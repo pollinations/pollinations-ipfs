@@ -1,1 +1,3 @@
-export default 'Hello World';
+export * as ipfsConnector from "./network/ipfsConnector"
+export * as ipfsPubSub from "./network/ipfsPubSub"
+export * as utils from "./utils"
