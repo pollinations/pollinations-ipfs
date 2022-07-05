@@ -11,7 +11,7 @@ import { AUTH, noop, toPromise } from "./utils.js";
 const debug = Debug("ipfsConnector")
 
 // Get IPFS_API_ENDPOINT from env
-const IPFS_HOST = process.env.IPFS_API_ENDPOINT || "https://public-ipfs-api.pollinations.ai"
+const IPFS_HOST = process?.env?.IPFS_API_ENDPOINT || "https://api.pollinations.ai"
 
 
 let _client = null;
@@ -41,9 +41,6 @@ export async function reader() {
     }
 }
 
-// randomly assign a temporary folder in the IPFS mutable filesystem
-// in the future ideally we'd be running nodes in the browser and on colab and could work in the root
-const mfsRoot = `/tmp_${(new Date()).toISOString().replace(/[\W_]+/g, "_")}`;
 
 
 // Create a writer to modify the IPFS state
@@ -51,9 +48,13 @@ const mfsRoot = `/tmp_${(new Date()).toISOString().replace(/[\W_]+/g, "_")}`;
 // so calling close is important
 export function writer(initialRootCID = null) {
 
+    // randomly assign a temporary folder in the IPFS mutable filesystem
+    // in the future ideally we'd be running nodes in the browser and on colab and could work in the root
+    const mfsRoot = `/tmp_${(new Date()).toISOString().replace(/[\W_]+/g, "_")}`;
+
 
     // Promise to a temporary folder in the IPFS mutable filesystem
-    let initializedFolder = getClient().then(client => initializeMFSFolder(client, initialRootCID))
+    let initializedFolder = getClient().then(client => initializeMFSFolder(client, initialRootCID, mfsRoot))
 
     // calls the function with client and absolute path and finally return the root CID
     const returnRootCID = func => async (path = "/", ...args) => {
@@ -77,6 +78,7 @@ export function writer(initialRootCID = null) {
         rm: returnRootCID(ipfsRm),
         mkDir: returnRootCID(ipfsMkdir),
         cid: returnRootCID(noop),
+        cp: returnRootCID(ipfsCp),
         close: async () => {
             debug("closing input writer. Deleting", mfsRoot)
             await initializedFolder
@@ -92,12 +94,12 @@ export function writer(initialRootCID = null) {
 
 
 // Initializes a folder in `mfsRoot` with the given CID
-async function initializeMFSFolder(client, initialRootCID) {
+async function initializeMFSFolder(client, initialRootCID, mfsRoot) {
 
     const getRootCID = async () => await getCID(client, mfsRoot);
 
     let rootCid = await getRootCID();
-    debug("existing root CID", rootCid);
+    debug("existing root CID", rootCid, "supplied", initialRootCID);
 
     if (rootCid === null) {
         if (initialRootCID === null) {
@@ -105,7 +107,7 @@ async function initializeMFSFolder(client, initialRootCID) {
             await ipfsMkdir(client, mfsRoot);
         } else {
             debug("Copying supplied rootCID", initialRootCID, "to MFS root.");
-            await ipfsCp(client, initialRootCID, mfsRoot);
+            await ipfsCp(client, mfsRoot, initialRootCID);
         }
         rootCid = await getRootCID();
         debug("new root CID", rootCid);
@@ -115,7 +117,7 @@ async function initializeMFSFolder(client, initialRootCID) {
             debug("CIDs are different. Removing existing  MFS root");
             await ipfsRm(client, mfsRoot);
             debug("Copying", rootCid, "to mfs root.");
-            await ipfsCp(client, rootCid, mfsRoot);
+            await ipfsCp(client, mfsRoot, initialRootCID);
         }
     }
     return await getRootCID();
@@ -136,25 +138,25 @@ const getIPFSDaemonURL = async () => {
 }
 
 
-const ipfsCp = async (client, cid, ipfsPath) => {
+const ipfsCp = async (client, ipfsPath, cid) => {
     debug("Copying from ", `/ipfs/${cid}`, "to", ipfsPath)
     return await client.files.cp(`/ipfs/${cid}`, ipfsPath)
 }
 
 const ipfsPin = async (client, cid) => {
     debug("Pinning to remote nft.storage", cid)
-    await client.pin.remote.add(CID.parse(cid), {recursive: true, service: "nft_storage", background: true  })
-    debug("Pinning to pollinations", cid)
+    return await client.pin.remote.add(CID.parse(cid), {recursive: true, service: "nft_storage", background: true  })
+    //debug("Pinning to pollinations", cid)
     return await client.pin.add(CID.parse(cid), { recursive: true })
 }
 
 export const getWebURL = (cid, name = null) => {
     const filename = name ? `?filename=${name}` : '';
-    return `https://public-ipfs-gateway.pollinations.ai/ipfs/${cid}${filename}`
+    return `https://ipfs.pollinations.ai/ipfs/${cid}${filename}`
 };
 
 export const getIPNSURL = (id) => {
-    return `https://public-ipfs-gateway.pollinations.ai/ipns/${id}`;
+    return `https://ipfs.pollinations.ai/ipns/${id}`;
 };
 
 const stripSlashIPFS = cidString => {
