@@ -1,6 +1,6 @@
 {
-  "name": "pollinations-ipfs",
-  "version": "1.0.0",
+  "name": "pollinations",
+  "version": "0.1.0",
   "description": "pollinations ipfs state, messaging and storage",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
     "install_backend": "cp -v dist/pollinate.js /usr/local/bin/pollinate && cp -v dist/social-post.js /usr/local/bin/social_post.js && cp -v dist/pin.js /usr/local/bin/pin.js && cp -v dist/discord-post.js /usr/local/bin/discord-post.js && cp -v scripts/*.sh /usr/local/bin"
   },
   "bin": {
-    "pollinate": "./src/backend/pollinate-cli.js"
+    "pollinate": "src/backend/pollinate-cli.js"
   },
   "repository": {
     "type": "git",
