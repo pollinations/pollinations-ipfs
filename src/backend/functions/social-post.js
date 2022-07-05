@@ -32,7 +32,16 @@ export async function socialPost(platform, cid) {
     console.log("Social post disabled. Aborting...");
     return;
   }
-  const data = getPostData(ipfs, cid, platform === "twitter");
+
+  const shortenPost = platform === "twitter"
+  const data = getPostData(ipfs, cid, shortenPost);
+
+  // Return early if the post title includes mature words.
+  if (data.title.includes("*")) {
+    console.log("Post contains mature words. Aborting...");
+    return null;
+  }
+
   let res = null;
   try {
     res = await doPost(data, platform);
@@ -41,10 +50,17 @@ export async function socialPost(platform, cid) {
     console.error("error", e);
     res = e;
   }
+  // Send discord webhook.
+  // await discordPollenPostWebhook(data);
   return res;
 }
 
 async function doPost({ post, title, videoURL, coverImage, url }, platform) {
+
+  if (platform === "youtube" && !videoURL) {
+    console.log("No video URL for youtube. Aborting...");
+    return null;
+  }
 
   post = (await autoHashtag(post)) + fixedHashTags;
 
@@ -70,7 +86,7 @@ async function doPost({ post, title, videoURL, coverImage, url }, platform) {
   };
 
   const postResponse = await social.post(shareConfig).catch(console.error);
-  
+
   console.log("postResponse", postResponse);
   return postResponse;
 }
