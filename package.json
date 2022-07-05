@@ -2,7 +2,7 @@
   "name": "pollinations",
   "version": "0.1.0",
   "description": "pollinations ipfs state, messaging and storage",
-  "main": "index.js",
+  "main": "src/index",
   "scripts": {
     "build": "npm run build_backend",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -13,6 +13,7 @@
   "bin": {
     "pollinate": "src/backend/pollinate-cli.js"
   },
+  "type":"module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pollinations/pollinations-ipfs.git"
