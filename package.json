@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "npm run esbuild",
-    "esbuild": "esbuild src/*.js --bundle --outdir=dist --platform=node --target=node14 --external:fsevents --external:electron",
+    "esbuild": "esbuild src/*-cli.js --bundle --outdir=dist --platform=node --target=node14 --external:fsevents --external:electron",
     "test": "echo \"Error: no test specified\" && exit 1",
     "predeploy": "npm run build",
     "install_backend": "cp -v dist/*-cli.js /usr/local/bin && cp -v scripts/*.sh /usr/local/bin"
