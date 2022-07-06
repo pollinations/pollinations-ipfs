@@ -1,12 +1,13 @@
 
 
 import Debug from "debug";
-import { parse } from "json5";
+import json5 from "json5";
 import { join } from "path";
 import { zip } from "ramda";
 import { PromiseAllProgress } from "./utils/logProgressToConsole.js";
 import { reader, stringCID } from "./ipfsConnector.js";
 
+const { parse } = json5;
 
 const debug = Debug("ipfsState");
 

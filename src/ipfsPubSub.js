@@ -1,11 +1,11 @@
 import awaitSleep from 'await-sleep';
 import Debug from 'debug';
-import { debounce } from 'lodash';
+// import { debounce } from 'lodash';
 import { AbortController } from 'native-abort-controller';
 import { Channel } from 'queueable';
 import { last } from 'ramda';
-import { getClient } from './ipfsConnector';
-import { noop, retryException, toPromise1 } from './utils/utils';
+import { getClient } from './ipfsConnector.js';
+import { noop, retryException, toPromise1 } from './utils/utils.js';
 
 
 const debug = Debug('ipfs:pubsub');
@@ -139,7 +139,7 @@ async function experimentalIPNSPublish(client, rootCID, ipnsKeyName) {
         });
 }
 
-const throttledExperimentalIPNSPublish = debounce(experimentalIPNSPublish, 3000, 5000)
+// const throttledExperimentalIPNSPublish = debounce(experimentalIPNSPublish, 3000, 5000)
 
 // Generate an async iterable by subscribing to CIDs from a specific node id and suffix
 export function subscribeGenerator(nodeID, suffix = "/input") {

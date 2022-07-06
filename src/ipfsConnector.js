@@ -4,7 +4,7 @@ import { createReadStream } from "fs";
 import { create } from "ipfs-http-client";
 import all from "it-all";
 import { CID } from "multiformats/cid";
-import { basename, dirname, join } from "path";
+import { basename, dirname, join } from "path-browserify";
 import { last } from "ramda";
 import { AUTH, noop, toPromise } from "./utils/utils.js";
 
