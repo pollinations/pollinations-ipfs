@@ -25,6 +25,7 @@
     "@cto.af/textdecoder": "0.0.0",
     "async": "^3.2.1",
     "await-sleep": "^0.0.1",
+    "buffer": "^6.0.3",
     "callback-to-async-iterator": "^1.1.1",
     "child-process-promise": "^2.2.1",
     "chokidar": "^3.5.3",
