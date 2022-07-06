@@ -1,5 +1,5 @@
-import { publisher } from "../network/ipfsPubSub";
-import { socialPost } from "./functions/social-post";
+import { publisher } from "./ipfsPubSub";
+import { socialPost } from "./backend/functions/social-post";
 import { receive } from "./ipfs/receiver";
 
 const PUBSUB_TOPIC = "post_pollen";

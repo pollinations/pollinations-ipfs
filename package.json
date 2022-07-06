@@ -1,19 +1,18 @@
 {
-  "name": "pollinations",
+  "name": "@pollinations/ipfs",
   "version": "0.1.0",
   "description": "pollinations ipfs state, messaging and storage",
-  "main": "src/index",
+  "main": "index",
   "scripts": {
-    "build": "npm run build_backend",
+    "build": "npm run esbuild",
+    "esbuild": "esbuild src/*.js --bundle --outdir=dist --platform=node --target=node14 --external:fsevents --external:electron",
     "test": "echo \"Error: no test specified\" && exit 1",
     "predeploy": "npm run build",
-    "build_backend": "mkdir -p dist && esbuild src/backend/pollinate-cli.js --platform=node --target=node14 --bundle --external:fsevents --external:electron > dist/pollinate.js  && esbuild src/backend/social-post-cli.js --platform=node --target=node14 --bundle --external:fsevents --external:electron > dist/social-post.js && esbuild src/backend/pinning-cli.js --platform=node --target=node14 --bundle --external:fsevents --external:electron > dist/pin.js&& esbuild src/backend/discord-post-cli.js --platform=node --target=node14 --bundle --external:fsevents --external:electron > dist/discord-post.js && chmod ugoa+x dist/*.js",
-    "install_backend": "cp -v dist/pollinate.js /usr/local/bin/pollinate && cp -v dist/social-post.js /usr/local/bin/social_post.js && cp -v dist/pin.js /usr/local/bin/pin.js && cp -v dist/discord-post.js /usr/local/bin/discord-post.js && cp -v scripts/*.sh /usr/local/bin"
+    "install_backend": "cp -v dist/*-cli.js /usr/local/bin && cp -v scripts/*.sh /usr/local/bin"
   },
   "bin": {
     "pollinate": "src/backend/pollinate-cli.js"
   },
-  "type":"module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pollinations/pollinations-ipfs.git"
@@ -59,7 +58,8 @@
     "sass": "^1.42.0",
     "social-post-api": "^1.0.20",
     "throttle-debounce": "^3.0.1",
-    "tree-kill": "^1.2.2"
+    "tree-kill": "^1.2.2",
+    "webhook-discord": "^3.7.8"
   },
   "author": "Thomas Haferlach",
   "license": "MIT",
@@ -68,6 +68,6 @@
   },
   "homepage": "https://github.com/pollinations/pollinations-ipfs#readme",
   "devDependencies": {
-    "esbuild": "^0.14.27"
+    "esbuild": "^0.14.48"
   }
 }

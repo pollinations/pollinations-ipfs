@@ -2,7 +2,7 @@
 import fetch from "node-fetch";
 import SocialPost from "social-post-api";
 import { getPostData } from "../../data/summaryData";
-import { IPFSWebState } from "../../network/ipfsWebClient.js";
+import { IPFSWebState } from "../../ipfsWebClient.js";
 
 const headers = {
   'Access-Control-Allow-Origin': '*',

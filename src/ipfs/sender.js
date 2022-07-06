@@ -3,7 +3,7 @@ import awaitSleep from 'await-sleep';
 import Debug from 'debug';
 import { existsSync, mkdirSync } from 'fs';
 import { AbortController } from "native-abort-controller";
-import { writer } from "../../network/ipfsConnector.js";
+import { writer } from "../ipfsConnector";
 import folderSync from "./folderSync.js";
 
 const debug = Debug("ipfs/sender");

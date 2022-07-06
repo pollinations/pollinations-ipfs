@@ -1,6 +1,6 @@
 import Debug from "debug";
 import throttle from "lodash.throttle";
-import { noop } from "./utils";
+import { noop } from "./utils/utils";
 const debug = Debug("localColabConnection");
 
 

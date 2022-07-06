@@ -1,5 +1,5 @@
-import { writer } from "../network/ipfsConnector"
-import { publisher } from "../network/ipfsPubSub"
+import { writer } from "./ipfsConnector"
+import { publisher } from "./ipfsPubSub"
 import { receive } from "./ipfs/receiver"
 
 const PUBSUB_TOPIC = "done_pollen"

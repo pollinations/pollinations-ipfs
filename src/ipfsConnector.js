@@ -6,7 +6,7 @@ import all from "it-all";
 import { CID } from "multiformats/cid";
 import { basename, dirname, join } from "path";
 import { last } from "ramda";
-import { AUTH, noop, toPromise } from "./utils.js";
+import { AUTH, noop, toPromise } from "./utils/utils.js";
 
 const debug = Debug("ipfsConnector")
 

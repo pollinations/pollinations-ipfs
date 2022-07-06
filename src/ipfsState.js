@@ -4,7 +4,7 @@ import Debug from "debug";
 import { parse } from "json5";
 import { join } from "path";
 import { zip } from "ramda";
-import { PromiseAllProgress } from "../utils/logProgressToConsole.js";
+import { PromiseAllProgress } from "./utils/logProgressToConsole.js";
 import { reader, stringCID } from "./ipfsConnector.js";
 
 

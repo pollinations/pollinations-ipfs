@@ -2,7 +2,7 @@
 import Debug from "debug";
 import { parse } from "json5";
 import { extname } from "path";
-import { getWebURL, writer } from "./ipfsConnector.js";
+import { getWebURL, writer } from "./ipfsConnector";
 import { getIPFSState } from "./ipfsState.js";
 
 const debug = Debug("ipfsWebClient")

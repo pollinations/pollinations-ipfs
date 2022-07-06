@@ -5,7 +5,7 @@ import { AbortController } from 'native-abort-controller';
 import { Channel } from 'queueable';
 import { last } from 'ramda';
 import { getClient } from './ipfsConnector';
-import { noop, retryException, toPromise1 } from './utils';
+import { noop, retryException, toPromise1 } from './utils/utils';
 
 
 const debug = Debug('ipfs:pubsub');

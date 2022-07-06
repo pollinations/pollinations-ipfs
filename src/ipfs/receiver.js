@@ -1,8 +1,8 @@
 import Debug from 'debug';
 import { mkdirSync, writeFileSync } from 'fs';
 import { dirname, join } from "path";
-import { subscribeGenerator } from '../../network/ipfsPubSub.js';
-import { getIPFSState } from '../../network/ipfsState.js';
+import { subscribeGenerator } from '../ipfsPubSub.js';
+import { getIPFSState } from '../ipfsState.js';
 
 
 const debug = Debug("ipfs/receiver");
