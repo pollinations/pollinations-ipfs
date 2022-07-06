@@ -2,7 +2,7 @@
 
 import Debug from "debug";
 import json5 from "json5";
-import { join } from "path";
+import { join } from "path-browserify";
 import { zip } from "ramda";
 import { PromiseAllProgress } from "./utils/logProgressToConsole.js";
 import { reader, stringCID } from "./ipfsConnector.js";

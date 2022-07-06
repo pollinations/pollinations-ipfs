@@ -4,7 +4,7 @@
   "description": "pollinations ipfs state, messaging and storage",
   "type": "module",
   "exports": {
-    ".": "./src/ipfsConnector.js",
+    "./*": "./src/*",
     "./package.json": "./package.json"
   },
   "scripts": {
