@@ -3,11 +3,12 @@ import Debug from "debug";
 import { create } from "ipfs-http-client";
 import all from "it-all";
 import { CID } from "multiformats/cid";
-import { join } from "path-browserify";
+import path from "path-browserify";
 import { last } from "ramda";
 import { noop, toPromise } from "./utils/utils.js";
 import { Buffer } from "buffer";
 
+const { join } = path;
 const debug = Debug("ipfsConnector")
 
 // Get IPFS_API_ENDPOINT from env

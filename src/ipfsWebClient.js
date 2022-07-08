@@ -1,10 +1,11 @@
 
 import Debug from "debug";
 import json5 from "json5";
-import { extname } from "path-browserify";
+import path from "path-browserify";
 import { getWebURL, writer } from "./ipfsConnector.js";
 import { getIPFSState } from "./ipfsState.js";
 
+const { extname } = path;
 const { parse } = json5;
 
 const debug = Debug("ipfsWebClient")

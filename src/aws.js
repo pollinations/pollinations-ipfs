@@ -1,4 +1,5 @@
 import Debug from "debug";
+import fetch from "node-fetch";
 
 const debug = Debug("Aws.js");
 const API_URL_DEV = "https://worker-dev.pollinations.ai/pollen/"
@@ -46,7 +47,7 @@ async function UploadInputstoIPFS(values, { add, mkDir, cid}){
   
   await mkDir("/input")
   for (let key in values) {
-    await add(`/input/${key}`, values[key])
+    await add(`/input/${key}`, JSON.stringify(values[key]))
   }
 
   return await cid()

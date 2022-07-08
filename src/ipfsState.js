@@ -2,11 +2,12 @@
 
 import Debug from "debug";
 import json5 from "json5";
-import { join } from "path-browserify";
+import path from "path-browserify";
 import { zip } from "ramda";
 import { PromiseAllProgress } from "./utils/logProgressToConsole.js";
 import { reader, stringCID } from "./ipfsConnector.js";
 
+const { join } = path;
 const { parse } = json5;
 
 const debug = Debug("ipfsState");
