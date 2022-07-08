@@ -1,6 +1,6 @@
 {
   "name": "@pollinations/ipfs",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "pollinations ipfs state, messaging and storage",
   "type": "module",
   "exports": {
@@ -15,7 +15,7 @@
     "install_backend": "cp -v dist/*-cli.js /usr/local/bin && cp -v scripts/*.sh /usr/local/bin"
   },
   "bin": {
-    "pollinate": "src/backend/pollinate-cli.js"
+    "pollinate": "dist/pollinate-cli.js"
   },
   "repository": {
     "type": "git",
