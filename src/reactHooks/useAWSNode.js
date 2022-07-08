@@ -1,7 +1,7 @@
 import Debug from "debug";
 import { useEffect, useState } from "react";
-import { subscribeCID }  from "../ipfsPubSub"
-import { submitToAWS } from "../aws";
+import { subscribeCID }  from "../ipfsPubSub.js"
+import { submitToAWS } from "../aws.js";
 
 const debug = Debug("useAWSNode");
 
