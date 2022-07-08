@@ -148,7 +148,7 @@ sleep 10
 # --- Pin
 CID=$( tail -n 1 /content/cid )
 echo "🐝: Pinning $CID"
-node /usr/local/bin/pining-cli.js $CID $FAILED_STATUS
+node /usr/local/bin/pinning-cli.js $CID $FAILED_STATUS
 
 
 # --- Post if run successfull ---
