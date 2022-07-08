@@ -148,13 +148,13 @@ sleep 10
 # --- Pin
 CID=$( tail -n 1 /content/cid )
 echo "🐝: Pinning $CID"
-node /usr/local/bin/pin.js $CID $FAILED_STATUS
+node /usr/local/bin/pining-cli.js $CID $FAILED_STATUS
 
 
 # --- Post if run successfull ---
 if [[ "$STATUS" != 1  ]]; then
     echo "🐝: Posting $CID to social media (if posting was enabled by the user)"
-    node /usr/local/bin/social_post.js $CID
+    node /usr/local/bin/social-post-cli.js $CID
 fi
 
 
