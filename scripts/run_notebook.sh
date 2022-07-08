@@ -67,7 +67,7 @@ echo "Starting notebook..." > $IPFS_ROOT/output/log
 
 
 echo "🐝: Preparing notebook for execution with papermill. (Add params tag to paraeter cell)"
-python /content/pollinations/pollinations/prepare_for_papermill.py $NOTEBOOK_PATH
+python /content/pollinations-ipfs/pollinations/prepare_for_papermill.py $NOTEBOOK_PATH
 
 # Initialize Run
 STATUS=1
