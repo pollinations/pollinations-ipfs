@@ -75,5 +75,7 @@
     "url": "https://github.com/pollinations/pollinations-ipfs/issues"
   },
   "homepage": "https://github.com/pollinations/pollinations-ipfs#readme",
-  
+  "devDependencies": {
+
+  }
 }
