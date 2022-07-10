@@ -28,7 +28,7 @@ const runModel = async (inputs, model="voodoohop/dalle-playground", executeOnDev
           const outputEntries = Object.entries(data?.output)
           
           // find the first entry whose key ends with .png
-          const [_filename, url] = outputEntries.find(([key]) => key.endsWith(".png"))
+          const [_filename, url] = outputEntries.find(([key]) => key.endsWith(".png") || key.endsWith(".jpg"))
           
           return url
       }
