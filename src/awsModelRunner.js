@@ -4,11 +4,11 @@ import { writer } from './ipfsConnector.js';
 import { subscribeGenerator } from './ipfsPubSub.js';
 import { IPFSWebState } from './ipfsWebClient.js';
 
-const runModel = async (inputs, model="voodoohop/dalle-playground") => {
+const runModel = async (inputs, model="voodoohop/dalle-playground", executeOnDev=false) => {
     
     console.log("!!!!submitted inputs", inputs)
     const inputWriter = writer();
-    const response = await submitToAWS(inputs, inputWriter, model, false)
+    const response = await submitToAWS(inputs, inputWriter, model, executeOnDev)
   
     console.log("got pollen id from aws", response)
     const { nodeID } = response
