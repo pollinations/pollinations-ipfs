@@ -6,7 +6,7 @@ import { IPFSWebState } from './ipfsWebClient.js';
 
 const runModel = async (inputs, model="voodoohop/dalle-playground") => {
     
-    console.log("!!!!submitted prompt", prompt)
+    console.log("!!!!submitted inputs", inputs)
     const inputWriter = writer();
     const response = await submitToAWS(inputs, inputWriter, model, false)
   
