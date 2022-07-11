@@ -1464,9 +1464,9 @@ var require_fast_list = __commonJS({
           return val;
         }
       };
-      if (typeof exports2 !== "undefined")
+      if ("undefined" !== typeof exports2)
         module2.exports = FastList;
-      else if (typeof define === "function" && define.amd) {
+      else if ("function" === typeof define && define.amd) {
         define("FastList", function() {
           return FastList;
         });
@@ -25366,8 +25366,8 @@ var require_http_cache_semantics = __commonJS({
         this._assertRequestHasHeaders(req);
         this._responseTime = this.now();
         this._isShared = shared !== false;
-        this._cacheHeuristic = cacheHeuristic !== void 0 ? cacheHeuristic : 0.1;
-        this._immutableMinTtl = immutableMinTimeToLive !== void 0 ? immutableMinTimeToLive : 24 * 3600 * 1e3;
+        this._cacheHeuristic = void 0 !== cacheHeuristic ? cacheHeuristic : 0.1;
+        this._immutableMinTtl = void 0 !== immutableMinTimeToLive ? immutableMinTimeToLive : 24 * 3600 * 1e3;
         this._status = "status" in res ? res.status : 200;
         this._resHeaders = res.headers;
         this._rescc = parseCacheControl(res.headers["cache-control"]);
@@ -25397,7 +25397,7 @@ var require_http_cache_semantics = __commonJS({
         return Date.now();
       }
       storable() {
-        return !!(!this._reqcc["no-store"] && (this._method === "GET" || this._method === "HEAD" || this._method === "POST" && this._hasExplicitExpiration()) && understoodStatuses.has(this._status) && !this._rescc["no-store"] && (!this._isShared || !this._rescc.private) && (!this._isShared || this._noAuthorization || this._allowsStoringAuthenticated()) && (this._resHeaders.expires || this._rescc["max-age"] || this._isShared && this._rescc["s-maxage"] || this._rescc.public || statusCodeCacheableByDefault.has(this._status)));
+        return !!(!this._reqcc["no-store"] && ("GET" === this._method || "HEAD" === this._method || "POST" === this._method && this._hasExplicitExpiration()) && understoodStatuses.has(this._status) && !this._rescc["no-store"] && (!this._isShared || !this._rescc.private) && (!this._isShared || this._noAuthorization || this._allowsStoringAuthenticated()) && (this._resHeaders.expires || this._rescc["max-age"] || this._isShared && this._rescc["s-maxage"] || this._rescc.public || statusCodeCacheableByDefault.has(this._status)));
       }
       _hasExplicitExpiration() {
         return this._isShared && this._rescc["s-maxage"] || this._rescc["max-age"] || this._resHeaders.expires;
@@ -25420,7 +25420,7 @@ var require_http_cache_semantics = __commonJS({
           return false;
         }
         if (this.stale()) {
-          const allowsStale = requestCC["max-stale"] && !this._rescc["must-revalidate"] && (requestCC["max-stale"] === true || requestCC["max-stale"] > this.age() - this.maxAge());
+          const allowsStale = requestCC["max-stale"] && !this._rescc["must-revalidate"] && (true === requestCC["max-stale"] || requestCC["max-stale"] > this.age() - this.maxAge());
           if (!allowsStale) {
             return false;
           }
@@ -25428,7 +25428,7 @@ var require_http_cache_semantics = __commonJS({
         return this._requestMatches(req, false);
       }
       _requestMatches(req, allowHeadMethod) {
-        return (!this._url || this._url === req.url) && this._host === req.headers.host && (!req.method || this._method === req.method || allowHeadMethod && req.method === "HEAD") && this._varyMatches(req);
+        return (!this._url || this._url === req.url) && this._host === req.headers.host && (!req.method || this._method === req.method || allowHeadMethod && "HEAD" === req.method) && this._varyMatches(req);
       }
       _allowsStoringAuthenticated() {
         return this._rescc["must-revalidate"] || this._rescc.public || this._rescc["s-maxage"];
@@ -25777,19 +25777,19 @@ var require_src9 = __commonJS({
 var require_json_buffer = __commonJS({
   "node_modules/json-buffer/index.js"(exports2) {
     exports2.stringify = function stringify(o) {
-      if (typeof o == "undefined")
+      if ("undefined" == typeof o)
         return o;
       if (o && Buffer.isBuffer(o))
         return JSON.stringify(":base64:" + o.toString("base64"));
       if (o && o.toJSON)
         o = o.toJSON();
-      if (o && typeof o === "object") {
+      if (o && "object" === typeof o) {
         var s = "";
         var array = Array.isArray(o);
         s = array ? "[" : "{";
         var first2 = true;
         for (var k in o) {
-          var ignore = typeof o[k] == "function" || !array && typeof o[k] === "undefined";
+          var ignore = "function" == typeof o[k] || !array && "undefined" === typeof o[k];
           if (Object.hasOwnProperty.call(o, k) && !ignore) {
             if (!first2)
               s += ",";
@@ -25806,16 +25806,16 @@ var require_json_buffer = __commonJS({
         }
         s += array ? "]" : "}";
         return s;
-      } else if (typeof o === "string") {
+      } else if ("string" === typeof o) {
         return JSON.stringify(/^:/.test(o) ? ":" + o : o);
-      } else if (typeof o === "undefined") {
+      } else if ("undefined" === typeof o) {
         return "null";
       } else
         return JSON.stringify(o);
     };
     exports2.parse = function(s) {
       return JSON.parse(s, function(key, value) {
-        if (typeof value === "string") {
+        if ("string" === typeof value) {
           if (/^:base64:/.test(value))
             return Buffer.from(value.substring(8), "base64");
           else

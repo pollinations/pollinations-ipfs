@@ -11,7 +11,8 @@
     "build": "npm run esbuild",
     "test": "echo \"Error: no test specified\" && exit 1",
     "predeploy": "npm run build",
-    "install_backend": "cp -v dist/*-cli.js /usr/local/bin && cp -v scripts/*.sh /usr/local/bin"
+    "install_backend": "cp -v dist/*-cli.js /usr/local/bin && cp -v scripts/*.sh /usr/local/bin",
+    "esbuild": "esbuild src/*-cli.js --bundle --outdir=dist --platform=node --target=node14 --external:fsevents --external:electron"
   },
   "bin": {
     "pollinate": "dist/pollinate-cli.js"
@@ -31,6 +32,7 @@
     "commander": "^7.2.0",
     "debounce": "^1.2.1",
     "debug": "^4.3.2",
+    "esbuild": "^0.14.49",
     "event-iterator": "^2.0.0",
     "fs-extra": "^10.0.0",
     "ipfs-http-client": "^56.0.3",
@@ -59,23 +61,20 @@
     "progress-stream": "^2.0.0",
     "queueable": "^4.1.4",
     "ramda": "^0.27.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "readline": "^1.3.0",
     "readline-async-generator": "^1.0.0",
     "sass": "^1.42.0",
     "social-post-api": "^1.0.20",
     "throttle-debounce": "^3.0.1",
     "tree-kill": "^1.2.2",
-    "webhook-discord": "^3.7.8",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "webhook-discord": "^3.7.8"
   },
   "author": "Thomas Haferlach",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/pollinations/pollinations-ipfs/issues"
   },
-  "homepage": "https://github.com/pollinations/pollinations-ipfs#readme",
-  "devDependencies": {
-
-  }
+  "homepage": "https://github.com/pollinations/pollinations-ipfs#readme"
 }
