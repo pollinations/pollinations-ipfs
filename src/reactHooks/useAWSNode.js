@@ -28,7 +28,7 @@ const useAWSNode = ({ nodeID: paramsNodeID } ) => {
 
     }, [nodeID])
 
-    return { nodeID, contentID, setContentID, connected: true, submitToAWS }
+    return { nodeID, contentID, setContentID, connected: true, submitToAWS, setNodeID }
 
 };
 
