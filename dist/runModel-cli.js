@@ -33663,10 +33663,11 @@ var runModel = async (inputs2, model2 = "voodoohop/dalle-playground", executeOnD
 var awsModelRunner_default = runModel;
 
 // src/runModel-cli.js
-var [, , model, inputsString] = process.argv;
+var [, , model, inputsString, isDevString] = process.argv;
+var isDev = isDevString === "DEV";
 var inputs = JSON.parse(inputsString);
 async function run(model2, inputs2) {
-  const imageUrl = await awsModelRunner_default(model2, inputs2);
+  const imageUrl = await awsModelRunner_default(inputs2, model2, isDev);
   console.log(imageUrl);
 }
 run(model, inputs);
