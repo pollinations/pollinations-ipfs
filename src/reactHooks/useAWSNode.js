@@ -11,6 +11,8 @@ const useAWSNode = ({ nodeID: paramsNodeID, contentID: paramsContentID } ) => {
 
     const [nodeID, setNodeID] = useState(paramsNodeID);
     const [contentID, setContentID] = useState(paramsContentID);
+    const ipfsWriter = useIPFSWrite()
+    const ipfs = useIPFS(contentID);
 
     // set node ID to the node ID from URL
     useEffect(() => setNodeID(paramsNodeID), [paramsNodeID])
@@ -29,16 +31,19 @@ const useAWSNode = ({ nodeID: paramsNodeID, contentID: paramsContentID } ) => {
 
     }, [nodeID])
 
-    const submitToAWSAndSetState = async (...args) => {
+    const submitToAWSAndSetState = async (values, notebook, dev) => {
         setNodeID(LOADING_NODEID);
-        const {nodeID, contentID} = await submitToAWS(...args);
+        const {nodeID, contentID} = await submitToAWS(values, ipfsWriter, notebook, dev);
         setNodeID(nodeID);
         setContentID(contentID);
     }
 
     const isSubmitting = nodeID === LOADING_NODEID;
 
-    return { nodeID, contentID, setContentID, connected: true, submitToAWS: submitToAWSAndSetState, setNodeID, isSubmitting  }
+    // state is loading if it is submitting to AWS or if there is a nodeID but the output is not yet available
+    const isLoading = isSubmitting || (nodeID && !ipfs?.output?.done);
+
+    return { nodeID, contentID, setContentID, connected: true, submitToAWS: submitToAWSAndSetState, setNodeID, isLoading, ipfs  }
 
 };
 
