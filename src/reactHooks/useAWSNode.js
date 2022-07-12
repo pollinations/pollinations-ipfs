@@ -38,6 +38,7 @@ const useAWSNode = ({ nodeID: paramsNodeID, contentID: paramsContentID } ) => {
         const {nodeID, contentID} = await submitToAWS(values, ipfsWriter, notebook, dev);
         setNodeID(nodeID);
         setContentID(contentID);
+        return {nodeID, contentID};
     }
 
     const isSubmitting = nodeID === LOADING_NODEID;
