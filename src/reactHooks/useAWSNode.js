@@ -7,10 +7,10 @@ const debug = Debug("useAWSNode");
 
 
 
-const useAWSNode = ({ nodeID: paramsNodeID } ) => {
+const useAWSNode = ({ nodeID: paramsNodeID, contentID: paramsContentID } ) => {
 
     const [nodeID, setNodeID] = useState(paramsNodeID);
-    const [contentID, setContentID] = useState(null);
+    const [contentID, setContentID] = useState(paramsContentID);
 
     // set node ID to the node ID from URL
     useEffect(() => setNodeID(paramsNodeID), [paramsNodeID])
