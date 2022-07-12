@@ -24841,8 +24841,9 @@ async function submitToAWS(values, ipfsWriter, notebook, dev = true) {
     return error;
   }
 }
-async function UploadInputstoIPFS(values, { add, mkDir, cid }) {
+async function UploadInputstoIPFS(values, { add, mkDir, cid, rm }) {
   debug("adding values to ipfs", values);
+  await rm("/output");
   await mkDir("/input");
   for (let key in values) {
     await add(`/input/${key}`, JSON.stringify(values[key]));

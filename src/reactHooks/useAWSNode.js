@@ -13,7 +13,7 @@ const useAWSNode = ({ nodeID: paramsNodeID, contentID: paramsContentID } ) => {
 
     const [nodeID, setNodeID] = useState(paramsNodeID);
     const [contentID, setContentID] = useState(paramsContentID);
-    const ipfsWriter = useIPFSWrite()
+    const ipfsWriter = useIPFSWrite();
     const ipfs = useIPFS(contentID);
 
     // set node ID to the node ID from URL
@@ -35,7 +35,7 @@ const useAWSNode = ({ nodeID: paramsNodeID, contentID: paramsContentID } ) => {
 
     const submitToAWSAndSetState = async (values, notebook, dev) => {
         setNodeID(LOADING_NODEID);
-        const {nodeID, contentID} = await submitToAWS(values, ipfsWriter, notebook, dev);
+        const { nodeID, contentID } = await submitToAWS(values, ipfsWriter, notebook, dev);
         setNodeID(nodeID);
         setContentID(contentID);
         return {nodeID, contentID};

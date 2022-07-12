@@ -7,6 +7,8 @@ import { uniqBy } from "ramda"
 const debug = Debug("fileWatcher")
 
 async function* chunkedFilewatcher({ path, debounce, signal }) {
+    debounce = parseInt(debounce)
+    
     debug("Local: Watching", path)
 
     const watcher = chokidar.watch(path, {
