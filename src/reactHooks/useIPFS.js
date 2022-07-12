@@ -14,7 +14,7 @@ const useIPFS = (contentID, skipCache = false) => {
 
         debug("setContentID", contentID);
 
-        if (contentID) {
+        if (contentID && contentID !== ipfs[".cid"]) {
             debug("dispatching new contentID", contentID);
 
             IPFSWebState(contentID, skipCache)
