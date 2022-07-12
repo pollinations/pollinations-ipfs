@@ -36,7 +36,9 @@ const useAWSNode = ({ nodeID: paramsNodeID, contentID: paramsContentID } ) => {
         setContentID(contentID);
     }
 
-    return { nodeID, contentID, setContentID, connected: true, submitToAWS: submitToAWSAndSetState, setNodeID }
+    const isSubmitting = nodeID === LOADING_NODEID;
+
+    return { nodeID, contentID, setContentID, connected: true, submitToAWS: submitToAWSAndSetState, setNodeID, isSubmitting  }
 
 };
 
