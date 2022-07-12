@@ -2,6 +2,8 @@ import Debug from "debug";
 import { useEffect, useState } from "react";
 import { subscribeCID }  from "../ipfsPubSub.js"
 import { submitToAWS } from "../aws.js";
+import useIPFSWrite from "./useIPFSWrite.js"
+import useIPFS from "./useIPFS.js"
 
 const debug = Debug("useAWSNode");
 
