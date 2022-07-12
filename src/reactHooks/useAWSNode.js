@@ -28,7 +28,13 @@ const useAWSNode = ({ nodeID: paramsNodeID, contentID: paramsContentID } ) => {
 
     }, [nodeID])
 
-    return { nodeID, contentID, setContentID, connected: true, submitToAWS, setNodeID }
+    const submitToAWSAndSetState = async (...args) => {
+        const {nodeID, contentID} = await submitToAWS(...args);
+        setNodeID(nodeID);
+        setContentID(contentID);
+    }
+
+    return { nodeID, contentID, setContentID, connected: true, submitToAWS: submitToAWSAndSetState, setNodeID }
 
 };
 
