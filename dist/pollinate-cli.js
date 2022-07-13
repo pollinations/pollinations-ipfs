@@ -23649,9 +23649,9 @@ var require_fast_list = __commonJS({
           return val;
         }
       };
-      if ("undefined" !== typeof exports2)
+      if (typeof exports2 !== "undefined")
         module2.exports = FastList;
-      else if ("function" === typeof define && define.amd) {
+      else if (typeof define === "function" && define.amd) {
         define("FastList", function() {
           return FastList;
         });
@@ -31109,7 +31109,6 @@ var import_fs4 = require("fs");
 var import_native_abort_controller3 = __toESM(require_src2(), 1);
 var import_path3 = require("path");
 var import_process = __toESM(require("process"), 1);
-var import_readline = __toESM(require("readline"), 1);
 var import_tree_kill = __toESM(require_tree_kill(), 1);
 
 // src/ipfsConnector.js
@@ -40140,10 +40139,6 @@ var options_default = import_commander.program.opts();
 
 // src/pollinate-cli.js
 var debug12 = (0, import_debug12.default)("pollinate");
-var readline = import_readline.default.createInterface({
-  input: import_process.default.stdin,
-  output: import_process.default.stdout
-});
 var getPublisher = (nodeid) => {
   const { publish: publishFrontend, close: closeFrontendPublisher2 } = publisher(nodeid, "/output");
   const { publish: publishPollen, close: closePollenPublisher2 } = publisher("processing_pollen", "");

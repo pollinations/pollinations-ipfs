@@ -3811,9 +3811,9 @@ var require_fast_list = __commonJS({
           return val;
         }
       };
-      if ("undefined" !== typeof exports2)
+      if (typeof exports2 !== "undefined")
         module2.exports = FastList;
-      else if ("function" === typeof define && define.amd) {
+      else if (typeof define === "function" && define.amd) {
         define("FastList", function() {
           return FastList;
         });

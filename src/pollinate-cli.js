@@ -7,7 +7,6 @@ import { createWriteStream, mkdirSync, rmSync } from "fs"
 import { AbortController } from "native-abort-controller"
 import { dirname } from "path"
 import process from "process"
-import Readline from 'readline'
 import treeKill from 'tree-kill'
 import { stringCID } from "./ipfsConnector"
 import { publisher, subscribeGenerator } from "./ipfsPubSub.js"
@@ -17,10 +16,6 @@ import options from "./backend/options.js"
 
 export const debug = Debug("pollinate")
 
-const readline = Readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-})
 
 
 const getPublisher = (nodeid) => {
