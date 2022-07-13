@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { publisher } from "./ipfsPubSub";
 import { socialPost } from "./backend/functions/social-post";
 import { receive } from "./ipfs/receiver";

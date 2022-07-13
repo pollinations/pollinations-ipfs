@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import webhook from "webhook-discord"
 import { receive } from "./ipfs/receiver"
 

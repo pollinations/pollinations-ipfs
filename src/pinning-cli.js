@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { writer } from "./ipfsConnector.js"
 import { publisher } from "./ipfsPubSub.js"
 import { receive } from "./ipfs/receiver.js"

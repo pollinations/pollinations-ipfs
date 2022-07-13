@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { IPFSWebState } from "./ipfsWebClient.js"
 
 const cid = process.argv[2]
