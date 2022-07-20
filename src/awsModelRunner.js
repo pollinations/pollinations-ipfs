@@ -4,7 +4,7 @@ import { writer } from './ipfsConnector.js';
 import { subscribeGenerator } from './ipfsPubSub.js';
 import { IPFSWebState } from './ipfsWebClient.js';
 
-const runModel = async (inputs, model="voodoohop/dalle-playground", executeOnDev=false) => {
+export async function* runModel (inputs, model="voodoohop/dalle-playground", executeOnDev=false)  {
     
     console.log("!!!!submitted inputs", inputs)
     const inputWriter = writer();
@@ -19,22 +19,46 @@ const runModel = async (inputs, model="voodoohop/dalle-playground", executeOnDev
     
       console.log("!!!!received response",cid)
       const data = await IPFSWebState(cid);
-      console.log("!!!!received response", data)
-    
-      if (data?.output?.done) {
-          unsubscribe()
-          console.log("unsubscribed")
-          
-          const outputEntries = Object.entries(data?.output)
-          
-          // find the first entry whose key ends with .png or .jpg
-          
-          const [_filename, url] = outputEntries.find(([key]) => key.endsWith(".png") || key.endsWith(".jpg"))
-          
-          return url
+      console.log("!!!!received response", data);
+      
+      if (data?.output) {
+        yield data;
+        
+        if (data.output.done) {
+          unsubscribe();
+          return;
+        }
       }
     }
   
 }
 
-export default runModel;
+const runModelOnce = async (inputs, model="voodoohop/dalle-playground", executeOnDev=false) => {
+
+  // call runModel
+  const outputs = runModel(inputs, model, executeOnDev)
+
+  for await (const data of outputs) {
+
+    const output = data.output;
+
+    if (output.done) {
+        // unsubscribe();
+        console.log("unsubscribed");
+        
+        const outputEntries = Object.entries(output);
+        
+        // find the first entry whose key ends with .png or .jpg
+        
+        const [_filename, url] = outputEntries.find(([key]) => key.endsWith(".png") || key.endsWith(".jpg"))
+        
+        return url
+    }
+  }
+
+}
+
+
+
+export default runModelOnce;
+
