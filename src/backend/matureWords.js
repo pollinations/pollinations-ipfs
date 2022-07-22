@@ -1,5 +1,4 @@
-export const words = {
- "words": [
+export const words = [
    "hentai",
    "jew",
    "nude",
@@ -460,5 +459,4 @@ export const words = {
    "willy",
    "xrated",
    "xxx"
-  ]
-}
+];

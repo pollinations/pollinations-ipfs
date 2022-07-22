@@ -2732,7 +2732,7 @@ var require_any = __commonJS({
     var _curry2 = require_curry2();
     var _dispatchable = require_dispatchable();
     var _xany = require_xany();
-    var any = /* @__PURE__ */ _curry2(/* @__PURE__ */ _dispatchable(["any"], _xany, function any2(fn, list) {
+    var any2 = /* @__PURE__ */ _curry2(/* @__PURE__ */ _dispatchable(["any"], _xany, function any3(fn, list) {
       var idx = 0;
       while (idx < list.length) {
         if (fn(list[idx])) {
@@ -2742,7 +2742,7 @@ var require_any = __commonJS({
       }
       return false;
     }));
-    module2.exports = any;
+    module2.exports = any2;
   }
 });
 
@@ -3506,8 +3506,8 @@ var require_composeK = __commonJS({
         throw new Error("composeK requires at least one argument");
       }
       var init = Array.prototype.slice.call(arguments);
-      var last7 = init.pop();
-      return compose(compose.apply(this, map3(chain, init)), last7);
+      var last8 = init.pop();
+      return compose(compose.apply(this, map3(chain, init)), last8);
     }
     module2.exports = composeK;
   }
@@ -3584,8 +3584,8 @@ var require_identity2 = __commonJS({
   "node_modules/ramda/src/identity.js"(exports2, module2) {
     var _curry1 = require_curry1();
     var _identity = require_identity();
-    var identity3 = /* @__PURE__ */ _curry1(_identity);
-    module2.exports = identity3;
+    var identity4 = /* @__PURE__ */ _curry1(_identity);
+    module2.exports = identity4;
   }
 });
 
@@ -3597,10 +3597,10 @@ var require_pipeWith = __commonJS({
     var head = require_head();
     var _reduce = require_reduce();
     var tail = require_tail();
-    var identity3 = require_identity2();
+    var identity4 = require_identity2();
     var pipeWith = /* @__PURE__ */ _curry2(function pipeWith2(xf, list) {
       if (list.length <= 0) {
-        return identity3;
+        return identity4;
       }
       var headList = head(list);
       var tailList = tail(list);
@@ -4854,8 +4854,8 @@ var require_xdropRepeatsWith = __commonJS({
 var require_last = __commonJS({
   "node_modules/ramda/src/last.js"(exports2, module2) {
     var nth = require_nth();
-    var last7 = /* @__PURE__ */ nth(-1);
-    module2.exports = last7;
+    var last8 = /* @__PURE__ */ nth(-1);
+    module2.exports = last8;
   }
 });
 
@@ -4865,7 +4865,7 @@ var require_dropRepeatsWith = __commonJS({
     var _curry2 = require_curry2();
     var _dispatchable = require_dispatchable();
     var _xdropRepeatsWith = require_xdropRepeatsWith();
-    var last7 = require_last();
+    var last8 = require_last();
     var dropRepeatsWith = /* @__PURE__ */ _curry2(/* @__PURE__ */ _dispatchable([], _xdropRepeatsWith, function dropRepeatsWith2(pred, list) {
       var result = [];
       var idx = 1;
@@ -4873,7 +4873,7 @@ var require_dropRepeatsWith = __commonJS({
       if (len !== 0) {
         result[0] = list[0];
         while (idx < len) {
-          if (!pred(last7(result), list[idx])) {
+          if (!pred(last8(result), list[idx])) {
             result[result.length] = list[idx];
           }
           idx += 1;
@@ -5606,9 +5606,9 @@ var require_uniqBy = __commonJS({
 // node_modules/ramda/src/uniq.js
 var require_uniq = __commonJS({
   "node_modules/ramda/src/uniq.js"(exports2, module2) {
-    var identity3 = require_identity2();
+    var identity4 = require_identity2();
     var uniqBy = require_uniqBy();
-    var uniq = /* @__PURE__ */ uniqBy(identity3);
+    var uniq = /* @__PURE__ */ uniqBy(identity4);
     module2.exports = uniq;
   }
 });
@@ -6761,10 +6761,10 @@ var require_useWith = __commonJS({
 var require_project = __commonJS({
   "node_modules/ramda/src/project.js"(exports2, module2) {
     var _map = require_map();
-    var identity3 = require_identity2();
+    var identity4 = require_identity2();
     var pickAll = require_pickAll();
     var useWith = require_useWith();
-    var project = /* @__PURE__ */ useWith(_map, [pickAll, identity3]);
+    var project = /* @__PURE__ */ useWith(_map, [pickAll, identity4]);
     module2.exports = project;
   }
 });
@@ -11102,13 +11102,13 @@ var require_identity3 = __commonJS({
     Object.defineProperty(exports2, "__esModule", { value: true });
     var base3 = require_base();
     var bytes = require_bytes();
-    var identity3 = base3.from({
+    var identity4 = base3.from({
       prefix: "\0",
       name: "identity",
       encode: (buf2) => bytes.toString(buf2),
       decode: (str) => bytes.fromString(str)
     });
-    exports2.identity = identity3;
+    exports2.identity = identity4;
   }
 });
 
@@ -11310,13 +11310,13 @@ var require_identity4 = __commonJS({
     var name7 = "identity";
     var encode12 = bytes.coerce;
     var digest2 = (input) => digest$1.create(code7, encode12(input));
-    var identity3 = {
+    var identity4 = {
       code: code7,
       name: name7,
       encode: encode12,
       digest: digest2
     };
-    exports2.identity = identity3;
+    exports2.identity = identity4;
   }
 });
 
@@ -11378,7 +11378,7 @@ var require_basics = __commonJS({
   "node_modules/multiformats/cjs/src/basics.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
-    var identity3 = require_identity3();
+    var identity4 = require_identity3();
     var base22 = require_base2();
     var base82 = require_base8();
     var base102 = require_base10();
@@ -11399,7 +11399,7 @@ var require_basics = __commonJS({
     var varint2 = require_varint2();
     var bytes = require_bytes();
     var bases2 = {
-      ...identity3,
+      ...identity4,
       ...base22,
       ...base82,
       ...base102,
@@ -20146,12 +20146,12 @@ var require_fixed_size = __commonJS({
         return true;
       }
       shift() {
-        const last7 = this.buffer[this.btm];
-        if (last7 === void 0)
+        const last8 = this.buffer[this.btm];
+        if (last8 === void 0)
           return void 0;
         this.buffer[this.btm] = void 0;
         this.btm = this.btm + 1 & this.mask;
-        return last7;
+        return last8;
       }
       peek() {
         return this.buffer[this.btm];
@@ -20876,8 +20876,8 @@ var require_multiaddr_to_uri = __commonJS({
         return `tcp://${str}:${port}`;
       let protocol = "tcp";
       let explicitPort = `:${port}`;
-      const last7 = parts[parts.length - 1];
-      if (last7.protocol === "tcp") {
+      const last8 = parts[parts.length - 1];
+      if (last8.protocol === "tcp") {
         protocol = port === "443" ? "https" : "http";
         explicitPort = port === "443" || port === "80" ? "" : explicitPort;
       }
@@ -22344,14 +22344,14 @@ var require_it_first = __commonJS({
 var require_it_last = __commonJS({
   "node_modules/it-last/index.js"(exports2, module2) {
     "use strict";
-    var last7 = async (source) => {
+    var last8 = async (source) => {
       let res;
       for await (const entry of source) {
         res = entry;
       }
       return res;
     };
-    module2.exports = last7;
+    module2.exports = last8;
   }
 });
 
@@ -29955,7 +29955,7 @@ var require_social_post_api = __commonJS({
       data.source = "npm";
       return data;
     };
-    var doPost = (endpoint, data, headers) => {
+    var doPost2 = (endpoint, data, headers) => {
       return got.post(`${BASE_URL}/${endpoint}`, {
         headers,
         json: preProcess(data),
@@ -30006,7 +30006,7 @@ var require_social_post_api = __commonJS({
         if (!post || !platforms || platforms.length === 0) {
           return ERROR_MSG;
         }
-        return doPost("post", data, this.headers);
+        return doPost2("post", data, this.headers);
       }
       delete(data) {
         const { id, bulk } = data;
@@ -30026,10 +30026,10 @@ var require_social_post_api = __commonJS({
         return doGet("analytics/links", this.headers, params);
       }
       analyticsPost(data) {
-        return doPost("analytics/post", data, this.headers);
+        return doPost2("analytics/post", data, this.headers);
       }
       analyticsSocial(data) {
-        return doPost("analytics/social", data, this.headers);
+        return doPost2("analytics/social", data, this.headers);
       }
       user(params) {
         return doGet("user", this.headers, params);
@@ -30039,21 +30039,21 @@ var require_social_post_api = __commonJS({
         if (!file) {
           return ERROR_MSG;
         }
-        return doPost("upload", data, this.headers);
+        return doPost2("upload", data, this.headers);
       }
       shorten(data) {
         const { url } = data;
         if (!url) {
           return ERROR_MSG;
         }
-        return doPost("shorten", data, this.headers);
+        return doPost2("shorten", data, this.headers);
       }
       feedAdd(data) {
         const { url } = data;
         if (!url) {
           return ERROR_MSG;
         }
-        return doPost("feed", data, this.headers);
+        return doPost2("feed", data, this.headers);
       }
       feedDelete(data) {
         const { id } = data;
@@ -30067,7 +30067,7 @@ var require_social_post_api = __commonJS({
         if (!id || !platforms || !comment) {
           return ERROR_MSG;
         }
-        return doPost("comments", data, this.headers);
+        return doPost2("comments", data, this.headers);
       }
       getComments(params) {
         return doGet("comments", this.headers, params);
@@ -30077,7 +30077,7 @@ var require_social_post_api = __commonJS({
         if (!title) {
           return ERROR_MSG;
         }
-        return doPost("profiles/create-profile", data, this.headers);
+        return doPost2("profiles/create-profile", data, this.headers);
       }
       deleteProfile(data) {
         const { profileKey } = data;
@@ -30094,14 +30094,14 @@ var require_social_post_api = __commonJS({
         if (!domain || !privateKey || !profileKey) {
           return ERROR_MSG;
         }
-        return doPost("profiles/generateJWT", data, this.headers);
+        return doPost2("profiles/generateJWT", data, this.headers);
       }
       setAutoSchedule(data) {
         const { schedule } = data;
         if (!schedule) {
           return ERROR_MSG;
         }
-        return doPost("auto-schedule/set", data, this.headers);
+        return doPost2("auto-schedule/set", data, this.headers);
       }
       deleteAutoSchedule(data) {
         return doDelete("auto-schedule/delete", data, this.headers);
@@ -30114,7 +30114,7 @@ var require_social_post_api = __commonJS({
         if (!action || !url) {
           return ERROR_MSG;
         }
-        return doPost("hook/webhook", data, this.headers);
+        return doPost2("hook/webhook", data, this.headers);
       }
       unregisterWebhook(data) {
         const { action } = data;
@@ -39637,6 +39637,10 @@ var getIPFSDaemonURL = async () => {
   debug5("localhost:5001 is not reachable. Connecting to", IPFS_HOST);
   return IPFS_HOST;
 };
+var getWebURL = (cid, name7 = null) => {
+  const filename = name7 ? `?filename=${name7}` : "";
+  return `https://ipfs.pollinations.ai/ipfs/${cid}${filename}`;
+};
 var stripSlashIPFS = (cidString) => {
   if (!cidString)
     throw new Error("CID is falsy");
@@ -39877,14 +39881,575 @@ var import_social_post_api = __toESM(require_social_post_api(), 1);
 // src/data/summaryData.js
 var import_debug9 = __toESM(require_src(), 1);
 
+// src/backend/matureWords.js
+var words = [
+  "hentai",
+  "jew",
+  "nude",
+  "4r5e",
+  "5h1t",
+  "5hit",
+  "a55",
+  "anal",
+  "anus",
+  "ar5e",
+  "arrse",
+  "arse",
+  "ass",
+  "ass-fucker",
+  "asses",
+  "assfucker",
+  "assfukka",
+  "asshole",
+  "assholes",
+  "asswhole",
+  "a_s_s ",
+  "b!tch",
+  "b00bs",
+  "b17ch",
+  "b1tch",
+  "ballbag",
+  "balls",
+  "ballsack",
+  "bastard",
+  "beastial",
+  "beastiality",
+  "bellend",
+  "bestial",
+  "bestiality",
+  "bi+ch",
+  "biatch",
+  "bitch",
+  "bitcher",
+  "bitchers",
+  "bitches",
+  "bitchin",
+  "bitching",
+  "bloody",
+  "blow job",
+  "blowjob",
+  "blowjobs",
+  "boiolas",
+  "bollock",
+  "bollok",
+  "boner",
+  "boob",
+  "boobs",
+  "booobs",
+  "boooobs",
+  "booooobs",
+  "booooooobs",
+  "breasts",
+  "buceta",
+  "bugger",
+  "bum",
+  "bunny fucker",
+  "butt",
+  "butthole",
+  "buttmuch",
+  "buttplug",
+  "c0ck",
+  "c0cksucker",
+  "carpet muncher",
+  "cawk",
+  "chink",
+  "cipa",
+  "cl1t",
+  "clit",
+  "clitoris",
+  "clits",
+  "cnut",
+  "cock",
+  "cock-sucker",
+  "cockface",
+  "cockhead",
+  "cockmunch",
+  "cockmuncher",
+  "cocks",
+  "cocksuck",
+  "cocksucked",
+  "cocksucker",
+  "cocksucking",
+  "cocksucks",
+  "cocksuka",
+  "cocksukka",
+  "cok",
+  "cokmuncher",
+  "coksucka",
+  "coon",
+  "cox",
+  "crap",
+  "cum",
+  "cummer",
+  "cumming",
+  "cums",
+  "cumshot",
+  "cunilingus",
+  "cunillingus",
+  "cunnilingus",
+  "cunt",
+  "cuntlick",
+  "cuntlicker",
+  "cuntlicking",
+  "cunts",
+  "cyalis",
+  "cyberfuc",
+  "cyberfuck",
+  "cyberfucked",
+  "cyberfucker",
+  "cyberfuckers",
+  "cyberfucking",
+  "d1ck",
+  "dick",
+  "dickhead",
+  "dildo",
+  "dildos",
+  "dink",
+  "dinks",
+  "dirsa",
+  "dlck",
+  "dog-fucker",
+  "doggin",
+  "dogging",
+  "donkeyribber",
+  "doosh",
+  "duche",
+  "dyke",
+  "ejaculate",
+  "ejaculated",
+  "ejaculates",
+  "ejaculating",
+  "ejaculatings",
+  "ejaculation",
+  "ejakulate",
+  "f u c k",
+  "f u c k e r",
+  "cuckold",
+  "f4nny",
+  "fag",
+  "fagging",
+  "faggitt",
+  "pornstars",
+  "hustler",
+  "lesbian",
+  "sex",
+  "xxx",
+  "juggs",
+  "faggot",
+  "faggs",
+  "fagot",
+  "fagots",
+  "fags",
+  "fanny",
+  "fannyflaps",
+  "fannyfucker",
+  "fanyy",
+  "fatass",
+  "fcuk",
+  "fcuker",
+  "fcuking",
+  "feck",
+  "fecker",
+  "felching",
+  "fellate",
+  "fellatio",
+  "fingerfuck",
+  "fingerfucked",
+  "fingerfucker",
+  "fingerfuckers",
+  "fingerfucking",
+  "fingerfucks",
+  "fistfuck",
+  "fistfucked",
+  "fistfucker",
+  "fistfuckers",
+  "fistfucking",
+  "fistfuckings",
+  "fistfucks",
+  "flange",
+  "fook",
+  "fooker",
+  "fuck",
+  "fucka",
+  "fucked",
+  "fucker",
+  "fuckers",
+  "fuckhead",
+  "fuckheads",
+  "fuckin",
+  "fucking",
+  "fuckings",
+  "fuckingshitmotherfucker",
+  "fuckme",
+  "fucks",
+  "fuckwhit",
+  "fuckwit",
+  "fudge packer",
+  "fudgepacker",
+  "fuk",
+  "fuker",
+  "fukker",
+  "fukkin",
+  "fuks",
+  "fukwhit",
+  "fukwit",
+  "fux",
+  "fux0r",
+  "f_u_c_k",
+  "gangbang",
+  "gangbanged",
+  "gangbangs",
+  "gaylord",
+  "gaysex",
+  "goatse",
+  "God",
+  "god-dam",
+  "god-damned",
+  "goddamn",
+  "goddamned",
+  "hardcoresex",
+  "hell",
+  "heshe",
+  "hoar",
+  "hoare",
+  "hoer",
+  "homo",
+  "hore",
+  "horniest",
+  "horny",
+  "hotsex",
+  "jack-off",
+  "jackoff",
+  "jap",
+  "jerk-off",
+  "jism",
+  "jiz",
+  "jizm",
+  "jizz",
+  "kawk",
+  "knob",
+  "knobead",
+  "knobed",
+  "knobend",
+  "knobhead",
+  "knobjocky",
+  "knobjokey",
+  "kock",
+  "kondum",
+  "kondums",
+  "kum",
+  "kummer",
+  "kumming",
+  "kums",
+  "kunilingus",
+  "l3i+ch",
+  "l3itch",
+  "labia",
+  "lmfao",
+  "lust",
+  "lusting",
+  "m0f0",
+  "m0fo",
+  "m45terbate",
+  "ma5terb8",
+  "ma5terbate",
+  "masochist",
+  "master-bate",
+  "masterb8",
+  "masterbat*",
+  "masterbat3",
+  "masterbate",
+  "masterbation",
+  "masterbations",
+  "masturbate",
+  "mo-fo",
+  "mof0",
+  "mofo",
+  "mothafuck",
+  "mothafucka",
+  "mothafuckas",
+  "mothafuckaz",
+  "mothafucked",
+  "mothafucker",
+  "mothafuckers",
+  "mothafuckin",
+  "mothafucking",
+  "mothafuckings",
+  "mothafucks",
+  "mother fucker",
+  "motherfuck",
+  "motherfucked",
+  "motherfucker",
+  "motherfuckers",
+  "motherfuckin",
+  "motherfucking",
+  "motherfuckings",
+  "motherfuckka",
+  "motherfucks",
+  "muff",
+  "mutha",
+  "muthafecker",
+  "muthafuckker",
+  "muther",
+  "mutherfucker",
+  "n1gga",
+  "n1gger",
+  "nazi",
+  "nigg3r",
+  "nigg4h",
+  "nigga",
+  "niggah",
+  "niggas",
+  "niggaz",
+  "nigger",
+  "niggers",
+  "nob",
+  "nob jokey",
+  "nobhead",
+  "nobjocky",
+  "nobjokey",
+  "numbnuts",
+  "nutsack",
+  "orgasim",
+  "orgasims",
+  "orgasm",
+  "orgasms",
+  "p0rn",
+  "pawn",
+  "pecker",
+  "penis",
+  "penisfucker",
+  "phonesex",
+  "phuck",
+  "phuk",
+  "phuked",
+  "phuking",
+  "phukked",
+  "phukking",
+  "phuks",
+  "phuq",
+  "pigfucker",
+  "pimpis",
+  "piss",
+  "pissed",
+  "pisser",
+  "pissers",
+  "pisses",
+  "pissflaps",
+  "pissin",
+  "pissing",
+  "pissoff",
+  "poop",
+  "porn",
+  "porno",
+  "pornography",
+  "pornos",
+  "prick",
+  "pricks",
+  "pron",
+  "pube",
+  "pusse",
+  "pussi",
+  "pussies",
+  "pussy",
+  "pussys",
+  "rectum",
+  "retard",
+  "rimjaw",
+  "rimming",
+  "s hit",
+  "s.o.b.",
+  "sadist",
+  "schlong",
+  "screwing",
+  "scroat",
+  "scrote",
+  "scrotum",
+  "semen",
+  "sex",
+  "sh!+",
+  "sh!t",
+  "sh1t",
+  "shag",
+  "shagger",
+  "shaggin",
+  "shagging",
+  "shemale",
+  "shi+",
+  "shit",
+  "shitdick",
+  "shite",
+  "shited",
+  "shitey",
+  "shitfuck",
+  "shitfull",
+  "shithead",
+  "shiting",
+  "shitings",
+  "shits",
+  "shitted",
+  "shitter",
+  "shitters",
+  "shitting",
+  "shittings",
+  "shitty",
+  "skank",
+  "slut",
+  "sluts",
+  "smegma",
+  "smut",
+  "snatch",
+  "son-of-a-bitch",
+  "spac",
+  "spunk",
+  "s_h_i_t",
+  "t1tt1e5",
+  "t1tties",
+  "teets",
+  "teez",
+  "testical",
+  "testicle",
+  "tit",
+  "titfuck",
+  "tits",
+  "titt",
+  "tittie5",
+  "tittiefucker",
+  "titties",
+  "tittyfuck",
+  "tittywank",
+  "titwank",
+  "tosser",
+  "turd",
+  "tw4t",
+  "twat",
+  "twathead",
+  "twatty",
+  "twunt",
+  "twunter",
+  "v14gra",
+  "v1gra",
+  "vagina",
+  "viagra",
+  "vulva",
+  "w00se",
+  "wang",
+  "wank",
+  "wanker",
+  "wanky",
+  "whoar",
+  "whore",
+  "willies",
+  "willy",
+  "xrated",
+  "xxx"
+];
+
+// src/backend/mature.js
+var mature = (raw_input) => {
+  try {
+    return words.reduce((text, word) => text.replace(new RegExp(`\\b${word}\\b`, "g"), repeatChar("*", word.length - 1)), raw_input);
+  } catch (e) {
+    console.error("Error when applying maturity filter", e);
+    return raw_input;
+  }
+};
+var repeatChar = (c, n) => n === 0 ? c : c + repeatChar(c, n - 1);
+var mature_default = (text) => mature(text);
+
 // src/utils/notebookMetadata.js
 var import_debug7 = __toESM(require_src(), 1);
 var import_json5 = __toESM(require_lib7(), 1);
 var { parse: parse2 } = import_json5.default;
 var debug7 = (0, import_debug7.default)("notebookMetadata");
+function readMetadata(notebookJSON) {
+  if (!notebookJSON)
+    return null;
+  let { metadata, cells } = notebookJSON;
+  debug7("cells", cells, "metadata", metadata);
+  const { name: name7 } = metadata["colab"];
+  const descriptionCell = cells.find(isDescriptionCell);
+  const parameterCell = cells.find(isParameterCell);
+  const colabLinkCell = cells.find(isColabLinkCell);
+  const colabLink = colabLinkCell ? getColabLinkURL(colabLinkCell) : null;
+  debug7("parameter cell", parameterCell);
+  const description = descriptionCell ? descriptionCell["source"].join("\n") : null;
+  const parameterTexts = parameterCell ? parameterCell["source"] : null;
+  debug7("parameter texts", parameterTexts);
+  if (!parameterTexts)
+    return null;
+  const allParameters = parameterTexts.map(extractParametersWithComment).filter((param) => param).map(mapToJSONFormField);
+  const properties = Object.fromEntries(allParameters);
+  if (!allParameters[0])
+    return null;
+  const primaryInput = allParameters[0][0];
+  debug7("got parameters", allParameters, "primary input", primaryInput);
+  return {
+    form: {
+      properties
+    },
+    name: name7,
+    description,
+    numCells: cells.length,
+    primaryInput,
+    colabLink
+  };
+}
+var extractParametersWithComment = (text, i, codeRows) => {
+  const params = extractParameters(text) || extractEnumerableParameters(text);
+  const previousRow = codeRows[i - 1];
+  if (params && previousRow && previousRow.trim().startsWith("#") && !previousRow.includes("#@param")) {
+    const description = previousRow.trim().slice(1).trim();
+    return { ...params, description };
+  }
+  return params;
+};
+var extractParameters = (text) => {
+  const match = text.match(/^([a-zA-Z0-9-_]+)\s*=\s*(.*)\s*#@param\s*({.*})/);
+  if (!match)
+    return null;
+  const [_text, name7, defaultVal, typedata] = match;
+  debug7("Parsing typedata", typedata);
+  return { name: name7, defaultVal, ...parse2(typedata) };
+};
+var extractEnumerableParameters = (text) => {
+  const match = text.match(/^([a-zA-Z0-9-_]+)\s=\s*(.*)\s*#@param\s*(\[.*\])/);
+  if (!match)
+    return null;
+  const [_text, name7, defaultVal, enumString] = match;
+  debug7("Parsing options string", enumString);
+  return { name: name7, defaultVal, type: "string", enumOptions: parse2(enumString) };
+};
+var mapToJSONFormField = ({ name: name7, defaultVal, type, enumOptions, ...rest }) => {
+  defaultVal = defaultVal.trim();
+  if (defaultVal == "True" || defaultVal == "False")
+    defaultVal = defaultVal.toLowerCase();
+  debug7("Parsing JSON:", { defaultVal, enumOptions });
+  return [name7, {
+    enum: enumOptions,
+    type,
+    default: parse2(defaultVal),
+    title: name7,
+    ...rest
+  }];
+};
+var isParameterCell = (cell) => cell["cell_type"] === "code" && cell["source"].join("\n").includes("#@param");
+var isMarkdownCell = (cell) => cell["cell_type"] === "markdown";
+var isDescriptionCell = (cell) => {
+  var _a;
+  return isMarkdownCell(cell) && ((_a = cell.metadata) == null ? void 0 : _a.id) !== "view-in-github";
+};
+var isColabLinkCell = (cell) => {
+  var _a;
+  return isMarkdownCell(cell) && ((_a = cell.metadata) == null ? void 0 : _a.id) === "view-in-github";
+};
+var getColabLinkURL = (cell) => getColabLink(cell).match(/.*href=\"([^\"]*)\".*/)[1];
+var getColabLink = (cell) => cell["source"][0];
+var notebookMetadata_default = readMetadata;
 
 // src/data/media.js
 var import_debug8 = __toESM(require_src(), 1);
+var import_ramda3 = __toESM(require_src3(), 1);
 var debug8 = (0, import_debug8.default)("media");
 var _mediaTypeMapWithoutAll = {
   "video": [".mp4", ".webm"],
@@ -39896,9 +40461,70 @@ var _mediaTypeMap = {
   ..._mediaTypeMapWithoutAll,
   "all": [...Object.values(_mediaTypeMapWithoutAll)].flat()
 };
+var getFileType = (filename) => {
+  const extension = (0, import_ramda3.last)(filename.split("."));
+  return Object.entries(_mediaTypeMap).find(([type, exts]) => (0, import_ramda3.any)((ext) => ext.endsWith(extension), exts))[0];
+};
+var getCoverImage = (output) => {
+  const image = output && getMedia(output, "image")[0];
+  debug8("coverImage", image);
+  return image ? [image[0], gzipProxy(image[1])] : null;
+};
+var getCoverVideo = (output) => output && getMedia(output, "video")[0];
+function getMedia(output, type = "all") {
+  const extensions = _mediaTypeMap[type];
+  const filterByExtensions = (filename) => (0, import_ramda3.any)(import_ramda3.identity, extensions.map((ext) => filename.toLowerCase().endsWith(ext)));
+  const mediaFilenames = output ? Object.keys(output).filter(filterByExtensions) : [];
+  const media = mediaFilenames.map((filename) => [filename, output[filename], getFileType(filename)]);
+  media.reverse();
+  return media;
+}
+var gzipProxy = (path4) => {
+  const cid = (0, import_ramda3.last)(path4.split("/"));
+  return `https://images.weserv.nl/?url=https://pollinations.ai/ipfs/${cid}`;
+};
 
 // src/data/summaryData.js
 var debug9 = (0, import_debug9.default)("summaryData");
+function getPostData(ipfs, cid, shortenPost = true) {
+  var _a;
+  const metadata = notebookMetadata_default(ipfs.input["notebook.ipynb"]);
+  const { name: name7, primaryInput } = metadata || { name: "", primaryInput: "Prompt" };
+  const coverImage = getCoverImage(ipfs.output);
+  debug9("got coverImage", coverImage);
+  const coverImageURL = coverImage ? coverImage[1] : null;
+  const vid = getCoverVideo(ipfs.output);
+  const videoURL = Array.isArray(vid) && vid[1] ? vid[1] : coverImageURL;
+  const url = `https://pollinations.ai/p/${cid}/`;
+  const possibleText = false;
+  const text = possibleText ? formatText(shortenPost, possibleText) : `"${ipfs.input[primaryInput]}"`;
+  const textWithMention = ((_a = ipfs.input) == null ? void 0 : _a.social_mention) ? `${ipfs.input.social_mention} ${text}` : text;
+  const maturityFilteredText = mature_default(textWithMention);
+  const { post, title } = formatPostAndTitle(name7, maturityFilteredText, url, shortenPost);
+  debug9("Created post data", { name: name7, text, videoURL, coverImage: coverImageURL, url });
+  return { post, title, videoURL, coverImage: coverImageURL, url };
+}
+var formatText = (shortenPost, possibleText) => shortenPost ? possibleText[1] : `
+
+${possibleText[1]}
+
+`;
+function formatPostAndTitle(modelTitle, text, url, shortenPost) {
+  if (shortenPost) {
+    text = shorten(text, 160);
+    modelTitle = shorten(modelTitle, 70);
+  }
+  const post = shortenPost ? `${text} ${url}` : `${modelTitle} - ${text} ${url}`;
+  return { post, title: text };
+}
+function shorten(str, maxLength) {
+  debug9("shortening", str, maxLength);
+  if (!str)
+    return "";
+  if (str.length > maxLength)
+    return `${str.substr(0, maxLength - 3)}...`;
+  return str;
+}
 
 // src/ipfsWebClient.js
 var import_debug11 = __toESM(require_src(), 1);
@@ -39909,7 +40535,7 @@ var import_path_browserify3 = __toESM(require_path_browserify(), 1);
 var import_debug10 = __toESM(require_src(), 1);
 var import_json52 = __toESM(require_lib7(), 1);
 var import_path_browserify2 = __toESM(require_path_browserify(), 1);
-var import_ramda3 = __toESM(require_src3(), 1);
+var import_ramda4 = __toESM(require_src3(), 1);
 
 // src/utils/logProgressToConsole.js
 var PromiseAllProgress = (name7, promises) => Promise.all(promises);
@@ -39948,7 +40574,7 @@ var _getIPFSState = async (ipfsReader, { cid, type, name: name7, path: path4, ro
     _debug("Got files for", name7, cid, files);
     const filenames = files.map(({ name: name8 }) => name8);
     const contents = await PromiseAllProgress(path4, files.map((file) => cachedIPFSState(ipfsReader, { ...file, path: join2(path4, file.name), rootCID }, processFile2, skipCache)));
-    const contentResult = Object.fromEntries((0, import_ramda3.zip)(filenames, contents));
+    const contentResult = Object.fromEntries((0, import_ramda4.zip)(filenames, contents));
     _debug("contents", contentResult);
     Object.defineProperty(contentResult, ".cid", { value: cid });
     return contentResult;
@@ -39978,6 +40604,104 @@ var dataFetchers = (cid, { get }) => {
 var { extname } = import_path_browserify3.default;
 var { parse: parse4 } = import_json53.default;
 var debug11 = (0, import_debug11.default)("ipfsWebClient");
+var fetchAndMakeURL = async ({ name: name7, cid, text }) => {
+  const ext = extname(name7);
+  const doImport = shouldImport(ext);
+  debug11("ext", ext, "extIsJSON", doImport);
+  const webURL = getWebURL(cid, name7);
+  if (doImport) {
+    const textContent = await text();
+    try {
+      const json = parse4(textContent);
+      if (typeof json === "object")
+        Object.defineProperty(json, ".cid", { value: cid });
+      return json;
+    } catch (_e) {
+      debug11("result was not json. returning raw.");
+      return textContent;
+    }
+  } else {
+    return webURL;
+  }
+};
+var IPFSWebState = (contentID, skipCache = false) => {
+  debug11("Getting state for CID", contentID);
+  return getIPFSState(contentID, fetchAndMakeURL, skipCache);
+};
+function shouldImport(ext) {
+  return ext.length === 0 || ext.toLowerCase() === ".json" || ext.toLowerCase() === ".ipynb" || ext.toLowerCase() === ".md";
+}
+
+// src/backend/functions/social-post.js
+async function socialPost(platform, cid) {
+  var _a;
+  console.log("platform", platform, "cid", cid, ". Fetching IPFS state");
+  const ipfs = await IPFSWebState(cid);
+  if (!((_a = ipfs == null ? void 0 : ipfs.input) == null ? void 0 : _a.social)) {
+    console.log("Social post disabled. Aborting...");
+    return;
+  }
+  const shortenPost = platform === "twitter";
+  const data = getPostData(ipfs, cid, shortenPost);
+  if (data.title.includes("*")) {
+    console.log("Post contains mature words. Aborting...");
+    return null;
+  }
+  let res = null;
+  try {
+    res = await doPost(data, platform);
+    console.log("res", JSON.stringify(res, null, 4));
+  } catch (e) {
+    console.error("error", e);
+    res = e;
+  }
+  return res;
+}
+async function doPost({ post, title, videoURL, coverImage, url }, platform) {
+  if (platform === "youtube" && !videoURL) {
+    console.log("No video URL for youtube. Aborting...");
+    return null;
+  }
+  post = await autoHashtag(post) + fixedHashTags;
+  console.log("starting social post api with key", process.env["AYRSHARE_KEY"]);
+  const social = new import_social_post_api.default(process.env["AYRSHARE_KEY"]);
+  const shareConfig = {
+    post,
+    title,
+    youTubeOptions: {
+      title,
+      youTubeVisibility: "public",
+      thumbNail: coverImage
+    },
+    shortenLinks: false,
+    "mediaUrls": [videoURL],
+    "platforms": [platform],
+    autoHashtag: {
+      max: 10,
+      position: "auto"
+    }
+  };
+  const postResponse = await social.post(shareConfig).catch(console.error);
+  console.log("postResponse", postResponse);
+  return postResponse;
+}
+var fixedHashTags = " #pollinations #generativeart #machinelearning";
+var autoHashtag = async (text) => {
+  const res = await (0, import_node_fetch.default)(`https://app.ayrshare.com/api/auto-hashtag`, {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${process.env["AYRSHARE_KEY"]}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      post: text,
+      max: 3,
+      position: "end"
+    })
+  });
+  const json = await res.json();
+  return json.post || text;
+};
 
 // src/ipfs/receiver.js
 var import_debug12 = __toESM(require_src(), 1);
@@ -40032,7 +40756,7 @@ if (process.argv[2]) {
   }, async (cid) => {
     for (const platform of ["twitter", "instagram", "facebook", "youtube", "linkedin"]) {
       console.log("posting", cid, "to", platform);
-      console.log("social post result", await doSocialPost(platform, cid));
+      console.log("social post result", await socialPost(platform, cid));
       console.log("done");
     }
   }, "");

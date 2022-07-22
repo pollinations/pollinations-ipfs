@@ -20,7 +20,7 @@ if (process.argv[2]) {
     }, async cid => {
         for (const platform of ["twitter", "instagram", "facebook", "youtube", "linkedin"]) {
             console.log("posting", cid, "to", platform);
-            console.log("social post result", await doSocialPost(platform, cid));
+            console.log("social post result", await socialPost(platform, cid));
             console.log("done");
         }
     },

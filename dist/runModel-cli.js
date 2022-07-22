@@ -33660,14 +33660,12 @@ async function* runModel(inputs2, model2 = "voodoohop/dalle-playground", execute
     }
   }
 }
-var runModelOnce = async (inputs2, model2 = "voodoohop/dalle-playground", executeOnDev = false, returnImage = true) => {
+var runModelOnce = async (inputs2, model2 = "voodoohop/dalle-playground", executeOnDev = false) => {
   const outputs = runModel(inputs2, model2, executeOnDev);
   for await (const data of outputs) {
     const output = data.output;
     if (output.done) {
       console.log("unsubscribed");
-      if (!returnImage)
-        return output;
       const outputEntries = Object.entries(output);
       const [_filename, url] = outputEntries.find(([key]) => key.endsWith(".png") || key.endsWith(".jpg"));
       return url;
