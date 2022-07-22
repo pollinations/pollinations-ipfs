@@ -1,4 +1,5 @@
 
+import { memoize } from "lodash";
 import fetch from "node-fetch";
 import SocialPost from "social-post-api";
 import { getPostData } from "../../data/summaryData.js";
@@ -25,7 +26,7 @@ export const handler = async ({ path }) => {
 }
 
 
-export async function socialPost(platform, cid) {
+export const socialPost = memoize(async (platform, cid) => {
   console.log("platform", platform, "cid", cid, ". Fetching IPFS state");
   const ipfs = await IPFSWebState(cid);
   if (!ipfs?.input?.social) {
@@ -56,7 +57,7 @@ export async function socialPost(platform, cid) {
   // Send discord webhook.
   // await discordPollenPostWebhook(data);
   return res;
-}
+});
 
 async function doPost({ post, title, videoURL, coverImage, url }, platform) {
 
