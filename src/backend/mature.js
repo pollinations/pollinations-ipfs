@@ -1,4 +1,4 @@
-import { words } from "./matureWords.json";
+import { words } from "./matureWords.js";
 
 // replace all mature words by *
 const mature = raw_input => {
