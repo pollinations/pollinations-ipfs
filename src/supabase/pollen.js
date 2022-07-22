@@ -1,4 +1,5 @@
-import supabase from "../supabase/client.js";
+import supabase from "./client.js";
+import { Channel } from 'queueable';
 
 export function getAllPollens() {
     return supabase.from("pollen").select("*").then(response => {
@@ -16,13 +17,13 @@ export function dispatchPollen(params) {
 // subscribe to 
 export async function subscribePollen(input, callback) {
 
-    const data = await getPollen(input);
+    const contentID = await getPollen(input);
 
-    if (data) {
-        callback(data);
+    if (contentID) {
+        callback(contentID);
         
         // return if job was already done
-        if (data.final_output)
+        if (contentID.final_output)
             return () => null;
     }
 
@@ -51,6 +52,14 @@ export async function getPollen(input) {
     return data && data[0];
 }
 
+export function subscribePollenGenerator(input) {
+    const channel = new Channel();
+    subscribePollen(input, data => channel.push(data))
+    return channel
+}
+
+
+
 // returnImmediately true means we don't wait for the pollen to be done if it was not finished yet
 export async function dispatchAndReturnPollen(params, returnImmediately=false) {
     
@@ -65,15 +74,16 @@ export async function dispatchAndReturnPollen(params, returnImmediately=false) {
 }
 
 
-async function test() {
-    //console.log(await getAllPollens())
-    const input = "QmYdTVSzh6MNDBKMG9Z1vqfzomTYWczV3iP15YBupKSsM1"
-    const image = "614871946825.dkr.ecr.us-east-1.amazonaws.com/pollinations/majesty-diffusion-cog"
-//    console.log("dispatch", await dispatchPollen({input, image}))
-//    subscribePollen(input, res => console.log("res",res))
+// async function test() {
+//     //console.log(await getAllPollens())
+//     const input = "QmYdTVSzh6MNDBKMG9Z1vqfzomTYWczV3iP15YBupKSsM1"
+//     const image = "614871946825.dkr.ecr.us-east-1.amazonaws.com/pollinations/majesty-diffusion-cog"
+// //    console.log("dispatch", await dispatchPollen({input, image}))
+// //    subscribePollen(input, res => console.log("res",res))
 
-    console.log("dispatchAndAwait", await dispatchAndReturnPollen({input, image}))
-}
+//     console.log("dispatchAndAwait", await dispatchAndReturnPollen({input, image}))
+// }
 
 
-test()
+// test()
+
