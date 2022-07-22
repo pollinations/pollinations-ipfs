@@ -35,9 +35,10 @@ if (message) {
 }
 
 function publishMessage(topic, message) {
-    const { publish, close } = publisher(topic, "")
+    const { publish, close } = publisher(topic, "", false)
     async function run() {
         await publish(message)
+        console.log("closing")
         close()
     }
     run()

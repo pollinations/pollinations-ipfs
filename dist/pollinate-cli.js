@@ -39700,7 +39700,7 @@ function publisher(nodeID, suffix = "/output", useIPNS = true) {
       createdIPNSKey = true;
     }
     debug6("ipnsKeyName", ipnsKeyName);
-    await publish(client, nodeID, cid, suffix, ipnsKeyName);
+    await publish(client, nodeID, cid, suffix, ipnsKeyName, useIPNS);
     await (0, import_await_sleep2.default)(100);
   };
   const sendHeartbeat = async () => {
@@ -39727,11 +39727,11 @@ var publishHeartbeat = async (client, suffix, nodeID) => {
     debug6("Exception. Couldn't publish heartbeat. Ignoring...", e.name);
   }
 };
-async function publish(client, nodeID, rootCID, suffix = "/output", ipnsKeyName = null) {
+async function publish(client, nodeID, rootCID, suffix = "/output", ipnsKeyName = null, useIPNS = true) {
   const retryPublish = retryException(client.pubsub.publish);
   debug6("publish pubsub", nodeID + suffix, rootCID, ipnsKeyName);
   try {
-    if (ipnsKeyName !== null)
+    if (ipnsKeyName !== null && useIPNS)
       experimentalIPNSPublish(client, rootCID, ipnsKeyName);
     if (nodeID !== "ipns")
       await retryPublish(nodeID + suffix, rootCID);

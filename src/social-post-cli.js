@@ -7,7 +7,7 @@ const PUBSUB_TOPIC = "post_pollen";
 
 if (process.argv[2]) {
 
-    const { publish, close } = publisher(PUBSUB_TOPIC, "");
+    const { publish, close } = publisher(PUBSUB_TOPIC, "", false);
     async function run() {
         await publish(process.argv[2]);
         close();

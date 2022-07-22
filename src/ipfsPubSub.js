@@ -52,7 +52,7 @@ export function publisher(nodeID, suffix = "/output", useIPNS=true) {
         debug("ipnsKeyName", ipnsKeyName)
 
         
-        await publish(client, nodeID, cid, suffix, ipnsKeyName)
+        await publish(client, nodeID, cid, suffix, ipnsKeyName, useIPNS)
 
         // for some reason publishing twice in a row causes a socket error. sleep just in case
         await awaitSleep(100)
@@ -98,12 +98,12 @@ const publishHeartbeat = async (client, suffix, nodeID) => {
     }
 }
 
-async function publish(client, nodeID, rootCID, suffix = "/output", ipnsKeyName = null) {
+async function publish(client, nodeID, rootCID, suffix = "/output", ipnsKeyName = null, useIPNS=true) {
     const retryPublish = retryException(client.pubsub.publish)
     debug("publish pubsub", nodeID + suffix, rootCID, ipnsKeyName);
 
     try {
-        if (ipnsKeyName !== null)
+        if (ipnsKeyName !== null && useIPNS)
             experimentalIPNSPublish(client, rootCID, ipnsKeyName)
 
         if (nodeID !== "ipns")
@@ -115,7 +115,7 @@ async function publish(client, nodeID, rootCID, suffix = "/output", ipnsKeyName 
 }
 
 
-// let abortPublish = null;
+let abortPublish = null;
 
 async function experimentalIPNSPublish(client, rootCID, ipnsKeyName) {
 
