@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-import { publisher } from "./ipfsPubSub";
-import { socialPost } from "./backend/functions/social-post";
-import { receive } from "./ipfs/receiver";
+import { publisher } from "./ipfsPubSub.js";
+import { socialPost } from "./backend/functions/social-post.js";
+import { receive } from "./ipfs/receiver.js";
 
 const PUBSUB_TOPIC = "post_pollen";
 
@@ -20,7 +20,7 @@ if (process.argv[2]) {
     }, async cid => {
         for (const platform of ["twitter", "instagram", "facebook", "youtube", "linkedin"]) {
             console.log("posting", cid, "to", platform);
-            console.log("social post result", await socialPost(platform, cid));
+            console.log("social post result", await doSocialPost(platform, cid));
             console.log("done");
         }
     },

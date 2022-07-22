@@ -33640,8 +33640,7 @@ function shouldImport(ext) {
 }
 
 // src/awsModelRunner.js
-var runModel = async (inputs2, model2 = "voodoohop/dalle-playground", executeOnDev = false) => {
-  var _a;
+async function* runModel(inputs2, model2 = "voodoohop/dalle-playground", executeOnDev = false) {
   console.log("!!!!submitted inputs", inputs2);
   const inputWriter = writer();
   const response = await submitToAWS(inputs2, inputWriter, model2, executeOnDev);
@@ -33652,16 +33651,30 @@ var runModel = async (inputs2, model2 = "voodoohop/dalle-playground", executeOnD
     console.log("!!!!received response", cid);
     const data = await IPFSWebState(cid);
     console.log("!!!!received response", data);
-    if ((_a = data == null ? void 0 : data.output) == null ? void 0 : _a.done) {
-      unsubscribe();
+    if (data == null ? void 0 : data.output) {
+      yield data;
+      if (data.output.done) {
+        unsubscribe();
+        return;
+      }
+    }
+  }
+}
+var runModelOnce = async (inputs2, model2 = "voodoohop/dalle-playground", executeOnDev = false, returnImage = true) => {
+  const outputs = runModel(inputs2, model2, executeOnDev);
+  for await (const data of outputs) {
+    const output = data.output;
+    if (output.done) {
       console.log("unsubscribed");
-      const outputEntries = Object.entries(data == null ? void 0 : data.output);
+      if (!returnImage)
+        return output;
+      const outputEntries = Object.entries(output);
       const [_filename, url] = outputEntries.find(([key]) => key.endsWith(".png") || key.endsWith(".jpg"));
       return url;
     }
   }
 };
-var awsModelRunner_default = runModel;
+var awsModelRunner_default = runModelOnce;
 
 // src/runModel-cli.js
 var [, , model, inputsString, isDevString] = process.argv;

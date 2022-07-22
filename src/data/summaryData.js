@@ -8,7 +8,9 @@ const debug = Debug("summaryData");
 // Replaces mature words with ***'s
 // shortenPost is useful for twitter, title and open graph tags
 export function getPostData(ipfs, cid, shortenPost = true) {
-  const { name, primaryInput } = readMetadata(ipfs.input["notebook.ipynb"]);
+  const metadata = readMetadata(ipfs.input["notebook.ipynb"]);
+  
+  const { name, primaryInput } = metadata || { name: "", primaryInput: "Prompt" };
 
   // get cover image and video
   const coverImage = getCoverImage(ipfs.output);
@@ -23,8 +25,11 @@ export function getPostData(ipfs, cid, shortenPost = true) {
   const possibleText = false; // getMedia(ipfs.output, "text")[0];
   const text = possibleText ? formatText(shortenPost, possibleText) : `"${ipfs.input[primaryInput]}"`;
 
+  // add mention if it exists
+  const textWithMention = ipfs.input?.social_mention ? `${ipfs.input.social_mention} ${text}` : text;
+
   // Replace mature words with ***'s
-  const maturityFilteredText = mature(text);
+  const maturityFilteredText = mature(textWithMention);
 
   const { post, title } = formatPostAndTitle(name, maturityFilteredText, url, shortenPost);
 

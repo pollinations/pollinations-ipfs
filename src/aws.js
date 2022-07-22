@@ -42,7 +42,7 @@ export async function submitToAWS(values, ipfsWriter, notebook, dev=true) {
   }
 
 
-async function UploadInputstoIPFS(values, { add, mkDir, cid, rm}){
+export async function UploadInputstoIPFS(values, { add, mkDir, cid, rm}){
   debug("adding values to ipfs", values)
   await rm("/output")
   await mkDir("/input")
