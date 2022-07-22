@@ -39710,7 +39710,7 @@ function publisher(nodeID, suffix = "/output", useIPNS = true) {
   const handle = setInterval(sendHeartbeat, HEARTBEAT_FREQUENCY * 1e3);
   sendHeartbeat();
   const close = () => {
-    debug6("Closing publisher", handle);
+    debug6("Closing publisher");
     clearInterval(handle);
   };
   return {

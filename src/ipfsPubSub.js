@@ -74,7 +74,7 @@ export function publisher(nodeID, suffix = "/output", useIPNS=true) {
     sendHeartbeat();
 
     const close = () => {
-        debug("Closing publisher", handle);
+        debug("Closing publisher");
         clearInterval(handle);
         // clearInterval(interval);
     };

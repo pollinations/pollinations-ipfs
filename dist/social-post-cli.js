@@ -39712,7 +39712,7 @@ function publisher(nodeID, suffix = "/output", useIPNS = true) {
   const handle = setInterval(sendHeartbeat, HEARTBEAT_FREQUENCY * 1e3);
   sendHeartbeat();
   const close = () => {
-    debug6("Closing publisher", handle);
+    debug6("Closing publisher");
     clearInterval(handle);
   };
   return {
@@ -40641,6 +40641,8 @@ async function socialPost(platform, cid) {
     console.log("Social post disabled. Aborting...");
     return;
   }
+  if (ipfs.input.social_platforms && !ipfs.input.social_platforms.includes(platform))
+    return;
   const shortenPost = platform === "twitter";
   const data = getPostData(ipfs, cid, shortenPost);
   if (data.title.includes("*")) {
@@ -40658,7 +40660,7 @@ async function socialPost(platform, cid) {
   return res;
 }
 async function doPost({ post, title, videoURL, coverImage, url }, platform) {
-  if (platform === "youtube" && !videoURL) {
+  if (platform === "youtube" && videoURL == coverImage) {
     console.log("No video URL for youtube. Aborting...");
     return null;
   }
