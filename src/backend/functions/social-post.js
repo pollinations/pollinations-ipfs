@@ -60,7 +60,7 @@ export async function socialPost(platform, cid) {
 
 async function doPost({ post, title, videoURL, coverImage, url }, platform) {
 
-  if (platform === "youtube" && !videoURL) {
+  if (platform === "youtube" && (videoURL == coverImage)) {
     console.log("No video URL for youtube. Aborting...");
     return null;
   }
