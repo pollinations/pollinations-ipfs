@@ -33,6 +33,9 @@ export async function socialPost(platform, cid) {
     return;
   }
 
+  if (ipfs.input.social_platforms && !ipfs.input.social_platforms.includes(platform))
+    return;
+
   const shortenPost = platform === "twitter"
   const data = getPostData(ipfs, cid, shortenPost);
 
