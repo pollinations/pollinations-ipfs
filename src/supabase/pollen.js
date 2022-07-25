@@ -1,5 +1,8 @@
 import supabase from "./client.js";
 import { Channel } from 'queueable';
+import Debug from 'debug';
+
+const debug = Debug("supabasePollen");
 
 export function getAllPollens() {
     return supabase.from("pollen").select("*").then(response => {
@@ -17,28 +20,31 @@ export function dispatchPollen(params) {
 // subscribe to 
 export async function subscribePollen(input, callback) {
 
-    const contentID = await getPollen(input);
-
-    if (contentID) {
-        callback(contentID);
+    debug("getting first pollen using select", input)
+    const data = await getPollen(input);
+    debug("got data",data)
+    if (data) {
+        callback(data);
         
         // return if job was already done
-        if (contentID.final_output)
+        if (data.success === true)
             return () => null;
     }
 
     
     const subscriptionHandler = ({new:data}) => { 
+        debug("subscriptionHandler", data);
         callback(data);
-        if (data.final_output) {
+        if (data.success === true) {
             supabase.removeSubscription(subscription)
         }
     }
 
+    debug("subscribing to,",`pollen:input.eq.${input}`)
     const subscription = supabase
-        .from(`pollen:input.eq.${input}`)
+        .from(`pollen`)//:input.eq.${input}`)
         .on("UPDATE", subscriptionHandler)
-        .on("INSERT", subscriptionHandler)
+        //.on("INSERT", subscriptionHandler)
         .subscribe();
 
     return () => supabase.removeSubscription(subscription);
@@ -62,14 +68,14 @@ export function subscribePollenGenerator(input) {
 
 // returnImmediately true means we don't wait for the pollen to be done if it was not finished yet
 export async function dispatchAndReturnPollen(params, returnImmediately=false) {
-    
+        debug("disopathing pollen", params);
         dispatchPollen(params);
         
         if (returnImmediately)
-            return (await getPollen(params.input)).final_output;
+            return (await getPollen(params.input)).output;
 
         return await new Promise(async (resolve) => {
-            await subscribePollen(params.input, ({final_output}) => final_output && resolve(final_output));
+            await subscribePollen(params.input, ({output, success}) => success === true && resolve(output));
         });
 }
 
