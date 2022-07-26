@@ -38,7 +38,7 @@ export async function* runModelGenerator(inputs, image="voodoohop/dalle-playgrou
   
   const pollenStream = dispatchPollenGenerator({input: inputCID, image})
 
-  for await (const contentID of pollenStream) {
+  for await (const {output:contentID} of pollenStream) {
     debug("got pollen data", contentID);
     const data = await IPFSWebState(contentID);
     yield data;
