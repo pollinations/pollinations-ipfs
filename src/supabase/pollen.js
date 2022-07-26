@@ -45,7 +45,7 @@ export async function subscribePollen(input, callback) {
     const subscriptionHandler = ({new:data}) => { 
         debug("subscriptionHandler", data);
         callback(data);
-        if (data.success === true) {
+        if (data.success !== null) {
             supabase.removeSubscription(subscription)
         }
     }
@@ -72,6 +72,7 @@ export function dispatchPollenGenerator(input) {
     dispatchPollen()
     const channel = new Channel();
     subscribePollen(input, data => channel.push(data))
+    
     return channel
 }
 
