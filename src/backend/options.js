@@ -9,7 +9,9 @@ program
     .option('-n, --nodeid <nodeid>', 'local node id', null)
     .option('-d, --debounce <ms>', 'file watch debounce time', 100)
     .option('-e, --execute <command>', 'run command on receive and stream back to ipfs', null)
-    .option('-l, --logout <path>', 'log to file', null);
+    .option('-l, --logout <path>', 'log to file', null)
+    .option('-w, --writetodb', 'write CIDs to pollinations db', null)
+    ;
 
 program.parse(process.argv);
 

@@ -17,6 +17,16 @@ export function dispatchPollen(params) {
             .then(({data}) => data);
 }
 
+export function updatePollen(input, output) {
+    return supabase
+            .from("pollen")
+            .update({
+                output
+            })
+            .eq("input", input)
+            .then(({data}) => data);
+}
+
 // subscribe to 
 export async function subscribePollen(input, callback) {
 
@@ -58,7 +68,8 @@ export async function getPollen(input) {
     return data && data[0];
 }
 
-export function subscribePollenGenerator(input) {
+export function dispatchPollenGenerator(input) {
+    dispatchPollen()
     const channel = new Channel();
     subscribePollen(input, data => channel.push(data))
     return channel
@@ -93,3 +104,26 @@ export async function dispatchAndReturnPollen(params, returnImmediately=false) {
 
 // test()
 
+
+
+// const allPollen = await getAllPollens();
+
+// for (const pollen of allPollen) {
+//    try {
+//     const parsedPollen = JSON.parse(pollen.output);
+//     let val = null;
+//     if (Array.isArray(parsedPollen)) {
+//         // pollen is last pollen
+//         val = parsedPollen[parsedPollen.length - 1];
+//     }
+//     else {
+//         val = parsedPollen;
+//     }
+
+//     await supabase.from("pollen").update({"output": val}).match({input:pollen.input});
+//     //console.log("changing pollen to", val);
+
+//    } catch (e) {
+//     console.log("could not parse",pollen.output)
+//    }
+// }

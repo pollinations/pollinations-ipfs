@@ -1,7 +1,6 @@
 
 import { submitToAWS, UploadInputstoIPFS } from './aws.js';
 import { writer } from './ipfsConnector.js';
-import { subscribeGenerator } from './ipfsPubSub.js';
 import { IPFSWebState } from './ipfsWebClient.js';
 import { dispatchAndReturnPollen } from './supabase/pollen.js';
 import Debug from "debug"
@@ -23,6 +22,8 @@ const runModelOnce = async (inputs, image="voodoohop/dalle-playground",) => {
   const outputCID = await dispatchAndReturnPollen({input: inputCID, image});
   const data = await IPFSWebState(outputCID);
   debug("got and returning output data", data);
+  if (!data?.output?.done) 
+   throw new Error("output not done");
 
   return data;
 }
