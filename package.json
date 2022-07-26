@@ -1,6 +1,6 @@
 {
   "name": "@pollinations/ipfs",
-  "version": "0.1.30",
+  "version": "0.1.31",
   "description": "pollinations ipfs state, messaging and storage",
   "type": "module",
   "exports": {
@@ -55,7 +55,7 @@
     "mz": "^2.7.0",
     "native-abort-controller": "^1.0.4",
     "node-abort-controller": "^3.0.1",
-    "node-fetch": "^2.6.7",
+    "node-fetch": "^3.2.9",
     "p-queue": "^7.1.0",
     "path-browserify": "^1.0.1",
     "progress-stream": "^2.0.0",
