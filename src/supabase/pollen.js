@@ -32,7 +32,7 @@ export async function subscribePollen(input, callback) {
 
     debug("getting first pollen using select", input)
     const data = await getPollen(input);
-    debug("got data",data)
+    debug("data",data)
     if (data) {
         callback(data);
         
@@ -68,10 +68,10 @@ export async function getPollen(input) {
     return data && data[0];
 }
 
-export function dispatchPollenGenerator(input) {
-    dispatchPollen()
+export async function dispatchPollenGenerator(input) {
+    await dispatchPollen(input)
     const channel = new Channel();
-    subscribePollen(input, data => channel.push(data))
+    subscribePollen(input.input, data => data.output && channel.push(data.output))
     
     return channel
 }
