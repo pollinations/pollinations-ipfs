@@ -100,7 +100,7 @@ export async function dispatchAndReturnPollen(params, returnImmediately=false) {
         dispatchPollen(params);
         
         if (returnImmediately)
-            return (await getPollen(params.input)).output;
+            return (await getPollen(params.input))?.output;
 
         return await new Promise(async (resolve) => {
             await subscribePollen(params.input, ({output, success}) => success === true && resolve(output));
