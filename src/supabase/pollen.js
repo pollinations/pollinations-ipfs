@@ -2,7 +2,37 @@ import supabase from "./client.js";
 import { Channel } from 'queueable';
 import Debug from 'debug';
 
-const debug = Debug("supabasePollen");
+const debug = Debug("pollen");
+
+
+let subscribers = {};
+
+   
+const subscriptionHandler = ({new:data}) => { 
+     Object.keys(subscribers).forEach(input => {
+        if (data.input !== input) {
+            //debug("ignoring pollen", data.input, input)
+            return;
+        }
+
+        debug("subscriptionHandler", data);
+        
+        if (data.output) {
+            subscribers[input](data);
+        }
+
+        if (data.success !== null) {
+            delete subscribers[input];
+        }
+    })
+}
+
+
+const subscription = supabase
+    .from(`pollen`)
+    .on("UPDATE", subscriptionHandler)
+    //.on("INSERT", subscriptionHandler)
+    .subscribe();
 
 export function getAllPollens() {
     return supabase.from("pollen").select("*").then(response => {
@@ -41,23 +71,9 @@ export async function subscribePollen(input, callback) {
             return () => null;
     }
 
-    
-    const subscriptionHandler = ({new:data}) => { 
-        debug("subscriptionHandler", data);
-        callback(data);
-        if (data.success !== null) {
-            supabase.removeSubscription(subscription)
-        }
-    }
+    subscribers[input] = callback;
 
-    debug("subscribing to,",`pollen:input.eq.${input}`)
-    const subscription = supabase
-        .from(`pollen:input.eq.${input}`)
-        .on("UPDATE", subscriptionHandler)
-        //.on("INSERT", subscriptionHandler)
-        .subscribe();
-
-    return () => supabase.removeSubscription(subscription);
+    return () => subscribers.delete(input);
 }
 
 export async function getPollen(input) {

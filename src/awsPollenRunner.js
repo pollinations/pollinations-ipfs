@@ -5,7 +5,7 @@ import { IPFSWebState } from './ipfsWebClient.js';
 import { dispatchAndReturnPollen, dispatchPollenGenerator } from './supabase/pollen.js';
 import Debug from "debug"
 
-const debug = Debug("awsPollenRunner");
+const debug = Debug("pollen");
 
 // export async function* runModel (inputs, model="voodoohop/dalle-playground", executeOnDev=false)  {
 
