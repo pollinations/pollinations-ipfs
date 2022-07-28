@@ -15,7 +15,7 @@ const debug = Debug("awsPollenRunner");
 
 const runModelOnce = async (inputs, image="voodoohop/dalle-playground") => {
   debug("running model", inputs, image);
-
+  inputs = {...inputs, model_image:image};
   const inputCID = await UploadInputstoIPFS(inputs, writer());
   debug("got input content ID", inputCID);
   
@@ -32,6 +32,7 @@ const runModelOnce = async (inputs, image="voodoohop/dalle-playground") => {
 
 export async function* runModelGenerator(inputs, image="voodoohop/dalle-playground") {
   debug("running model", image);
+  inputs = {...inputs, model_image:image};
 
   const inputCID = await UploadInputstoIPFS(inputs, writer());
   debug("got input content ID", inputCID);

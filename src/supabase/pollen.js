@@ -52,7 +52,7 @@ export async function subscribePollen(input, callback) {
 
     debug("subscribing to,",`pollen:input.eq.${input}`)
     const subscription = supabase
-        .from(`pollen`)//:input.eq.${input}`)
+        .from(`pollen:input.eq.${input}`)
         .on("UPDATE", subscriptionHandler)
         //.on("INSERT", subscriptionHandler)
         .subscribe();
