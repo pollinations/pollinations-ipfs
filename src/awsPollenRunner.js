@@ -20,6 +20,8 @@ const runModelOnce = async (inputs, image="voodoohop/dalle-playground", returnIm
   debug("got input content ID", inputCID);
   
   const outputCID = await dispatchAndReturnPollen({input: inputCID, image}, returnImmediately);
+  if (!outputCID)
+    return null;
   const data = await IPFSWebState(outputCID);
   debug("got and returning output data", data);
 
