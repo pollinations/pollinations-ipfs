@@ -182,7 +182,7 @@ const ipfsLsCID = async (client, cid) => {
 }
 
 
-const ipfsAdd = async (client, path, content, options = { pin: false }) => {
+const ipfsAdd = async (client, path, content, options = { pin: true }) => {
     debug("adding", path, "options", options)
 
     let cid = null

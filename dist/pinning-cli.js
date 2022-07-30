@@ -33302,7 +33302,7 @@ var ipfsLsCID = async (client, cid) => {
     console.log(e);
   }
 };
-var ipfsAdd = async (client, path3, content, options = { pin: false }) => {
+var ipfsAdd = async (client, path3, content, options = { pin: true }) => {
   debug5("adding", path3, "options", options);
   let cid = null;
   try {
