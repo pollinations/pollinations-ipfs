@@ -38,10 +38,11 @@ const useAWSNode = ({ nodeID: paramsNodeID, contentID: paramsContentID } ) => {
     const submitToAWSAndSetState = async (values, notebook, dev) => {
         setNodeID(LOADING_NODEID);
         const inputContentID = await UploadInputstoIPFS({...values, model_image: notebook}, ipfsWriter);
+        debug("input content ID", inputContentID);
         dispatchPollen({input: inputContentID, image: notebook });
         setNodeID(inputContentID);
         setContentID(inputContentID);
-        return { nodeID, contentID };
+        return { nodeID:inputContentID, contentID: inputContentID };
     }
 
     const isSubmitting = nodeID === LOADING_NODEID;
