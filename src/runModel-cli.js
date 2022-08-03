@@ -1,4 +1,4 @@
-import runModel from "./awsModelRunner";
+import runModel from "./awsPollenRunner";
 
 // first argument is model name, second inputs
 

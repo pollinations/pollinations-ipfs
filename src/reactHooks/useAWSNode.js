@@ -1,9 +1,10 @@
 import Debug from "debug";
 import { useEffect, useState } from "react";
 import { subscribeCID }  from "../ipfsPubSub.js"
-import { submitToAWS } from "../aws.js";
+import { UploadInputstoIPFS } from "../aws.js";
 import useIPFSWrite from "./useIPFSWrite.js"
 import useIPFS from "./useIPFS.js"
+import { dispatchPollen, subscribePollen } from "../supabase/pollen.js";
 
 const debug = Debug("useAWSNode");
 
@@ -24,10 +25,11 @@ const useAWSNode = ({ nodeID: paramsNodeID, contentID: paramsContentID } ) => {
 
         if (!nodeID || nodeID === LOADING_NODEID) return;
 
-        // Update
         debug("nodeID changed to", nodeID, ". (Re)subscribing");
         
-        const closeSub = subscribeCID(nodeID, "/output", setContentID);
+        let closeSub = () => null;
+
+        subscribePollen(nodeID, ({output}) => setContentID(output)).then(close => closeSub = close);
 
         return closeSub;
 
@@ -35,10 +37,11 @@ const useAWSNode = ({ nodeID: paramsNodeID, contentID: paramsContentID } ) => {
 
     const submitToAWSAndSetState = async (values, notebook, dev) => {
         setNodeID(LOADING_NODEID);
-        const { nodeID, contentID } = await submitToAWS(values, ipfsWriter, notebook, dev);
-        setNodeID(nodeID);
-        setContentID(contentID);
-        return {nodeID, contentID};
+        const inputContentID = await UploadInputstoIPFS({...values, model_image: notebook}, ipfsWriter);
+        dispatchPollen({input: inputContentID, image: notebook });
+        setNodeID(inputContentID);
+        setContentID(inputContentID);
+        return { nodeID, contentID };
     }
 
     const isSubmitting = nodeID === LOADING_NODEID;

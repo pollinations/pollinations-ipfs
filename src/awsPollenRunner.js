@@ -1,5 +1,5 @@
 
-import { submitToAWS, UploadInputstoIPFS } from './aws.js';
+import { UploadInputstoIPFS } from './aws.js';
 import { writer } from './ipfsConnector.js';
 import { IPFSWebState } from './ipfsWebClient.js';
 import { dispatchAndReturnPollen, dispatchPollenGenerator } from './supabase/pollen.js';
