@@ -2,9 +2,11 @@
 import { UploadInputstoIPFS } from './aws.js';
 import { writer } from './ipfsConnector.js';
 import { IPFSWebState } from './ipfsWebClient.js';
-import { dispatchAndReturnPollen, dispatchPollenGenerator } from './supabase/pollen.js';
+import { dispatchAndReturnPollen, dispatchPollenGenerator} from './supabase/pollen.js';
 import Debug from "debug"
 
+export { getPollens } from './supabase/pollen.js';
+ 
 const debug = Debug("pollen");
 
 // export async function* runModel (inputs, model="voodoohop/dalle-playground", executeOnDev=false)  {
@@ -47,6 +49,8 @@ export async function* runModelGenerator(inputs, image="voodoohop/dalle-playgrou
     yield data;
   }
 }
+
+
 
 
 export default runModelOnce;

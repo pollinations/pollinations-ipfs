@@ -4,6 +4,7 @@ import Debug from 'debug';
 
 const debug = Debug("pollen");
 
+const DB_NAME = "pollen";
 
 let subscribers = {};
 
@@ -34,15 +35,17 @@ const subscription = supabase
     //.on("INSERT", subscriptionHandler)
     .subscribe();
 
-export function getAllPollens() {
-    return supabase.from("pollen").select("*").then(response => {
-        return response.data
-    })
+export async function getPollens(params) {
+    const { data } = await supabase
+        .from(`pollen`)
+        .select("*")
+        .match(params);
+    return data;
 }
 
 export function dispatchPollen(params) {
     return supabase
-            .from("pollen")
+            .from(DB_NAME)
             .insert(params)
             .then(({data}) => data);
 }
