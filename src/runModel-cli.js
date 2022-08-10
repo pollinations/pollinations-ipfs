@@ -11,6 +11,8 @@ const inputs = JSON.parse(inputsString);
 async function run(model, inputs) {
   const imageUrl = await runModel(inputs, model, isDev);
   console.log(imageUrl);
+  // exit process
+  process.exit(0);
 }
 
 run(model, inputs)

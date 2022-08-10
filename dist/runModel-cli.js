@@ -40870,6 +40870,7 @@ var client_default = getClient2();
 var import_queueable = __toESM(require_lib8(), 1);
 var import_debug9 = __toESM(require_src(), 1);
 var debug9 = (0, import_debug9.default)("pollen");
+var DB_NAME = "pollen";
 var subscribers = {};
 var subscriptionHandler = ({ new: data }) => {
   Object.keys(subscribers).forEach((input) => {
@@ -40887,7 +40888,7 @@ var subscriptionHandler = ({ new: data }) => {
 };
 var subscription = client_default.from(`pollen`).on("UPDATE", subscriptionHandler).subscribe();
 function dispatchPollen(params) {
-  return client_default.from("pollen").insert(params).then(({ data }) => data);
+  return client_default.from(DB_NAME).insert(params).then(({ data }) => data);
 }
 async function subscribePollen(input, callback) {
   debug9("getting first pollen using select", input);
@@ -40943,5 +40944,6 @@ var inputs = JSON.parse(inputsString);
 async function run(model2, inputs2) {
   const imageUrl = await awsPollenRunner_default(inputs2, model2, isDev);
   console.log(imageUrl);
+  process.exit(0);
 }
 run(model, inputs);
