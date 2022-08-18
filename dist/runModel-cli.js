@@ -40886,7 +40886,7 @@ var subscriptionHandler = ({ new: data }) => {
     }
   });
 };
-var subscription = client_default.from(`pollen`).on("UPDATE", subscriptionHandler).subscribe();
+var subscription = client_default.from(DB_NAME).on("UPDATE", subscriptionHandler).subscribe();
 function dispatchPollen(params) {
   return client_default.from(DB_NAME).insert(params).then(({ data }) => data);
 }
@@ -40903,7 +40903,7 @@ async function subscribePollen(input, callback) {
   return () => subscribers.delete(input);
 }
 async function getPollen(input) {
-  const { data } = await client_default.from(`pollen`).select("*").match({ input });
+  const { data } = await client_default.from(DB_NAME).select("*").match({ input });
   return data && data[0];
 }
 async function dispatchAndReturnPollen(params, returnImmediately = false) {

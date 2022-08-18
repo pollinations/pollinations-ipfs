@@ -5,7 +5,7 @@ import { IPFSWebState } from './ipfsWebClient.js';
 import { dispatchAndReturnPollen, dispatchPollenGenerator} from './supabase/pollen.js';
 import Debug from "debug"
 
-export { getPollens } from './supabase/pollen.js';
+export { getPollens, updatePollen } from './supabase/pollen.js';
  
 const debug = Debug("pollen");
 

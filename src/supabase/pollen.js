@@ -30,14 +30,14 @@ const subscriptionHandler = ({new:data}) => {
 
 
 const subscription = supabase
-    .from(`pollen`)
+    .from(DB_NAME)
     .on("UPDATE", subscriptionHandler)
     //.on("INSERT", subscriptionHandler)
     .subscribe();
 
 export async function getPollens(params) {
     const { data } = await supabase
-        .from(`pollen`)
+        .from(DB_NAME)
         .select("*")
         .match(params);
     return data;
@@ -50,12 +50,10 @@ export function dispatchPollen(params) {
             .then(({data}) => data);
 }
 
-export function updatePollen(input, output) {
+export function updatePollen(input, data) {
     return supabase
-            .from("pollen")
-            .update({
-                output
-            })
+            .from(DB_NAME)
+            .update(data)
             .eq("input", input)
             .then(({data}) => data);
 }
@@ -81,7 +79,7 @@ export async function subscribePollen(input, callback) {
 
 export async function getPollen(input) {
     const { data } = await supabase
-        .from(`pollen`)
+        .from(DB_NAME)
         .select("*")
         .match({ input });
     return data && data[0];
