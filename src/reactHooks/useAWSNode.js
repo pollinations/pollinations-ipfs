@@ -4,7 +4,8 @@ import { subscribeCID }  from "../ipfsPubSub.js"
 import { UploadInputstoIPFS } from "../aws.js";
 import useIPFSWrite from "./useIPFSWrite.js"
 import useIPFS from "./useIPFS.js"
-import { dispatchPollen, subscribePollen } from "../supabase/pollen.js";
+import { dispatchPollen, subscribePollen, updatePollen } from "../supabase/pollen.js";
+import { curry } from "ramda";
 
 const debug = Debug("useAWSNode");
 
@@ -50,7 +51,17 @@ const useAWSNode = ({ nodeID: paramsNodeID, contentID: paramsContentID } ) => {
     // state is loading if it is submitting to AWS or if there is a nodeID but the output is not yet available
     const isLoading = isSubmitting || (nodeID && !ipfs?.output?.done);
 
-    return { nodeID, contentID, setContentID, connected: true, submitToAWS: submitToAWSAndSetState, setNodeID, isLoading, ipfs  }
+    return { 
+        nodeID, 
+        contentID, 
+        setContentID, 
+        connected: true, 
+        submitToAWS: submitToAWSAndSetState, 
+        setNodeID, 
+        isLoading, 
+        ipfs,
+        updatePollen: curry(updatePollen, nodeID)
+    }
 
 };
 
