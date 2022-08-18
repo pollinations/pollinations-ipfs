@@ -1,6 +1,7 @@
 import supabase from "./client.js";
 import { Channel } from 'queueable';
 import Debug from 'debug';
+import { reject } from "lodash";
 
 const debug = Debug("pollen");
 
@@ -104,7 +105,7 @@ export async function dispatchAndReturnPollen(params, returnImmediately=false) {
             return (await getPollen(params.input))?.output;
 
         return await new Promise(async (resolve) => {
-            await subscribePollen(params.input, ({output, success}) => success === true && resolve(output));
+            await subscribePollen(params.input, ({output, success}) => success === true ? resolve(output) : reject(output));
         });
 }
 
