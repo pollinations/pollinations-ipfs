@@ -8,7 +8,8 @@ const DB_NAME = "pollen";
 
 let subscribers = {};
 
-   
+let subscription = null;
+
 const subscriptionHandler = ({new:data}) => { 
      Object.keys(subscribers).forEach(input => {
         if (data.input !== input) {
@@ -29,11 +30,26 @@ const subscriptionHandler = ({new:data}) => {
 }
 
 
-const subscription = supabase
-    .from(DB_NAME)
-    .on("UPDATE", subscriptionHandler)
-    //.on("INSERT", subscriptionHandler)
-    .subscribe();
+
+
+const createSubscriptionIfNeeded = () => {
+
+    const haveSubscribers = Object.keys(subscribers).length > 0;
+
+    if (!haveSubscribers && subscription) {
+        subscription.unsubscribe();
+        subscription = null;
+        return
+    }
+    
+    if (haveSubscribers && !subscription) {
+        subscription = supabase
+                .from(DB_NAME)
+                .on("UPDATE", subscriptionHandler)
+                //.on("INSERT", subscriptionHandler)
+                .subscribe();
+    }
+}
 
 export async function getPollens(params) {
     const { data } = await supabase
@@ -51,6 +67,7 @@ export function dispatchPollen(params) {
 }
 
 export function updatePollen(input, data) {
+    debug("updatePollen", input, data)
     return supabase
             .from(DB_NAME)
             .update(data)
@@ -73,6 +90,8 @@ export async function subscribePollen(input, callback) {
     }
 
     subscribers[input] = callback;
+
+    createSubscriptionIfNeeded();
 
     return () => subscribers.delete(input);
 }
@@ -104,10 +123,11 @@ export async function dispatchAndReturnPollen(params, returnImmediately=false) {
             return (await getPollen(params.input))?.output;
 
         return await new Promise(async (resolve, reject) => {
-            await subscribePollen(params.input, ({output, success}) => success === true ? resolve(output) : reject(output));
+            await subscribePollen(params.input, ({output, success}) => ((success === true) && resolve(output)) || ((success === false) && reject(output)));
         });
 }
 
+console.log("blaaa")
 
 // async function test() {
 //     //console.log(await getAllPollens())
