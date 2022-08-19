@@ -60,7 +60,7 @@ const useAWSNode = ({ nodeID: paramsNodeID, contentID: paramsContentID } ) => {
         setNodeID, 
         isLoading, 
         ipfs,
-        updatePollen: curry(updatePollen, nodeID)
+        updatePollen: data => updatePollen(nodeID, data)
     }
 
 };
