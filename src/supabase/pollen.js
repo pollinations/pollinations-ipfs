@@ -1,10 +1,12 @@
-import supabase from "./client.js";
-import { Channel } from 'queueable';
 import Debug from 'debug';
+import { Channel } from 'queueable';
+import supabase from "./client.js";
 
 const debug = Debug("pollen");
 
-const DB_NAME = "pollen";
+// DB Name should be "pollen" if environment is production else "pollen_dev"
+
+const DB_NAME = process.env.NODE_ENV === "development" ? "pollen_dev" : "pollen";
 
 let subscribers = {};
 

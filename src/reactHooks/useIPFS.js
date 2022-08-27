@@ -1,12 +1,12 @@
 
 import Debug from "debug";
 import { useEffect, useState } from "react";
-import { IPFSWebState } from  "../ipfsWebClient.js";
+import { IPFSWebState } from "../ipfsWebClient.js";
 
 const debug = Debug("useIPFS");
 
 const useIPFS = (contentID, skipCache = false) => {
-    const [ipfs, setIpfsState] = useState({});
+    const [ipfs, setIpfsState] = useState({loading: true});
 
     debug("ipfs state", ipfs);
 

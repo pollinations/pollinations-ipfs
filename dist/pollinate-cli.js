@@ -20,7 +20,10 @@ var __copyProps = (to, from3, except, desc) => {
   }
   return to;
 };
-var __toESM = (mod2, isNodeMode, target) => (target = mod2 != null ? __create(__getProtoOf(mod2)) : {}, __copyProps(isNodeMode || !mod2 || !mod2.__esModule ? __defProp(target, "default", { value: mod2, enumerable: true }) : target, mod2));
+var __toESM = (mod2, isNodeMode, target) => (target = mod2 != null ? __create(__getProtoOf(mod2)) : {}, __copyProps(
+  isNodeMode || !mod2 || !mod2.__esModule ? __defProp(target, "default", { value: mod2, enumerable: true }) : target,
+  mod2
+));
 var __toCommonJS = (mod2) => __copyProps(__defProp({}, "__esModule", { value: true }), mod2);
 
 // node_modules/await-sleep/index.js
@@ -47,14 +50,18 @@ var require_ms = __commonJS({
       } else if (type === "number" && isFinite(val)) {
         return options.long ? fmtLong(val) : fmtShort(val);
       }
-      throw new Error("val is not a non-empty string or a valid number. val=" + JSON.stringify(val));
+      throw new Error(
+        "val is not a non-empty string or a valid number. val=" + JSON.stringify(val)
+      );
     };
     function parse3(str) {
       str = String(str);
       if (str.length > 100) {
         return;
       }
-      var match = /^(-?(?:\d+)?\.?\d+) *(milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|years?|yrs?|y)?$/i.exec(str);
+      var match = /^(-?(?:\d+)?\.?\d+) *(milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|years?|yrs?|y)?$/i.exec(
+        str
+      );
       if (!match) {
         return;
       }
@@ -596,8 +603,11 @@ var require_node = __commonJS({
     exports2.save = save;
     exports2.load = load;
     exports2.useColors = useColors;
-    exports2.destroy = util.deprecate(() => {
-    }, "Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.");
+    exports2.destroy = util.deprecate(
+      () => {
+      },
+      "Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`."
+    );
     exports2.colors = [6, 2, 3, 4, 5, 1];
     try {
       const supportsColor = require_supports_color();
@@ -926,13 +936,20 @@ var require_event_target_shim = __commonJS({
     var wrappers = /* @__PURE__ */ new WeakMap();
     function pd(event) {
       const retv = privateData.get(event);
-      console.assert(retv != null, "'this' is expected an Event object, but got", event);
+      console.assert(
+        retv != null,
+        "'this' is expected an Event object, but got",
+        event
+      );
       return retv;
     }
     function setCancelFlag(data) {
       if (data.passiveListener != null) {
         if (typeof console !== "undefined" && typeof console.error === "function") {
-          console.error("Unable to preventDefault inside passive event listener invocation.", data.passiveListener);
+          console.error(
+            "Unable to preventDefault inside passive event listener invocation.",
+            data.passiveListener
+          );
         }
         return;
       }
@@ -1104,7 +1121,11 @@ var require_event_target_shim = __commonJS({
         if (!(key in BaseEvent.prototype)) {
           const descriptor = Object.getOwnPropertyDescriptor(proto, key);
           const isFunc = typeof descriptor.value === "function";
-          Object.defineProperty(CustomEvent.prototype, key, isFunc ? defineCallDescriptor(key) : defineRedirectDescriptor(key));
+          Object.defineProperty(
+            CustomEvent.prototype,
+            key,
+            isFunc ? defineCallDescriptor(key) : defineRedirectDescriptor(key)
+          );
         }
       }
       return CustomEvent;
@@ -1146,7 +1167,9 @@ var require_event_target_shim = __commonJS({
     function getListeners(eventTarget) {
       const listeners = listenersMap.get(eventTarget);
       if (listeners == null) {
-        throw new TypeError("'this' is expected an EventTarget object, but got another value.");
+        throw new TypeError(
+          "'this' is expected an EventTarget object, but got another value."
+        );
       }
       return listeners;
     }
@@ -1204,7 +1227,11 @@ var require_event_target_shim = __commonJS({
       };
     }
     function defineEventAttribute(eventTargetPrototype, eventName) {
-      Object.defineProperty(eventTargetPrototype, `on${eventName}`, defineEventAttributeDescriptor(eventName));
+      Object.defineProperty(
+        eventTargetPrototype,
+        `on${eventName}`,
+        defineEventAttributeDescriptor(eventName)
+      );
     }
     function defineCustomEventTarget(eventNames) {
       function CustomEventTarget() {
@@ -1321,7 +1348,10 @@ var require_event_target_shim = __commonJS({
           } else {
             prev = node;
           }
-          setPassiveListener(wrappedEvent, node.passive ? node.listener : null);
+          setPassiveListener(
+            wrappedEvent,
+            node.passive ? node.listener : null
+          );
           if (typeof node.listener === "function") {
             try {
               node.listener.call(this, wrappedEvent);
@@ -9892,11 +9922,14 @@ var require_lib3 = __commonJS({
       },
       blob() {
         const ct = this.headers && this.headers.get("content-type") || "";
-        return consumeBody.call(this).then((buf2) => Object.assign(new Blob2([], {
-          type: ct.toLowerCase()
-        }), {
-          [BUFFER]: buf2
-        }));
+        return consumeBody.call(this).then((buf2) => Object.assign(
+          new Blob2([], {
+            type: ct.toLowerCase()
+          }),
+          {
+            [BUFFER]: buf2
+          }
+        ));
       },
       json() {
         return consumeBody.call(this).then((buffer2) => JSON.parse(buffer2.toString()));
@@ -12626,11 +12659,14 @@ var require_lib5 = __commonJS({
       blob() {
         let ct = this.headers && this.headers.get("content-type") || "";
         return consumeBody.call(this).then(function(buf2) {
-          return Object.assign(new Blob2([], {
-            type: ct.toLowerCase()
-          }), {
-            [BUFFER]: buf2
-          });
+          return Object.assign(
+            new Blob2([], {
+              type: ct.toLowerCase()
+            }),
+            {
+              [BUFFER]: buf2
+            }
+          );
         });
       },
       json() {
@@ -13584,11 +13620,13 @@ var require_fetch_browser = __commonJS({
               break;
             }
             case "load": {
-              resolve2(new ResponseWithURL(request.responseURL, request.response, {
-                status: request.status,
-                statusText: request.statusText,
-                headers: parseHeaders(request.getAllResponseHeaders())
-              }));
+              resolve2(
+                new ResponseWithURL(request.responseURL, request.response, {
+                  status: request.status,
+                  statusText: request.statusText,
+                  headers: parseHeaders(request.getAllResponseHeaders())
+                })
+              );
               break;
             }
             case "timeout": {
@@ -14277,12 +14315,19 @@ var require_http = __commonJS({
         }
         const abortController = new AbortController();
         const signal = anySignal2([abortController.signal, opts.signal]);
-        const response = await timeout(fetch(url.toString(), {
-          ...opts,
-          signal,
-          timeout: void 0,
-          headers
-        }), opts.timeout, abortController);
+        const response = await timeout(
+          fetch(
+            url.toString(),
+            {
+              ...opts,
+              signal,
+              timeout: void 0,
+              headers
+            }
+          ),
+          opts.timeout,
+          abortController
+        );
         if (!response.ok && opts.throwHttpErrors) {
           if (opts.handleError) {
             await opts.handleError(response);
@@ -15103,10 +15148,22 @@ var require_longbits = __commonJS({
     LongBits.fromHash = function fromHash(hash) {
       if (hash === zeroHash)
         return zero;
-      return new LongBits((charCodeAt.call(hash, 0) | charCodeAt.call(hash, 1) << 8 | charCodeAt.call(hash, 2) << 16 | charCodeAt.call(hash, 3) << 24) >>> 0, (charCodeAt.call(hash, 4) | charCodeAt.call(hash, 5) << 8 | charCodeAt.call(hash, 6) << 16 | charCodeAt.call(hash, 7) << 24) >>> 0);
+      return new LongBits(
+        (charCodeAt.call(hash, 0) | charCodeAt.call(hash, 1) << 8 | charCodeAt.call(hash, 2) << 16 | charCodeAt.call(hash, 3) << 24) >>> 0,
+        (charCodeAt.call(hash, 4) | charCodeAt.call(hash, 5) << 8 | charCodeAt.call(hash, 6) << 16 | charCodeAt.call(hash, 7) << 24) >>> 0
+      );
     };
     LongBits.prototype.toHash = function toHash() {
-      return String.fromCharCode(this.lo & 255, this.lo >>> 8 & 255, this.lo >>> 16 & 255, this.lo >>> 24, this.hi & 255, this.hi >>> 8 & 255, this.hi >>> 16 & 255, this.hi >>> 24);
+      return String.fromCharCode(
+        this.lo & 255,
+        this.lo >>> 8 & 255,
+        this.lo >>> 16 & 255,
+        this.lo >>> 24,
+        this.hi & 255,
+        this.hi >>> 8 & 255,
+        this.hi >>> 16 & 255,
+        this.hi >>> 24
+      );
     };
     LongBits.prototype.zzEncode = function zzEncode() {
       var mask = this.hi >> 31;
@@ -15328,7 +15385,10 @@ var require_writer = __commonJS({
     VarintOp.prototype = Object.create(Op.prototype);
     VarintOp.prototype.fn = writeVarint32;
     Writer.prototype.uint32 = function write_uint32(value) {
-      this.len += (this.tail = this.tail.next = new VarintOp((value = value >>> 0) < 128 ? 1 : value < 16384 ? 2 : value < 2097152 ? 3 : value < 268435456 ? 4 : 5, value)).len;
+      this.len += (this.tail = this.tail.next = new VarintOp(
+        (value = value >>> 0) < 128 ? 1 : value < 16384 ? 2 : value < 2097152 ? 3 : value < 268435456 ? 4 : 5,
+        value
+      )).len;
       return this;
     };
     Writer.prototype.int32 = function write_int32(value) {
@@ -15770,26 +15830,30 @@ var require_service = __commonJS({
         return void 0;
       }
       try {
-        return self2.rpcImpl(method, requestCtor[self2.requestDelimited ? "encodeDelimited" : "encode"](request).finish(), function rpcCallback(err, response) {
-          if (err) {
-            self2.emit("error", err, method);
-            return callback(err);
-          }
-          if (response === null) {
-            self2.end(true);
-            return void 0;
-          }
-          if (!(response instanceof responseCtor)) {
-            try {
-              response = responseCtor[self2.responseDelimited ? "decodeDelimited" : "decode"](response);
-            } catch (err2) {
-              self2.emit("error", err2, method);
-              return callback(err2);
+        return self2.rpcImpl(
+          method,
+          requestCtor[self2.requestDelimited ? "encodeDelimited" : "encode"](request).finish(),
+          function rpcCallback(err, response) {
+            if (err) {
+              self2.emit("error", err, method);
+              return callback(err);
             }
+            if (response === null) {
+              self2.end(true);
+              return void 0;
+            }
+            if (!(response instanceof responseCtor)) {
+              try {
+                response = responseCtor[self2.responseDelimited ? "decodeDelimited" : "decode"](response);
+              } catch (err2) {
+                self2.emit("error", err2, method);
+                return callback(err2);
+              }
+            }
+            self2.emit("data", response, method);
+            return callback(null, response);
           }
-          self2.emit("data", response, method);
-          return callback(null, response);
-        });
+        );
       } catch (err) {
         self2.emit("error", err, method);
         setTimeout(function() {
@@ -16653,7 +16717,10 @@ var require_minimatch = __commonJS({
     };
     Minimatch.prototype.matchOne = function(file, pattern, partial) {
       var options = this.options;
-      this.debug("matchOne", { "this": this, file, pattern });
+      this.debug(
+        "matchOne",
+        { "this": this, file, pattern }
+      );
       this.debug("matchOne", file.length, pattern.length);
       for (var fi = 0, pi = 0, fl = file.length, pl = pattern.length; fi < fl && pi < pl; fi++, pi++) {
         this.debug("matchOne loop");
@@ -16779,7 +16846,11 @@ var require_glob_source = __commonJS({
     module2.exports = async function* globSource(cwd, pattern, options) {
       options = options || {};
       if (typeof pattern !== "string") {
-        throw errCode12(new Error("Pattern must be a string"), "ERR_INVALID_PATH", { pattern });
+        throw errCode12(
+          new Error("Pattern must be a string"),
+          "ERR_INVALID_PATH",
+          { pattern }
+        );
       }
       if (!Path.isAbsolute(cwd)) {
         cwd = Path.resolve(process.cwd(), cwd);
@@ -17688,16 +17759,18 @@ var require_all = __commonJS({
     var _curry2 = require_curry2();
     var _dispatchable = require_dispatchable();
     var _xall = require_xall();
-    var all4 = /* @__PURE__ */ _curry2(/* @__PURE__ */ _dispatchable(["all"], _xall, function all5(fn, list) {
-      var idx = 0;
-      while (idx < list.length) {
-        if (!fn(list[idx])) {
-          return false;
+    var all4 = /* @__PURE__ */ _curry2(
+      /* @__PURE__ */ _dispatchable(["all"], _xall, function all5(fn, list) {
+        var idx = 0;
+        while (idx < list.length) {
+          if (!fn(list[idx])) {
+            return false;
+          }
+          idx += 1;
         }
-        idx += 1;
-      }
-      return true;
-    }));
+        return true;
+      })
+    );
     module2.exports = all4;
   }
 });
@@ -17987,21 +18060,23 @@ var require_map3 = __commonJS({
     var _xmap = require_xmap();
     var curryN = require_curryN2();
     var keys = require_keys();
-    var map3 = /* @__PURE__ */ _curry2(/* @__PURE__ */ _dispatchable(["fantasy-land/map", "map"], _xmap, function map4(fn, functor) {
-      switch (Object.prototype.toString.call(functor)) {
-        case "[object Function]":
-          return curryN(functor.length, function() {
-            return fn.call(this, functor.apply(this, arguments));
-          });
-        case "[object Object]":
-          return _reduce(function(acc, key) {
-            acc[key] = fn(functor[key]);
-            return acc;
-          }, {}, keys(functor));
-        default:
-          return _map(fn, functor);
-      }
-    }));
+    var map3 = /* @__PURE__ */ _curry2(
+      /* @__PURE__ */ _dispatchable(["fantasy-land/map", "map"], _xmap, function map4(fn, functor) {
+        switch (Object.prototype.toString.call(functor)) {
+          case "[object Function]":
+            return curryN(functor.length, function() {
+              return fn.call(this, functor.apply(this, arguments));
+            });
+          case "[object Object]":
+            return _reduce(function(acc, key) {
+              acc[key] = fn(functor[key]);
+              return acc;
+            }, {}, keys(functor));
+          default:
+            return _map(fn, functor);
+        }
+      })
+    );
     module2.exports = map3;
   }
 });
@@ -18191,16 +18266,18 @@ var require_any = __commonJS({
     var _curry2 = require_curry2();
     var _dispatchable = require_dispatchable();
     var _xany = require_xany();
-    var any = /* @__PURE__ */ _curry2(/* @__PURE__ */ _dispatchable(["any"], _xany, function any2(fn, list) {
-      var idx = 0;
-      while (idx < list.length) {
-        if (fn(list[idx])) {
-          return true;
+    var any = /* @__PURE__ */ _curry2(
+      /* @__PURE__ */ _dispatchable(["any"], _xany, function any2(fn, list) {
+        var idx = 0;
+        while (idx < list.length) {
+          if (fn(list[idx])) {
+            return true;
+          }
+          idx += 1;
         }
-        idx += 1;
-      }
-      return false;
-    }));
+        return false;
+      })
+    );
     module2.exports = any;
   }
 });
@@ -18314,7 +18391,9 @@ var require_aperture2 = __commonJS({
     var _curry2 = require_curry2();
     var _dispatchable = require_dispatchable();
     var _xaperture = require_xaperture();
-    var aperture = /* @__PURE__ */ _curry2(/* @__PURE__ */ _dispatchable([], _xaperture, _aperture));
+    var aperture = /* @__PURE__ */ _curry2(
+      /* @__PURE__ */ _dispatchable([], _xaperture, _aperture)
+    );
     module2.exports = aperture;
   }
 });
@@ -18725,14 +18804,16 @@ var require_chain = __commonJS({
     var _makeFlat = require_makeFlat();
     var _xchain = require_xchain();
     var map3 = require_map3();
-    var chain = /* @__PURE__ */ _curry2(/* @__PURE__ */ _dispatchable(["fantasy-land/chain", "chain"], _xchain, function chain2(fn, monad) {
-      if (typeof monad === "function") {
-        return function(x) {
-          return fn(monad(x))(x);
-        };
-      }
-      return _makeFlat(false)(map3(fn, monad));
-    }));
+    var chain = /* @__PURE__ */ _curry2(
+      /* @__PURE__ */ _dispatchable(["fantasy-land/chain", "chain"], _xchain, function chain2(fn, monad) {
+        if (typeof monad === "function") {
+          return function(x) {
+            return fn(monad(x))(x);
+          };
+        }
+        return _makeFlat(false)(map3(fn, monad));
+      })
+    );
     module2.exports = chain;
   }
 });
@@ -18892,9 +18973,11 @@ var require_slice = __commonJS({
   "node_modules/ramda/src/slice.js"(exports2, module2) {
     var _checkForMethod = require_checkForMethod();
     var _curry3 = require_curry3();
-    var slice2 = /* @__PURE__ */ _curry3(/* @__PURE__ */ _checkForMethod("slice", function slice3(fromIndex, toIndex, list) {
-      return Array.prototype.slice.call(list, fromIndex, toIndex);
-    }));
+    var slice2 = /* @__PURE__ */ _curry3(
+      /* @__PURE__ */ _checkForMethod("slice", function slice3(fromIndex, toIndex, list) {
+        return Array.prototype.slice.call(list, fromIndex, toIndex);
+      })
+    );
     module2.exports = slice2;
   }
 });
@@ -18905,7 +18988,12 @@ var require_tail = __commonJS({
     var _checkForMethod = require_checkForMethod();
     var _curry1 = require_curry1();
     var slice2 = require_slice();
-    var tail = /* @__PURE__ */ _curry1(/* @__PURE__ */ _checkForMethod("tail", /* @__PURE__ */ slice2(1, Infinity)));
+    var tail = /* @__PURE__ */ _curry1(
+      /* @__PURE__ */ _checkForMethod(
+        "tail",
+        /* @__PURE__ */ slice2(1, Infinity)
+      )
+    );
     module2.exports = tail;
   }
 });
@@ -19447,14 +19535,16 @@ var require_filter2 = __commonJS({
     var _reduce = require_reduce();
     var _xfilter = require_xfilter();
     var keys = require_keys();
-    var filter2 = /* @__PURE__ */ _curry2(/* @__PURE__ */ _dispatchable(["filter"], _xfilter, function(pred, filterable) {
-      return _isObject(filterable) ? _reduce(function(acc, key) {
-        if (pred(filterable[key])) {
-          acc[key] = filterable[key];
-        }
-        return acc;
-      }, {}, keys(filterable)) : _filter(pred, filterable);
-    }));
+    var filter2 = /* @__PURE__ */ _curry2(
+      /* @__PURE__ */ _dispatchable(["filter"], _xfilter, function(pred, filterable) {
+        return _isObject(filterable) ? _reduce(function(acc, key) {
+          if (pred(filterable[key])) {
+            acc[key] = filterable[key];
+          }
+          return acc;
+        }, {}, keys(filterable)) : _filter(pred, filterable);
+      })
+    );
     module2.exports = filter2;
   }
 });
@@ -19736,13 +19826,17 @@ var require_reduceBy = __commonJS({
     var _has = require_has();
     var _reduce = require_reduce();
     var _xreduceBy = require_xreduceBy();
-    var reduceBy = /* @__PURE__ */ _curryN(4, [], /* @__PURE__ */ _dispatchable([], _xreduceBy, function reduceBy2(valueFn, valueAcc, keyFn, list) {
-      return _reduce(function(acc, elt) {
-        var key = keyFn(elt);
-        acc[key] = valueFn(_has(key, acc) ? acc[key] : _clone(valueAcc, [], [], false), elt);
-        return acc;
-      }, {}, list);
-    }));
+    var reduceBy = /* @__PURE__ */ _curryN(
+      4,
+      [],
+      /* @__PURE__ */ _dispatchable([], _xreduceBy, function reduceBy2(valueFn, valueAcc, keyFn, list) {
+        return _reduce(function(acc, elt) {
+          var key = keyFn(elt);
+          acc[key] = valueFn(_has(key, acc) ? acc[key] : _clone(valueAcc, [], [], false), elt);
+          return acc;
+        }, {}, list);
+      })
+    );
     module2.exports = reduceBy;
   }
 });
@@ -20098,9 +20192,11 @@ var require_drop = __commonJS({
     var _dispatchable = require_dispatchable();
     var _xdrop = require_xdrop();
     var slice2 = require_slice();
-    var drop = /* @__PURE__ */ _curry2(/* @__PURE__ */ _dispatchable(["drop"], _xdrop, function drop2(n, xs) {
-      return slice2(Math.max(0, n), Infinity, xs);
-    }));
+    var drop = /* @__PURE__ */ _curry2(
+      /* @__PURE__ */ _dispatchable(["drop"], _xdrop, function drop2(n, xs) {
+        return slice2(Math.max(0, n), Infinity, xs);
+      })
+    );
     module2.exports = drop;
   }
 });
@@ -20140,9 +20236,11 @@ var require_take = __commonJS({
     var _dispatchable = require_dispatchable();
     var _xtake = require_xtake();
     var slice2 = require_slice();
-    var take = /* @__PURE__ */ _curry2(/* @__PURE__ */ _dispatchable(["take"], _xtake, function take2(n, xs) {
-      return slice2(0, n < 0 ? Infinity : n, xs);
-    }));
+    var take = /* @__PURE__ */ _curry2(
+      /* @__PURE__ */ _dispatchable(["take"], _xtake, function take2(n, xs) {
+        return slice2(0, n < 0 ? Infinity : n, xs);
+      })
+    );
     module2.exports = take;
   }
 });
@@ -20206,7 +20304,9 @@ var require_dropLast2 = __commonJS({
     var _dispatchable = require_dispatchable();
     var _dropLast = require_dropLast();
     var _xdropLast = require_xdropLast();
-    var dropLast = /* @__PURE__ */ _curry2(/* @__PURE__ */ _dispatchable([], _xdropLast, _dropLast));
+    var dropLast = /* @__PURE__ */ _curry2(
+      /* @__PURE__ */ _dispatchable([], _xdropLast, _dropLast)
+    );
     module2.exports = dropLast;
   }
 });
@@ -20271,7 +20371,9 @@ var require_dropLastWhile2 = __commonJS({
     var _dispatchable = require_dispatchable();
     var _dropLastWhile = require_dropLastWhile();
     var _xdropLastWhile = require_xdropLastWhile();
-    var dropLastWhile = /* @__PURE__ */ _curry2(/* @__PURE__ */ _dispatchable([], _xdropLastWhile, _dropLastWhile));
+    var dropLastWhile = /* @__PURE__ */ _curry2(
+      /* @__PURE__ */ _dispatchable([], _xdropLastWhile, _dropLastWhile)
+    );
     module2.exports = dropLastWhile;
   }
 });
@@ -20325,21 +20427,23 @@ var require_dropRepeatsWith = __commonJS({
     var _dispatchable = require_dispatchable();
     var _xdropRepeatsWith = require_xdropRepeatsWith();
     var last7 = require_last();
-    var dropRepeatsWith = /* @__PURE__ */ _curry2(/* @__PURE__ */ _dispatchable([], _xdropRepeatsWith, function dropRepeatsWith2(pred, list) {
-      var result = [];
-      var idx = 1;
-      var len = list.length;
-      if (len !== 0) {
-        result[0] = list[0];
-        while (idx < len) {
-          if (!pred(last7(result), list[idx])) {
-            result[result.length] = list[idx];
+    var dropRepeatsWith = /* @__PURE__ */ _curry2(
+      /* @__PURE__ */ _dispatchable([], _xdropRepeatsWith, function dropRepeatsWith2(pred, list) {
+        var result = [];
+        var idx = 1;
+        var len = list.length;
+        if (len !== 0) {
+          result[0] = list[0];
+          while (idx < len) {
+            if (!pred(last7(result), list[idx])) {
+              result[result.length] = list[idx];
+            }
+            idx += 1;
           }
-          idx += 1;
         }
-      }
-      return result;
-    }));
+        return result;
+      })
+    );
     module2.exports = dropRepeatsWith;
   }
 });
@@ -20352,7 +20456,13 @@ var require_dropRepeats = __commonJS({
     var _xdropRepeatsWith = require_xdropRepeatsWith();
     var dropRepeatsWith = require_dropRepeatsWith();
     var equals3 = require_equals3();
-    var dropRepeats = /* @__PURE__ */ _curry1(/* @__PURE__ */ _dispatchable([], /* @__PURE__ */ _xdropRepeatsWith(equals3), /* @__PURE__ */ dropRepeatsWith(equals3)));
+    var dropRepeats = /* @__PURE__ */ _curry1(
+      /* @__PURE__ */ _dispatchable(
+        [],
+        /* @__PURE__ */ _xdropRepeatsWith(equals3),
+        /* @__PURE__ */ dropRepeatsWith(equals3)
+      )
+    );
     module2.exports = dropRepeats;
   }
 });
@@ -20394,14 +20504,16 @@ var require_dropWhile = __commonJS({
     var _dispatchable = require_dispatchable();
     var _xdropWhile = require_xdropWhile();
     var slice2 = require_slice();
-    var dropWhile = /* @__PURE__ */ _curry2(/* @__PURE__ */ _dispatchable(["dropWhile"], _xdropWhile, function dropWhile2(pred, xs) {
-      var idx = 0;
-      var len = xs.length;
-      while (idx < len && pred(xs[idx])) {
-        idx += 1;
-      }
-      return slice2(idx, Infinity, xs);
-    }));
+    var dropWhile = /* @__PURE__ */ _curry2(
+      /* @__PURE__ */ _dispatchable(["dropWhile"], _xdropWhile, function dropWhile2(pred, xs) {
+        var idx = 0;
+        var len = xs.length;
+        while (idx < len && pred(xs[idx])) {
+          idx += 1;
+        }
+        return slice2(idx, Infinity, xs);
+      })
+    );
     module2.exports = dropWhile;
   }
 });
@@ -20558,16 +20670,18 @@ var require_find = __commonJS({
     var _curry2 = require_curry2();
     var _dispatchable = require_dispatchable();
     var _xfind = require_xfind();
-    var find = /* @__PURE__ */ _curry2(/* @__PURE__ */ _dispatchable(["find"], _xfind, function find2(fn, list) {
-      var idx = 0;
-      var len = list.length;
-      while (idx < len) {
-        if (fn(list[idx])) {
-          return list[idx];
+    var find = /* @__PURE__ */ _curry2(
+      /* @__PURE__ */ _dispatchable(["find"], _xfind, function find2(fn, list) {
+        var idx = 0;
+        var len = list.length;
+        while (idx < len) {
+          if (fn(list[idx])) {
+            return list[idx];
+          }
+          idx += 1;
         }
-        idx += 1;
-      }
-    }));
+      })
+    );
     module2.exports = find;
   }
 });
@@ -20615,17 +20729,19 @@ var require_findIndex = __commonJS({
     var _curry2 = require_curry2();
     var _dispatchable = require_dispatchable();
     var _xfindIndex = require_xfindIndex();
-    var findIndex = /* @__PURE__ */ _curry2(/* @__PURE__ */ _dispatchable([], _xfindIndex, function findIndex2(fn, list) {
-      var idx = 0;
-      var len = list.length;
-      while (idx < len) {
-        if (fn(list[idx])) {
-          return idx;
+    var findIndex = /* @__PURE__ */ _curry2(
+      /* @__PURE__ */ _dispatchable([], _xfindIndex, function findIndex2(fn, list) {
+        var idx = 0;
+        var len = list.length;
+        while (idx < len) {
+          if (fn(list[idx])) {
+            return idx;
+          }
+          idx += 1;
         }
-        idx += 1;
-      }
-      return -1;
-    }));
+        return -1;
+      })
+    );
     module2.exports = findIndex;
   }
 });
@@ -20665,15 +20781,17 @@ var require_findLast = __commonJS({
     var _curry2 = require_curry2();
     var _dispatchable = require_dispatchable();
     var _xfindLast = require_xfindLast();
-    var findLast = /* @__PURE__ */ _curry2(/* @__PURE__ */ _dispatchable([], _xfindLast, function findLast2(fn, list) {
-      var idx = list.length - 1;
-      while (idx >= 0) {
-        if (fn(list[idx])) {
-          return list[idx];
+    var findLast = /* @__PURE__ */ _curry2(
+      /* @__PURE__ */ _dispatchable([], _xfindLast, function findLast2(fn, list) {
+        var idx = list.length - 1;
+        while (idx >= 0) {
+          if (fn(list[idx])) {
+            return list[idx];
+          }
+          idx -= 1;
         }
-        idx -= 1;
-      }
-    }));
+      })
+    );
     module2.exports = findLast;
   }
 });
@@ -20716,16 +20834,18 @@ var require_findLastIndex = __commonJS({
     var _curry2 = require_curry2();
     var _dispatchable = require_dispatchable();
     var _xfindLastIndex = require_xfindLastIndex();
-    var findLastIndex = /* @__PURE__ */ _curry2(/* @__PURE__ */ _dispatchable([], _xfindLastIndex, function findLastIndex2(fn, list) {
-      var idx = list.length - 1;
-      while (idx >= 0) {
-        if (fn(list[idx])) {
-          return idx;
+    var findLastIndex = /* @__PURE__ */ _curry2(
+      /* @__PURE__ */ _dispatchable([], _xfindLastIndex, function findLastIndex2(fn, list) {
+        var idx = list.length - 1;
+        while (idx >= 0) {
+          if (fn(list[idx])) {
+            return idx;
+          }
+          idx -= 1;
         }
-        idx -= 1;
-      }
-      return -1;
-    }));
+        return -1;
+      })
+    );
     module2.exports = findLastIndex;
   }
 });
@@ -20735,7 +20855,9 @@ var require_flatten = __commonJS({
   "node_modules/ramda/src/flatten.js"(exports2, module2) {
     var _curry1 = require_curry1();
     var _makeFlat = require_makeFlat();
-    var flatten = /* @__PURE__ */ _curry1(/* @__PURE__ */ _makeFlat(true));
+    var flatten = /* @__PURE__ */ _curry1(
+      /* @__PURE__ */ _makeFlat(true)
+    );
     module2.exports = flatten;
   }
 });
@@ -20762,15 +20884,17 @@ var require_forEach = __commonJS({
   "node_modules/ramda/src/forEach.js"(exports2, module2) {
     var _checkForMethod = require_checkForMethod();
     var _curry2 = require_curry2();
-    var forEach = /* @__PURE__ */ _curry2(/* @__PURE__ */ _checkForMethod("forEach", function forEach2(fn, list) {
-      var len = list.length;
-      var idx = 0;
-      while (idx < len) {
-        fn(list[idx]);
-        idx += 1;
-      }
-      return list;
-    }));
+    var forEach = /* @__PURE__ */ _curry2(
+      /* @__PURE__ */ _checkForMethod("forEach", function forEach2(fn, list) {
+        var len = list.length;
+        var idx = 0;
+        while (idx < len) {
+          fn(list[idx]);
+          idx += 1;
+        }
+        return list;
+      })
+    );
     module2.exports = forEach;
   }
 });
@@ -20817,13 +20941,18 @@ var require_groupBy = __commonJS({
     var _checkForMethod = require_checkForMethod();
     var _curry2 = require_curry2();
     var reduceBy = require_reduceBy();
-    var groupBy = /* @__PURE__ */ _curry2(/* @__PURE__ */ _checkForMethod("groupBy", /* @__PURE__ */ reduceBy(function(acc, item) {
-      if (acc == null) {
-        acc = [];
-      }
-      acc.push(item);
-      return acc;
-    }, null)));
+    var groupBy = /* @__PURE__ */ _curry2(
+      /* @__PURE__ */ _checkForMethod(
+        "groupBy",
+        /* @__PURE__ */ reduceBy(function(acc, item) {
+          if (acc == null) {
+            acc = [];
+          }
+          acc.push(item);
+          return acc;
+        }, null)
+      )
+    );
     module2.exports = groupBy;
   }
 });
@@ -21100,20 +21229,22 @@ var require_intersperse = __commonJS({
   "node_modules/ramda/src/intersperse.js"(exports2, module2) {
     var _checkForMethod = require_checkForMethod();
     var _curry2 = require_curry2();
-    var intersperse = /* @__PURE__ */ _curry2(/* @__PURE__ */ _checkForMethod("intersperse", function intersperse2(separator, list) {
-      var out = [];
-      var idx = 0;
-      var length2 = list.length;
-      while (idx < length2) {
-        if (idx === length2 - 1) {
-          out.push(list[idx]);
-        } else {
-          out.push(list[idx], separator);
+    var intersperse = /* @__PURE__ */ _curry2(
+      /* @__PURE__ */ _checkForMethod("intersperse", function intersperse2(separator, list) {
+        var out = [];
+        var idx = 0;
+        var length2 = list.length;
+        while (idx < length2) {
+          if (idx === length2 - 1) {
+            out.push(list[idx]);
+          } else {
+            out.push(list[idx], separator);
+          }
+          idx += 1;
         }
-        idx += 1;
-      }
-      return out;
-    }));
+        return out;
+      })
+    );
     module2.exports = intersperse;
   }
 });
@@ -22050,7 +22181,9 @@ var require_partialRight = __commonJS({
     var _concat = require_concat2();
     var _createPartialApplicator = require_createPartialApplicator();
     var flip = require_flip();
-    var partialRight = /* @__PURE__ */ _createPartialApplicator(/* @__PURE__ */ flip(_concat));
+    var partialRight = /* @__PURE__ */ _createPartialApplicator(
+      /* @__PURE__ */ flip(_concat)
+    );
     module2.exports = partialRight;
   }
 });
@@ -22649,14 +22782,16 @@ var require_takeWhile = __commonJS({
     var _dispatchable = require_dispatchable();
     var _xtakeWhile = require_xtakeWhile();
     var slice2 = require_slice();
-    var takeWhile = /* @__PURE__ */ _curry2(/* @__PURE__ */ _dispatchable(["takeWhile"], _xtakeWhile, function takeWhile2(fn, xs) {
-      var idx = 0;
-      var len = xs.length;
-      while (idx < len && fn(xs[idx])) {
-        idx += 1;
-      }
-      return slice2(0, idx, xs);
-    }));
+    var takeWhile = /* @__PURE__ */ _curry2(
+      /* @__PURE__ */ _dispatchable(["takeWhile"], _xtakeWhile, function takeWhile2(fn, xs) {
+        var idx = 0;
+        var len = xs.length;
+        while (idx < len && fn(xs[idx])) {
+          idx += 1;
+        }
+        return slice2(0, idx, xs);
+      })
+    );
     module2.exports = takeWhile;
   }
 });
@@ -22692,10 +22827,12 @@ var require_tap = __commonJS({
     var _curry2 = require_curry2();
     var _dispatchable = require_dispatchable();
     var _xtap = require_xtap();
-    var tap = /* @__PURE__ */ _curry2(/* @__PURE__ */ _dispatchable([], _xtap, function tap2(fn, x) {
-      fn(x);
-      return x;
-    }));
+    var tap = /* @__PURE__ */ _curry2(
+      /* @__PURE__ */ _dispatchable([], _xtap, function tap2(fn, x) {
+        fn(x);
+        return x;
+      })
+    );
     module2.exports = tap;
   }
 });
@@ -22952,7 +23089,9 @@ var require_union = __commonJS({
     var _curry2 = require_curry2();
     var compose = require_compose();
     var uniq = require_uniq();
-    var union = /* @__PURE__ */ _curry2(/* @__PURE__ */ compose(uniq, _concat));
+    var union = /* @__PURE__ */ _curry2(
+      /* @__PURE__ */ compose(uniq, _concat)
+    );
     module2.exports = union;
   }
 });
@@ -23649,9 +23788,9 @@ var require_fast_list = __commonJS({
           return val;
         }
       };
-      if (typeof exports2 !== "undefined")
+      if ("undefined" !== typeof exports2)
         module2.exports = FastList;
-      else if (typeof define === "function" && define.amd) {
+      else if ("function" === typeof define && define.amd) {
         define("FastList", function() {
           return FastList;
         });
@@ -26711,7 +26850,9 @@ var require_readdirp = __commonJS({
             if (entryRealPathStats.isDirectory()) {
               const len = entryRealPath.length;
               if (full.startsWith(entryRealPath) && full.substr(len, 1) === sysPath.sep) {
-                const recursiveError = new Error(`Circular symlink detected: "${full}" points to "${entryRealPath}"`);
+                const recursiveError = new Error(
+                  `Circular symlink detected: "${full}" points to "${entryRealPath}"`
+                );
                 recursiveError.code = RECURSIVE_ERROR_CODE;
                 return this._onError(recursiveError);
               }
@@ -28493,7 +28634,11 @@ var require_nodefs_handler = __commonJS({
         listener(path3);
         emitRaw(rawEvent, evPath, { watchedPath: path3 });
         if (evPath && path3 !== evPath) {
-          fsWatchBroadcast(sysPath.resolve(path3, evPath), KEY_LISTENERS, sysPath.join(path3, evPath));
+          fsWatchBroadcast(
+            sysPath.resolve(path3, evPath),
+            KEY_LISTENERS,
+            sysPath.join(path3, evPath)
+          );
         }
       };
       try {
@@ -28515,7 +28660,13 @@ var require_nodefs_handler = __commonJS({
       let cont = FsWatchInstances.get(fullPath);
       let watcher;
       if (!options.persistent) {
-        watcher = createFsWatchInstance(path3, options, listener, errHandler, rawEmitter);
+        watcher = createFsWatchInstance(
+          path3,
+          options,
+          listener,
+          errHandler,
+          rawEmitter
+        );
         return watcher.close.bind(watcher);
       }
       if (cont) {
@@ -28523,7 +28674,13 @@ var require_nodefs_handler = __commonJS({
         addAndConvert(cont, KEY_ERR, errHandler);
         addAndConvert(cont, KEY_RAW, rawEmitter);
       } else {
-        watcher = createFsWatchInstance(path3, options, fsWatchBroadcast.bind(null, fullPath, KEY_LISTENERS), errHandler, fsWatchBroadcast.bind(null, fullPath, KEY_RAW));
+        watcher = createFsWatchInstance(
+          path3,
+          options,
+          fsWatchBroadcast.bind(null, fullPath, KEY_LISTENERS),
+          errHandler,
+          fsWatchBroadcast.bind(null, fullPath, KEY_RAW)
+        );
         if (!watcher)
           return;
         watcher.on(EV_ERROR, async (error) => {
@@ -28755,24 +28912,26 @@ var require_nodefs_handler = __commonJS({
             this._addToNodeFs(path3, initialAdd, wh, depth + 1);
           }
         }).on(EV_ERROR, this._boundHandleError);
-        return new Promise((resolve2) => stream2.once(STR_END, () => {
-          if (this.fsw.closed) {
+        return new Promise(
+          (resolve2) => stream2.once(STR_END, () => {
+            if (this.fsw.closed) {
+              stream2 = void 0;
+              return;
+            }
+            const wasThrottled = throttler ? throttler.clear() : false;
+            resolve2();
+            previous.getChildren().filter((item) => {
+              return item !== directory && !current.has(item) && (!wh.hasGlob || wh.filterPath({
+                fullPath: sysPath.resolve(directory, item)
+              }));
+            }).forEach((item) => {
+              this.fsw._remove(directory, item);
+            });
             stream2 = void 0;
-            return;
-          }
-          const wasThrottled = throttler ? throttler.clear() : false;
-          resolve2();
-          previous.getChildren().filter((item) => {
-            return item !== directory && !current.has(item) && (!wh.hasGlob || wh.filterPath({
-              fullPath: sysPath.resolve(directory, item)
-            }));
-          }).forEach((item) => {
-            this.fsw._remove(directory, item);
-          });
-          stream2 = void 0;
-          if (wasThrottled)
-            this._handleRead(directory, false, wh, target, dir, depth, throttler);
-        }));
+            if (wasThrottled)
+              this._handleRead(directory, false, wh, target, dir, depth, throttler);
+          })
+        );
       }
       async _handleDir(dir, stats, initialAdd, depth, target, wh, realpath) {
         const parentDir = this.fsw._getWatchedDir(sysPath.dirname(dir));
@@ -29079,12 +29238,17 @@ var require_fsevents_handler = __commonJS({
             return;
           if (opts.depth !== void 0 && calcDepth(fullPath, realPath) > opts.depth)
             return;
-          const path3 = transform(sysPath.join(watchPath, sysPath.relative(watchPath, fullPath)));
+          const path3 = transform(sysPath.join(
+            watchPath,
+            sysPath.relative(watchPath, fullPath)
+          ));
           if (globFilter && !globFilter(path3))
             return;
           const parent = sysPath.dirname(path3);
           const item = sysPath.basename(path3);
-          const watchedDir = this.fsw._getWatchedDir(info.type === FSEVENT_TYPE_DIRECTORY ? path3 : parent);
+          const watchedDir = this.fsw._getWatchedDir(
+            info.type === FSEVENT_TYPE_DIRECTORY ? path3 : parent
+          );
           if (wrongEventFlags.has(flags) || info.event === FSEVENT_UNKNOWN) {
             if (typeof opts.ignored === FUNCTION_TYPE) {
               let stats;
@@ -29115,7 +29279,12 @@ var require_fsevents_handler = __commonJS({
             }
           }
         };
-        const closer = setFSEventsListener(watchPath, realPath, watchCallback, this.fsw._emitRaw);
+        const closer = setFSEventsListener(
+          watchPath,
+          realPath,
+          watchCallback,
+          this.fsw._emitRaw
+        );
         this.fsw._emitReady();
         return closer;
       }
@@ -29164,7 +29333,12 @@ var require_fsevents_handler = __commonJS({
       initWatch(realPath, path3, wh, processPath) {
         if (this.fsw.closed)
           return;
-        const closer = this._watchWithFsEvents(wh.watchPath, sysPath.resolve(realPath || wh.watchPath), processPath, wh.globFilter);
+        const closer = this._watchWithFsEvents(
+          wh.watchPath,
+          sysPath.resolve(realPath || wh.watchPath),
+          processPath,
+          wh.globFilter
+        );
         this.fsw._addPathCloser(path3, closer);
       }
       async _addToFsEvents(path3, transform, forceAdd, priorDepth) {
@@ -29416,7 +29590,10 @@ var require_chokidar = __commonJS({
         return entry.fullPath;
       }
       entryPath(entry) {
-        return sysPath.join(this.watchPath, sysPath.relative(this.watchPath, this.checkGlobSymlink(entry)));
+        return sysPath.join(
+          this.watchPath,
+          sysPath.relative(this.watchPath, this.checkGlobSymlink(entry))
+        );
       }
       filterPath(entry) {
         const { stats } = entry;
@@ -29575,12 +29752,14 @@ var require_chokidar = __commonJS({
           if (!this._readyCount)
             this._readyCount = 0;
           this._readyCount += paths.length;
-          Promise.all(paths.map(async (path3) => {
-            const res = await this._nodeFsHandler._addToNodeFs(path3, !_internal, 0, 0, _origAdd);
-            if (res)
-              this._emitReady();
-            return res;
-          })).then((results) => {
+          Promise.all(
+            paths.map(async (path3) => {
+              const res = await this._nodeFsHandler._addToNodeFs(path3, !_internal, 0, 0, _origAdd);
+              if (res)
+                this._emitReady();
+              return res;
+            })
+          ).then((results) => {
             if (this.closed)
               return;
             results.filter((item) => item).forEach((item) => {
@@ -29779,7 +29958,11 @@ var require_chokidar = __commonJS({
               this._pendingWrites.delete(path3);
               awfEmit(void 0, curStat);
             } else {
-              timeoutHandler = setTimeout(awaitWriteFinish, this.options.awaitWriteFinish.pollInterval, curStat);
+              timeoutHandler = setTimeout(
+                awaitWriteFinish,
+                this.options.awaitWriteFinish.pollInterval,
+                curStat
+              );
             }
           });
         };
@@ -29792,7 +29975,10 @@ var require_chokidar = __commonJS({
               return event;
             }
           });
-          timeoutHandler = setTimeout(awaitWriteFinish, this.options.awaitWriteFinish.pollInterval);
+          timeoutHandler = setTimeout(
+            awaitWriteFinish,
+            this.options.awaitWriteFinish.pollInterval
+          );
         }
       }
       _getGlobIgnored() {
@@ -30027,7 +30213,9 @@ var require_commander = __commonJS({
         }
         const extraInfo = [];
         if (option.argChoices) {
-          extraInfo.push(`choices: ${option.argChoices.map((choice) => JSON.stringify(choice)).join(", ")}`);
+          extraInfo.push(
+            `choices: ${option.argChoices.map((choice) => JSON.stringify(choice)).join(", ")}`
+          );
         }
         if (option.defaultValue !== void 0) {
           extraInfo.push(`default: ${option.defaultValueDescription || JSON.stringify(option.defaultValue)}`);
@@ -30079,7 +30267,11 @@ var require_commander = __commonJS({
         return output.join("\n");
       }
       padWidth(cmd, helper) {
-        return Math.max(helper.longestOptionTermLength(cmd, helper), helper.longestSubcommandTermLength(cmd, helper), helper.longestArgumentTermLength(cmd, helper));
+        return Math.max(
+          helper.longestOptionTermLength(cmd, helper),
+          helper.longestSubcommandTermLength(cmd, helper),
+          helper.longestArgumentTermLength(cmd, helper)
+        );
       }
       wrap(str, width, indent, minColumnWidth = 40) {
         if (str.match(/[\n]\s+/))
@@ -30926,7 +31118,11 @@ var require_commander = __commonJS({
           const args = this._args.map((arg) => {
             return humanReadableArgName(arg);
           });
-          return [].concat(this.options.length || this._hasHelpOption ? "[options]" : [], this.commands.length ? "[command]" : [], this._args.length ? args : []).join(" ");
+          return [].concat(
+            this.options.length || this._hasHelpOption ? "[options]" : [],
+            this.commands.length ? "[command]" : [],
+            this._args.length ? args : []
+          ).join(" ");
         }
         this._usage = str;
         return this;
@@ -39753,7 +39949,11 @@ async function experimentalIPNSPublish(client, rootCID, ipnsKeyName) {
 function subscribeGenerator(nodeID, suffix = "/input") {
   const channel = new import_queueable.Channel();
   debug6("Subscribing to pubsub events from", nodeID, suffix);
-  const unsubscribe = subscribeCID(nodeID, suffix, (cid) => channel.push(cid));
+  const unsubscribe = subscribeCID(
+    nodeID,
+    suffix,
+    (cid) => channel.push(cid)
+  );
   return [channel, unsubscribe];
 }
 function subscribeCID(nodeID, suffix = "", callback, heartbeatDeadCallback = noop2) {
@@ -39919,7 +40119,9 @@ var _getIPFSState = async (ipfsReader, { cid, type, name: name7, path: path3, ro
     const files = await ls(cid);
     _debug("Got files for", name7, cid, files);
     const filenames = files.map(({ name: name8 }) => name8);
-    const contents = await PromiseAllProgress(path3, files.map((file) => cachedIPFSState(ipfsReader, { ...file, path: join2(path3, file.name), rootCID }, processFile2, skipCache)));
+    const contents = await PromiseAllProgress(path3, files.map(
+      (file) => cachedIPFSState(ipfsReader, { ...file, path: join2(path3, file.name), rootCID }, processFile2, skipCache)
+    ));
     const contentResult = Object.fromEntries((0, import_ramda3.zip)(filenames, contents));
     _debug("contents", contentResult);
     Object.defineProperty(contentResult, ".cid", { value: cid });
@@ -40063,32 +40265,36 @@ async function* folderSync({ writer: writer2, path: path3, debounce, signal }) {
     const changedGrouped = groupSyncQueue(changedFlat);
     debug10("changedGrouped", changedGrouped);
     for (const changed of changedGrouped) {
-      await Promise.all(changed.map(async ({ event, path: file }) => {
-        if (signal.aborted)
-          return;
-        debug10("Local:", event, file);
-        const localPath = (0, import_path2.join)(path3, file);
-        const ipfsPath = file;
-        if (event === "addDir") {
-          debug10("mkdir", ipfsPath);
-          await mkDir(ipfsPath);
-        }
-        if (event === "add" || event === "change") {
-          debug10("adding", ipfsPath, localPath);
-          await addFile(ipfsPath, localPath);
-        }
-        if (event === "unlink" || event === "unlinkDir") {
-          debug10("removing", file, event);
-          await rm(ipfsPath);
-        }
-      }));
+      await Promise.all(
+        changed.map(async ({ event, path: file }) => {
+          if (signal.aborted)
+            return;
+          debug10("Local:", event, file);
+          const localPath = (0, import_path2.join)(path3, file);
+          const ipfsPath = file;
+          if (event === "addDir") {
+            debug10("mkdir", ipfsPath);
+            await mkDir(ipfsPath);
+          }
+          if (event === "add" || event === "change") {
+            debug10("adding", ipfsPath, localPath);
+            await addFile(ipfsPath, localPath);
+          }
+          if (event === "unlink" || event === "unlinkDir") {
+            debug10("removing", file, event);
+            await rm(ipfsPath);
+          }
+        })
+      );
     }
     const newContentID = await cid();
     yield newContentID;
   }
 }
 var groupKey = ({ event, path: path3 }) => (0, import_path2.dirname)(path3) + "_" + event;
-var groupSyncQueue = (0, import_ramda5.groupWith)((a, b) => groupKey(a) === groupKey(b));
+var groupSyncQueue = (0, import_ramda5.groupWith)(
+  (a, b) => groupKey(a) === groupKey(b)
+);
 
 // src/ipfs/sender.js
 var debug11 = (0, import_debug11.default)("ipfs/sender");
