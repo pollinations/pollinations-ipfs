@@ -6,7 +6,7 @@ const debug = Debug("pollen");
 
 // DB Name should be "pollen" if environment is production else "pollen_dev"
 
-const DB_NAME = process.env.NODE_ENV === "development" ? "pollen_dev" : "pollen";
+const DB_NAME = process.env.POLLINATIONS_ENV === "development" ? "pollen_dev" : "pollen";
 
 let subscribers = {};
 
