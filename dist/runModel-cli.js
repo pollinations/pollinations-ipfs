@@ -32377,6 +32377,9 @@ var require_main6 = __commonJS({
   }
 });
 
+// src/awsPollenRunner.js
+var import_debug10 = __toESM(require_src(), 1);
+
 // src/aws.js
 var import_debug = __toESM(require_src(), 1);
 var import_node_fetch = __toESM(require_lib3(), 1);
@@ -41058,7 +41061,7 @@ var client_default = getClient2();
 
 // src/supabase/pollen.js
 var debug9 = (0, import_debug9.default)("pollen");
-var DB_NAME = process.env.NODE_ENV === "development" ? "pollen_dev" : "pollen";
+var DB_NAME = process.env.POLLINATIONS_ENV === "development" ? "pollen_dev" : "pollen";
 var subscribers = {};
 var subscription = null;
 var subscriptionHandler = ({ new: data }) => {
@@ -41119,15 +41122,14 @@ async function dispatchAndReturnPollen(params, returnImmediately = false) {
 console.log("blaaa");
 
 // src/awsPollenRunner.js
-var import_debug10 = __toESM(require_src(), 1);
 var debug10 = (0, import_debug10.default)("pollen");
-var runModelOnce = async (inputs2, image = "voodoohop/dalle-playground", returnImmediately = false) => {
+var runModelOnce = async (inputs2, image = "voodoohop/dalle-playground", { priority = 0, returnImmediately = false }) => {
   var _a;
   debug10("running model", inputs2, image);
   inputs2 = { ...inputs2, model_image: image };
   const inputCID = await UploadInputstoIPFS(inputs2, writer());
   debug10("got input content ID", inputCID);
-  const outputCID = await dispatchAndReturnPollen({ input: inputCID, image }, returnImmediately);
+  const outputCID = await dispatchAndReturnPollen({ input: inputCID, image, priority }, returnImmediately);
   if (!outputCID)
     return null;
   const data = await IPFSWebState(outputCID);

@@ -106,10 +106,10 @@ export async function getPollen(input) {
     return data && data[0];
 }
 
-export async function dispatchPollenGenerator(input) {
-    await dispatchPollen(input)
+export async function dispatchPollenGenerator(params) {
+    await dispatchPollen(params)
     const channel = new Channel();
-    subscribePollen(input.input, data => data.output && channel.push(data.output))
+    subscribePollen(params.input, data => data.output && channel.push(data.output))
     
     return channel
 }
