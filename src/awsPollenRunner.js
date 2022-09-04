@@ -15,13 +15,13 @@ const debug = Debug("pollen");
 
 
 
-const runModelOnce = async (inputs, image="voodoohop/dalle-playground", { priority=0, returnImmediately=false }) => {
+const runModelOnce = async (inputs, image="voodoohop/dalle-playground", returnImmediately=false, params={}) => {
   debug("running model", inputs, image);
   inputs = {...inputs, model_image:image};
   const inputCID = await UploadInputstoIPFS(inputs, writer());
   debug("got input content ID", inputCID);
   
-  const outputCID = await dispatchAndReturnPollen({input: inputCID, image, priority }, returnImmediately);
+  const outputCID = await dispatchAndReturnPollen({input: inputCID, image, ...params }, returnImmediately);
   if (!outputCID)
     return null;
   const data = await IPFSWebState(outputCID);
