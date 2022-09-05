@@ -8,30 +8,6 @@ const debug = Debug("pollen");
 
 const DB_NAME = process.env.POLLINATIONS_ENV === "development" ? "pollen_dev" : "pollen";
 
-let subscribers = {};
-
-let subscription = null;
-
-const subscriptionHandler = ({new:data}) => { 
-     Object.keys(subscribers).forEach(input => {
-        if (data.input !== input) {
-            //debug("ignoring pollen", data.input, input)
-            return;
-        }
-
-        debug("subscriptionHandler", data);
-        
-        if (data.output) {
-            subscribers[input](data);
-        }
-
-        if (data.success !== null) {
-            delete subscribers[input];
-        }
-    })
-}
-
-
 
 export async function getPollens(params) {
     const { data } = await supabase
