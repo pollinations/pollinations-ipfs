@@ -71,7 +71,7 @@ export async function subscribePollen(input, callback) {
             callback(data);
 
             // return if job was already done
-            if (data.success === true)
+            if (data.success !== null)
                 clearInterval(interval);
         }
     };
@@ -115,7 +115,7 @@ export async function dispatchAndReturnPollen(params, returnImmediately=false) {
 }
 
 // await sleep(1000)
-console.log("pollen", await getPollens({image: "614871946825.dkr.ecr.us-east-1.amazonaws.com/pollinations/stable-diffusion-private", success: true}))
+// console.log("pollen", await getPollens({image: "614871946825.dkr.ecr.us-east-1.amazonaws.com/pollinations/stable-diffusion-private", success: true}))
 // async function test() {
 //    //console.log(await getAllPollens())
 //     const input = "QmYdTVSzh6MNDBKMG9Z1vqfzomTYWczV3iP15YBupKSsM1"
@@ -128,7 +128,7 @@ console.log("pollen", await getPollens({image: "614871946825.dkr.ecr.us-east-1.a
 
 
 // test()
-subscribePollen("QmX3SZ1Hqev1p7kvubXZA7Zua87D9QJEVsRJzBz15v3iSv", data => console.log("data", data))
+// subscribePollen("QmX3SZ1Hqev1p7kvubXZA7Zua87D9QJEVsRJzBz15v3iSv", data => console.log("data", data))
 
 
 // const allPollen = await getAllPollens();
