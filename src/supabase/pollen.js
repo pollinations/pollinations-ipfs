@@ -33,26 +33,6 @@ const subscriptionHandler = ({new:data}) => {
 
 
 
-
-const createSubscriptionIfNeeded = () => {
-
-    const haveSubscribers = Object.keys(subscribers).length > 0;
-
-    if (!haveSubscribers && subscription) {
-        subscription.unsubscribe();
-        subscription = null;
-        return
-    }
-    
-    if (haveSubscribers && !subscription) {
-        subscription = supabase
-                .from(DB_NAME)
-                .on("UPDATE", subscriptionHandler)
-                //.on("INSERT", subscriptionHandler)
-                .subscribe();
-    }
-}
-
 export async function getPollens(params) {
     const { data } = await supabase
         .from(DB_NAME)
@@ -81,21 +61,26 @@ export function updatePollen(input, data) {
 export async function subscribePollen(input, callback) {
 
     debug("getting first pollen using select", input)
-    const data = await getPollen(input);
-    debug("data",data)
-    if (data) {
-        callback(data);
-        
-        // return if job was already done
-        if (data.success === true)
-            return () => null;
-    }
+    
+    let lastData = null;
+    const getData = async () => {
+        const data = await getPollen(input);
+        debug("data", data);
+        if (data && (JSON.stringify(data) !== JSON.stringify(lastData))) {
+            lastData = data;
+            callback(data);
 
-    subscribers[input] = callback;
+            // return if job was already done
+            if (data.success === true)
+                clearInterval(interval);
+        }
+    };
 
-    createSubscriptionIfNeeded();
 
-    return () => subscribers.delete(input);
+    const interval = setInterval(getData, 1000)
+    getData();
+    
+    return () => clearInterval(interval);
 }
 
 export async function getPollen(input) {
@@ -129,10 +114,10 @@ export async function dispatchAndReturnPollen(params, returnImmediately=false) {
         });
 }
 
-console.log("blaaa")
-
+// await sleep(1000)
+console.log("pollen", await getPollens({image: "614871946825.dkr.ecr.us-east-1.amazonaws.com/pollinations/stable-diffusion-private", success: true}))
 // async function test() {
-//     //console.log(await getAllPollens())
+//    //console.log(await getAllPollens())
 //     const input = "QmYdTVSzh6MNDBKMG9Z1vqfzomTYWczV3iP15YBupKSsM1"
 //     const image = "614871946825.dkr.ecr.us-east-1.amazonaws.com/pollinations/majesty-diffusion-cog"
 // //    console.log("dispatch", await dispatchPollen({input, image}))
@@ -143,7 +128,7 @@ console.log("blaaa")
 
 
 // test()
-
+subscribePollen("QmX3SZ1Hqev1p7kvubXZA7Zua87D9QJEVsRJzBz15v3iSv", data => console.log("data", data))
 
 
 // const allPollen = await getAllPollens();
