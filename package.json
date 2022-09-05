@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@cto.af/textdecoder": "0.0.0",
-    "@supabase/supabase-js": "^1.35.4",
+    "@supabase/supabase-js": "^1.35.6",
     "async": "^3.2.1",
     "await-sleep": "^0.0.1",
     "buffer": "^6.0.3",
