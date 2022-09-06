@@ -41,9 +41,11 @@ export async function subscribePollen(input, callback) {
     let lastData = null;
     const getData = async () => {
         const data = await getPollen(input);
-        debug("data", data);
+        // debug("data", data);
         if (data && (JSON.stringify(data) !== JSON.stringify(lastData))) {
+
             lastData = data;
+            debug("got new data", data);
             callback(data);
 
             // return if job was already done
