@@ -66,7 +66,7 @@ const useAWSNode = ({ nodeID: paramsNodeID, contentID: paramsContentID } ) => {
         ipfs,
         updatePollen: data => updatePollen(nodeID, data),
         queuePosition
-
+    }
 };
 
 export default useAWSNode
