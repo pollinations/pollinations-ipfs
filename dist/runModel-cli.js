@@ -7056,12 +7056,12 @@ var require_lib3 = __commonJS({
       const dest = new URL$1(destination).hostname;
       return orig === dest || orig[orig.length - dest.length - 1] === "." && orig.endsWith(dest);
     };
-    function fetch3(url, opts) {
-      if (!fetch3.Promise) {
+    function fetch4(url, opts) {
+      if (!fetch4.Promise) {
         throw new Error("native promise missing, set fetch.Promise to your favorite alternative");
       }
-      Body.Promise = fetch3.Promise;
-      return new fetch3.Promise(function(resolve2, reject) {
+      Body.Promise = fetch4.Promise;
+      return new fetch4.Promise(function(resolve2, reject) {
         const request = new Request(url, opts);
         const options = getNodeRequestOptions(request);
         const send = (options.protocol === "https:" ? https2 : http2).request;
@@ -7111,7 +7111,7 @@ var require_lib3 = __commonJS({
         req.on("response", function(res) {
           clearTimeout(reqTimeout);
           const headers = createHeadersLenient(res.headers);
-          if (fetch3.isRedirect(res.statusCode)) {
+          if (fetch4.isRedirect(res.statusCode)) {
             const location2 = headers.get("Location");
             let locationURL = null;
             try {
@@ -7173,7 +7173,7 @@ var require_lib3 = __commonJS({
                   requestOpts.body = void 0;
                   requestOpts.headers.delete("content-length");
                 }
-                resolve2(fetch3(new Request(locationURL, requestOpts)));
+                resolve2(fetch4(new Request(locationURL, requestOpts)));
                 finalize();
                 return;
             }
@@ -7233,11 +7233,11 @@ var require_lib3 = __commonJS({
         writeToStream(req, request);
       });
     }
-    fetch3.isRedirect = function(code7) {
+    fetch4.isRedirect = function(code7) {
       return code7 === 301 || code7 === 302 || code7 === 303 || code7 === 307 || code7 === 308;
     };
-    fetch3.Promise = global.Promise;
-    module2.exports = exports2 = fetch3;
+    fetch4.Promise = global.Promise;
+    module2.exports = exports2 = fetch4;
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.default = exports2;
     exports2.Headers = Headers;
@@ -12538,7 +12538,7 @@ var require_lib5 = __commonJS({
       electron = require("electron");
     }
     var isReady = electron && electron.app && !electron.app.isReady() ? new Promise((resolve2) => electron.app.once("ready", resolve2)) : Promise.resolve();
-    function fetch3(url$1, opts = {}) {
+    function fetch4(url$1, opts = {}) {
       return isReady.then(() => new Promise((resolve2, reject) => {
         const request = new Request(url$1, opts);
         const options = getNodeRequestOptions(request);
@@ -12627,7 +12627,7 @@ var require_lib5 = __commonJS({
           if (request.signal) {
             request.signal.removeEventListener("abort", abortRequest);
           }
-          if (fetch3.isRedirect(res.statusCode) && request.redirect !== "manual") {
+          if (fetch4.isRedirect(res.statusCode) && request.redirect !== "manual") {
             if (request.redirect === "error") {
               reject(new FetchError(`redirect mode is set to error: ${request.url}`, "no-redirect"));
               return;
@@ -12646,7 +12646,7 @@ var require_lib5 = __commonJS({
               request.headers.delete("content-length");
             }
             request.counter++;
-            resolve2(fetch3(url.resolve(request.url, res.headers.location), request));
+            resolve2(fetch4(url.resolve(request.url, res.headers.location), request));
             return;
           }
           const headers2 = new Headers();
@@ -12715,12 +12715,12 @@ var require_lib5 = __commonJS({
         writeToStream(req, request);
       }));
     }
-    fetch3.isRedirect = (code7) => code7 === 301 || code7 === 302 || code7 === 303 || code7 === 307 || code7 === 308;
+    fetch4.isRedirect = (code7) => code7 === 301 || code7 === 302 || code7 === 303 || code7 === 307 || code7 === 308;
     exports2.FetchError = FetchError;
     exports2.Headers = Headers;
     exports2.Request = Request;
     exports2.Response = Response2;
-    exports2["default"] = fetch3;
+    exports2["default"] = fetch4;
   }
 });
 
@@ -12764,7 +12764,7 @@ var require_fetch_browser = __commonJS({
   "node_modules/ipfs-utils/src/http/fetch.browser.js"(exports2, module2) {
     "use strict";
     var { TimeoutError, AbortError } = require_error();
-    var { Response: Response2, Request, Headers, default: fetch3 } = require_fetch();
+    var { Response: Response2, Request, Headers, default: fetch4 } = require_fetch();
     var fetchWithProgress = (url, options = {}) => {
       const request = new XMLHttpRequest();
       request.open(options.method || "GET", url.toString(), true);
@@ -12824,7 +12824,7 @@ var require_fetch_browser = __commonJS({
         request.send(options.body);
       });
     };
-    var fetchWithStreaming = fetch3;
+    var fetchWithStreaming = fetch4;
     var fetchWith = (url, options = {}) => options.onUploadProgress != null ? fetchWithProgress(url, options) : fetchWithStreaming(url, options);
     var parseHeaders = (input) => {
       const headers = new Headers();
@@ -13124,7 +13124,7 @@ var require_fetch_node = __commonJS({
     var { Request, Response: Response2, Headers, default: nativeFetch } = require_fetch();
     var toStream2 = require_src5();
     var { Buffer: Buffer3 } = require("buffer");
-    var fetch3 = (url, options = {}) => nativeFetch(url, withUploadProgress(options));
+    var fetch4 = (url, options = {}) => nativeFetch(url, withUploadProgress(options));
     var withUploadProgress = (options) => {
       const { onUploadProgress, body } = options;
       if (onUploadProgress && body) {
@@ -13169,7 +13169,7 @@ var require_fetch_node = __commonJS({
       }
     };
     module2.exports = {
-      fetch: fetch3,
+      fetch: fetch4,
       Request,
       Headers
     };
@@ -13422,7 +13422,7 @@ var require_any_signal = __commonJS({
 var require_http = __commonJS({
   "node_modules/ipfs-utils/src/http.js"(exports2, module2) {
     "use strict";
-    var { fetch: fetch3, Request, Headers } = require_fetch2();
+    var { fetch: fetch4, Request, Headers } = require_fetch2();
     var { TimeoutError, HTTPError: HTTPError2 } = require_error();
     var merge3 = require_merge_options().bind({ ignoreUndefined: true });
     var { URL: URL2, URLSearchParams: URLSearchParams2 } = require_iso_url();
@@ -13491,7 +13491,7 @@ var require_http = __commonJS({
         const abortController = new AbortController();
         const signal = anySignal2([abortController.signal, opts.signal]);
         const response = await timeout(
-          fetch3(
+          fetch4(
             url.toString(),
             {
               ...opts,
@@ -24393,7 +24393,7 @@ var require_version = __commonJS({
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.version = void 0;
-    exports2.version = "1.35.4";
+    exports2.version = "1.35.6";
   }
 });
 
@@ -24437,7 +24437,7 @@ var require_version2 = __commonJS({
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.version = void 0;
-    exports2.version = "1.22.20";
+    exports2.version = "1.22.22";
   }
 });
 
@@ -24695,19 +24695,19 @@ var require_node_ponyfill = __commonJS({
   "node_modules/cross-fetch/dist/node-ponyfill.js"(exports2, module2) {
     var nodeFetch = require_lib3();
     var realFetch = nodeFetch.default || nodeFetch;
-    var fetch3 = function(url, options) {
+    var fetch4 = function(url, options) {
       if (/^\/\//.test(url)) {
         url = "https:" + url;
       }
       return realFetch.call(this, url, options);
     };
-    fetch3.ponyfill = true;
-    module2.exports = exports2 = fetch3;
-    exports2.fetch = fetch3;
+    fetch4.ponyfill = true;
+    module2.exports = exports2 = fetch4;
+    exports2.fetch = fetch4;
     exports2.Headers = nodeFetch.Headers;
     exports2.Request = nodeFetch.Request;
     exports2.Response = nodeFetch.Response;
-    exports2.default = fetch3;
+    exports2.default = fetch4;
   }
 });
 
@@ -24884,11 +24884,11 @@ var require_GoTrueApi = __commonJS({
     var cookies_1 = require_cookies();
     var helpers_1 = require_helpers2();
     var GoTrueApi = class {
-      constructor({ url = "", headers = {}, cookieOptions, fetch: fetch3 }) {
+      constructor({ url = "", headers = {}, cookieOptions, fetch: fetch4 }) {
         this.url = url;
         this.headers = headers;
         this.cookieOptions = Object.assign(Object.assign({}, constants_1.COOKIE_OPTIONS), cookieOptions);
-        this.fetch = (0, helpers_1.resolveFetch)(fetch3);
+        this.fetch = (0, helpers_1.resolveFetch)(fetch4);
       }
       _createRequestHeaders(jwt) {
         const headers = Object.assign({}, this.headers);
@@ -24944,7 +24944,7 @@ var require_GoTrueApi = __commonJS({
             if (options.redirectTo) {
               queryString += "&redirect_to=" + encodeURIComponent(options.redirectTo);
             }
-            const data = yield (0, fetch_1.post)(this.fetch, `${this.url}/token${queryString}`, { email, password }, { headers });
+            const data = yield (0, fetch_1.post)(this.fetch, `${this.url}/token${queryString}`, { email, password, gotrue_meta_security: { captcha_token: options.captchaToken } }, { headers });
             const session = Object.assign({}, data);
             if (session.expires_in)
               session.expires_at = (0, helpers_1.expiresAt)(data.expires_in);
@@ -24973,12 +24973,12 @@ var require_GoTrueApi = __commonJS({
           }
         });
       }
-      signInWithPhone(phone, password) {
+      signInWithPhone(phone, password, options = {}) {
         return __awaiter(this, void 0, void 0, function* () {
           try {
             const headers = Object.assign({}, this.headers);
             const queryString = "?grant_type=password";
-            const data = yield (0, fetch_1.post)(this.fetch, `${this.url}/token${queryString}`, { phone, password }, { headers });
+            const data = yield (0, fetch_1.post)(this.fetch, `${this.url}/token${queryString}`, { phone, password, gotrue_meta_security: { captcha_token: options.captchaToken } }, { headers });
             const session = Object.assign({}, data);
             if (session.expires_in)
               session.expires_at = (0, helpers_1.expiresAt)(data.expires_in);
@@ -25504,7 +25504,8 @@ var require_GoTrueClient = __commonJS({
             }
             if (email && password) {
               return this._handleEmailSignIn(email, password, {
-                redirectTo: options.redirectTo
+                redirectTo: options.redirectTo,
+                captchaToken: options.captchaToken
               });
             }
             if (phone && !password) {
@@ -25702,15 +25703,15 @@ var require_GoTrueClient = __commonJS({
       onAuthStateChange(callback) {
         try {
           const id = (0, helpers_1.uuid)();
-          const subscription2 = {
+          const subscription = {
             id,
             callback,
             unsubscribe: () => {
               this.stateChangeEmitters.delete(id);
             }
           };
-          this.stateChangeEmitters.set(id, subscription2);
-          return { data: subscription2, error: null };
+          this.stateChangeEmitters.set(id, subscription);
+          return { data: subscription, error: null };
         } catch (e) {
           return { data: null, error: e };
         }
@@ -25720,7 +25721,8 @@ var require_GoTrueClient = __commonJS({
         return __awaiter(this, void 0, void 0, function* () {
           try {
             const { data, error } = yield this.api.signInWithEmail(email, password, {
-              redirectTo: options.redirectTo
+              redirectTo: options.redirectTo,
+              captchaToken: options.captchaToken
             });
             if (error || !data)
               return { data: null, user: null, session: null, error };
@@ -25734,11 +25736,11 @@ var require_GoTrueClient = __commonJS({
           }
         });
       }
-      _handlePhoneSignIn(phone, password) {
+      _handlePhoneSignIn(phone, password, options = {}) {
         var _a;
         return __awaiter(this, void 0, void 0, function* () {
           try {
-            const { data, error } = yield this.api.signInWithPhone(phone, password);
+            const { data, error } = yield this.api.signInWithPhone(phone, password, options);
             if (error || !data)
               return { data: null, user: null, session: null, error };
             if ((_a = data === null || data === void 0 ? void 0 : data.user) === null || _a === void 0 ? void 0 : _a.phone_confirmed_at) {
@@ -26433,8 +26435,8 @@ var require_PostgrestQueryBuilder = __commonJS({
     var types_1 = require_types2();
     var PostgrestFilterBuilder_1 = __importDefault(require_PostgrestFilterBuilder());
     var PostgrestQueryBuilder = class extends types_1.PostgrestBuilder {
-      constructor(url, { headers = {}, schema, fetch: fetch3, shouldThrowOnError } = {}) {
-        super({ fetch: fetch3, shouldThrowOnError });
+      constructor(url, { headers = {}, schema, fetch: fetch4, shouldThrowOnError } = {}) {
+        super({ fetch: fetch4, shouldThrowOnError });
         this.url = new URL(url);
         this.headers = Object.assign({}, headers);
         this.schema = schema;
@@ -26543,8 +26545,8 @@ var require_PostgrestRpcBuilder = __commonJS({
     var types_1 = require_types2();
     var PostgrestFilterBuilder_1 = __importDefault(require_PostgrestFilterBuilder());
     var PostgrestRpcBuilder = class extends types_1.PostgrestBuilder {
-      constructor(url, { headers = {}, schema, fetch: fetch3, shouldThrowOnError } = {}) {
-        super({ fetch: fetch3, shouldThrowOnError });
+      constructor(url, { headers = {}, schema, fetch: fetch4, shouldThrowOnError } = {}) {
+        super({ fetch: fetch4, shouldThrowOnError });
         this.url = new URL(url);
         this.headers = Object.assign({}, headers);
         this.schema = schema;
@@ -26607,11 +26609,11 @@ var require_PostgrestClient = __commonJS({
     var PostgrestRpcBuilder_1 = __importDefault(require_PostgrestRpcBuilder());
     var constants_1 = require_constants3();
     var PostgrestClient = class {
-      constructor(url, { headers = {}, schema, fetch: fetch3, throwOnError } = {}) {
+      constructor(url, { headers = {}, schema, fetch: fetch4, throwOnError } = {}) {
         this.url = url;
         this.headers = Object.assign(Object.assign({}, constants_1.DEFAULT_HEADERS), headers);
         this.schema = schema;
-        this.fetch = fetch3;
+        this.fetch = fetch4;
         this.shouldThrowOnError = throwOnError;
       }
       auth(token) {
@@ -30100,7 +30102,7 @@ var require_version5 = __commonJS({
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.version = void 0;
-    exports2.version = "1.7.3";
+    exports2.version = "1.7.4";
   }
 });
 
@@ -30226,12 +30228,8 @@ var require_serializer = __commonJS({
 var require_push = __commonJS({
   "node_modules/@supabase/realtime-js/dist/main/lib/push.js"(exports2) {
     "use strict";
-    var __importDefault = exports2 && exports2.__importDefault || function(mod2) {
-      return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
-    };
     Object.defineProperty(exports2, "__esModule", { value: true });
     var constants_1 = require_constants4();
-    var RealtimeSubscription_1 = __importDefault(require_RealtimeSubscription());
     var Push = class {
       constructor(channel, event, payload = {}, timeout = constants_1.DEFAULT_TIMEOUT) {
         this.channel = channel;
@@ -30290,11 +30288,7 @@ var require_push = __commonJS({
           this.receivedResp = payload;
           this._matchReceive(payload);
         };
-        if (this.channel instanceof RealtimeSubscription_1.default) {
-          this.channel.on(this.refEvent, callback);
-        } else {
-          this.channel.on(this.refEvent, {}, callback);
-        }
+        this.channel.on(this.refEvent, callback);
         this.timeoutTimer = setTimeout(() => {
           this.trigger("timeout", {});
         }, this.timeout);
@@ -30311,11 +30305,7 @@ var require_push = __commonJS({
         if (!this.refEvent) {
           return;
         }
-        if (this.channel instanceof RealtimeSubscription_1.default) {
-          this.channel.off(this.refEvent);
-        } else {
-          this.channel.off(this.refEvent, {});
-        }
+        this.channel.off(this.refEvent);
       }
       _cancelTimeout() {
         clearTimeout(this.timeoutTimer);
@@ -30506,380 +30496,6 @@ var require_RealtimeSubscription = __commonJS({
   }
 });
 
-// node_modules/@supabase/realtime-js/dist/main/RealtimePresence.js
-var require_RealtimePresence = __commonJS({
-  "node_modules/@supabase/realtime-js/dist/main/RealtimePresence.js"(exports2) {
-    "use strict";
-    Object.defineProperty(exports2, "__esModule", { value: true });
-    var RealtimePresence = class {
-      constructor(channel, opts) {
-        this.channel = channel;
-        this.state = {};
-        this.pendingDiffs = [];
-        this.joinRef = null;
-        this.caller = {
-          onJoin: () => {
-          },
-          onLeave: () => {
-          },
-          onSync: () => {
-          }
-        };
-        const events = (opts === null || opts === void 0 ? void 0 : opts.events) || {
-          state: "presence_state",
-          diff: "presence_diff"
-        };
-        this.channel.on(events.state, {}, (newState) => {
-          const { onJoin, onLeave, onSync } = this.caller;
-          this.joinRef = this.channel.joinRef();
-          this.state = RealtimePresence.syncState(this.state, newState, onJoin, onLeave);
-          this.pendingDiffs.forEach((diff) => {
-            this.state = RealtimePresence.syncDiff(this.state, diff, onJoin, onLeave);
-          });
-          this.pendingDiffs = [];
-          onSync();
-        });
-        this.channel.on(events.diff, {}, (diff) => {
-          const { onJoin, onLeave, onSync } = this.caller;
-          if (this.inPendingSyncState()) {
-            this.pendingDiffs.push(diff);
-          } else {
-            this.state = RealtimePresence.syncDiff(this.state, diff, onJoin, onLeave);
-            onSync();
-          }
-        });
-      }
-      static syncState(currentState, newState, onJoin, onLeave) {
-        const state = this.cloneDeep(currentState);
-        const transformedState = this.transformState(newState);
-        const joins = {};
-        const leaves = {};
-        this.map(state, (key, presences) => {
-          if (!transformedState[key]) {
-            leaves[key] = presences;
-          }
-        });
-        this.map(transformedState, (key, newPresences) => {
-          const currentPresences = state[key];
-          if (currentPresences) {
-            const newPresenceIds = newPresences.map((m) => m.presence_id);
-            const curPresenceIds = currentPresences.map((m) => m.presence_id);
-            const joinedPresences = newPresences.filter((m) => curPresenceIds.indexOf(m.presence_id) < 0);
-            const leftPresences = currentPresences.filter((m) => newPresenceIds.indexOf(m.presence_id) < 0);
-            if (joinedPresences.length > 0) {
-              joins[key] = joinedPresences;
-            }
-            if (leftPresences.length > 0) {
-              leaves[key] = leftPresences;
-            }
-          } else {
-            joins[key] = newPresences;
-          }
-        });
-        return this.syncDiff(state, { joins, leaves }, onJoin, onLeave);
-      }
-      static syncDiff(state, diff, onJoin, onLeave) {
-        const { joins, leaves } = {
-          joins: this.transformState(diff.joins),
-          leaves: this.transformState(diff.leaves)
-        };
-        if (!onJoin) {
-          onJoin = () => {
-          };
-        }
-        if (!onLeave) {
-          onLeave = () => {
-          };
-        }
-        this.map(joins, (key, newPresences) => {
-          const currentPresences = state[key];
-          state[key] = this.cloneDeep(newPresences);
-          if (currentPresences) {
-            const joinedPresenceIds = state[key].map((m) => m.presence_id);
-            const curPresences = currentPresences.filter((m) => joinedPresenceIds.indexOf(m.presence_id) < 0);
-            state[key].unshift(...curPresences);
-          }
-          onJoin(key, currentPresences, newPresences);
-        });
-        this.map(leaves, (key, leftPresences) => {
-          let currentPresences = state[key];
-          if (!currentPresences)
-            return;
-          const presenceIdsToRemove = leftPresences.map((m) => m.presence_id);
-          currentPresences = currentPresences.filter((m) => presenceIdsToRemove.indexOf(m.presence_id) < 0);
-          state[key] = currentPresences;
-          onLeave(key, currentPresences, leftPresences);
-          if (currentPresences.length === 0)
-            delete state[key];
-        });
-        return state;
-      }
-      static list(presences, chooser) {
-        if (!chooser) {
-          chooser = (_key, pres) => pres;
-        }
-        return this.map(presences, (key, presences2) => chooser(key, presences2));
-      }
-      static map(obj, func) {
-        return Object.getOwnPropertyNames(obj).map((key) => func(key, obj[key]));
-      }
-      static transformState(state) {
-        state = this.cloneDeep(state);
-        return Object.getOwnPropertyNames(state).reduce((newState, key) => {
-          const presences = state[key];
-          if ("metas" in presences) {
-            newState[key] = presences.metas.map((presence) => {
-              presence["presence_id"] = presence["phx_ref"];
-              delete presence["phx_ref"];
-              delete presence["phx_ref_prev"];
-              return presence;
-            });
-          } else {
-            newState[key] = presences;
-          }
-          return newState;
-        }, {});
-      }
-      static cloneDeep(obj) {
-        return JSON.parse(JSON.stringify(obj));
-      }
-      onJoin(callback) {
-        this.caller.onJoin = callback;
-      }
-      onLeave(callback) {
-        this.caller.onLeave = callback;
-      }
-      onSync(callback) {
-        this.caller.onSync = callback;
-      }
-      list(by) {
-        return RealtimePresence.list(this.state, by);
-      }
-      inPendingSyncState() {
-        return !this.joinRef || this.joinRef !== this.channel.joinRef();
-      }
-    };
-    exports2.default = RealtimePresence;
-  }
-});
-
-// node_modules/@supabase/realtime-js/dist/main/RealtimeChannel.js
-var require_RealtimeChannel = __commonJS({
-  "node_modules/@supabase/realtime-js/dist/main/RealtimeChannel.js"(exports2) {
-    "use strict";
-    var __importDefault = exports2 && exports2.__importDefault || function(mod2) {
-      return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
-    };
-    Object.defineProperty(exports2, "__esModule", { value: true });
-    var constants_1 = require_constants4();
-    var push_1 = __importDefault(require_push());
-    var timer_1 = __importDefault(require_timer());
-    var RealtimePresence_1 = __importDefault(require_RealtimePresence());
-    var RealtimeChannel = class {
-      constructor(topic, params = {}, socket) {
-        this.topic = topic;
-        this.params = params;
-        this.socket = socket;
-        this.bindings = [];
-        this.state = constants_1.CHANNEL_STATES.closed;
-        this.joinedOnce = false;
-        this.pushBuffer = [];
-        this.timeout = this.socket.timeout;
-        this.joinPush = new push_1.default(this, constants_1.CHANNEL_EVENTS.join, this.params, this.timeout);
-        this.rejoinTimer = new timer_1.default(() => this.rejoinUntilConnected(), this.socket.reconnectAfterMs);
-        this.joinPush.receive("ok", () => {
-          this.state = constants_1.CHANNEL_STATES.joined;
-          this.rejoinTimer.reset();
-          this.pushBuffer.forEach((pushEvent) => pushEvent.send());
-          this.pushBuffer = [];
-        });
-        this.onClose(() => {
-          this.rejoinTimer.reset();
-          this.socket.log("channel", `close ${this.topic} ${this.joinRef()}`);
-          this.state = constants_1.CHANNEL_STATES.closed;
-          this.socket.remove(this);
-        });
-        this.onError((reason) => {
-          if (this.isLeaving() || this.isClosed()) {
-            return;
-          }
-          this.socket.log("channel", `error ${this.topic}`, reason);
-          this.state = constants_1.CHANNEL_STATES.errored;
-          this.rejoinTimer.scheduleTimeout();
-        });
-        this.joinPush.receive("timeout", () => {
-          if (!this.isJoining()) {
-            return;
-          }
-          this.socket.log("channel", `timeout ${this.topic}`, this.joinPush.timeout);
-          this.state = constants_1.CHANNEL_STATES.errored;
-          this.rejoinTimer.scheduleTimeout();
-        });
-        this.on(constants_1.CHANNEL_EVENTS.reply, {}, (payload, ref) => {
-          this.trigger(this.replyEventName(ref), payload);
-        });
-        this.presence = new RealtimePresence_1.default(this);
-      }
-      list() {
-        return this.presence.list();
-      }
-      rejoinUntilConnected() {
-        this.rejoinTimer.scheduleTimeout();
-        if (this.socket.isConnected()) {
-          this.rejoin();
-        }
-      }
-      subscribe(timeout = this.timeout) {
-        if (this.joinedOnce) {
-          throw `tried to subscribe multiple times. 'subscribe' can only be called a single time per channel instance`;
-        } else {
-          const configs = this.bindings.reduce((acc, binding) => {
-            const { type } = binding;
-            if (![
-              "phx_close",
-              "phx_error",
-              "phx_reply",
-              "presence_diff",
-              "presence_state"
-            ].includes(type)) {
-              acc[type] = binding;
-            }
-            return acc;
-          }, {});
-          if (Object.keys(configs).length) {
-            this.updateJoinPayload({ configs });
-          }
-          this.joinedOnce = true;
-          this.rejoin(timeout);
-          return this.joinPush;
-        }
-      }
-      onClose(callback) {
-        this.on(constants_1.CHANNEL_EVENTS.close, {}, callback);
-      }
-      onError(callback) {
-        this.on(constants_1.CHANNEL_EVENTS.error, {}, (reason) => callback(reason));
-      }
-      on(type, filter2, callback) {
-        this.bindings.push({
-          type,
-          filter: filter2 !== null && filter2 !== void 0 ? filter2 : {},
-          callback: callback !== null && callback !== void 0 ? callback : () => {
-          }
-        });
-      }
-      off(type, filter2) {
-        this.bindings = this.bindings.filter((bind) => {
-          return !(bind.type === type && RealtimeChannel.isEqual(bind.filter, filter2));
-        });
-      }
-      canPush() {
-        return this.socket.isConnected() && this.isJoined();
-      }
-      push(event, payload, timeout = this.timeout) {
-        if (!this.joinedOnce) {
-          throw `tried to push '${event}' to '${this.topic}' before joining. Use channel.subscribe() before pushing events`;
-        }
-        let pushEvent = new push_1.default(this, event, payload, timeout);
-        if (this.canPush()) {
-          pushEvent.send();
-        } else {
-          pushEvent.startTimeout();
-          this.pushBuffer.push(pushEvent);
-        }
-        return pushEvent;
-      }
-      updateJoinPayload(payload) {
-        this.joinPush.updatePayload(payload);
-      }
-      unsubscribe(timeout = this.timeout) {
-        this.state = constants_1.CHANNEL_STATES.leaving;
-        const onClose = () => {
-          this.socket.log("channel", `leave ${this.topic}`);
-          this.trigger(constants_1.CHANNEL_EVENTS.close, "leave", this.joinRef());
-        };
-        this.joinPush.destroy();
-        const leavePush = new push_1.default(this, constants_1.CHANNEL_EVENTS.leave, {}, timeout);
-        leavePush.receive("ok", () => onClose()).receive("timeout", () => onClose());
-        leavePush.send();
-        if (!this.canPush()) {
-          leavePush.trigger("ok", {});
-        }
-        return leavePush;
-      }
-      onMessage(event, payload, ref) {
-        return payload;
-      }
-      isMember(topic) {
-        return this.topic === topic;
-      }
-      joinRef() {
-        return this.joinPush.ref;
-      }
-      rejoin(timeout = this.timeout) {
-        if (this.isLeaving()) {
-          return;
-        }
-        this.socket.leaveOpenTopic(this.topic);
-        this.state = constants_1.CHANNEL_STATES.joining;
-        this.joinPush.resend(timeout);
-      }
-      trigger(type, payload, ref) {
-        const { close, error, leave, join: join3 } = constants_1.CHANNEL_EVENTS;
-        const events = [close, error, leave, join3];
-        if (ref && events.indexOf(type) >= 0 && ref !== this.joinRef()) {
-          return;
-        }
-        const handledPayload = this.onMessage(type, payload, ref);
-        if (payload && !handledPayload) {
-          throw "channel onMessage callbacks must return the payload, modified or unmodified";
-        }
-        this.bindings.filter((bind) => {
-          var _a, _b;
-          return (bind === null || bind === void 0 ? void 0 : bind.type) === type && (((_a = bind === null || bind === void 0 ? void 0 : bind.filter) === null || _a === void 0 ? void 0 : _a.event) === "*" || ((_b = bind === null || bind === void 0 ? void 0 : bind.filter) === null || _b === void 0 ? void 0 : _b.event) === (payload === null || payload === void 0 ? void 0 : payload.event));
-        }).map((bind) => bind.callback(handledPayload, ref));
-      }
-      send(payload) {
-        const push = this.push(payload.type, payload);
-        return new Promise((resolve2) => {
-          push.receive("ok", () => resolve2("ok"));
-          push.receive("timeout", () => resolve2("timeout"));
-        });
-      }
-      replyEventName(ref) {
-        return `chan_reply_${ref}`;
-      }
-      isClosed() {
-        return this.state === constants_1.CHANNEL_STATES.closed;
-      }
-      isErrored() {
-        return this.state === constants_1.CHANNEL_STATES.errored;
-      }
-      isJoined() {
-        return this.state === constants_1.CHANNEL_STATES.joined;
-      }
-      isJoining() {
-        return this.state === constants_1.CHANNEL_STATES.joining;
-      }
-      isLeaving() {
-        return this.state === constants_1.CHANNEL_STATES.leaving;
-      }
-      static isEqual(obj1, obj2) {
-        if (Object.keys(obj1).length !== Object.keys(obj2).length) {
-          return false;
-        }
-        for (const k in obj1) {
-          if (obj1[k] !== obj2[k]) {
-            return false;
-          }
-        }
-        return true;
-      }
-    };
-    exports2.default = RealtimeChannel;
-  }
-});
-
 // node_modules/@supabase/realtime-js/dist/main/RealtimeClient.js
 var require_RealtimeClient = __commonJS({
   "node_modules/@supabase/realtime-js/dist/main/RealtimeClient.js"(exports2) {
@@ -30911,18 +30527,6 @@ var require_RealtimeClient = __commonJS({
         step((generator = generator.apply(thisArg, _arguments || [])).next());
       });
     };
-    var __rest = exports2 && exports2.__rest || function(s, e) {
-      var t = {};
-      for (var p in s)
-        if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-          t[p] = s[p];
-      if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-          if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-            t[p[i]] = s[p[i]];
-        }
-      return t;
-    };
     var __importDefault = exports2 && exports2.__importDefault || function(mod2) {
       return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
     };
@@ -30932,7 +30536,6 @@ var require_RealtimeClient = __commonJS({
     var timer_1 = __importDefault(require_timer());
     var serializer_1 = __importDefault(require_serializer());
     var RealtimeSubscription_1 = __importDefault(require_RealtimeSubscription());
-    var RealtimeChannel_1 = __importDefault(require_RealtimeChannel());
     var noop2 = () => {
     };
     var RealtimeClient = class {
@@ -31054,33 +30657,7 @@ var require_RealtimeClient = __commonJS({
         this.channels = this.channels.filter((c) => c.joinRef() !== channel.joinRef());
       }
       channel(topic, chanParams = {}) {
-        var _a;
-        const { selfBroadcast } = chanParams, params = __rest(chanParams, ["selfBroadcast"]);
-        if (selfBroadcast) {
-          params.self_broadcast = selfBroadcast;
-        }
-        const chan = ((_a = this.params) === null || _a === void 0 ? void 0 : _a.vsndate) ? new RealtimeChannel_1.default(topic, params, this) : new RealtimeSubscription_1.default(topic, params, this);
-        if (chan instanceof RealtimeChannel_1.default) {
-          chan.presence.onJoin((key, currentPresences, newPresences) => {
-            chan.trigger("presence", {
-              event: "JOIN",
-              key,
-              currentPresences,
-              newPresences
-            });
-          });
-          chan.presence.onLeave((key, currentPresences, leftPresences) => {
-            chan.trigger("presence", {
-              event: "LEAVE",
-              key,
-              currentPresences,
-              leftPresences
-            });
-          });
-          chan.presence.onSync(() => {
-            chan.trigger("presence", { event: "SYNC" });
-          });
-        }
+        const chan = new RealtimeSubscription_1.default(topic, chanParams, this);
         this.channels.push(chan);
         return chan;
       }
@@ -31236,17 +30813,13 @@ var require_main3 = __commonJS({
       return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
-    exports2.Transformers = exports2.RealtimePresence = exports2.RealtimeChannel = exports2.RealtimeSubscription = exports2.RealtimeClient = void 0;
+    exports2.Transformers = exports2.RealtimeSubscription = exports2.RealtimeClient = void 0;
     var Transformers = __importStar(require_transformers());
     exports2.Transformers = Transformers;
     var RealtimeClient_1 = __importDefault(require_RealtimeClient());
     exports2.RealtimeClient = RealtimeClient_1.default;
     var RealtimeSubscription_1 = __importDefault(require_RealtimeSubscription());
     exports2.RealtimeSubscription = RealtimeSubscription_1.default;
-    var RealtimeChannel_1 = __importDefault(require_RealtimeChannel());
-    exports2.RealtimeChannel = RealtimeChannel_1.default;
-    var RealtimePresence_1 = __importDefault(require_RealtimePresence());
-    exports2.RealtimePresence = RealtimePresence_1.default;
   }
 });
 
@@ -31317,8 +30890,8 @@ var require_SupabaseQueryBuilder = __commonJS({
     var postgrest_js_1 = require_main2();
     var SupabaseRealtimeClient_1 = require_SupabaseRealtimeClient();
     var SupabaseQueryBuilder = class extends postgrest_js_1.PostgrestQueryBuilder {
-      constructor(url, { headers = {}, schema, realtime, table, fetch: fetch3, shouldThrowOnError }) {
-        super(url, { headers, schema, fetch: fetch3, shouldThrowOnError });
+      constructor(url, { headers = {}, schema, realtime, table, fetch: fetch4, shouldThrowOnError }) {
+        super(url, { headers, schema, fetch: fetch4, shouldThrowOnError });
         this._subscription = null;
         this._realtime = realtime;
         this._headers = headers;
@@ -31568,10 +31141,10 @@ var require_StorageBucketApi = __commonJS({
     var fetch_1 = require_fetch4();
     var helpers_1 = require_helpers3();
     var StorageBucketApi = class {
-      constructor(url, headers = {}, fetch3) {
+      constructor(url, headers = {}, fetch4) {
         this.url = url;
         this.headers = Object.assign(Object.assign({}, constants_1.DEFAULT_HEADERS), headers);
-        this.fetch = helpers_1.resolveFetch(fetch3);
+        this.fetch = helpers_1.resolveFetch(fetch4);
       }
       listBuckets() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -31687,11 +31260,11 @@ var require_StorageFileApi = __commonJS({
       upsert: false
     };
     var StorageFileApi = class {
-      constructor(url, headers = {}, bucketId, fetch3) {
+      constructor(url, headers = {}, bucketId, fetch4) {
         this.url = url;
         this.headers = headers;
         this.bucketId = bucketId;
-        this.fetch = helpers_1.resolveFetch(fetch3);
+        this.fetch = helpers_1.resolveFetch(fetch4);
       }
       uploadOrUpdate(method, path4, fileBody, fileOptions) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -31886,8 +31459,8 @@ var require_StorageClient = __commonJS({
     exports2.StorageClient = void 0;
     var lib_1 = require_lib8();
     var StorageClient = class extends lib_1.StorageBucketApi {
-      constructor(url, headers = {}, fetch3) {
-        super(url, headers, fetch3);
+      constructor(url, headers = {}, fetch4) {
+        super(url, headers, fetch4);
       }
       from(id) {
         return new lib_1.StorageFileApi(this.url, this.headers, id, this.fetch);
@@ -32193,14 +31766,6 @@ var require_SupabaseClient = __commonJS({
         const rest = this._initPostgRESTClient();
         return rest.rpc(fn, params, { head, count });
       }
-      channel(name7, opts) {
-        var _a, _b;
-        const userToken = (_b = (_a = this.auth.session()) === null || _a === void 0 ? void 0 : _a.access_token) !== null && _b !== void 0 ? _b : this.supabaseKey;
-        if (!this.realtime.isConnected()) {
-          this.realtime.connect();
-        }
-        return this.realtime.channel(name7, Object.assign(Object.assign({}, opts), { user_token: userToken }));
-      }
       removeAllSubscriptions() {
         return __awaiter(this, void 0, void 0, function* () {
           const allSubs = this.getSubscriptions().slice();
@@ -32214,19 +31779,9 @@ var require_SupabaseClient = __commonJS({
           });
         });
       }
-      removeChannel(channel) {
+      removeSubscription(subscription) {
         return __awaiter(this, void 0, void 0, function* () {
-          const { error } = yield this._closeSubscription(channel);
-          const allChans = this.getSubscriptions();
-          const openChanCount = allChans.filter((chan) => chan.isJoined()).length;
-          if (allChans.length === 0)
-            yield this.realtime.disconnect();
-          return { data: { openChannels: openChanCount }, error };
-        });
-      }
-      removeSubscription(subscription2) {
-        return __awaiter(this, void 0, void 0, function* () {
-          const { error } = yield this._closeSubscription(subscription2);
+          const { error } = yield this._closeSubscription(subscription);
           const allSubs = this.getSubscriptions();
           const openSubCount = allSubs.filter((chan) => chan.isJoined()).length;
           if (allSubs.length === 0)
@@ -32234,26 +31789,26 @@ var require_SupabaseClient = __commonJS({
           return { data: { openSubscriptions: openSubCount }, error };
         });
       }
-      _closeSubscription(subscription2) {
+      _closeSubscription(subscription) {
         return __awaiter(this, void 0, void 0, function* () {
           let error = null;
-          if (!subscription2.isClosed()) {
-            const { error: unsubError } = yield this._unsubscribeSubscription(subscription2);
+          if (!subscription.isClosed()) {
+            const { error: unsubError } = yield this._unsubscribeSubscription(subscription);
             error = unsubError;
           }
-          this.realtime.remove(subscription2);
+          this.realtime.remove(subscription);
           return { error };
         });
       }
-      _unsubscribeSubscription(subscription2) {
+      _unsubscribeSubscription(subscription) {
         return new Promise((resolve2) => {
-          subscription2.unsubscribe().receive("ok", () => resolve2({ error: null })).receive("error", (error) => resolve2({ error })).receive("timeout", () => resolve2({ error: new Error("timed out") }));
+          subscription.unsubscribe().receive("ok", () => resolve2({ error: null })).receive("error", (error) => resolve2({ error })).receive("timeout", () => resolve2({ error: new Error("timed out") }));
         });
       }
       getSubscriptions() {
         return this.realtime.channels;
       }
-      _initSupabaseAuthClient({ autoRefreshToken, persistSession, detectSessionInUrl, localStorage: localStorage2, headers, fetch: fetch3, cookieOptions, multiTab }) {
+      _initSupabaseAuthClient({ autoRefreshToken, persistSession, detectSessionInUrl, localStorage: localStorage2, headers, fetch: fetch4, cookieOptions, multiTab }) {
         const authHeaders = {
           Authorization: `Bearer ${this.supabaseKey}`,
           apikey: `${this.supabaseKey}`
@@ -32265,7 +31820,7 @@ var require_SupabaseClient = __commonJS({
           persistSession,
           detectSessionInUrl,
           localStorage: localStorage2,
-          fetch: fetch3,
+          fetch: fetch4,
           cookieOptions,
           multiTab
         });
@@ -36704,12 +36259,12 @@ var Client = class extends import_http2.default {
     delete this.put;
     delete this.delete;
     delete this.options;
-    const fetch3 = this.fetch;
+    const fetch4 = this.fetch;
     this.fetch = (resource, options2 = {}) => {
       if (typeof resource === "string" && !resource.startsWith("/")) {
         resource = `${opts.url}/${resource}`;
       }
-      return fetch3.call(this, resource, merge(options2, { method: "POST" }));
+      return fetch4.call(this, resource, merge(options2, { method: "POST" }));
     };
   }
 };
@@ -41047,6 +40602,7 @@ function shouldImport(ext) {
 
 // src/supabase/pollen.js
 var import_debug9 = __toESM(require_src(), 1);
+var import_node_fetch2 = __toESM(require_lib3(), 1);
 var import_queueable = __toESM(require_lib7(), 1);
 
 // src/supabase/client.js
@@ -41061,49 +40617,41 @@ var client_default = getClient2();
 
 // src/supabase/pollen.js
 var debug9 = (0, import_debug9.default)("pollen");
+var modelsMetadata = (0, import_node_fetch2.default)("https://raw.githubusercontent.com/pollinations/model-index/main/metadata.json").then((res) => res.json());
 var DB_NAME = process.env.POLLINATIONS_ENV === "development" ? "pollen_dev" : "pollen";
-var subscribers = {};
-var subscription = null;
-var subscriptionHandler = ({ new: data }) => {
-  Object.keys(subscribers).forEach((input) => {
-    if (data.input !== input) {
-      return;
-    }
-    debug9("subscriptionHandler", data);
-    if (data.output) {
-      subscribers[input](data);
-    }
-    if (data.success !== null) {
-      delete subscribers[input];
-    }
-  });
-};
-var createSubscriptionIfNeeded = () => {
-  const haveSubscribers = Object.keys(subscribers).length > 0;
-  if (!haveSubscribers && subscription) {
-    subscription.unsubscribe();
-    subscription = null;
-    return;
-  }
-  if (haveSubscribers && !subscription) {
-    subscription = client_default.from(DB_NAME).on("UPDATE", subscriptionHandler).subscribe();
-  }
-};
 function dispatchPollen(params) {
   return client_default.from(DB_NAME).insert(params).then(({ data }) => data);
 }
+async function getPlaceInQueue({ image, request_submit_time, priority }) {
+  var _a;
+  const metadata = await modelsMetadata;
+  const groups = (_a = metadata[image].meta) == null ? void 0 : _a.pollinator_group;
+  const competing_images = Object.keys(metadata).filter((i) => {
+    var _a2, _b;
+    return ((_b = (_a2 = metadata[i]) == null ? void 0 : _a2.meta.pollinator_group) == null ? void 0 : _b.filter((g) => groups.includes(g)).length) > 0;
+  });
+  return await client_default.from(DB_NAME).select("*", { count: "exact" }).eq("processing_started", false).lte("request_submit_time", request_submit_time).in("image", competing_images).gte("priority", priority).then(({ count }) => count);
+}
 async function subscribePollen(input, callback) {
   debug9("getting first pollen using select", input);
-  const data = await getPollen(input);
-  debug9("data", data);
-  if (data) {
-    callback(data);
-    if (data.success === true)
-      return () => null;
-  }
-  subscribers[input] = callback;
-  createSubscriptionIfNeeded();
-  return () => subscribers.delete(input);
+  let lastData = null;
+  let lastPlaceInQueue = 9999;
+  const getData = async () => {
+    const data = await getPollen(input);
+    const placeInQueue = await getPlaceInQueue(data);
+    debug9("queue place", placeInQueue);
+    if (data && (JSON.stringify(data) !== JSON.stringify(lastData) || placeInQueue !== lastPlaceInQueue)) {
+      lastData = data;
+      lastPlaceInQueue = placeInQueue;
+      debug9("got new data or place in queue", data, placeInQueue);
+      callback(data, placeInQueue);
+      if (data.success !== null)
+        clearInterval(interval);
+    }
+  };
+  const interval = setInterval(getData, 1e3);
+  getData();
+  return () => clearInterval(interval);
 }
 async function getPollen(input) {
   const { data } = await client_default.from(DB_NAME).select("*").match({ input });
@@ -41119,17 +40667,16 @@ async function dispatchAndReturnPollen(params, returnImmediately = false) {
     await subscribePollen(params.input, ({ output, success }) => success === true && resolve2(output) || success === false && reject(output));
   });
 }
-console.log("blaaa");
 
 // src/awsPollenRunner.js
 var debug10 = (0, import_debug10.default)("pollen");
-var runModelOnce = async (inputs2, image = "voodoohop/dalle-playground", { priority = 0, returnImmediately = false }) => {
+var runModelOnce = async (inputs2, image = "voodoohop/dalle-playground", returnImmediately = false, params = {}) => {
   var _a;
   debug10("running model", inputs2, image);
   inputs2 = { ...inputs2, model_image: image };
   const inputCID = await UploadInputstoIPFS(inputs2, writer());
   debug10("got input content ID", inputCID);
-  const outputCID = await dispatchAndReturnPollen({ input: inputCID, image, priority }, returnImmediately);
+  const outputCID = await dispatchAndReturnPollen({ input: inputCID, image, ...params }, returnImmediately);
   if (!outputCID)
     return null;
   const data = await IPFSWebState(outputCID);

@@ -1,11 +1,13 @@
 import Debug from 'debug';
+import fetch from "node-fetch";
 import { Channel } from 'queueable';
 import supabase from "./client.js";
 
 const debug = Debug("pollen");
 
-// DB Name should be "pollen" if environment is production else "pollen_dev"
+const modelsMetadata = fetch("https://raw.githubusercontent.com/pollinations/model-index/main/metadata.json").then(res => res.json())
 
+// DB Name should be "pollen" if environment is production else "pollen_dev"
 const DB_NAME = process.env.POLLINATIONS_ENV === "development" ? "pollen_dev" : "pollen";
 
 
@@ -33,20 +35,52 @@ export function updatePollen(input, data) {
             .then(({data}) => data);
 }
 
+
+async function getPlaceInQueue({image, request_submit_time, priority}) {
+
+    const metadata = await modelsMetadata
+
+    const groups = metadata[image].meta?.pollinator_group
+
+    
+    const competing_images = Object.keys(metadata).filter((i) => metadata[i]?.meta.pollinator_group?.filter(g => groups.includes(g)).length > 0);
+    // console.log("competing_images", competing_images)
+    
+    return await supabase
+        .from(DB_NAME)
+        .select("*", { count: 'exact' })
+        .eq("processing_started", false)
+        .lte("request_submit_time", request_submit_time)
+        .in("image", competing_images)
+        .gte("priority",priority).then(({count}) => count)
+
+}
+
 // subscribe to 
 export async function subscribePollen(input, callback) {
 
     debug("getting first pollen using select", input)
     
     let lastData = null;
+
+    let lastPlaceInQueue = 9999;
+    
     const getData = async () => {
+
+
         const data = await getPollen(input);
         // debug("data", data);
-        if (data && (JSON.stringify(data) !== JSON.stringify(lastData))) {
+        const placeInQueue = await getPlaceInQueue(data);
+
+        debug("queue place", placeInQueue);
+
+        if (data && (JSON.stringify(data) !== JSON.stringify(lastData) || placeInQueue !== lastPlaceInQueue)) {
 
             lastData = data;
-            debug("got new data", data);
-            callback(data);
+            lastPlaceInQueue = placeInQueue;
+
+            debug("got new data or place in queue", data, placeInQueue);
+            callback(data, placeInQueue);
 
             // return if job was already done
             if (data.success !== null)
@@ -92,6 +126,8 @@ export async function dispatchAndReturnPollen(params, returnImmediately=false) {
         });
 }
 
+
+
 // await sleep(1000)
 // console.log("pollen", await getPollens({image: "614871946825.dkr.ecr.us-east-1.amazonaws.com/pollinations/stable-diffusion-private", success: true}))
 // async function test() {
@@ -106,7 +142,7 @@ export async function dispatchAndReturnPollen(params, returnImmediately=false) {
 
 
 // test()
-// subscribePollen("QmX3SZ1Hqev1p7kvubXZA7Zua87D9QJEVsRJzBz15v3iSv", data => console.log("data", data))
+//  subscribePollen("QmaEL5xH4hZyniWeXvdFDRVBVQiXDfXfiiEC9LjULHy9L3", (data, placeInQueue) => console.log("data", data, placeInQueue))
 
 
 // const allPollen = await getAllPollens();
