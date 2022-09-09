@@ -67,9 +67,9 @@ export async function subscribePollen(input, callback) {
     
     const getData = async () => {
 
-
+        debug("getting data")
         const data = await getPollen(input);
-        // debug("data", data);
+        debug("data", data);
         const placeInQueue = await getPlaceInQueue(data);
 
         debug("queue place", placeInQueue);
@@ -85,11 +85,12 @@ export async function subscribePollen(input, callback) {
             // return if job was already done
             if (data.success !== null)
                 clearInterval(interval);
+
         }
     };
 
 
-    const interval = setInterval(getData, 1000)
+    const interval = setInterval(getData, 10000)
     getData();
     
     return () => clearInterval(interval);
@@ -142,10 +143,10 @@ export async function dispatchAndReturnPollen(params, returnImmediately=false) {
 
 
 // test()
-//  subscribePollen("QmaEL5xH4hZyniWeXvdFDRVBVQiXDfXfiiEC9LjULHy9L3", (data, placeInQueue) => console.log("data", data, placeInQueue))
+ subscribePollen("QmaEL5xH4hZyniWeXvdFDRVBVQiXDfXfiiEC9LjULHy9L3", (data, placeInQueue) => console.log("data", data, placeInQueue))
 
-
-// const allPollen = await getAllPollens();
+ const allPollen = await getPollens({});
+ console.log(allPollen)
 
 // for (const pollen of allPollen) {
 //    try {
