@@ -143,10 +143,10 @@ export async function dispatchAndReturnPollen(params, returnImmediately=false) {
 
 
 // test()
- subscribePollen("QmaEL5xH4hZyniWeXvdFDRVBVQiXDfXfiiEC9LjULHy9L3", (data, placeInQueue) => console.log("data", data, placeInQueue))
+//  subscribePollen("QmaEL5xH4hZyniWeXvdFDRVBVQiXDfXfiiEC9LjULHy9L3", (data, placeInQueue) => console.log("data", data, placeInQueue))
 
- const allPollen = await getPollens({});
- console.log(allPollen)
+//  const allPollen = await getPollens({});
+//  console.log(allPollen)
 
 // for (const pollen of allPollen) {
 //    try {
