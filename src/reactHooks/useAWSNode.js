@@ -1,9 +1,9 @@
 import Debug from "debug";
 import { useEffect, useState } from "react";
 import { UploadInputstoIPFS } from "../aws.js";
-import useIPFSWrite from "./useIPFSWrite.js"
-import useIPFS from "./useIPFS.js"
 import { dispatchPollen, subscribePollen, updatePollen } from "../supabase/pollen.js";
+import useIPFS from "./useIPFS.js";
+import useIPFSWrite from "./useIPFSWrite.js";
 
 
 const debug = Debug("useAWSNode");
@@ -13,6 +13,7 @@ const LOADING_NODEID = "submitted";
 const useAWSNode = ({ nodeID: paramsNodeID, contentID: paramsContentID } ) => {
 
     const [nodeID, setNodeID] = useState(paramsNodeID);
+    const [queuePosition, setQueueNumber] = useState(-1);
     const [contentID, setContentID] = useState(paramsContentID);
     const ipfsWriter = useIPFSWrite();
     const ipfs = useIPFS(contentID);
@@ -29,7 +30,11 @@ const useAWSNode = ({ nodeID: paramsNodeID, contentID: paramsContentID } ) => {
         
         let closeSub = () => null;
 
-        subscribePollen(nodeID, ({output}) => setContentID(output)).then(close => closeSub = close);
+        subscribePollen(nodeID, ({output}, queueNumber) => {
+            setContentID(output);
+            setQueueNumber(queueNumber);
+
+        }).then(close => closeSub = close);
 
         return closeSub;
 
@@ -59,8 +64,8 @@ const useAWSNode = ({ nodeID: paramsNodeID, contentID: paramsContentID } ) => {
         setNodeID, 
         isLoading, 
         ipfs,
-        updatePollen: data => updatePollen(nodeID, data)
-    }
+        updatePollen: data => updatePollen(nodeID, data),
+        queuePosition
 
 };
 
