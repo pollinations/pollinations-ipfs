@@ -3,9 +3,8 @@ import Debug from 'debug';
 // import { debounce } from 'lodash';
 import { AbortController } from 'native-abort-controller';
 import { Channel } from 'queueable';
-import { last } from 'ramda';
 import { getClient } from './ipfsConnector.js';
-import { noop, retryException, toPromise1 } from './utils/utils.js';
+import { noop, retryException } from './utils/utils.js';
 
 
 const debug = Debug('ipfs:pubsub');
@@ -23,33 +22,32 @@ export function publisher(nodeID, suffix = "/output", useIPNS=true) {
         
     debug("Creating publisher for", nodeID, suffix)
 
-    // if the nodeID is "ipns" means we are publishing to the API node and don't need to create a key
-    let createdIPNSKey = nodeID === "ipns"
+
 
     const _publish = async cid => {
 
         const client = await getClient()
 
-        const ipnsKeyName = nodeID === "ipns" ? "self" : nodeID + suffix
+        const ipnsKeyName = nodeID === "ipns" ? "self" : null;
 
-        if (useIPNS && !createdIPNSKey) {
+        // if (useIPNS && !createdIPNSKey) {
 
-            const keys = await client.key.list()
+        //     const keys = await client.key.list()
 
-            debug("IPNS keys", keys)
+        //     debug("IPNS keys", keys)
 
-            if (!keys.find(({name}) => name === ipnsKeyName)) {
+        //     if (!keys.find(({name}) => name === ipnsKeyName)) {
 
-                const { name } = await client.key.gen(ipnsKeyName)
-                debug("Generated IPNS key with name", name)
-            } else
-                debug("IPNS key already exists. Reusing")
+        //         const { name } = await client.key.gen(ipnsKeyName)
+        //         debug("Generated IPNS key with name", name)
+        //     } else
+        //         debug("IPNS key already exists. Reusing")
             
-            createdIPNSKey = true
+        //     createdIPNSKey = true
             
-        }
+        // }
 
-        debug("ipnsKeyName", ipnsKeyName)
+        // debug("ipnsKeyName", ipnsKeyName)
 
         
         await publish(client, nodeID, cid, suffix, ipnsKeyName, useIPNS)
@@ -177,7 +175,7 @@ export function subscribeCID(nodeID, suffix = "", callback, heartbeatDeadCallbac
     (async () => {
         const keyName = nodeID + suffix
 
-        await getInitialStateFromIPNS(keyName, callback)
+        // await getInitialStateFromIPNS(keyName, callback)
 
         while (!aborted) {
             unsubscribe = subscribeCallback(keyName, handleMessage)
@@ -196,25 +194,25 @@ export function subscribeCID(nodeID, suffix = "", callback, heartbeatDeadCallbac
     }
 };
 
-async function getInitialStateFromIPNS(keyName, callback) {
-    const client = await getClient();
+// async function getInitialStateFromIPNS(keyName, callback) {
+//     const client = await getClient();
 
-    const keys = await client.key.list();
+//     const keys = await client.key.list();
 
 
-    const ipnsKey = keys.find(({ name }) => name === keyName);
+//     const ipnsKey = keys.find(({ name }) => name === keyName);
 
-    if (ipnsKey) {
-        const cidString = await toPromise1(client.name.resolve(`/ipns/${ipnsKey.id}`));
-        debug("got initial CID through IPNS. Calling callback with", cidString);
-        if (cidString) { 
-            const cid = last(cidString.split("/"))
-            callback(cid);
-        }
-        else
-            debug("Strange or not strange? There was no initial CID found through IPNS.")
-    }
-}
+//     if (ipnsKey) {
+//         const cidString = await toPromise1(client.name.resolve(`/ipns/${ipnsKey.id}`));
+//         debug("got initial CID through IPNS. Calling callback with", cidString);
+//         if (cidString) { 
+//             const cid = last(cidString.split("/"))
+//             callback(cid);
+//         }
+//         else
+//             debug("Strange or not strange? There was no initial CID found through IPNS.")
+//     }
+// }
 
 // if we don't receive a heartbeat from the publisher in 2 x HEARTBEAT_FREQUENCY seconds, 
 // we assume the publisher is dead and call heartbeatDeadCallback

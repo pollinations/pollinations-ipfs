@@ -1,4 +1,5 @@
 
+import { Buffer } from "buffer";
 import Debug from "debug";
 import { create } from "ipfs-http-client";
 import all from "it-all";
@@ -6,7 +7,6 @@ import { CID } from "multiformats/cid";
 import path from "path-browserify";
 import { last } from "ramda";
 import { noop, toPromise } from "./utils/utils.js";
-import { Buffer } from "buffer";
 
 const { join } = path;
 const debug = Debug("ipfsConnector")
@@ -182,7 +182,7 @@ const ipfsLsCID = async (client, cid) => {
 }
 
 
-const ipfsAdd = async (client, path, content, options = { pin: true }) => {
+const ipfsAdd = async (client, path, content, options = { pin: false }) => {
     debug("adding", path, "options", options)
 
     let cid = null

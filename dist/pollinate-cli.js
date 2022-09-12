@@ -13732,12 +13732,12 @@ var require_fixed_size = __commonJS({
         return true;
       }
       shift() {
-        const last7 = this.buffer[this.btm];
-        if (last7 === void 0)
+        const last6 = this.buffer[this.btm];
+        if (last6 === void 0)
           return void 0;
         this.buffer[this.btm] = void 0;
         this.btm = this.btm + 1 & this.mask;
-        return last7;
+        return last6;
       }
       peek() {
         return this.buffer[this.btm];
@@ -14469,8 +14469,8 @@ var require_multiaddr_to_uri = __commonJS({
         return `tcp://${str}:${port}`;
       let protocol = "tcp";
       let explicitPort = `:${port}`;
-      const last7 = parts[parts.length - 1];
-      if (last7.protocol === "tcp") {
+      const last6 = parts[parts.length - 1];
+      if (last6.protocol === "tcp") {
         protocol = port === "443" ? "https" : "http";
         explicitPort = port === "443" || port === "80" ? "" : explicitPort;
       }
@@ -15956,14 +15956,14 @@ var require_it_first = __commonJS({
 var require_it_last = __commonJS({
   "node_modules/it-last/index.js"(exports2, module2) {
     "use strict";
-    var last7 = async (source) => {
+    var last6 = async (source) => {
       let res;
       for await (const entry of source) {
         res = entry;
       }
       return res;
     };
-    module2.exports = last7;
+    module2.exports = last6;
   }
 });
 
@@ -19069,8 +19069,8 @@ var require_composeK = __commonJS({
         throw new Error("composeK requires at least one argument");
       }
       var init = Array.prototype.slice.call(arguments);
-      var last7 = init.pop();
-      return compose(compose.apply(this, map3(chain, init)), last7);
+      var last6 = init.pop();
+      return compose(compose.apply(this, map3(chain, init)), last6);
     }
     module2.exports = composeK;
   }
@@ -20431,8 +20431,8 @@ var require_xdropRepeatsWith = __commonJS({
 var require_last = __commonJS({
   "node_modules/ramda/src/last.js"(exports2, module2) {
     var nth = require_nth();
-    var last7 = /* @__PURE__ */ nth(-1);
-    module2.exports = last7;
+    var last6 = /* @__PURE__ */ nth(-1);
+    module2.exports = last6;
   }
 });
 
@@ -20442,7 +20442,7 @@ var require_dropRepeatsWith = __commonJS({
     var _curry2 = require_curry2();
     var _dispatchable = require_dispatchable();
     var _xdropRepeatsWith = require_xdropRepeatsWith();
-    var last7 = require_last();
+    var last6 = require_last();
     var dropRepeatsWith = /* @__PURE__ */ _curry2(
       /* @__PURE__ */ _dispatchable([], _xdropRepeatsWith, function dropRepeatsWith2(pred, list) {
         var result = [];
@@ -20451,7 +20451,7 @@ var require_dropRepeatsWith = __commonJS({
         if (len !== 0) {
           result[0] = list[0];
           while (idx < len) {
-            if (!pred(last7(result), list[idx])) {
+            if (!pred(last6(result), list[idx])) {
               result[result.length] = list[idx];
             }
             idx += 1;
@@ -31324,6 +31324,7 @@ var import_process = __toESM(require("process"), 1);
 var import_tree_kill = __toESM(require_tree_kill(), 1);
 
 // src/ipfsConnector.js
+var import_buffer = require("buffer");
 var import_debug5 = __toESM(require_src(), 1);
 
 // node_modules/ipfs-core-utils/esm/src/multibases.js
@@ -39693,15 +39694,6 @@ var toPromise = async (asyncGen) => {
   }
   return contents;
 };
-var toPromise1 = async (asyncGen) => {
-  debug4("getting values of asyncGen");
-  for await (const value of asyncGen) {
-    debug4("Got value", value);
-    return value;
-  }
-  debug4("No value found to convert to Promise");
-  return null;
-};
 var noop2 = () => null;
 var retryException = (f) => {
   return async (...args) => {
@@ -39719,7 +39711,6 @@ var retryException = (f) => {
 };
 
 // src/ipfsConnector.js
-var import_buffer = require("buffer");
 var { join } = import_path_browserify.default;
 var debug5 = (0, import_debug5.default)("ipfsConnector");
 var IPFS_HOST = "https://api.pollinations.ai";
@@ -39831,7 +39822,7 @@ var ipfsLsCID = async (client, cid) => {
     console.log(e);
   }
 };
-var ipfsAdd = async (client, path3, content, options = { pin: true }) => {
+var ipfsAdd = async (client, path3, content, options = { pin: false }) => {
   debug5("adding", path3, "options", options);
   let cid = null;
   try {
@@ -39905,28 +39896,15 @@ var import_await_sleep2 = __toESM(require_await_sleep(), 1);
 var import_debug6 = __toESM(require_src(), 1);
 var import_native_abort_controller = __toESM(require_src2(), 1);
 var import_queueable = __toESM(require_lib6(), 1);
-var import_ramda2 = __toESM(require_src7(), 1);
 var debug6 = (0, import_debug6.default)("ipfs:pubsub");
 var HEARTBEAT_FREQUENCY = 12;
 function publisher(nodeID, suffix = "/output", useIPNS = true) {
   if (nodeID === "ipns")
     suffix = "";
   debug6("Creating publisher for", nodeID, suffix);
-  let createdIPNSKey = nodeID === "ipns";
   const _publish = async (cid) => {
     const client = await getClient();
-    const ipnsKeyName = nodeID === "ipns" ? "self" : nodeID + suffix;
-    if (useIPNS && !createdIPNSKey) {
-      const keys = await client.key.list();
-      debug6("IPNS keys", keys);
-      if (!keys.find(({ name: name7 }) => name7 === ipnsKeyName)) {
-        const { name: name7 } = await client.key.gen(ipnsKeyName);
-        debug6("Generated IPNS key with name", name7);
-      } else
-        debug6("IPNS key already exists. Reusing");
-      createdIPNSKey = true;
-    }
-    debug6("ipnsKeyName", ipnsKeyName);
+    const ipnsKeyName = nodeID === "ipns" ? "self" : null;
     await publish(client, nodeID, cid, suffix, ipnsKeyName, useIPNS);
     await (0, import_await_sleep2.default)(100);
   };
@@ -40000,7 +39978,6 @@ function subscribeCID(nodeID, suffix = "", callback, heartbeatDeadCallback = noo
   };
   (async () => {
     const keyName = nodeID + suffix;
-    await getInitialStateFromIPNS(keyName, callback);
     while (!aborted) {
       unsubscribe = subscribeCallback(keyName, handleMessage);
       await (0, import_await_sleep2.default)(5 * 60 * 1e3);
@@ -40014,20 +39991,6 @@ function subscribeCID(nodeID, suffix = "", callback, heartbeatDeadCallback = noo
     closeHeartbeat();
     aborted = true;
   };
-}
-async function getInitialStateFromIPNS(keyName, callback) {
-  const client = await getClient();
-  const keys = await client.key.list();
-  const ipnsKey = keys.find(({ name: name7 }) => name7 === keyName);
-  if (ipnsKey) {
-    const cidString = await toPromise1(client.name.resolve(`/ipns/${ipnsKey.id}`));
-    debug6("got initial CID through IPNS. Calling callback with", cidString);
-    if (cidString) {
-      const cid = (0, import_ramda2.last)(cidString.split("/"));
-      callback(cid);
-    } else
-      debug6("Strange or not strange? There was no initial CID found through IPNS.");
-  }
 }
 function heartbeatChecker(heartbeatStateCallback) {
   let lastHeartbeat = new Date().getTime();
@@ -40112,7 +40075,7 @@ var import_path = require("path");
 var import_debug7 = __toESM(require_src(), 1);
 var import_json5 = __toESM(require_lib7(), 1);
 var import_path_browserify2 = __toESM(require_path_browserify(), 1);
-var import_ramda3 = __toESM(require_src7(), 1);
+var import_ramda2 = __toESM(require_src7(), 1);
 
 // src/utils/logProgressToConsole.js
 var PromiseAllProgress = (name7, promises) => Promise.all(promises);
@@ -40153,7 +40116,7 @@ var _getIPFSState = async (ipfsReader, { cid, type, name: name7, path: path3, ro
     const contents = await PromiseAllProgress(path3, files.map(
       (file) => cachedIPFSState(ipfsReader, { ...file, path: join2(path3, file.name), rootCID }, processFile2, skipCache)
     ));
-    const contentResult = Object.fromEntries((0, import_ramda3.zip)(filenames, contents));
+    const contentResult = Object.fromEntries((0, import_ramda2.zip)(filenames, contents));
     _debug("contents", contentResult);
     Object.defineProperty(contentResult, ".cid", { value: cid });
     return contentResult;
@@ -40223,13 +40186,13 @@ var import_native_abort_controller2 = __toESM(require_src2(), 1);
 var import_debug10 = __toESM(require_src(), 1);
 var import_fs2 = require("fs");
 var import_path2 = require("path");
-var import_ramda5 = __toESM(require_src7(), 1);
+var import_ramda4 = __toESM(require_src7(), 1);
 
 // src/ipfs/fileWatcher.js
 var import_await_sleep3 = __toESM(require_await_sleep(), 1);
 var import_chokidar = __toESM(require_chokidar(), 1);
 var import_debug9 = __toESM(require_src(), 1);
-var import_ramda4 = __toESM(require_src7(), 1);
+var import_ramda3 = __toESM(require_src7(), 1);
 var debug9 = (0, import_debug9.default)("fileWatcher");
 async function* chunkedFilewatcher({ path: path3, debounce, signal }) {
   debounce = parseInt(debounce);
@@ -40269,7 +40232,7 @@ async function* chunkedFilewatcher({ path: path3, debounce, signal }) {
   await watcher.close();
   debug9("closed filewatcher");
 }
-var deduplicateChangedFiles = (changed) => (0, import_ramda4.uniqBy)(({ event, path: path3 }) => `${event}-${path3}`, changed);
+var deduplicateChangedFiles = (changed) => (0, import_ramda3.uniqBy)(({ event, path: path3 }) => `${event}-${path3}`, changed);
 var fileWatcher_default = chunkedFilewatcher;
 
 // src/ipfs/folderSync.js
@@ -40323,7 +40286,7 @@ async function* folderSync({ writer: writer2, path: path3, debounce, signal }) {
   }
 }
 var groupKey = ({ event, path: path3 }) => (0, import_path2.dirname)(path3) + "_" + event;
-var groupSyncQueue = (0, import_ramda5.groupWith)(
+var groupSyncQueue = (0, import_ramda4.groupWith)(
   (a, b) => groupKey(a) === groupKey(b)
 );
 

@@ -31966,6 +31966,7 @@ async function UploadInputstoIPFS(values, { add, mkDir, cid, rm }) {
 }
 
 // src/ipfsConnector.js
+var import_buffer = require("buffer");
 var import_debug6 = __toESM(require_src(), 1);
 
 // node_modules/ipfs-core-utils/esm/src/multibases.js
@@ -40338,7 +40339,6 @@ var toPromise = async (asyncGen) => {
 var noop = () => null;
 
 // src/ipfsConnector.js
-var import_buffer = require("buffer");
 var { join } = import_path_browserify.default;
 var debug6 = (0, import_debug6.default)("ipfsConnector");
 var IPFS_HOST = "https://api.pollinations.ai";
@@ -40454,7 +40454,7 @@ var ipfsLsCID = async (client, cid) => {
     console.log(e);
   }
 };
-var ipfsAdd = async (client, path4, content, options = { pin: true }) => {
+var ipfsAdd = async (client, path4, content, options = { pin: false }) => {
   debug6("adding", path4, "options", options);
   let cid = null;
   try {

@@ -23919,6 +23919,7 @@ var import_json52 = __toESM(require_lib(), 1);
 var import_path_browserify3 = __toESM(require_path_browserify(), 1);
 
 // src/ipfsConnector.js
+var import_buffer = require("buffer");
 var import_debug5 = __toESM(require_src(), 1);
 
 // node_modules/ipfs-core-utils/esm/src/multibases.js
@@ -32290,7 +32291,6 @@ var toPromise = async (asyncGen) => {
 };
 
 // src/ipfsConnector.js
-var import_buffer = require("buffer");
 var { join } = import_path_browserify.default;
 var debug5 = (0, import_debug5.default)("ipfsConnector");
 var IPFS_HOST = "https://api.pollinations.ai";
