@@ -51,14 +51,19 @@ export function writer(initialRootCID = null) {
 
 
     // Promise to a temporary folder in the IPFS mutable filesystem
-    let initializedFolder = getClient().then(client => initializeMFSFolder(client, initialRootCID, mfsRoot))
-
+    let initializedFolder = null;
+    
+    function initializeFolder()  {
+        if (!initializedFolder) 
+            initializedFolder = getClient().then(client => initializeMFSFolder(client, initialRootCID, mfsRoot))
+        return initializedFolder;
+    }
     // calls the function with client and absolute path and finally return the root CID
     const returnRootCID = func => async (path = "/", ...args) => {
 
         const client = await getClient()
 
-        await initializedFolder
+        await initializeFolder()
         debug("join", mfsRoot, path)
         const tmpPath = join(mfsRoot, path)
 
@@ -76,9 +81,13 @@ export function writer(initialRootCID = null) {
         cid: returnRootCID(noop),
         cp: returnRootCID(ipfsCp),
         close: async () => {
-            debug("closing input writer. Deleting", mfsRoot)
-            await initializedFolder
-            await ipfsRm(await getClient(), mfsRoot)
+            
+            debug("closing input writer.")
+            if (initializedFolder) {
+                debug("Deleting", mfsRoot)
+                await initializeFolder()
+                await ipfsRm(await getClient(), mfsRoot)
+            }
         },
         pin: async cid => await ipfsPin(await getClient(), cid)
     }

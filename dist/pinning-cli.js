@@ -33375,10 +33375,15 @@ async function reader() {
 }
 function writer(initialRootCID = null) {
   const mfsRoot = `/tmp_${new Date().toISOString().replace(/[\W_]+/g, "_")}`;
-  let initializedFolder = getClient().then((client) => initializeMFSFolder(client, initialRootCID, mfsRoot));
+  let initializedFolder = null;
+  function initializeFolder() {
+    if (!initializedFolder)
+      initializedFolder = getClient().then((client) => initializeMFSFolder(client, initialRootCID, mfsRoot));
+    return initializedFolder;
+  }
   const returnRootCID = (func) => async (path3 = "/", ...args) => {
     const client = await getClient();
-    await initializedFolder;
+    await initializeFolder();
     debug5("join", mfsRoot, path3);
     const tmpPath = join(mfsRoot, path3);
     await func(client, tmpPath, ...args);
@@ -33391,9 +33396,12 @@ function writer(initialRootCID = null) {
     cid: returnRootCID(noop),
     cp: returnRootCID(ipfsCp),
     close: async () => {
-      debug5("closing input writer. Deleting", mfsRoot);
-      await initializedFolder;
-      await ipfsRm(await getClient(), mfsRoot);
+      debug5("closing input writer.");
+      if (initializedFolder) {
+        debug5("Deleting", mfsRoot);
+        await initializeFolder();
+        await ipfsRm(await getClient(), mfsRoot);
+      }
     },
     pin: async (cid) => await ipfsPin(await getClient(), cid)
   };

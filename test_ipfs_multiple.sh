@@ -5,5 +5,5 @@ for i in {1..100}
 do
     echo -n "run $i "
     TIMEFORMAT=%R
-    time ./test_ipfs.sh > /dev/null
+    time ./test_ipfs.sh
 done
