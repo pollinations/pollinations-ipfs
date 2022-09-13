@@ -32308,7 +32308,7 @@ var ipfsLsCID = async (client, cid2) => {
   try {
     cid2 = await optionallyResolveIPNS(client, cid2);
     debug5("calling ipfs ls with cid", cid2);
-    const result = (await toPromise(client.ls(stringCID(cid2)))).filter(({ type, name: name7 }) => type !== "unknown" && name7 !== void 0).map(_normalizeIPFS);
+    const result = (await toPromise(client.ls(stringCID(cid2)))).filter((o) => o).filter(({ type, name: name7 }) => type !== "unknown" && name7 !== void 0).map(_normalizeIPFS);
     debug5("got ipfs ls result", result);
     return result;
   } catch (e) {
