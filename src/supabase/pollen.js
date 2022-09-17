@@ -36,7 +36,12 @@ export function updatePollen(input, data) {
 }
 
 
-async function getPlaceInQueue({image, request_submit_time, priority}) {
+async function getPlaceInQueue(data) {
+
+    if (!data)
+        return -1
+    
+    const {image, request_submit_time, priority} = data
 
     const metadata = await modelsMetadata
 

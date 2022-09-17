@@ -40630,8 +40630,11 @@ var DB_NAME = process.env.POLLINATIONS_ENV === "development" ? "pollen_dev" : "p
 function dispatchPollen(params) {
   return client_default.from(DB_NAME).insert(params).then(({ data }) => data);
 }
-async function getPlaceInQueue({ image, request_submit_time, priority }) {
+async function getPlaceInQueue(data) {
   var _a;
+  if (!data)
+    return -1;
+  const { image, request_submit_time, priority } = data;
   const metadata = await modelsMetadata;
   const groups = (_a = metadata[image].meta) == null ? void 0 : _a.pollinator_group;
   const competing_images = Object.keys(metadata).filter((i) => {
