@@ -40643,7 +40643,7 @@ async function getPlaceInQueue(data) {
   });
   return await client_default.from(DB_NAME).select("*", { count: "exact" }).eq("processing_started", false).lte("request_submit_time", request_submit_time).in("image", competing_images).gte("priority", priority).then(({ count }) => count);
 }
-async function subscribePollen(input, callback) {
+function subscribePollen(input, callback) {
   debug9("getting first pollen using select", input);
   let lastData = null;
   let lastPlaceInQueue = 9999;
@@ -40677,7 +40677,7 @@ async function dispatchAndReturnPollen(params, returnImmediately = false) {
   if (returnImmediately)
     return (_a = await getPollen(params.input)) == null ? void 0 : _a.output;
   return await new Promise(async (resolve2, reject) => {
-    await subscribePollen(params.input, ({ output, success }) => success === true && resolve2(output) || success === false && reject(output));
+    subscribePollen(params.input, ({ output, success }) => success === true && resolve2(output) || success === false && reject(output));
   });
 }
 

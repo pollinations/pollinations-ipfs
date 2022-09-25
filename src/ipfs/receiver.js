@@ -20,14 +20,14 @@ export async function processRemoteCID(contentID, rootPath) {
 }
 
 // Receives a stream of updates from IPFS pubsub or stdin and writes them to disk
-export const receive = async function* ({ ipns, nodeid, once, path: rootPath }, process=processRemoteCID, suffix="/input") {
+export const receive = async function* ({ subfolder, nodeid,path: rootPath }, process=processRemoteCID, suffix="/input") {
   // subscribe to content id updates either via IPNS or stdin
 
   const [cidStream, unsubscribe] = subscribeGenerator(nodeid, suffix)
    
 
   for await (let receivedCID of await cidStream) {
-    await process(receivedCID, rootPath);
+    await process(receivedCID + subfolder, rootPath);
   }
 
   unsubscribe()

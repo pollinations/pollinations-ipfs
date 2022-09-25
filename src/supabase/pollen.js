@@ -62,7 +62,7 @@ async function getPlaceInQueue(data) {
 }
 
 // subscribe to 
-export async function subscribePollen(input, callback) {
+export function subscribePollen(input, callback) {
 
     debug("getting first pollen using select", input)
     
@@ -128,7 +128,7 @@ export async function dispatchAndReturnPollen(params, returnImmediately=false) {
             return (await getPollen(params.input))?.output;
 
         return await new Promise(async (resolve, reject) => {
-            await subscribePollen(params.input, ({output, success}) => ((success === true) && resolve(output)) || ((success === false) && reject(output)));
+            subscribePollen(params.input, ({output, success}) => ((success === true) && resolve(output)) || ((success === false) && reject(output)));
         });
 }
 

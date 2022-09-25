@@ -27,14 +27,12 @@ const useAWSNode = ({ nodeID: paramsNodeID, contentID: paramsContentID } ) => {
         if (!nodeID || nodeID === LOADING_NODEID) return;
 
         debug("nodeID changed to", nodeID, ". (Re)subscribing");
-        
-        let closeSub = () => null;
 
-        subscribePollen(nodeID, ({output}, queueNumber) => {
+        const closeSub = subscribePollen(nodeID, ({output}, queueNumber) => {
             setContentID(output);
             setQueueNumber(queueNumber);
 
-        }).then(close => closeSub = close);
+        })
 
         return closeSub;
 

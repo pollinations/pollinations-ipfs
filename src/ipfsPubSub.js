@@ -4,6 +4,7 @@ import Debug from 'debug';
 import { AbortController } from 'native-abort-controller';
 import { Channel } from 'queueable';
 import { getClient } from './ipfsConnector.js';
+import { subscribePollen } from './supabase/pollen.js';
 import { noop, retryException } from './utils/utils.js';
 
 
@@ -156,6 +157,13 @@ export function subscribeGenerator(nodeID, suffix = "/input") {
 // Subscribe to a content ids from a nodeID and suffix. Callback is called with the content ids
 // Also receives and logs heartbeats received from the publisher
 export function subscribeCID(nodeID, suffix = "", callback, heartbeatDeadCallback = noop) {
+
+    if (nodeID.startsWith("Qm")) {
+        const closeSub = subscribePollen(nodeID, ({output}) => {
+            callback(output); 
+        });
+       return closeSub;
+    }
 
     const { gotHeartbeat, closeHeartbeat } = heartbeatChecker(heartbeatDeadCallback);
 

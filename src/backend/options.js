@@ -11,7 +11,7 @@ program
     .option('-e, --execute <command>', 'run command on receive and stream back to ipfs', null)
     .option('-l, --logout <path>', 'log to file', null)
     .option('-w, --writetodb', 'write CIDs to pollinations db', null)
-    ;
+    .option('-sf, --subfolder <subfolder>', 'subfolder to download', "");
 
 program.parse(process.argv);
 
