@@ -159,8 +159,9 @@ export function subscribeGenerator(nodeID, suffix = "/input") {
 export function subscribeCID(nodeID, suffix = "", callback, heartbeatDeadCallback = noop) {
 
     if (nodeID.startsWith("Qm")) {
-        const closeSub = subscribePollen(nodeID, ({output}) => {
-            callback(output); 
+        const closeSub = subscribePollen(nodeID, (res) => {
+            if (res?.output)
+                callback(res?.output);
         });
        return closeSub;
     }

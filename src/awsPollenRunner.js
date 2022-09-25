@@ -3,7 +3,7 @@ import Debug from "debug";
 import { UploadInputstoIPFS } from './aws.js';
 import { writer } from './ipfsConnector.js';
 import { IPFSWebState } from './ipfsWebClient.js';
-import { dispatchAndReturnPollen, dispatchPollenGenerator } from './supabase/pollen.js';
+import { dispatchAndReturnPollen, dispatchPollen, dispatchPollenGenerator } from './supabase/pollen.js';
 
 export { getPollens, updatePollen } from './supabase/pollen.js';
  
@@ -33,6 +33,11 @@ const runModelOnce = async (inputs, image="voodoohop/dalle-playground", returnIm
   return data;
 }
 
+export async function dispatch(inputs, image="voodoohop/dalle-playground", params={}) {
+  const inputCID = await UploadInputstoIPFS({...inputs, model_image: image}, writer());
+  await dispatchPollen({input: inputCID, image, ...params });
+  return inputCID;
+}
 
 export async function* runModelGenerator(inputs, image="voodoohop/dalle-playground", params={}) {
   debug("running model", image);

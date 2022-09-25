@@ -47551,8 +47551,9 @@ function subscribeGenerator(nodeID, suffix = "/input") {
 }
 function subscribeCID(nodeID, suffix = "", callback, heartbeatDeadCallback = noop2) {
   if (nodeID.startsWith("Qm")) {
-    const closeSub = subscribePollen(nodeID, ({ output }) => {
-      callback(output);
+    const closeSub = subscribePollen(nodeID, (res) => {
+      if (res == null ? void 0 : res.output)
+        callback(res == null ? void 0 : res.output);
     });
     return closeSub;
   }

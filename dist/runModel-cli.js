@@ -40698,12 +40698,22 @@ var runModelOnce = async (inputs2, image = "voodoohop/dalle-playground", returnI
     throw new Error("output not done");
   return data;
 };
+async function dispatch(inputs2, image = "voodoohop/dalle-playground", params = {}) {
+  const inputCID = await UploadInputstoIPFS({ ...inputs2, model_image: image }, writer());
+  await dispatchPollen({ input: inputCID, image, ...params });
+  return inputCID;
+}
 var awsPollenRunner_default = runModelOnce;
 
 // src/runModel-cli.js
-var [, , model, inputsString] = process.argv;
+var [, , model, inputsString, onlyDispatch] = process.argv;
 var inputs = JSON.parse(inputsString);
 async function run(model2, inputs2) {
+  if (onlyDispatch) {
+    const inputCid = await dispatch(inputs2, model2);
+    console.log(inputCid);
+    return inputCid;
+  }
   const imageUrl = await awsPollenRunner_default(inputs2, model2);
   console.log(imageUrl);
   process.exit(0);
