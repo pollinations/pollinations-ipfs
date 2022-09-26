@@ -40710,11 +40710,11 @@ var [, , model, inputsString, onlyDispatch] = process.argv;
 var inputs = JSON.parse(inputsString);
 async function run(model2, inputs2) {
   if (onlyDispatch) {
-    const inputCid = await dispatch(inputs2, model2);
+    const inputCid = await dispatch(inputs2, model2, { priority: 1 });
     console.log(inputCid);
     return inputCid;
   }
-  const imageUrl = await awsPollenRunner_default(inputs2, model2);
+  const imageUrl = await awsPollenRunner_default(inputs2, model2, false, { priority: 1 });
   console.log(imageUrl);
   process.exit(0);
 }
