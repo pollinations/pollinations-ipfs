@@ -1,6 +1,5 @@
 import Debug from 'debug';
 import { importer } from 'ipfs-unixfs-importer';
-import PQueue from 'p-queue';
 import {
     Web3Storage
 } from 'web3.storage';
@@ -17,7 +16,7 @@ const blockstore = new S3Blockstore()
 
 const debug = Debug('web3storage');
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDU3NTM0NzQyMDkwZjVjMjZCRTdiMmFFZUVGQ2NBZDM2NTNhODM5N0MiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NTE4NDczOTg0ODcsIm5hbWUiOiJwb2xsaW5hdGlvbnMifQ.s7smzTFAmfMDkBvIg1rtArcvtMasE11z1pnRexNhz6A" //args.token
+const token = process.env.WEB3STORAGE_TOKEN //args.token
 
 if (!token) {
    console.error('A token is needed. You can create one on https://web3.storage')
@@ -90,9 +89,9 @@ const mapAsyncIterator = async function* (iterator, fn) {
 
 
 const cids = [
-"QmcJe7Umf4mH5x6Xi9kMAiGvdiMaaaQn1XsS6GAqgjpsgD",
+"QmNnSmivNDFc9P2DGrxRr9gTSgjnXSAjSZfaCVzUi48fu9",
 // "QmXMAvPvawu1gLYuEq23j5R386w3j2m3XS3UBHdBF5qshF",
-// "QmXwr676mZDzr5qeC9AfspvvH2J3bZYhxUDqqULU2Q48zA",
+// "QmXwr676mZDzr5qeC9AfspvvH2J3bZYhxUDqqU3LU2Q48zA",
 // "QmaJGpEqDaVTzVQjytpMNYhhEbm8a71b4AXcHw41b6cSGP",
 // "QmXUHC2E3rGiRYQMoAX57K3CkV8685WGmoUNzZ9gD49ZbC",
 // "QmSPYTvbJYcGefoDBjWNwAMJfWYKXCscuj8vPxH6EeFs4x",
@@ -137,7 +136,7 @@ const cids = [
 // "QmQQZdgq71rEpE1TXpyZvyYn7Zn7W2iuTEtkUPJ5cDaCQx"
 ]
 
-const queue = new PQueue({concurrency: 10});
+// const queue = new PQueue({concurrency: 10});
 
 
 // for (const cid of cids) {

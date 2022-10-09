@@ -3,11 +3,11 @@ import { exporter, recursive } from 'ipfs-unixfs-exporter';
 import { importer } from 'ipfs-unixfs-importer';
 import { extname } from 'path';
 import { assocPath } from 'ramda';
-import { getWebURL } from '../ipfsConnector.js';
+import { getWebURL } from './ipfsConnector.js';
 const debug = Debug('pollenStoreClient');
 
-import S3Blockstore from './s3store.js';
-import { importFromWeb3Storage } from './web3storage.js';
+import S3Blockstore from './supabase/s3store.js';
+import { importFromWeb3Storage } from './supabase/web3storage.js';
 
 
 const blockstore = new S3Blockstore()
@@ -69,12 +69,12 @@ function objectToFiles(obj, path="") {
 
 // // // const cid = await importJSON({a: {b:  "hello"}})
 
-// let resultObj = await lsCID("QmVh1bMaeq5NwjWZPL8xXz6tUBiQcPshkzhwHesgS3Y8Nt");
+// let resultObj = await exportCID("QmVh1bMaeq5NwjWZPL8xXz6tUBiQcPshkzhwHesgS3Y8Nt");
 // // //     // await getDirectory(entry.unixfs);
 // console.log(resultObj)
 
 export async function exportCIDBuffer(cid) {
-    const entries = await recursive(cid, blockstore);
+    const entries = await fetchWithWeb3storageFallback(cid);
     for await (const file of entries) {
         debug("extracting content of", file)
         const content = await extractContent(file);
@@ -83,7 +83,7 @@ export async function exportCIDBuffer(cid) {
 }
 
 export async function lsCID(cid) {
-    const dirEntry = await exporter(cid, blockstore);
+    const dirEntry = await fetchWithWeb3storageFallback(cid, exporter);
     if  (dirEntry.type !== "directory")
         throw new Error("LS CID is not a directory");
 
@@ -95,48 +95,29 @@ export async function lsCID(cid) {
 }
 
 export async function exportCID(cid) {
-    try {
-        debug("exporting CID", cid)
-        const entries = await recursive(cid, blockstore);
-        debug("Got final entry", entries);
 
-        let resultObj = {};
-        
-        for await (const file of entries) {
-            debug("exporting file", file.path);
-            if (file.type !== "directory") {
-                
-                let value = getWebURL(file.cid);
+    debug("exporting CID", cid)
+    const entries = await fetchWithWeb3storageFallback(cid);
+    debug("Got final entry", entries);
 
-                // if there is no extension read the file as a JSON string
-                if (!extname(file.path)) 
-                    value = parse(await extractContent(file));
-
-                resultObj = assocPath(file.path.split("/"), value, resultObj);
-            }
-
-        }
-        debug("Got result", resultObj);
-        return resultObj[Object.keys(resultObj)[0]];
-    } catch (e) {
-        // check if exception is ERR_NOT_FOUND
-        if (e.code === "ERR_NOT_FOUND") {
-            debug("cid not found locally. fetching from web3.storage");
-            const importedCID = await importFromWeb3Storage(cid);
+    let resultObj = {};
+    
+    for await (const file of entries) {
+        debug("exporting file", file.path);
+        if (file.type !== "directory") {
             
-            debug("imported from web3.storage", importedCID);
-            
-            if (importedCID) {
-                if (importedCID !== cid) 
-                    console.error("imported CID does not match original CID", importedCID, cid,". Some annoyance with different block sizes. Update the CID in the database?");
-                return await exportCID(importedCID);
-            } else {
-                throw new Error("CID not found");
-            }
-        } else {
-            throw e;
+            let value = getWebURL(file.cid);
+
+            // if there is no extension read the file as a JSON string
+            if (!extname(file.path)) 
+                value = parse(await extractContent(file));
+
+            resultObj = assocPath(file.path.split("/"), value, resultObj);
         }
+
     }
+    debug("Got result", resultObj);
+    return resultObj[Object.keys(resultObj)[0]];
 }
 
 async function extractContent(file) {
@@ -158,12 +139,12 @@ function parse(content) {
 
 
 
-async function fetchWithWeb3storageFallback(cid) {
+async function fetchWithWeb3storageFallback(cid,func=recursive,skipWeb3storage=false) {
     try {
-        return await recursive(cid, blockstore);
+        return await func(cid, blockstore);
     } catch (e) {
         // check if exception is ERR_NOT_FOUND
-        if (e.code === "ERR_NOT_FOUND") {
+    if (e.code === "ERR_NOT_FOUND" && !skipWeb3storage) {
             debug("cid not found locally. fetching from web3.storage");
             const importedCID = await importFromWeb3Storage(cid);
             
@@ -172,7 +153,7 @@ async function fetchWithWeb3storageFallback(cid) {
             if (importedCID) {
                 if (importedCID !== cid) 
                     console.error("imported CID does not match original CID", importedCID, cid,". Some annoyance with different block sizes. Update the CID in the database?");
-                return (importedCID);
+                return await fetchWithWeb3storageFallback(importedCID, func, true);
             } else {
                 throw new Error("CID not found");
             }

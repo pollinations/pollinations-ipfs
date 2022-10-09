@@ -5,7 +5,7 @@ import { create } from "ipfs-http-client";
 import { CID } from "multiformats/cid";
 import path from "path-browserify";
 import { last } from "ramda";
-import { exportCIDBuffer, lsCID, pollenImporter } from "./supabase/pollenStoreClient.js";
+import { exportCIDBuffer, lsCID, pollenImporter } from "./pollenStoreClient.js";
 import { noop, toPromise } from "./utils/utils.js";
 
 const { join } = path;
