@@ -2,11 +2,10 @@
 import { Buffer } from "buffer";
 import Debug from "debug";
 import { create } from "ipfs-http-client";
-import all from "it-all";
 import { CID } from "multiformats/cid";
 import path from "path-browserify";
 import { last } from "ramda";
-import { pollenImporter } from "./supabase/pollenStoreClient.js";
+import { exportCIDBuffer, lsCID, pollenImporter } from "./supabase/pollenStoreClient.js";
 import { noop, toPromise } from "./utils/utils.js";
 
 const { join } = path;
@@ -32,10 +31,10 @@ export function getClient() {
 
 // basic IPFS read access
 export async function reader() {
-    const client = await getClient();
+
     return {
-        ls: async cid => await ipfsLsCID(client, cid),
-        get: async (cid, options = {}) => await ipfsGet(client, cid, options)
+        ls: async cid => await ipfsLsCID(cid),
+        get: async (cid, options = {}) => await ipfsGet(cid, options)
     }
 }
 
@@ -145,19 +144,21 @@ export const stringCID = file => firstLine(stripSlashIPFS(file instanceof Object
 
 const _normalizeIPFS = ({ name, path, cid, type }) => ({ name, path, cid: stringCID(cid), type });
 
-const ipfsLsCID = async (client, cid) => {
-    try {
-        cid = await optionallyResolveIPNS(client, cid);
-        debug("calling ipfs ls with cid", cid);
-        const result = (await toPromise(client.ls(stringCID(cid))))
-            .filter(o => o)
-            .filter(({ type, name }) => type !== "unknown" && name !== undefined)
-            .map(_normalizeIPFS);
-        debug("got ipfs ls result", result);
-        return result;
-    } catch (e) {
-        console.log(e)
-    }
+const ipfsLsCID = async (cid) => {
+    // try {
+    //     cid = await optionallyResolveIPNS(client, cid);
+    //     debug("calling ipfs ls with cid", cid);
+    //     const result = (await toPromise(client.ls(stringCID(cid))))
+    //         .filter(o => o)
+    //         .filter(({ type, name }) => type !== "unknown" && name !== undefined)
+    //         .map(_normalizeIPFS);
+    //     debug("got ipfs ls result", result);
+    //     return result;
+    // } catch (e) {
+    //     console.log(e)
+    // }
+    const data = await lsCID(cid)
+    return data;
 }
 
 
@@ -174,26 +175,9 @@ const ipfsAdd = async (importer, path, content, options = { pin: false }) => {
     return cid
 }
 
-const ipfsGet = async (client, cid, { onlyLink = false }) => {
-
-    const _debug = debug.extend(`ipfsGet(${cid})`);
-
-    cid = await optionallyResolveIPNS(client, cid);
-
-    const chunkArrays = await all(client.cat(cid));
-
-    const chunks = chunkArrays.map(Buffer.from);
-
-    _debug("Got all chunks. Total:", chunks.length);
-    if (chunks.length === 0)
-        return Buffer.from([]);
-
-    const contentArray = chunks.length > 1 ? Buffer.concat(chunks) : chunks[0];
-
-    // const contentArray = Buffer.concat(await toPromise(client.get(cid)));
-    _debug("Received content length:", contentArray.length);
-    // debug("Content type",contentArray)
-    return contentArray;
+// returns a buffer
+const ipfsGet = async (cid) => {
+    return await exportCIDBuffer(cid)
 };
 
 async function optionallyResolveIPNS(client, cid) {

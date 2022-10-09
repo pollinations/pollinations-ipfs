@@ -4,8 +4,8 @@ import Debug from "debug";
 import json5 from "json5";
 import path from "path-browserify";
 import { zip } from "ramda";
-import { PromiseAllProgress } from "./utils/logProgressToConsole.js";
 import { reader, stringCID } from "./ipfsConnector.js";
+import { PromiseAllProgress } from "./utils/logProgressToConsole.js";
 
 const { join } = path;
 const { parse } = json5;
@@ -20,7 +20,7 @@ export const getIPFSState = async (contentID, callback=f=>f, skipCache=false) =>
     const ipfsReader = await reader();
     debug("Getting state for CID", contentID);
     try {
-    return await cachedIPFSState(ipfsReader, { cid: contentID, name: "root", type: "dir", path: "/", rootCID: contentID}, callback, skipCache);
+    return await cachedIPFSState(ipfsReader, { cid: contentID, name: "root", type: "directory", path: "/", rootCID: contentID}, callback, skipCache);
     } catch (e) { console.log(e)}
 
 }
@@ -46,7 +46,7 @@ const _getIPFSState = async (ipfsReader, { cid, type, name, path, rootCID }, pro
     cid = stringCID(cid);
     const _debug = debug.extend(`_getIPFSState(${path})`);
     _debug("Getting state for", type, name, cid);
-    if (type === "dir") {
+    if (type === "directory") {
         const files = await ls(cid);
         _debug("Got files for", name, cid, files);
         const filenames = files.map(({ name }) => name);

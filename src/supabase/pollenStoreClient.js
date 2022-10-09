@@ -1,5 +1,5 @@
 import Debug from 'debug';
-import { recursive } from 'ipfs-unixfs-exporter';
+import { exporter, recursive } from 'ipfs-unixfs-exporter';
 import { importer } from 'ipfs-unixfs-importer';
 import { extname } from 'path';
 import { assocPath } from 'ramda';
@@ -67,40 +67,57 @@ function objectToFiles(obj, path="") {
 }
 
 
-// const cid = await importJSON({a: {b:  "hello"}})
+// // // const cid = await importJSON({a: {b:  "hello"}})
 
-let resultObj = await exportCID("QmaMtjjZnUMNmXzRMtk287N8UPVDdPcaFULrJ22Jxoapu4");
-    // await getDirectory(entry.unixfs);
+// let resultObj = await lsCID("QmVh1bMaeq5NwjWZPL8xXz6tUBiQcPshkzhwHesgS3Y8Nt");
+// // //     // await getDirectory(entry.unixfs);
+// console.log(resultObj)
 
+export async function exportCIDBuffer(cid) {
+    const entries = await recursive(cid, blockstore);
+    for await (const file of entries) {
+        debug("extracting content of", file)
+        const content = await extractContent(file);
+        return content;
+    }
+}
 
-console.log(resultObj)
+export async function lsCID(cid) {
+    const dirEntry = await exporter(cid, blockstore);
+    if  (dirEntry.type !== "directory")
+        throw new Error("LS CID is not a directory");
 
-
+    const files = [];
+    for await (const file of dirEntry.content()) {
+        files.push({name: file.name, path: file.name, cid: file.cid.toString(), type: file.type});
+    }
+    return files;
+}
 
 export async function exportCID(cid) {
     try {
-    debug("exporting CID", cid)
-    const entries = await recursive(cid, blockstore);
-    debug("Got final entry", entries);
+        debug("exporting CID", cid)
+        const entries = await recursive(cid, blockstore);
+        debug("Got final entry", entries);
 
-    let resultObj = {};
-    
-    for await (const file of entries) {
-        debug("exporting file", file.path);
-        if (file.type !== "directory") {
-            
-            let value = getWebURL(file.cid);
+        let resultObj = {};
+        
+        for await (const file of entries) {
+            debug("exporting file", file.path);
+            if (file.type !== "directory") {
+                
+                let value = getWebURL(file.cid);
 
-            // if there is no extension read the file as a JSON string
-            if (!extname(file.path)) 
-                value = parse(await extractContent(file));
+                // if there is no extension read the file as a JSON string
+                if (!extname(file.path)) 
+                    value = parse(await extractContent(file));
 
-            resultObj = assocPath(file.path.split("/"), value, resultObj);
+                resultObj = assocPath(file.path.split("/"), value, resultObj);
+            }
+
         }
-
-    }
-    debug("Got result", resultObj);
-    return resultObj[Object.keys(resultObj)[0]];
+        debug("Got result", resultObj);
+        return resultObj[Object.keys(resultObj)[0]];
     } catch (e) {
         // check if exception is ERR_NOT_FOUND
         if (e.code === "ERR_NOT_FOUND") {
@@ -108,7 +125,6 @@ export async function exportCID(cid) {
             const importedCID = await importFromWeb3Storage(cid);
             
             debug("imported from web3.storage", importedCID);
-            
             
             if (importedCID) {
                 if (importedCID !== cid) 
@@ -124,11 +140,11 @@ export async function exportCID(cid) {
 }
 
 async function extractContent(file) {
-    let content = new Uint8Array();
+    let content = []
     for await (const chunk of await file.content()) {
         content = [...content, ...chunk];
     }
-    return content;
+    return new Uint8Array(content);
 }
 
 function parse(content) {
@@ -140,3 +156,28 @@ function parse(content) {
     }
 }
 
+
+
+async function fetchWithWeb3storageFallback(cid) {
+    try {
+        return await recursive(cid, blockstore);
+    } catch (e) {
+        // check if exception is ERR_NOT_FOUND
+        if (e.code === "ERR_NOT_FOUND") {
+            debug("cid not found locally. fetching from web3.storage");
+            const importedCID = await importFromWeb3Storage(cid);
+            
+            debug("imported from web3.storage", importedCID);
+            
+            if (importedCID) {
+                if (importedCID !== cid) 
+                    console.error("imported CID does not match original CID", importedCID, cid,". Some annoyance with different block sizes. Update the CID in the database?");
+                return (importedCID);
+            } else {
+                throw new Error("CID not found");
+            }
+        } else {
+            throw e;
+        }
+    }
+}

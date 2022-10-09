@@ -46,6 +46,7 @@ export const writeFileAndCreateFolder = async (path, content) => {
 
 // Writes all files to disk coming from the IPFS state
 async function processFile({ path, cid }, rootPath, { get }) {
+  debug("processing file", path, cid, rootPath);
   const _debug = debug.extend(`processFile(${path})`);
   _debug("started");
   const destPath = join(rootPath, path);

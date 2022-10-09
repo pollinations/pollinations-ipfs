@@ -1,7 +1,6 @@
 import Debug from 'debug';
 import { importer } from 'ipfs-unixfs-importer';
 import PQueue from 'p-queue';
-import { timeout } from 'promise-timeout';
 import {
     Web3Storage
 } from 'web3.storage';
@@ -31,9 +30,9 @@ const storage = new Web3Storage({
 
 export async function importFromWeb3Storage(cid) {
     debug("importing from web3 storage", cid);
-    const {ok, unixFsIterator: files} =  await storage.get(cid)
-    
+    const result =  await storage.get(cid)
 
+    const { files, ok } = result;
     debug("got result", ok)
     if (!ok)
         return false;
@@ -71,24 +70,13 @@ export async function importFromWeb3Storage(cid) {
 const formatFileForUnixFSImport = async (file) => {
     // if (file.type !== 'file') 
     //     return null;
-    debug("mapping file", file, file.name, file.type);
-    if (file.type === "directory") {
-        return {
-           ...file,
-           content: null,
-        }
-    }
-    return {
-        ...file,
-        content: await extractContent(file).buffer,
-    }
+    debug("mapping file", file, file.name, file.lastModified);
+
     const content = Buffer.from(await file.arrayBuffer());
     debug("content", content);
     // let buffer = Buffer.from(content)
 
-    return { path: file.name, content
-        // , mode: file.mode, mtime: file.lastModified  
-    } ;
+    return { path: file.name, content } ;
 };
 
 const mapAsyncIterator = async function* (iterator, fn) {
@@ -100,13 +88,6 @@ const mapAsyncIterator = async function* (iterator, fn) {
 }
 
 
-async function extractContent(file) {
-    let content = new Uint8Array();
-    for await (const chunk of await file.content()) {
-        content = [...content, ...chunk];
-    }
-    return content;
-}
 
 const cids = [
 "QmcJe7Umf4mH5x6Xi9kMAiGvdiMaaaQn1XsS6GAqgjpsgD",
@@ -159,9 +140,9 @@ const cids = [
 const queue = new PQueue({concurrency: 10});
 
 
-for (const cid of cids) {
+// for (const cid of cids) {
 
-   queue.add(() => {
-    return timeout(importFromWeb3Storage(cid), 30000).catch(e => console.error("timeout"))
-   })
-}
+//    queue.add(() => {
+//     return timeout(importFromWeb3Storage(cid), 30000).catch(e => console.error("timeout"))
+//    })
+// }
