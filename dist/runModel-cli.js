@@ -8746,9 +8746,11 @@ var require_bl = __commonJS({
         this._initReuseChunk = null;
       }
       reset() {
-        this.chunks = [];
         this.cursor = 0;
         this.maxCursor = -1;
+        if (this.chunks.length) {
+          this.chunks = [];
+        }
         if (this._initReuseChunk !== null) {
           this.chunks.push(this._initReuseChunk);
           this.maxCursor = this._initReuseChunk.length - 1;
@@ -8962,10 +8964,10 @@ var require_uint = __commonJS({
         }
       }
     }
-    encodeUint2.encodedSize = function encodedSize6(token2) {
+    encodeUint2.encodedSize = function encodedSize9(token2) {
       return encodeUintValue2.encodedSize(token2.value);
     };
-    encodeUintValue2.encodedSize = function encodedSize6(uint) {
+    encodeUintValue2.encodedSize = function encodedSize9(uint) {
       if (uint < uintBoundaries2[0]) {
         return 1;
       }
@@ -9034,7 +9036,7 @@ var require_negint = __commonJS({
       const unsigned = typeof negint === "bigint" ? negint * neg1b2 - pos1b2 : negint * -1 - 1;
       _0uint.encodeUintValue(buf2, token2.type.majorEncoded, unsigned);
     }
-    encodeNegint2.encodedSize = function encodedSize6(token2) {
+    encodeNegint2.encodedSize = function encodedSize9(token2) {
       const negint = token2.value;
       const unsigned = typeof negint === "bigint" ? negint * neg1b2 - pos1b2 : negint * -1 - 1;
       if (unsigned < _0uint.uintBoundaries[0]) {
@@ -9106,7 +9108,7 @@ var require_bytes2 = __commonJS({
       _0uint.encodeUintValue(buf2, token2.type.majorEncoded, bytes.length);
       buf2.push(bytes);
     }
-    encodeBytes2.encodedSize = function encodedSize6(token2) {
+    encodeBytes2.encodedSize = function encodedSize9(token2) {
       const bytes = tokenBytes2(token2);
       return _0uint.encodeUintValue.encodedSize(bytes.length) + bytes.length;
     };
@@ -9214,6 +9216,9 @@ var require_array = __commonJS({
       _0uint.encodeUintValue(buf2, token.Type.array.majorEncoded, token$1.value);
     }
     encodeArray2.compareTokens = _0uint.encodeUint.compareTokens;
+    encodeArray2.encodedSize = function encodedSize9(token2) {
+      return _0uint.encodeUintValue.encodedSize(token2.value);
+    };
     exports2.decodeArray16 = decodeArray162;
     exports2.decodeArray32 = decodeArray322;
     exports2.decodeArray64 = decodeArray642;
@@ -9264,6 +9269,9 @@ var require_map = __commonJS({
       _0uint.encodeUintValue(buf2, token.Type.map.majorEncoded, token$1.value);
     }
     encodeMap2.compareTokens = _0uint.encodeUint.compareTokens;
+    encodeMap2.encodedSize = function encodedSize9(token2) {
+      return _0uint.encodeUintValue.encodedSize(token2.value);
+    };
     exports2.decodeMap16 = decodeMap162;
     exports2.decodeMap32 = decodeMap322;
     exports2.decodeMap64 = decodeMap642;
@@ -9300,6 +9308,9 @@ var require_tag = __commonJS({
       _0uint.encodeUintValue(buf2, token.Type.tag.majorEncoded, token$1.value);
     }
     encodeTag2.compareTokens = _0uint.encodeUint.compareTokens;
+    encodeTag2.encodedSize = function encodedSize9(token2) {
+      return _0uint.encodeUintValue.encodedSize(token2.value);
+    };
     exports2.decodeTag16 = decodeTag162;
     exports2.decodeTag32 = decodeTag322;
     exports2.decodeTag64 = decodeTag642;
@@ -9393,15 +9404,14 @@ var require_float = __commonJS({
         }
       }
     }
-    encodeFloat2.encodedSize = function encodedSize6(token2, options) {
+    encodeFloat2.encodedSize = function encodedSize9(token2, options) {
       const float = token2.value;
       if (float === false || float === true || float === null || float === void 0) {
         return 1;
       }
-      let decoded;
       if (!options || options.float64 !== true) {
         encodeFloat162(float);
-        decoded = readFloat162(ui8a2, 1);
+        let decoded = readFloat162(ui8a2, 1);
         if (float === decoded || Number.isNaN(float)) {
           return 3;
         }
@@ -9700,15 +9710,19 @@ var require_encode = __commonJS({
       mapSorter: mapSorter3,
       quickEncodeToken: jump2.quickEncodeToken
     };
-    var cborEncoders2 = [];
-    cborEncoders2[token.Type.uint.major] = _0uint.encodeUint;
-    cborEncoders2[token.Type.negint.major] = _1negint.encodeNegint;
-    cborEncoders2[token.Type.bytes.major] = _2bytes.encodeBytes;
-    cborEncoders2[token.Type.string.major] = _3string.encodeString;
-    cborEncoders2[token.Type.array.major] = _4array.encodeArray;
-    cborEncoders2[token.Type.map.major] = _5map.encodeMap;
-    cborEncoders2[token.Type.tag.major] = _6tag.encodeTag;
-    cborEncoders2[token.Type.float.major] = _7float.encodeFloat;
+    function makeCborEncoders2() {
+      const encoders = [];
+      encoders[token.Type.uint.major] = _0uint.encodeUint;
+      encoders[token.Type.negint.major] = _1negint.encodeNegint;
+      encoders[token.Type.bytes.major] = _2bytes.encodeBytes;
+      encoders[token.Type.string.major] = _3string.encodeString;
+      encoders[token.Type.array.major] = _4array.encodeArray;
+      encoders[token.Type.map.major] = _5map.encodeMap;
+      encoders[token.Type.tag.major] = _6tag.encodeTag;
+      encoders[token.Type.float.major] = _7float.encodeFloat;
+      return encoders;
+    }
+    var cborEncoders2 = makeCborEncoders2();
     var buf2 = new bl.Bl();
     var Ref2 = class {
       constructor(obj, parent) {
@@ -9906,6 +9920,7 @@ var require_encode = __commonJS({
           return byteUtils.asU8A(buf3.chunks[0]);
         }
       }
+      buf2.reset();
       tokensToEncoded2(buf2, tokens, encoders, options);
       return buf2.toBytes(true);
     }
@@ -9916,6 +9931,7 @@ var require_encode = __commonJS({
     exports2.Ref = Ref2;
     exports2.encode = encode12;
     exports2.encodeCustom = encodeCustom2;
+    exports2.makeCborEncoders = makeCborEncoders2;
     exports2.objectToTokens = objectToTokens2;
   }
 });
@@ -33965,9 +33981,11 @@ var Bl = class {
     this._initReuseChunk = null;
   }
   reset() {
-    this.chunks = [];
     this.cursor = 0;
     this.maxCursor = -1;
+    if (this.chunks.length) {
+      this.chunks = [];
+    }
     if (this._initReuseChunk !== null) {
       this.chunks.push(this._initReuseChunk);
       this.maxCursor = this._initReuseChunk.length - 1;
@@ -34346,6 +34364,9 @@ function encodeArray(buf2, token) {
   encodeUintValue(buf2, Type.array.majorEncoded, token.value);
 }
 encodeArray.compareTokens = encodeUint.compareTokens;
+encodeArray.encodedSize = function encodedSize5(token) {
+  return encodeUintValue.encodedSize(token.value);
+};
 
 // node_modules/cborg/esm/lib/5map.js
 function toToken4(_data, _pos, prefix, length2) {
@@ -34380,6 +34401,9 @@ function encodeMap(buf2, token) {
   encodeUintValue(buf2, Type.map.majorEncoded, token.value);
 }
 encodeMap.compareTokens = encodeUint.compareTokens;
+encodeMap.encodedSize = function encodedSize6(token) {
+  return encodeUintValue.encodedSize(token.value);
+};
 
 // node_modules/cborg/esm/lib/6tag.js
 function decodeTagCompact(_data, _pos, minor, _options) {
@@ -34401,6 +34425,9 @@ function encodeTag(buf2, token) {
   encodeUintValue(buf2, Type.tag.majorEncoded, token.value);
 }
 encodeTag.compareTokens = encodeUint.compareTokens;
+encodeTag.encodedSize = function encodedSize7(token) {
+  return encodeUintValue.encodedSize(token.value);
+};
 
 // node_modules/cborg/esm/lib/7float.js
 var MINOR_FALSE = 20;
@@ -34479,15 +34506,14 @@ function encodeFloat(buf2, token, options) {
     }
   }
 }
-encodeFloat.encodedSize = function encodedSize5(token, options) {
+encodeFloat.encodedSize = function encodedSize8(token, options) {
   const float = token.value;
   if (float === false || float === true || float === null || float === void 0) {
     return 1;
   }
-  let decoded;
   if (!options || options.float64 !== true) {
     encodeFloat16(float);
-    decoded = readFloat16(ui8a, 1);
+    let decoded = readFloat16(ui8a, 1);
     if (float === decoded || Number.isNaN(float)) {
       return 3;
     }
@@ -34740,15 +34766,19 @@ var defaultEncodeOptions = {
   mapSorter,
   quickEncodeToken
 };
-var cborEncoders = [];
-cborEncoders[Type.uint.major] = encodeUint;
-cborEncoders[Type.negint.major] = encodeNegint;
-cborEncoders[Type.bytes.major] = encodeBytes;
-cborEncoders[Type.string.major] = encodeString;
-cborEncoders[Type.array.major] = encodeArray;
-cborEncoders[Type.map.major] = encodeMap;
-cborEncoders[Type.tag.major] = encodeTag;
-cborEncoders[Type.float.major] = encodeFloat;
+function makeCborEncoders() {
+  const encoders = [];
+  encoders[Type.uint.major] = encodeUint;
+  encoders[Type.negint.major] = encodeNegint;
+  encoders[Type.bytes.major] = encodeBytes;
+  encoders[Type.string.major] = encodeString;
+  encoders[Type.array.major] = encodeArray;
+  encoders[Type.map.major] = encodeMap;
+  encoders[Type.tag.major] = encodeTag;
+  encoders[Type.float.major] = encodeFloat;
+  return encoders;
+}
+var cborEncoders = makeCborEncoders();
 var buf = new Bl();
 var Ref = class {
   constructor(obj, parent) {
@@ -34946,6 +34976,7 @@ function encodeCustom(data, encoders, options) {
       return asU8A(buf2.chunks[0]);
     }
   }
+  buf.reset();
   tokensToEncoded(buf, tokens, encoders, options);
   return buf.toBytes(true);
 }
@@ -40634,14 +40665,14 @@ async function getPlaceInQueue(data) {
   var _a;
   if (!data)
     return -1;
-  const { image, request_submit_time, priority } = data;
+  const { image, request_submit_time, priority: priority2 } = data;
   const metadata = await modelsMetadata;
   const groups = (_a = metadata[image].meta) == null ? void 0 : _a.pollinator_group;
   const competing_images = Object.keys(metadata).filter((i) => {
     var _a2, _b;
     return ((_b = (_a2 = metadata[i]) == null ? void 0 : _a2.meta.pollinator_group) == null ? void 0 : _b.filter((g) => groups.includes(g)).length) > 0;
   });
-  return await client_default.from(DB_NAME).select("*", { count: "exact" }).eq("processing_started", false).lte("request_submit_time", request_submit_time).in("image", competing_images).gte("priority", priority).then(({ count }) => count);
+  return await client_default.from(DB_NAME).select("*", { count: "exact" }).eq("processing_started", false).lte("request_submit_time", request_submit_time).in("image", competing_images).gte("priority", priority2).then(({ count }) => count);
 }
 function subscribePollen(input, callback) {
   debug9("getting first pollen using select", input);
@@ -40706,15 +40737,17 @@ async function dispatch(inputs2, image = "voodoohop/dalle-playground", params = 
 var awsPollenRunner_default = runModelOnce;
 
 // src/runModel-cli.js
-var [, , model, inputsString, onlyDispatch] = process.argv;
+var [, , model, inputsString, stringPriority = "1"] = process.argv;
+var priority = parseInt(stringPriority);
 var inputs = JSON.parse(inputsString);
+var onlyDispatch = false;
 async function run(model2, inputs2) {
   if (onlyDispatch) {
-    const inputCid = await dispatch(inputs2, model2, { priority: 1 });
+    const inputCid = await dispatch(inputs2, model2, { priority });
     console.log(inputCid);
     return inputCid;
   }
-  const imageUrl = await awsPollenRunner_default(inputs2, model2, false, { priority: 1 });
+  const imageUrl = await awsPollenRunner_default(inputs2, model2, false, { priority });
   console.log(imageUrl);
   process.exit(0);
 }
