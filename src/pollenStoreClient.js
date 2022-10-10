@@ -158,7 +158,9 @@ async function* fetchWithWeb3storageFallback(cid,func=recursive,skipWeb3storage=
             if (importedCID) {
                 if (importedCID.toString() !== cid.toString()) 
                     console.error("imported CID does not match original CID", importedCID, cid,". Some annoyance with different block sizes. Update the CID in the database?");
-                return await fetchWithWeb3storageFallback(importedCID, func, true);
+                
+                const results = await fetchWithWeb3storageFallback(importedCID, func, true);
+                yield* results;
             } else {
                 throw new Error("CID not found");
             }
