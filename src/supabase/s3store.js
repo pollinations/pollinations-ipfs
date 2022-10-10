@@ -1,4 +1,4 @@
-import AWS from 'aws-sdk';
+import { S3 } from 'aws-sdk/clients/s3';
 // create S3 instance
 import Debug from 'debug';
 
@@ -6,7 +6,7 @@ import Debug from 'debug';
 import { Errors } from 'blockstore-core';
 import { BaseBlockstore } from 'blockstore-core/base';
 
-const s3 = new AWS.S3();
+const s3 = new S3();
 
 const Bucket = "pollinations-ipfs";
 
