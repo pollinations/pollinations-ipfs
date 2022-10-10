@@ -78361,7 +78361,6 @@ var Errors = { ...errors_exports };
 var s3 = new import_client_s3.S3Client();
 var Bucket3 = "pollinations-ipfs";
 var debug4 = (0, import_debug4.default)("s3store");
-debug4("s3head", s3.headObject);
 var S3Blockstore = class extends BaseBlockstore {
   constructor() {
     super();
