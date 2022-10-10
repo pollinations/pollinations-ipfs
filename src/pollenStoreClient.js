@@ -67,17 +67,15 @@ function objectToFiles(obj, path="") {
 }
 
 
-// // // const cid = await importJSON({a: {b:  "hello"}})
-try {
-    // const importedCID = await importFromWeb3Storage("QmVh1bMaeq5NwjWZPL8xXz6tUBiQcPshkzhwHesgS3Y8Nt");
+// // const importedCID = await importFromWeb3Storage("QmVh1bMaeq5NwjWZPL8xXz6tUBiQcPshkzhwHesgS3Y8Nt");
+// try {
+// let resultObj = await exportCID("Qmb9eA8MNGnXu5d2hEpoSAJDwqRYx2drE7q6bzj6gkn4VB");
+// // //     // await getDirectory(entry.unixfs);
+// console.log(resultObj)
 
-let resultObj = await exportCID("QmVh1bMaeq5NwjWZPL8xXz6tUBiQcPshkzhwHesgS3Y8Nt");
-// //     // await getDirectory(entry.unixfs);
-console.log(resultObj)
-}
-catch (e) {
-    console.error(e);
-}
+// } catch (e) {
+//     console.error("erroir", e)
+// }
 export async function exportCIDBuffer(cid) {
     const entries = await fetchWithWeb3storageFallback(cid);
     for await (const file of entries) {
@@ -144,9 +142,10 @@ function parse(content) {
 
 
 
-async function fetchWithWeb3storageFallback(cid,func=recursive,skipWeb3storage=false) {
+async function* fetchWithWeb3storageFallback(cid,func=recursive,skipWeb3storage=false) {
     try {
-        return await func(cid, blockstore);
+        const results = await func(cid, blockstore);
+        yield* results;
     } catch (e) {
         // check if exception is ERR_NOT_FOUND
         debug("Error fetching from S3", e.code);
@@ -157,7 +156,7 @@ async function fetchWithWeb3storageFallback(cid,func=recursive,skipWeb3storage=f
             debug("imported from web3.storage", importedCID);
             
             if (importedCID) {
-                if (importedCID !== cid) 
+                if (importedCID.toString() !== cid.toString()) 
                     console.error("imported CID does not match original CID", importedCID, cid,". Some annoyance with different block sizes. Update the CID in the database?");
                 return await fetchWithWeb3storageFallback(importedCID, func, true);
             } else {
