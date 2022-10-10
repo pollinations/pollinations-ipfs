@@ -1,4 +1,4 @@
-import { S3 } from 'aws-sdk/clients/s3';
+import { GetOjectCommand, HeadObjectCommand, PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 // create S3 instance
 import Debug from 'debug';
 
@@ -6,11 +6,13 @@ import Debug from 'debug';
 import { Errors } from 'blockstore-core';
 import { BaseBlockstore } from 'blockstore-core/base';
 
-const s3 = new S3();
+const s3 = new S3Client();
 
 const Bucket = "pollinations-ipfs";
 
 const debug = Debug("s3store");
+
+// debug("s3head", s3.headObject)
 
 class S3Blockstore extends BaseBlockstore {
     constructor () {
@@ -41,7 +43,7 @@ class S3Blockstore extends BaseBlockstore {
             Body: val
         };
 
-        debug("put result", await s3.putObject(params).promise());
+        debug("put result", await await s3.send(new PutObjectCommand(params)));
     }
 
     async get (key, options) {
@@ -57,7 +59,7 @@ class S3Blockstore extends BaseBlockstore {
         };
         // debug("get", key, params)
         try {
-            const { Body } = await s3.getObject(params).promise();
+            const { Body } = await s3.send(new GetOjectCommand(params));
             debug("get from s3", key)
 
             // convert the boddy which is a buffer to a UInt8Array
@@ -78,7 +80,7 @@ class S3Blockstore extends BaseBlockstore {
             Key: key.toString()
         };
         try {
-            await s3.headObject(params).promise();
+            await s3.send(new HeadObjectCommand(params));
             return true;
         } catch (err) {
             return false;
