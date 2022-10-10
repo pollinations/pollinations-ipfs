@@ -2,7 +2,7 @@ import s3client from '@aws-sdk/client-s3';
 // create S3 instance
 import Debug from 'debug';
 
-const  { GetOjectCommand, HeadObjectCommand, PutObjectCommand, S3Client } = s3client;
+const  { GetObjectCommand, HeadObjectCommand, PutObjectCommand, S3Client } = s3client;
 
 import { Errors } from 'blockstore-core';
 import { BaseBlockstore } from 'blockstore-core/base';
@@ -60,12 +60,15 @@ class S3Blockstore extends BaseBlockstore {
         };
         // debug("get", key, params)
         try {
-            const { Body } = await s3.send(new GetOjectCommand(params));
-            debug("get from s3", key)
+            const { Body } = await s3.send(new GetObjectCommand(params));
+
+            
+            debug("get from s3", key.toString())
 
             // convert the boddy which is a buffer to a UInt8Array
-            return new Uint8Array(Body);
+            return new Uint8Array(await streamToBuffer(Body));
         } catch (e) {
+            console.error("error getting", e)
             throw Errors.notFoundError()
         }
     }
@@ -143,7 +146,15 @@ export default S3Blockstore;
 
 
 
-
+const streamToBuffer = (stream) => {
+    // if you are using node version < 17.5.0
+return new Promise((resolve, reject) => {
+    const chunks = []
+    stream.on('data', chunk => chunks.push(chunk))
+    stream.once('end', () => resolve(Buffer.concat(chunks)))
+    stream.once('error', reject)
+})
+}
 
 
 // class MemoryBlockstore extends BaseBlockstore {

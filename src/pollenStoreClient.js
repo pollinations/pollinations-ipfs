@@ -68,11 +68,16 @@ function objectToFiles(obj, path="") {
 
 
 // // // const cid = await importJSON({a: {b:  "hello"}})
+try {
+    // const importedCID = await importFromWeb3Storage("QmVh1bMaeq5NwjWZPL8xXz6tUBiQcPshkzhwHesgS3Y8Nt");
 
-// let resultObj = await exportCID("QmVh1bMaeq5NwjWZPL8xXz6tUBiQcPshkzhwHesgS3Y8Nt");
-// // //     // await getDirectory(entry.unixfs);
-// console.log(resultObj)
-
+let resultObj = await exportCID("QmVh1bMaeq5NwjWZPL8xXz6tUBiQcPshkzhwHesgS3Y8Nt");
+// //     // await getDirectory(entry.unixfs);
+console.log(resultObj)
+}
+catch (e) {
+    console.error(e);
+}
 export async function exportCIDBuffer(cid) {
     const entries = await fetchWithWeb3storageFallback(cid);
     for await (const file of entries) {
@@ -144,6 +149,7 @@ async function fetchWithWeb3storageFallback(cid,func=recursive,skipWeb3storage=f
         return await func(cid, blockstore);
     } catch (e) {
         // check if exception is ERR_NOT_FOUND
+        debug("Error fetching from S3", e.code);
     if (e.code === "ERR_NOT_FOUND" && !skipWeb3storage) {
             debug("cid not found locally. fetching from web3.storage");
             const importedCID = await importFromWeb3Storage(cid);
