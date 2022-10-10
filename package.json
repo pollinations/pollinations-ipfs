@@ -37,7 +37,6 @@
     "event-iterator": "^2.0.0",
     "fs-extra": "^10.0.0",
     "ipfs-http-client": "^56.0.3",
-    "ipfs-unixfs-importer": "https://gitpkg.now.sh/pollinations/js-ipfs-unixfs/packages/ipfs-unixfs-importer?master",
     "is-ipfs": "^6.0.2",
     "is-port-reachable": "^3.0.0",
     "it-all": "^1.0.5",
