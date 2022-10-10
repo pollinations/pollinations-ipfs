@@ -67,15 +67,15 @@ function objectToFiles(obj, path="") {
 }
 
 
-// // const importedCID = await importFromWeb3Storage("QmVh1bMaeq5NwjWZPL8xXz6tUBiQcPshkzhwHesgS3Y8Nt");
-// try {
-// let resultObj = await exportCID("Qmb9eA8MNGnXu5d2hEpoSAJDwqRYx2drE7q6bzj6gkn4VB");
-// // //     // await getDirectory(entry.unixfs);
-// console.log(resultObj)
+// const importedCID = await importFromWeb3Storage("QmVh1bMaeq5NwjWZPL8xXz6tUBiQcPshkzhwHesgS3Y8Nt");
+try {
+let resultObj = await exportCID("QmbhSy19HrWaMT5Hmh14xzTwubbJV6LKcKoifvYf9Bqqod");
+// //     // await getDirectory(entry.unixfs);
+console.log(resultObj)
 
-// } catch (e) {
-//     console.error("erroir", e)
-// }
+} catch (e) {
+    console.error("erroir", e)
+}
 export async function exportCIDBuffer(cid) {
     const entries = await fetchWithWeb3storageFallback(cid);
     for await (const file of entries) {
@@ -106,15 +106,25 @@ export async function exportCID(cid) {
     let resultObj = {};
     
     for await (const file of entries) {
-        debug("exporting file", file.path);
+        debug("exporting file", file);
         if (file.type !== "directory") {
             
             let value = getWebURL(file.cid);
 
             // if there is no extension read the file as a JSON string
-            if (!extname(file.path)) 
-                value = parse(await extractContent(file));
-
+            if (!extname(file.path)) {
+                value = await extractContent(file);
+                if (file.path.split("/").length === 1) { 
+                    debug("result is buffer. returning directly")
+                    return value.buffer
+                } else {
+                    try {
+                        value = parse(value);
+                    } catch (e) {
+                        debug("Could not parse file", file.path, "as JSON. Returning raw.");
+                    }
+                }
+            }
             resultObj = assocPath(file.path.split("/"), value, resultObj);
         }
 
