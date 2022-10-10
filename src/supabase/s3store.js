@@ -1,7 +1,8 @@
-import { GetOjectCommand, HeadObjectCommand, PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
+import s3client from '@aws-sdk/client-s3';
 // create S3 instance
 import Debug from 'debug';
 
+const  { GetOjectCommand, HeadObjectCommand, PutObjectCommand, S3Client } = s3client;
 
 import { Errors } from 'blockstore-core';
 import { BaseBlockstore } from 'blockstore-core/base';
