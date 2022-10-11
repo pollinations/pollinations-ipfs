@@ -2,13 +2,12 @@ import runModel, { dispatch } from "./awsPollenRunner";
 
 // first argument is model name, second inputs
 
-const [, , model, inputsString, stringPriority="1"] = process.argv;
+const [, , model, inputsString, stringPriority="1", onlyDispatch=false] = process.argv;
 
 
 const priority = parseInt(stringPriority);
 const inputs = JSON.parse(inputsString);
 
-const onlyDispatch = false;
 
 async function run(model, inputs) {
   if (onlyDispatch) {

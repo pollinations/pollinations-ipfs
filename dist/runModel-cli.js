@@ -40737,10 +40737,9 @@ async function dispatch(inputs2, image = "voodoohop/dalle-playground", params = 
 var awsPollenRunner_default = runModelOnce;
 
 // src/runModel-cli.js
-var [, , model, inputsString, stringPriority = "1"] = process.argv;
+var [, , model, inputsString, stringPriority = "1", onlyDispatch = false] = process.argv;
 var priority = parseInt(stringPriority);
 var inputs = JSON.parse(inputsString);
-var onlyDispatch = false;
 async function run(model2, inputs2) {
   if (onlyDispatch) {
     const inputCid = await dispatch(inputs2, model2, { priority });
