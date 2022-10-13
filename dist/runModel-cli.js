@@ -40715,7 +40715,6 @@ async function dispatchAndReturnPollen(params, returnImmediately = false) {
 // src/awsPollenRunner.js
 var debug10 = (0, import_debug10.default)("pollen");
 var runModelOnce = async (inputs2, image = "voodoohop/dalle-playground", returnImmediately = false, params = {}) => {
-  var _a;
   debug10("running model", inputs2, image);
   inputs2 = { ...inputs2, model_image: image };
   const inputCID = await UploadInputstoIPFS(inputs2, writer());
@@ -40725,8 +40724,6 @@ var runModelOnce = async (inputs2, image = "voodoohop/dalle-playground", returnI
     return null;
   const data = await IPFSWebState(outputCID);
   debug10("got and returning output data", data);
-  if (!((_a = data == null ? void 0 : data.output) == null ? void 0 : _a.done))
-    throw new Error("output not done");
   return data;
 };
 async function dispatch(inputs2, image = "voodoohop/dalle-playground", params = {}) {
