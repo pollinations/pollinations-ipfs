@@ -1,10 +1,9 @@
 
 import Debug from "debug";
 import json5 from "json5";
+import fetch from "node-fetch";
 import path from "path-browserify";
 import { getWebURL, writer } from "./ipfsConnector.js";
-import { getIPFSState } from "./ipfsState.js";
-
 const { extname } = path;
 const { parse } = json5;
 
@@ -36,9 +35,12 @@ const fetchAndMakeURL = async ({ name, cid, text }) => {
 }
 
 // Return IPFS state. Converts all JSON/text content to objects and binary cids to URLs.
-export const IPFSWebState = (contentID, skipCache = false) => {
+export const IPFSWebState = async contentID => {
     debug("Getting state for CID", contentID)
-    return getIPFSState(contentID, fetchAndMakeURL, skipCache);
+    const response = await fetch(`https://bep5vapqfb.execute-api.us-east-1.amazonaws.com/dev/?cid={contentID}`);
+    const json = await response.json();
+    debug("Got state", json);
+    return json;
 }
 
 export const getWriter = cid => {
