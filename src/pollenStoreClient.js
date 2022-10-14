@@ -205,7 +205,7 @@ const dataFetchers = (file) => {
     return{
       json: async () => parse(await extractContent(file)),
       text: async () => contentToString(await extractContent(file)),
-      buffer: async () => await extractContent(file).buffer
+      buffer: async () => (await extractContent(file)).buffer
     };
 };
 
@@ -213,7 +213,7 @@ const dataFetchers = (file) => {
 
 // const importedCID = await importFromWeb3Storage("QmVh1bMaeq5NwjWZPL8xXz6tUBiQcPshkzhwHesgS3Y8Nt");
 // try {
-//     let resultObj = await exportCID("QmNsDSF9Zz2gEbKJ7hQr7sLTyYVzCv41oGuyjeLLkbfcpd");
+//     let resultObj = await exportCID("QmXzEKNkacq3qPohCFwqs8NXZGvtfDL8B4KZyLeKSTdh3J");
 //     // //     // await getDirectory(entry.unixfs);
 //     console.log(resultObj)
     
