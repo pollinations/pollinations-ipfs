@@ -46949,7 +46949,7 @@ var require_GetObjectCommand = __commonJS({
     var smithy_client_1 = require_dist_cjs7();
     var models_0_1 = require_models_0();
     var Aws_restXml_1 = require_Aws_restXml();
-    var GetObjectCommand = class extends smithy_client_1.Command {
+    var GetObjectCommand2 = class extends smithy_client_1.Command {
       constructor(input) {
         super();
         this.input = input;
@@ -46985,7 +46985,7 @@ var require_GetObjectCommand = __commonJS({
         return (0, Aws_restXml_1.deserializeAws_restXmlGetObjectCommand)(output, context);
       }
     };
-    exports2.GetObjectCommand = GetObjectCommand;
+    exports2.GetObjectCommand = GetObjectCommand2;
   }
 });
 
@@ -78358,7 +78358,8 @@ var BaseBlockstore = class {
 var Errors = { ...errors_exports };
 
 // src/supabase/s3store.js
-var s3 = new import_client_s3.S3Client();
+var { GetObjectCommand, HeadObjectCommand, PutObjectCommand, S3Client } = import_client_s3.default;
+var s3 = new S3Client();
 var Bucket3 = "pollinations-ipfs";
 var debug4 = (0, import_debug4.default)("s3store");
 var S3Blockstore = class extends BaseBlockstore {
@@ -78383,7 +78384,7 @@ var S3Blockstore = class extends BaseBlockstore {
       Key: key.toString(),
       Body: val
     };
-    debug4("put result", await await s3.send(new import_client_s3.PutObjectCommand(params)));
+    debug4("put result", await await s3.send(new PutObjectCommand(params)));
   }
   async get(key, options) {
     if (this.cache[key]) {
@@ -78395,10 +78396,11 @@ var S3Blockstore = class extends BaseBlockstore {
       Key: key.toString()
     };
     try {
-      const { Body: Body2 } = await s3.send(new import_client_s3.GetOjectCommand(params));
-      debug4("get from s3", key);
-      return new Uint8Array(Body2);
+      const { Body: Body2 } = await s3.send(new GetObjectCommand(params));
+      debug4("get from s3", key.toString());
+      return new Uint8Array(await streamToBuffer(Body2));
     } catch (e) {
+      console.error("error getting", e);
       throw Errors.notFoundError();
     }
   }
@@ -78411,7 +78413,7 @@ var S3Blockstore = class extends BaseBlockstore {
       Key: key.toString()
     };
     try {
-      await s3.send(new import_client_s3.HeadObjectCommand(params));
+      await s3.send(new HeadObjectCommand(params));
       return true;
     } catch (err) {
       return false;
@@ -78445,6 +78447,14 @@ var S3Blockstore = class extends BaseBlockstore {
   }
 };
 var s3store_default = S3Blockstore;
+var streamToBuffer = (stream) => {
+  return new Promise((resolve10, reject) => {
+    const chunks = [];
+    stream.on("data", (chunk) => chunks.push(chunk));
+    stream.once("end", () => resolve10(Buffer.concat(chunks)));
+    stream.once("error", reject);
+  });
+};
 
 // src/supabase/web3storage.js
 var import_debug5 = __toESM(require_src(), 1);
@@ -83738,18 +83748,21 @@ async function extractContent(file) {
   }
   return new Uint8Array(content);
 }
-async function fetchWithWeb3storageFallback(cid2, func = recursive, skipWeb3storage = false) {
+async function* fetchWithWeb3storageFallback(cid2, func = recursive, skipWeb3storage = false) {
   try {
-    return await func(cid2, blockstore2);
+    const results = await func(cid2, blockstore2);
+    yield* results;
   } catch (e) {
+    debug6("Error fetching from S3", e.code);
     if (e.code === "ERR_NOT_FOUND" && !skipWeb3storage) {
       debug6("cid not found locally. fetching from web3.storage");
       const importedCID = await importFromWeb3Storage(cid2);
       debug6("imported from web3.storage", importedCID);
       if (importedCID) {
-        if (importedCID !== cid2)
+        if (importedCID.toString() !== cid2.toString())
           console.error("imported CID does not match original CID", importedCID, cid2, ". Some annoyance with different block sizes. Update the CID in the database?");
-        return await fetchWithWeb3storageFallback(importedCID, func, true);
+        const results = await fetchWithWeb3storageFallback(importedCID, func, true);
+        yield* results;
       } else {
         throw new Error("CID not found");
       }

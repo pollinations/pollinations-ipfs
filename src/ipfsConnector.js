@@ -73,7 +73,7 @@ export function writer(initialRootCID = null) {
 
         const cid = await importer([])
         // return the root CID
-        console.log("returning root CID", cid)
+        debug("returning root CID", cid)
         return cid; 
     };
 
@@ -188,7 +188,7 @@ async function optionallyResolveIPNS(client, cid) {
 }
 
 async function ipfsMkdir(importer, path) {
-    console.log("Creating directory", path)
+    debug("Creating directory", path)
     return await importer([{path, type: "directory"}])
 }
 

@@ -67,15 +67,15 @@ function objectToFiles(obj, path="") {
 }
 
 
-// const importedCID = await importFromWeb3Storage("QmVh1bMaeq5NwjWZPL8xXz6tUBiQcPshkzhwHesgS3Y8Nt");
-try {
-let resultObj = await exportCID("QmbhSy19HrWaMT5Hmh14xzTwubbJV6LKcKoifvYf9Bqqod");
-// //     // await getDirectory(entry.unixfs);
-console.log(resultObj)
+// // const importedCID = await importFromWeb3Storage("QmVh1bMaeq5NwjWZPL8xXz6tUBiQcPshkzhwHesgS3Y8Nt");
+// try {
+// let resultObj = await exportCID("QmbhSy19HrWaMT5Hmh14xzTwubbJV6LKcKoifvYf9Bqqod");
+// // //     // await getDirectory(entry.unixfs);
+// console.log(resultObj)
 
-} catch (e) {
-    console.error("erroir", e)
-}
+// } catch (e) {
+//     console.error("erroir", e)
+// }
 export async function exportCIDBuffer(cid) {
     const entries = await fetchWithWeb3storageFallback(cid);
     for await (const file of entries) {
