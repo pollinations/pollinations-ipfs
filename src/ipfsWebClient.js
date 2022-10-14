@@ -42,7 +42,7 @@ export const updateInput = async inputs => {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(inputs)
+        body: JSON.stringify({inputs})
     });
     
     const cid = await response.text();
