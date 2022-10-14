@@ -37,7 +37,7 @@ const fetchAndMakeURL = async ({ name, cid, text }) => {
 // Return IPFS state. Converts all JSON/text content to objects and binary cids to URLs.
 export const IPFSWebState = async contentID => {
     debug("Getting state for CID", contentID)
-    const response = await fetch(`https://bep5vapqfb.execute-api.us-east-1.amazonaws.com/dev/?cid={contentID}`);
+    const response = await fetch(`https://bep5vapqfb.execute-api.us-east-1.amazonaws.com/dev/?cid=${contentID}`);
     const json = await response.json();
     debug("Got state", json);
     return json;
