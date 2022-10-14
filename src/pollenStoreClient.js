@@ -211,12 +211,13 @@ const dataFetchers = (file) => {
 
 
 
-// const importedCID = await importFromWeb3Storage("QmVh1bMaeq5NwjWZPL8xXz6tUBiQcPshkzhwHesgS3Y8Nt");
+// // const importedCID = await importFromWeb3Storage("QmVh1bMaeq5NwjWZPL8xXz6tUBiQcPshkzhwHesgS3Y8Nt");
 // try {
 //     let resultObj = await exportCID("QmXzEKNkacq3qPohCFwqs8NXZGvtfDL8B4KZyLeKSTdh3J");
 //     // //     // await getDirectory(entry.unixfs);
 //     console.log(resultObj)
-    
+//     const {mime} = await fileTypeFromBuffer(resultObj);
+//     console.log(mime)
 // } catch (e) {
 //     console.error("erroir", e)
 // }

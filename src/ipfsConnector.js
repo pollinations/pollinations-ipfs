@@ -124,8 +124,8 @@ const ipfsPin = async (client, cid) => {
 }
 
 export const getWebURL = (cid, name = null) => {
-    const filename = name ? `?filename=${name}` : '';
-    return `https://bep5vapqfb.execute-api.us-east-1.amazonaws.com/dev/?cid=${cid.toString()}&filename=${filename}`
+    const filename = name ? `&filename=${name}` : '';
+    return `https://bep5vapqfb.execute-api.us-east-1.amazonaws.com/dev/?cid=${cid.toString()}${filename}`
 };
 
 export const getIPNSURL = (id) => {
