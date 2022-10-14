@@ -86875,6 +86875,7 @@ var storage = new Web3Storage({
 
 // src/pollenStoreClient.js
 var debug7 = (0, import_debug7.default)("pollenStoreClient");
+import_debug7.default.enable("*");
 var { extname } = import_path_browserify.default;
 var blockstore2 = new s3store_default();
 var importOptions = {
