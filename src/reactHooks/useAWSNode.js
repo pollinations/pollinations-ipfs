@@ -1,6 +1,6 @@
 import Debug from "debug";
 import { useEffect, useState } from "react";
-import { UploadInputstoIPFS } from "../aws.js";
+import { updateInput } from "../ipfsWebClient.js";
 import { dispatchPollen, subscribePollen, updatePollen } from "../supabase/pollen.js";
 import useIPFS from "./useIPFS.js";
 
@@ -37,7 +37,7 @@ const useAWSNode = ({ nodeID: paramsNodeID, contentID: paramsContentID } ) => {
 
     const submitToAWSAndSetState = async (values, notebook, dev, params={}) => {
         setNodeID(LOADING_NODEID);
-        const inputContentID = await UploadInputstoIPFS({...values, model_image: notebook}, ipfsWriter);
+        const inputContentID = await updateInput({...values, model_image: notebook});
         debug("input content ID", inputContentID);
         dispatchPollen({input: inputContentID, image: notebook ,...params });
         setNodeID(inputContentID);
