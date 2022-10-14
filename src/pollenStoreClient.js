@@ -6,10 +6,11 @@ import { getWebURL } from './ipfsConnector.js';
 const debug = Debug('pollenStoreClient');
 
 import json5 from "json5";
-import { extname } from 'path-browserify';
+import path from 'path-browserify';
 import S3Blockstore from './supabase/s3store.js';
 import { importFromWeb3Storage } from './supabase/web3storage.js';
 
+const { extname } = path;
 
 const blockstore = new S3Blockstore()
 
@@ -212,7 +213,7 @@ const dataFetchers = (file) => {
 
 // const importedCID = await importFromWeb3Storage("QmVh1bMaeq5NwjWZPL8xXz6tUBiQcPshkzhwHesgS3Y8Nt");
 // try {
-//     let resultObj = await exportCID("QmZEqHamLYUnHBDvnq282ag5voWg5fDQxfS1Y1msurET1T");
+//     let resultObj = await exportCID("QmNsDSF9Zz2gEbKJ7hQr7sLTyYVzCv41oGuyjeLLkbfcpd");
 //     // //     // await getDirectory(entry.unixfs);
 //     console.log(resultObj)
     
