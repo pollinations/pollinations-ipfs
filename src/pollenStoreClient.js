@@ -1,12 +1,12 @@
 import Debug from 'debug';
 import { recursive } from 'ipfs-unixfs-exporter';
 import { importer } from 'ipfs-unixfs-importer';
-import { extname } from 'path';
 import { assocPath } from 'ramda';
 import { getWebURL } from './ipfsConnector.js';
 const debug = Debug('pollenStoreClient');
 
 import json5 from "json5";
+import { extname } from 'path-browserify';
 import S3Blockstore from './supabase/s3store.js';
 import { importFromWeb3Storage } from './supabase/web3storage.js';
 
