@@ -5,7 +5,7 @@ import { writer } from './ipfsConnector.js';
 import { IPFSWebState } from './ipfsWebClient.js';
 import { dispatchAndReturnPollen, dispatchPollen, dispatchPollenGenerator } from './supabase/pollen.js';
 
-export { getPollens, updatePollen } from './supabase/pollen.js';
+import { getPollens as getPollens1, updatePollen as updatePollen1 } from './supabase/pollen.js';
  
 const debug = Debug("pollen");
 
@@ -13,7 +13,8 @@ const debug = Debug("pollen");
 
 // }
 
-
+export const getPollens = getPollens1;
+export const updatePollen = updatePollen1;
 
 const runModelOnce = async (inputs, image="voodoohop/dalle-playground", returnImmediately=false, params={}) => {
   debug("running model", inputs, image);
