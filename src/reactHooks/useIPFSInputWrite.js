@@ -2,10 +2,10 @@
 
 import Debug from "debug";
 import { useCallback } from "react";
-import { getWriter, updateInput } from "../ipfsWebClient.js"
+import { updateInput } from "../ipfsWebClient.js";
 
 
-const debug = Debug("useIPFSWrite");
+const debug = Debug("useIPFSInputWrite");
 
 export default (ipfs, node) => {
 
@@ -16,9 +16,8 @@ export default (ipfs, node) => {
     const dispatch = useCallback(async inputState => {
 
 
-        const writer = getWriter();
         debug("dispatching", ipfs)
-        const newContentID = await updateInput(writer, { ...ipfs.input, ...inputState })
+        const newContentID = await updateInput({ ...ipfs.input, ...inputState })
 
         debug("added input", inputState, "got cid", newContentID, "to state")
 
