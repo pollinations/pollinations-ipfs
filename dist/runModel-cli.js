@@ -85370,6 +85370,8 @@ async function importJSON(inputs2) {
 function objectToFiles(obj, path4 = "") {
   const result = [];
   for (const key of Object.keys(obj)) {
+    if (key === ".cid")
+      continue;
     const value = obj[key];
     if (typeof value === "object") {
       result.push(...objectToFiles(value, `${path4}/${key}`));

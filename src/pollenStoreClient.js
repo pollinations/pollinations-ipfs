@@ -58,7 +58,13 @@ export function pollenImporter() {
 function objectToFiles(obj, path="") {  
     const result = [];
     for (const key of Object.keys(obj)) {
-        const value = obj[key];
+        
+        // the .cid property was added to allow easier caching and json diffs to consumers
+        // it is not part of the actual data
+        if (key === ".cid")
+            continue;
+        
+            const value = obj[key];
         if (typeof value === "object") {
             result.push(...objectToFiles(value, `${path}/${key}`))
         } else {
