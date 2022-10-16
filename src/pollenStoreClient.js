@@ -9,7 +9,7 @@ import json5 from "json5";
 import path from 'path-browserify';
 import S3Blockstore from './supabase/s3store.js';
 import { importFromWeb3Storage } from './supabase/web3storage.js';
-Debug.enable("*");
+// Debug.enable("*");
 const { extname } = path;
 
 const blockstore = new S3Blockstore()
@@ -108,9 +108,14 @@ export async function exportCID(cid, processor=null) {
 
     let resultObj = {};
     
+    const cidWithoutEndingSlash = cid.replace(/\/$/, "");
     for await (const file of entries) {
         debug("exporting file", file.name);
-        const pathArray = file.path.split("/").slice(1);
+        
+        // remove the input cid from the path
+        const pathArray = file.path.replace(cidWithoutEndingSlash,"").split("/").slice(1);
+        
+        debug("path array", file.path, pathArray)
         if (file.type !== "directory") {
 
             let value = await processFile({

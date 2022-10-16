@@ -80067,7 +80067,9 @@ var S3Blockstore = class extends BaseBlockstore {
     try {
       const { Body: Body2 } = await s3.send(new import_client_s3.GetObjectCommand(params));
       debug7("get from s3", key.toString());
-      return new Uint8Array(await streamToBuffer(Body2));
+      const result = new Uint8Array(await streamToBuffer(Body2));
+      this.cache[key] = result;
+      return result;
     } catch (e) {
       console.error("error getting", e);
       throw Errors.notFoundError();
@@ -85352,7 +85354,6 @@ var storage = new Web3Storage({
 
 // src/pollenStoreClient.js
 var debug9 = (0, import_debug9.default)("pollenStoreClient");
-import_debug9.default.enable("*");
 var { extname: extname2 } = import_path_browserify3.default;
 var blockstore2 = new s3store_default();
 var importOptions = {

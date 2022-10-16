@@ -64,7 +64,10 @@ class S3Blockstore extends BaseBlockstore {
             debug("get from s3", key.toString())
 
             // convert the boddy which is a buffer to a UInt8Array
-            return new Uint8Array(await streamToBuffer(Body));
+            const result = new Uint8Array(await streamToBuffer(Body));
+            this.cache[key] = result;
+            return result;
+            
         } catch (e) {
             console.error("error getting", e)
             throw Errors.notFoundError()
