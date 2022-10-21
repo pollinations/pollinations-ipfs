@@ -77765,7 +77765,7 @@ var runModelOnce = async (inputs2, image = "voodoohop/dalle-playground", returnI
   var _a;
   debug6("running model", inputs2, image);
   inputs2 = { ...inputs2, model_image: image };
-  const inputCID = await importJSON(inputs2);
+  const inputCID = await importJSON({ input: inputs2 });
   debug6("got input content ID", inputCID);
   const outputCID = await dispatchAndReturnPollen({ input: inputCID.toString(), image, ...params }, returnImmediately);
   if (!outputCID)
@@ -77777,7 +77777,7 @@ var runModelOnce = async (inputs2, image = "voodoohop/dalle-playground", returnI
   return data;
 };
 async function dispatch(inputs2, image, params = {}) {
-  const inputCID = await importJSON({ ...inputs2, model_image: image });
+  const inputCID = await importJSON({ input: { ...inputs2, model_image: image } });
   await dispatchPollen({ input: inputCID, image, ...params });
   return inputCID;
 }
