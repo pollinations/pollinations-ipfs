@@ -132,7 +132,7 @@ export async function dispatchPollenGenerator(params) {
 
 // returnImmediately true means we don't wait for the pollen to be done if it was not finished yet
 export async function dispatchAndReturnPollen(params, returnImmediately=false) {
-        debug("disopathing pollen", params);
+        debug("dispatching pollen", params);
         dispatchPollen(params);
         
         if (returnImmediately)

@@ -18,10 +18,10 @@ export const updatePollen = updatePollen1;
 const runModelOnce = async (inputs, image="voodoohop/dalle-playground", returnImmediately=false, params={}) => {
   debug("running model", inputs, image);
   inputs = {...inputs, model_image: image};
-  const inputCID = await importJSON(inputs);
+  const inputCID = await importJSON({input: inputs});
   debug("got input content ID", inputCID);
   
-  const outputCID = await dispatchAndReturnPollen({input: inputCID, image, ...params }, returnImmediately);
+  const outputCID = await dispatchAndReturnPollen({input: inputCID.toString(), image, ...params }, returnImmediately);
   if (!outputCID)
     return null;
   const data = await IPFSWebState(outputCID);
@@ -34,7 +34,7 @@ const runModelOnce = async (inputs, image="voodoohop/dalle-playground", returnIm
 }
 
 export async function dispatch(inputs, image, params={}) {
-  const inputCID = await importJSON({...inputs, model_image: image});
+  const inputCID = await importJSON({input: {...inputs, model_image: image}});
   await dispatchPollen({input: inputCID, image, ...params });
   return inputCID;
 }
@@ -43,7 +43,7 @@ export async function* runModelGenerator(inputs, image, params={}) {
   debug("running model", image);
   inputs = {...inputs, model_image:image};
 
-  const inputCID = await importJSON(inputs);
+  const inputCID = await importJSON({input: inputs});
   debug("got input content ID", inputCID);
   
   const pollenStream = await dispatchPollenGenerator({input: inputCID, image, ...params })

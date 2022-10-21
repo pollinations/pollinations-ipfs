@@ -39,7 +39,7 @@ const useAWSNode = ({ nodeID: paramsNodeID, contentID: paramsContentID } ) => {
         setNodeID(LOADING_NODEID);
         const inputContentID = await updateInput({...values, model_image: notebook});
         debug("input content ID", inputContentID);
-        dispatchPollen({input: inputContentID, image: notebook ,...params });
+        dispatchPollen({input: inputContentID.toString(), image: notebook ,...params });
         setNodeID(inputContentID);
         setContentID(inputContentID);
         return { nodeID:inputContentID, contentID: inputContentID };

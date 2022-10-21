@@ -64138,7 +64138,7 @@ async function getPollen(input) {
 }
 async function dispatchAndReturnPollen(params, returnImmediately = false) {
   var _a;
-  debug("disopathing pollen", params);
+  debug("dispatching pollen", params);
   dispatchPollen(params);
   if (returnImmediately)
     return (_a = await getPollen(params.input)) == null ? void 0 : _a.output;
@@ -77767,7 +77767,7 @@ var runModelOnce = async (inputs2, image = "voodoohop/dalle-playground", returnI
   inputs2 = { ...inputs2, model_image: image };
   const inputCID = await importJSON(inputs2);
   debug6("got input content ID", inputCID);
-  const outputCID = await dispatchAndReturnPollen({ input: inputCID, image, ...params }, returnImmediately);
+  const outputCID = await dispatchAndReturnPollen({ input: inputCID.toString(), image, ...params }, returnImmediately);
   if (!outputCID)
     return null;
   const data = await IPFSWebState(outputCID);
