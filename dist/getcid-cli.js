@@ -8760,10 +8760,10 @@ var import_path_browserify = __toESM(require_path_browserify(), 1);
 var { extname } = import_path_browserify.default;
 var { parse } = import_json5.default;
 var debug = (0, import_debug.default)("ipfsWebClient");
-var host = "https://bep5vapqfb.execute-api.us-east-1.amazonaws.com/dev/";
+var host = "https://store.pollinations.ai";
 var IPFSWebState = async (contentID) => {
   debug("Getting state for CID", contentID);
-  const response = await (0, import_node_fetch.default)(`${host}?cid=${contentID}`);
+  const response = await (0, import_node_fetch.default)(`${host}/ipfs/${contentID}`);
   const json = await response.json();
   debug("Got state", json);
   return json;

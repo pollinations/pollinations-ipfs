@@ -8,11 +8,11 @@ const { parse } = json5;
 
 const debug = Debug("ipfsWebClient")
 
-const host = "https://bep5vapqfb.execute-api.us-east-1.amazonaws.com/dev/"
+const host = "https://store.pollinations.ai"
 // Return IPFS state. Converts all JSON/text content to objects and binary cids to URLs.
 export const IPFSWebState = async contentID => {
     debug("Getting state for CID", contentID)
-    const response = await fetch(`${host}?cid=${contentID}`);
+    const response = await fetch(`${host}/ipfs/${contentID}`);
     const json = await response.json();
     debug("Got state", json);
     return json;

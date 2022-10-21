@@ -7,8 +7,19 @@ const debug = Debug("pollen");
 
 const modelsMetadata = fetch("https://raw.githubusercontent.com/pollinations/model-index/main/metadata.json").then(res => res.json())
 
+
 // DB Name should be "pollen" if environment is production else "pollen_dev"
-const DB_NAME = process.env.POLLINATIONS_ENV === "development" ? "pollen_dev" : "pollen";
+
+let DB_NAME = "pollen"
+
+if (typeof localStorage !== "undefined" && localStorage["isDev"]) {
+    DB_NAME = "pollen_dev"
+}
+
+if (process.env.NODE_ENV === "development") {
+    DB_NAME = "pollen_dev"
+}
+
 
 
 export async function getPollens(params) {

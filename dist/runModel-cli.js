@@ -68806,10 +68806,10 @@ var import_path_browserify = __toESM(require_path_browserify(), 1);
 var { extname } = import_path_browserify.default;
 var { parse } = import_json5.default;
 var debug = (0, import_debug.default)("ipfsWebClient");
-var host = "https://bep5vapqfb.execute-api.us-east-1.amazonaws.com/dev/";
+var host = "https://store.pollinations.ai";
 var IPFSWebState = async (contentID) => {
   debug("Getting state for CID", contentID);
-  const response = await (0, import_node_fetch.default)(`${host}?cid=${contentID}`);
+  const response = await (0, import_node_fetch.default)(`${host}/ipfs/${contentID}`);
   const json = await response.json();
   debug("Got state", json);
   return json;
@@ -85401,7 +85401,13 @@ var client_default = getClient();
 // src/supabase/pollen.js
 var debug10 = (0, import_debug10.default)("pollen");
 var modelsMetadata = (0, import_node_fetch2.default)("https://raw.githubusercontent.com/pollinations/model-index/main/metadata.json").then((res) => res.json());
-var DB_NAME = process.env.POLLINATIONS_ENV === "development" ? "pollen_dev" : "pollen";
+var DB_NAME = "pollen";
+if (typeof localStorage !== "undefined" && localStorage["isDev"]) {
+  DB_NAME = "pollen_dev";
+}
+if (process.env.NODE_ENV === "development") {
+  DB_NAME = "pollen_dev";
+}
 function dispatchPollen(params) {
   return client_default.from(DB_NAME).insert(params).then(({ data }) => data);
 }
