@@ -117,8 +117,8 @@ export async function exportCID(cid, processor=null) {
         
         debug("path array", file.path, pathArray)
         if (file.type !== "directory") {
-
-            let value = await processFile({
+            debug("calling processfile for file", file.path);
+            let value = await processor({
                 path: pathArray.join("/"), 
                 cid: file.cid, 
                 rootCID: cid, 
@@ -216,7 +216,7 @@ const dataFetchers = (file) => {
     return{
       json: async () => parse(await extractContent(file)),
       text: async () => contentToString(await extractContent(file)),
-      buffer: async () => (await extractContent(file)).buffer
+      buffer: async () => (await extractContent(file))
     };
 };
 

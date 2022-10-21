@@ -8,11 +8,11 @@ import { AbortController } from "native-abort-controller"
 import { dirname } from "path"
 import process from "process"
 import treeKill from 'tree-kill'
-import { stringCID } from "./ipfsConnector"
-import { publisher, subscribeGenerator } from "./ipfsPubSub.js"
+import options from "./backend/options.js"
 import { processRemoteCID, receive } from "./ipfs/receiver.js"
 import { sender } from './ipfs/sender.js'
-import options from "./backend/options.js"
+import { stringCID } from "./ipfsConnector"
+import { publisher, subscribeGenerator } from "./ipfsPubSub.js"
 
 export const debug = Debug("pollinate")
 
@@ -20,7 +20,7 @@ export const debug = Debug("pollinate")
 
 const getPublisher = (nodeid) => {
   // publisher to pollinations frontend
-  const { publish: publishFrontend, close: closeFrontendPublisher } = publisher(nodeid, "/output")
+  const { publish: publishFrontend, close: closeFrontendPublisher } = publisher(nodeid)
 
   // publisher to pollen feed
   const { publish: publishPollen, close: closePollenPublisher } = publisher("processing_pollen", "")
@@ -81,7 +81,7 @@ if (executeCommand)
     let [executeSignal, abortExecute] = [null, null]
 
     const [cidStream, unsubscribe] = options.ipns ?
-      subscribeGenerator(options.nodeid, "/input")
+      subscribeGenerator(options.nodeid)
       : [stream.call(process.stdin), noop];
 
 
