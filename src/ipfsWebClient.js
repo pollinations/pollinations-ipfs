@@ -3,8 +3,12 @@ import Debug from "debug";
 import json5 from "json5";
 import fetch from "node-fetch";
 import path from "path-browserify";
+
+export { default as getWebURL } from "./utils/getWebURL.js";
+
 const { extname } = path;
 const { parse } = json5;
+
 
 const debug = Debug("ipfsWebClient")
 

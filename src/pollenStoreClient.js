@@ -2,7 +2,7 @@ import Debug from 'debug';
 import { recursive } from 'ipfs-unixfs-exporter';
 import { importer } from 'ipfs-unixfs-importer';
 import { assocPath } from 'ramda';
-import { getWebURL } from './ipfsConnector.js';
+import getWebURL from './utils/getWebURL.js';
 const debug = Debug('pollenStoreClient');
 
 import json5 from "json5";
