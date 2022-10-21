@@ -13062,20 +13062,20 @@ var require_merge_options = __commonJS({
       });
       return result;
     }
-    var mergeKeys = (merged, source, keys, config) => {
+    var mergeKeys = (merged, source, keys, config2) => {
       keys.forEach((key) => {
-        if (typeof source[key] === "undefined" && config.ignoreUndefined) {
+        if (typeof source[key] === "undefined" && config2.ignoreUndefined) {
           return;
         }
         if (key in merged && merged[key] !== Object.getPrototypeOf(merged)) {
-          defineProperty(merged, key, merge4(merged[key], source[key], config));
+          defineProperty(merged, key, merge4(merged[key], source[key], config2));
         } else {
           defineProperty(merged, key, clone2(source[key]));
         }
       });
       return merged;
     };
-    var concatArrays = (merged, source, config) => {
+    var concatArrays = (merged, source, config2) => {
       let result = merged.slice(0, 0);
       let resultIndex = 0;
       [merged, source].forEach((array) => {
@@ -13091,21 +13091,21 @@ var require_merge_options = __commonJS({
             defineProperty(result, resultIndex++, clone2(array[k]));
           }
         }
-        result = mergeKeys(result, array, getEnumerableOwnPropertyKeys(array).filter((key) => !indices.includes(key)), config);
+        result = mergeKeys(result, array, getEnumerableOwnPropertyKeys(array).filter((key) => !indices.includes(key)), config2);
       });
       return result;
     };
-    function merge4(merged, source, config) {
-      if (config.concatArrays && Array.isArray(merged) && Array.isArray(source)) {
-        return concatArrays(merged, source, config);
+    function merge4(merged, source, config2) {
+      if (config2.concatArrays && Array.isArray(merged) && Array.isArray(source)) {
+        return concatArrays(merged, source, config2);
       }
       if (!isOptionObject(source) || !isOptionObject(merged)) {
         return clone2(source);
       }
-      return mergeKeys(merged, source, getEnumerableOwnPropertyKeys(source), config);
+      return mergeKeys(merged, source, getEnumerableOwnPropertyKeys(source), config2);
     }
     module2.exports = function(...options) {
-      const config = merge4(clone2(defaultMergeOptions), this !== globalThis2 && this || {}, defaultMergeOptions);
+      const config2 = merge4(clone2(defaultMergeOptions), this !== globalThis2 && this || {}, defaultMergeOptions);
       let merged = { _: {} };
       for (const option of options) {
         if (option === void 0) {
@@ -13114,7 +13114,7 @@ var require_merge_options = __commonJS({
         if (!isOptionObject(option)) {
           throw new TypeError("`" + option + "` is not an Option Object");
         }
-        merged = merge4(merged, { _: option }, config);
+        merged = merge4(merged, { _: option }, config2);
       }
       return merged._;
     };
@@ -22308,11 +22308,11 @@ var require_serdePlugin = __commonJS({
       tags: ["SERIALIZER"],
       override: true
     };
-    function getSerdePlugin(config, serializer, deserializer) {
+    function getSerdePlugin(config2, serializer, deserializer) {
       return {
         applyToStack: (commandStack) => {
-          commandStack.add((0, deserializerMiddleware_1.deserializerMiddleware)(config, deserializer), exports2.deserializerMiddlewareOption);
-          commandStack.add((0, serializerMiddleware_1.serializerMiddleware)(config, serializer), exports2.serializerMiddlewareOption);
+          commandStack.add((0, deserializerMiddleware_1.deserializerMiddleware)(config2, deserializer), exports2.deserializerMiddlewareOption);
+          commandStack.add((0, serializerMiddleware_1.serializerMiddleware)(config2, serializer), exports2.serializerMiddlewareOption);
         }
       };
     }
@@ -22572,9 +22572,9 @@ var require_client = __commonJS({
     exports2.Client = void 0;
     var middleware_stack_1 = require_dist_cjs6();
     var Client2 = class {
-      constructor(config) {
+      constructor(config2) {
         this.middlewareStack = (0, middleware_stack_1.constructStack)();
-        this.config = config;
+        this.config = config2;
       }
       send(command, optionsOrCb, cb) {
         const options = typeof optionsOrCb !== "function" ? optionsOrCb : void 0;
@@ -36499,7 +36499,7 @@ var require_throw_200_exceptions = __commonJS({
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.getThrow200ExceptionsPlugin = exports2.throw200ExceptionsMiddlewareOptions = exports2.throw200ExceptionsMiddleware = void 0;
     var protocol_http_1 = require_dist_cjs2();
-    var throw200ExceptionsMiddleware = (config) => (next) => async (args) => {
+    var throw200ExceptionsMiddleware = (config2) => (next) => async (args) => {
       const result = await next(args);
       const { response } = result;
       if (!protocol_http_1.HttpResponse.isInstance(response))
@@ -36507,8 +36507,8 @@ var require_throw_200_exceptions = __commonJS({
       const { statusCode, body } = response;
       if (statusCode < 200 || statusCode >= 300)
         return result;
-      const bodyBytes = await collectBody(body, config);
-      const bodyString = await collectBodyString(bodyBytes, config);
+      const bodyBytes = await collectBody(body, config2);
+      const bodyString = await collectBodyString(bodyBytes, config2);
       if (bodyBytes.length === 0) {
         const err = new Error("S3 aborted request");
         err.name = "InternalError";
@@ -36535,9 +36535,9 @@ var require_throw_200_exceptions = __commonJS({
       name: "throw200ExceptionsMiddleware",
       override: true
     };
-    var getThrow200ExceptionsPlugin = (config) => ({
+    var getThrow200ExceptionsPlugin = (config2) => ({
       applyToStack: (clientStack) => {
-        clientStack.addRelativeTo((0, exports2.throw200ExceptionsMiddleware)(config), exports2.throw200ExceptionsMiddlewareOptions);
+        clientStack.addRelativeTo((0, exports2.throw200ExceptionsMiddleware)(config2), exports2.throw200ExceptionsMiddlewareOptions);
       }
     });
     exports2.getThrow200ExceptionsPlugin = getThrow200ExceptionsPlugin;
@@ -36586,8 +36586,8 @@ var require_write_get_object_response_endpoint = __commonJS({
     exports2.getWriteGetObjectResponseEndpointPlugin = exports2.writeGetObjectResponseEndpointMiddlewareOptions = exports2.writeGetObjectResponseEndpointMiddleware = void 0;
     var middleware_bucket_endpoint_1 = require_dist_cjs4();
     var protocol_http_1 = require_dist_cjs2();
-    var writeGetObjectResponseEndpointMiddleware = (config) => (next, context) => async (args) => {
-      const { region: regionProvider, isCustomEndpoint, disableHostPrefix } = config;
+    var writeGetObjectResponseEndpointMiddleware = (config2) => (next, context) => async (args) => {
+      const { region: regionProvider, isCustomEndpoint, disableHostPrefix } = config2;
       const region = await regionProvider();
       const { request, input } = args;
       if (!protocol_http_1.HttpRequest.isInstance(request))
@@ -36605,7 +36605,7 @@ var require_write_get_object_response_endpoint = __commonJS({
       }
       request.hostname = hostname;
       context["signing_service"] = "s3-object-lambda";
-      if (config.runtime === "node" && !request.headers["content-length"]) {
+      if (config2.runtime === "node" && !request.headers["content-length"]) {
         request.headers["transfer-encoding"] = "chunked";
       }
       return next({ ...args });
@@ -36618,9 +36618,9 @@ var require_write_get_object_response_endpoint = __commonJS({
       name: "writeGetObjectResponseEndpointMiddleware",
       override: true
     };
-    var getWriteGetObjectResponseEndpointPlugin = (config) => ({
+    var getWriteGetObjectResponseEndpointPlugin = (config2) => ({
       applyToStack: (clientStack) => {
-        clientStack.addRelativeTo((0, exports2.writeGetObjectResponseEndpointMiddleware)(config), exports2.writeGetObjectResponseEndpointMiddlewareOptions);
+        clientStack.addRelativeTo((0, exports2.writeGetObjectResponseEndpointMiddleware)(config2), exports2.writeGetObjectResponseEndpointMiddlewareOptions);
       }
     });
     exports2.getWriteGetObjectResponseEndpointPlugin = getWriteGetObjectResponseEndpointPlugin;
@@ -36687,9 +36687,9 @@ var require_dist_cjs10 = __commonJS({
       tags: ["SSE"],
       override: true
     };
-    var getSsecPlugin = (config) => ({
+    var getSsecPlugin = (config2) => ({
       applyToStack: (clientStack) => {
-        clientStack.add(ssecMiddleware(config), exports2.ssecMiddlewareOptions);
+        clientStack.add(ssecMiddleware(config2), exports2.ssecMiddlewareOptions);
       }
     });
     exports2.getSsecPlugin = getSsecPlugin;
@@ -36821,9 +36821,9 @@ var require_dist_cjs11 = __commonJS({
       name: "locationConstraintMiddleware",
       override: true
     };
-    var getLocationConstraintPlugin = (config) => ({
+    var getLocationConstraintPlugin = (config2) => ({
       applyToStack: (clientStack) => {
-        clientStack.add(locationConstraintMiddleware(config), exports2.locationConstraintMiddlewareOptions);
+        clientStack.add(locationConstraintMiddleware(config2), exports2.locationConstraintMiddlewareOptions);
       }
     });
     exports2.getLocationConstraintPlugin = getLocationConstraintPlugin;
@@ -39326,12 +39326,12 @@ var require_selectChecksumAlgorithmFunction = __commonJS({
     var crc32_1 = require_build2();
     var crc32c_1 = require_build3();
     var constants_1 = require_constants2();
-    var selectChecksumAlgorithmFunction = (checksumAlgorithm, config) => ({
-      [constants_1.ChecksumAlgorithm.MD5]: config.md5,
+    var selectChecksumAlgorithmFunction = (checksumAlgorithm, config2) => ({
+      [constants_1.ChecksumAlgorithm.MD5]: config2.md5,
       [constants_1.ChecksumAlgorithm.CRC32]: crc32_1.AwsCrc32,
       [constants_1.ChecksumAlgorithm.CRC32C]: crc32c_1.AwsCrc32c,
-      [constants_1.ChecksumAlgorithm.SHA1]: config.sha1,
-      [constants_1.ChecksumAlgorithm.SHA256]: config.sha256
+      [constants_1.ChecksumAlgorithm.SHA1]: config2.sha1,
+      [constants_1.ChecksumAlgorithm.SHA256]: config2.sha256
     })[checksumAlgorithm];
     exports2.selectChecksumAlgorithmFunction = selectChecksumAlgorithmFunction;
   }
@@ -39399,15 +39399,15 @@ var require_validateChecksumFromResponse = __commonJS({
     var getChecksumAlgorithmListForResponse_1 = require_getChecksumAlgorithmListForResponse();
     var getChecksumLocationName_1 = require_getChecksumLocationName();
     var selectChecksumAlgorithmFunction_1 = require_selectChecksumAlgorithmFunction();
-    var validateChecksumFromResponse = async (response, { config, responseAlgorithms }) => {
+    var validateChecksumFromResponse = async (response, { config: config2, responseAlgorithms }) => {
       const checksumAlgorithms = (0, getChecksumAlgorithmListForResponse_1.getChecksumAlgorithmListForResponse)(responseAlgorithms);
       const { body: responseBody, headers: responseHeaders } = response;
       for (const algorithm of checksumAlgorithms) {
         const responseHeader = (0, getChecksumLocationName_1.getChecksumLocationName)(algorithm);
         const checksumFromResponse = responseHeaders[responseHeader];
         if (checksumFromResponse) {
-          const checksumAlgorithmFn = (0, selectChecksumAlgorithmFunction_1.selectChecksumAlgorithmFunction)(algorithm, config);
-          const { streamHasher, base64Encoder } = config;
+          const checksumAlgorithmFn = (0, selectChecksumAlgorithmFunction_1.selectChecksumAlgorithmFunction)(algorithm, config2);
+          const { streamHasher, base64Encoder } = config2;
           const checksum = await (0, getChecksum_1.getChecksum)(responseBody, { streamHasher, checksumAlgorithmFn, base64Encoder });
           if (checksum === checksumFromResponse) {
             break;
@@ -39434,13 +39434,13 @@ var require_flexibleChecksumsMiddleware = __commonJS({
     var selectChecksumAlgorithmFunction_1 = require_selectChecksumAlgorithmFunction();
     var stringHasher_1 = require_stringHasher();
     var validateChecksumFromResponse_1 = require_validateChecksumFromResponse();
-    var flexibleChecksumsMiddleware = (config, middlewareConfig) => (next) => async (args) => {
+    var flexibleChecksumsMiddleware = (config2, middlewareConfig) => (next) => async (args) => {
       if (!protocol_http_1.HttpRequest.isInstance(args.request)) {
         return next(args);
       }
       const { request } = args;
       const { body: requestBody, headers } = request;
-      const { base64Encoder, streamHasher } = config;
+      const { base64Encoder, streamHasher } = config2;
       const { input, requestChecksumRequired, requestAlgorithmMember } = middlewareConfig;
       const checksumAlgorithm = (0, getChecksumAlgorithmForRequest_1.getChecksumAlgorithmForRequest)(input, {
         requestChecksumRequired,
@@ -39450,9 +39450,9 @@ var require_flexibleChecksumsMiddleware = __commonJS({
       let updatedHeaders = headers;
       if (checksumAlgorithm) {
         const checksumLocationName = (0, getChecksumLocationName_1.getChecksumLocationName)(checksumAlgorithm);
-        const checksumAlgorithmFn = (0, selectChecksumAlgorithmFunction_1.selectChecksumAlgorithmFunction)(checksumAlgorithm, config);
+        const checksumAlgorithmFn = (0, selectChecksumAlgorithmFunction_1.selectChecksumAlgorithmFunction)(checksumAlgorithm, config2);
         if ((0, isStreaming_1.isStreaming)(requestBody)) {
-          const { getAwsChunkedEncodingStream, bodyLengthChecker } = config;
+          const { getAwsChunkedEncodingStream, bodyLengthChecker } = config2;
           updatedBody = getAwsChunkedEncodingStream(requestBody, {
             base64Encoder,
             bodyLengthChecker,
@@ -39488,7 +39488,7 @@ var require_flexibleChecksumsMiddleware = __commonJS({
       const { requestValidationModeMember, responseAlgorithms } = middlewareConfig;
       if (requestValidationModeMember && input[requestValidationModeMember] === "ENABLED") {
         (0, validateChecksumFromResponse_1.validateChecksumFromResponse)(result.response, {
-          config,
+          config: config2,
           responseAlgorithms
         });
       }
@@ -39511,9 +39511,9 @@ var require_getFlexibleChecksumsPlugin = __commonJS({
       tags: ["BODY_CHECKSUM"],
       override: true
     };
-    var getFlexibleChecksumsPlugin = (config, middlewareConfig) => ({
+    var getFlexibleChecksumsPlugin = (config2, middlewareConfig) => ({
       applyToStack: (clientStack) => {
-        clientStack.add((0, flexibleChecksumsMiddleware_1.flexibleChecksumsMiddleware)(config, middlewareConfig), exports2.flexibleChecksumsMiddlewareOptions);
+        clientStack.add((0, flexibleChecksumsMiddleware_1.flexibleChecksumsMiddleware)(config2, middlewareConfig), exports2.flexibleChecksumsMiddlewareOptions);
       }
     });
     exports2.getFlexibleChecksumsPlugin = getFlexibleChecksumsPlugin;
@@ -45669,9 +45669,9 @@ var require_user_agent_middleware = __commonJS({
       tags: ["SET_USER_AGENT", "USER_AGENT"],
       override: true
     };
-    var getUserAgentPlugin = (config) => ({
+    var getUserAgentPlugin = (config2) => ({
       applyToStack: (clientStack) => {
-        clientStack.add((0, exports2.userAgentMiddleware)(config), exports2.getUserAgentMiddlewareOptions);
+        clientStack.add((0, exports2.userAgentMiddleware)(config2), exports2.getUserAgentMiddlewareOptions);
       }
     });
     exports2.getUserAgentPlugin = getUserAgentPlugin;
@@ -48145,11 +48145,11 @@ var require_fromEnv2 = __commonJS({
     var property_provider_1 = require_dist_cjs25();
     var fromEnv = (envVarSelector) => async () => {
       try {
-        const config = envVarSelector(process.env);
-        if (config === void 0) {
+        const config2 = envVarSelector(process.env);
+        if (config2 === void 0) {
           throw new Error();
         }
-        return config;
+        return config2;
       } catch (e) {
         throw new property_provider_1.CredentialsProviderError(e.message || `Cannot load config from environment variables with getter: ${envVarSelector}`);
       }
@@ -50443,15 +50443,15 @@ var require_runtimeConfig_shared = __commonJS({
     exports2.getRuntimeConfig = void 0;
     var url_parser_1 = require_dist_cjs36();
     var endpoints_1 = require_endpoints();
-    var getRuntimeConfig = (config) => {
+    var getRuntimeConfig = (config2) => {
       var _a, _b, _c, _d, _e;
       return {
         apiVersion: "2019-06-10",
-        disableHostPrefix: (_a = config === null || config === void 0 ? void 0 : config.disableHostPrefix) !== null && _a !== void 0 ? _a : false,
-        logger: (_b = config === null || config === void 0 ? void 0 : config.logger) !== null && _b !== void 0 ? _b : {},
-        regionInfoProvider: (_c = config === null || config === void 0 ? void 0 : config.regionInfoProvider) !== null && _c !== void 0 ? _c : endpoints_1.defaultRegionInfoProvider,
-        serviceId: (_d = config === null || config === void 0 ? void 0 : config.serviceId) !== null && _d !== void 0 ? _d : "SSO",
-        urlParser: (_e = config === null || config === void 0 ? void 0 : config.urlParser) !== null && _e !== void 0 ? _e : url_parser_1.parseUrl
+        disableHostPrefix: (_a = config2 === null || config2 === void 0 ? void 0 : config2.disableHostPrefix) !== null && _a !== void 0 ? _a : false,
+        logger: (_b = config2 === null || config2 === void 0 ? void 0 : config2.logger) !== null && _b !== void 0 ? _b : {},
+        regionInfoProvider: (_c = config2 === null || config2 === void 0 ? void 0 : config2.regionInfoProvider) !== null && _c !== void 0 ? _c : endpoints_1.defaultRegionInfoProvider,
+        serviceId: (_d = config2 === null || config2 === void 0 ? void 0 : config2.serviceId) !== null && _d !== void 0 ? _d : "SSO",
+        urlParser: (_e = config2 === null || config2 === void 0 ? void 0 : config2.urlParser) !== null && _e !== void 0 ? _e : url_parser_1.parseUrl
       };
     };
     exports2.getRuntimeConfig = getRuntimeConfig;
@@ -50585,34 +50585,34 @@ var require_runtimeConfig = __commonJS({
     var smithy_client_1 = require_dist_cjs7();
     var util_defaults_mode_node_1 = require_dist_cjs46();
     var smithy_client_2 = require_dist_cjs7();
-    var getRuntimeConfig = (config) => {
+    var getRuntimeConfig = (config2) => {
       var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p;
       (0, smithy_client_2.emitWarningIfUnsupportedVersion)(process.version);
-      const defaultsMode = (0, util_defaults_mode_node_1.resolveDefaultsModeConfig)(config);
+      const defaultsMode = (0, util_defaults_mode_node_1.resolveDefaultsModeConfig)(config2);
       const defaultConfigProvider = () => defaultsMode().then(smithy_client_1.loadConfigsForDefaultMode);
-      const clientSharedValues = (0, runtimeConfig_shared_1.getRuntimeConfig)(config);
+      const clientSharedValues = (0, runtimeConfig_shared_1.getRuntimeConfig)(config2);
       return {
         ...clientSharedValues,
-        ...config,
+        ...config2,
         runtime: "node",
         defaultsMode,
-        base64Decoder: (_a = config === null || config === void 0 ? void 0 : config.base64Decoder) !== null && _a !== void 0 ? _a : util_base64_node_1.fromBase64,
-        base64Encoder: (_b = config === null || config === void 0 ? void 0 : config.base64Encoder) !== null && _b !== void 0 ? _b : util_base64_node_1.toBase64,
-        bodyLengthChecker: (_c = config === null || config === void 0 ? void 0 : config.bodyLengthChecker) !== null && _c !== void 0 ? _c : util_body_length_node_1.calculateBodyLength,
-        defaultUserAgentProvider: (_d = config === null || config === void 0 ? void 0 : config.defaultUserAgentProvider) !== null && _d !== void 0 ? _d : (0, util_user_agent_node_1.defaultUserAgent)({ serviceId: clientSharedValues.serviceId, clientVersion: package_json_1.default.version }),
-        maxAttempts: (_e = config === null || config === void 0 ? void 0 : config.maxAttempts) !== null && _e !== void 0 ? _e : (0, node_config_provider_1.loadConfig)(middleware_retry_1.NODE_MAX_ATTEMPT_CONFIG_OPTIONS),
-        region: (_f = config === null || config === void 0 ? void 0 : config.region) !== null && _f !== void 0 ? _f : (0, node_config_provider_1.loadConfig)(config_resolver_1.NODE_REGION_CONFIG_OPTIONS, config_resolver_1.NODE_REGION_CONFIG_FILE_OPTIONS),
-        requestHandler: (_g = config === null || config === void 0 ? void 0 : config.requestHandler) !== null && _g !== void 0 ? _g : new node_http_handler_1.NodeHttpHandler(defaultConfigProvider),
-        retryMode: (_h = config === null || config === void 0 ? void 0 : config.retryMode) !== null && _h !== void 0 ? _h : (0, node_config_provider_1.loadConfig)({
+        base64Decoder: (_a = config2 === null || config2 === void 0 ? void 0 : config2.base64Decoder) !== null && _a !== void 0 ? _a : util_base64_node_1.fromBase64,
+        base64Encoder: (_b = config2 === null || config2 === void 0 ? void 0 : config2.base64Encoder) !== null && _b !== void 0 ? _b : util_base64_node_1.toBase64,
+        bodyLengthChecker: (_c = config2 === null || config2 === void 0 ? void 0 : config2.bodyLengthChecker) !== null && _c !== void 0 ? _c : util_body_length_node_1.calculateBodyLength,
+        defaultUserAgentProvider: (_d = config2 === null || config2 === void 0 ? void 0 : config2.defaultUserAgentProvider) !== null && _d !== void 0 ? _d : (0, util_user_agent_node_1.defaultUserAgent)({ serviceId: clientSharedValues.serviceId, clientVersion: package_json_1.default.version }),
+        maxAttempts: (_e = config2 === null || config2 === void 0 ? void 0 : config2.maxAttempts) !== null && _e !== void 0 ? _e : (0, node_config_provider_1.loadConfig)(middleware_retry_1.NODE_MAX_ATTEMPT_CONFIG_OPTIONS),
+        region: (_f = config2 === null || config2 === void 0 ? void 0 : config2.region) !== null && _f !== void 0 ? _f : (0, node_config_provider_1.loadConfig)(config_resolver_1.NODE_REGION_CONFIG_OPTIONS, config_resolver_1.NODE_REGION_CONFIG_FILE_OPTIONS),
+        requestHandler: (_g = config2 === null || config2 === void 0 ? void 0 : config2.requestHandler) !== null && _g !== void 0 ? _g : new node_http_handler_1.NodeHttpHandler(defaultConfigProvider),
+        retryMode: (_h = config2 === null || config2 === void 0 ? void 0 : config2.retryMode) !== null && _h !== void 0 ? _h : (0, node_config_provider_1.loadConfig)({
           ...middleware_retry_1.NODE_RETRY_MODE_CONFIG_OPTIONS,
           default: async () => (await defaultConfigProvider()).retryMode || middleware_retry_1.DEFAULT_RETRY_MODE
         }),
-        sha256: (_j = config === null || config === void 0 ? void 0 : config.sha256) !== null && _j !== void 0 ? _j : hash_node_1.Hash.bind(null, "sha256"),
-        streamCollector: (_k = config === null || config === void 0 ? void 0 : config.streamCollector) !== null && _k !== void 0 ? _k : node_http_handler_1.streamCollector,
-        useDualstackEndpoint: (_l = config === null || config === void 0 ? void 0 : config.useDualstackEndpoint) !== null && _l !== void 0 ? _l : (0, node_config_provider_1.loadConfig)(config_resolver_1.NODE_USE_DUALSTACK_ENDPOINT_CONFIG_OPTIONS),
-        useFipsEndpoint: (_m = config === null || config === void 0 ? void 0 : config.useFipsEndpoint) !== null && _m !== void 0 ? _m : (0, node_config_provider_1.loadConfig)(config_resolver_1.NODE_USE_FIPS_ENDPOINT_CONFIG_OPTIONS),
-        utf8Decoder: (_o = config === null || config === void 0 ? void 0 : config.utf8Decoder) !== null && _o !== void 0 ? _o : util_utf8_node_1.fromUtf8,
-        utf8Encoder: (_p = config === null || config === void 0 ? void 0 : config.utf8Encoder) !== null && _p !== void 0 ? _p : util_utf8_node_1.toUtf8
+        sha256: (_j = config2 === null || config2 === void 0 ? void 0 : config2.sha256) !== null && _j !== void 0 ? _j : hash_node_1.Hash.bind(null, "sha256"),
+        streamCollector: (_k = config2 === null || config2 === void 0 ? void 0 : config2.streamCollector) !== null && _k !== void 0 ? _k : node_http_handler_1.streamCollector,
+        useDualstackEndpoint: (_l = config2 === null || config2 === void 0 ? void 0 : config2.useDualstackEndpoint) !== null && _l !== void 0 ? _l : (0, node_config_provider_1.loadConfig)(config_resolver_1.NODE_USE_DUALSTACK_ENDPOINT_CONFIG_OPTIONS),
+        useFipsEndpoint: (_m = config2 === null || config2 === void 0 ? void 0 : config2.useFipsEndpoint) !== null && _m !== void 0 ? _m : (0, node_config_provider_1.loadConfig)(config_resolver_1.NODE_USE_FIPS_ENDPOINT_CONFIG_OPTIONS),
+        utf8Decoder: (_o = config2 === null || config2 === void 0 ? void 0 : config2.utf8Decoder) !== null && _o !== void 0 ? _o : util_utf8_node_1.fromUtf8,
+        utf8Encoder: (_p = config2 === null || config2 === void 0 ? void 0 : config2.utf8Encoder) !== null && _p !== void 0 ? _p : util_utf8_node_1.toUtf8
       };
     };
     exports2.getRuntimeConfig = getRuntimeConfig;
@@ -50770,24 +50770,24 @@ var require_ListAccountRolesPaginator = __commonJS({
     var makePagedRequest = async (client, input, ...args) => {
       return await client.listAccountRoles(input, ...args);
     };
-    async function* paginateListAccountRoles(config, input, ...additionalArguments) {
-      let token2 = config.startingToken || void 0;
+    async function* paginateListAccountRoles(config2, input, ...additionalArguments) {
+      let token2 = config2.startingToken || void 0;
       let hasNext = true;
       let page;
       while (hasNext) {
         input.nextToken = token2;
-        input["maxResults"] = config.pageSize;
-        if (config.client instanceof SSO_1.SSO) {
-          page = await makePagedRequest(config.client, input, ...additionalArguments);
-        } else if (config.client instanceof SSOClient_1.SSOClient) {
-          page = await makePagedClientRequest(config.client, input, ...additionalArguments);
+        input["maxResults"] = config2.pageSize;
+        if (config2.client instanceof SSO_1.SSO) {
+          page = await makePagedRequest(config2.client, input, ...additionalArguments);
+        } else if (config2.client instanceof SSOClient_1.SSOClient) {
+          page = await makePagedClientRequest(config2.client, input, ...additionalArguments);
         } else {
           throw new Error("Invalid client, expected SSO | SSOClient");
         }
         yield page;
         const prevToken = token2;
         token2 = page.nextToken;
-        hasNext = !!(token2 && (!config.stopOnSameToken || token2 !== prevToken));
+        hasNext = !!(token2 && (!config2.stopOnSameToken || token2 !== prevToken));
       }
       return void 0;
     }
@@ -50810,24 +50810,24 @@ var require_ListAccountsPaginator = __commonJS({
     var makePagedRequest = async (client, input, ...args) => {
       return await client.listAccounts(input, ...args);
     };
-    async function* paginateListAccounts(config, input, ...additionalArguments) {
-      let token2 = config.startingToken || void 0;
+    async function* paginateListAccounts(config2, input, ...additionalArguments) {
+      let token2 = config2.startingToken || void 0;
       let hasNext = true;
       let page;
       while (hasNext) {
         input.nextToken = token2;
-        input["maxResults"] = config.pageSize;
-        if (config.client instanceof SSO_1.SSO) {
-          page = await makePagedRequest(config.client, input, ...additionalArguments);
-        } else if (config.client instanceof SSOClient_1.SSOClient) {
-          page = await makePagedClientRequest(config.client, input, ...additionalArguments);
+        input["maxResults"] = config2.pageSize;
+        if (config2.client instanceof SSO_1.SSO) {
+          page = await makePagedRequest(config2.client, input, ...additionalArguments);
+        } else if (config2.client instanceof SSOClient_1.SSOClient) {
+          page = await makePagedClientRequest(config2.client, input, ...additionalArguments);
         } else {
           throw new Error("Invalid client, expected SSO | SSOClient");
         }
         yield page;
         const prevToken = token2;
         token2 = page.nextToken;
-        hasNext = !!(token2 && (!config.stopOnSameToken || token2 !== prevToken));
+        hasNext = !!(token2 && (!config2.stopOnSameToken || token2 !== prevToken));
       }
       return void 0;
     }
@@ -51539,15 +51539,15 @@ var require_runtimeConfig_shared2 = __commonJS({
     exports2.getRuntimeConfig = void 0;
     var url_parser_1 = require_dist_cjs36();
     var endpoints_1 = require_endpoints2();
-    var getRuntimeConfig = (config) => {
+    var getRuntimeConfig = (config2) => {
       var _a, _b, _c, _d, _e;
       return {
         apiVersion: "2011-06-15",
-        disableHostPrefix: (_a = config === null || config === void 0 ? void 0 : config.disableHostPrefix) !== null && _a !== void 0 ? _a : false,
-        logger: (_b = config === null || config === void 0 ? void 0 : config.logger) !== null && _b !== void 0 ? _b : {},
-        regionInfoProvider: (_c = config === null || config === void 0 ? void 0 : config.regionInfoProvider) !== null && _c !== void 0 ? _c : endpoints_1.defaultRegionInfoProvider,
-        serviceId: (_d = config === null || config === void 0 ? void 0 : config.serviceId) !== null && _d !== void 0 ? _d : "STS",
-        urlParser: (_e = config === null || config === void 0 ? void 0 : config.urlParser) !== null && _e !== void 0 ? _e : url_parser_1.parseUrl
+        disableHostPrefix: (_a = config2 === null || config2 === void 0 ? void 0 : config2.disableHostPrefix) !== null && _a !== void 0 ? _a : false,
+        logger: (_b = config2 === null || config2 === void 0 ? void 0 : config2.logger) !== null && _b !== void 0 ? _b : {},
+        regionInfoProvider: (_c = config2 === null || config2 === void 0 ? void 0 : config2.regionInfoProvider) !== null && _c !== void 0 ? _c : endpoints_1.defaultRegionInfoProvider,
+        serviceId: (_d = config2 === null || config2 === void 0 ? void 0 : config2.serviceId) !== null && _d !== void 0 ? _d : "STS",
+        urlParser: (_e = config2 === null || config2 === void 0 ? void 0 : config2.urlParser) !== null && _e !== void 0 ? _e : url_parser_1.parseUrl
       };
     };
     exports2.getRuntimeConfig = getRuntimeConfig;
@@ -51577,35 +51577,35 @@ var require_runtimeConfig2 = __commonJS({
     var smithy_client_1 = require_dist_cjs7();
     var util_defaults_mode_node_1 = require_dist_cjs46();
     var smithy_client_2 = require_dist_cjs7();
-    var getRuntimeConfig = (config) => {
+    var getRuntimeConfig = (config2) => {
       var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q;
       (0, smithy_client_2.emitWarningIfUnsupportedVersion)(process.version);
-      const defaultsMode = (0, util_defaults_mode_node_1.resolveDefaultsModeConfig)(config);
+      const defaultsMode = (0, util_defaults_mode_node_1.resolveDefaultsModeConfig)(config2);
       const defaultConfigProvider = () => defaultsMode().then(smithy_client_1.loadConfigsForDefaultMode);
-      const clientSharedValues = (0, runtimeConfig_shared_1.getRuntimeConfig)(config);
+      const clientSharedValues = (0, runtimeConfig_shared_1.getRuntimeConfig)(config2);
       return {
         ...clientSharedValues,
-        ...config,
+        ...config2,
         runtime: "node",
         defaultsMode,
-        base64Decoder: (_a = config === null || config === void 0 ? void 0 : config.base64Decoder) !== null && _a !== void 0 ? _a : util_base64_node_1.fromBase64,
-        base64Encoder: (_b = config === null || config === void 0 ? void 0 : config.base64Encoder) !== null && _b !== void 0 ? _b : util_base64_node_1.toBase64,
-        bodyLengthChecker: (_c = config === null || config === void 0 ? void 0 : config.bodyLengthChecker) !== null && _c !== void 0 ? _c : util_body_length_node_1.calculateBodyLength,
-        credentialDefaultProvider: (_d = config === null || config === void 0 ? void 0 : config.credentialDefaultProvider) !== null && _d !== void 0 ? _d : (0, defaultStsRoleAssumers_1.decorateDefaultCredentialProvider)(credential_provider_node_1.defaultProvider),
-        defaultUserAgentProvider: (_e = config === null || config === void 0 ? void 0 : config.defaultUserAgentProvider) !== null && _e !== void 0 ? _e : (0, util_user_agent_node_1.defaultUserAgent)({ serviceId: clientSharedValues.serviceId, clientVersion: package_json_1.default.version }),
-        maxAttempts: (_f = config === null || config === void 0 ? void 0 : config.maxAttempts) !== null && _f !== void 0 ? _f : (0, node_config_provider_1.loadConfig)(middleware_retry_1.NODE_MAX_ATTEMPT_CONFIG_OPTIONS),
-        region: (_g = config === null || config === void 0 ? void 0 : config.region) !== null && _g !== void 0 ? _g : (0, node_config_provider_1.loadConfig)(config_resolver_1.NODE_REGION_CONFIG_OPTIONS, config_resolver_1.NODE_REGION_CONFIG_FILE_OPTIONS),
-        requestHandler: (_h = config === null || config === void 0 ? void 0 : config.requestHandler) !== null && _h !== void 0 ? _h : new node_http_handler_1.NodeHttpHandler(defaultConfigProvider),
-        retryMode: (_j = config === null || config === void 0 ? void 0 : config.retryMode) !== null && _j !== void 0 ? _j : (0, node_config_provider_1.loadConfig)({
+        base64Decoder: (_a = config2 === null || config2 === void 0 ? void 0 : config2.base64Decoder) !== null && _a !== void 0 ? _a : util_base64_node_1.fromBase64,
+        base64Encoder: (_b = config2 === null || config2 === void 0 ? void 0 : config2.base64Encoder) !== null && _b !== void 0 ? _b : util_base64_node_1.toBase64,
+        bodyLengthChecker: (_c = config2 === null || config2 === void 0 ? void 0 : config2.bodyLengthChecker) !== null && _c !== void 0 ? _c : util_body_length_node_1.calculateBodyLength,
+        credentialDefaultProvider: (_d = config2 === null || config2 === void 0 ? void 0 : config2.credentialDefaultProvider) !== null && _d !== void 0 ? _d : (0, defaultStsRoleAssumers_1.decorateDefaultCredentialProvider)(credential_provider_node_1.defaultProvider),
+        defaultUserAgentProvider: (_e = config2 === null || config2 === void 0 ? void 0 : config2.defaultUserAgentProvider) !== null && _e !== void 0 ? _e : (0, util_user_agent_node_1.defaultUserAgent)({ serviceId: clientSharedValues.serviceId, clientVersion: package_json_1.default.version }),
+        maxAttempts: (_f = config2 === null || config2 === void 0 ? void 0 : config2.maxAttempts) !== null && _f !== void 0 ? _f : (0, node_config_provider_1.loadConfig)(middleware_retry_1.NODE_MAX_ATTEMPT_CONFIG_OPTIONS),
+        region: (_g = config2 === null || config2 === void 0 ? void 0 : config2.region) !== null && _g !== void 0 ? _g : (0, node_config_provider_1.loadConfig)(config_resolver_1.NODE_REGION_CONFIG_OPTIONS, config_resolver_1.NODE_REGION_CONFIG_FILE_OPTIONS),
+        requestHandler: (_h = config2 === null || config2 === void 0 ? void 0 : config2.requestHandler) !== null && _h !== void 0 ? _h : new node_http_handler_1.NodeHttpHandler(defaultConfigProvider),
+        retryMode: (_j = config2 === null || config2 === void 0 ? void 0 : config2.retryMode) !== null && _j !== void 0 ? _j : (0, node_config_provider_1.loadConfig)({
           ...middleware_retry_1.NODE_RETRY_MODE_CONFIG_OPTIONS,
           default: async () => (await defaultConfigProvider()).retryMode || middleware_retry_1.DEFAULT_RETRY_MODE
         }),
-        sha256: (_k = config === null || config === void 0 ? void 0 : config.sha256) !== null && _k !== void 0 ? _k : hash_node_1.Hash.bind(null, "sha256"),
-        streamCollector: (_l = config === null || config === void 0 ? void 0 : config.streamCollector) !== null && _l !== void 0 ? _l : node_http_handler_1.streamCollector,
-        useDualstackEndpoint: (_m = config === null || config === void 0 ? void 0 : config.useDualstackEndpoint) !== null && _m !== void 0 ? _m : (0, node_config_provider_1.loadConfig)(config_resolver_1.NODE_USE_DUALSTACK_ENDPOINT_CONFIG_OPTIONS),
-        useFipsEndpoint: (_o = config === null || config === void 0 ? void 0 : config.useFipsEndpoint) !== null && _o !== void 0 ? _o : (0, node_config_provider_1.loadConfig)(config_resolver_1.NODE_USE_FIPS_ENDPOINT_CONFIG_OPTIONS),
-        utf8Decoder: (_p = config === null || config === void 0 ? void 0 : config.utf8Decoder) !== null && _p !== void 0 ? _p : util_utf8_node_1.fromUtf8,
-        utf8Encoder: (_q = config === null || config === void 0 ? void 0 : config.utf8Encoder) !== null && _q !== void 0 ? _q : util_utf8_node_1.toUtf8
+        sha256: (_k = config2 === null || config2 === void 0 ? void 0 : config2.sha256) !== null && _k !== void 0 ? _k : hash_node_1.Hash.bind(null, "sha256"),
+        streamCollector: (_l = config2 === null || config2 === void 0 ? void 0 : config2.streamCollector) !== null && _l !== void 0 ? _l : node_http_handler_1.streamCollector,
+        useDualstackEndpoint: (_m = config2 === null || config2 === void 0 ? void 0 : config2.useDualstackEndpoint) !== null && _m !== void 0 ? _m : (0, node_config_provider_1.loadConfig)(config_resolver_1.NODE_USE_DUALSTACK_ENDPOINT_CONFIG_OPTIONS),
+        useFipsEndpoint: (_o = config2 === null || config2 === void 0 ? void 0 : config2.useFipsEndpoint) !== null && _o !== void 0 ? _o : (0, node_config_provider_1.loadConfig)(config_resolver_1.NODE_USE_FIPS_ENDPOINT_CONFIG_OPTIONS),
+        utf8Decoder: (_p = config2 === null || config2 === void 0 ? void 0 : config2.utf8Decoder) !== null && _p !== void 0 ? _p : util_utf8_node_1.fromUtf8,
+        utf8Encoder: (_q = config2 === null || config2 === void 0 ? void 0 : config2.utf8Encoder) !== null && _q !== void 0 ? _q : util_utf8_node_1.toUtf8
       };
     };
     exports2.getRuntimeConfig = getRuntimeConfig;
@@ -51801,8 +51801,8 @@ var require_defaultRoleAssumers = __commonJS({
         return baseCtor;
       else
         return class CustomizableSTSClient extends baseCtor {
-          constructor(config) {
-            super(config);
+          constructor(config2) {
+            super(config2);
             for (const customization of customizations) {
               this.middlewareStack.use(customization);
             }
@@ -53227,18 +53227,18 @@ var require_runtimeConfig_shared3 = __commonJS({
     var signature_v4_multi_region_1 = require_dist_cjs59();
     var url_parser_1 = require_dist_cjs36();
     var endpoints_1 = require_endpoints3();
-    var getRuntimeConfig = (config) => {
+    var getRuntimeConfig = (config2) => {
       var _a, _b, _c, _d, _e, _f, _g, _h;
       return {
         apiVersion: "2006-03-01",
-        disableHostPrefix: (_a = config === null || config === void 0 ? void 0 : config.disableHostPrefix) !== null && _a !== void 0 ? _a : false,
-        logger: (_b = config === null || config === void 0 ? void 0 : config.logger) !== null && _b !== void 0 ? _b : {},
-        regionInfoProvider: (_c = config === null || config === void 0 ? void 0 : config.regionInfoProvider) !== null && _c !== void 0 ? _c : endpoints_1.defaultRegionInfoProvider,
-        serviceId: (_d = config === null || config === void 0 ? void 0 : config.serviceId) !== null && _d !== void 0 ? _d : "S3",
-        signerConstructor: (_e = config === null || config === void 0 ? void 0 : config.signerConstructor) !== null && _e !== void 0 ? _e : signature_v4_multi_region_1.SignatureV4MultiRegion,
-        signingEscapePath: (_f = config === null || config === void 0 ? void 0 : config.signingEscapePath) !== null && _f !== void 0 ? _f : false,
-        urlParser: (_g = config === null || config === void 0 ? void 0 : config.urlParser) !== null && _g !== void 0 ? _g : url_parser_1.parseUrl,
-        useArnRegion: (_h = config === null || config === void 0 ? void 0 : config.useArnRegion) !== null && _h !== void 0 ? _h : false
+        disableHostPrefix: (_a = config2 === null || config2 === void 0 ? void 0 : config2.disableHostPrefix) !== null && _a !== void 0 ? _a : false,
+        logger: (_b = config2 === null || config2 === void 0 ? void 0 : config2.logger) !== null && _b !== void 0 ? _b : {},
+        regionInfoProvider: (_c = config2 === null || config2 === void 0 ? void 0 : config2.regionInfoProvider) !== null && _c !== void 0 ? _c : endpoints_1.defaultRegionInfoProvider,
+        serviceId: (_d = config2 === null || config2 === void 0 ? void 0 : config2.serviceId) !== null && _d !== void 0 ? _d : "S3",
+        signerConstructor: (_e = config2 === null || config2 === void 0 ? void 0 : config2.signerConstructor) !== null && _e !== void 0 ? _e : signature_v4_multi_region_1.SignatureV4MultiRegion,
+        signingEscapePath: (_f = config2 === null || config2 === void 0 ? void 0 : config2.signingEscapePath) !== null && _f !== void 0 ? _f : false,
+        urlParser: (_g = config2 === null || config2 === void 0 ? void 0 : config2.urlParser) !== null && _g !== void 0 ? _g : url_parser_1.parseUrl,
+        useArnRegion: (_h = config2 === null || config2 === void 0 ? void 0 : config2.useArnRegion) !== null && _h !== void 0 ? _h : false
       };
     };
     exports2.getRuntimeConfig = getRuntimeConfig;
@@ -53272,41 +53272,41 @@ var require_runtimeConfig3 = __commonJS({
     var smithy_client_1 = require_dist_cjs7();
     var util_defaults_mode_node_1 = require_dist_cjs46();
     var smithy_client_2 = require_dist_cjs7();
-    var getRuntimeConfig = (config) => {
+    var getRuntimeConfig = (config2) => {
       var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w;
       (0, smithy_client_2.emitWarningIfUnsupportedVersion)(process.version);
-      const defaultsMode = (0, util_defaults_mode_node_1.resolveDefaultsModeConfig)(config);
+      const defaultsMode = (0, util_defaults_mode_node_1.resolveDefaultsModeConfig)(config2);
       const defaultConfigProvider = () => defaultsMode().then(smithy_client_1.loadConfigsForDefaultMode);
-      const clientSharedValues = (0, runtimeConfig_shared_1.getRuntimeConfig)(config);
+      const clientSharedValues = (0, runtimeConfig_shared_1.getRuntimeConfig)(config2);
       return {
         ...clientSharedValues,
-        ...config,
+        ...config2,
         runtime: "node",
         defaultsMode,
-        base64Decoder: (_a = config === null || config === void 0 ? void 0 : config.base64Decoder) !== null && _a !== void 0 ? _a : util_base64_node_1.fromBase64,
-        base64Encoder: (_b = config === null || config === void 0 ? void 0 : config.base64Encoder) !== null && _b !== void 0 ? _b : util_base64_node_1.toBase64,
-        bodyLengthChecker: (_c = config === null || config === void 0 ? void 0 : config.bodyLengthChecker) !== null && _c !== void 0 ? _c : util_body_length_node_1.calculateBodyLength,
-        credentialDefaultProvider: (_d = config === null || config === void 0 ? void 0 : config.credentialDefaultProvider) !== null && _d !== void 0 ? _d : (0, client_sts_1.decorateDefaultCredentialProvider)(credential_provider_node_1.defaultProvider),
-        defaultUserAgentProvider: (_e = config === null || config === void 0 ? void 0 : config.defaultUserAgentProvider) !== null && _e !== void 0 ? _e : (0, util_user_agent_node_1.defaultUserAgent)({ serviceId: clientSharedValues.serviceId, clientVersion: package_json_1.default.version }),
-        eventStreamSerdeProvider: (_f = config === null || config === void 0 ? void 0 : config.eventStreamSerdeProvider) !== null && _f !== void 0 ? _f : eventstream_serde_node_1.eventStreamSerdeProvider,
-        getAwsChunkedEncodingStream: (_g = config === null || config === void 0 ? void 0 : config.getAwsChunkedEncodingStream) !== null && _g !== void 0 ? _g : util_stream_node_1.getAwsChunkedEncodingStream,
-        maxAttempts: (_h = config === null || config === void 0 ? void 0 : config.maxAttempts) !== null && _h !== void 0 ? _h : (0, node_config_provider_1.loadConfig)(middleware_retry_1.NODE_MAX_ATTEMPT_CONFIG_OPTIONS),
-        md5: (_j = config === null || config === void 0 ? void 0 : config.md5) !== null && _j !== void 0 ? _j : hash_node_1.Hash.bind(null, "md5"),
-        region: (_k = config === null || config === void 0 ? void 0 : config.region) !== null && _k !== void 0 ? _k : (0, node_config_provider_1.loadConfig)(config_resolver_1.NODE_REGION_CONFIG_OPTIONS, config_resolver_1.NODE_REGION_CONFIG_FILE_OPTIONS),
-        requestHandler: (_l = config === null || config === void 0 ? void 0 : config.requestHandler) !== null && _l !== void 0 ? _l : new node_http_handler_1.NodeHttpHandler(defaultConfigProvider),
-        retryMode: (_m = config === null || config === void 0 ? void 0 : config.retryMode) !== null && _m !== void 0 ? _m : (0, node_config_provider_1.loadConfig)({
+        base64Decoder: (_a = config2 === null || config2 === void 0 ? void 0 : config2.base64Decoder) !== null && _a !== void 0 ? _a : util_base64_node_1.fromBase64,
+        base64Encoder: (_b = config2 === null || config2 === void 0 ? void 0 : config2.base64Encoder) !== null && _b !== void 0 ? _b : util_base64_node_1.toBase64,
+        bodyLengthChecker: (_c = config2 === null || config2 === void 0 ? void 0 : config2.bodyLengthChecker) !== null && _c !== void 0 ? _c : util_body_length_node_1.calculateBodyLength,
+        credentialDefaultProvider: (_d = config2 === null || config2 === void 0 ? void 0 : config2.credentialDefaultProvider) !== null && _d !== void 0 ? _d : (0, client_sts_1.decorateDefaultCredentialProvider)(credential_provider_node_1.defaultProvider),
+        defaultUserAgentProvider: (_e = config2 === null || config2 === void 0 ? void 0 : config2.defaultUserAgentProvider) !== null && _e !== void 0 ? _e : (0, util_user_agent_node_1.defaultUserAgent)({ serviceId: clientSharedValues.serviceId, clientVersion: package_json_1.default.version }),
+        eventStreamSerdeProvider: (_f = config2 === null || config2 === void 0 ? void 0 : config2.eventStreamSerdeProvider) !== null && _f !== void 0 ? _f : eventstream_serde_node_1.eventStreamSerdeProvider,
+        getAwsChunkedEncodingStream: (_g = config2 === null || config2 === void 0 ? void 0 : config2.getAwsChunkedEncodingStream) !== null && _g !== void 0 ? _g : util_stream_node_1.getAwsChunkedEncodingStream,
+        maxAttempts: (_h = config2 === null || config2 === void 0 ? void 0 : config2.maxAttempts) !== null && _h !== void 0 ? _h : (0, node_config_provider_1.loadConfig)(middleware_retry_1.NODE_MAX_ATTEMPT_CONFIG_OPTIONS),
+        md5: (_j = config2 === null || config2 === void 0 ? void 0 : config2.md5) !== null && _j !== void 0 ? _j : hash_node_1.Hash.bind(null, "md5"),
+        region: (_k = config2 === null || config2 === void 0 ? void 0 : config2.region) !== null && _k !== void 0 ? _k : (0, node_config_provider_1.loadConfig)(config_resolver_1.NODE_REGION_CONFIG_OPTIONS, config_resolver_1.NODE_REGION_CONFIG_FILE_OPTIONS),
+        requestHandler: (_l = config2 === null || config2 === void 0 ? void 0 : config2.requestHandler) !== null && _l !== void 0 ? _l : new node_http_handler_1.NodeHttpHandler(defaultConfigProvider),
+        retryMode: (_m = config2 === null || config2 === void 0 ? void 0 : config2.retryMode) !== null && _m !== void 0 ? _m : (0, node_config_provider_1.loadConfig)({
           ...middleware_retry_1.NODE_RETRY_MODE_CONFIG_OPTIONS,
           default: async () => (await defaultConfigProvider()).retryMode || middleware_retry_1.DEFAULT_RETRY_MODE
         }),
-        sha1: (_o = config === null || config === void 0 ? void 0 : config.sha1) !== null && _o !== void 0 ? _o : hash_node_1.Hash.bind(null, "sha1"),
-        sha256: (_p = config === null || config === void 0 ? void 0 : config.sha256) !== null && _p !== void 0 ? _p : hash_node_1.Hash.bind(null, "sha256"),
-        streamCollector: (_q = config === null || config === void 0 ? void 0 : config.streamCollector) !== null && _q !== void 0 ? _q : node_http_handler_1.streamCollector,
-        streamHasher: (_r = config === null || config === void 0 ? void 0 : config.streamHasher) !== null && _r !== void 0 ? _r : hash_stream_node_1.readableStreamHasher,
-        useArnRegion: (_s = config === null || config === void 0 ? void 0 : config.useArnRegion) !== null && _s !== void 0 ? _s : (0, node_config_provider_1.loadConfig)(middleware_bucket_endpoint_1.NODE_USE_ARN_REGION_CONFIG_OPTIONS),
-        useDualstackEndpoint: (_t = config === null || config === void 0 ? void 0 : config.useDualstackEndpoint) !== null && _t !== void 0 ? _t : (0, node_config_provider_1.loadConfig)(config_resolver_1.NODE_USE_DUALSTACK_ENDPOINT_CONFIG_OPTIONS),
-        useFipsEndpoint: (_u = config === null || config === void 0 ? void 0 : config.useFipsEndpoint) !== null && _u !== void 0 ? _u : (0, node_config_provider_1.loadConfig)(config_resolver_1.NODE_USE_FIPS_ENDPOINT_CONFIG_OPTIONS),
-        utf8Decoder: (_v = config === null || config === void 0 ? void 0 : config.utf8Decoder) !== null && _v !== void 0 ? _v : util_utf8_node_1.fromUtf8,
-        utf8Encoder: (_w = config === null || config === void 0 ? void 0 : config.utf8Encoder) !== null && _w !== void 0 ? _w : util_utf8_node_1.toUtf8
+        sha1: (_o = config2 === null || config2 === void 0 ? void 0 : config2.sha1) !== null && _o !== void 0 ? _o : hash_node_1.Hash.bind(null, "sha1"),
+        sha256: (_p = config2 === null || config2 === void 0 ? void 0 : config2.sha256) !== null && _p !== void 0 ? _p : hash_node_1.Hash.bind(null, "sha256"),
+        streamCollector: (_q = config2 === null || config2 === void 0 ? void 0 : config2.streamCollector) !== null && _q !== void 0 ? _q : node_http_handler_1.streamCollector,
+        streamHasher: (_r = config2 === null || config2 === void 0 ? void 0 : config2.streamHasher) !== null && _r !== void 0 ? _r : hash_stream_node_1.readableStreamHasher,
+        useArnRegion: (_s = config2 === null || config2 === void 0 ? void 0 : config2.useArnRegion) !== null && _s !== void 0 ? _s : (0, node_config_provider_1.loadConfig)(middleware_bucket_endpoint_1.NODE_USE_ARN_REGION_CONFIG_OPTIONS),
+        useDualstackEndpoint: (_t = config2 === null || config2 === void 0 ? void 0 : config2.useDualstackEndpoint) !== null && _t !== void 0 ? _t : (0, node_config_provider_1.loadConfig)(config_resolver_1.NODE_USE_DUALSTACK_ENDPOINT_CONFIG_OPTIONS),
+        useFipsEndpoint: (_u = config2 === null || config2 === void 0 ? void 0 : config2.useFipsEndpoint) !== null && _u !== void 0 ? _u : (0, node_config_provider_1.loadConfig)(config_resolver_1.NODE_USE_FIPS_ENDPOINT_CONFIG_OPTIONS),
+        utf8Decoder: (_v = config2 === null || config2 === void 0 ? void 0 : config2.utf8Decoder) !== null && _v !== void 0 ? _v : util_utf8_node_1.fromUtf8,
+        utf8Encoder: (_w = config2 === null || config2 === void 0 ? void 0 : config2.utf8Encoder) !== null && _w !== void 0 ? _w : util_utf8_node_1.toUtf8
       };
     };
     exports2.getRuntimeConfig = getRuntimeConfig;
@@ -54722,24 +54722,24 @@ var require_ListObjectsV2Paginator = __commonJS({
     var makePagedRequest = async (client, input, ...args) => {
       return await client.listObjectsV2(input, ...args);
     };
-    async function* paginateListObjectsV2(config, input, ...additionalArguments) {
-      let token2 = config.startingToken || void 0;
+    async function* paginateListObjectsV2(config2, input, ...additionalArguments) {
+      let token2 = config2.startingToken || void 0;
       let hasNext = true;
       let page;
       while (hasNext) {
         input.ContinuationToken = token2;
-        input["MaxKeys"] = config.pageSize;
-        if (config.client instanceof S3_1.S3) {
-          page = await makePagedRequest(config.client, input, ...additionalArguments);
-        } else if (config.client instanceof S3Client_1.S3Client) {
-          page = await makePagedClientRequest(config.client, input, ...additionalArguments);
+        input["MaxKeys"] = config2.pageSize;
+        if (config2.client instanceof S3_1.S3) {
+          page = await makePagedRequest(config2.client, input, ...additionalArguments);
+        } else if (config2.client instanceof S3Client_1.S3Client) {
+          page = await makePagedClientRequest(config2.client, input, ...additionalArguments);
         } else {
           throw new Error("Invalid client, expected S3 | S3Client");
         }
         yield page;
         const prevToken = token2;
         token2 = page.NextContinuationToken;
-        hasNext = !!(token2 && (!config.stopOnSameToken || token2 !== prevToken));
+        hasNext = !!(token2 && (!config2.stopOnSameToken || token2 !== prevToken));
       }
       return void 0;
     }
@@ -54762,24 +54762,24 @@ var require_ListPartsPaginator = __commonJS({
     var makePagedRequest = async (client, input, ...args) => {
       return await client.listParts(input, ...args);
     };
-    async function* paginateListParts(config, input, ...additionalArguments) {
-      let token2 = config.startingToken || void 0;
+    async function* paginateListParts(config2, input, ...additionalArguments) {
+      let token2 = config2.startingToken || void 0;
       let hasNext = true;
       let page;
       while (hasNext) {
         input.PartNumberMarker = token2;
-        input["MaxParts"] = config.pageSize;
-        if (config.client instanceof S3_1.S3) {
-          page = await makePagedRequest(config.client, input, ...additionalArguments);
-        } else if (config.client instanceof S3Client_1.S3Client) {
-          page = await makePagedClientRequest(config.client, input, ...additionalArguments);
+        input["MaxParts"] = config2.pageSize;
+        if (config2.client instanceof S3_1.S3) {
+          page = await makePagedRequest(config2.client, input, ...additionalArguments);
+        } else if (config2.client instanceof S3Client_1.S3Client) {
+          page = await makePagedClientRequest(config2.client, input, ...additionalArguments);
         } else {
           throw new Error("Invalid client, expected S3 | S3Client");
         }
         yield page;
         const prevToken = token2;
         token2 = page.NextPartNumberMarker;
-        hasNext = !!(token2 && (!config.stopOnSameToken || token2 !== prevToken));
+        hasNext = !!(token2 && (!config2.stopOnSameToken || token2 !== prevToken));
       }
       return void 0;
     }
@@ -60759,6 +60759,155 @@ var require_stream = __commonJS({
   }
 });
 
+// node_modules/dotenv/package.json
+var require_package4 = __commonJS({
+  "node_modules/dotenv/package.json"(exports2, module2) {
+    module2.exports = {
+      name: "dotenv",
+      version: "16.0.3",
+      description: "Loads environment variables from .env file",
+      main: "lib/main.js",
+      types: "lib/main.d.ts",
+      exports: {
+        ".": {
+          require: "./lib/main.js",
+          types: "./lib/main.d.ts",
+          default: "./lib/main.js"
+        },
+        "./config": "./config.js",
+        "./config.js": "./config.js",
+        "./lib/env-options": "./lib/env-options.js",
+        "./lib/env-options.js": "./lib/env-options.js",
+        "./lib/cli-options": "./lib/cli-options.js",
+        "./lib/cli-options.js": "./lib/cli-options.js",
+        "./package.json": "./package.json"
+      },
+      scripts: {
+        "dts-check": "tsc --project tests/types/tsconfig.json",
+        lint: "standard",
+        "lint-readme": "standard-markdown",
+        pretest: "npm run lint && npm run dts-check",
+        test: "tap tests/*.js --100 -Rspec",
+        prerelease: "npm test",
+        release: "standard-version"
+      },
+      repository: {
+        type: "git",
+        url: "git://github.com/motdotla/dotenv.git"
+      },
+      keywords: [
+        "dotenv",
+        "env",
+        ".env",
+        "environment",
+        "variables",
+        "config",
+        "settings"
+      ],
+      readmeFilename: "README.md",
+      license: "BSD-2-Clause",
+      devDependencies: {
+        "@types/node": "^17.0.9",
+        decache: "^4.6.1",
+        dtslint: "^3.7.0",
+        sinon: "^12.0.1",
+        standard: "^16.0.4",
+        "standard-markdown": "^7.1.0",
+        "standard-version": "^9.3.2",
+        tap: "^15.1.6",
+        tar: "^6.1.11",
+        typescript: "^4.5.4"
+      },
+      engines: {
+        node: ">=12"
+      }
+    };
+  }
+});
+
+// node_modules/dotenv/lib/main.js
+var require_main = __commonJS({
+  "node_modules/dotenv/lib/main.js"(exports2, module2) {
+    var fs5 = require("fs");
+    var path4 = require("path");
+    var os2 = require("os");
+    var packageJson = require_package4();
+    var version2 = packageJson.version;
+    var LINE = /(?:^|^)\s*(?:export\s+)?([\w.-]+)(?:\s*=\s*?|:\s+?)(\s*'(?:\\'|[^'])*'|\s*"(?:\\"|[^"])*"|\s*`(?:\\`|[^`])*`|[^#\r\n]+)?\s*(?:#.*)?(?:$|$)/mg;
+    function parse3(src2) {
+      const obj = {};
+      let lines = src2.toString();
+      lines = lines.replace(/\r\n?/mg, "\n");
+      let match;
+      while ((match = LINE.exec(lines)) != null) {
+        const key = match[1];
+        let value = match[2] || "";
+        value = value.trim();
+        const maybeQuote = value[0];
+        value = value.replace(/^(['"`])([\s\S]*)\1$/mg, "$2");
+        if (maybeQuote === '"') {
+          value = value.replace(/\\n/g, "\n");
+          value = value.replace(/\\r/g, "\r");
+        }
+        obj[key] = value;
+      }
+      return obj;
+    }
+    function _log(message) {
+      console.log(`[dotenv@${version2}][DEBUG] ${message}`);
+    }
+    function _resolveHome(envPath) {
+      return envPath[0] === "~" ? path4.join(os2.homedir(), envPath.slice(1)) : envPath;
+    }
+    function config2(options) {
+      let dotenvPath = path4.resolve(process.cwd(), ".env");
+      let encoding = "utf8";
+      const debug12 = Boolean(options && options.debug);
+      const override = Boolean(options && options.override);
+      if (options) {
+        if (options.path != null) {
+          dotenvPath = _resolveHome(options.path);
+        }
+        if (options.encoding != null) {
+          encoding = options.encoding;
+        }
+      }
+      try {
+        const parsed = DotenvModule.parse(fs5.readFileSync(dotenvPath, { encoding }));
+        Object.keys(parsed).forEach(function(key) {
+          if (!Object.prototype.hasOwnProperty.call(process.env, key)) {
+            process.env[key] = parsed[key];
+          } else {
+            if (override === true) {
+              process.env[key] = parsed[key];
+            }
+            if (debug12) {
+              if (override === true) {
+                _log(`"${key}" is already defined in \`process.env\` and WAS overwritten`);
+              } else {
+                _log(`"${key}" is already defined in \`process.env\` and was NOT overwritten`);
+              }
+            }
+          }
+        });
+        return { parsed };
+      } catch (e) {
+        if (debug12) {
+          _log(`Failed to load ${dotenvPath} ${e.message}`);
+        }
+        return { error: e };
+      }
+    }
+    var DotenvModule = {
+      config: config2,
+      parse: parse3
+    };
+    module2.exports.config = DotenvModule.config;
+    module2.exports.parse = DotenvModule.parse;
+    module2.exports = DotenvModule;
+  }
+});
+
 // node_modules/queueable/dist/lib/Deferred.js
 var require_Deferred = __commonJS({
   "node_modules/queueable/dist/lib/Deferred.js"(exports2) {
@@ -62833,7 +62982,7 @@ var require_types6 = __commonJS({
 });
 
 // node_modules/@supabase/gotrue-js/dist/main/index.js
-var require_main = __commonJS({
+var require_main2 = __commonJS({
   "node_modules/@supabase/gotrue-js/dist/main/index.js"(exports2) {
     "use strict";
     var __createBinding = exports2 && exports2.__createBinding || (Object.create ? function(o, m, k, k2) {
@@ -62871,7 +63020,7 @@ var require_SupabaseAuthClient = __commonJS({
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.SupabaseAuthClient = void 0;
-    var gotrue_js_1 = require_main();
+    var gotrue_js_1 = require_main2();
     var SupabaseAuthClient = class extends gotrue_js_1.GoTrueClient {
       constructor(options) {
         super(options);
@@ -63239,7 +63388,7 @@ var require_PostgrestFilterBuilder = __commonJS({
         }
         return this;
       }
-      textSearch(column, query, { config, type = null } = {}) {
+      textSearch(column, query, { config: config2, type = null } = {}) {
         let typePart = "";
         if (type === "plain") {
           typePart = "pl";
@@ -63248,27 +63397,27 @@ var require_PostgrestFilterBuilder = __commonJS({
         } else if (type === "websearch") {
           typePart = "w";
         }
-        const configPart = config === void 0 ? "" : `(${config})`;
+        const configPart = config2 === void 0 ? "" : `(${config2})`;
         this.url.searchParams.append(`${column}`, `${typePart}fts${configPart}.${query}`);
         return this;
       }
-      fts(column, query, { config } = {}) {
-        const configPart = typeof config === "undefined" ? "" : `(${config})`;
+      fts(column, query, { config: config2 } = {}) {
+        const configPart = typeof config2 === "undefined" ? "" : `(${config2})`;
         this.url.searchParams.append(`${column}`, `fts${configPart}.${query}`);
         return this;
       }
-      plfts(column, query, { config } = {}) {
-        const configPart = typeof config === "undefined" ? "" : `(${config})`;
+      plfts(column, query, { config: config2 } = {}) {
+        const configPart = typeof config2 === "undefined" ? "" : `(${config2})`;
         this.url.searchParams.append(`${column}`, `plfts${configPart}.${query}`);
         return this;
       }
-      phfts(column, query, { config } = {}) {
-        const configPart = typeof config === "undefined" ? "" : `(${config})`;
+      phfts(column, query, { config: config2 } = {}) {
+        const configPart = typeof config2 === "undefined" ? "" : `(${config2})`;
         this.url.searchParams.append(`${column}`, `phfts${configPart}.${query}`);
         return this;
       }
-      wfts(column, query, { config } = {}) {
-        const configPart = typeof config === "undefined" ? "" : `(${config})`;
+      wfts(column, query, { config: config2 } = {}) {
+        const configPart = typeof config2 === "undefined" ? "" : `(${config2})`;
         this.url.searchParams.append(`${column}`, `wfts${configPart}.${query}`);
         return this;
       }
@@ -63507,7 +63656,7 @@ var require_PostgrestClient = __commonJS({
 });
 
 // node_modules/@supabase/postgrest-js/dist/main/index.js
-var require_main2 = __commonJS({
+var require_main3 = __commonJS({
   "node_modules/@supabase/postgrest-js/dist/main/index.js"(exports2) {
     "use strict";
     var __importDefault = exports2 && exports2.__importDefault || function(mod2) {
@@ -64404,11 +64553,11 @@ var require_WebSocketFrame = __commonJS({
     var WAITING_FOR_MASK_KEY = 4;
     var WAITING_FOR_PAYLOAD = 5;
     var COMPLETE = 6;
-    function WebSocketFrame(maskBytes, frameHeader, config) {
+    function WebSocketFrame(maskBytes, frameHeader, config2) {
       this.maskBytes = maskBytes;
       this.frameHeader = frameHeader;
-      this.config = config;
-      this.maxReceivedFrameSize = config.maxReceivedFrameSize;
+      this.config = config2;
+      this.maxReceivedFrameSize = config2.maxReceivedFrameSize;
       this.protocolError = false;
       this.frameTooLarge = false;
       this.invalidCloseFrameLength = false;
@@ -64827,7 +64976,7 @@ var require_WebSocketConnection = __commonJS({
     var STATE_CLOSED = "closed";
     var setImmediateImpl = "setImmediate" in global ? global.setImmediate.bind(global) : process.nextTick.bind(process);
     var idCounter = 0;
-    function WebSocketConnection(socket, extensions, protocol, maskOutgoingPackets, config) {
+    function WebSocketConnection(socket, extensions, protocol, maskOutgoingPackets, config2) {
       this._debug = utils.BufferingLogger("websocket:connection", ++idCounter);
       this._debug("constructor");
       if (this._debug.enabled) {
@@ -64844,7 +64993,7 @@ var require_WebSocketConnection = __commonJS({
           this._pingListenerCount--;
         }
       });
-      this.config = config;
+      this.config = config2;
       this.socket = socket;
       this.protocol = protocol;
       this.extensions = extensions;
@@ -65951,7 +66100,7 @@ var require_WebSocketServer = __commonJS({
     var debug12 = require_src9()("websocket:server");
     var EventEmitter2 = require("events").EventEmitter;
     var WebSocketRequest = require_WebSocketRequest();
-    var WebSocketServer = function WebSocketServer2(config) {
+    var WebSocketServer = function WebSocketServer2(config2) {
       EventEmitter2.call(this);
       this._handlers = {
         upgrade: this.handleUpgrade.bind(this),
@@ -65960,12 +66109,12 @@ var require_WebSocketServer = __commonJS({
       };
       this.connections = [];
       this.pendingRequests = [];
-      if (config) {
-        this.mount(config);
+      if (config2) {
+        this.mount(config2);
       }
     };
     util.inherits(WebSocketServer, EventEmitter2);
-    WebSocketServer.prototype.mount = function(config) {
+    WebSocketServer.prototype.mount = function(config2) {
       this.config = {
         httpServer: null,
         maxReceivedFrameSize: 65536,
@@ -65985,7 +66134,7 @@ var require_WebSocketServer = __commonJS({
         disableNagleAlgorithm: true,
         closeTimeout: 5e3
       };
-      extend(this.config, config);
+      extend(this.config, config2);
       if (this.config.httpServer) {
         if (!Array.isArray(this.config.httpServer)) {
           this.config.httpServer = [this.config.httpServer];
@@ -66124,7 +66273,7 @@ var require_WebSocketClient = __commonJS({
       String.fromCharCode(9)
     ];
     var excludedTlsOptions = ["hostname", "port", "method", "path", "headers"];
-    function WebSocketClient(config) {
+    function WebSocketClient(config2) {
       EventEmitter2.call(this);
       this.config = {
         maxReceivedFrameSize: 1048576,
@@ -66137,15 +66286,15 @@ var require_WebSocketClient = __commonJS({
         closeTimeout: 5e3,
         tlsOptions: {}
       };
-      if (config) {
+      if (config2) {
         var tlsOptions;
-        if (config.tlsOptions) {
-          tlsOptions = config.tlsOptions;
-          delete config.tlsOptions;
+        if (config2.tlsOptions) {
+          tlsOptions = config2.tlsOptions;
+          delete config2.tlsOptions;
         } else {
           tlsOptions = {};
         }
-        extend(this.config, config);
+        extend(this.config, config2);
         extend(this.config.tlsOptions, tlsOptions);
       }
       this._req = null;
@@ -66398,13 +66547,13 @@ var require_WebSocketRouter = __commonJS({
     var util = require("util");
     var EventEmitter2 = require("events").EventEmitter;
     var WebSocketRouterRequest = require_WebSocketRouterRequest();
-    function WebSocketRouter(config) {
+    function WebSocketRouter(config2) {
       EventEmitter2.call(this);
       this.config = {
         server: null
       };
-      if (config) {
-        extend(this.config, config);
+      if (config2) {
+        extend(this.config, config2);
       }
       this.handlers = [];
       this._requestHandler = this.handleRequest.bind(this);
@@ -66865,7 +67014,7 @@ var require_Deprecation = __commonJS({
 });
 
 // node_modules/websocket/package.json
-var require_package4 = __commonJS({
+var require_package5 = __commonJS({
   "node_modules/websocket/package.json"(exports2, module2) {
     module2.exports = {
       name: "websocket",
@@ -66931,7 +67080,7 @@ var require_package4 = __commonJS({
 // node_modules/websocket/lib/version.js
 var require_version5 = __commonJS({
   "node_modules/websocket/lib/version.js"(exports2, module2) {
-    module2.exports = require_package4().version;
+    module2.exports = require_package5().version;
   }
 });
 
@@ -67641,7 +67790,7 @@ var require_RealtimeClient = __commonJS({
 });
 
 // node_modules/@supabase/realtime-js/dist/main/index.js
-var require_main3 = __commonJS({
+var require_main4 = __commonJS({
   "node_modules/@supabase/realtime-js/dist/main/index.js"(exports2) {
     "use strict";
     var __createBinding = exports2 && exports2.__createBinding || (Object.create ? function(o, m, k, k2) {
@@ -67692,7 +67841,7 @@ var require_SupabaseRealtimeClient = __commonJS({
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.SupabaseRealtimeClient = void 0;
-    var realtime_js_1 = require_main3();
+    var realtime_js_1 = require_main4();
     var SupabaseRealtimeClient = class {
       constructor(socket, headers, schema, tableName) {
         const chanParams = {};
@@ -67750,7 +67899,7 @@ var require_SupabaseQueryBuilder = __commonJS({
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.SupabaseQueryBuilder = void 0;
-    var postgrest_js_1 = require_main2();
+    var postgrest_js_1 = require_main3();
     var SupabaseRealtimeClient_1 = require_SupabaseRealtimeClient();
     var SupabaseQueryBuilder = class extends postgrest_js_1.PostgrestQueryBuilder {
       constructor(url, { headers = {}, schema, realtime, table, fetch: fetch5, shouldThrowOnError }) {
@@ -68334,7 +68483,7 @@ var require_StorageClient = __commonJS({
 });
 
 // node_modules/@supabase/storage-js/dist/main/index.js
-var require_main4 = __commonJS({
+var require_main5 = __commonJS({
   "node_modules/@supabase/storage-js/dist/main/index.js"(exports2) {
     "use strict";
     var __createBinding = exports2 && exports2.__createBinding || (Object.create ? function(o, m, k, k2) {
@@ -68449,7 +68598,7 @@ var require_helper = __commonJS({
 });
 
 // node_modules/@supabase/functions-js/dist/main/index.js
-var require_main5 = __commonJS({
+var require_main6 = __commonJS({
   "node_modules/@supabase/functions-js/dist/main/index.js"(exports2) {
     "use strict";
     var __awaiter = exports2 && exports2.__awaiter || function(thisArg, _arguments, P, generator) {
@@ -68562,10 +68711,10 @@ var require_SupabaseClient = __commonJS({
     var helpers_1 = require_helpers();
     var SupabaseAuthClient_1 = require_SupabaseAuthClient();
     var SupabaseQueryBuilder_1 = require_SupabaseQueryBuilder();
-    var storage_js_1 = require_main4();
-    var functions_js_1 = require_main5();
-    var postgrest_js_1 = require_main2();
-    var realtime_js_1 = require_main3();
+    var storage_js_1 = require_main5();
+    var functions_js_1 = require_main6();
+    var postgrest_js_1 = require_main3();
+    var realtime_js_1 = require_main4();
     var DEFAULT_OPTIONS = {
       schema: "public",
       autoRefreshToken: true,
@@ -68756,7 +68905,7 @@ var require_SupabaseClient = __commonJS({
 });
 
 // node_modules/@supabase/supabase-js/dist/main/index.js
-var require_main6 = __commonJS({
+var require_main7 = __commonJS({
   "node_modules/@supabase/supabase-js/dist/main/index.js"(exports2) {
     "use strict";
     var __createBinding = exports2 && exports2.__createBinding || (Object.create ? function(o, m, k, k2) {
@@ -68786,8 +68935,8 @@ var require_main6 = __commonJS({
     exports2.SupabaseClient = exports2.createClient = void 0;
     var SupabaseClient_1 = __importDefault(require_SupabaseClient());
     exports2.SupabaseClient = SupabaseClient_1.default;
-    __exportStar(require_main(), exports2);
-    __exportStar(require_main3(), exports2);
+    __exportStar(require_main2(), exports2);
+    __exportStar(require_main4(), exports2);
     var createClient2 = (supabaseUrl, supabaseKey, options) => {
       return new SupabaseClient_1.default(supabaseUrl, supabaseKey, options);
     };
@@ -78034,13 +78183,13 @@ var createGetAll = configure((api) => {
 
 // node_modules/ipfs-http-client/esm/src/config/replace.js
 var createReplace = configure((api) => {
-  const replace = async (config, options = {}) => {
+  const replace = async (config2, options = {}) => {
     const controller = new AbortController();
     const signal = abortSignal(controller.signal, options.signal);
     const res = await api.post("config/replace", {
       signal,
       searchParams: toUrlSearchParams(options),
-      ...await multipartRequest3([fromString3(JSON.stringify(config))], controller, options.headers)
+      ...await multipartRequest3([fromString3(JSON.stringify(config2))], controller, options.headers)
     });
     await res.text();
   };
@@ -85342,11 +85491,14 @@ async function* paginator(fn, service, opts) {
 }
 
 // src/supabase/web3storage.js
+var dotenv = __toESM(require_main(), 1);
+dotenv.config();
 var blockstore = new s3store_default();
 var debug8 = (0, import_debug8.default)("web3storage");
 var token = process.env.WEB3STORAGE_TOKEN;
 if (!token) {
   console.error("A token is needed. You can create one on https://web3.storage");
+  console.error("env", process.env);
 }
 var storage = new Web3Storage({
   token
@@ -85389,7 +85541,7 @@ var import_node_fetch2 = __toESM(require_lib4(), 1);
 var import_queueable = __toESM(require_lib8(), 1);
 
 // src/supabase/client.js
-var import_supabase_js = __toESM(require_main6(), 1);
+var import_supabase_js = __toESM(require_main7(), 1);
 var getClient = () => {
   const supabaseUrl = "https://vtxnaziguspwqgndeais.supabase.co";
   const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ0eG5hemlndXNwd3FnbmRlYWlzIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDc1MjI5NjQsImV4cCI6MTk2MzA5ODk2NH0.sMlEkFJUdP8imkKF-a13C-MDvpyn0nbk2WDZBcMHg1A";
