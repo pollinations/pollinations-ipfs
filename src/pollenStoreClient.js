@@ -32,7 +32,7 @@ export async function importJSON(inputs) {
         lastCID = file.cid;
         // lastTree = file.tree;
     }
-    return lastCID;
+    return lastCID.toString();
 }
 
 export function pollenImporter() {

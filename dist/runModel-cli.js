@@ -77742,7 +77742,7 @@ async function importJSON(inputs2) {
     debug5("Imported file", file.path, file.cid);
     lastCID = file.cid;
   }
-  return lastCID;
+  return lastCID.toString();
 }
 function objectToFiles(obj, path2 = "") {
   const result = [];
