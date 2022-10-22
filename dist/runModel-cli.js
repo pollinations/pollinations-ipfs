@@ -40631,7 +40631,7 @@ var require_GetObjectCommand = __commonJS({
     var smithy_client_1 = require_dist_cjs7();
     var models_0_1 = require_models_0();
     var Aws_restXml_1 = require_Aws_restXml();
-    var GetObjectCommand2 = class extends smithy_client_1.Command {
+    var GetObjectCommand3 = class extends smithy_client_1.Command {
       constructor(input) {
         super();
         this.input = input;
@@ -40667,7 +40667,7 @@ var require_GetObjectCommand = __commonJS({
         return (0, Aws_restXml_1.deserializeAws_restXmlGetObjectCommand)(output, context);
       }
     };
-    exports2.GetObjectCommand = GetObjectCommand2;
+    exports2.GetObjectCommand = GetObjectCommand3;
   }
 });
 
@@ -71629,8 +71629,8 @@ async function* importer(source, blockstore3, options = {}) {
 var import_json5 = __toESM(require_lib6(), 1);
 var import_path_browserify = __toESM(require_path_browserify(), 1);
 
-// src/supabase/s3store.js
-var import_client_s3 = __toESM(require_dist_cjs61(), 1);
+// src/s3/s3store.js
+var import_client_s32 = __toESM(require_dist_cjs61(), 1);
 var import_debug3 = __toESM(require_src(), 1);
 
 // node_modules/blockstore-core/esm/src/errors.js
@@ -71771,9 +71771,12 @@ var BaseBlockstore = class {
 // node_modules/blockstore-core/esm/src/index.js
 var Errors = { ...errors_exports };
 
-// src/supabase/s3store.js
+// src/s3/s3client.js
+var import_client_s3 = __toESM(require_dist_cjs61(), 1);
 var s3 = new import_client_s3.S3Client();
 var Bucket3 = "pollinations-ipfs";
+
+// src/s3/s3store.js
 var debug3 = (0, import_debug3.default)("s3store");
 var S3Blockstore = class extends BaseBlockstore {
   constructor() {
@@ -71797,7 +71800,7 @@ var S3Blockstore = class extends BaseBlockstore {
       Key: key.toString(),
       Body: val
     };
-    debug3("put result", await await s3.send(new import_client_s3.PutObjectCommand(params)));
+    debug3("put result", await await s3.send(new import_client_s32.PutObjectCommand(params)));
   }
   async get(key, options) {
     if (this.cache[key]) {
@@ -71809,7 +71812,7 @@ var S3Blockstore = class extends BaseBlockstore {
       Key: key.toString()
     };
     try {
-      const { Body: Body2 } = await s3.send(new import_client_s3.GetObjectCommand(params));
+      const { Body: Body2 } = await s3.send(new import_client_s32.GetObjectCommand(params));
       debug3("get from s3", key.toString());
       const result = new Uint8Array(await streamToBuffer(Body2));
       this.cache[key] = result;
@@ -71828,7 +71831,7 @@ var S3Blockstore = class extends BaseBlockstore {
       Key: key.toString()
     };
     try {
-      await s3.send(new import_client_s3.HeadObjectCommand(params));
+      await s3.send(new import_client_s32.HeadObjectCommand(params));
       return true;
     } catch (err) {
       return false;
