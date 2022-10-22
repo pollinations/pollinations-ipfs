@@ -9,7 +9,7 @@ import json5 from "json5";
 import path from 'path-browserify';
 import S3Blockstore from './s3/s3store.js';
 import { importFromWeb3Storage } from './supabase/web3storage.js';
-export { getSignedUrl } from './s3/s3client.js';
+export { getSignedURL } from './s3/s3client.js';
 // Debug.enable("*");
 const { extname } = path;
 
