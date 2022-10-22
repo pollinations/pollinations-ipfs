@@ -4,7 +4,7 @@ import Debug from 'debug';
 
 import { Errors } from 'blockstore-core';
 import { BaseBlockstore } from 'blockstore-core/base';
-import { Bucket, s3 } from './s3client';
+import { Bucket, s3 } from './s3client.js';
 
 
 const debug = Debug("s3store");
