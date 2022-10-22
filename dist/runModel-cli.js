@@ -40631,7 +40631,7 @@ var require_GetObjectCommand = __commonJS({
     var smithy_client_1 = require_dist_cjs7();
     var models_0_1 = require_models_0();
     var Aws_restXml_1 = require_Aws_restXml();
-    var GetObjectCommand2 = class extends smithy_client_1.Command {
+    var GetObjectCommand = class extends smithy_client_1.Command {
       constructor(input) {
         super();
         this.input = input;
@@ -40667,7 +40667,7 @@ var require_GetObjectCommand = __commonJS({
         return (0, Aws_restXml_1.deserializeAws_restXmlGetObjectCommand)(output, context);
       }
     };
-    exports2.GetObjectCommand = GetObjectCommand2;
+    exports2.GetObjectCommand = GetObjectCommand;
   }
 });
 
@@ -42395,7 +42395,7 @@ var require_PutObjectCommand = __commonJS({
     var smithy_client_1 = require_dist_cjs7();
     var models_0_1 = require_models_0();
     var Aws_restXml_1 = require_Aws_restXml();
-    var PutObjectCommand = class extends smithy_client_1.Command {
+    var PutObjectCommand2 = class extends smithy_client_1.Command {
       constructor(input) {
         super();
         this.input = input;
@@ -42431,7 +42431,7 @@ var require_PutObjectCommand = __commonJS({
         return (0, Aws_restXml_1.deserializeAws_restXmlPutObjectCommand)(output, context);
       }
     };
-    exports2.PutObjectCommand = PutObjectCommand;
+    exports2.PutObjectCommand = PutObjectCommand2;
   }
 });
 
