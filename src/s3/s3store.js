@@ -1,4 +1,5 @@
-import { GetObjectCommand, HeadObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3';
+import { HeadObjectCommand } from '@aws-sdk/client-s3';
+import fetch from 'node-fetch';
 // create S3 instance
 import Debug from 'debug';
 
@@ -33,14 +34,29 @@ class S3Blockstore extends BaseBlockstore {
             debug("block already exists", key)
             return;
         }
-        // store a block to the bucket
-        const params = {
-            Bucket,
-            Key: key.toString(),
-            Body: val
-        };
+        // // store a block to the bucket
+        // const params = {
+        //     Bucket,
+        //     Key: key.toString(),
+        //     Body: val,
+        // };
 
-        debug("put result", await await s3.send(new PutObjectCommand(params)));
+        // debug("put result", await await s3.send(new PutObjectCommand(params)));
+
+        // get a signed url from https://store.pollinations.ai/upload/[key]
+        const urlResponse = await fetch(`https://store.pollinations.ai/upload/${key.toString()}`)
+        const url = await urlResponse.text();
+        debug("signed url", url)
+        // upload to signed url
+        // val is a Uint8Array
+        const uploadResponse = await fetch(url, {
+            method: "PUT",
+            body: val,
+            headers: {
+                "Content-Type": "application/octet-stream"
+            }
+        });
+        debug("upload response", uploadResponse)
     }
 
     async get (key, options) {
@@ -50,19 +66,16 @@ class S3Blockstore extends BaseBlockstore {
             return this.cache[key];
         }
         // retrieve a block
-        const params = {
-            Bucket,
-            Key: key.toString()
-        };
+
         // debug("get", key, params)
         try {
-            const { Body } = await s3.send(new GetObjectCommand(params));
 
-            
-            debug("get from s3", key.toString())
-
-            // convert the boddy which is a buffer to a UInt8Array
-            const result = new Uint8Array(await streamToBuffer(Body));
+            // get from https://pollinations-ipfs.s3.amazonaws.com/[key] using fetch
+            debug("get from s3", key.toString())    
+            const response = await fetch(`https://pollinations-ipfs.s3.amazonaws.com/${key.toString()}`);
+            // convert to Uint8Array
+            const buffer = await response.arrayBuffer();
+            const result = new Uint8Array(buffer);
             this.cache[key] = result;
             return result;
             
@@ -154,6 +167,7 @@ return new Promise((resolve, reject) => {
     stream.once('error', reject)
 })
 }
+
 
 
 // class MemoryBlockstore extends BaseBlockstore {

@@ -7056,12 +7056,12 @@ var require_lib3 = __commonJS({
       const dest = new URL$1(destination).hostname;
       return orig === dest || orig[orig.length - dest.length - 1] === "." && orig.endsWith(dest);
     };
-    function fetch5(url, opts) {
-      if (!fetch5.Promise) {
+    function fetch6(url, opts) {
+      if (!fetch6.Promise) {
         throw new Error("native promise missing, set fetch.Promise to your favorite alternative");
       }
-      Body2.Promise = fetch5.Promise;
-      return new fetch5.Promise(function(resolve8, reject) {
+      Body2.Promise = fetch6.Promise;
+      return new fetch6.Promise(function(resolve8, reject) {
         const request = new Request2(url, opts);
         const options = getNodeRequestOptions2(request);
         const send = (options.protocol === "https:" ? https2 : http3).request;
@@ -7111,7 +7111,7 @@ var require_lib3 = __commonJS({
         req.on("response", function(res) {
           clearTimeout(reqTimeout);
           const headers = createHeadersLenient(res.headers);
-          if (fetch5.isRedirect(res.statusCode)) {
+          if (fetch6.isRedirect(res.statusCode)) {
             const location = headers.get("Location");
             let locationURL = null;
             try {
@@ -7173,7 +7173,7 @@ var require_lib3 = __commonJS({
                   requestOpts.body = void 0;
                   requestOpts.headers.delete("content-length");
                 }
-                resolve8(fetch5(new Request2(locationURL, requestOpts)));
+                resolve8(fetch6(new Request2(locationURL, requestOpts)));
                 finalize();
                 return;
             }
@@ -7233,11 +7233,11 @@ var require_lib3 = __commonJS({
         writeToStream2(req, request);
       });
     }
-    fetch5.isRedirect = function(code6) {
+    fetch6.isRedirect = function(code6) {
       return code6 === 301 || code6 === 302 || code6 === 303 || code6 === 307 || code6 === 308;
     };
-    fetch5.Promise = global.Promise;
-    module2.exports = exports2 = fetch5;
+    fetch6.Promise = global.Promise;
+    module2.exports = exports2 = fetch6;
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.default = exports2;
     exports2.Headers = Headers2;
@@ -8046,19 +8046,19 @@ var require_node_ponyfill = __commonJS({
   "node_modules/cross-fetch/dist/node-ponyfill.js"(exports2, module2) {
     var nodeFetch = require_lib3();
     var realFetch = nodeFetch.default || nodeFetch;
-    var fetch5 = function(url, options) {
+    var fetch6 = function(url, options) {
       if (/^\/\//.test(url)) {
         url = "https:" + url;
       }
       return realFetch.call(this, url, options);
     };
-    fetch5.ponyfill = true;
-    module2.exports = exports2 = fetch5;
-    exports2.fetch = fetch5;
+    fetch6.ponyfill = true;
+    module2.exports = exports2 = fetch6;
+    exports2.fetch = fetch6;
     exports2.Headers = nodeFetch.Headers;
     exports2.Request = nodeFetch.Request;
     exports2.Response = nodeFetch.Response;
-    exports2.default = fetch5;
+    exports2.default = fetch6;
   }
 });
 
@@ -8235,11 +8235,11 @@ var require_GoTrueApi = __commonJS({
     var cookies_1 = require_cookies();
     var helpers_1 = require_helpers2();
     var GoTrueApi = class {
-      constructor({ url = "", headers = {}, cookieOptions, fetch: fetch5 }) {
+      constructor({ url = "", headers = {}, cookieOptions, fetch: fetch6 }) {
         this.url = url;
         this.headers = headers;
         this.cookieOptions = Object.assign(Object.assign({}, constants_1.COOKIE_OPTIONS), cookieOptions);
-        this.fetch = (0, helpers_1.resolveFetch)(fetch5);
+        this.fetch = (0, helpers_1.resolveFetch)(fetch6);
       }
       _createRequestHeaders(jwt) {
         const headers = Object.assign({}, this.headers);
@@ -9786,8 +9786,8 @@ var require_PostgrestQueryBuilder = __commonJS({
     var types_1 = require_types2();
     var PostgrestFilterBuilder_1 = __importDefault(require_PostgrestFilterBuilder());
     var PostgrestQueryBuilder = class extends types_1.PostgrestBuilder {
-      constructor(url, { headers = {}, schema, fetch: fetch5, shouldThrowOnError } = {}) {
-        super({ fetch: fetch5, shouldThrowOnError });
+      constructor(url, { headers = {}, schema, fetch: fetch6, shouldThrowOnError } = {}) {
+        super({ fetch: fetch6, shouldThrowOnError });
         this.url = new URL(url);
         this.headers = Object.assign({}, headers);
         this.schema = schema;
@@ -9896,8 +9896,8 @@ var require_PostgrestRpcBuilder = __commonJS({
     var types_1 = require_types2();
     var PostgrestFilterBuilder_1 = __importDefault(require_PostgrestFilterBuilder());
     var PostgrestRpcBuilder = class extends types_1.PostgrestBuilder {
-      constructor(url, { headers = {}, schema, fetch: fetch5, shouldThrowOnError } = {}) {
-        super({ fetch: fetch5, shouldThrowOnError });
+      constructor(url, { headers = {}, schema, fetch: fetch6, shouldThrowOnError } = {}) {
+        super({ fetch: fetch6, shouldThrowOnError });
         this.url = new URL(url);
         this.headers = Object.assign({}, headers);
         this.schema = schema;
@@ -9960,11 +9960,11 @@ var require_PostgrestClient = __commonJS({
     var PostgrestRpcBuilder_1 = __importDefault(require_PostgrestRpcBuilder());
     var constants_1 = require_constants3();
     var PostgrestClient = class {
-      constructor(url, { headers = {}, schema, fetch: fetch5, throwOnError } = {}) {
+      constructor(url, { headers = {}, schema, fetch: fetch6, throwOnError } = {}) {
         this.url = url;
         this.headers = Object.assign(Object.assign({}, constants_1.DEFAULT_HEADERS), headers);
         this.schema = schema;
-        this.fetch = fetch5;
+        this.fetch = fetch6;
         this.shouldThrowOnError = throwOnError;
       }
       auth(token2) {
@@ -14241,8 +14241,8 @@ var require_SupabaseQueryBuilder = __commonJS({
     var postgrest_js_1 = require_main2();
     var SupabaseRealtimeClient_1 = require_SupabaseRealtimeClient();
     var SupabaseQueryBuilder = class extends postgrest_js_1.PostgrestQueryBuilder {
-      constructor(url, { headers = {}, schema, realtime, table, fetch: fetch5, shouldThrowOnError }) {
-        super(url, { headers, schema, fetch: fetch5, shouldThrowOnError });
+      constructor(url, { headers = {}, schema, realtime, table, fetch: fetch6, shouldThrowOnError }) {
+        super(url, { headers, schema, fetch: fetch6, shouldThrowOnError });
         this._subscription = null;
         this._realtime = realtime;
         this._headers = headers;
@@ -14492,10 +14492,10 @@ var require_StorageBucketApi = __commonJS({
     var fetch_1 = require_fetch2();
     var helpers_1 = require_helpers3();
     var StorageBucketApi = class {
-      constructor(url, headers = {}, fetch5) {
+      constructor(url, headers = {}, fetch6) {
         this.url = url;
         this.headers = Object.assign(Object.assign({}, constants_1.DEFAULT_HEADERS), headers);
-        this.fetch = helpers_1.resolveFetch(fetch5);
+        this.fetch = helpers_1.resolveFetch(fetch6);
       }
       listBuckets() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -14611,11 +14611,11 @@ var require_StorageFileApi = __commonJS({
       upsert: false
     };
     var StorageFileApi = class {
-      constructor(url, headers = {}, bucketId, fetch5) {
+      constructor(url, headers = {}, bucketId, fetch6) {
         this.url = url;
         this.headers = headers;
         this.bucketId = bucketId;
-        this.fetch = helpers_1.resolveFetch(fetch5);
+        this.fetch = helpers_1.resolveFetch(fetch6);
       }
       uploadOrUpdate(method, path2, fileBody, fileOptions) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -14810,8 +14810,8 @@ var require_StorageClient = __commonJS({
     exports2.StorageClient = void 0;
     var lib_1 = require_lib5();
     var StorageClient = class extends lib_1.StorageBucketApi {
-      constructor(url, headers = {}, fetch5) {
-        super(url, headers, fetch5);
+      constructor(url, headers = {}, fetch6) {
+        super(url, headers, fetch6);
       }
       from(id) {
         return new lib_1.StorageFileApi(this.url, this.headers, id, this.fetch);
@@ -15159,7 +15159,7 @@ var require_SupabaseClient = __commonJS({
       getSubscriptions() {
         return this.realtime.channels;
       }
-      _initSupabaseAuthClient({ autoRefreshToken, persistSession, detectSessionInUrl, localStorage: localStorage2, headers, fetch: fetch5, cookieOptions, multiTab }) {
+      _initSupabaseAuthClient({ autoRefreshToken, persistSession, detectSessionInUrl, localStorage: localStorage2, headers, fetch: fetch6, cookieOptions, multiTab }) {
         const authHeaders = {
           Authorization: `Bearer ${this.supabaseKey}`,
           apikey: `${this.supabaseKey}`
@@ -15171,7 +15171,7 @@ var require_SupabaseClient = __commonJS({
           persistSession,
           detectSessionInUrl,
           localStorage: localStorage2,
-          fetch: fetch5,
+          fetch: fetch6,
           cookieOptions,
           multiTab
         });
@@ -40631,7 +40631,7 @@ var require_GetObjectCommand = __commonJS({
     var smithy_client_1 = require_dist_cjs7();
     var models_0_1 = require_models_0();
     var Aws_restXml_1 = require_Aws_restXml();
-    var GetObjectCommand3 = class extends smithy_client_1.Command {
+    var GetObjectCommand2 = class extends smithy_client_1.Command {
       constructor(input) {
         super();
         this.input = input;
@@ -40667,7 +40667,7 @@ var require_GetObjectCommand = __commonJS({
         return (0, Aws_restXml_1.deserializeAws_restXmlGetObjectCommand)(output, context);
       }
     };
-    exports2.GetObjectCommand = GetObjectCommand3;
+    exports2.GetObjectCommand = GetObjectCommand2;
   }
 });
 
@@ -42395,7 +42395,7 @@ var require_PutObjectCommand = __commonJS({
     var smithy_client_1 = require_dist_cjs7();
     var models_0_1 = require_models_0();
     var Aws_restXml_1 = require_Aws_restXml();
-    var PutObjectCommand2 = class extends smithy_client_1.Command {
+    var PutObjectCommand = class extends smithy_client_1.Command {
       constructor(input) {
         super();
         this.input = input;
@@ -42431,7 +42431,7 @@ var require_PutObjectCommand = __commonJS({
         return (0, Aws_restXml_1.deserializeAws_restXmlPutObjectCommand)(output, context);
       }
     };
-    exports2.PutObjectCommand = PutObjectCommand2;
+    exports2.PutObjectCommand = PutObjectCommand;
   }
 });
 
@@ -55174,6 +55174,1460 @@ var require_it_take = __commonJS({
       }
     };
     module2.exports = take2;
+  }
+});
+
+// node_modules/@aws-sdk/middleware-endpoint/dist-cjs/service-customizations/s3.js
+var require_s3 = __commonJS({
+  "node_modules/@aws-sdk/middleware-endpoint/dist-cjs/service-customizations/s3.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.isArnBucketName = exports2.isDnsCompatibleBucketName = exports2.S3_HOSTNAME_PATTERN = exports2.DOT_PATTERN = exports2.resolveParamsForS3 = void 0;
+    var resolveParamsForS3 = async (endpointParams) => {
+      const bucket = (endpointParams === null || endpointParams === void 0 ? void 0 : endpointParams.Bucket) || "";
+      if (typeof endpointParams.Bucket === "string") {
+        endpointParams.Bucket = bucket.replace(/#/g, encodeURIComponent("#")).replace(/\?/g, encodeURIComponent("?"));
+      }
+      if ((0, exports2.isArnBucketName)(bucket)) {
+        if (endpointParams.ForcePathStyle === true) {
+          throw new Error("Path-style addressing cannot be used with ARN buckets");
+        }
+      } else if (!(0, exports2.isDnsCompatibleBucketName)(bucket) || bucket.indexOf(".") !== -1 && !String(endpointParams.Endpoint).startsWith("http:") || bucket.toLowerCase() !== bucket || bucket.length < 3) {
+        endpointParams.ForcePathStyle = true;
+      }
+      if (endpointParams.DisableMultiRegionAccessPoints) {
+        endpointParams.disableMultiRegionAccessPoints = true;
+        endpointParams.DisableMRAP = true;
+      }
+      return endpointParams;
+    };
+    exports2.resolveParamsForS3 = resolveParamsForS3;
+    var DOMAIN_PATTERN = /^[a-z0-9][a-z0-9\.\-]{1,61}[a-z0-9]$/;
+    var IP_ADDRESS_PATTERN = /(\d+\.){3}\d+/;
+    var DOTS_PATTERN = /\.\./;
+    exports2.DOT_PATTERN = /\./;
+    exports2.S3_HOSTNAME_PATTERN = /^(.+\.)?s3(-fips)?(\.dualstack)?[.-]([a-z0-9-]+)\./;
+    var isDnsCompatibleBucketName = (bucketName) => DOMAIN_PATTERN.test(bucketName) && !IP_ADDRESS_PATTERN.test(bucketName) && !DOTS_PATTERN.test(bucketName);
+    exports2.isDnsCompatibleBucketName = isDnsCompatibleBucketName;
+    var isArnBucketName = (bucketName) => {
+      const [arn, partition, service, region, account, typeOrId] = bucketName.split(":");
+      const isArn = arn === "arn" && bucketName.split(":").length >= 6;
+      const isValidArn = [arn, partition, service, account, typeOrId].filter(Boolean).length === 5;
+      if (isArn && !isValidArn) {
+        throw new Error(`Invalid ARN: ${bucketName} was an invalid ARN.`);
+      }
+      return arn === "arn" && !!partition && !!service && !!account && !!typeOrId;
+    };
+    exports2.isArnBucketName = isArnBucketName;
+  }
+});
+
+// node_modules/@aws-sdk/middleware-endpoint/dist-cjs/service-customizations/index.js
+var require_service_customizations = __commonJS({
+  "node_modules/@aws-sdk/middleware-endpoint/dist-cjs/service-customizations/index.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    var tslib_1 = require_tslib();
+    tslib_1.__exportStar(require_s3(), exports2);
+  }
+});
+
+// node_modules/@aws-sdk/middleware-endpoint/dist-cjs/adaptors/getEndpointFromInstructions.js
+var require_getEndpointFromInstructions = __commonJS({
+  "node_modules/@aws-sdk/middleware-endpoint/dist-cjs/adaptors/getEndpointFromInstructions.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.resolveParams = exports2.getEndpointFromInstructions = void 0;
+    var service_customizations_1 = require_service_customizations();
+    var getEndpointFromInstructions = async (commandInput, instructionsSupplier, clientConfig, context) => {
+      const endpointParams = await (0, exports2.resolveParams)(commandInput, instructionsSupplier, clientConfig);
+      if (typeof clientConfig.endpointProvider !== "function") {
+        throw new Error("config.endpointProvider is not set.");
+      }
+      const endpoint = clientConfig.endpointProvider(endpointParams, context);
+      return endpoint;
+    };
+    exports2.getEndpointFromInstructions = getEndpointFromInstructions;
+    var resolveParams = async (commandInput, instructionsSupplier, clientConfig) => {
+      var _a;
+      const endpointParams = {};
+      const instructions = ((_a = instructionsSupplier === null || instructionsSupplier === void 0 ? void 0 : instructionsSupplier.getEndpointParameterInstructions) === null || _a === void 0 ? void 0 : _a.call(instructionsSupplier)) || {};
+      for (const [name5, instruction] of Object.entries(instructions)) {
+        switch (instruction.type) {
+          case "staticContextParams":
+            endpointParams[name5] = instruction.value;
+            break;
+          case "contextParams":
+            endpointParams[name5] = commandInput[instruction.name];
+            break;
+          case "clientContextParams":
+          case "builtInParams":
+            endpointParams[name5] = await createConfigProvider(instruction.name, name5, clientConfig)();
+            break;
+          default:
+            throw new Error("Unrecognized endpoint parameter instruction: " + JSON.stringify(instruction));
+        }
+      }
+      if (Object.keys(instructions).length === 0) {
+        Object.assign(endpointParams, clientConfig);
+      }
+      if (String(clientConfig.serviceId).toLowerCase() === "s3") {
+        await (0, service_customizations_1.resolveParamsForS3)(endpointParams);
+      }
+      return endpointParams;
+    };
+    exports2.resolveParams = resolveParams;
+    var createConfigProvider = (configKey, canonicalEndpointParamKey, config2) => {
+      const configProvider = async () => {
+        const configValue = config2[configKey] || config2[canonicalEndpointParamKey];
+        if (typeof configValue === "function") {
+          return configValue();
+        }
+        return configValue;
+      };
+      return configProvider;
+    };
+  }
+});
+
+// node_modules/@aws-sdk/middleware-endpoint/node_modules/@aws-sdk/querystring-parser/dist-cjs/index.js
+var require_dist_cjs62 = __commonJS({
+  "node_modules/@aws-sdk/middleware-endpoint/node_modules/@aws-sdk/querystring-parser/dist-cjs/index.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.parseQueryString = void 0;
+    function parseQueryString(querystring) {
+      const query = {};
+      querystring = querystring.replace(/^\?/, "");
+      if (querystring) {
+        for (const pair of querystring.split("&")) {
+          let [key, value = null] = pair.split("=");
+          key = decodeURIComponent(key);
+          if (value) {
+            value = decodeURIComponent(value);
+          }
+          if (!(key in query)) {
+            query[key] = value;
+          } else if (Array.isArray(query[key])) {
+            query[key].push(value);
+          } else {
+            query[key] = [query[key], value];
+          }
+        }
+      }
+      return query;
+    }
+    exports2.parseQueryString = parseQueryString;
+  }
+});
+
+// node_modules/@aws-sdk/middleware-endpoint/node_modules/@aws-sdk/url-parser/dist-cjs/index.js
+var require_dist_cjs63 = __commonJS({
+  "node_modules/@aws-sdk/middleware-endpoint/node_modules/@aws-sdk/url-parser/dist-cjs/index.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.parseUrl = void 0;
+    var querystring_parser_1 = require_dist_cjs62();
+    var parseUrl = (url) => {
+      if (typeof url === "string") {
+        return (0, exports2.parseUrl)(new URL(url));
+      }
+      const { hostname, pathname, port, protocol, search } = url;
+      let query;
+      if (search) {
+        query = (0, querystring_parser_1.parseQueryString)(search);
+      }
+      return {
+        hostname,
+        port: port ? parseInt(port) : void 0,
+        protocol,
+        path: pathname,
+        query
+      };
+    };
+    exports2.parseUrl = parseUrl;
+  }
+});
+
+// node_modules/@aws-sdk/middleware-endpoint/dist-cjs/adaptors/toEndpointV1.js
+var require_toEndpointV1 = __commonJS({
+  "node_modules/@aws-sdk/middleware-endpoint/dist-cjs/adaptors/toEndpointV1.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.toEndpointV1 = void 0;
+    var url_parser_1 = require_dist_cjs63();
+    var toEndpointV1 = (endpoint) => {
+      if (typeof endpoint === "object") {
+        if ("url" in endpoint) {
+          return (0, url_parser_1.parseUrl)(endpoint.url);
+        }
+        return endpoint;
+      }
+      return (0, url_parser_1.parseUrl)(endpoint);
+    };
+    exports2.toEndpointV1 = toEndpointV1;
+  }
+});
+
+// node_modules/@aws-sdk/middleware-endpoint/dist-cjs/adaptors/index.js
+var require_adaptors = __commonJS({
+  "node_modules/@aws-sdk/middleware-endpoint/dist-cjs/adaptors/index.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    var tslib_1 = require_tslib();
+    tslib_1.__exportStar(require_getEndpointFromInstructions(), exports2);
+    tslib_1.__exportStar(require_toEndpointV1(), exports2);
+  }
+});
+
+// node_modules/@aws-sdk/middleware-endpoint/dist-cjs/endpointMiddleware.js
+var require_endpointMiddleware = __commonJS({
+  "node_modules/@aws-sdk/middleware-endpoint/dist-cjs/endpointMiddleware.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.endpointMiddleware = void 0;
+    var getEndpointFromInstructions_1 = require_getEndpointFromInstructions();
+    var endpointMiddleware = ({ config: config2, instructions }) => {
+      return (next, context) => async (args) => {
+        var _a, _b;
+        const endpoint = await (0, getEndpointFromInstructions_1.getEndpointFromInstructions)(args.input, {
+          getEndpointParameterInstructions() {
+            return instructions;
+          }
+        }, { ...config2 }, context);
+        context.endpointV2 = endpoint;
+        context.authSchemes = (_a = endpoint.properties) === null || _a === void 0 ? void 0 : _a.authSchemes;
+        const authScheme = (_b = context.authSchemes) === null || _b === void 0 ? void 0 : _b[0];
+        if (authScheme) {
+          context["signing_region"] = authScheme.signingRegion;
+          context["signing_service"] = authScheme.signingName;
+        }
+        return next({
+          ...args
+        });
+      };
+    };
+    exports2.endpointMiddleware = endpointMiddleware;
+  }
+});
+
+// node_modules/@aws-sdk/middleware-endpoint/node_modules/@aws-sdk/middleware-serde/dist-cjs/deserializerMiddleware.js
+var require_deserializerMiddleware2 = __commonJS({
+  "node_modules/@aws-sdk/middleware-endpoint/node_modules/@aws-sdk/middleware-serde/dist-cjs/deserializerMiddleware.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.deserializerMiddleware = void 0;
+    var deserializerMiddleware = (options, deserializer) => (next, context) => async (args) => {
+      const { response } = await next(args);
+      try {
+        const parsed = await deserializer(response, options);
+        return {
+          response,
+          output: parsed
+        };
+      } catch (error) {
+        Object.defineProperty(error, "$response", {
+          value: response
+        });
+        throw error;
+      }
+    };
+    exports2.deserializerMiddleware = deserializerMiddleware;
+  }
+});
+
+// node_modules/@aws-sdk/middleware-endpoint/node_modules/@aws-sdk/middleware-serde/dist-cjs/serializerMiddleware.js
+var require_serializerMiddleware2 = __commonJS({
+  "node_modules/@aws-sdk/middleware-endpoint/node_modules/@aws-sdk/middleware-serde/dist-cjs/serializerMiddleware.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.serializerMiddleware = void 0;
+    var serializerMiddleware = (options, serializer) => (next, context) => async (args) => {
+      var _a;
+      const endpoint = ((_a = context.endpointV2) === null || _a === void 0 ? void 0 : _a.url) && options.urlParser ? async () => options.urlParser(context.endpointV2.url) : options.endpoint;
+      if (!endpoint) {
+        throw new Error("No valid endpoint provider available.");
+      }
+      const request = await serializer(args.input, { ...options, endpoint });
+      return next({
+        ...args,
+        request
+      });
+    };
+    exports2.serializerMiddleware = serializerMiddleware;
+  }
+});
+
+// node_modules/@aws-sdk/middleware-endpoint/node_modules/@aws-sdk/middleware-serde/dist-cjs/serdePlugin.js
+var require_serdePlugin2 = __commonJS({
+  "node_modules/@aws-sdk/middleware-endpoint/node_modules/@aws-sdk/middleware-serde/dist-cjs/serdePlugin.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.getSerdePlugin = exports2.serializerMiddlewareOption = exports2.deserializerMiddlewareOption = void 0;
+    var deserializerMiddleware_1 = require_deserializerMiddleware2();
+    var serializerMiddleware_1 = require_serializerMiddleware2();
+    exports2.deserializerMiddlewareOption = {
+      name: "deserializerMiddleware",
+      step: "deserialize",
+      tags: ["DESERIALIZER"],
+      override: true
+    };
+    exports2.serializerMiddlewareOption = {
+      name: "serializerMiddleware",
+      step: "serialize",
+      tags: ["SERIALIZER"],
+      override: true
+    };
+    function getSerdePlugin(config2, serializer, deserializer) {
+      return {
+        applyToStack: (commandStack) => {
+          commandStack.add((0, deserializerMiddleware_1.deserializerMiddleware)(config2, deserializer), exports2.deserializerMiddlewareOption);
+          commandStack.add((0, serializerMiddleware_1.serializerMiddleware)(config2, serializer), exports2.serializerMiddlewareOption);
+        }
+      };
+    }
+    exports2.getSerdePlugin = getSerdePlugin;
+  }
+});
+
+// node_modules/@aws-sdk/middleware-endpoint/node_modules/@aws-sdk/middleware-serde/dist-cjs/index.js
+var require_dist_cjs64 = __commonJS({
+  "node_modules/@aws-sdk/middleware-endpoint/node_modules/@aws-sdk/middleware-serde/dist-cjs/index.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    var tslib_1 = require_tslib();
+    tslib_1.__exportStar(require_deserializerMiddleware2(), exports2);
+    tslib_1.__exportStar(require_serdePlugin2(), exports2);
+    tslib_1.__exportStar(require_serializerMiddleware2(), exports2);
+  }
+});
+
+// node_modules/@aws-sdk/middleware-endpoint/dist-cjs/getEndpointPlugin.js
+var require_getEndpointPlugin = __commonJS({
+  "node_modules/@aws-sdk/middleware-endpoint/dist-cjs/getEndpointPlugin.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.getEndpointPlugin = exports2.endpointMiddlewareOptions = void 0;
+    var middleware_serde_1 = require_dist_cjs64();
+    var endpointMiddleware_1 = require_endpointMiddleware();
+    exports2.endpointMiddlewareOptions = {
+      step: "serialize",
+      tags: ["ENDPOINT_PARAMETERS", "ENDPOINT_V2", "ENDPOINT"],
+      name: "endpointV2Middleware",
+      override: true,
+      relation: "before",
+      toMiddleware: middleware_serde_1.serializerMiddlewareOption.name
+    };
+    var getEndpointPlugin = (config2, instructions) => ({
+      applyToStack: (clientStack) => {
+        clientStack.addRelativeTo((0, endpointMiddleware_1.endpointMiddleware)({
+          config: config2,
+          instructions
+        }), exports2.endpointMiddlewareOptions);
+      }
+    });
+    exports2.getEndpointPlugin = getEndpointPlugin;
+  }
+});
+
+// node_modules/@aws-sdk/middleware-endpoint/node_modules/@aws-sdk/util-middleware/dist-cjs/normalizeProvider.js
+var require_normalizeProvider2 = __commonJS({
+  "node_modules/@aws-sdk/middleware-endpoint/node_modules/@aws-sdk/util-middleware/dist-cjs/normalizeProvider.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.normalizeProvider = void 0;
+    var normalizeProvider = (input) => {
+      if (typeof input === "function")
+        return input;
+      const promisified = Promise.resolve(input);
+      return () => promisified;
+    };
+    exports2.normalizeProvider = normalizeProvider;
+  }
+});
+
+// node_modules/@aws-sdk/middleware-endpoint/node_modules/@aws-sdk/util-middleware/dist-cjs/index.js
+var require_dist_cjs65 = __commonJS({
+  "node_modules/@aws-sdk/middleware-endpoint/node_modules/@aws-sdk/util-middleware/dist-cjs/index.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    var tslib_1 = require_tslib();
+    tslib_1.__exportStar(require_normalizeProvider2(), exports2);
+  }
+});
+
+// node_modules/@aws-sdk/middleware-endpoint/dist-cjs/resolveEndpointConfig.js
+var require_resolveEndpointConfig = __commonJS({
+  "node_modules/@aws-sdk/middleware-endpoint/dist-cjs/resolveEndpointConfig.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.resolveEndpointConfig = void 0;
+    var util_middleware_1 = require_dist_cjs65();
+    var toEndpointV1_1 = require_toEndpointV1();
+    var resolveEndpointConfig = (input) => {
+      var _a, _b, _c;
+      const tls = (_a = input.tls) !== null && _a !== void 0 ? _a : true;
+      const { endpoint } = input;
+      const customEndpointProvider = endpoint != null ? async () => (0, toEndpointV1_1.toEndpointV1)(await (0, util_middleware_1.normalizeProvider)(endpoint)()) : void 0;
+      const isCustomEndpoint = !!endpoint;
+      return {
+        ...input,
+        endpoint: customEndpointProvider,
+        tls,
+        isCustomEndpoint,
+        useDualstackEndpoint: (0, util_middleware_1.normalizeProvider)((_b = input.useDualstackEndpoint) !== null && _b !== void 0 ? _b : false),
+        useFipsEndpoint: (0, util_middleware_1.normalizeProvider)((_c = input.useFipsEndpoint) !== null && _c !== void 0 ? _c : false)
+      };
+    };
+    exports2.resolveEndpointConfig = resolveEndpointConfig;
+  }
+});
+
+// node_modules/@aws-sdk/middleware-endpoint/dist-cjs/types.js
+var require_types9 = __commonJS({
+  "node_modules/@aws-sdk/middleware-endpoint/dist-cjs/types.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+  }
+});
+
+// node_modules/@aws-sdk/middleware-endpoint/dist-cjs/index.js
+var require_dist_cjs66 = __commonJS({
+  "node_modules/@aws-sdk/middleware-endpoint/dist-cjs/index.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    var tslib_1 = require_tslib();
+    tslib_1.__exportStar(require_adaptors(), exports2);
+    tslib_1.__exportStar(require_endpointMiddleware(), exports2);
+    tslib_1.__exportStar(require_getEndpointPlugin(), exports2);
+    tslib_1.__exportStar(require_resolveEndpointConfig(), exports2);
+    tslib_1.__exportStar(require_types9(), exports2);
+  }
+});
+
+// node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/protocol-http/dist-cjs/httpHandler.js
+var require_httpHandler2 = __commonJS({
+  "node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/protocol-http/dist-cjs/httpHandler.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+  }
+});
+
+// node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/protocol-http/dist-cjs/httpRequest.js
+var require_httpRequest3 = __commonJS({
+  "node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/protocol-http/dist-cjs/httpRequest.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.HttpRequest = void 0;
+    var HttpRequest = class {
+      constructor(options) {
+        this.method = options.method || "GET";
+        this.hostname = options.hostname || "localhost";
+        this.port = options.port;
+        this.query = options.query || {};
+        this.headers = options.headers || {};
+        this.body = options.body;
+        this.protocol = options.protocol ? options.protocol.slice(-1) !== ":" ? `${options.protocol}:` : options.protocol : "https:";
+        this.path = options.path ? options.path.charAt(0) !== "/" ? `/${options.path}` : options.path : "/";
+      }
+      static isInstance(request) {
+        if (!request)
+          return false;
+        const req = request;
+        return "method" in req && "protocol" in req && "hostname" in req && "path" in req && typeof req["query"] === "object" && typeof req["headers"] === "object";
+      }
+      clone() {
+        const cloned = new HttpRequest({
+          ...this,
+          headers: { ...this.headers }
+        });
+        if (cloned.query)
+          cloned.query = cloneQuery(cloned.query);
+        return cloned;
+      }
+    };
+    exports2.HttpRequest = HttpRequest;
+    function cloneQuery(query) {
+      return Object.keys(query).reduce((carry, paramName) => {
+        const param = query[paramName];
+        return {
+          ...carry,
+          [paramName]: Array.isArray(param) ? [...param] : param
+        };
+      }, {});
+    }
+  }
+});
+
+// node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/protocol-http/dist-cjs/httpResponse.js
+var require_httpResponse2 = __commonJS({
+  "node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/protocol-http/dist-cjs/httpResponse.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.HttpResponse = void 0;
+    var HttpResponse = class {
+      constructor(options) {
+        this.statusCode = options.statusCode;
+        this.headers = options.headers || {};
+        this.body = options.body;
+      }
+      static isInstance(response) {
+        if (!response)
+          return false;
+        const resp = response;
+        return typeof resp.statusCode === "number" && typeof resp.headers === "object";
+      }
+    };
+    exports2.HttpResponse = HttpResponse;
+  }
+});
+
+// node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/protocol-http/dist-cjs/isValidHostname.js
+var require_isValidHostname2 = __commonJS({
+  "node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/protocol-http/dist-cjs/isValidHostname.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.isValidHostname = void 0;
+    function isValidHostname(hostname) {
+      const hostPattern = /^[a-z0-9][a-z0-9\.\-]*[a-z0-9]$/;
+      return hostPattern.test(hostname);
+    }
+    exports2.isValidHostname = isValidHostname;
+  }
+});
+
+// node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/protocol-http/dist-cjs/index.js
+var require_dist_cjs67 = __commonJS({
+  "node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/protocol-http/dist-cjs/index.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    var tslib_1 = require_tslib();
+    tslib_1.__exportStar(require_httpHandler2(), exports2);
+    tslib_1.__exportStar(require_httpRequest3(), exports2);
+    tslib_1.__exportStar(require_httpResponse2(), exports2);
+    tslib_1.__exportStar(require_isValidHostname2(), exports2);
+  }
+});
+
+// node_modules/@aws-sdk/util-format-url/node_modules/@aws-sdk/util-uri-escape/dist-cjs/escape-uri.js
+var require_escape_uri2 = __commonJS({
+  "node_modules/@aws-sdk/util-format-url/node_modules/@aws-sdk/util-uri-escape/dist-cjs/escape-uri.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.escapeUri = void 0;
+    var escapeUri = (uri) => encodeURIComponent(uri).replace(/[!'()*]/g, hexEncode);
+    exports2.escapeUri = escapeUri;
+    var hexEncode = (c) => `%${c.charCodeAt(0).toString(16).toUpperCase()}`;
+  }
+});
+
+// node_modules/@aws-sdk/util-format-url/node_modules/@aws-sdk/util-uri-escape/dist-cjs/escape-uri-path.js
+var require_escape_uri_path2 = __commonJS({
+  "node_modules/@aws-sdk/util-format-url/node_modules/@aws-sdk/util-uri-escape/dist-cjs/escape-uri-path.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.escapeUriPath = void 0;
+    var escape_uri_1 = require_escape_uri2();
+    var escapeUriPath = (uri) => uri.split("/").map(escape_uri_1.escapeUri).join("/");
+    exports2.escapeUriPath = escapeUriPath;
+  }
+});
+
+// node_modules/@aws-sdk/util-format-url/node_modules/@aws-sdk/util-uri-escape/dist-cjs/index.js
+var require_dist_cjs68 = __commonJS({
+  "node_modules/@aws-sdk/util-format-url/node_modules/@aws-sdk/util-uri-escape/dist-cjs/index.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    var tslib_1 = require_tslib();
+    tslib_1.__exportStar(require_escape_uri2(), exports2);
+    tslib_1.__exportStar(require_escape_uri_path2(), exports2);
+  }
+});
+
+// node_modules/@aws-sdk/util-format-url/node_modules/@aws-sdk/querystring-builder/dist-cjs/index.js
+var require_dist_cjs69 = __commonJS({
+  "node_modules/@aws-sdk/util-format-url/node_modules/@aws-sdk/querystring-builder/dist-cjs/index.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.buildQueryString = void 0;
+    var util_uri_escape_1 = require_dist_cjs68();
+    function buildQueryString(query) {
+      const parts = [];
+      for (let key of Object.keys(query).sort()) {
+        const value = query[key];
+        key = (0, util_uri_escape_1.escapeUri)(key);
+        if (Array.isArray(value)) {
+          for (let i = 0, iLen = value.length; i < iLen; i++) {
+            parts.push(`${key}=${(0, util_uri_escape_1.escapeUri)(value[i])}`);
+          }
+        } else {
+          let qsEntry = key;
+          if (value || typeof value === "string") {
+            qsEntry += `=${(0, util_uri_escape_1.escapeUri)(value)}`;
+          }
+          parts.push(qsEntry);
+        }
+      }
+      return parts.join("&");
+    }
+    exports2.buildQueryString = buildQueryString;
+  }
+});
+
+// node_modules/@aws-sdk/util-format-url/dist-cjs/index.js
+var require_dist_cjs70 = __commonJS({
+  "node_modules/@aws-sdk/util-format-url/dist-cjs/index.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.formatUrl = void 0;
+    var querystring_builder_1 = require_dist_cjs69();
+    function formatUrl2(request) {
+      const { port, query } = request;
+      let { protocol, path: path2, hostname } = request;
+      if (protocol && protocol.slice(-1) !== ":") {
+        protocol += ":";
+      }
+      if (port) {
+        hostname += `:${port}`;
+      }
+      if (path2 && path2.charAt(0) !== "/") {
+        path2 = `/${path2}`;
+      }
+      let queryString = query ? (0, querystring_builder_1.buildQueryString)(query) : "";
+      if (queryString && queryString[0] !== "?") {
+        queryString = `?${queryString}`;
+      }
+      return `${protocol}//${hostname}${path2}${queryString}`;
+    }
+    exports2.formatUrl = formatUrl2;
+  }
+});
+
+// node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/util-hex-encoding/dist-cjs/index.js
+var require_dist_cjs71 = __commonJS({
+  "node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/util-hex-encoding/dist-cjs/index.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.toHex = exports2.fromHex = void 0;
+    var SHORT_TO_HEX = {};
+    var HEX_TO_SHORT = {};
+    for (let i = 0; i < 256; i++) {
+      let encodedByte = i.toString(16).toLowerCase();
+      if (encodedByte.length === 1) {
+        encodedByte = `0${encodedByte}`;
+      }
+      SHORT_TO_HEX[i] = encodedByte;
+      HEX_TO_SHORT[encodedByte] = i;
+    }
+    function fromHex2(encoded) {
+      if (encoded.length % 2 !== 0) {
+        throw new Error("Hex encoded strings must have an even number length");
+      }
+      const out = new Uint8Array(encoded.length / 2);
+      for (let i = 0; i < encoded.length; i += 2) {
+        const encodedByte = encoded.slice(i, i + 2).toLowerCase();
+        if (encodedByte in HEX_TO_SHORT) {
+          out[i / 2] = HEX_TO_SHORT[encodedByte];
+        } else {
+          throw new Error(`Cannot decode unrecognized sequence ${encodedByte} as hexadecimal`);
+        }
+      }
+      return out;
+    }
+    exports2.fromHex = fromHex2;
+    function toHex2(bytes) {
+      let out = "";
+      for (let i = 0; i < bytes.byteLength; i++) {
+        out += SHORT_TO_HEX[bytes[i]];
+      }
+      return out;
+    }
+    exports2.toHex = toHex2;
+  }
+});
+
+// node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/util-middleware/dist-cjs/normalizeProvider.js
+var require_normalizeProvider3 = __commonJS({
+  "node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/util-middleware/dist-cjs/normalizeProvider.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.normalizeProvider = void 0;
+    var normalizeProvider = (input) => {
+      if (typeof input === "function")
+        return input;
+      const promisified = Promise.resolve(input);
+      return () => promisified;
+    };
+    exports2.normalizeProvider = normalizeProvider;
+  }
+});
+
+// node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/util-middleware/dist-cjs/index.js
+var require_dist_cjs72 = __commonJS({
+  "node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/util-middleware/dist-cjs/index.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    var tslib_1 = require_tslib();
+    tslib_1.__exportStar(require_normalizeProvider3(), exports2);
+  }
+});
+
+// node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/signature-v4/dist-cjs/constants.js
+var require_constants14 = __commonJS({
+  "node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/signature-v4/dist-cjs/constants.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.MAX_PRESIGNED_TTL = exports2.KEY_TYPE_IDENTIFIER = exports2.MAX_CACHE_SIZE = exports2.UNSIGNED_PAYLOAD = exports2.EVENT_ALGORITHM_IDENTIFIER = exports2.ALGORITHM_IDENTIFIER_V4A = exports2.ALGORITHM_IDENTIFIER = exports2.UNSIGNABLE_PATTERNS = exports2.SEC_HEADER_PATTERN = exports2.PROXY_HEADER_PATTERN = exports2.ALWAYS_UNSIGNABLE_HEADERS = exports2.HOST_HEADER = exports2.TOKEN_HEADER = exports2.SHA256_HEADER = exports2.SIGNATURE_HEADER = exports2.GENERATED_HEADERS = exports2.DATE_HEADER = exports2.AMZ_DATE_HEADER = exports2.AUTH_HEADER = exports2.REGION_SET_PARAM = exports2.TOKEN_QUERY_PARAM = exports2.SIGNATURE_QUERY_PARAM = exports2.EXPIRES_QUERY_PARAM = exports2.SIGNED_HEADERS_QUERY_PARAM = exports2.AMZ_DATE_QUERY_PARAM = exports2.CREDENTIAL_QUERY_PARAM = exports2.ALGORITHM_QUERY_PARAM = void 0;
+    exports2.ALGORITHM_QUERY_PARAM = "X-Amz-Algorithm";
+    exports2.CREDENTIAL_QUERY_PARAM = "X-Amz-Credential";
+    exports2.AMZ_DATE_QUERY_PARAM = "X-Amz-Date";
+    exports2.SIGNED_HEADERS_QUERY_PARAM = "X-Amz-SignedHeaders";
+    exports2.EXPIRES_QUERY_PARAM = "X-Amz-Expires";
+    exports2.SIGNATURE_QUERY_PARAM = "X-Amz-Signature";
+    exports2.TOKEN_QUERY_PARAM = "X-Amz-Security-Token";
+    exports2.REGION_SET_PARAM = "X-Amz-Region-Set";
+    exports2.AUTH_HEADER = "authorization";
+    exports2.AMZ_DATE_HEADER = exports2.AMZ_DATE_QUERY_PARAM.toLowerCase();
+    exports2.DATE_HEADER = "date";
+    exports2.GENERATED_HEADERS = [exports2.AUTH_HEADER, exports2.AMZ_DATE_HEADER, exports2.DATE_HEADER];
+    exports2.SIGNATURE_HEADER = exports2.SIGNATURE_QUERY_PARAM.toLowerCase();
+    exports2.SHA256_HEADER = "x-amz-content-sha256";
+    exports2.TOKEN_HEADER = exports2.TOKEN_QUERY_PARAM.toLowerCase();
+    exports2.HOST_HEADER = "host";
+    exports2.ALWAYS_UNSIGNABLE_HEADERS = {
+      authorization: true,
+      "cache-control": true,
+      connection: true,
+      expect: true,
+      from: true,
+      "keep-alive": true,
+      "max-forwards": true,
+      pragma: true,
+      referer: true,
+      te: true,
+      trailer: true,
+      "transfer-encoding": true,
+      upgrade: true,
+      "user-agent": true,
+      "x-amzn-trace-id": true
+    };
+    exports2.PROXY_HEADER_PATTERN = /^proxy-/;
+    exports2.SEC_HEADER_PATTERN = /^sec-/;
+    exports2.UNSIGNABLE_PATTERNS = [/^proxy-/i, /^sec-/i];
+    exports2.ALGORITHM_IDENTIFIER = "AWS4-HMAC-SHA256";
+    exports2.ALGORITHM_IDENTIFIER_V4A = "AWS4-ECDSA-P256-SHA256";
+    exports2.EVENT_ALGORITHM_IDENTIFIER = "AWS4-HMAC-SHA256-PAYLOAD";
+    exports2.UNSIGNED_PAYLOAD = "UNSIGNED-PAYLOAD";
+    exports2.MAX_CACHE_SIZE = 50;
+    exports2.KEY_TYPE_IDENTIFIER = "aws4_request";
+    exports2.MAX_PRESIGNED_TTL = 60 * 60 * 24 * 7;
+  }
+});
+
+// node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/signature-v4/dist-cjs/credentialDerivation.js
+var require_credentialDerivation2 = __commonJS({
+  "node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/signature-v4/dist-cjs/credentialDerivation.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.clearCredentialCache = exports2.getSigningKey = exports2.createScope = void 0;
+    var util_hex_encoding_1 = require_dist_cjs71();
+    var constants_1 = require_constants14();
+    var signingKeyCache = {};
+    var cacheQueue = [];
+    var createScope = (shortDate, region, service) => `${shortDate}/${region}/${service}/${constants_1.KEY_TYPE_IDENTIFIER}`;
+    exports2.createScope = createScope;
+    var getSigningKey = async (sha256Constructor, credentials, shortDate, region, service) => {
+      const credsHash = await hmac(sha256Constructor, credentials.secretAccessKey, credentials.accessKeyId);
+      const cacheKey = `${shortDate}:${region}:${service}:${(0, util_hex_encoding_1.toHex)(credsHash)}:${credentials.sessionToken}`;
+      if (cacheKey in signingKeyCache) {
+        return signingKeyCache[cacheKey];
+      }
+      cacheQueue.push(cacheKey);
+      while (cacheQueue.length > constants_1.MAX_CACHE_SIZE) {
+        delete signingKeyCache[cacheQueue.shift()];
+      }
+      let key = `AWS4${credentials.secretAccessKey}`;
+      for (const signable of [shortDate, region, service, constants_1.KEY_TYPE_IDENTIFIER]) {
+        key = await hmac(sha256Constructor, key, signable);
+      }
+      return signingKeyCache[cacheKey] = key;
+    };
+    exports2.getSigningKey = getSigningKey;
+    var clearCredentialCache = () => {
+      cacheQueue.length = 0;
+      Object.keys(signingKeyCache).forEach((cacheKey) => {
+        delete signingKeyCache[cacheKey];
+      });
+    };
+    exports2.clearCredentialCache = clearCredentialCache;
+    var hmac = (ctor, secret, data) => {
+      const hash = new ctor(secret);
+      hash.update(data);
+      return hash.digest();
+    };
+  }
+});
+
+// node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/signature-v4/dist-cjs/getCanonicalHeaders.js
+var require_getCanonicalHeaders2 = __commonJS({
+  "node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/signature-v4/dist-cjs/getCanonicalHeaders.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.getCanonicalHeaders = void 0;
+    var constants_1 = require_constants14();
+    var getCanonicalHeaders = ({ headers }, unsignableHeaders, signableHeaders) => {
+      const canonical = {};
+      for (const headerName of Object.keys(headers).sort()) {
+        if (headers[headerName] == void 0) {
+          continue;
+        }
+        const canonicalHeaderName = headerName.toLowerCase();
+        if (canonicalHeaderName in constants_1.ALWAYS_UNSIGNABLE_HEADERS || (unsignableHeaders === null || unsignableHeaders === void 0 ? void 0 : unsignableHeaders.has(canonicalHeaderName)) || constants_1.PROXY_HEADER_PATTERN.test(canonicalHeaderName) || constants_1.SEC_HEADER_PATTERN.test(canonicalHeaderName)) {
+          if (!signableHeaders || signableHeaders && !signableHeaders.has(canonicalHeaderName)) {
+            continue;
+          }
+        }
+        canonical[canonicalHeaderName] = headers[headerName].trim().replace(/\s+/g, " ");
+      }
+      return canonical;
+    };
+    exports2.getCanonicalHeaders = getCanonicalHeaders;
+  }
+});
+
+// node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/util-uri-escape/dist-cjs/escape-uri.js
+var require_escape_uri3 = __commonJS({
+  "node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/util-uri-escape/dist-cjs/escape-uri.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.escapeUri = void 0;
+    var escapeUri = (uri) => encodeURIComponent(uri).replace(/[!'()*]/g, hexEncode);
+    exports2.escapeUri = escapeUri;
+    var hexEncode = (c) => `%${c.charCodeAt(0).toString(16).toUpperCase()}`;
+  }
+});
+
+// node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/util-uri-escape/dist-cjs/escape-uri-path.js
+var require_escape_uri_path3 = __commonJS({
+  "node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/util-uri-escape/dist-cjs/escape-uri-path.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.escapeUriPath = void 0;
+    var escape_uri_1 = require_escape_uri3();
+    var escapeUriPath = (uri) => uri.split("/").map(escape_uri_1.escapeUri).join("/");
+    exports2.escapeUriPath = escapeUriPath;
+  }
+});
+
+// node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/util-uri-escape/dist-cjs/index.js
+var require_dist_cjs73 = __commonJS({
+  "node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/util-uri-escape/dist-cjs/index.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    var tslib_1 = require_tslib();
+    tslib_1.__exportStar(require_escape_uri3(), exports2);
+    tslib_1.__exportStar(require_escape_uri_path3(), exports2);
+  }
+});
+
+// node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/signature-v4/dist-cjs/getCanonicalQuery.js
+var require_getCanonicalQuery2 = __commonJS({
+  "node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/signature-v4/dist-cjs/getCanonicalQuery.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.getCanonicalQuery = void 0;
+    var util_uri_escape_1 = require_dist_cjs73();
+    var constants_1 = require_constants14();
+    var getCanonicalQuery = ({ query = {} }) => {
+      const keys = [];
+      const serialized = {};
+      for (const key of Object.keys(query).sort()) {
+        if (key.toLowerCase() === constants_1.SIGNATURE_HEADER) {
+          continue;
+        }
+        keys.push(key);
+        const value = query[key];
+        if (typeof value === "string") {
+          serialized[key] = `${(0, util_uri_escape_1.escapeUri)(key)}=${(0, util_uri_escape_1.escapeUri)(value)}`;
+        } else if (Array.isArray(value)) {
+          serialized[key] = value.slice(0).sort().reduce((encoded, value2) => encoded.concat([`${(0, util_uri_escape_1.escapeUri)(key)}=${(0, util_uri_escape_1.escapeUri)(value2)}`]), []).join("&");
+        }
+      }
+      return keys.map((key) => serialized[key]).filter((serialized2) => serialized2).join("&");
+    };
+    exports2.getCanonicalQuery = getCanonicalQuery;
+  }
+});
+
+// node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/is-array-buffer/dist-cjs/index.js
+var require_dist_cjs74 = __commonJS({
+  "node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/is-array-buffer/dist-cjs/index.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.isArrayBuffer = void 0;
+    var isArrayBuffer = (arg) => typeof ArrayBuffer === "function" && arg instanceof ArrayBuffer || Object.prototype.toString.call(arg) === "[object ArrayBuffer]";
+    exports2.isArrayBuffer = isArrayBuffer;
+  }
+});
+
+// node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/signature-v4/dist-cjs/getPayloadHash.js
+var require_getPayloadHash2 = __commonJS({
+  "node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/signature-v4/dist-cjs/getPayloadHash.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.getPayloadHash = void 0;
+    var is_array_buffer_1 = require_dist_cjs74();
+    var util_hex_encoding_1 = require_dist_cjs71();
+    var constants_1 = require_constants14();
+    var getPayloadHash = async ({ headers, body }, hashConstructor) => {
+      for (const headerName of Object.keys(headers)) {
+        if (headerName.toLowerCase() === constants_1.SHA256_HEADER) {
+          return headers[headerName];
+        }
+      }
+      if (body == void 0) {
+        return "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+      } else if (typeof body === "string" || ArrayBuffer.isView(body) || (0, is_array_buffer_1.isArrayBuffer)(body)) {
+        const hashCtor = new hashConstructor();
+        hashCtor.update(body);
+        return (0, util_hex_encoding_1.toHex)(await hashCtor.digest());
+      }
+      return constants_1.UNSIGNED_PAYLOAD;
+    };
+    exports2.getPayloadHash = getPayloadHash;
+  }
+});
+
+// node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/signature-v4/dist-cjs/headerUtil.js
+var require_headerUtil2 = __commonJS({
+  "node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/signature-v4/dist-cjs/headerUtil.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.deleteHeader = exports2.getHeaderValue = exports2.hasHeader = void 0;
+    var hasHeader = (soughtHeader, headers) => {
+      soughtHeader = soughtHeader.toLowerCase();
+      for (const headerName of Object.keys(headers)) {
+        if (soughtHeader === headerName.toLowerCase()) {
+          return true;
+        }
+      }
+      return false;
+    };
+    exports2.hasHeader = hasHeader;
+    var getHeaderValue = (soughtHeader, headers) => {
+      soughtHeader = soughtHeader.toLowerCase();
+      for (const headerName of Object.keys(headers)) {
+        if (soughtHeader === headerName.toLowerCase()) {
+          return headers[headerName];
+        }
+      }
+      return void 0;
+    };
+    exports2.getHeaderValue = getHeaderValue;
+    var deleteHeader = (soughtHeader, headers) => {
+      soughtHeader = soughtHeader.toLowerCase();
+      for (const headerName of Object.keys(headers)) {
+        if (soughtHeader === headerName.toLowerCase()) {
+          delete headers[headerName];
+        }
+      }
+    };
+    exports2.deleteHeader = deleteHeader;
+  }
+});
+
+// node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/signature-v4/dist-cjs/cloneRequest.js
+var require_cloneRequest2 = __commonJS({
+  "node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/signature-v4/dist-cjs/cloneRequest.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.cloneQuery = exports2.cloneRequest = void 0;
+    var cloneRequest = ({ headers, query, ...rest }) => ({
+      ...rest,
+      headers: { ...headers },
+      query: query ? (0, exports2.cloneQuery)(query) : void 0
+    });
+    exports2.cloneRequest = cloneRequest;
+    var cloneQuery = (query) => Object.keys(query).reduce((carry, paramName) => {
+      const param = query[paramName];
+      return {
+        ...carry,
+        [paramName]: Array.isArray(param) ? [...param] : param
+      };
+    }, {});
+    exports2.cloneQuery = cloneQuery;
+  }
+});
+
+// node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/signature-v4/dist-cjs/moveHeadersToQuery.js
+var require_moveHeadersToQuery2 = __commonJS({
+  "node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/signature-v4/dist-cjs/moveHeadersToQuery.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.moveHeadersToQuery = void 0;
+    var cloneRequest_1 = require_cloneRequest2();
+    var moveHeadersToQuery = (request, options = {}) => {
+      var _a;
+      const { headers, query = {} } = typeof request.clone === "function" ? request.clone() : (0, cloneRequest_1.cloneRequest)(request);
+      for (const name5 of Object.keys(headers)) {
+        const lname = name5.toLowerCase();
+        if (lname.slice(0, 6) === "x-amz-" && !((_a = options.unhoistableHeaders) === null || _a === void 0 ? void 0 : _a.has(lname))) {
+          query[name5] = headers[name5];
+          delete headers[name5];
+        }
+      }
+      return {
+        ...request,
+        headers,
+        query
+      };
+    };
+    exports2.moveHeadersToQuery = moveHeadersToQuery;
+  }
+});
+
+// node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/signature-v4/dist-cjs/prepareRequest.js
+var require_prepareRequest2 = __commonJS({
+  "node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/signature-v4/dist-cjs/prepareRequest.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.prepareRequest = void 0;
+    var cloneRequest_1 = require_cloneRequest2();
+    var constants_1 = require_constants14();
+    var prepareRequest = (request) => {
+      request = typeof request.clone === "function" ? request.clone() : (0, cloneRequest_1.cloneRequest)(request);
+      for (const headerName of Object.keys(request.headers)) {
+        if (constants_1.GENERATED_HEADERS.indexOf(headerName.toLowerCase()) > -1) {
+          delete request.headers[headerName];
+        }
+      }
+      return request;
+    };
+    exports2.prepareRequest = prepareRequest;
+  }
+});
+
+// node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/signature-v4/dist-cjs/utilDate.js
+var require_utilDate2 = __commonJS({
+  "node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/signature-v4/dist-cjs/utilDate.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.toDate = exports2.iso8601 = void 0;
+    var iso8601 = (time) => (0, exports2.toDate)(time).toISOString().replace(/\.\d{3}Z$/, "Z");
+    exports2.iso8601 = iso8601;
+    var toDate = (time) => {
+      if (typeof time === "number") {
+        return new Date(time * 1e3);
+      }
+      if (typeof time === "string") {
+        if (Number(time)) {
+          return new Date(Number(time) * 1e3);
+        }
+        return new Date(time);
+      }
+      return time;
+    };
+    exports2.toDate = toDate;
+  }
+});
+
+// node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/signature-v4/dist-cjs/SignatureV4.js
+var require_SignatureV42 = __commonJS({
+  "node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/signature-v4/dist-cjs/SignatureV4.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.SignatureV4 = void 0;
+    var util_hex_encoding_1 = require_dist_cjs71();
+    var util_middleware_1 = require_dist_cjs72();
+    var constants_1 = require_constants14();
+    var credentialDerivation_1 = require_credentialDerivation2();
+    var getCanonicalHeaders_1 = require_getCanonicalHeaders2();
+    var getCanonicalQuery_1 = require_getCanonicalQuery2();
+    var getPayloadHash_1 = require_getPayloadHash2();
+    var headerUtil_1 = require_headerUtil2();
+    var moveHeadersToQuery_1 = require_moveHeadersToQuery2();
+    var prepareRequest_1 = require_prepareRequest2();
+    var utilDate_1 = require_utilDate2();
+    var SignatureV4 = class {
+      constructor({ applyChecksum, credentials, region, service, sha256: sha2562, uriEscapePath = true }) {
+        this.service = service;
+        this.sha256 = sha2562;
+        this.uriEscapePath = uriEscapePath;
+        this.applyChecksum = typeof applyChecksum === "boolean" ? applyChecksum : true;
+        this.regionProvider = (0, util_middleware_1.normalizeProvider)(region);
+        this.credentialProvider = (0, util_middleware_1.normalizeProvider)(credentials);
+      }
+      async presign(originalRequest, options = {}) {
+        const { signingDate = new Date(), expiresIn = 3600, unsignableHeaders, unhoistableHeaders, signableHeaders, signingRegion, signingService } = options;
+        const credentials = await this.credentialProvider();
+        this.validateResolvedCredentials(credentials);
+        const region = signingRegion !== null && signingRegion !== void 0 ? signingRegion : await this.regionProvider();
+        const { longDate, shortDate } = formatDate(signingDate);
+        if (expiresIn > constants_1.MAX_PRESIGNED_TTL) {
+          return Promise.reject("Signature version 4 presigned URLs must have an expiration date less than one week in the future");
+        }
+        const scope = (0, credentialDerivation_1.createScope)(shortDate, region, signingService !== null && signingService !== void 0 ? signingService : this.service);
+        const request = (0, moveHeadersToQuery_1.moveHeadersToQuery)((0, prepareRequest_1.prepareRequest)(originalRequest), { unhoistableHeaders });
+        if (credentials.sessionToken) {
+          request.query[constants_1.TOKEN_QUERY_PARAM] = credentials.sessionToken;
+        }
+        request.query[constants_1.ALGORITHM_QUERY_PARAM] = constants_1.ALGORITHM_IDENTIFIER;
+        request.query[constants_1.CREDENTIAL_QUERY_PARAM] = `${credentials.accessKeyId}/${scope}`;
+        request.query[constants_1.AMZ_DATE_QUERY_PARAM] = longDate;
+        request.query[constants_1.EXPIRES_QUERY_PARAM] = expiresIn.toString(10);
+        const canonicalHeaders = (0, getCanonicalHeaders_1.getCanonicalHeaders)(request, unsignableHeaders, signableHeaders);
+        request.query[constants_1.SIGNED_HEADERS_QUERY_PARAM] = getCanonicalHeaderList(canonicalHeaders);
+        request.query[constants_1.SIGNATURE_QUERY_PARAM] = await this.getSignature(longDate, scope, this.getSigningKey(credentials, region, shortDate, signingService), this.createCanonicalRequest(request, canonicalHeaders, await (0, getPayloadHash_1.getPayloadHash)(originalRequest, this.sha256)));
+        return request;
+      }
+      async sign(toSign, options) {
+        if (typeof toSign === "string") {
+          return this.signString(toSign, options);
+        } else if (toSign.headers && toSign.payload) {
+          return this.signEvent(toSign, options);
+        } else {
+          return this.signRequest(toSign, options);
+        }
+      }
+      async signEvent({ headers, payload }, { signingDate = new Date(), priorSignature, signingRegion, signingService }) {
+        const region = signingRegion !== null && signingRegion !== void 0 ? signingRegion : await this.regionProvider();
+        const { shortDate, longDate } = formatDate(signingDate);
+        const scope = (0, credentialDerivation_1.createScope)(shortDate, region, signingService !== null && signingService !== void 0 ? signingService : this.service);
+        const hashedPayload = await (0, getPayloadHash_1.getPayloadHash)({ headers: {}, body: payload }, this.sha256);
+        const hash = new this.sha256();
+        hash.update(headers);
+        const hashedHeaders = (0, util_hex_encoding_1.toHex)(await hash.digest());
+        const stringToSign = [
+          constants_1.EVENT_ALGORITHM_IDENTIFIER,
+          longDate,
+          scope,
+          priorSignature,
+          hashedHeaders,
+          hashedPayload
+        ].join("\n");
+        return this.signString(stringToSign, { signingDate, signingRegion: region, signingService });
+      }
+      async signString(stringToSign, { signingDate = new Date(), signingRegion, signingService } = {}) {
+        const credentials = await this.credentialProvider();
+        this.validateResolvedCredentials(credentials);
+        const region = signingRegion !== null && signingRegion !== void 0 ? signingRegion : await this.regionProvider();
+        const { shortDate } = formatDate(signingDate);
+        const hash = new this.sha256(await this.getSigningKey(credentials, region, shortDate, signingService));
+        hash.update(stringToSign);
+        return (0, util_hex_encoding_1.toHex)(await hash.digest());
+      }
+      async signRequest(requestToSign, { signingDate = new Date(), signableHeaders, unsignableHeaders, signingRegion, signingService } = {}) {
+        const credentials = await this.credentialProvider();
+        this.validateResolvedCredentials(credentials);
+        const region = signingRegion !== null && signingRegion !== void 0 ? signingRegion : await this.regionProvider();
+        const request = (0, prepareRequest_1.prepareRequest)(requestToSign);
+        const { longDate, shortDate } = formatDate(signingDate);
+        const scope = (0, credentialDerivation_1.createScope)(shortDate, region, signingService !== null && signingService !== void 0 ? signingService : this.service);
+        request.headers[constants_1.AMZ_DATE_HEADER] = longDate;
+        if (credentials.sessionToken) {
+          request.headers[constants_1.TOKEN_HEADER] = credentials.sessionToken;
+        }
+        const payloadHash = await (0, getPayloadHash_1.getPayloadHash)(request, this.sha256);
+        if (!(0, headerUtil_1.hasHeader)(constants_1.SHA256_HEADER, request.headers) && this.applyChecksum) {
+          request.headers[constants_1.SHA256_HEADER] = payloadHash;
+        }
+        const canonicalHeaders = (0, getCanonicalHeaders_1.getCanonicalHeaders)(request, unsignableHeaders, signableHeaders);
+        const signature = await this.getSignature(longDate, scope, this.getSigningKey(credentials, region, shortDate, signingService), this.createCanonicalRequest(request, canonicalHeaders, payloadHash));
+        request.headers[constants_1.AUTH_HEADER] = `${constants_1.ALGORITHM_IDENTIFIER} Credential=${credentials.accessKeyId}/${scope}, SignedHeaders=${getCanonicalHeaderList(canonicalHeaders)}, Signature=${signature}`;
+        return request;
+      }
+      createCanonicalRequest(request, canonicalHeaders, payloadHash) {
+        const sortedHeaders = Object.keys(canonicalHeaders).sort();
+        return `${request.method}
+${this.getCanonicalPath(request)}
+${(0, getCanonicalQuery_1.getCanonicalQuery)(request)}
+${sortedHeaders.map((name5) => `${name5}:${canonicalHeaders[name5]}`).join("\n")}
+
+${sortedHeaders.join(";")}
+${payloadHash}`;
+      }
+      async createStringToSign(longDate, credentialScope, canonicalRequest) {
+        const hash = new this.sha256();
+        hash.update(canonicalRequest);
+        const hashedRequest = await hash.digest();
+        return `${constants_1.ALGORITHM_IDENTIFIER}
+${longDate}
+${credentialScope}
+${(0, util_hex_encoding_1.toHex)(hashedRequest)}`;
+      }
+      getCanonicalPath({ path: path2 }) {
+        if (this.uriEscapePath) {
+          const normalizedPathSegments = [];
+          for (const pathSegment of path2.split("/")) {
+            if ((pathSegment === null || pathSegment === void 0 ? void 0 : pathSegment.length) === 0)
+              continue;
+            if (pathSegment === ".")
+              continue;
+            if (pathSegment === "..") {
+              normalizedPathSegments.pop();
+            } else {
+              normalizedPathSegments.push(pathSegment);
+            }
+          }
+          const normalizedPath = `${(path2 === null || path2 === void 0 ? void 0 : path2.startsWith("/")) ? "/" : ""}${normalizedPathSegments.join("/")}${normalizedPathSegments.length > 0 && (path2 === null || path2 === void 0 ? void 0 : path2.endsWith("/")) ? "/" : ""}`;
+          const doubleEncoded = encodeURIComponent(normalizedPath);
+          return doubleEncoded.replace(/%2F/g, "/");
+        }
+        return path2;
+      }
+      async getSignature(longDate, credentialScope, keyPromise, canonicalRequest) {
+        const stringToSign = await this.createStringToSign(longDate, credentialScope, canonicalRequest);
+        const hash = new this.sha256(await keyPromise);
+        hash.update(stringToSign);
+        return (0, util_hex_encoding_1.toHex)(await hash.digest());
+      }
+      getSigningKey(credentials, region, shortDate, service) {
+        return (0, credentialDerivation_1.getSigningKey)(this.sha256, credentials, shortDate, region, service || this.service);
+      }
+      validateResolvedCredentials(credentials) {
+        if (typeof credentials !== "object" || typeof credentials.accessKeyId !== "string" || typeof credentials.secretAccessKey !== "string") {
+          throw new Error("Resolved credential object is not valid");
+        }
+      }
+    };
+    exports2.SignatureV4 = SignatureV4;
+    var formatDate = (now) => {
+      const longDate = (0, utilDate_1.iso8601)(now).replace(/[\-:]/g, "");
+      return {
+        longDate,
+        shortDate: longDate.slice(0, 8)
+      };
+    };
+    var getCanonicalHeaderList = (headers) => Object.keys(headers).sort().join(";");
+  }
+});
+
+// node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/signature-v4/dist-cjs/index.js
+var require_dist_cjs75 = __commonJS({
+  "node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/signature-v4/dist-cjs/index.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.prepareRequest = exports2.moveHeadersToQuery = exports2.getPayloadHash = exports2.getCanonicalQuery = exports2.getCanonicalHeaders = void 0;
+    var tslib_1 = require_tslib();
+    tslib_1.__exportStar(require_SignatureV42(), exports2);
+    var getCanonicalHeaders_1 = require_getCanonicalHeaders2();
+    Object.defineProperty(exports2, "getCanonicalHeaders", { enumerable: true, get: function() {
+      return getCanonicalHeaders_1.getCanonicalHeaders;
+    } });
+    var getCanonicalQuery_1 = require_getCanonicalQuery2();
+    Object.defineProperty(exports2, "getCanonicalQuery", { enumerable: true, get: function() {
+      return getCanonicalQuery_1.getCanonicalQuery;
+    } });
+    var getPayloadHash_1 = require_getPayloadHash2();
+    Object.defineProperty(exports2, "getPayloadHash", { enumerable: true, get: function() {
+      return getPayloadHash_1.getPayloadHash;
+    } });
+    var moveHeadersToQuery_1 = require_moveHeadersToQuery2();
+    Object.defineProperty(exports2, "moveHeadersToQuery", { enumerable: true, get: function() {
+      return moveHeadersToQuery_1.moveHeadersToQuery;
+    } });
+    var prepareRequest_1 = require_prepareRequest2();
+    Object.defineProperty(exports2, "prepareRequest", { enumerable: true, get: function() {
+      return prepareRequest_1.prepareRequest;
+    } });
+    tslib_1.__exportStar(require_credentialDerivation2(), exports2);
+  }
+});
+
+// node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/signature-v4-multi-region/dist-cjs/SignatureV4MultiRegion.js
+var require_SignatureV4MultiRegion2 = __commonJS({
+  "node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/signature-v4-multi-region/dist-cjs/SignatureV4MultiRegion.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.SignatureV4MultiRegion = void 0;
+    var signature_v4_1 = require_dist_cjs75();
+    var SignatureV4MultiRegion = class {
+      constructor(options) {
+        this.sigv4Signer = new signature_v4_1.SignatureV4(options);
+        this.signerOptions = options;
+      }
+      async sign(requestToSign, options = {}) {
+        if (options.signingRegion === "*") {
+          if (this.signerOptions.runtime !== "node")
+            throw new Error("This request requires signing with SigV4Asymmetric algorithm. It's only available in Node.js");
+          return this.getSigv4aSigner().sign(requestToSign, options);
+        }
+        return this.sigv4Signer.sign(requestToSign, options);
+      }
+      async presign(originalRequest, options = {}) {
+        if (options.signingRegion === "*") {
+          if (this.signerOptions.runtime !== "node")
+            throw new Error("This request requires signing with SigV4Asymmetric algorithm. It's only available in Node.js");
+          return this.getSigv4aSigner().presign(originalRequest, options);
+        }
+        return this.sigv4Signer.presign(originalRequest, options);
+      }
+      getSigv4aSigner() {
+        if (!this.sigv4aSigner) {
+          let CrtSignerV4;
+          try {
+            CrtSignerV4 = typeof require === "function" && require("@aws-sdk/signature-v4-crt").CrtSignerV4;
+            if (typeof CrtSignerV4 !== "function")
+              throw new Error();
+          } catch (e) {
+            e.message = `${e.message}
+Please check if you have installed "@aws-sdk/signature-v4-crt" package explicitly. 
+For more information please go to https://github.com/aws/aws-sdk-js-v3#functionality-requiring-aws-common-runtime-crt`;
+            throw e;
+          }
+          this.sigv4aSigner = new CrtSignerV4({
+            ...this.signerOptions,
+            signingAlgorithm: 1
+          });
+        }
+        return this.sigv4aSigner;
+      }
+    };
+    exports2.SignatureV4MultiRegion = SignatureV4MultiRegion;
+  }
+});
+
+// node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/signature-v4-multi-region/dist-cjs/index.js
+var require_dist_cjs76 = __commonJS({
+  "node_modules/@aws-sdk/s3-request-presigner/node_modules/@aws-sdk/signature-v4-multi-region/dist-cjs/index.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    var tslib_1 = require_tslib();
+    tslib_1.__exportStar(require_SignatureV4MultiRegion2(), exports2);
+  }
+});
+
+// node_modules/@aws-sdk/s3-request-presigner/dist-cjs/constants.js
+var require_constants15 = __commonJS({
+  "node_modules/@aws-sdk/s3-request-presigner/dist-cjs/constants.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.ALGORITHM_IDENTIFIER = exports2.HOST_HEADER = exports2.EXPIRES_QUERY_PARAM = exports2.SIGNED_HEADERS_QUERY_PARAM = exports2.AMZ_DATE_QUERY_PARAM = exports2.CREDENTIAL_QUERY_PARAM = exports2.ALGORITHM_QUERY_PARAM = exports2.SHA256_HEADER = exports2.UNSIGNED_PAYLOAD = void 0;
+    exports2.UNSIGNED_PAYLOAD = "UNSIGNED-PAYLOAD";
+    exports2.SHA256_HEADER = "X-Amz-Content-Sha256";
+    exports2.ALGORITHM_QUERY_PARAM = "X-Amz-Algorithm";
+    exports2.CREDENTIAL_QUERY_PARAM = "X-Amz-Credential";
+    exports2.AMZ_DATE_QUERY_PARAM = "X-Amz-Date";
+    exports2.SIGNED_HEADERS_QUERY_PARAM = "X-Amz-SignedHeaders";
+    exports2.EXPIRES_QUERY_PARAM = "X-Amz-Expires";
+    exports2.HOST_HEADER = "host";
+    exports2.ALGORITHM_IDENTIFIER = "AWS4-HMAC-SHA256";
+  }
+});
+
+// node_modules/@aws-sdk/s3-request-presigner/dist-cjs/presigner.js
+var require_presigner = __commonJS({
+  "node_modules/@aws-sdk/s3-request-presigner/dist-cjs/presigner.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.S3RequestPresigner = void 0;
+    var signature_v4_multi_region_1 = require_dist_cjs76();
+    var constants_1 = require_constants15();
+    var S3RequestPresigner = class {
+      constructor(options) {
+        const resolvedOptions = {
+          service: options.signingName || options.service || "s3",
+          uriEscapePath: options.uriEscapePath || false,
+          applyChecksum: options.applyChecksum || false,
+          ...options
+        };
+        this.signer = new signature_v4_multi_region_1.SignatureV4MultiRegion(resolvedOptions);
+      }
+      presign(requestToSign, { unsignableHeaders = /* @__PURE__ */ new Set(), unhoistableHeaders = /* @__PURE__ */ new Set(), ...options } = {}) {
+        unsignableHeaders.add("content-type");
+        Object.keys(requestToSign.headers).map((header) => header.toLowerCase()).filter((header) => header.startsWith("x-amz-server-side-encryption")).forEach((header) => {
+          unhoistableHeaders.add(header);
+        });
+        requestToSign.headers[constants_1.SHA256_HEADER] = constants_1.UNSIGNED_PAYLOAD;
+        const currentHostHeader = requestToSign.headers.host;
+        const port = requestToSign.port;
+        const expectedHostHeader = `${requestToSign.hostname}${requestToSign.port != null ? ":" + port : ""}`;
+        if (!currentHostHeader || currentHostHeader === requestToSign.hostname && requestToSign.port != null) {
+          requestToSign.headers.host = expectedHostHeader;
+        }
+        return this.signer.presign(requestToSign, {
+          expiresIn: 900,
+          unsignableHeaders,
+          unhoistableHeaders,
+          ...options
+        });
+      }
+    };
+    exports2.S3RequestPresigner = S3RequestPresigner;
+  }
+});
+
+// node_modules/@aws-sdk/s3-request-presigner/dist-cjs/getSignedUrl.js
+var require_getSignedUrl = __commonJS({
+  "node_modules/@aws-sdk/s3-request-presigner/dist-cjs/getSignedUrl.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.getSignedUrl = void 0;
+    var middleware_endpoint_1 = require_dist_cjs66();
+    var protocol_http_1 = require_dist_cjs67();
+    var util_format_url_1 = require_dist_cjs70();
+    var presigner_1 = require_presigner();
+    var getSignedUrl2 = async (client, command, options = {}) => {
+      var _a, _b;
+      let s3Presigner;
+      if (typeof client.config.endpointProvider === "function") {
+        const endpointV2 = await (0, middleware_endpoint_1.getEndpointFromInstructions)(command.input, command.constructor, client.config);
+        const authScheme = (_b = (_a = endpointV2.properties) === null || _a === void 0 ? void 0 : _a.authSchemes) === null || _b === void 0 ? void 0 : _b[0];
+        s3Presigner = new presigner_1.S3RequestPresigner({
+          ...client.config,
+          signingName: authScheme === null || authScheme === void 0 ? void 0 : authScheme.signingName,
+          region: async () => authScheme === null || authScheme === void 0 ? void 0 : authScheme.signingRegion
+        });
+      } else {
+        s3Presigner = new presigner_1.S3RequestPresigner(client.config);
+      }
+      const presignInterceptMiddleware = (next, context) => async (args) => {
+        var _a2, _b2;
+        const { request } = args;
+        if (!protocol_http_1.HttpRequest.isInstance(request)) {
+          throw new Error("Request to be presigned is not an valid HTTP request.");
+        }
+        delete request.headers["amz-sdk-invocation-id"];
+        delete request.headers["amz-sdk-request"];
+        delete request.headers["x-amz-user-agent"];
+        const presigned2 = await s3Presigner.presign(request, {
+          ...options,
+          signingRegion: (_a2 = options.signingRegion) !== null && _a2 !== void 0 ? _a2 : context["signing_region"],
+          signingService: (_b2 = options.signingService) !== null && _b2 !== void 0 ? _b2 : context["signing_service"]
+        });
+        return {
+          response: {},
+          output: {
+            $metadata: { httpStatusCode: 200 },
+            presigned: presigned2
+          }
+        };
+      };
+      const middlewareName = "presignInterceptMiddleware";
+      const clientStack = client.middlewareStack.clone();
+      clientStack.addRelativeTo(presignInterceptMiddleware, {
+        name: middlewareName,
+        relation: "before",
+        toMiddleware: "awsAuthMiddleware",
+        override: true
+      });
+      const handler = command.resolveMiddleware(clientStack, client.config, {});
+      const { output } = await handler({ input: command.input });
+      const { presigned } = output;
+      return (0, util_format_url_1.formatUrl)(presigned);
+    };
+    exports2.getSignedUrl = getSignedUrl2;
+  }
+});
+
+// node_modules/@aws-sdk/s3-request-presigner/dist-cjs/index.js
+var require_dist_cjs77 = __commonJS({
+  "node_modules/@aws-sdk/s3-request-presigner/dist-cjs/index.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    var tslib_1 = require_tslib();
+    tslib_1.__exportStar(require_getSignedUrl(), exports2);
+    tslib_1.__exportStar(require_presigner(), exports2);
   }
 });
 
@@ -71631,6 +73085,7 @@ var import_path_browserify = __toESM(require_path_browserify(), 1);
 
 // src/s3/s3store.js
 var import_client_s32 = __toESM(require_dist_cjs61(), 1);
+var import_node_fetch3 = __toESM(require_lib3(), 1);
 var import_debug3 = __toESM(require_src(), 1);
 
 // node_modules/blockstore-core/esm/src/errors.js
@@ -71773,6 +73228,7 @@ var Errors = { ...errors_exports };
 
 // src/s3/s3client.js
 var import_client_s3 = __toESM(require_dist_cjs61(), 1);
+var import_s3_request_presigner = __toESM(require_dist_cjs77(), 1);
 var s3 = new import_client_s3.S3Client();
 var Bucket3 = "pollinations-ipfs";
 
@@ -71795,26 +73251,28 @@ var S3Blockstore = class extends BaseBlockstore {
       debug3("block already exists", key);
       return;
     }
-    const params = {
-      Bucket: Bucket3,
-      Key: key.toString(),
-      Body: val
-    };
-    debug3("put result", await await s3.send(new import_client_s32.PutObjectCommand(params)));
+    const urlResponse = await (0, import_node_fetch3.default)(`https://store.pollinations.ai/upload/${key.toString()}`);
+    const url = await urlResponse.text();
+    debug3("signed url", url);
+    const uploadResponse = await (0, import_node_fetch3.default)(url, {
+      method: "PUT",
+      body: val,
+      headers: {
+        "Content-Type": "application/octet-stream"
+      }
+    });
+    debug3("upload response", uploadResponse);
   }
   async get(key, options) {
     if (this.cache[key]) {
       debug3("get cache hit", key);
       return this.cache[key];
     }
-    const params = {
-      Bucket: Bucket3,
-      Key: key.toString()
-    };
     try {
-      const { Body: Body2 } = await s3.send(new import_client_s32.GetObjectCommand(params));
       debug3("get from s3", key.toString());
-      const result = new Uint8Array(await streamToBuffer(Body2));
+      const response = await (0, import_node_fetch3.default)(`https://pollinations-ipfs.s3.amazonaws.com/${key.toString()}`);
+      const buffer2 = await response.arrayBuffer();
+      const result = new Uint8Array(buffer2);
       this.cache[key] = result;
       return result;
     } catch (e) {
@@ -71865,14 +73323,6 @@ var S3Blockstore = class extends BaseBlockstore {
   }
 };
 var s3store_default = S3Blockstore;
-var streamToBuffer = (stream) => {
-  return new Promise((resolve8, reject) => {
-    const chunks = [];
-    stream.on("data", (chunk) => chunks.push(chunk));
-    stream.once("end", () => resolve8(Buffer.concat(chunks)));
-    stream.once("error", reject);
-  });
-};
 
 // src/supabase/web3storage.js
 var import_debug4 = __toESM(require_src(), 1);
@@ -77132,7 +78582,7 @@ var AbortError2 = class extends FetchBaseError {
 var import_stream5 = require("stream");
 var Stream3 = __toESM(require("stream"), 1);
 var supportedSchemas = /* @__PURE__ */ new Set(["data:", "http:", "https:"]);
-async function fetch4(url, options_ = {}) {
+async function fetch5(url, options_ = {}) {
   return new Promise((resolve8, reject) => {
     const request = new Request(url, options_);
     const options = getNodeRequestOptions(request);
@@ -77249,7 +78699,7 @@ async function fetch4(url, options_ = {}) {
               requestOptions.body = void 0;
               requestOptions.headers.delete("content-length");
             }
-            fetch4(new Request(locationURL.href, requestOptions)).then(resolve8, reject);
+            fetch5(new Request(locationURL.href, requestOptions)).then(resolve8, reject);
             finalize();
             return;
           }
@@ -77450,12 +78900,12 @@ var Web3Storage = class {
     token: token2,
     endpoint = new URL("https://api.web3.storage"),
     rateLimiter,
-    fetch: fetch5 = fetch4
+    fetch: fetch6 = fetch5
   }) {
     this.token = token2;
     this.endpoint = endpoint;
     this.rateLimiter = rateLimiter || createRateLimiter();
-    this.fetch = fetch5;
+    this.fetch = fetch6;
   }
   static headers(token2) {
     if (!token2)
@@ -77465,7 +78915,7 @@ var Web3Storage = class {
       "X-Client": "web3.storage/js"
     };
   }
-  static async put({ endpoint, token: token2, rateLimiter = globalRateLimiter, fetch: fetch5 = fetch4 }, files, {
+  static async put({ endpoint, token: token2, rateLimiter = globalRateLimiter, fetch: fetch6 = fetch5 }, files, {
     onRootCidReady,
     onStoredChunk,
     maxRetries = MAX_PUT_RETRIES,
@@ -77488,12 +78938,12 @@ var Web3Storage = class {
       });
       onRootCidReady && onRootCidReady(root.toString());
       const car = await CarReader2.fromIterable(out);
-      return await Web3Storage.putCar({ endpoint, token: token2, rateLimiter, fetch: fetch5 }, car, { onStoredChunk, maxRetries, maxChunkSize, name: name5, signal });
+      return await Web3Storage.putCar({ endpoint, token: token2, rateLimiter, fetch: fetch6 }, car, { onStoredChunk, maxRetries, maxChunkSize, name: name5, signal });
     } finally {
       await blockstore3.close();
     }
   }
-  static async putCar({ endpoint, token: token2, rateLimiter = globalRateLimiter, fetch: fetch5 = fetch4 }, car, {
+  static async putCar({ endpoint, token: token2, rateLimiter = globalRateLimiter, fetch: fetch6 = fetch5 }, car, {
     name: name5,
     onStoredChunk,
     maxRetries = MAX_PUT_RETRIES,
@@ -77530,7 +78980,7 @@ var Web3Storage = class {
           await rateLimiter();
           let response;
           try {
-            response = await fetch5(url.toString(), {
+            response = await fetch6(url.toString(), {
               method: "POST",
               headers,
               body: carFile,
@@ -77561,10 +79011,10 @@ var Web3Storage = class {
     }
     return carRoot;
   }
-  static async get({ endpoint, token: token2, rateLimiter = globalRateLimiter, fetch: fetch5 = fetch4 }, cid, options = {}) {
+  static async get({ endpoint, token: token2, rateLimiter = globalRateLimiter, fetch: fetch6 = fetch5 }, cid, options = {}) {
     const url = new URL(`car/${cid}`, endpoint);
     await rateLimiter();
-    const res = await fetch5(url.toString(), {
+    const res = await fetch6(url.toString(), {
       method: "GET",
       headers: Web3Storage.headers(token2),
       signal: options.signal
@@ -77578,10 +79028,10 @@ var Web3Storage = class {
     console.log("Not deleting", cid, endpoint, token2, rateLimiter, options);
     throw Error(".delete not implemented yet");
   }
-  static async status({ endpoint, token: token2, rateLimiter = globalRateLimiter, fetch: fetch5 = fetch4 }, cid, options = {}) {
+  static async status({ endpoint, token: token2, rateLimiter = globalRateLimiter, fetch: fetch6 = fetch5 }, cid, options = {}) {
     const url = new URL(`status/${cid}`, endpoint);
     await rateLimiter();
-    const res = await fetch5(url.toString(), {
+    const res = await fetch6(url.toString(), {
       method: "GET",
       headers: Web3Storage.headers(token2),
       signal: options.signal
@@ -77598,11 +79048,11 @@ var Web3Storage = class {
     return res.json();
   }
   static async *list(service, { before = new Date().toISOString(), maxResults = Infinity, signal } = {}) {
-    async function listPage({ endpoint, token: token2, rateLimiter = globalRateLimiter, fetch: fetch5 = fetch4 }, { before: before2, size: size2 }) {
+    async function listPage({ endpoint, token: token2, rateLimiter = globalRateLimiter, fetch: fetch6 = fetch5 }, { before: before2, size: size2 }) {
       const search = new URLSearchParams({ before: before2, size: size2.toString() });
       const url = new URL(`user/uploads?${search}`, endpoint);
       await rateLimiter();
-      return fetch5(url.toString(), {
+      return fetch6(url.toString(), {
         method: "GET",
         headers: {
           ...Web3Storage.headers(token2),
