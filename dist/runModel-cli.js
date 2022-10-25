@@ -36112,7 +36112,7 @@ function fromString3(string2, encoding = "utf8") {
 }
 
 // node_modules/ipfs-unixfs-exporter/node_modules/hamt-sharding/dist/src/bucket.js
-var Bucket2 = class {
+var Bucket = class {
   constructor(options, parent, posAtParent = 0) {
     this._options = options;
     this._popCount = 0;
@@ -36141,7 +36141,7 @@ var Bucket2 = class {
   leafCount() {
     const children = this._children.compactArray();
     return children.reduce((acc, child) => {
-      if (child instanceof Bucket2) {
+      if (child instanceof Bucket) {
         return acc + child.leafCount();
       }
       return acc + 1;
@@ -36156,7 +36156,7 @@ var Bucket2 = class {
   *eachLeafSeries() {
     const children = this._children.compactArray();
     for (const child of children) {
-      if (child instanceof Bucket2) {
+      if (child instanceof Bucket) {
         yield* child.eachLeafSeries();
       } else {
         yield child;
@@ -36167,7 +36167,7 @@ var Bucket2 = class {
     const acc = [];
     return reduce3(this._children.reduce((acc2, child, index) => {
       if (child != null) {
-        if (child instanceof Bucket2) {
+        if (child instanceof Bucket) {
           acc2.push(child.serialize(map4, reduce3));
         } else {
           acc2.push(map4(child, index));
@@ -36191,7 +36191,7 @@ var Bucket2 = class {
   async _findChild(key) {
     const result = await this._findPlace(key);
     const child = result.bucket._at(result.pos);
-    if (child instanceof Bucket2) {
+    if (child instanceof Bucket) {
       return void 0;
     }
     if (child != null && child.key === key) {
@@ -36202,7 +36202,7 @@ var Bucket2 = class {
     const hashValue = this._options.hash(typeof key === "string" ? fromString3(key) : key);
     const index = await hashValue.take(this._options.bits);
     const child = this._children.get(index);
-    if (child instanceof Bucket2) {
+    if (child instanceof Bucket) {
       return await child._findPlace(hashValue);
     }
     return {
@@ -36215,7 +36215,7 @@ var Bucket2 = class {
   async _findNewBucketAndPos(key) {
     const place = await this._findPlace(key);
     if (place.existingChild != null && place.existingChild.key !== key) {
-      const bucket = new Bucket2(this._options, place.bucket, place.pos);
+      const bucket = new Bucket(this._options, place.bucket, place.pos);
       place.bucket._putObjectAt(place.pos, bucket);
       const newPlace = await bucket._findPlace(place.existingChild.hash);
       newPlace.bucket._putAt(newPlace, place.existingChild.key, place.existingChild.value);
@@ -36250,7 +36250,7 @@ var Bucket2 = class {
     if (this._parent != null && this._popCount <= 1) {
       if (this._popCount === 1) {
         const onlyChild = this._children.find(exists);
-        if (onlyChild != null && !(onlyChild instanceof Bucket2)) {
+        if (onlyChild != null && !(onlyChild instanceof Bucket)) {
           const hash = onlyChild.hash;
           hash.untake(this._options.bits);
           const place = {
@@ -36281,7 +36281,7 @@ function reduceNodes(nodes) {
 async function asyncTransformBucket(bucket, asyncMap, asyncReduce) {
   const output = [];
   for (const child of bucket._children.compactArray()) {
-    if (child instanceof Bucket2) {
+    if (child instanceof Bucket) {
       await asyncTransformBucket(child, asyncMap, asyncReduce);
     } else {
       const mappedChildren = await asyncMap(child);
@@ -36453,7 +36453,7 @@ function createHAMT(options) {
     bits: options.bits ?? 8,
     hash: wrapHash(options.hashFn)
   };
-  return new Bucket2(bucketOptions);
+  return new Bucket(bucketOptions);
 }
 
 // node_modules/@multiformats/murmur3/esm/index.js
@@ -36489,7 +36489,7 @@ var addLinksToHamtBucket = (links2, bucket, rootBucket) => {
       }
       if (link.Name.length === 2) {
         const pos = parseInt(link.Name, 16);
-        return bucket._putObjectAt(pos, new Bucket2({
+        return bucket._putObjectAt(pos, new Bucket({
           hash: rootBucket._options.hash,
           bits: rootBucket._options.bits
         }, bucket, pos));
@@ -38935,7 +38935,7 @@ var dir_flat_default = DirFlat;
 
 // node_modules/ipfs-unixfs-importer/node_modules/hamt-sharding/dist/src/bucket.js
 var import_sparse_array2 = __toESM(require_sparse_array(), 1);
-var Bucket3 = class {
+var Bucket2 = class {
   constructor(options, parent, posAtParent = 0) {
     this._options = options;
     this._popCount = 0;
@@ -38964,7 +38964,7 @@ var Bucket3 = class {
   leafCount() {
     const children = this._children.compactArray();
     return children.reduce((acc, child) => {
-      if (child instanceof Bucket3) {
+      if (child instanceof Bucket2) {
         return acc + child.leafCount();
       }
       return acc + 1;
@@ -38979,7 +38979,7 @@ var Bucket3 = class {
   *eachLeafSeries() {
     const children = this._children.compactArray();
     for (const child of children) {
-      if (child instanceof Bucket3) {
+      if (child instanceof Bucket2) {
         yield* child.eachLeafSeries();
       } else {
         yield child;
@@ -38990,7 +38990,7 @@ var Bucket3 = class {
     const acc = [];
     return reduce3(this._children.reduce((acc2, child, index) => {
       if (child != null) {
-        if (child instanceof Bucket3) {
+        if (child instanceof Bucket2) {
           acc2.push(child.serialize(map4, reduce3));
         } else {
           acc2.push(map4(child, index));
@@ -39014,7 +39014,7 @@ var Bucket3 = class {
   async _findChild(key) {
     const result = await this._findPlace(key);
     const child = result.bucket._at(result.pos);
-    if (child instanceof Bucket3) {
+    if (child instanceof Bucket2) {
       return void 0;
     }
     if (child != null && child.key === key) {
@@ -39025,7 +39025,7 @@ var Bucket3 = class {
     const hashValue = this._options.hash(typeof key === "string" ? fromString3(key) : key);
     const index = await hashValue.take(this._options.bits);
     const child = this._children.get(index);
-    if (child instanceof Bucket3) {
+    if (child instanceof Bucket2) {
       return await child._findPlace(hashValue);
     }
     return {
@@ -39038,7 +39038,7 @@ var Bucket3 = class {
   async _findNewBucketAndPos(key) {
     const place = await this._findPlace(key);
     if (place.existingChild != null && place.existingChild.key !== key) {
-      const bucket = new Bucket3(this._options, place.bucket, place.pos);
+      const bucket = new Bucket2(this._options, place.bucket, place.pos);
       place.bucket._putObjectAt(place.pos, bucket);
       const newPlace = await bucket._findPlace(place.existingChild.hash);
       newPlace.bucket._putAt(newPlace, place.existingChild.key, place.existingChild.value);
@@ -39073,7 +39073,7 @@ var Bucket3 = class {
     if (this._parent != null && this._popCount <= 1) {
       if (this._popCount === 1) {
         const onlyChild = this._children.find(exists2);
-        if (onlyChild != null && !(onlyChild instanceof Bucket3)) {
+        if (onlyChild != null && !(onlyChild instanceof Bucket2)) {
           const hash = onlyChild.hash;
           hash.untake(this._options.bits);
           const place = {
@@ -39104,7 +39104,7 @@ function reduceNodes2(nodes) {
 async function asyncTransformBucket2(bucket, asyncMap, asyncReduce) {
   const output = [];
   for (const child of bucket._children.compactArray()) {
-    if (child instanceof Bucket3) {
+    if (child instanceof Bucket2) {
       await asyncTransformBucket2(child, asyncMap, asyncReduce);
     } else {
       const mappedChildren = await asyncMap(child);
@@ -39262,7 +39262,7 @@ function createHAMT2(options) {
     bits: options.bits ?? 8,
     hash: wrapHash2(options.hashFn)
   };
-  return new Bucket3(bucketOptions);
+  return new Bucket2(bucketOptions);
 }
 
 // node_modules/ipfs-unixfs-importer/src/dir-sharded.js
@@ -39317,7 +39317,7 @@ async function* flush(bucket, blockstore3, shardRoot, options) {
       continue;
     }
     const labelPrefix = i.toString(16).toUpperCase().padStart(2, "0");
-    if (child instanceof Bucket3) {
+    if (child instanceof Bucket2) {
       let shard;
       for await (const subShard of await flush(child, blockstore3, null, options)) {
         shard = subShard;
