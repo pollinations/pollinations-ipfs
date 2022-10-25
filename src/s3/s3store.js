@@ -1,11 +1,9 @@
-import { HeadObjectCommand } from '@aws-sdk/client-s3';
 import fetch from 'node-fetch';
 // create S3 instance
 import Debug from 'debug';
 
 import { Errors } from 'blockstore-core';
 import { BaseBlockstore } from 'blockstore-core/base';
-import { Bucket, s3 } from './s3client.js';
 
 
 const debug = Debug("s3store");
@@ -56,7 +54,7 @@ class S3Blockstore extends BaseBlockstore {
                 "Content-Type": "application/octet-stream"
             }
         });
-        debug("upload response", uploadResponse)
+        debug("upload response ok", uploadResponse.ok)
     }
 
     async get (key, options) {
@@ -91,48 +89,41 @@ class S3Blockstore extends BaseBlockstore {
             return true;
             
         debug("has", key);
-        const params = {
-            Bucket,
-            Key: key.toString()
-        };
-        try {
-            await s3.send(new HeadObjectCommand(params));
-            return true;
-        } catch (err) {
-            return false;
-        }
+        // const params = {
+        //     Bucket,
+        //     Key: key.toString()
+        // };
+        // try {
+        //     await s3.send(new HeadObjectCommand(params));
+        //     return true;
+        // } catch (err) {
+        //     return false;
+        // }
+
+        // check if a block exists using fetch with a HEAD request
+        const response = await fetch(`https://pollinations-ipfs.s3.amazonaws.com/${key.toString()}`, {
+            method: "HEAD"
+        });
+        debug("has response", response.ok)
+        return response.ok;
     }
 
     async delete (key, options) {
         // delete a block
-        const params = {
-            Bucket,
-            Key: key.toString()
-        };
-        await s3.deleteObject(params).promise();
+        console.error("delete not implemented")
+        throw new Error("delete not implemented")
     }
 
     async * _all () {
         // retrieve all blocks
-        const params = {
-            Bucket
-        };
-        const { Contents } = await s3.listObjectsV2(params).promise();
-        for (const { Key } of Contents) {
-            debug("returning all", Key)
-            yield { key: Key, value: await this.get(Key) };
-        }
+        console.error("all not implemented")
+        throw new Error("all not implemented")
     }
 
     async * _allKeys () {
         // retrieve all block keys
-        const params = {
-            Bucket
-        };
-        const { Contents } = await s3.listObjectsV2(params).promise();
-        for (const { Key } of Contents) {
-            yield Key;
-        }
+        console.error("allKeys not implemented")
+        throw new Error("allKeys not implemented")
     }
 }
 
@@ -229,4 +220,5 @@ return new Promise((resolve, reject) => {
 //     }
 //   }
   
+
 
