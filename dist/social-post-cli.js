@@ -50896,8 +50896,8 @@ var import_node_fetch2 = __toESM(require_lib4(), 1);
 
 // src/utils/getWebURL.js
 var getWebURL = (cid, name5 = null) => {
-  const filename = name5 ? `&filename=${name5}` : "";
-  return `https://store.pollinations.ai/ipfs/${cid.toString()}?{filename}`;
+  const filename = name5 ? `?filename=${name5}` : "";
+  return `https://store.pollinations.ai/ipfs/${cid.toString()}${filename}`;
 };
 var getWebURL_default = getWebURL;
 
