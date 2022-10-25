@@ -55848,7 +55848,7 @@ var import_ramda = __toESM(require_src6(), 1);
 // src/utils/getWebURL.js
 var getWebURL = (cid, name8 = null) => {
   const filename = name8 ? `&filename=${name8}` : "";
-  return `https://store.pollinations.ai/ipfs/${cid.toString()}${filename}`;
+  return `https://store.pollinations.ai/ipfs/${cid.toString()}?{filename}`;
 };
 var getWebURL_default = getWebURL;
 
