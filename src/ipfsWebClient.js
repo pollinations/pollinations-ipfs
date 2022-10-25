@@ -38,7 +38,7 @@ export const updateInput = async inputs => {
     // POST JSON to host
     const response = await fetch(host, {
         method: "POST",
-        body: inputs
+        body: JSON.stringify({inputs})
     });
     
     const cid = await response.text();
