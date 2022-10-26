@@ -64840,6 +64840,7 @@ var debug8 = (0, import_debug8.default)("ipfs/receiver");
 async function processRemoteCID(contentID, rootPath2) {
   debug8("Processing remote CID", contentID);
   const ipfsState = await getIPFSState(contentID, (file) => processFile2(file, rootPath2));
+  debug8("got remote state", ipfsState);
 }
 var receive = async function* ({ subfolder, nodeid, path: rootPath2 }, process3 = processRemoteCID) {
   const [cidStream, unsubscribe] = subscribeGenerator(nodeid);
