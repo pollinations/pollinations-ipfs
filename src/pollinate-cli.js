@@ -50,7 +50,7 @@ const enableReceive = !options.send
 
 
 const executeCommand = options.execute
-const sleepBeforeExit = options.debounce * 2 + 10000
+const sleepBeforeExit = options.debounce * 2 + 300
 
 const execute = async (command, logfile = null, signal) =>
   new Promise((resolve, reject) => {
