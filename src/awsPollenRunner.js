@@ -27,8 +27,8 @@ const runModelOnce = async (inputs, image="voodoohop/dalle-playground", returnIm
   const data = await IPFSWebState(outputCID);
   debug("got and returning output data", data);
 
-  if (!data?.output?.done) 
-   throw new Error("output not done");
+  // if (!data?.output?.done) 
+  //  throw new Error("output not done");
 
   return data;
 }
