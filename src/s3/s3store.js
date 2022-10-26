@@ -44,7 +44,7 @@ class S3Blockstore extends BaseBlockstore {
         // get a signed url from https://store.pollinations.ai/upload/[key]
         const urlResponse = await fetch(`https://store.pollinations.ai/upload/${key.toString()}`)
         const url = await urlResponse.text();
-        debug("signed url", url)
+        debug("signed url", url, "for key", key.toString())
         // upload to signed url
         // val is a Uint8Array
         const uploadResponse = await fetch(url, {

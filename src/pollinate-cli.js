@@ -13,6 +13,7 @@ import { processRemoteCID, receive } from "./ipfs/receiver.js"
 import { sender } from './ipfs/sender.js'
 import { stringCID } from "./ipfsConnector"
 import { publisher, subscribeGenerator } from "./ipfsPubSub.js"
+import { noop } from "./utils/utils.js"
 
 export const debug = Debug("pollinate")
 
@@ -148,7 +149,7 @@ else {
       if (options.ipns)
         await awaitSleep(sleepBeforeExit)
       await closePublish()
-      process.exit(0)
+      // process.exit(0)
     })();
 
 

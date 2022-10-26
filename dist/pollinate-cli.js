@@ -181,11 +181,11 @@ var require_common = __commonJS({
         let enableOverride = null;
         let namespacesCache;
         let enabledCache;
-        function debug17(...args) {
-          if (!debug17.enabled) {
+        function debug18(...args) {
+          if (!debug18.enabled) {
             return;
           }
-          const self2 = debug17;
+          const self2 = debug18;
           const curr = Number(new Date());
           const ms = curr - (prevTime || curr);
           self2.diff = ms;
@@ -215,12 +215,12 @@ var require_common = __commonJS({
           const logFn = self2.log || createDebug.log;
           logFn.apply(self2, args);
         }
-        debug17.namespace = namespace;
-        debug17.useColors = createDebug.useColors();
-        debug17.color = createDebug.selectColor(namespace);
-        debug17.extend = extend;
-        debug17.destroy = createDebug.destroy;
-        Object.defineProperty(debug17, "enabled", {
+        debug18.namespace = namespace;
+        debug18.useColors = createDebug.useColors();
+        debug18.color = createDebug.selectColor(namespace);
+        debug18.extend = extend;
+        debug18.destroy = createDebug.destroy;
+        Object.defineProperty(debug18, "enabled", {
           enumerable: true,
           configurable: false,
           get: () => {
@@ -238,9 +238,9 @@ var require_common = __commonJS({
           }
         });
         if (typeof createDebug.init === "function") {
-          createDebug.init(debug17);
+          createDebug.init(debug18);
         }
-        return debug17;
+        return debug18;
       }
       function extend(namespace, delimiter) {
         const newDebug = createDebug(this.namespace + (typeof delimiter === "undefined" ? ":" : delimiter) + namespace);
@@ -746,11 +746,11 @@ var require_node = __commonJS({
     function load() {
       return process.env.DEBUG;
     }
-    function init(debug17) {
-      debug17.inspectOpts = {};
+    function init(debug18) {
+      debug18.inspectOpts = {};
       const keys = Object.keys(exports2.inspectOpts);
       for (let i = 0; i < keys.length; i++) {
-        debug17.inspectOpts[keys[i]] = exports2.inspectOpts[keys[i]];
+        debug18.inspectOpts[keys[i]] = exports2.inspectOpts[keys[i]];
       }
     }
     module2.exports = require_common()(exports2);
@@ -9114,11 +9114,11 @@ var require_lib4 = __commonJS({
       return void 0;
     }
     var MAP = Symbol("map");
-    var Headers2 = class {
+    var Headers3 = class {
       constructor() {
         let init = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : void 0;
         this[MAP] = /* @__PURE__ */ Object.create(null);
-        if (init instanceof Headers2) {
+        if (init instanceof Headers3) {
           const rawHeaders = init.raw();
           const headerNames = Object.keys(rawHeaders);
           for (const headerName of headerNames) {
@@ -9226,14 +9226,14 @@ var require_lib4 = __commonJS({
         return createHeadersIterator(this, "key+value");
       }
     };
-    Headers2.prototype.entries = Headers2.prototype[Symbol.iterator];
-    Object.defineProperty(Headers2.prototype, Symbol.toStringTag, {
+    Headers3.prototype.entries = Headers3.prototype[Symbol.iterator];
+    Object.defineProperty(Headers3.prototype, Symbol.toStringTag, {
       value: "Headers",
       writable: false,
       enumerable: false,
       configurable: true
     });
-    Object.defineProperties(Headers2.prototype, {
+    Object.defineProperties(Headers3.prototype, {
       get: { enumerable: true },
       forEach: { enumerable: true },
       set: { enumerable: true },
@@ -9302,7 +9302,7 @@ var require_lib4 = __commonJS({
       return obj;
     }
     function createHeadersLenient(obj) {
-      const headers = new Headers2();
+      const headers = new Headers3();
       for (const name8 of Object.keys(obj)) {
         if (invalidTokenRegex.test(name8)) {
           continue;
@@ -9332,7 +9332,7 @@ var require_lib4 = __commonJS({
         let opts = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
         Body2.call(this, body, opts);
         const status = opts.status || 200;
-        const headers = new Headers2(opts.headers);
+        const headers = new Headers3(opts.headers);
         if (body != null && !headers.has("Content-Type")) {
           const contentType = extractContentType2(body);
           if (contentType) {
@@ -9434,7 +9434,7 @@ var require_lib4 = __commonJS({
           timeout: init.timeout || input.timeout || 0,
           size: init.size || input.size || 0
         });
-        const headers = new Headers2(init.headers || input.headers || {});
+        const headers = new Headers3(init.headers || input.headers || {});
         if (inputBody != null && !headers.has("Content-Type")) {
           const contentType = extractContentType2(inputBody);
           if (contentType) {
@@ -9495,7 +9495,7 @@ var require_lib4 = __commonJS({
     });
     function getNodeRequestOptions2(request) {
       const parsedURL = request[INTERNALS$2].parsedURL;
-      const headers = new Headers2(request[INTERNALS$2].headers);
+      const headers = new Headers3(request[INTERNALS$2].headers);
       if (!headers.has("Accept")) {
         headers.set("Accept", "*/*");
       }
@@ -9647,7 +9647,7 @@ var require_lib4 = __commonJS({
                   return;
                 }
                 const requestOpts = {
-                  headers: new Headers2(request.headers),
+                  headers: new Headers3(request.headers),
                   follow: request.follow,
                   counter: request.counter + 1,
                   agent: request.agent,
@@ -9740,313 +9740,10 @@ var require_lib4 = __commonJS({
     module2.exports = exports2 = fetch5;
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.default = exports2;
-    exports2.Headers = Headers2;
+    exports2.Headers = Headers3;
     exports2.Request = Request2;
     exports2.Response = Response3;
     exports2.FetchError = FetchError2;
-  }
-});
-
-// node_modules/@supabase/supabase-js/dist/main/lib/version.js
-var require_version = __commonJS({
-  "node_modules/@supabase/supabase-js/dist/main/lib/version.js"(exports2) {
-    "use strict";
-    Object.defineProperty(exports2, "__esModule", { value: true });
-    exports2.version = void 0;
-    exports2.version = "1.35.6";
-  }
-});
-
-// node_modules/@supabase/supabase-js/dist/main/lib/constants.js
-var require_constants = __commonJS({
-  "node_modules/@supabase/supabase-js/dist/main/lib/constants.js"(exports2) {
-    "use strict";
-    Object.defineProperty(exports2, "__esModule", { value: true });
-    exports2.STORAGE_KEY = exports2.DEFAULT_HEADERS = void 0;
-    var version_1 = require_version();
-    exports2.DEFAULT_HEADERS = { "X-Client-Info": `supabase-js/${version_1.version}` };
-    exports2.STORAGE_KEY = "supabase.auth.token";
-  }
-});
-
-// node_modules/@supabase/supabase-js/dist/main/lib/helpers.js
-var require_helpers = __commonJS({
-  "node_modules/@supabase/supabase-js/dist/main/lib/helpers.js"(exports2) {
-    "use strict";
-    Object.defineProperty(exports2, "__esModule", { value: true });
-    exports2.isBrowser = exports2.stripTrailingSlash = exports2.uuid = void 0;
-    function uuid() {
-      return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
-        var r = Math.random() * 16 | 0, v = c == "x" ? r : r & 3 | 8;
-        return v.toString(16);
-      });
-    }
-    exports2.uuid = uuid;
-    function stripTrailingSlash(url) {
-      return url.replace(/\/$/, "");
-    }
-    exports2.stripTrailingSlash = stripTrailingSlash;
-    var isBrowser2 = () => typeof window !== "undefined";
-    exports2.isBrowser = isBrowser2;
-  }
-});
-
-// node_modules/@supabase/gotrue-js/dist/main/lib/version.js
-var require_version2 = __commonJS({
-  "node_modules/@supabase/gotrue-js/dist/main/lib/version.js"(exports2) {
-    "use strict";
-    Object.defineProperty(exports2, "__esModule", { value: true });
-    exports2.version = void 0;
-    exports2.version = "1.22.22";
-  }
-});
-
-// node_modules/@supabase/gotrue-js/dist/main/lib/constants.js
-var require_constants2 = __commonJS({
-  "node_modules/@supabase/gotrue-js/dist/main/lib/constants.js"(exports2) {
-    "use strict";
-    Object.defineProperty(exports2, "__esModule", { value: true });
-    exports2.COOKIE_OPTIONS = exports2.STORAGE_KEY = exports2.NETWORK_FAILURE = exports2.EXPIRY_MARGIN = exports2.DEFAULT_HEADERS = exports2.AUDIENCE = exports2.GOTRUE_URL = void 0;
-    var version_1 = require_version2();
-    exports2.GOTRUE_URL = "http://localhost:9999";
-    exports2.AUDIENCE = "";
-    exports2.DEFAULT_HEADERS = { "X-Client-Info": `gotrue-js/${version_1.version}` };
-    exports2.EXPIRY_MARGIN = 10;
-    exports2.NETWORK_FAILURE = {
-      ERROR_MESSAGE: "Request Failed",
-      MAX_RETRIES: 10,
-      RETRY_INTERVAL: 2
-    };
-    exports2.STORAGE_KEY = "supabase.auth.token";
-    exports2.COOKIE_OPTIONS = {
-      name: "sb",
-      lifetime: 60 * 60 * 8,
-      domain: "",
-      path: "/",
-      sameSite: "lax"
-    };
-  }
-});
-
-// node_modules/@supabase/gotrue-js/dist/main/lib/fetch.js
-var require_fetch = __commonJS({
-  "node_modules/@supabase/gotrue-js/dist/main/lib/fetch.js"(exports2) {
-    "use strict";
-    var __awaiter = exports2 && exports2.__awaiter || function(thisArg, _arguments, P, generator) {
-      function adopt(value) {
-        return value instanceof P ? value : new P(function(resolve10) {
-          resolve10(value);
-        });
-      }
-      return new (P || (P = Promise))(function(resolve10, reject) {
-        function fulfilled(value) {
-          try {
-            step(generator.next(value));
-          } catch (e) {
-            reject(e);
-          }
-        }
-        function rejected(value) {
-          try {
-            step(generator["throw"](value));
-          } catch (e) {
-            reject(e);
-          }
-        }
-        function step(result) {
-          result.done ? resolve10(result.value) : adopt(result.value).then(fulfilled, rejected);
-        }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-      });
-    };
-    Object.defineProperty(exports2, "__esModule", { value: true });
-    exports2.remove = exports2.put = exports2.post = exports2.get = void 0;
-    var constants_1 = require_constants2();
-    var _getErrorMessage = (err) => err.msg || err.message || err.error_description || err.error || JSON.stringify(err);
-    var handleError = (error, reject) => {
-      if (!(error === null || error === void 0 ? void 0 : error.status)) {
-        return reject({ message: constants_1.NETWORK_FAILURE.ERROR_MESSAGE });
-      }
-      if (typeof error.json !== "function") {
-        return reject(error);
-      }
-      error.json().then((err) => {
-        return reject({
-          message: _getErrorMessage(err),
-          status: (error === null || error === void 0 ? void 0 : error.status) || 500
-        });
-      });
-    };
-    var _getRequestParams = (method, options, body) => {
-      const params = { method, headers: (options === null || options === void 0 ? void 0 : options.headers) || {} };
-      if (method === "GET") {
-        return params;
-      }
-      params.headers = Object.assign({ "Content-Type": "text/plain;charset=UTF-8" }, options === null || options === void 0 ? void 0 : options.headers);
-      params.body = JSON.stringify(body);
-      return params;
-    };
-    function _handleRequest(fetcher, method, url, options, body) {
-      return __awaiter(this, void 0, void 0, function* () {
-        return new Promise((resolve10, reject) => {
-          fetcher(url, _getRequestParams(method, options, body)).then((result) => {
-            if (!result.ok)
-              throw result;
-            if (options === null || options === void 0 ? void 0 : options.noResolveJson)
-              return resolve10;
-            return result.json();
-          }).then((data) => resolve10(data)).catch((error) => handleError(error, reject));
-        });
-      });
-    }
-    function get2(fetcher, url, options) {
-      return __awaiter(this, void 0, void 0, function* () {
-        return _handleRequest(fetcher, "GET", url, options);
-      });
-    }
-    exports2.get = get2;
-    function post(fetcher, url, body, options) {
-      return __awaiter(this, void 0, void 0, function* () {
-        return _handleRequest(fetcher, "POST", url, options, body);
-      });
-    }
-    exports2.post = post;
-    function put(fetcher, url, body, options) {
-      return __awaiter(this, void 0, void 0, function* () {
-        return _handleRequest(fetcher, "PUT", url, options, body);
-      });
-    }
-    exports2.put = put;
-    function remove(fetcher, url, body, options) {
-      return __awaiter(this, void 0, void 0, function* () {
-        return _handleRequest(fetcher, "DELETE", url, options, body);
-      });
-    }
-    exports2.remove = remove;
-  }
-});
-
-// node_modules/@supabase/gotrue-js/dist/main/lib/cookies.js
-var require_cookies = __commonJS({
-  "node_modules/@supabase/gotrue-js/dist/main/lib/cookies.js"(exports2) {
-    "use strict";
-    Object.defineProperty(exports2, "__esModule", { value: true });
-    exports2.deleteCookie = exports2.setCookie = exports2.setCookies = exports2.getCookieString = void 0;
-    function serialize(name8, val, options) {
-      const opt = options || {};
-      const enc = encodeURIComponent;
-      const fieldContentRegExp = /^[\u0009\u0020-\u007e\u0080-\u00ff]+$/;
-      if (typeof enc !== "function") {
-        throw new TypeError("option encode is invalid");
-      }
-      if (!fieldContentRegExp.test(name8)) {
-        throw new TypeError("argument name is invalid");
-      }
-      const value = enc(val);
-      if (value && !fieldContentRegExp.test(value)) {
-        throw new TypeError("argument val is invalid");
-      }
-      let str = name8 + "=" + value;
-      if (null != opt.maxAge) {
-        const maxAge = opt.maxAge - 0;
-        if (isNaN(maxAge) || !isFinite(maxAge)) {
-          throw new TypeError("option maxAge is invalid");
-        }
-        str += "; Max-Age=" + Math.floor(maxAge);
-      }
-      if (opt.domain) {
-        if (!fieldContentRegExp.test(opt.domain)) {
-          throw new TypeError("option domain is invalid");
-        }
-        str += "; Domain=" + opt.domain;
-      }
-      if (opt.path) {
-        if (!fieldContentRegExp.test(opt.path)) {
-          throw new TypeError("option path is invalid");
-        }
-        str += "; Path=" + opt.path;
-      }
-      if (opt.expires) {
-        if (typeof opt.expires.toUTCString !== "function") {
-          throw new TypeError("option expires is invalid");
-        }
-        str += "; Expires=" + opt.expires.toUTCString();
-      }
-      if (opt.httpOnly) {
-        str += "; HttpOnly";
-      }
-      if (opt.secure) {
-        str += "; Secure";
-      }
-      if (opt.sameSite) {
-        const sameSite = typeof opt.sameSite === "string" ? opt.sameSite.toLowerCase() : opt.sameSite;
-        switch (sameSite) {
-          case "lax":
-            str += "; SameSite=Lax";
-            break;
-          case "strict":
-            str += "; SameSite=Strict";
-            break;
-          case "none":
-            str += "; SameSite=None";
-            break;
-          default:
-            throw new TypeError("option sameSite is invalid");
-        }
-      }
-      return str;
-    }
-    function isSecureEnvironment(req) {
-      if (!req || !req.headers || !req.headers.host) {
-        throw new Error('The "host" request header is not available');
-      }
-      const host = req.headers.host.indexOf(":") > -1 && req.headers.host.split(":")[0] || req.headers.host;
-      if (["localhost", "127.0.0.1"].indexOf(host) > -1 || host.endsWith(".local")) {
-        return false;
-      }
-      return true;
-    }
-    function serializeCookie(cookie, secure) {
-      var _a, _b, _c;
-      return serialize(cookie.name, cookie.value, {
-        maxAge: cookie.maxAge,
-        expires: new Date(Date.now() + cookie.maxAge * 1e3),
-        httpOnly: true,
-        secure,
-        path: (_a = cookie.path) !== null && _a !== void 0 ? _a : "/",
-        domain: (_b = cookie.domain) !== null && _b !== void 0 ? _b : "",
-        sameSite: (_c = cookie.sameSite) !== null && _c !== void 0 ? _c : "lax"
-      });
-    }
-    function getCookieString(req, res, cookies) {
-      const strCookies = cookies.map((c) => serializeCookie(c, isSecureEnvironment(req)));
-      const previousCookies = res.getHeader("Set-Cookie");
-      if (previousCookies) {
-        if (previousCookies instanceof Array) {
-          Array.prototype.push.apply(strCookies, previousCookies);
-        } else if (typeof previousCookies === "string") {
-          strCookies.push(previousCookies);
-        }
-      }
-      return strCookies;
-    }
-    exports2.getCookieString = getCookieString;
-    function setCookies(req, res, cookies) {
-      res.setHeader("Set-Cookie", getCookieString(req, res, cookies));
-    }
-    exports2.setCookies = setCookies;
-    function setCookie(req, res, cookie) {
-      setCookies(req, res, [cookie]);
-    }
-    exports2.setCookie = setCookie;
-    function deleteCookie(req, res, name8) {
-      setCookie(req, res, {
-        name: name8,
-        value: "",
-        maxAge: -1
-      });
-    }
-    exports2.deleteCookie = deleteCookie;
   }
 });
 
@@ -10071,16 +9768,20 @@ var require_node_ponyfill = __commonJS({
   }
 });
 
-// node_modules/@supabase/gotrue-js/dist/main/lib/helpers.js
-var require_helpers2 = __commonJS({
-  "node_modules/@supabase/gotrue-js/dist/main/lib/helpers.js"(exports2) {
+// node_modules/@supabase/functions-js/dist/main/helper.js
+var require_helper = __commonJS({
+  "node_modules/@supabase/functions-js/dist/main/helper.js"(exports2) {
     "use strict";
     var __createBinding = exports2 && exports2.__createBinding || (Object.create ? function(o, m, k, k2) {
       if (k2 === void 0)
         k2 = k;
-      Object.defineProperty(o, k2, { enumerable: true, get: function() {
-        return m[k];
-      } });
+      var desc = Object.getOwnPropertyDescriptor(m, k);
+      if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+        desc = { enumerable: true, get: function() {
+          return m[k];
+        } };
+      }
+      Object.defineProperty(o, k2, desc);
     } : function(o, m, k, k2) {
       if (k2 === void 0)
         k2 = k;
@@ -10131,34 +9832,7 @@ var require_helpers2 = __commonJS({
       });
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
-    exports2.removeItemAsync = exports2.getItemSynchronously = exports2.getItemAsync = exports2.setItemAsync = exports2.resolveFetch = exports2.getParameterByName = exports2.isBrowser = exports2.uuid = exports2.expiresAt = void 0;
-    function expiresAt(expiresIn) {
-      const timeNow = Math.round(Date.now() / 1e3);
-      return timeNow + expiresIn;
-    }
-    exports2.expiresAt = expiresAt;
-    function uuid() {
-      return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
-        const r = Math.random() * 16 | 0, v = c == "x" ? r : r & 3 | 8;
-        return v.toString(16);
-      });
-    }
-    exports2.uuid = uuid;
-    var isBrowser2 = () => typeof window !== "undefined";
-    exports2.isBrowser = isBrowser2;
-    function getParameterByName(name8, url) {
-      var _a;
-      if (!url)
-        url = ((_a = window === null || window === void 0 ? void 0 : window.location) === null || _a === void 0 ? void 0 : _a.href) || "";
-      name8 = name8.replace(/[\[\]]/g, "\\$&");
-      const regex = new RegExp("[?&#]" + name8 + "(=([^&#]*)|&|#|$)"), results = regex.exec(url);
-      if (!results)
-        return null;
-      if (!results[2])
-        return "";
-      return decodeURIComponent(results[2].replace(/\+/g, " "));
-    }
-    exports2.getParameterByName = getParameterByName;
+    exports2.resolveFetch = void 0;
     var resolveFetch = (customFetch) => {
       let _fetch;
       if (customFetch) {
@@ -10173,43 +9847,47 @@ var require_helpers2 = __commonJS({
       return (...args) => _fetch(...args);
     };
     exports2.resolveFetch = resolveFetch;
-    var setItemAsync = (storage2, key, data) => __awaiter(void 0, void 0, void 0, function* () {
-      (0, exports2.isBrowser)() && (yield storage2 === null || storage2 === void 0 ? void 0 : storage2.setItem(key, JSON.stringify(data)));
-    });
-    exports2.setItemAsync = setItemAsync;
-    var getItemAsync = (storage2, key) => __awaiter(void 0, void 0, void 0, function* () {
-      const value = (0, exports2.isBrowser)() && (yield storage2 === null || storage2 === void 0 ? void 0 : storage2.getItem(key));
-      if (!value)
-        return null;
-      try {
-        return JSON.parse(value);
-      } catch (_a) {
-        return value;
-      }
-    });
-    exports2.getItemAsync = getItemAsync;
-    var getItemSynchronously = (storage2, key) => {
-      const value = (0, exports2.isBrowser)() && (storage2 === null || storage2 === void 0 ? void 0 : storage2.getItem(key));
-      if (!value || typeof value !== "string") {
-        return null;
-      }
-      try {
-        return JSON.parse(value);
-      } catch (_a) {
-        return value;
-      }
-    };
-    exports2.getItemSynchronously = getItemSynchronously;
-    var removeItemAsync = (storage2, key) => __awaiter(void 0, void 0, void 0, function* () {
-      (0, exports2.isBrowser)() && (yield storage2 === null || storage2 === void 0 ? void 0 : storage2.removeItem(key));
-    });
-    exports2.removeItemAsync = removeItemAsync;
   }
 });
 
-// node_modules/@supabase/gotrue-js/dist/main/GoTrueApi.js
-var require_GoTrueApi = __commonJS({
-  "node_modules/@supabase/gotrue-js/dist/main/GoTrueApi.js"(exports2) {
+// node_modules/@supabase/functions-js/dist/main/types.js
+var require_types = __commonJS({
+  "node_modules/@supabase/functions-js/dist/main/types.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.FunctionsHttpError = exports2.FunctionsRelayError = exports2.FunctionsFetchError = exports2.FunctionsError = void 0;
+    var FunctionsError = class extends Error {
+      constructor(message, name8 = "FunctionsError", context) {
+        super(message);
+        super.name = name8;
+        this.context = context;
+      }
+    };
+    exports2.FunctionsError = FunctionsError;
+    var FunctionsFetchError = class extends FunctionsError {
+      constructor(context) {
+        super("Failed to send a request to the Edge Function", "FunctionsFetchError", context);
+      }
+    };
+    exports2.FunctionsFetchError = FunctionsFetchError;
+    var FunctionsRelayError = class extends FunctionsError {
+      constructor(context) {
+        super("Relay Error invoking the Edge Function", "FunctionsRelayError", context);
+      }
+    };
+    exports2.FunctionsRelayError = FunctionsRelayError;
+    var FunctionsHttpError = class extends FunctionsError {
+      constructor(context) {
+        super("Edge Function returned a non-2xx status code", "FunctionsHttpError", context);
+      }
+    };
+    exports2.FunctionsHttpError = FunctionsHttpError;
+  }
+});
+
+// node_modules/@supabase/functions-js/dist/main/FunctionsClient.js
+var require_FunctionsClient = __commonJS({
+  "node_modules/@supabase/functions-js/dist/main/FunctionsClient.js"(exports2) {
     "use strict";
     var __awaiter = exports2 && exports2.__awaiter || function(thisArg, _arguments, P, generator) {
       function adopt(value) {
@@ -10239,1177 +9917,105 @@ var require_GoTrueApi = __commonJS({
       });
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
-    var fetch_1 = require_fetch();
-    var constants_1 = require_constants2();
-    var cookies_1 = require_cookies();
-    var helpers_1 = require_helpers2();
-    var GoTrueApi = class {
-      constructor({ url = "", headers = {}, cookieOptions, fetch: fetch5 }) {
+    exports2.FunctionsClient = void 0;
+    var helper_1 = require_helper();
+    var types_1 = require_types();
+    var FunctionsClient = class {
+      constructor(url, { headers = {}, customFetch } = {}) {
         this.url = url;
         this.headers = headers;
-        this.cookieOptions = Object.assign(Object.assign({}, constants_1.COOKIE_OPTIONS), cookieOptions);
-        this.fetch = (0, helpers_1.resolveFetch)(fetch5);
+        this.fetch = (0, helper_1.resolveFetch)(customFetch);
       }
-      _createRequestHeaders(jwt) {
-        const headers = Object.assign({}, this.headers);
-        headers["Authorization"] = `Bearer ${jwt}`;
-        return headers;
+      setAuth(token2) {
+        this.headers.Authorization = `Bearer ${token2}`;
       }
-      cookieName() {
-        var _a;
-        return (_a = this.cookieOptions.name) !== null && _a !== void 0 ? _a : "";
-      }
-      getUrlForProvider(provider, options) {
-        const urlParams = [`provider=${encodeURIComponent(provider)}`];
-        if (options === null || options === void 0 ? void 0 : options.redirectTo) {
-          urlParams.push(`redirect_to=${encodeURIComponent(options.redirectTo)}`);
-        }
-        if (options === null || options === void 0 ? void 0 : options.scopes) {
-          urlParams.push(`scopes=${encodeURIComponent(options.scopes)}`);
-        }
-        if (options === null || options === void 0 ? void 0 : options.queryParams) {
-          const query = new URLSearchParams(options.queryParams);
-          urlParams.push(`${query}`);
-        }
-        return `${this.url}/authorize?${urlParams.join("&")}`;
-      }
-      signUpWithEmail(email, password, options = {}) {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            const headers = Object.assign({}, this.headers);
-            let queryString = "";
-            if (options.redirectTo) {
-              queryString = "?redirect_to=" + encodeURIComponent(options.redirectTo);
-            }
-            const data = yield (0, fetch_1.post)(this.fetch, `${this.url}/signup${queryString}`, {
-              email,
-              password,
-              data: options.data,
-              gotrue_meta_security: { captcha_token: options.captchaToken }
-            }, { headers });
-            const session = Object.assign({}, data);
-            if (session.expires_in)
-              session.expires_at = (0, helpers_1.expiresAt)(data.expires_in);
-            return { data: session, error: null };
-          } catch (e) {
-            return { data: null, error: e };
-          }
-        });
-      }
-      signInWithEmail(email, password, options = {}) {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            const headers = Object.assign({}, this.headers);
-            let queryString = "?grant_type=password";
-            if (options.redirectTo) {
-              queryString += "&redirect_to=" + encodeURIComponent(options.redirectTo);
-            }
-            const data = yield (0, fetch_1.post)(this.fetch, `${this.url}/token${queryString}`, { email, password, gotrue_meta_security: { captcha_token: options.captchaToken } }, { headers });
-            const session = Object.assign({}, data);
-            if (session.expires_in)
-              session.expires_at = (0, helpers_1.expiresAt)(data.expires_in);
-            return { data: session, error: null };
-          } catch (e) {
-            return { data: null, error: e };
-          }
-        });
-      }
-      signUpWithPhone(phone, password, options = {}) {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            const headers = Object.assign({}, this.headers);
-            const data = yield (0, fetch_1.post)(this.fetch, `${this.url}/signup`, {
-              phone,
-              password,
-              data: options.data,
-              gotrue_meta_security: { captcha_token: options.captchaToken }
-            }, { headers });
-            const session = Object.assign({}, data);
-            if (session.expires_in)
-              session.expires_at = (0, helpers_1.expiresAt)(data.expires_in);
-            return { data: session, error: null };
-          } catch (e) {
-            return { data: null, error: e };
-          }
-        });
-      }
-      signInWithPhone(phone, password, options = {}) {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            const headers = Object.assign({}, this.headers);
-            const queryString = "?grant_type=password";
-            const data = yield (0, fetch_1.post)(this.fetch, `${this.url}/token${queryString}`, { phone, password, gotrue_meta_security: { captcha_token: options.captchaToken } }, { headers });
-            const session = Object.assign({}, data);
-            if (session.expires_in)
-              session.expires_at = (0, helpers_1.expiresAt)(data.expires_in);
-            return { data: session, error: null };
-          } catch (e) {
-            return { data: null, error: e };
-          }
-        });
-      }
-      signInWithOpenIDConnect({ id_token, nonce, client_id, issuer, provider }) {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            const headers = Object.assign({}, this.headers);
-            const queryString = "?grant_type=id_token";
-            const data = yield (0, fetch_1.post)(this.fetch, `${this.url}/token${queryString}`, { id_token, nonce, client_id, issuer, provider }, { headers });
-            const session = Object.assign({}, data);
-            if (session.expires_in)
-              session.expires_at = (0, helpers_1.expiresAt)(data.expires_in);
-            return { data: session, error: null };
-          } catch (e) {
-            return { data: null, error: e };
-          }
-        });
-      }
-      sendMagicLinkEmail(email, options = {}) {
+      invoke(functionName, invokeOptions = {}) {
         var _a;
         return __awaiter(this, void 0, void 0, function* () {
           try {
-            const headers = Object.assign({}, this.headers);
-            let queryString = "";
-            if (options.redirectTo) {
-              queryString += "?redirect_to=" + encodeURIComponent(options.redirectTo);
-            }
-            const shouldCreateUser = (_a = options.shouldCreateUser) !== null && _a !== void 0 ? _a : true;
-            const data = yield (0, fetch_1.post)(this.fetch, `${this.url}/otp${queryString}`, {
-              email,
-              create_user: shouldCreateUser,
-              gotrue_meta_security: { captcha_token: options.captchaToken }
-            }, { headers });
-            return { data, error: null };
-          } catch (e) {
-            return { data: null, error: e };
-          }
-        });
-      }
-      sendMobileOTP(phone, options = {}) {
-        var _a;
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            const shouldCreateUser = (_a = options.shouldCreateUser) !== null && _a !== void 0 ? _a : true;
-            const headers = Object.assign({}, this.headers);
-            const data = yield (0, fetch_1.post)(this.fetch, `${this.url}/otp`, {
-              phone,
-              create_user: shouldCreateUser,
-              gotrue_meta_security: { captcha_token: options.captchaToken }
-            }, { headers });
-            return { data, error: null };
-          } catch (e) {
-            return { data: null, error: e };
-          }
-        });
-      }
-      signOut(jwt) {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            yield (0, fetch_1.post)(this.fetch, `${this.url}/logout`, {}, { headers: this._createRequestHeaders(jwt), noResolveJson: true });
-            return { error: null };
-          } catch (e) {
-            return { error: e };
-          }
-        });
-      }
-      verifyMobileOTP(phone, token2, options = {}) {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            const headers = Object.assign({}, this.headers);
-            const data = yield (0, fetch_1.post)(this.fetch, `${this.url}/verify`, { phone, token: token2, type: "sms", redirect_to: options.redirectTo }, { headers });
-            const session = Object.assign({}, data);
-            if (session.expires_in)
-              session.expires_at = (0, helpers_1.expiresAt)(data.expires_in);
-            return { data: session, error: null };
-          } catch (e) {
-            return { data: null, error: e };
-          }
-        });
-      }
-      verifyOTP({ email, phone, token: token2, type = "sms" }, options = {}) {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            const headers = Object.assign({}, this.headers);
-            const data = yield (0, fetch_1.post)(this.fetch, `${this.url}/verify`, { email, phone, token: token2, type, redirect_to: options.redirectTo }, { headers });
-            const session = Object.assign({}, data);
-            if (session.expires_in)
-              session.expires_at = (0, helpers_1.expiresAt)(data.expires_in);
-            return { data: session, error: null };
-          } catch (e) {
-            return { data: null, error: e };
-          }
-        });
-      }
-      inviteUserByEmail(email, options = {}) {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            const headers = Object.assign({}, this.headers);
-            let queryString = "";
-            if (options.redirectTo) {
-              queryString += "?redirect_to=" + encodeURIComponent(options.redirectTo);
-            }
-            const data = yield (0, fetch_1.post)(this.fetch, `${this.url}/invite${queryString}`, { email, data: options.data }, { headers });
-            return { data, error: null };
-          } catch (e) {
-            return { data: null, error: e };
-          }
-        });
-      }
-      resetPasswordForEmail(email, options = {}) {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            const headers = Object.assign({}, this.headers);
-            let queryString = "";
-            if (options.redirectTo) {
-              queryString += "?redirect_to=" + encodeURIComponent(options.redirectTo);
-            }
-            const data = yield (0, fetch_1.post)(this.fetch, `${this.url}/recover${queryString}`, { email, gotrue_meta_security: { captcha_token: options.captchaToken } }, { headers });
-            return { data, error: null };
-          } catch (e) {
-            return { data: null, error: e };
-          }
-        });
-      }
-      refreshAccessToken(refreshToken) {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            const data = yield (0, fetch_1.post)(this.fetch, `${this.url}/token?grant_type=refresh_token`, { refresh_token: refreshToken }, { headers: this.headers });
-            const session = Object.assign({}, data);
-            if (session.expires_in)
-              session.expires_at = (0, helpers_1.expiresAt)(data.expires_in);
-            return { data: session, error: null };
-          } catch (e) {
-            return { data: null, error: e };
-          }
-        });
-      }
-      setAuthCookie(req, res) {
-        if (req.method !== "POST") {
-          res.setHeader("Allow", "POST");
-          res.status(405).end("Method Not Allowed");
-        }
-        const { event, session } = req.body;
-        if (!event)
-          throw new Error("Auth event missing!");
-        if (event === "SIGNED_IN") {
-          if (!session)
-            throw new Error("Auth session missing!");
-          (0, cookies_1.setCookies)(req, res, [
-            { key: "access-token", value: session.access_token },
-            { key: "refresh-token", value: session.refresh_token }
-          ].map((token2) => {
-            var _a;
-            return {
-              name: `${this.cookieName()}-${token2.key}`,
-              value: token2.value,
-              domain: this.cookieOptions.domain,
-              maxAge: (_a = this.cookieOptions.lifetime) !== null && _a !== void 0 ? _a : 0,
-              path: this.cookieOptions.path,
-              sameSite: this.cookieOptions.sameSite
-            };
-          }));
-        }
-        if (event === "SIGNED_OUT") {
-          (0, cookies_1.setCookies)(req, res, ["access-token", "refresh-token"].map((key) => ({
-            name: `${this.cookieName()}-${key}`,
-            value: "",
-            maxAge: -1
-          })));
-        }
-        res.status(200).json({});
-      }
-      deleteAuthCookie(req, res, { redirectTo = "/" }) {
-        (0, cookies_1.setCookies)(req, res, ["access-token", "refresh-token"].map((key) => ({
-          name: `${this.cookieName()}-${key}`,
-          value: "",
-          maxAge: -1
-        })));
-        return res.redirect(307, redirectTo);
-      }
-      getAuthCookieString(req, res) {
-        if (req.method !== "POST") {
-          res.setHeader("Allow", "POST");
-          res.status(405).end("Method Not Allowed");
-        }
-        const { event, session } = req.body;
-        if (!event)
-          throw new Error("Auth event missing!");
-        if (event === "SIGNED_IN") {
-          if (!session)
-            throw new Error("Auth session missing!");
-          return (0, cookies_1.getCookieString)(req, res, [
-            { key: "access-token", value: session.access_token },
-            { key: "refresh-token", value: session.refresh_token }
-          ].map((token2) => {
-            var _a;
-            return {
-              name: `${this.cookieName()}-${token2.key}`,
-              value: token2.value,
-              domain: this.cookieOptions.domain,
-              maxAge: (_a = this.cookieOptions.lifetime) !== null && _a !== void 0 ? _a : 0,
-              path: this.cookieOptions.path,
-              sameSite: this.cookieOptions.sameSite
-            };
-          }));
-        }
-        if (event === "SIGNED_OUT") {
-          return (0, cookies_1.getCookieString)(req, res, ["access-token", "refresh-token"].map((key) => ({
-            name: `${this.cookieName()}-${key}`,
-            value: "",
-            maxAge: -1
-          })));
-        }
-        return res.getHeader("Set-Cookie");
-      }
-      generateLink(type, email, options = {}) {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            const data = yield (0, fetch_1.post)(this.fetch, `${this.url}/admin/generate_link`, {
-              type,
-              email,
-              password: options.password,
-              data: options.data,
-              redirect_to: options.redirectTo
-            }, { headers: this.headers });
-            return { data, error: null };
-          } catch (e) {
-            return { data: null, error: e };
-          }
-        });
-      }
-      createUser(attributes) {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            const data = yield (0, fetch_1.post)(this.fetch, `${this.url}/admin/users`, attributes, {
-              headers: this.headers
-            });
-            return { user: data, data, error: null };
-          } catch (e) {
-            return { user: null, data: null, error: e };
-          }
-        });
-      }
-      listUsers() {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            const data = yield (0, fetch_1.get)(this.fetch, `${this.url}/admin/users`, {
-              headers: this.headers
-            });
-            return { data: data.users, error: null };
-          } catch (e) {
-            return { data: null, error: e };
-          }
-        });
-      }
-      getUserById(uid) {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            const data = yield (0, fetch_1.get)(this.fetch, `${this.url}/admin/users/${uid}`, {
-              headers: this.headers
-            });
-            return { data, error: null };
-          } catch (e) {
-            return { data: null, error: e };
-          }
-        });
-      }
-      getUserByCookie(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            if (!req.cookies) {
-              throw new Error("Not able to parse cookies! When using Express make sure the cookie-parser middleware is in use!");
-            }
-            const access_token = req.cookies[`${this.cookieName()}-access-token`];
-            const refresh_token = req.cookies[`${this.cookieName()}-refresh-token`];
-            if (!access_token) {
-              throw new Error("No cookie found!");
-            }
-            const { user, error: getUserError } = yield this.getUser(access_token);
-            if (getUserError) {
-              if (!refresh_token)
-                throw new Error("No refresh_token cookie found!");
-              if (!res)
-                throw new Error("You need to pass the res object to automatically refresh the session!");
-              const { data, error } = yield this.refreshAccessToken(refresh_token);
-              if (error) {
-                throw error;
-              } else if (data) {
-                (0, cookies_1.setCookies)(req, res, [
-                  { key: "access-token", value: data.access_token },
-                  { key: "refresh-token", value: data.refresh_token }
-                ].map((token2) => {
-                  var _a;
-                  return {
-                    name: `${this.cookieName()}-${token2.key}`,
-                    value: token2.value,
-                    domain: this.cookieOptions.domain,
-                    maxAge: (_a = this.cookieOptions.lifetime) !== null && _a !== void 0 ? _a : 0,
-                    path: this.cookieOptions.path,
-                    sameSite: this.cookieOptions.sameSite
-                  };
-                }));
-                return { token: data.access_token, user: data.user, data: data.user, error: null };
-              }
-            }
-            return { token: access_token, user, data: user, error: null };
-          } catch (e) {
-            return { token: null, user: null, data: null, error: e };
-          }
-        });
-      }
-      updateUserById(uid, attributes) {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            this;
-            const data = yield (0, fetch_1.put)(this.fetch, `${this.url}/admin/users/${uid}`, attributes, {
-              headers: this.headers
-            });
-            return { user: data, data, error: null };
-          } catch (e) {
-            return { user: null, data: null, error: e };
-          }
-        });
-      }
-      deleteUser(uid) {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            const data = yield (0, fetch_1.remove)(this.fetch, `${this.url}/admin/users/${uid}`, {}, {
-              headers: this.headers
-            });
-            return { user: data, data, error: null };
-          } catch (e) {
-            return { user: null, data: null, error: e };
-          }
-        });
-      }
-      getUser(jwt) {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            const data = yield (0, fetch_1.get)(this.fetch, `${this.url}/user`, {
-              headers: this._createRequestHeaders(jwt)
-            });
-            return { user: data, data, error: null };
-          } catch (e) {
-            return { user: null, data: null, error: e };
-          }
-        });
-      }
-      updateUser(jwt, attributes) {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            const data = yield (0, fetch_1.put)(this.fetch, `${this.url}/user`, attributes, {
-              headers: this._createRequestHeaders(jwt)
-            });
-            return { user: data, data, error: null };
-          } catch (e) {
-            return { user: null, data: null, error: e };
-          }
-        });
-      }
-    };
-    exports2.default = GoTrueApi;
-  }
-});
-
-// node_modules/@supabase/gotrue-js/dist/main/lib/polyfills.js
-var require_polyfills = __commonJS({
-  "node_modules/@supabase/gotrue-js/dist/main/lib/polyfills.js"(exports2) {
-    "use strict";
-    Object.defineProperty(exports2, "__esModule", { value: true });
-    exports2.polyfillGlobalThis = void 0;
-    function polyfillGlobalThis() {
-      if (typeof globalThis === "object")
-        return;
-      try {
-        Object.defineProperty(Object.prototype, "__magic__", {
-          get: function() {
-            return this;
-          },
-          configurable: true
-        });
-        __magic__.globalThis = __magic__;
-        delete Object.prototype.__magic__;
-      } catch (e) {
-        if (typeof self !== "undefined") {
-          self.globalThis = self;
-        }
-      }
-    }
-    exports2.polyfillGlobalThis = polyfillGlobalThis;
-  }
-});
-
-// node_modules/@supabase/gotrue-js/dist/main/GoTrueClient.js
-var require_GoTrueClient = __commonJS({
-  "node_modules/@supabase/gotrue-js/dist/main/GoTrueClient.js"(exports2) {
-    "use strict";
-    var __awaiter = exports2 && exports2.__awaiter || function(thisArg, _arguments, P, generator) {
-      function adopt(value) {
-        return value instanceof P ? value : new P(function(resolve10) {
-          resolve10(value);
-        });
-      }
-      return new (P || (P = Promise))(function(resolve10, reject) {
-        function fulfilled(value) {
-          try {
-            step(generator.next(value));
-          } catch (e) {
-            reject(e);
-          }
-        }
-        function rejected(value) {
-          try {
-            step(generator["throw"](value));
-          } catch (e) {
-            reject(e);
-          }
-        }
-        function step(result) {
-          result.done ? resolve10(result.value) : adopt(result.value).then(fulfilled, rejected);
-        }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-      });
-    };
-    var __importDefault = exports2 && exports2.__importDefault || function(mod2) {
-      return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
-    };
-    Object.defineProperty(exports2, "__esModule", { value: true });
-    var GoTrueApi_1 = __importDefault(require_GoTrueApi());
-    var helpers_1 = require_helpers2();
-    var constants_1 = require_constants2();
-    var polyfills_1 = require_polyfills();
-    (0, polyfills_1.polyfillGlobalThis)();
-    var DEFAULT_OPTIONS = {
-      url: constants_1.GOTRUE_URL,
-      autoRefreshToken: true,
-      persistSession: true,
-      detectSessionInUrl: true,
-      multiTab: true,
-      headers: constants_1.DEFAULT_HEADERS
-    };
-    var GoTrueClient = class {
-      constructor(options) {
-        this.stateChangeEmitters = /* @__PURE__ */ new Map();
-        this.networkRetries = 0;
-        const settings = Object.assign(Object.assign({}, DEFAULT_OPTIONS), options);
-        this.currentUser = null;
-        this.currentSession = null;
-        this.autoRefreshToken = settings.autoRefreshToken;
-        this.persistSession = settings.persistSession;
-        this.multiTab = settings.multiTab;
-        this.localStorage = settings.localStorage || globalThis.localStorage;
-        this.api = new GoTrueApi_1.default({
-          url: settings.url,
-          headers: settings.headers,
-          cookieOptions: settings.cookieOptions,
-          fetch: settings.fetch
-        });
-        this._recoverSession();
-        this._recoverAndRefresh();
-        this._listenForMultiTabEvents();
-        this._handleVisibilityChange();
-        if (settings.detectSessionInUrl && (0, helpers_1.isBrowser)() && !!(0, helpers_1.getParameterByName)("access_token")) {
-          this.getSessionFromUrl({ storeSession: true }).then(({ error }) => {
-            if (error) {
-              throw new Error("Error getting session from URL.");
-            }
-          });
-        }
-      }
-      signUp({ email, password, phone }, options = {}) {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            this._removeSession();
-            const { data, error } = phone && password ? yield this.api.signUpWithPhone(phone, password, {
-              data: options.data,
-              captchaToken: options.captchaToken
-            }) : yield this.api.signUpWithEmail(email, password, {
-              redirectTo: options.redirectTo,
-              data: options.data,
-              captchaToken: options.captchaToken
-            });
-            if (error) {
-              throw error;
-            }
-            if (!data) {
-              throw "An error occurred on sign up.";
-            }
-            let session = null;
-            let user = null;
-            if (data.access_token) {
-              session = data;
-              user = session.user;
-              this._saveSession(session);
-              this._notifyAllSubscribers("SIGNED_IN");
-            }
-            if (data.id) {
-              user = data;
-            }
-            return { user, session, error: null };
-          } catch (e) {
-            return { user: null, session: null, error: e };
-          }
-        });
-      }
-      signIn({ email, phone, password, refreshToken, provider, oidc }, options = {}) {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            this._removeSession();
-            if (email && !password) {
-              const { error } = yield this.api.sendMagicLinkEmail(email, {
-                redirectTo: options.redirectTo,
-                shouldCreateUser: options.shouldCreateUser,
-                captchaToken: options.captchaToken
-              });
-              return { user: null, session: null, error };
-            }
-            if (email && password) {
-              return this._handleEmailSignIn(email, password, {
-                redirectTo: options.redirectTo,
-                captchaToken: options.captchaToken
-              });
-            }
-            if (phone && !password) {
-              const { error } = yield this.api.sendMobileOTP(phone, {
-                shouldCreateUser: options.shouldCreateUser,
-                captchaToken: options.captchaToken
-              });
-              return { user: null, session: null, error };
-            }
-            if (phone && password) {
-              return this._handlePhoneSignIn(phone, password);
-            }
-            if (refreshToken) {
-              const { error } = yield this._callRefreshToken(refreshToken);
-              if (error)
-                throw error;
-              return {
-                user: this.currentUser,
-                session: this.currentSession,
-                error: null
-              };
-            }
-            if (provider) {
-              return this._handleProviderSignIn(provider, {
-                redirectTo: options.redirectTo,
-                scopes: options.scopes,
-                queryParams: options.queryParams
-              });
-            }
-            if (oidc) {
-              return this._handleOpenIDConnectSignIn(oidc);
-            }
-            throw new Error(`You must provide either an email, phone number, a third-party provider or OpenID Connect.`);
-          } catch (e) {
-            return { user: null, session: null, error: e };
-          }
-        });
-      }
-      verifyOTP(params, options = {}) {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            this._removeSession();
-            const { data, error } = yield this.api.verifyOTP(params, options);
-            if (error) {
-              throw error;
-            }
-            if (!data) {
-              throw "An error occurred on token verification.";
-            }
-            let session = null;
-            let user = null;
-            if (data.access_token) {
-              session = data;
-              user = session.user;
-              this._saveSession(session);
-              this._notifyAllSubscribers("SIGNED_IN");
-            }
-            if (data.id) {
-              user = data;
-            }
-            return { user, session, error: null };
-          } catch (e) {
-            return { user: null, session: null, error: e };
-          }
-        });
-      }
-      user() {
-        return this.currentUser;
-      }
-      session() {
-        return this.currentSession;
-      }
-      refreshSession() {
-        var _a;
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            if (!((_a = this.currentSession) === null || _a === void 0 ? void 0 : _a.access_token))
-              throw new Error("Not logged in.");
-            const { error } = yield this._callRefreshToken();
-            if (error)
-              throw error;
-            return { data: this.currentSession, user: this.currentUser, error: null };
-          } catch (e) {
-            return { data: null, user: null, error: e };
-          }
-        });
-      }
-      update(attributes) {
-        var _a;
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            if (!((_a = this.currentSession) === null || _a === void 0 ? void 0 : _a.access_token))
-              throw new Error("Not logged in.");
-            const { user, error } = yield this.api.updateUser(this.currentSession.access_token, attributes);
-            if (error)
-              throw error;
-            if (!user)
-              throw Error("Invalid user data.");
-            const session = Object.assign(Object.assign({}, this.currentSession), { user });
-            this._saveSession(session);
-            this._notifyAllSubscribers("USER_UPDATED");
-            return { data: user, user, error: null };
-          } catch (e) {
-            return { data: null, user: null, error: e };
-          }
-        });
-      }
-      setSession(refresh_token) {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            if (!refresh_token) {
-              throw new Error("No current session.");
-            }
-            const { data, error } = yield this.api.refreshAccessToken(refresh_token);
-            if (error) {
-              return { session: null, error };
-            }
-            this._saveSession(data);
-            this._notifyAllSubscribers("SIGNED_IN");
-            return { session: data, error: null };
-          } catch (e) {
-            return { error: e, session: null };
-          }
-        });
-      }
-      setAuth(access_token) {
-        this.currentSession = Object.assign(Object.assign({}, this.currentSession), { access_token, token_type: "bearer", user: this.user() });
-        this._notifyAllSubscribers("TOKEN_REFRESHED");
-        return this.currentSession;
-      }
-      getSessionFromUrl(options) {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            if (!(0, helpers_1.isBrowser)())
-              throw new Error("No browser detected.");
-            const error_description = (0, helpers_1.getParameterByName)("error_description");
-            if (error_description)
-              throw new Error(error_description);
-            const provider_token = (0, helpers_1.getParameterByName)("provider_token");
-            const access_token = (0, helpers_1.getParameterByName)("access_token");
-            if (!access_token)
-              throw new Error("No access_token detected.");
-            const expires_in = (0, helpers_1.getParameterByName)("expires_in");
-            if (!expires_in)
-              throw new Error("No expires_in detected.");
-            const refresh_token = (0, helpers_1.getParameterByName)("refresh_token");
-            if (!refresh_token)
-              throw new Error("No refresh_token detected.");
-            const token_type = (0, helpers_1.getParameterByName)("token_type");
-            if (!token_type)
-              throw new Error("No token_type detected.");
-            const timeNow = Math.round(Date.now() / 1e3);
-            const expires_at = timeNow + parseInt(expires_in);
-            const { user, error } = yield this.api.getUser(access_token);
-            if (error)
-              throw error;
-            const session = {
-              provider_token,
-              access_token,
-              expires_in: parseInt(expires_in),
-              expires_at,
-              refresh_token,
-              token_type,
-              user
-            };
-            if (options === null || options === void 0 ? void 0 : options.storeSession) {
-              this._saveSession(session);
-              const recoveryMode = (0, helpers_1.getParameterByName)("type");
-              this._notifyAllSubscribers("SIGNED_IN");
-              if (recoveryMode === "recovery") {
-                this._notifyAllSubscribers("PASSWORD_RECOVERY");
-              }
-            }
-            window.location.hash = "";
-            return { data: session, error: null };
-          } catch (e) {
-            return { data: null, error: e };
-          }
-        });
-      }
-      signOut() {
-        var _a;
-        return __awaiter(this, void 0, void 0, function* () {
-          const accessToken = (_a = this.currentSession) === null || _a === void 0 ? void 0 : _a.access_token;
-          this._removeSession();
-          this._notifyAllSubscribers("SIGNED_OUT");
-          if (accessToken) {
-            const { error } = yield this.api.signOut(accessToken);
-            if (error)
-              return { error };
-          }
-          return { error: null };
-        });
-      }
-      onAuthStateChange(callback) {
-        try {
-          const id = (0, helpers_1.uuid)();
-          const subscription = {
-            id,
-            callback,
-            unsubscribe: () => {
-              this.stateChangeEmitters.delete(id);
-            }
-          };
-          this.stateChangeEmitters.set(id, subscription);
-          return { data: subscription, error: null };
-        } catch (e) {
-          return { data: null, error: e };
-        }
-      }
-      _handleEmailSignIn(email, password, options = {}) {
-        var _a, _b;
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            const { data, error } = yield this.api.signInWithEmail(email, password, {
-              redirectTo: options.redirectTo,
-              captchaToken: options.captchaToken
-            });
-            if (error || !data)
-              return { data: null, user: null, session: null, error };
-            if (((_a = data === null || data === void 0 ? void 0 : data.user) === null || _a === void 0 ? void 0 : _a.confirmed_at) || ((_b = data === null || data === void 0 ? void 0 : data.user) === null || _b === void 0 ? void 0 : _b.email_confirmed_at)) {
-              this._saveSession(data);
-              this._notifyAllSubscribers("SIGNED_IN");
-            }
-            return { data, user: data.user, session: data, error: null };
-          } catch (e) {
-            return { data: null, user: null, session: null, error: e };
-          }
-        });
-      }
-      _handlePhoneSignIn(phone, password, options = {}) {
-        var _a;
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            const { data, error } = yield this.api.signInWithPhone(phone, password, options);
-            if (error || !data)
-              return { data: null, user: null, session: null, error };
-            if ((_a = data === null || data === void 0 ? void 0 : data.user) === null || _a === void 0 ? void 0 : _a.phone_confirmed_at) {
-              this._saveSession(data);
-              this._notifyAllSubscribers("SIGNED_IN");
-            }
-            return { data, user: data.user, session: data, error: null };
-          } catch (e) {
-            return { data: null, user: null, session: null, error: e };
-          }
-        });
-      }
-      _handleProviderSignIn(provider, options = {}) {
-        const url = this.api.getUrlForProvider(provider, {
-          redirectTo: options.redirectTo,
-          scopes: options.scopes,
-          queryParams: options.queryParams
-        });
-        try {
-          if ((0, helpers_1.isBrowser)()) {
-            window.location.href = url;
-          }
-          return { provider, url, data: null, session: null, user: null, error: null };
-        } catch (e) {
-          if (url)
-            return { provider, url, data: null, session: null, user: null, error: null };
-          return { data: null, user: null, session: null, error: e };
-        }
-      }
-      _handleOpenIDConnectSignIn({ id_token, nonce, client_id, issuer, provider }) {
-        return __awaiter(this, void 0, void 0, function* () {
-          if (id_token && nonce && (client_id && issuer || provider)) {
-            try {
-              const { data, error } = yield this.api.signInWithOpenIDConnect({
-                id_token,
-                nonce,
-                client_id,
-                issuer,
-                provider
-              });
-              if (error || !data)
-                return { user: null, session: null, error };
-              this._saveSession(data);
-              this._notifyAllSubscribers("SIGNED_IN");
-              return { user: data.user, session: data, error: null };
-            } catch (e) {
-              return { user: null, session: null, error: e };
-            }
-          }
-          throw new Error(`You must provide a OpenID Connect provider with your id token and nonce.`);
-        });
-      }
-      _recoverSession() {
-        try {
-          const data = (0, helpers_1.getItemSynchronously)(this.localStorage, constants_1.STORAGE_KEY);
-          if (!data)
-            return null;
-          const { currentSession, expiresAt } = data;
-          const timeNow = Math.round(Date.now() / 1e3);
-          if (expiresAt >= timeNow + constants_1.EXPIRY_MARGIN && (currentSession === null || currentSession === void 0 ? void 0 : currentSession.user)) {
-            this._saveSession(currentSession);
-            this._notifyAllSubscribers("SIGNED_IN");
-          }
-        } catch (error) {
-          console.log("error", error);
-        }
-      }
-      _recoverAndRefresh() {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            const data = yield (0, helpers_1.getItemAsync)(this.localStorage, constants_1.STORAGE_KEY);
-            if (!data)
-              return null;
-            const { currentSession, expiresAt } = data;
-            const timeNow = Math.round(Date.now() / 1e3);
-            if (expiresAt < timeNow + constants_1.EXPIRY_MARGIN) {
-              if (this.autoRefreshToken && currentSession.refresh_token) {
-                this.networkRetries++;
-                const { error } = yield this._callRefreshToken(currentSession.refresh_token);
-                if (error) {
-                  console.log(error.message);
-                  if (error.message === constants_1.NETWORK_FAILURE.ERROR_MESSAGE && this.networkRetries < constants_1.NETWORK_FAILURE.MAX_RETRIES) {
-                    if (this.refreshTokenTimer)
-                      clearTimeout(this.refreshTokenTimer);
-                    this.refreshTokenTimer = setTimeout(
-                      () => this._recoverAndRefresh(),
-                      Math.pow(constants_1.NETWORK_FAILURE.RETRY_INTERVAL, this.networkRetries) * 100
-                    );
-                    return;
-                  }
-                  yield this._removeSession();
-                }
-                this.networkRetries = 0;
+            const { headers, body: functionArgs } = invokeOptions;
+            let _headers = {};
+            let body;
+            if (functionArgs && (headers && !Object.prototype.hasOwnProperty.call(headers, "Content-Type") || !headers)) {
+              if (typeof Blob !== "undefined" && functionArgs instanceof Blob || functionArgs instanceof ArrayBuffer) {
+                _headers["Content-Type"] = "application/octet-stream";
+                body = functionArgs;
+              } else if (typeof functionArgs === "string") {
+                _headers["Content-Type"] = "text/plain";
+                body = functionArgs;
+              } else if (typeof FormData !== "undefined" && functionArgs instanceof FormData) {
+                body = functionArgs;
               } else {
-                this._removeSession();
+                _headers["Content-Type"] = "application/json";
+                body = JSON.stringify(functionArgs);
               }
-            } else if (!currentSession) {
-              console.log("Current session is missing data.");
-              this._removeSession();
+            }
+            const response = yield this.fetch(`${this.url}/${functionName}`, {
+              method: "POST",
+              headers: Object.assign(Object.assign(Object.assign({}, _headers), this.headers), headers),
+              body
+            }).catch((fetchError) => {
+              throw new types_1.FunctionsFetchError(fetchError);
+            });
+            const isRelayError = response.headers.get("x-relay-error");
+            if (isRelayError && isRelayError === "true") {
+              throw new types_1.FunctionsRelayError(response);
+            }
+            if (!response.ok) {
+              throw new types_1.FunctionsHttpError(response);
+            }
+            let responseType = ((_a = response.headers.get("Content-Type")) !== null && _a !== void 0 ? _a : "text/plain").split(";")[0].trim();
+            let data;
+            if (responseType === "application/json") {
+              data = yield response.json();
+            } else if (responseType === "application/octet-stream") {
+              data = yield response.blob();
+            } else if (responseType === "multipart/form-data") {
+              data = yield response.formData();
             } else {
-              this._saveSession(currentSession);
-              this._notifyAllSubscribers("SIGNED_IN");
+              data = yield response.text();
             }
-          } catch (err) {
-            console.error(err);
-            return null;
-          }
-        });
-      }
-      _callRefreshToken(refresh_token) {
-        var _a;
-        if (refresh_token === void 0) {
-          refresh_token = (_a = this.currentSession) === null || _a === void 0 ? void 0 : _a.refresh_token;
-        }
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            if (!refresh_token) {
-              throw new Error("No current session.");
-            }
-            const { data, error } = yield this.api.refreshAccessToken(refresh_token);
-            if (error)
-              throw error;
-            if (!data)
-              throw Error("Invalid session data.");
-            this._saveSession(data);
-            this._notifyAllSubscribers("TOKEN_REFRESHED");
-            this._notifyAllSubscribers("SIGNED_IN");
             return { data, error: null };
-          } catch (e) {
-            return { data: null, error: e };
+          } catch (error) {
+            return { data: null, error };
           }
         });
       }
-      _notifyAllSubscribers(event) {
-        this.stateChangeEmitters.forEach((x) => x.callback(event, this.currentSession));
-      }
-      _saveSession(session) {
-        this.currentSession = session;
-        this.currentUser = session.user;
-        const expiresAt = session.expires_at;
-        if (expiresAt) {
-          const timeNow = Math.round(Date.now() / 1e3);
-          const expiresIn = expiresAt - timeNow;
-          const refreshDurationBeforeExpires = expiresIn > constants_1.EXPIRY_MARGIN ? constants_1.EXPIRY_MARGIN : 0.5;
-          this._startAutoRefreshToken((expiresIn - refreshDurationBeforeExpires) * 1e3);
-        }
-        if (this.persistSession && session.expires_at) {
-          this._persistSession(this.currentSession);
-        }
-      }
-      _persistSession(currentSession) {
-        const data = { currentSession, expiresAt: currentSession.expires_at };
-        (0, helpers_1.setItemAsync)(this.localStorage, constants_1.STORAGE_KEY, data);
-      }
-      _removeSession() {
-        return __awaiter(this, void 0, void 0, function* () {
-          this.currentSession = null;
-          this.currentUser = null;
-          if (this.refreshTokenTimer)
-            clearTimeout(this.refreshTokenTimer);
-          (0, helpers_1.removeItemAsync)(this.localStorage, constants_1.STORAGE_KEY);
-        });
-      }
-      _startAutoRefreshToken(value) {
-        if (this.refreshTokenTimer)
-          clearTimeout(this.refreshTokenTimer);
-        if (value <= 0 || !this.autoRefreshToken)
-          return;
-        this.refreshTokenTimer = setTimeout(() => __awaiter(this, void 0, void 0, function* () {
-          this.networkRetries++;
-          const { error } = yield this._callRefreshToken();
-          if (!error)
-            this.networkRetries = 0;
-          if ((error === null || error === void 0 ? void 0 : error.message) === constants_1.NETWORK_FAILURE.ERROR_MESSAGE && this.networkRetries < constants_1.NETWORK_FAILURE.MAX_RETRIES)
-            this._startAutoRefreshToken(Math.pow(constants_1.NETWORK_FAILURE.RETRY_INTERVAL, this.networkRetries) * 100);
-        }), value);
-        if (typeof this.refreshTokenTimer.unref === "function")
-          this.refreshTokenTimer.unref();
-      }
-      _listenForMultiTabEvents() {
-        if (!this.multiTab || !(0, helpers_1.isBrowser)() || !(window === null || window === void 0 ? void 0 : window.addEventListener)) {
-          return false;
-        }
-        try {
-          window === null || window === void 0 ? void 0 : window.addEventListener("storage", (e) => {
-            var _a;
-            if (e.key === constants_1.STORAGE_KEY) {
-              const newSession = JSON.parse(String(e.newValue));
-              if ((_a = newSession === null || newSession === void 0 ? void 0 : newSession.currentSession) === null || _a === void 0 ? void 0 : _a.access_token) {
-                this._saveSession(newSession.currentSession);
-                this._notifyAllSubscribers("SIGNED_IN");
-              } else {
-                this._removeSession();
-                this._notifyAllSubscribers("SIGNED_OUT");
-              }
-            }
-          });
-        } catch (error) {
-          console.error("_listenForMultiTabEvents", error);
-        }
-      }
-      _handleVisibilityChange() {
-        if (!this.multiTab || !(0, helpers_1.isBrowser)() || !(window === null || window === void 0 ? void 0 : window.addEventListener)) {
-          return false;
-        }
-        try {
-          window === null || window === void 0 ? void 0 : window.addEventListener("visibilitychange", () => {
-            if (document.visibilityState === "visible") {
-              this._recoverAndRefresh();
-            }
-          });
-        } catch (error) {
-          console.error("_handleVisibilityChange", error);
-        }
-      }
     };
-    exports2.default = GoTrueClient;
+    exports2.FunctionsClient = FunctionsClient;
   }
 });
 
-// node_modules/@supabase/gotrue-js/dist/main/lib/types.js
-var require_types = __commonJS({
-  "node_modules/@supabase/gotrue-js/dist/main/lib/types.js"(exports2) {
-    "use strict";
-    Object.defineProperty(exports2, "__esModule", { value: true });
-  }
-});
-
-// node_modules/@supabase/gotrue-js/dist/main/index.js
+// node_modules/@supabase/functions-js/dist/main/index.js
 var require_main = __commonJS({
-  "node_modules/@supabase/gotrue-js/dist/main/index.js"(exports2) {
+  "node_modules/@supabase/functions-js/dist/main/index.js"(exports2) {
     "use strict";
-    var __createBinding = exports2 && exports2.__createBinding || (Object.create ? function(o, m, k, k2) {
-      if (k2 === void 0)
-        k2 = k;
-      Object.defineProperty(o, k2, { enumerable: true, get: function() {
-        return m[k];
-      } });
-    } : function(o, m, k, k2) {
-      if (k2 === void 0)
-        k2 = k;
-      o[k2] = m[k];
-    });
-    var __exportStar = exports2 && exports2.__exportStar || function(m, exports3) {
-      for (var p in m)
-        if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports3, p))
-          __createBinding(exports3, m, p);
-    };
-    var __importDefault = exports2 && exports2.__importDefault || function(mod2) {
-      return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
-    };
     Object.defineProperty(exports2, "__esModule", { value: true });
-    exports2.GoTrueClient = exports2.GoTrueApi = void 0;
-    var GoTrueApi_1 = __importDefault(require_GoTrueApi());
-    exports2.GoTrueApi = GoTrueApi_1.default;
-    var GoTrueClient_1 = __importDefault(require_GoTrueClient());
-    exports2.GoTrueClient = GoTrueClient_1.default;
-    __exportStar(require_types(), exports2);
+    exports2.FunctionsRelayError = exports2.FunctionsHttpError = exports2.FunctionsFetchError = exports2.FunctionsError = exports2.FunctionsClient = void 0;
+    var FunctionsClient_1 = require_FunctionsClient();
+    Object.defineProperty(exports2, "FunctionsClient", { enumerable: true, get: function() {
+      return FunctionsClient_1.FunctionsClient;
+    } });
+    var types_1 = require_types();
+    Object.defineProperty(exports2, "FunctionsError", { enumerable: true, get: function() {
+      return types_1.FunctionsError;
+    } });
+    Object.defineProperty(exports2, "FunctionsFetchError", { enumerable: true, get: function() {
+      return types_1.FunctionsFetchError;
+    } });
+    Object.defineProperty(exports2, "FunctionsHttpError", { enumerable: true, get: function() {
+      return types_1.FunctionsHttpError;
+    } });
+    Object.defineProperty(exports2, "FunctionsRelayError", { enumerable: true, get: function() {
+      return types_1.FunctionsRelayError;
+    } });
   }
 });
 
-// node_modules/@supabase/supabase-js/dist/main/lib/SupabaseAuthClient.js
-var require_SupabaseAuthClient = __commonJS({
-  "node_modules/@supabase/supabase-js/dist/main/lib/SupabaseAuthClient.js"(exports2) {
+// node_modules/@supabase/postgrest-js/dist/main/PostgrestBuilder.js
+var require_PostgrestBuilder = __commonJS({
+  "node_modules/@supabase/postgrest-js/dist/main/PostgrestBuilder.js"(exports2) {
     "use strict";
-    Object.defineProperty(exports2, "__esModule", { value: true });
-    exports2.SupabaseAuthClient = void 0;
-    var gotrue_js_1 = require_main();
-    var SupabaseAuthClient = class extends gotrue_js_1.GoTrueClient {
-      constructor(options) {
-        super(options);
-      }
-    };
-    exports2.SupabaseAuthClient = SupabaseAuthClient;
-  }
-});
-
-// node_modules/@supabase/postgrest-js/dist/main/lib/types.js
-var require_types2 = __commonJS({
-  "node_modules/@supabase/postgrest-js/dist/main/lib/types.js"(exports2) {
-    "use strict";
-    var __createBinding = exports2 && exports2.__createBinding || (Object.create ? function(o, m, k, k2) {
-      if (k2 === void 0)
-        k2 = k;
-      Object.defineProperty(o, k2, { enumerable: true, get: function() {
-        return m[k];
-      } });
-    } : function(o, m, k, k2) {
-      if (k2 === void 0)
-        k2 = k;
-      o[k2] = m[k];
-    });
-    var __setModuleDefault = exports2 && exports2.__setModuleDefault || (Object.create ? function(o, v) {
-      Object.defineProperty(o, "default", { enumerable: true, value: v });
-    } : function(o, v) {
-      o["default"] = v;
-    });
-    var __importStar = exports2 && exports2.__importStar || function(mod2) {
-      if (mod2 && mod2.__esModule)
-        return mod2;
-      var result = {};
-      if (mod2 != null) {
-        for (var k in mod2)
-          if (k !== "default" && Object.prototype.hasOwnProperty.call(mod2, k))
-            __createBinding(result, mod2, k);
-      }
-      __setModuleDefault(result, mod2);
-      return result;
-    };
     var __awaiter = exports2 && exports2.__awaiter || function(thisArg, _arguments, P, generator) {
       function adopt(value) {
         return value instanceof P ? value : new P(function(resolve10) {
@@ -11437,34 +10043,36 @@ var require_types2 = __commonJS({
         step((generator = generator.apply(thisArg, _arguments || [])).next());
       });
     };
+    var __importDefault = exports2 && exports2.__importDefault || function(mod2) {
+      return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
+    };
     Object.defineProperty(exports2, "__esModule", { value: true });
-    exports2.PostgrestBuilder = void 0;
+    var cross_fetch_1 = __importDefault(require_node_ponyfill());
     var PostgrestBuilder = class {
       constructor(builder) {
-        Object.assign(this, builder);
-        let _fetch;
+        this.shouldThrowOnError = false;
+        this.method = builder.method;
+        this.url = builder.url;
+        this.headers = builder.headers;
+        this.schema = builder.schema;
+        this.body = builder.body;
+        this.shouldThrowOnError = builder.shouldThrowOnError;
+        this.signal = builder.signal;
+        this.allowEmpty = builder.allowEmpty;
         if (builder.fetch) {
-          _fetch = builder.fetch;
+          this.fetch = builder.fetch;
         } else if (typeof fetch === "undefined") {
-          _fetch = (...args) => __awaiter(this, void 0, void 0, function* () {
-            return yield (yield Promise.resolve().then(() => __importStar(require_node_ponyfill()))).fetch(...args);
-          });
+          this.fetch = cross_fetch_1.default;
         } else {
-          _fetch = fetch;
+          this.fetch = fetch;
         }
-        this.fetch = (...args) => _fetch(...args);
-        this.shouldThrowOnError = builder.shouldThrowOnError || false;
-        this.allowEmpty = builder.allowEmpty || false;
       }
-      throwOnError(throwOnError) {
-        if (throwOnError === null || throwOnError === void 0) {
-          throwOnError = true;
-        }
-        this.shouldThrowOnError = throwOnError;
+      throwOnError() {
+        this.shouldThrowOnError = true;
         return this;
       }
       then(onfulfilled, onrejected) {
-        if (typeof this.schema === "undefined") {
+        if (this.schema === void 0) {
         } else if (["GET", "HEAD"].includes(this.method)) {
           this.headers["Accept-Profile"] = this.schema;
         } else {
@@ -11473,31 +10081,33 @@ var require_types2 = __commonJS({
         if (this.method !== "GET" && this.method !== "HEAD") {
           this.headers["Content-Type"] = "application/json";
         }
-        let res = this.fetch(this.url.toString(), {
+        const _fetch = this.fetch;
+        let res = _fetch(this.url.toString(), {
           method: this.method,
           headers: this.headers,
           body: JSON.stringify(this.body),
           signal: this.signal
         }).then((res2) => __awaiter(this, void 0, void 0, function* () {
-          var _a, _b, _c, _d;
+          var _a, _b, _c;
           let error = null;
           let data = null;
           let count = null;
           let status = res2.status;
           let statusText = res2.statusText;
           if (res2.ok) {
-            const isReturnMinimal = (_a = this.headers["Prefer"]) === null || _a === void 0 ? void 0 : _a.split(",").includes("return=minimal");
-            if (this.method !== "HEAD" && !isReturnMinimal) {
-              const text = yield res2.text();
-              if (!text) {
+            if (this.method !== "HEAD") {
+              const body = yield res2.text();
+              if (body === "") {
               } else if (this.headers["Accept"] === "text/csv") {
-                data = text;
+                data = body;
+              } else if (this.headers["Accept"] && this.headers["Accept"].includes("application/vnd.pgrst.plan+text")) {
+                data = body;
               } else {
-                data = JSON.parse(text);
+                data = JSON.parse(body);
               }
             }
-            const countHeader = (_b = this.headers["Prefer"]) === null || _b === void 0 ? void 0 : _b.match(/count=(exact|planned|estimated)/);
-            const contentRange = (_c = res2.headers.get("content-range")) === null || _c === void 0 ? void 0 : _c.split("/");
+            const countHeader = (_a = this.headers["Prefer"]) === null || _a === void 0 ? void 0 : _a.match(/count=(exact|planned|estimated)/);
+            const contentRange = (_b = res2.headers.get("content-range")) === null || _b === void 0 ? void 0 : _b.split("/");
             if (countHeader && contentRange && contentRange.length > 1) {
               count = parseInt(contentRange[1]);
             }
@@ -11505,12 +10115,12 @@ var require_types2 = __commonJS({
             const body = yield res2.text();
             try {
               error = JSON.parse(body);
-            } catch (_e) {
+            } catch (_d) {
               error = {
                 message: body
               };
             }
-            if (error && this.allowEmpty && ((_d = error === null || error === void 0 ? void 0 : error.details) === null || _d === void 0 ? void 0 : _d.includes("Results contain 0 rows"))) {
+            if (error && this.allowEmpty && ((_c = error === null || error === void 0 ? void 0 : error.details) === null || _c === void 0 ? void 0 : _c.includes("Results contain 0 rows"))) {
               error = null;
               status = 200;
               statusText = "OK";
@@ -11524,8 +10134,7 @@ var require_types2 = __commonJS({
             data,
             count,
             status,
-            statusText,
-            body: data
+            statusText
           };
           return postgrestResponse;
         }));
@@ -11538,29 +10147,31 @@ var require_types2 = __commonJS({
               code: fetchError.code || ""
             },
             data: null,
-            body: null,
             count: null,
-            status: 400,
-            statusText: "Bad Request"
+            status: 0,
+            statusText: ""
           }));
         }
         return res.then(onfulfilled, onrejected);
       }
     };
-    exports2.PostgrestBuilder = PostgrestBuilder;
+    exports2.default = PostgrestBuilder;
   }
 });
 
-// node_modules/@supabase/postgrest-js/dist/main/lib/PostgrestTransformBuilder.js
+// node_modules/@supabase/postgrest-js/dist/main/PostgrestTransformBuilder.js
 var require_PostgrestTransformBuilder = __commonJS({
-  "node_modules/@supabase/postgrest-js/dist/main/lib/PostgrestTransformBuilder.js"(exports2) {
+  "node_modules/@supabase/postgrest-js/dist/main/PostgrestTransformBuilder.js"(exports2) {
     "use strict";
+    var __importDefault = exports2 && exports2.__importDefault || function(mod2) {
+      return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
+    };
     Object.defineProperty(exports2, "__esModule", { value: true });
-    var types_1 = require_types2();
-    var PostgrestTransformBuilder = class extends types_1.PostgrestBuilder {
-      select(columns = "*") {
+    var PostgrestBuilder_1 = __importDefault(require_PostgrestBuilder());
+    var PostgrestTransformBuilder = class extends PostgrestBuilder_1.default {
+      select(columns) {
         let quoted = false;
-        const cleanedColumns = columns.split("").map((c) => {
+        const cleanedColumns = (columns !== null && columns !== void 0 ? columns : "*").split("").map((c) => {
           if (/\s/.test(c) && !quoted) {
             return "";
           }
@@ -11570,12 +10181,16 @@ var require_PostgrestTransformBuilder = __commonJS({
           return c;
         }).join("");
         this.url.searchParams.set("select", cleanedColumns);
+        if (this.headers["Prefer"]) {
+          this.headers["Prefer"] += ",";
+        }
+        this.headers["Prefer"] += "return=representation";
         return this;
       }
-      order(column, { ascending = true, nullsFirst = false, foreignTable } = {}) {
-        const key = typeof foreignTable === "undefined" ? "order" : `${foreignTable}.order`;
+      order(column, { ascending = true, nullsFirst, foreignTable } = {}) {
+        const key = foreignTable ? `${foreignTable}.order` : "order";
         const existingOrder = this.url.searchParams.get(key);
-        this.url.searchParams.set(key, `${existingOrder ? `${existingOrder},` : ""}${column}.${ascending ? "asc" : "desc"}.${nullsFirst ? "nullsfirst" : "nullslast"}`);
+        this.url.searchParams.set(key, `${existingOrder ? `${existingOrder},` : ""}${column}.${ascending ? "asc" : "desc"}${nullsFirst === void 0 ? "" : nullsFirst ? ".nullsfirst" : ".nullslast"}`);
         return this;
       }
       limit(count, { foreignTable } = {}) {
@@ -11607,14 +10222,45 @@ var require_PostgrestTransformBuilder = __commonJS({
         this.headers["Accept"] = "text/csv";
         return this;
       }
+      geojson() {
+        this.headers["Accept"] = "application/geo+json";
+        return this;
+      }
+      explain({ analyze = false, verbose = false, settings = false, buffers = false, wal = false, format = "text" } = {}) {
+        const options = [
+          analyze ? "analyze" : null,
+          verbose ? "verbose" : null,
+          settings ? "settings" : null,
+          buffers ? "buffers" : null,
+          wal ? "wal" : null
+        ].filter(Boolean).join("|");
+        const forMediatype = this.headers["Accept"];
+        this.headers["Accept"] = `application/vnd.pgrst.plan+${format}; for="${forMediatype}"; options=${options};`;
+        if (format === "json")
+          return this;
+        else
+          return this;
+      }
+      rollback() {
+        var _a;
+        if (((_a = this.headers["Prefer"]) !== null && _a !== void 0 ? _a : "").trim().length > 0) {
+          this.headers["Prefer"] += ",tx=rollback";
+        } else {
+          this.headers["Prefer"] = "tx=rollback";
+        }
+        return this;
+      }
+      returns() {
+        return this;
+      }
     };
     exports2.default = PostgrestTransformBuilder;
   }
 });
 
-// node_modules/@supabase/postgrest-js/dist/main/lib/PostgrestFilterBuilder.js
+// node_modules/@supabase/postgrest-js/dist/main/PostgrestFilterBuilder.js
 var require_PostgrestFilterBuilder = __commonJS({
-  "node_modules/@supabase/postgrest-js/dist/main/lib/PostgrestFilterBuilder.js"(exports2) {
+  "node_modules/@supabase/postgrest-js/dist/main/PostgrestFilterBuilder.js"(exports2) {
     "use strict";
     var __importDefault = exports2 && exports2.__importDefault || function(mod2) {
       return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
@@ -11622,60 +10268,40 @@ var require_PostgrestFilterBuilder = __commonJS({
     Object.defineProperty(exports2, "__esModule", { value: true });
     var PostgrestTransformBuilder_1 = __importDefault(require_PostgrestTransformBuilder());
     var PostgrestFilterBuilder = class extends PostgrestTransformBuilder_1.default {
-      constructor() {
-        super(...arguments);
-        this.cs = this.contains;
-        this.cd = this.containedBy;
-        this.sl = this.rangeLt;
-        this.sr = this.rangeGt;
-        this.nxl = this.rangeGte;
-        this.nxr = this.rangeLte;
-        this.adj = this.rangeAdjacent;
-        this.ov = this.overlaps;
-      }
-      not(column, operator, value) {
-        this.url.searchParams.append(`${column}`, `not.${operator}.${value}`);
-        return this;
-      }
-      or(filters, { foreignTable } = {}) {
-        const key = typeof foreignTable === "undefined" ? "or" : `${foreignTable}.or`;
-        this.url.searchParams.append(key, `(${filters})`);
-        return this;
-      }
       eq(column, value) {
-        this.url.searchParams.append(`${column}`, `eq.${value}`);
+        this.url.searchParams.append(column, `eq.${value}`);
         return this;
       }
       neq(column, value) {
-        this.url.searchParams.append(`${column}`, `neq.${value}`);
+        this.url.searchParams.append(column, `neq.${value}`);
         return this;
       }
       gt(column, value) {
-        this.url.searchParams.append(`${column}`, `gt.${value}`);
+        this.url.searchParams.append(column, `gt.${value}`);
         return this;
       }
       gte(column, value) {
-        this.url.searchParams.append(`${column}`, `gte.${value}`);
+        this.url.searchParams.append(column, `gte.${value}`);
         return this;
       }
       lt(column, value) {
-        this.url.searchParams.append(`${column}`, `lt.${value}`);
+        this.url.searchParams.append(column, `lt.${value}`);
         return this;
       }
       lte(column, value) {
-        this.url.searchParams.append(`${column}`, `lte.${value}`);
+        this.url.searchParams.append(column, `lte.${value}`);
         return this;
       }
       like(column, pattern) {
-        this.url.searchParams.append(`${column}`, `like.${pattern}`);
+        this.url.searchParams.append(column, `like.${pattern}`);
         return this;
       }
       ilike(column, pattern) {
-        this.url.searchParams.append(`${column}`, `ilike.${pattern}`);
+        this.url.searchParams.append(column, `ilike.${pattern}`);
         return this;
       }
       is(column, value) {
-        this.url.searchParams.append(`${column}`, `is.${value}`);
+        this.url.searchParams.append(column, `is.${value}`);
         return this;
       }
       in(column, values) {
@@ -11685,58 +10311,58 @@ var require_PostgrestFilterBuilder = __commonJS({
           else
             return `${s}`;
         }).join(",");
-        this.url.searchParams.append(`${column}`, `in.(${cleanedValues})`);
+        this.url.searchParams.append(column, `in.(${cleanedValues})`);
         return this;
       }
       contains(column, value) {
         if (typeof value === "string") {
-          this.url.searchParams.append(`${column}`, `cs.${value}`);
+          this.url.searchParams.append(column, `cs.${value}`);
         } else if (Array.isArray(value)) {
-          this.url.searchParams.append(`${column}`, `cs.{${value.join(",")}}`);
+          this.url.searchParams.append(column, `cs.{${value.join(",")}}`);
         } else {
-          this.url.searchParams.append(`${column}`, `cs.${JSON.stringify(value)}`);
+          this.url.searchParams.append(column, `cs.${JSON.stringify(value)}`);
         }
         return this;
       }
       containedBy(column, value) {
         if (typeof value === "string") {
-          this.url.searchParams.append(`${column}`, `cd.${value}`);
+          this.url.searchParams.append(column, `cd.${value}`);
         } else if (Array.isArray(value)) {
-          this.url.searchParams.append(`${column}`, `cd.{${value.join(",")}}`);
+          this.url.searchParams.append(column, `cd.{${value.join(",")}}`);
         } else {
-          this.url.searchParams.append(`${column}`, `cd.${JSON.stringify(value)}`);
+          this.url.searchParams.append(column, `cd.${JSON.stringify(value)}`);
         }
         return this;
       }
-      rangeLt(column, range) {
-        this.url.searchParams.append(`${column}`, `sl.${range}`);
-        return this;
-      }
       rangeGt(column, range) {
-        this.url.searchParams.append(`${column}`, `sr.${range}`);
+        this.url.searchParams.append(column, `sr.${range}`);
         return this;
       }
       rangeGte(column, range) {
-        this.url.searchParams.append(`${column}`, `nxl.${range}`);
+        this.url.searchParams.append(column, `nxl.${range}`);
+        return this;
+      }
+      rangeLt(column, range) {
+        this.url.searchParams.append(column, `sl.${range}`);
         return this;
       }
       rangeLte(column, range) {
-        this.url.searchParams.append(`${column}`, `nxr.${range}`);
+        this.url.searchParams.append(column, `nxr.${range}`);
         return this;
       }
       rangeAdjacent(column, range) {
-        this.url.searchParams.append(`${column}`, `adj.${range}`);
+        this.url.searchParams.append(column, `adj.${range}`);
         return this;
       }
       overlaps(column, value) {
         if (typeof value === "string") {
-          this.url.searchParams.append(`${column}`, `ov.${value}`);
+          this.url.searchParams.append(column, `ov.${value}`);
         } else {
-          this.url.searchParams.append(`${column}`, `ov.{${value.join(",")}}`);
+          this.url.searchParams.append(column, `ov.{${value.join(",")}}`);
         }
         return this;
       }
-      textSearch(column, query, { config: config2, type = null } = {}) {
+      textSearch(column, query, { config: config2, type } = {}) {
         let typePart = "";
         if (type === "plain") {
           typePart = "pl";
@@ -11746,37 +10372,26 @@ var require_PostgrestFilterBuilder = __commonJS({
           typePart = "w";
         }
         const configPart = config2 === void 0 ? "" : `(${config2})`;
-        this.url.searchParams.append(`${column}`, `${typePart}fts${configPart}.${query}`);
-        return this;
-      }
-      fts(column, query, { config: config2 } = {}) {
-        const configPart = typeof config2 === "undefined" ? "" : `(${config2})`;
-        this.url.searchParams.append(`${column}`, `fts${configPart}.${query}`);
-        return this;
-      }
-      plfts(column, query, { config: config2 } = {}) {
-        const configPart = typeof config2 === "undefined" ? "" : `(${config2})`;
-        this.url.searchParams.append(`${column}`, `plfts${configPart}.${query}`);
-        return this;
-      }
-      phfts(column, query, { config: config2 } = {}) {
-        const configPart = typeof config2 === "undefined" ? "" : `(${config2})`;
-        this.url.searchParams.append(`${column}`, `phfts${configPart}.${query}`);
-        return this;
-      }
-      wfts(column, query, { config: config2 } = {}) {
-        const configPart = typeof config2 === "undefined" ? "" : `(${config2})`;
-        this.url.searchParams.append(`${column}`, `wfts${configPart}.${query}`);
-        return this;
-      }
-      filter(column, operator, value) {
-        this.url.searchParams.append(`${column}`, `${operator}.${value}`);
+        this.url.searchParams.append(column, `${typePart}fts${configPart}.${query}`);
         return this;
       }
       match(query) {
-        Object.keys(query).forEach((key) => {
-          this.url.searchParams.append(`${key}`, `eq.${query[key]}`);
+        Object.entries(query).forEach(([column, value]) => {
+          this.url.searchParams.append(column, `eq.${value}`);
         });
+        return this;
+      }
+      not(column, operator, value) {
+        this.url.searchParams.append(column, `not.${operator}.${value}`);
+        return this;
+      }
+      or(filters, { foreignTable } = {}) {
+        const key = foreignTable ? `${foreignTable}.or` : "or";
+        this.url.searchParams.append(key, `(${filters})`);
+        return this;
+      }
+      filter(column, operator, value) {
+        this.url.searchParams.append(column, `${operator}.${value}`);
         return this;
       }
     };
@@ -11784,27 +10399,26 @@ var require_PostgrestFilterBuilder = __commonJS({
   }
 });
 
-// node_modules/@supabase/postgrest-js/dist/main/lib/PostgrestQueryBuilder.js
+// node_modules/@supabase/postgrest-js/dist/main/PostgrestQueryBuilder.js
 var require_PostgrestQueryBuilder = __commonJS({
-  "node_modules/@supabase/postgrest-js/dist/main/lib/PostgrestQueryBuilder.js"(exports2) {
+  "node_modules/@supabase/postgrest-js/dist/main/PostgrestQueryBuilder.js"(exports2) {
     "use strict";
     var __importDefault = exports2 && exports2.__importDefault || function(mod2) {
       return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
-    var types_1 = require_types2();
     var PostgrestFilterBuilder_1 = __importDefault(require_PostgrestFilterBuilder());
-    var PostgrestQueryBuilder = class extends types_1.PostgrestBuilder {
-      constructor(url, { headers = {}, schema, fetch: fetch5, shouldThrowOnError } = {}) {
-        super({ fetch: fetch5, shouldThrowOnError });
-        this.url = new URL(url);
-        this.headers = Object.assign({}, headers);
+    var PostgrestQueryBuilder = class {
+      constructor(url, { headers = {}, schema, fetch: fetch5 }) {
+        this.url = url;
+        this.headers = headers;
         this.schema = schema;
+        this.fetch = fetch5;
       }
-      select(columns = "*", { head = false, count = null } = {}) {
-        this.method = "GET";
+      select(columns, { head = false, count } = {}) {
+        const method = head ? "HEAD" : "GET";
         let quoted = false;
-        const cleanedColumns = columns.split("").map((c) => {
+        const cleanedColumns = (columns !== null && columns !== void 0 ? columns : "*").split("").map((c) => {
           if (/\s/.test(c) && !quoted) {
             return "";
           }
@@ -11817,19 +10431,19 @@ var require_PostgrestQueryBuilder = __commonJS({
         if (count) {
           this.headers["Prefer"] = `count=${count}`;
         }
-        if (head) {
-          this.method = "HEAD";
-        }
-        return new PostgrestFilterBuilder_1.default(this);
+        return new PostgrestFilterBuilder_1.default({
+          method,
+          url: this.url,
+          headers: this.headers,
+          schema: this.schema,
+          fetch: this.fetch,
+          allowEmpty: false
+        });
       }
-      insert(values, { upsert = false, onConflict, returning = "representation", count = null } = {}) {
-        this.method = "POST";
-        const prefersHeaders = [`return=${returning}`];
-        if (upsert)
-          prefersHeaders.push("resolution=merge-duplicates");
-        if (upsert && onConflict !== void 0)
-          this.url.searchParams.set("on_conflict", onConflict);
-        this.body = values;
+      insert(values, { count } = {}) {
+        const method = "POST";
+        const prefersHeaders = [];
+        const body = values;
         if (count) {
           prefersHeaders.push(`count=${count}`);
         }
@@ -11844,17 +10458,22 @@ var require_PostgrestQueryBuilder = __commonJS({
             this.url.searchParams.set("columns", uniqueColumns.join(","));
           }
         }
-        return new PostgrestFilterBuilder_1.default(this);
+        return new PostgrestFilterBuilder_1.default({
+          method,
+          url: this.url,
+          headers: this.headers,
+          schema: this.schema,
+          body,
+          fetch: this.fetch,
+          allowEmpty: false
+        });
       }
-      upsert(values, { onConflict, returning = "representation", count = null, ignoreDuplicates = false } = {}) {
-        this.method = "POST";
-        const prefersHeaders = [
-          `resolution=${ignoreDuplicates ? "ignore" : "merge"}-duplicates`,
-          `return=${returning}`
-        ];
+      upsert(values, { onConflict, ignoreDuplicates = false, count } = {}) {
+        const method = "POST";
+        const prefersHeaders = [`resolution=${ignoreDuplicates ? "ignore" : "merge"}-duplicates`];
         if (onConflict !== void 0)
           this.url.searchParams.set("on_conflict", onConflict);
-        this.body = values;
+        const body = values;
         if (count) {
           prefersHeaders.push(`count=${count}`);
         }
@@ -11862,12 +10481,20 @@ var require_PostgrestQueryBuilder = __commonJS({
           prefersHeaders.unshift(this.headers["Prefer"]);
         }
         this.headers["Prefer"] = prefersHeaders.join(",");
-        return new PostgrestFilterBuilder_1.default(this);
+        return new PostgrestFilterBuilder_1.default({
+          method,
+          url: this.url,
+          headers: this.headers,
+          schema: this.schema,
+          body,
+          fetch: this.fetch,
+          allowEmpty: false
+        });
       }
-      update(values, { returning = "representation", count = null } = {}) {
-        this.method = "PATCH";
-        const prefersHeaders = [`return=${returning}`];
-        this.body = values;
+      update(values, { count } = {}) {
+        const method = "PATCH";
+        const prefersHeaders = [];
+        const body = values;
         if (count) {
           prefersHeaders.push(`count=${count}`);
         }
@@ -11875,11 +10502,19 @@ var require_PostgrestQueryBuilder = __commonJS({
           prefersHeaders.unshift(this.headers["Prefer"]);
         }
         this.headers["Prefer"] = prefersHeaders.join(",");
-        return new PostgrestFilterBuilder_1.default(this);
+        return new PostgrestFilterBuilder_1.default({
+          method,
+          url: this.url,
+          headers: this.headers,
+          schema: this.schema,
+          body,
+          fetch: this.fetch,
+          allowEmpty: false
+        });
       }
-      delete({ returning = "representation", count = null } = {}) {
-        this.method = "DELETE";
-        const prefersHeaders = [`return=${returning}`];
+      delete({ count } = {}) {
+        const method = "DELETE";
+        const prefersHeaders = [];
         if (count) {
           prefersHeaders.push(`count=${count}`);
         }
@@ -11887,72 +10522,37 @@ var require_PostgrestQueryBuilder = __commonJS({
           prefersHeaders.unshift(this.headers["Prefer"]);
         }
         this.headers["Prefer"] = prefersHeaders.join(",");
-        return new PostgrestFilterBuilder_1.default(this);
+        return new PostgrestFilterBuilder_1.default({
+          method,
+          url: this.url,
+          headers: this.headers,
+          schema: this.schema,
+          fetch: this.fetch,
+          allowEmpty: false
+        });
       }
     };
     exports2.default = PostgrestQueryBuilder;
   }
 });
 
-// node_modules/@supabase/postgrest-js/dist/main/lib/PostgrestRpcBuilder.js
-var require_PostgrestRpcBuilder = __commonJS({
-  "node_modules/@supabase/postgrest-js/dist/main/lib/PostgrestRpcBuilder.js"(exports2) {
-    "use strict";
-    var __importDefault = exports2 && exports2.__importDefault || function(mod2) {
-      return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
-    };
-    Object.defineProperty(exports2, "__esModule", { value: true });
-    var types_1 = require_types2();
-    var PostgrestFilterBuilder_1 = __importDefault(require_PostgrestFilterBuilder());
-    var PostgrestRpcBuilder = class extends types_1.PostgrestBuilder {
-      constructor(url, { headers = {}, schema, fetch: fetch5, shouldThrowOnError } = {}) {
-        super({ fetch: fetch5, shouldThrowOnError });
-        this.url = new URL(url);
-        this.headers = Object.assign({}, headers);
-        this.schema = schema;
-      }
-      rpc(params, { head = false, count = null } = {}) {
-        if (head) {
-          this.method = "HEAD";
-          if (params) {
-            Object.entries(params).forEach(([name8, value]) => {
-              this.url.searchParams.append(name8, value);
-            });
-          }
-        } else {
-          this.method = "POST";
-          this.body = params;
-        }
-        if (count) {
-          if (this.headers["Prefer"] !== void 0)
-            this.headers["Prefer"] += `,count=${count}`;
-          else
-            this.headers["Prefer"] = `count=${count}`;
-        }
-        return new PostgrestFilterBuilder_1.default(this);
-      }
-    };
-    exports2.default = PostgrestRpcBuilder;
-  }
-});
-
-// node_modules/@supabase/postgrest-js/dist/main/lib/version.js
-var require_version3 = __commonJS({
-  "node_modules/@supabase/postgrest-js/dist/main/lib/version.js"(exports2) {
+// node_modules/@supabase/postgrest-js/dist/main/version.js
+var require_version = __commonJS({
+  "node_modules/@supabase/postgrest-js/dist/main/version.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.version = void 0;
-    exports2.version = "0.37.4";
+    exports2.version = "1.1.0";
   }
 });
 
-// node_modules/@supabase/postgrest-js/dist/main/lib/constants.js
-var require_constants3 = __commonJS({
-  "node_modules/@supabase/postgrest-js/dist/main/lib/constants.js"(exports2) {
+// node_modules/@supabase/postgrest-js/dist/main/constants.js
+var require_constants = __commonJS({
+  "node_modules/@supabase/postgrest-js/dist/main/constants.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.DEFAULT_HEADERS = void 0;
-    var version_1 = require_version3();
+    var version_1 = require_version();
     exports2.DEFAULT_HEADERS = { "X-Client-Info": `postgrest-js/${version_1.version}` };
   }
 });
@@ -11966,37 +10566,49 @@ var require_PostgrestClient = __commonJS({
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
     var PostgrestQueryBuilder_1 = __importDefault(require_PostgrestQueryBuilder());
-    var PostgrestRpcBuilder_1 = __importDefault(require_PostgrestRpcBuilder());
-    var constants_1 = require_constants3();
+    var PostgrestFilterBuilder_1 = __importDefault(require_PostgrestFilterBuilder());
+    var constants_1 = require_constants();
     var PostgrestClient = class {
-      constructor(url, { headers = {}, schema, fetch: fetch5, throwOnError } = {}) {
+      constructor(url, { headers = {}, schema, fetch: fetch5 } = {}) {
         this.url = url;
         this.headers = Object.assign(Object.assign({}, constants_1.DEFAULT_HEADERS), headers);
         this.schema = schema;
         this.fetch = fetch5;
-        this.shouldThrowOnError = throwOnError;
       }
-      auth(token2) {
-        this.headers["Authorization"] = `Bearer ${token2}`;
-        return this;
-      }
-      from(table) {
-        const url = `${this.url}/${table}`;
+      from(relation) {
+        const url = new URL(`${this.url}/${relation}`);
         return new PostgrestQueryBuilder_1.default(url, {
-          headers: this.headers,
+          headers: Object.assign({}, this.headers),
           schema: this.schema,
-          fetch: this.fetch,
-          shouldThrowOnError: this.shouldThrowOnError
+          fetch: this.fetch
         });
       }
-      rpc(fn, params, { head = false, count = null } = {}) {
-        const url = `${this.url}/rpc/${fn}`;
-        return new PostgrestRpcBuilder_1.default(url, {
-          headers: this.headers,
+      rpc(fn, args = {}, { head = false, count } = {}) {
+        let method;
+        const url = new URL(`${this.url}/rpc/${fn}`);
+        let body;
+        if (head) {
+          method = "HEAD";
+          Object.entries(args).forEach(([name8, value]) => {
+            url.searchParams.append(name8, `${value}`);
+          });
+        } else {
+          method = "POST";
+          body = args;
+        }
+        const headers = Object.assign({}, this.headers);
+        if (count) {
+          headers["Prefer"] = `count=${count}`;
+        }
+        return new PostgrestFilterBuilder_1.default({
+          method,
+          url,
+          headers,
           schema: this.schema,
+          body,
           fetch: this.fetch,
-          shouldThrowOnError: this.shouldThrowOnError
-        }).rpc(params, { head, count });
+          allowEmpty: false
+        });
       }
     };
     exports2.default = PostgrestClient;
@@ -12011,167 +10623,27 @@ var require_main2 = __commonJS({
       return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
-    exports2.PostgrestFilterBuilder = exports2.PostgrestQueryBuilder = exports2.PostgrestBuilder = exports2.PostgrestClient = void 0;
-    var PostgrestClient_1 = __importDefault(require_PostgrestClient());
-    exports2.PostgrestClient = PostgrestClient_1.default;
-    var PostgrestFilterBuilder_1 = __importDefault(require_PostgrestFilterBuilder());
-    exports2.PostgrestFilterBuilder = PostgrestFilterBuilder_1.default;
-    var PostgrestQueryBuilder_1 = __importDefault(require_PostgrestQueryBuilder());
-    exports2.PostgrestQueryBuilder = PostgrestQueryBuilder_1.default;
-    var types_1 = require_types2();
-    Object.defineProperty(exports2, "PostgrestBuilder", { enumerable: true, get: function() {
-      return types_1.PostgrestBuilder;
+    exports2.PostgrestBuilder = exports2.PostgrestTransformBuilder = exports2.PostgrestFilterBuilder = exports2.PostgrestQueryBuilder = exports2.PostgrestClient = void 0;
+    var PostgrestClient_1 = require_PostgrestClient();
+    Object.defineProperty(exports2, "PostgrestClient", { enumerable: true, get: function() {
+      return __importDefault(PostgrestClient_1).default;
     } });
-  }
-});
-
-// node_modules/@supabase/realtime-js/dist/main/lib/transformers.js
-var require_transformers = __commonJS({
-  "node_modules/@supabase/realtime-js/dist/main/lib/transformers.js"(exports2) {
-    "use strict";
-    Object.defineProperty(exports2, "__esModule", { value: true });
-    exports2.toTimestampString = exports2.toArray = exports2.toJson = exports2.toNumber = exports2.toBoolean = exports2.convertCell = exports2.convertColumn = exports2.convertChangeData = exports2.PostgresTypes = void 0;
-    var PostgresTypes;
-    (function(PostgresTypes2) {
-      PostgresTypes2["abstime"] = "abstime";
-      PostgresTypes2["bool"] = "bool";
-      PostgresTypes2["date"] = "date";
-      PostgresTypes2["daterange"] = "daterange";
-      PostgresTypes2["float4"] = "float4";
-      PostgresTypes2["float8"] = "float8";
-      PostgresTypes2["int2"] = "int2";
-      PostgresTypes2["int4"] = "int4";
-      PostgresTypes2["int4range"] = "int4range";
-      PostgresTypes2["int8"] = "int8";
-      PostgresTypes2["int8range"] = "int8range";
-      PostgresTypes2["json"] = "json";
-      PostgresTypes2["jsonb"] = "jsonb";
-      PostgresTypes2["money"] = "money";
-      PostgresTypes2["numeric"] = "numeric";
-      PostgresTypes2["oid"] = "oid";
-      PostgresTypes2["reltime"] = "reltime";
-      PostgresTypes2["text"] = "text";
-      PostgresTypes2["time"] = "time";
-      PostgresTypes2["timestamp"] = "timestamp";
-      PostgresTypes2["timestamptz"] = "timestamptz";
-      PostgresTypes2["timetz"] = "timetz";
-      PostgresTypes2["tsrange"] = "tsrange";
-      PostgresTypes2["tstzrange"] = "tstzrange";
-    })(PostgresTypes = exports2.PostgresTypes || (exports2.PostgresTypes = {}));
-    exports2.convertChangeData = (columns, record, options = {}) => {
-      var _a;
-      const skipTypes = (_a = options.skipTypes) !== null && _a !== void 0 ? _a : [];
-      return Object.keys(record).reduce((acc, rec_key) => {
-        acc[rec_key] = exports2.convertColumn(rec_key, columns, record, skipTypes);
-        return acc;
-      }, {});
-    };
-    exports2.convertColumn = (columnName, columns, record, skipTypes) => {
-      const column = columns.find((x) => x.name === columnName);
-      const colType = column === null || column === void 0 ? void 0 : column.type;
-      const value = record[columnName];
-      if (colType && !skipTypes.includes(colType)) {
-        return exports2.convertCell(colType, value);
-      }
-      return noop4(value);
-    };
-    exports2.convertCell = (type, value) => {
-      if (type.charAt(0) === "_") {
-        const dataType = type.slice(1, type.length);
-        return exports2.toArray(value, dataType);
-      }
-      switch (type) {
-        case PostgresTypes.bool:
-          return exports2.toBoolean(value);
-        case PostgresTypes.float4:
-        case PostgresTypes.float8:
-        case PostgresTypes.int2:
-        case PostgresTypes.int4:
-        case PostgresTypes.int8:
-        case PostgresTypes.numeric:
-        case PostgresTypes.oid:
-          return exports2.toNumber(value);
-        case PostgresTypes.json:
-        case PostgresTypes.jsonb:
-          return exports2.toJson(value);
-        case PostgresTypes.timestamp:
-          return exports2.toTimestampString(value);
-        case PostgresTypes.abstime:
-        case PostgresTypes.date:
-        case PostgresTypes.daterange:
-        case PostgresTypes.int4range:
-        case PostgresTypes.int8range:
-        case PostgresTypes.money:
-        case PostgresTypes.reltime:
-        case PostgresTypes.text:
-        case PostgresTypes.time:
-        case PostgresTypes.timestamptz:
-        case PostgresTypes.timetz:
-        case PostgresTypes.tsrange:
-        case PostgresTypes.tstzrange:
-          return noop4(value);
-        default:
-          return noop4(value);
-      }
-    };
-    var noop4 = (value) => {
-      return value;
-    };
-    exports2.toBoolean = (value) => {
-      switch (value) {
-        case "t":
-          return true;
-        case "f":
-          return false;
-        default:
-          return value;
-      }
-    };
-    exports2.toNumber = (value) => {
-      if (typeof value === "string") {
-        const parsedValue = parseFloat(value);
-        if (!Number.isNaN(parsedValue)) {
-          return parsedValue;
-        }
-      }
-      return value;
-    };
-    exports2.toJson = (value) => {
-      if (typeof value === "string") {
-        try {
-          return JSON.parse(value);
-        } catch (error) {
-          console.log(`JSON parse error: ${error}`);
-          return value;
-        }
-      }
-      return value;
-    };
-    exports2.toArray = (value, type) => {
-      if (typeof value !== "string") {
-        return value;
-      }
-      const lastIdx = value.length - 1;
-      const closeBrace = value[lastIdx];
-      const openBrace = value[0];
-      if (openBrace === "{" && closeBrace === "}") {
-        let arr;
-        const valTrim = value.slice(1, lastIdx);
-        try {
-          arr = JSON.parse("[" + valTrim + "]");
-        } catch (_) {
-          arr = valTrim ? valTrim.split(",") : [];
-        }
-        return arr.map((val) => exports2.convertCell(type, val));
-      }
-      return value;
-    };
-    exports2.toTimestampString = (value) => {
-      if (typeof value === "string") {
-        return value.replace(" ", "T");
-      }
-      return value;
-    };
+    var PostgrestQueryBuilder_1 = require_PostgrestQueryBuilder();
+    Object.defineProperty(exports2, "PostgrestQueryBuilder", { enumerable: true, get: function() {
+      return __importDefault(PostgrestQueryBuilder_1).default;
+    } });
+    var PostgrestFilterBuilder_1 = require_PostgrestFilterBuilder();
+    Object.defineProperty(exports2, "PostgrestFilterBuilder", { enumerable: true, get: function() {
+      return __importDefault(PostgrestFilterBuilder_1).default;
+    } });
+    var PostgrestTransformBuilder_1 = require_PostgrestTransformBuilder();
+    Object.defineProperty(exports2, "PostgrestTransformBuilder", { enumerable: true, get: function() {
+      return __importDefault(PostgrestTransformBuilder_1).default;
+    } });
+    var PostgrestBuilder_1 = require_PostgrestBuilder();
+    Object.defineProperty(exports2, "PostgrestBuilder", { enumerable: true, get: function() {
+      return __importDefault(PostgrestBuilder_1).default;
+    } });
   }
 });
 
@@ -12299,10 +10771,10 @@ var require_debug = __commonJS({
       return exports2.colors[Math.abs(hash) % exports2.colors.length];
     }
     function createDebug(namespace) {
-      function debug17() {
-        if (!debug17.enabled)
+      function debug18() {
+        if (!debug18.enabled)
           return;
-        var self2 = debug17;
+        var self2 = debug18;
         var curr = +new Date();
         var ms = curr - (prevTime || curr);
         self2.diff = ms;
@@ -12332,17 +10804,17 @@ var require_debug = __commonJS({
           return match;
         });
         exports2.formatArgs.call(self2, args);
-        var logFn = debug17.log || exports2.log || console.log.bind(console);
+        var logFn = debug18.log || exports2.log || console.log.bind(console);
         logFn.apply(self2, args);
       }
-      debug17.namespace = namespace;
-      debug17.enabled = exports2.enabled(namespace);
-      debug17.useColors = exports2.useColors();
-      debug17.color = selectColor(namespace);
+      debug18.namespace = namespace;
+      debug18.enabled = exports2.enabled(namespace);
+      debug18.useColors = exports2.useColors();
+      debug18.color = selectColor(namespace);
       if ("function" === typeof exports2.init) {
-        exports2.init(debug17);
+        exports2.init(debug18);
       }
-      return debug17;
+      return debug18;
     }
     function enable(namespaces) {
       exports2.save(namespaces);
@@ -12583,11 +11055,11 @@ var require_node3 = __commonJS({
       stream3._isStdio = true;
       return stream3;
     }
-    function init(debug17) {
-      debug17.inspectOpts = {};
+    function init(debug18) {
+      debug18.inspectOpts = {};
       var keys = Object.keys(exports2.inspectOpts);
       for (var i = 0; i < keys.length; i++) {
-        debug17.inspectOpts[keys[i]] = exports2.inspectOpts[keys[i]];
+        debug18.inspectOpts[keys[i]] = exports2.inspectOpts[keys[i]];
       }
     }
     exports2.enable(load());
@@ -12608,7 +11080,7 @@ var require_src3 = __commonJS({
 // node_modules/websocket/lib/utils.js
 var require_utils2 = __commonJS({
   "node_modules/websocket/lib/utils.js"(exports2) {
-    var noop4 = exports2.noop = function() {
+    var noop3 = exports2.noop = function() {
     };
     exports2.extend = function extend(dest, source) {
       for (var prop in source) {
@@ -12628,12 +11100,12 @@ var require_utils2 = __commonJS({
       var logFunction = require_src3()(identifier);
       if (logFunction.enabled) {
         var logger = new BufferingLogger(identifier, uniqueID, logFunction);
-        var debug17 = logger.log.bind(logger);
-        debug17.printOutput = logger.printOutput.bind(logger);
-        debug17.enabled = logFunction.enabled;
-        return debug17;
+        var debug18 = logger.log.bind(logger);
+        debug18.printOutput = logger.printOutput.bind(logger);
+        debug18.enabled = logFunction.enabled;
+        return debug18;
       }
-      logFunction.printOutput = noop4;
+      logFunction.printOutput = noop3;
       return logFunction;
     };
     function BufferingLogger(identifier, uniqueID, logFunction) {
@@ -12701,9 +11173,9 @@ var require_node_gyp_build = __commonJS({
         var release = getFirst(path4.join(dir, "build/Release"), matchBuild);
         if (release)
           return release;
-        var debug17 = getFirst(path4.join(dir, "build/Debug"), matchBuild);
-        if (debug17)
-          return debug17;
+        var debug18 = getFirst(path4.join(dir, "build/Debug"), matchBuild);
+        if (debug18)
+          return debug18;
       }
       var prebuild = resolve10(dir);
       if (prebuild)
@@ -14445,7 +12917,7 @@ var require_WebSocketServer = __commonJS({
     var extend = require_utils2().extend;
     var utils = require_utils2();
     var util = require("util");
-    var debug17 = require_src3()("websocket:server");
+    var debug18 = require_src3()("websocket:server");
     var EventEmitter2 = require("events").EventEmitter;
     var WebSocketRequest = require_WebSocketRequest();
     var WebSocketServer = function WebSocketServer2(config2) {
@@ -14543,7 +13015,7 @@ var require_WebSocketServer = __commonJS({
           e.message,
           e.headers
         );
-        debug17("Invalid handshake: %s", e.message);
+        debug18("Invalid handshake: %s", e.message);
         this.emit("upgradeError", e);
         return;
       }
@@ -15426,7 +13898,7 @@ var require_package = __commonJS({
 });
 
 // node_modules/websocket/lib/version.js
-var require_version4 = __commonJS({
+var require_version2 = __commonJS({
   "node_modules/websocket/lib/version.js"(exports2, module2) {
     module2.exports = require_package().version;
   }
@@ -15444,7 +13916,7 @@ var require_websocket = __commonJS({
       "connection": require_WebSocketConnection(),
       "w3cwebsocket": require_W3CWebSocket(),
       "deprecation": require_Deprecation(),
-      "version": require_version4()
+      "version": require_version2()
     };
   }
 });
@@ -15457,22 +13929,22 @@ var require_websocket2 = __commonJS({
 });
 
 // node_modules/@supabase/realtime-js/dist/main/lib/version.js
-var require_version5 = __commonJS({
+var require_version3 = __commonJS({
   "node_modules/@supabase/realtime-js/dist/main/lib/version.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.version = void 0;
-    exports2.version = "1.7.4";
+    exports2.version = "2.1.0";
   }
 });
 
 // node_modules/@supabase/realtime-js/dist/main/lib/constants.js
-var require_constants4 = __commonJS({
+var require_constants2 = __commonJS({
   "node_modules/@supabase/realtime-js/dist/main/lib/constants.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.CONNECTION_STATE = exports2.TRANSPORTS = exports2.CHANNEL_EVENTS = exports2.CHANNEL_STATES = exports2.SOCKET_STATES = exports2.WS_CLOSE_NORMAL = exports2.DEFAULT_TIMEOUT = exports2.VSN = exports2.DEFAULT_HEADERS = void 0;
-    var version_1 = require_version5();
+    var version_1 = require_version3();
     exports2.DEFAULT_HEADERS = { "X-Client-Info": `realtime-js/${version_1.version}` };
     exports2.VSN = "1.0.0";
     exports2.DEFAULT_TIMEOUT = 1e4;
@@ -15589,7 +14061,7 @@ var require_push = __commonJS({
   "node_modules/@supabase/realtime-js/dist/main/lib/push.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
-    var constants_1 = require_constants4();
+    var constants_1 = require_constants2();
     var Push = class {
       constructor(channel, event, payload = {}, timeout = constants_1.DEFAULT_TIMEOUT) {
         this.channel = channel;
@@ -15602,6 +14074,7 @@ var require_push = __commonJS({
         this.receivedResp = null;
         this.recHooks = [];
         this.refEvent = null;
+        this.rateLimited = false;
       }
       resend(timeout) {
         this.timeout = timeout;
@@ -15618,12 +14091,16 @@ var require_push = __commonJS({
         }
         this.startTimeout();
         this.sent = true;
-        this.channel.socket.push({
+        const status = this.channel.socket.push({
           topic: this.channel.topic,
           event: this.event,
           payload: this.payload,
-          ref: this.ref
+          ref: this.ref,
+          join_ref: this.channel._joinRef()
         });
+        if (status === "rate limited") {
+          this.rateLimited = true;
+        }
       }
       updatePayload(payload) {
         this.payload = Object.assign(Object.assign({}, this.payload), payload);
@@ -15640,22 +14117,22 @@ var require_push = __commonJS({
         if (this.timeoutTimer) {
           return;
         }
-        this.ref = this.channel.socket.makeRef();
-        this.refEvent = this.channel.replyEventName(this.ref);
+        this.ref = this.channel.socket._makeRef();
+        this.refEvent = this.channel._replyEventName(this.ref);
         const callback = (payload) => {
           this._cancelRefEvent();
           this._cancelTimeout();
           this.receivedResp = payload;
           this._matchReceive(payload);
         };
-        this.channel.on(this.refEvent, callback);
+        this.channel._on(this.refEvent, {}, callback);
         this.timeoutTimer = setTimeout(() => {
           this.trigger("timeout", {});
         }, this.timeout);
       }
       trigger(status, response) {
         if (this.refEvent)
-          this.channel.trigger(this.refEvent, { status, response });
+          this.channel._trigger(this.refEvent, { status, response });
       }
       destroy() {
         this._cancelRefEvent();
@@ -15665,7 +14142,7 @@ var require_push = __commonJS({
         if (!this.refEvent) {
           return;
         }
-        this.channel.off(this.refEvent);
+        this.channel._off(this.refEvent, {});
       }
       _cancelTimeout() {
         clearTimeout(this.timeoutTimer);
@@ -15682,43 +14159,462 @@ var require_push = __commonJS({
   }
 });
 
-// node_modules/@supabase/realtime-js/dist/main/RealtimeSubscription.js
-var require_RealtimeSubscription = __commonJS({
-  "node_modules/@supabase/realtime-js/dist/main/RealtimeSubscription.js"(exports2) {
+// node_modules/@supabase/realtime-js/dist/main/RealtimePresence.js
+var require_RealtimePresence = __commonJS({
+  "node_modules/@supabase/realtime-js/dist/main/RealtimePresence.js"(exports2) {
     "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.REALTIME_PRESENCE_LISTEN_EVENTS = void 0;
+    var REALTIME_PRESENCE_LISTEN_EVENTS;
+    (function(REALTIME_PRESENCE_LISTEN_EVENTS2) {
+      REALTIME_PRESENCE_LISTEN_EVENTS2["SYNC"] = "sync";
+      REALTIME_PRESENCE_LISTEN_EVENTS2["JOIN"] = "join";
+      REALTIME_PRESENCE_LISTEN_EVENTS2["LEAVE"] = "leave";
+    })(REALTIME_PRESENCE_LISTEN_EVENTS = exports2.REALTIME_PRESENCE_LISTEN_EVENTS || (exports2.REALTIME_PRESENCE_LISTEN_EVENTS = {}));
+    var RealtimePresence = class {
+      constructor(channel, opts) {
+        this.channel = channel;
+        this.state = {};
+        this.pendingDiffs = [];
+        this.joinRef = null;
+        this.caller = {
+          onJoin: () => {
+          },
+          onLeave: () => {
+          },
+          onSync: () => {
+          }
+        };
+        const events = (opts === null || opts === void 0 ? void 0 : opts.events) || {
+          state: "presence_state",
+          diff: "presence_diff"
+        };
+        this.channel._on(events.state, {}, (newState) => {
+          const { onJoin, onLeave, onSync } = this.caller;
+          this.joinRef = this.channel._joinRef();
+          this.state = RealtimePresence.syncState(this.state, newState, onJoin, onLeave);
+          this.pendingDiffs.forEach((diff) => {
+            this.state = RealtimePresence.syncDiff(this.state, diff, onJoin, onLeave);
+          });
+          this.pendingDiffs = [];
+          onSync();
+        });
+        this.channel._on(events.diff, {}, (diff) => {
+          const { onJoin, onLeave, onSync } = this.caller;
+          if (this.inPendingSyncState()) {
+            this.pendingDiffs.push(diff);
+          } else {
+            this.state = RealtimePresence.syncDiff(this.state, diff, onJoin, onLeave);
+            onSync();
+          }
+        });
+        this.onJoin((key, currentPresences, newPresences) => {
+          this.channel._trigger("presence", {
+            event: "join",
+            key,
+            currentPresences,
+            newPresences
+          });
+        });
+        this.onLeave((key, currentPresences, leftPresences) => {
+          this.channel._trigger("presence", {
+            event: "leave",
+            key,
+            currentPresences,
+            leftPresences
+          });
+        });
+        this.onSync(() => {
+          this.channel._trigger("presence", { event: "sync" });
+        });
+      }
+      static syncState(currentState, newState, onJoin, onLeave) {
+        const state = this.cloneDeep(currentState);
+        const transformedState = this.transformState(newState);
+        const joins = {};
+        const leaves = {};
+        this.map(state, (key, presences) => {
+          if (!transformedState[key]) {
+            leaves[key] = presences;
+          }
+        });
+        this.map(transformedState, (key, newPresences) => {
+          const currentPresences = state[key];
+          if (currentPresences) {
+            const newPresenceRefs = newPresences.map((m) => m.presence_ref);
+            const curPresenceRefs = currentPresences.map((m) => m.presence_ref);
+            const joinedPresences = newPresences.filter((m) => curPresenceRefs.indexOf(m.presence_ref) < 0);
+            const leftPresences = currentPresences.filter((m) => newPresenceRefs.indexOf(m.presence_ref) < 0);
+            if (joinedPresences.length > 0) {
+              joins[key] = joinedPresences;
+            }
+            if (leftPresences.length > 0) {
+              leaves[key] = leftPresences;
+            }
+          } else {
+            joins[key] = newPresences;
+          }
+        });
+        return this.syncDiff(state, { joins, leaves }, onJoin, onLeave);
+      }
+      static syncDiff(state, diff, onJoin, onLeave) {
+        const { joins, leaves } = {
+          joins: this.transformState(diff.joins),
+          leaves: this.transformState(diff.leaves)
+        };
+        if (!onJoin) {
+          onJoin = () => {
+          };
+        }
+        if (!onLeave) {
+          onLeave = () => {
+          };
+        }
+        this.map(joins, (key, newPresences) => {
+          var _a;
+          const currentPresences = (_a = state[key]) !== null && _a !== void 0 ? _a : [];
+          state[key] = this.cloneDeep(newPresences);
+          if (currentPresences.length > 0) {
+            const joinedPresenceRefs = state[key].map((m) => m.presence_ref);
+            const curPresences = currentPresences.filter((m) => joinedPresenceRefs.indexOf(m.presence_ref) < 0);
+            state[key].unshift(...curPresences);
+          }
+          onJoin(key, currentPresences, newPresences);
+        });
+        this.map(leaves, (key, leftPresences) => {
+          let currentPresences = state[key];
+          if (!currentPresences)
+            return;
+          const presenceRefsToRemove = leftPresences.map((m) => m.presence_ref);
+          currentPresences = currentPresences.filter((m) => presenceRefsToRemove.indexOf(m.presence_ref) < 0);
+          state[key] = currentPresences;
+          onLeave(key, currentPresences, leftPresences);
+          if (currentPresences.length === 0)
+            delete state[key];
+        });
+        return state;
+      }
+      static map(obj, func) {
+        return Object.getOwnPropertyNames(obj).map((key) => func(key, obj[key]));
+      }
+      static transformState(state) {
+        state = this.cloneDeep(state);
+        return Object.getOwnPropertyNames(state).reduce((newState, key) => {
+          const presences = state[key];
+          if ("metas" in presences) {
+            newState[key] = presences.metas.map((presence) => {
+              presence["presence_ref"] = presence["phx_ref"];
+              delete presence["phx_ref"];
+              delete presence["phx_ref_prev"];
+              return presence;
+            });
+          } else {
+            newState[key] = presences;
+          }
+          return newState;
+        }, {});
+      }
+      static cloneDeep(obj) {
+        return JSON.parse(JSON.stringify(obj));
+      }
+      onJoin(callback) {
+        this.caller.onJoin = callback;
+      }
+      onLeave(callback) {
+        this.caller.onLeave = callback;
+      }
+      onSync(callback) {
+        this.caller.onSync = callback;
+      }
+      inPendingSyncState() {
+        return !this.joinRef || this.joinRef !== this.channel._joinRef();
+      }
+    };
+    exports2.default = RealtimePresence;
+  }
+});
+
+// node_modules/@supabase/realtime-js/dist/main/lib/transformers.js
+var require_transformers = __commonJS({
+  "node_modules/@supabase/realtime-js/dist/main/lib/transformers.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.toTimestampString = exports2.toArray = exports2.toJson = exports2.toNumber = exports2.toBoolean = exports2.convertCell = exports2.convertColumn = exports2.convertChangeData = exports2.PostgresTypes = void 0;
+    var PostgresTypes;
+    (function(PostgresTypes2) {
+      PostgresTypes2["abstime"] = "abstime";
+      PostgresTypes2["bool"] = "bool";
+      PostgresTypes2["date"] = "date";
+      PostgresTypes2["daterange"] = "daterange";
+      PostgresTypes2["float4"] = "float4";
+      PostgresTypes2["float8"] = "float8";
+      PostgresTypes2["int2"] = "int2";
+      PostgresTypes2["int4"] = "int4";
+      PostgresTypes2["int4range"] = "int4range";
+      PostgresTypes2["int8"] = "int8";
+      PostgresTypes2["int8range"] = "int8range";
+      PostgresTypes2["json"] = "json";
+      PostgresTypes2["jsonb"] = "jsonb";
+      PostgresTypes2["money"] = "money";
+      PostgresTypes2["numeric"] = "numeric";
+      PostgresTypes2["oid"] = "oid";
+      PostgresTypes2["reltime"] = "reltime";
+      PostgresTypes2["text"] = "text";
+      PostgresTypes2["time"] = "time";
+      PostgresTypes2["timestamp"] = "timestamp";
+      PostgresTypes2["timestamptz"] = "timestamptz";
+      PostgresTypes2["timetz"] = "timetz";
+      PostgresTypes2["tsrange"] = "tsrange";
+      PostgresTypes2["tstzrange"] = "tstzrange";
+    })(PostgresTypes = exports2.PostgresTypes || (exports2.PostgresTypes = {}));
+    var convertChangeData = (columns, record, options = {}) => {
+      var _a;
+      const skipTypes = (_a = options.skipTypes) !== null && _a !== void 0 ? _a : [];
+      return Object.keys(record).reduce((acc, rec_key) => {
+        acc[rec_key] = (0, exports2.convertColumn)(rec_key, columns, record, skipTypes);
+        return acc;
+      }, {});
+    };
+    exports2.convertChangeData = convertChangeData;
+    var convertColumn = (columnName, columns, record, skipTypes) => {
+      const column = columns.find((x) => x.name === columnName);
+      const colType = column === null || column === void 0 ? void 0 : column.type;
+      const value = record[columnName];
+      if (colType && !skipTypes.includes(colType)) {
+        return (0, exports2.convertCell)(colType, value);
+      }
+      return noop3(value);
+    };
+    exports2.convertColumn = convertColumn;
+    var convertCell = (type, value) => {
+      if (type.charAt(0) === "_") {
+        const dataType = type.slice(1, type.length);
+        return (0, exports2.toArray)(value, dataType);
+      }
+      switch (type) {
+        case PostgresTypes.bool:
+          return (0, exports2.toBoolean)(value);
+        case PostgresTypes.float4:
+        case PostgresTypes.float8:
+        case PostgresTypes.int2:
+        case PostgresTypes.int4:
+        case PostgresTypes.int8:
+        case PostgresTypes.numeric:
+        case PostgresTypes.oid:
+          return (0, exports2.toNumber)(value);
+        case PostgresTypes.json:
+        case PostgresTypes.jsonb:
+          return (0, exports2.toJson)(value);
+        case PostgresTypes.timestamp:
+          return (0, exports2.toTimestampString)(value);
+        case PostgresTypes.abstime:
+        case PostgresTypes.date:
+        case PostgresTypes.daterange:
+        case PostgresTypes.int4range:
+        case PostgresTypes.int8range:
+        case PostgresTypes.money:
+        case PostgresTypes.reltime:
+        case PostgresTypes.text:
+        case PostgresTypes.time:
+        case PostgresTypes.timestamptz:
+        case PostgresTypes.timetz:
+        case PostgresTypes.tsrange:
+        case PostgresTypes.tstzrange:
+          return noop3(value);
+        default:
+          return noop3(value);
+      }
+    };
+    exports2.convertCell = convertCell;
+    var noop3 = (value) => {
+      return value;
+    };
+    var toBoolean = (value) => {
+      switch (value) {
+        case "t":
+          return true;
+        case "f":
+          return false;
+        default:
+          return value;
+      }
+    };
+    exports2.toBoolean = toBoolean;
+    var toNumber = (value) => {
+      if (typeof value === "string") {
+        const parsedValue = parseFloat(value);
+        if (!Number.isNaN(parsedValue)) {
+          return parsedValue;
+        }
+      }
+      return value;
+    };
+    exports2.toNumber = toNumber;
+    var toJson = (value) => {
+      if (typeof value === "string") {
+        try {
+          return JSON.parse(value);
+        } catch (error) {
+          console.log(`JSON parse error: ${error}`);
+          return value;
+        }
+      }
+      return value;
+    };
+    exports2.toJson = toJson;
+    var toArray = (value, type) => {
+      if (typeof value !== "string") {
+        return value;
+      }
+      const lastIdx = value.length - 1;
+      const closeBrace = value[lastIdx];
+      const openBrace = value[0];
+      if (openBrace === "{" && closeBrace === "}") {
+        let arr;
+        const valTrim = value.slice(1, lastIdx);
+        try {
+          arr = JSON.parse("[" + valTrim + "]");
+        } catch (_) {
+          arr = valTrim ? valTrim.split(",") : [];
+        }
+        return arr.map((val) => (0, exports2.convertCell)(type, val));
+      }
+      return value;
+    };
+    exports2.toArray = toArray;
+    var toTimestampString = (value) => {
+      if (typeof value === "string") {
+        return value.replace(" ", "T");
+      }
+      return value;
+    };
+    exports2.toTimestampString = toTimestampString;
+  }
+});
+
+// node_modules/@supabase/realtime-js/dist/main/RealtimeChannel.js
+var require_RealtimeChannel = __commonJS({
+  "node_modules/@supabase/realtime-js/dist/main/RealtimeChannel.js"(exports2) {
+    "use strict";
+    var __createBinding = exports2 && exports2.__createBinding || (Object.create ? function(o, m, k, k2) {
+      if (k2 === void 0)
+        k2 = k;
+      var desc = Object.getOwnPropertyDescriptor(m, k);
+      if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+        desc = { enumerable: true, get: function() {
+          return m[k];
+        } };
+      }
+      Object.defineProperty(o, k2, desc);
+    } : function(o, m, k, k2) {
+      if (k2 === void 0)
+        k2 = k;
+      o[k2] = m[k];
+    });
+    var __setModuleDefault = exports2 && exports2.__setModuleDefault || (Object.create ? function(o, v) {
+      Object.defineProperty(o, "default", { enumerable: true, value: v });
+    } : function(o, v) {
+      o["default"] = v;
+    });
+    var __importStar = exports2 && exports2.__importStar || function(mod2) {
+      if (mod2 && mod2.__esModule)
+        return mod2;
+      var result = {};
+      if (mod2 != null) {
+        for (var k in mod2)
+          if (k !== "default" && Object.prototype.hasOwnProperty.call(mod2, k))
+            __createBinding(result, mod2, k);
+      }
+      __setModuleDefault(result, mod2);
+      return result;
+    };
+    var __awaiter = exports2 && exports2.__awaiter || function(thisArg, _arguments, P, generator) {
+      function adopt(value) {
+        return value instanceof P ? value : new P(function(resolve10) {
+          resolve10(value);
+        });
+      }
+      return new (P || (P = Promise))(function(resolve10, reject) {
+        function fulfilled(value) {
+          try {
+            step(generator.next(value));
+          } catch (e) {
+            reject(e);
+          }
+        }
+        function rejected(value) {
+          try {
+            step(generator["throw"](value));
+          } catch (e) {
+            reject(e);
+          }
+        }
+        function step(result) {
+          result.done ? resolve10(result.value) : adopt(result.value).then(fulfilled, rejected);
+        }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+      });
+    };
     var __importDefault = exports2 && exports2.__importDefault || function(mod2) {
       return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
-    var constants_1 = require_constants4();
+    exports2.REALTIME_SUBSCRIBE_STATES = exports2.REALTIME_LISTEN_TYPES = exports2.REALTIME_POSTGRES_CHANGES_LISTEN_EVENT = void 0;
+    var constants_1 = require_constants2();
     var push_1 = __importDefault(require_push());
     var timer_1 = __importDefault(require_timer());
-    var RealtimeSubscription = class {
-      constructor(topic, params = {}, socket) {
+    var RealtimePresence_1 = __importDefault(require_RealtimePresence());
+    var Transformers = __importStar(require_transformers());
+    var REALTIME_POSTGRES_CHANGES_LISTEN_EVENT;
+    (function(REALTIME_POSTGRES_CHANGES_LISTEN_EVENT2) {
+      REALTIME_POSTGRES_CHANGES_LISTEN_EVENT2["ALL"] = "*";
+      REALTIME_POSTGRES_CHANGES_LISTEN_EVENT2["INSERT"] = "INSERT";
+      REALTIME_POSTGRES_CHANGES_LISTEN_EVENT2["UPDATE"] = "UPDATE";
+      REALTIME_POSTGRES_CHANGES_LISTEN_EVENT2["DELETE"] = "DELETE";
+    })(REALTIME_POSTGRES_CHANGES_LISTEN_EVENT = exports2.REALTIME_POSTGRES_CHANGES_LISTEN_EVENT || (exports2.REALTIME_POSTGRES_CHANGES_LISTEN_EVENT = {}));
+    var REALTIME_LISTEN_TYPES;
+    (function(REALTIME_LISTEN_TYPES2) {
+      REALTIME_LISTEN_TYPES2["BROADCAST"] = "broadcast";
+      REALTIME_LISTEN_TYPES2["PRESENCE"] = "presence";
+      REALTIME_LISTEN_TYPES2["POSTGRES_CHANGES"] = "postgres_changes";
+    })(REALTIME_LISTEN_TYPES = exports2.REALTIME_LISTEN_TYPES || (exports2.REALTIME_LISTEN_TYPES = {}));
+    var REALTIME_SUBSCRIBE_STATES;
+    (function(REALTIME_SUBSCRIBE_STATES2) {
+      REALTIME_SUBSCRIBE_STATES2["SUBSCRIBED"] = "SUBSCRIBED";
+      REALTIME_SUBSCRIBE_STATES2["TIMED_OUT"] = "TIMED_OUT";
+      REALTIME_SUBSCRIBE_STATES2["CLOSED"] = "CLOSED";
+      REALTIME_SUBSCRIBE_STATES2["CHANNEL_ERROR"] = "CHANNEL_ERROR";
+    })(REALTIME_SUBSCRIBE_STATES = exports2.REALTIME_SUBSCRIBE_STATES || (exports2.REALTIME_SUBSCRIBE_STATES = {}));
+    var RealtimeChannel = class {
+      constructor(topic, params = { config: {} }, socket) {
         this.topic = topic;
         this.params = params;
         this.socket = socket;
-        this.bindings = [];
+        this.bindings = {};
         this.state = constants_1.CHANNEL_STATES.closed;
         this.joinedOnce = false;
         this.pushBuffer = [];
+        this.params.config = Object.assign({
+          broadcast: { ack: false, self: false },
+          presence: { key: "" }
+        }, params.config);
         this.timeout = this.socket.timeout;
         this.joinPush = new push_1.default(this, constants_1.CHANNEL_EVENTS.join, this.params, this.timeout);
-        this.rejoinTimer = new timer_1.default(() => this.rejoinUntilConnected(), this.socket.reconnectAfterMs);
+        this.rejoinTimer = new timer_1.default(() => this._rejoinUntilConnected(), this.socket.reconnectAfterMs);
         this.joinPush.receive("ok", () => {
           this.state = constants_1.CHANNEL_STATES.joined;
           this.rejoinTimer.reset();
           this.pushBuffer.forEach((pushEvent) => pushEvent.send());
           this.pushBuffer = [];
         });
-        this.onClose(() => {
+        this._onClose(() => {
           this.rejoinTimer.reset();
-          this.socket.log("channel", `close ${this.topic} ${this.joinRef()}`);
+          this.socket.log("channel", `close ${this.topic} ${this._joinRef()}`);
           this.state = constants_1.CHANNEL_STATES.closed;
-          this.socket.remove(this);
+          this.socket._remove(this);
         });
-        this.onError((reason) => {
-          if (this.isLeaving() || this.isClosed()) {
+        this._onError((reason) => {
+          if (this._isLeaving() || this._isClosed()) {
             return;
           }
           this.socket.log("channel", `error ${this.topic}`, reason);
@@ -15726,53 +14622,145 @@ var require_RealtimeSubscription = __commonJS({
           this.rejoinTimer.scheduleTimeout();
         });
         this.joinPush.receive("timeout", () => {
-          if (!this.isJoining()) {
+          if (!this._isJoining()) {
             return;
           }
           this.socket.log("channel", `timeout ${this.topic}`, this.joinPush.timeout);
           this.state = constants_1.CHANNEL_STATES.errored;
           this.rejoinTimer.scheduleTimeout();
         });
-        this.on(constants_1.CHANNEL_EVENTS.reply, (payload, ref) => {
-          this.trigger(this.replyEventName(ref), payload);
+        this._on(constants_1.CHANNEL_EVENTS.reply, {}, (payload, ref) => {
+          this._trigger(this._replyEventName(ref), payload);
         });
+        this.presence = new RealtimePresence_1.default(this);
       }
-      rejoinUntilConnected() {
-        this.rejoinTimer.scheduleTimeout();
-        if (this.socket.isConnected()) {
-          this.rejoin();
-        }
-      }
-      subscribe(timeout = this.timeout) {
+      subscribe(callback, timeout = this.timeout) {
+        var _a, _b;
         if (this.joinedOnce) {
           throw `tried to subscribe multiple times. 'subscribe' can only be called a single time per channel instance`;
         } else {
+          const { config: { broadcast, presence } } = this.params;
+          this._onError((e) => callback && callback("CHANNEL_ERROR", e));
+          this._onClose(() => callback && callback("CLOSED"));
+          const accessTokenPayload = {};
+          const config2 = {
+            broadcast,
+            presence,
+            postgres_changes: (_b = (_a = this.bindings.postgres_changes) === null || _a === void 0 ? void 0 : _a.map((r) => r.filter)) !== null && _b !== void 0 ? _b : []
+          };
+          if (this.socket.accessToken) {
+            accessTokenPayload.access_token = this.socket.accessToken;
+          }
+          this.updateJoinPayload(Object.assign({ config: config2 }, accessTokenPayload));
           this.joinedOnce = true;
-          this.rejoin(timeout);
-          return this.joinPush;
+          this._rejoin(timeout);
+          this.joinPush.receive("ok", ({ postgres_changes: serverPostgresFilters }) => {
+            var _a2;
+            this.socket.accessToken && this.socket.setAuth(this.socket.accessToken);
+            if (serverPostgresFilters === void 0) {
+              callback && callback("SUBSCRIBED");
+              return;
+            } else {
+              const clientPostgresBindings = this.bindings.postgres_changes;
+              const bindingsLen = (_a2 = clientPostgresBindings === null || clientPostgresBindings === void 0 ? void 0 : clientPostgresBindings.length) !== null && _a2 !== void 0 ? _a2 : 0;
+              const newPostgresBindings = [];
+              for (let i = 0; i < bindingsLen; i++) {
+                const clientPostgresBinding = clientPostgresBindings[i];
+                const { filter: { event, schema, table, filter: filter3 } } = clientPostgresBinding;
+                const serverPostgresFilter = serverPostgresFilters && serverPostgresFilters[i];
+                if (serverPostgresFilter && serverPostgresFilter.event === event && serverPostgresFilter.schema === schema && serverPostgresFilter.table === table && serverPostgresFilter.filter === filter3) {
+                  newPostgresBindings.push(Object.assign(Object.assign({}, clientPostgresBinding), { id: serverPostgresFilter.id }));
+                } else {
+                  this.unsubscribe();
+                  callback && callback("CHANNEL_ERROR", new Error("mismatch between server and client bindings for postgres changes"));
+                  return;
+                }
+              }
+              this.bindings.postgres_changes = newPostgresBindings;
+              callback && callback("SUBSCRIBED");
+              return;
+            }
+          }).receive("error", (error) => {
+            callback && callback("CHANNEL_ERROR", new Error(JSON.stringify(Object.values(error).join(", ") || "error")));
+            return;
+          }).receive("timeout", () => {
+            callback && callback("TIMED_OUT");
+            return;
+          });
         }
+        return this;
       }
-      onClose(callback) {
-        this.on(constants_1.CHANNEL_EVENTS.close, callback);
+      presenceState() {
+        return this.presence.state;
       }
-      onError(callback) {
-        this.on(constants_1.CHANNEL_EVENTS.error, (reason) => callback(reason));
+      track(payload, opts = {}) {
+        return __awaiter(this, void 0, void 0, function* () {
+          return yield this.send({
+            type: "presence",
+            event: "track",
+            payload
+          }, opts.timeout || this.timeout);
+        });
       }
-      on(event, callback) {
-        this.bindings.push({ event, callback });
+      untrack(opts = {}) {
+        return __awaiter(this, void 0, void 0, function* () {
+          return yield this.send({
+            type: "presence",
+            event: "untrack"
+          }, opts);
+        });
       }
-      off(event) {
-        this.bindings = this.bindings.filter((bind) => bind.event !== event);
+      on(type, filter3, callback) {
+        return this._on(type, filter3, callback);
       }
-      canPush() {
-        return this.socket.isConnected() && this.isJoined();
+      send(payload, opts = {}) {
+        return new Promise((resolve10) => {
+          var _a, _b, _c;
+          const push = this._push(payload.type, payload, opts.timeout || this.timeout);
+          if (push.rateLimited) {
+            resolve10("rate limited");
+          }
+          if (payload.type === "broadcast" && !((_c = (_b = (_a = this.params) === null || _a === void 0 ? void 0 : _a.config) === null || _b === void 0 ? void 0 : _b.broadcast) === null || _c === void 0 ? void 0 : _c.ack)) {
+            resolve10("ok");
+          }
+          push.receive("ok", () => resolve10("ok"));
+          push.receive("timeout", () => resolve10("timed out"));
+        });
       }
-      push(event, payload, timeout = this.timeout) {
+      updateJoinPayload(payload) {
+        this.joinPush.updatePayload(payload);
+      }
+      unsubscribe(timeout = this.timeout) {
+        this.state = constants_1.CHANNEL_STATES.leaving;
+        const onClose = () => {
+          this.socket.log("channel", `leave ${this.topic}`);
+          this._trigger(constants_1.CHANNEL_EVENTS.close, "leave", this._joinRef());
+        };
+        this.rejoinTimer.reset();
+        this.joinPush.destroy();
+        return new Promise((resolve10) => {
+          const leavePush = new push_1.default(this, constants_1.CHANNEL_EVENTS.leave, {}, timeout);
+          leavePush.receive("ok", () => {
+            onClose();
+            resolve10("ok");
+          }).receive("timeout", () => {
+            onClose();
+            resolve10("timed out");
+          }).receive("error", () => {
+            resolve10("error");
+          });
+          leavePush.send();
+          if (!this._canPush()) {
+            leavePush.trigger("ok", {});
+          }
+        });
+      }
+      _push(event, payload, timeout = this.timeout) {
         if (!this.joinedOnce) {
           throw `tried to push '${event}' to '${this.topic}' before joining. Use channel.subscribe() before pushing events`;
         }
         let pushEvent = new push_1.default(this, event, payload, timeout);
-        if (this.canPush()) {
+        if (this._canPush()) {
           pushEvent.send();
         } else {
           pushEvent.startTimeout();
@@ -15780,79 +14768,152 @@ var require_RealtimeSubscription = __commonJS({
         }
         return pushEvent;
       }
-      updateJoinPayload(payload) {
-        this.joinPush.updatePayload(payload);
-      }
-      unsubscribe(timeout = this.timeout) {
-        this.state = constants_1.CHANNEL_STATES.leaving;
-        let onClose = () => {
-          this.socket.log("channel", `leave ${this.topic}`);
-          this.trigger(constants_1.CHANNEL_EVENTS.close, "leave", this.joinRef());
-        };
-        this.joinPush.destroy();
-        let leavePush = new push_1.default(this, constants_1.CHANNEL_EVENTS.leave, {}, timeout);
-        leavePush.receive("ok", () => onClose()).receive("timeout", () => onClose());
-        leavePush.send();
-        if (!this.canPush()) {
-          leavePush.trigger("ok", {});
-        }
-        return leavePush;
-      }
-      onMessage(event, payload, ref) {
+      _onMessage(_event, payload, _ref) {
         return payload;
       }
-      isMember(topic) {
+      _isMember(topic) {
         return this.topic === topic;
       }
-      joinRef() {
+      _joinRef() {
         return this.joinPush.ref;
       }
-      rejoin(timeout = this.timeout) {
-        if (this.isLeaving()) {
+      _trigger(type, payload, ref) {
+        var _a, _b;
+        const typeLower = type.toLocaleLowerCase();
+        const { close, error, leave, join: join5 } = constants_1.CHANNEL_EVENTS;
+        const events = [close, error, leave, join5];
+        if (ref && events.indexOf(typeLower) >= 0 && ref !== this._joinRef()) {
           return;
         }
-        this.socket.leaveOpenTopic(this.topic);
-        this.state = constants_1.CHANNEL_STATES.joining;
-        this.joinPush.resend(timeout);
-      }
-      trigger(event, payload, ref) {
-        let { close, error, leave, join: join5 } = constants_1.CHANNEL_EVENTS;
-        let events = [close, error, leave, join5];
-        if (ref && events.indexOf(event) >= 0 && ref !== this.joinRef()) {
-          return;
-        }
-        let handledPayload = this.onMessage(event, payload, ref);
+        let handledPayload = this._onMessage(typeLower, payload, ref);
         if (payload && !handledPayload) {
           throw "channel onMessage callbacks must return the payload, modified or unmodified";
         }
-        this.bindings.filter((bind) => {
-          if (bind.event === "*") {
-            return event === (payload === null || payload === void 0 ? void 0 : payload.type);
-          } else {
-            return bind.event === event;
-          }
-        }).map((bind) => bind.callback(handledPayload, ref));
+        if (["insert", "update", "delete"].includes(typeLower)) {
+          (_a = this.bindings.postgres_changes) === null || _a === void 0 ? void 0 : _a.filter((bind) => {
+            var _a2, _b2, _c;
+            return ((_a2 = bind.filter) === null || _a2 === void 0 ? void 0 : _a2.event) === "*" || ((_c = (_b2 = bind.filter) === null || _b2 === void 0 ? void 0 : _b2.event) === null || _c === void 0 ? void 0 : _c.toLocaleLowerCase()) === typeLower;
+          }).map((bind) => bind.callback(handledPayload, ref));
+        } else {
+          (_b = this.bindings[typeLower]) === null || _b === void 0 ? void 0 : _b.filter((bind) => {
+            var _a2, _b2, _c, _d, _e, _f;
+            if (["broadcast", "presence", "postgres_changes"].includes(typeLower)) {
+              if ("id" in bind) {
+                const bindId = bind.id;
+                const bindEvent = (_a2 = bind.filter) === null || _a2 === void 0 ? void 0 : _a2.event;
+                return bindId && ((_b2 = payload.ids) === null || _b2 === void 0 ? void 0 : _b2.includes(bindId)) && (bindEvent === "*" || (bindEvent === null || bindEvent === void 0 ? void 0 : bindEvent.toLocaleLowerCase()) === ((_c = payload.data) === null || _c === void 0 ? void 0 : _c.type.toLocaleLowerCase()));
+              } else {
+                const bindEvent = (_e = (_d = bind === null || bind === void 0 ? void 0 : bind.filter) === null || _d === void 0 ? void 0 : _d.event) === null || _e === void 0 ? void 0 : _e.toLocaleLowerCase();
+                return bindEvent === "*" || bindEvent === ((_f = payload === null || payload === void 0 ? void 0 : payload.event) === null || _f === void 0 ? void 0 : _f.toLocaleLowerCase());
+              }
+            } else {
+              return bind.type.toLocaleLowerCase() === typeLower;
+            }
+          }).map((bind) => {
+            if (typeof handledPayload === "object" && "ids" in handledPayload) {
+              const postgresChanges = handledPayload.data;
+              const { schema, table, commit_timestamp, type: type2, errors } = postgresChanges;
+              const enrichedPayload = {
+                schema,
+                table,
+                commit_timestamp,
+                eventType: type2,
+                new: {},
+                old: {},
+                errors
+              };
+              handledPayload = Object.assign(Object.assign({}, enrichedPayload), this._getPayloadRecords(postgresChanges));
+            }
+            bind.callback(handledPayload, ref);
+          });
+        }
       }
-      replyEventName(ref) {
-        return `chan_reply_${ref}`;
-      }
-      isClosed() {
+      _isClosed() {
         return this.state === constants_1.CHANNEL_STATES.closed;
       }
-      isErrored() {
-        return this.state === constants_1.CHANNEL_STATES.errored;
-      }
-      isJoined() {
+      _isJoined() {
         return this.state === constants_1.CHANNEL_STATES.joined;
       }
-      isJoining() {
+      _isJoining() {
         return this.state === constants_1.CHANNEL_STATES.joining;
       }
-      isLeaving() {
+      _isLeaving() {
         return this.state === constants_1.CHANNEL_STATES.leaving;
       }
+      _replyEventName(ref) {
+        return `chan_reply_${ref}`;
+      }
+      _on(type, filter3, callback) {
+        const typeLower = type.toLocaleLowerCase();
+        const binding = {
+          type: typeLower,
+          filter: filter3,
+          callback
+        };
+        if (this.bindings[typeLower]) {
+          this.bindings[typeLower].push(binding);
+        } else {
+          this.bindings[typeLower] = [binding];
+        }
+        return this;
+      }
+      _off(type, filter3) {
+        const typeLower = type.toLocaleLowerCase();
+        this.bindings[typeLower] = this.bindings[typeLower].filter((bind) => {
+          var _a;
+          return !(((_a = bind.type) === null || _a === void 0 ? void 0 : _a.toLocaleLowerCase()) === typeLower && RealtimeChannel.isEqual(bind.filter, filter3));
+        });
+        return this;
+      }
+      static isEqual(obj1, obj2) {
+        if (Object.keys(obj1).length !== Object.keys(obj2).length) {
+          return false;
+        }
+        for (const k in obj1) {
+          if (obj1[k] !== obj2[k]) {
+            return false;
+          }
+        }
+        return true;
+      }
+      _rejoinUntilConnected() {
+        this.rejoinTimer.scheduleTimeout();
+        if (this.socket.isConnected()) {
+          this._rejoin();
+        }
+      }
+      _onClose(callback) {
+        this._on(constants_1.CHANNEL_EVENTS.close, {}, callback);
+      }
+      _onError(callback) {
+        this._on(constants_1.CHANNEL_EVENTS.error, {}, (reason) => callback(reason));
+      }
+      _canPush() {
+        return this.socket.isConnected() && this._isJoined();
+      }
+      _rejoin(timeout = this.timeout) {
+        if (this._isLeaving()) {
+          return;
+        }
+        this.socket._leaveOpenTopic(this.topic);
+        this.state = constants_1.CHANNEL_STATES.joining;
+        this.joinPush.resend(timeout);
+      }
+      _getPayloadRecords(payload) {
+        const records = {
+          new: {},
+          old: {}
+        };
+        if (payload.type === "INSERT" || payload.type === "UPDATE") {
+          records.new = Transformers.convertChangeData(payload.columns, payload.record);
+        }
+        if (payload.type === "UPDATE" || payload.type === "DELETE") {
+          records.old = Transformers.convertChangeData(payload.columns, payload.old_record);
+        }
+        return records;
+      }
     };
-    exports2.default = RealtimeSubscription;
+    exports2.default = RealtimeChannel;
   }
 });
 
@@ -15892,14 +14953,15 @@ var require_RealtimeClient = __commonJS({
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
     var websocket_1 = require_websocket2();
-    var constants_1 = require_constants4();
+    var constants_1 = require_constants2();
     var timer_1 = __importDefault(require_timer());
     var serializer_1 = __importDefault(require_serializer());
-    var RealtimeSubscription_1 = __importDefault(require_RealtimeSubscription());
-    var noop4 = () => {
+    var RealtimeChannel_1 = __importDefault(require_RealtimeChannel());
+    var noop3 = () => {
     };
     var RealtimeClient = class {
       constructor(endPoint, options) {
+        var _a;
         this.accessToken = null;
         this.channels = [];
         this.endPoint = "";
@@ -15908,11 +14970,10 @@ var require_RealtimeClient = __commonJS({
         this.timeout = constants_1.DEFAULT_TIMEOUT;
         this.transport = websocket_1.w3cwebsocket;
         this.heartbeatIntervalMs = 3e4;
-        this.longpollerTimeout = 2e4;
         this.heartbeatTimer = void 0;
         this.pendingHeartbeatRef = null;
         this.ref = 0;
-        this.logger = noop4;
+        this.logger = noop3;
         this.conn = null;
         this.sendBuffer = [];
         this.serializer = new serializer_1.default();
@@ -15922,6 +14983,8 @@ var require_RealtimeClient = __commonJS({
           error: [],
           message: []
         };
+        this.eventsPerSecondLimitMs = 100;
+        this.inThrottle = false;
         this.endPoint = `${endPoint}/${constants_1.TRANSPORTS.websocket}`;
         if (options === null || options === void 0 ? void 0 : options.params)
           this.params = options.params;
@@ -15935,8 +14998,9 @@ var require_RealtimeClient = __commonJS({
           this.transport = options.transport;
         if (options === null || options === void 0 ? void 0 : options.heartbeatIntervalMs)
           this.heartbeatIntervalMs = options.heartbeatIntervalMs;
-        if (options === null || options === void 0 ? void 0 : options.longpollerTimeout)
-          this.longpollerTimeout = options.longpollerTimeout;
+        const eventsPerSecond = (_a = options === null || options === void 0 ? void 0 : options.params) === null || _a === void 0 ? void 0 : _a.eventsPerSecond;
+        if (eventsPerSecond)
+          this.eventsPerSecondLimitMs = Math.floor(1e3 / eventsPerSecond);
         this.reconnectAfterMs = (options === null || options === void 0 ? void 0 : options.reconnectAfterMs) ? options.reconnectAfterMs : (tries) => {
           return [1e3, 2e3, 5e3, 1e4][tries - 1] || 1e4;
         };
@@ -15945,7 +15009,7 @@ var require_RealtimeClient = __commonJS({
         };
         this.decode = (options === null || options === void 0 ? void 0 : options.decode) ? options.decode : this.serializer.decode.bind(this.serializer);
         this.reconnectTimer = new timer_1.default(() => __awaiter(this, void 0, void 0, function* () {
-          yield this.disconnect();
+          this.disconnect();
           this.connect();
         }), this.reconnectAfterMs);
       }
@@ -15953,50 +15017,48 @@ var require_RealtimeClient = __commonJS({
         if (this.conn) {
           return;
         }
-        this.conn = new this.transport(this.endPointURL(), [], null, this.headers);
+        this.conn = new this.transport(this._endPointURL(), [], null, this.headers);
         if (this.conn) {
           this.conn.binaryType = "arraybuffer";
           this.conn.onopen = () => this._onConnOpen();
           this.conn.onerror = (error) => this._onConnError(error);
-          this.conn.onmessage = (event) => this.onConnMessage(event);
+          this.conn.onmessage = (event) => this._onConnMessage(event);
           this.conn.onclose = (event) => this._onConnClose(event);
         }
       }
       disconnect(code8, reason) {
-        return new Promise((resolve10, _reject) => {
-          try {
-            if (this.conn) {
-              this.conn.onclose = function() {
-              };
-              if (code8) {
-                this.conn.close(code8, reason || "");
-              } else {
-                this.conn.close();
-              }
-              this.conn = null;
-              this.heartbeatTimer && clearInterval(this.heartbeatTimer);
-              this.reconnectTimer.reset();
-            }
-            resolve10({ error: null, data: true });
-          } catch (error) {
-            resolve10({ error, data: false });
+        if (this.conn) {
+          this.conn.onclose = function() {
+          };
+          if (code8) {
+            this.conn.close(code8, reason !== null && reason !== void 0 ? reason : "");
+          } else {
+            this.conn.close();
           }
+          this.conn = null;
+          this.heartbeatTimer && clearInterval(this.heartbeatTimer);
+          this.reconnectTimer.reset();
+        }
+      }
+      getChannels() {
+        return this.channels;
+      }
+      removeChannel(channel) {
+        return channel.unsubscribe().then((status) => {
+          if (this.channels.length === 0) {
+            this.disconnect();
+          }
+          return status;
+        });
+      }
+      removeAllChannels() {
+        return Promise.all(this.channels.map((channel) => channel.unsubscribe())).then((values) => {
+          this.disconnect();
+          return values;
         });
       }
       log(kind, msg, data) {
         this.logger(kind, msg, data);
-      }
-      onOpen(callback) {
-        this.stateChangeCallbacks.open.push(callback);
-      }
-      onClose(callback) {
-        this.stateChangeCallbacks.close.push(callback);
-      }
-      onError(callback) {
-        this.stateChangeCallbacks.error.push(callback);
-      }
-      onMessage(callback) {
-        this.stateChangeCallbacks.message.push(callback);
       }
       connectionState() {
         switch (this.conn && this.conn.readyState) {
@@ -16013,11 +15075,11 @@ var require_RealtimeClient = __commonJS({
       isConnected() {
         return this.connectionState() === constants_1.CONNECTION_STATE.Open;
       }
-      remove(channel) {
-        this.channels = this.channels.filter((c) => c.joinRef() !== channel.joinRef());
-      }
-      channel(topic, chanParams = {}) {
-        const chan = new RealtimeSubscription_1.default(topic, chanParams, this);
+      channel(topic, params = { config: {} }) {
+        if (!this.isConnected()) {
+          this.connect();
+        }
+        const chan = new RealtimeChannel_1.default(`realtime:${topic}`, params, this);
         this.channels.push(chan);
         return chan;
       }
@@ -16031,26 +15093,28 @@ var require_RealtimeClient = __commonJS({
         };
         this.log("push", `${topic} ${event} (${ref})`, payload);
         if (this.isConnected()) {
-          callback();
+          if (["broadcast", "presence", "postgres_changes"].includes(event)) {
+            const isThrottled = this._throttle(callback)();
+            if (isThrottled) {
+              return "rate limited";
+            }
+          } else {
+            callback();
+          }
         } else {
           this.sendBuffer.push(callback);
         }
       }
-      onConnMessage(rawMessage) {
-        this.decode(rawMessage.data, (msg) => {
-          let { topic, event, payload, ref } = msg;
-          if (ref && ref === this.pendingHeartbeatRef || event === (payload === null || payload === void 0 ? void 0 : payload.type)) {
-            this.pendingHeartbeatRef = null;
+      setAuth(token2) {
+        this.accessToken = token2;
+        this.channels.forEach((channel) => {
+          token2 && channel.updateJoinPayload({ access_token: token2 });
+          if (channel.joinedOnce && channel._isJoined()) {
+            channel._push(constants_1.CHANNEL_EVENTS.access_token, { access_token: token2 });
           }
-          this.log("receive", `${payload.status || ""} ${topic} ${event} ${ref && "(" + ref + ")" || ""}`, payload);
-          this.channels.filter((channel) => channel.isMember(topic)).forEach((channel) => channel.trigger(event, payload, ref));
-          this.stateChangeCallbacks.message.forEach((callback) => callback(msg));
         });
       }
-      endPointURL() {
-        return this._appendParams(this.endPoint, Object.assign({}, this.params, { vsn: constants_1.VSN }));
-      }
-      makeRef() {
+      _makeRef() {
         let newRef = this.ref + 1;
         if (newRef === this.ref) {
           this.ref = 0;
@@ -16059,24 +15123,32 @@ var require_RealtimeClient = __commonJS({
         }
         return this.ref.toString();
       }
-      setAuth(token2) {
-        this.accessToken = token2;
-        this.channels.forEach((channel) => {
-          token2 && channel.updateJoinPayload({ user_token: token2 });
-          if (channel.joinedOnce && channel.isJoined()) {
-            channel.push(constants_1.CHANNEL_EVENTS.access_token, { access_token: token2 });
-          }
-        });
-      }
-      leaveOpenTopic(topic) {
-        let dupChannel = this.channels.find((c) => c.topic === topic && (c.isJoined() || c.isJoining()));
+      _leaveOpenTopic(topic) {
+        let dupChannel = this.channels.find((c) => c.topic === topic && (c._isJoined() || c._isJoining()));
         if (dupChannel) {
           this.log("transport", `leaving duplicate topic "${topic}"`);
           dupChannel.unsubscribe();
         }
       }
+      _remove(channel) {
+        this.channels = this.channels.filter((c) => c._joinRef() !== channel._joinRef());
+      }
+      _endPointURL() {
+        return this._appendParams(this.endPoint, Object.assign({}, this.params, { vsn: constants_1.VSN }));
+      }
+      _onConnMessage(rawMessage) {
+        this.decode(rawMessage.data, (msg) => {
+          let { topic, event, payload, ref } = msg;
+          if (ref && ref === this.pendingHeartbeatRef || event === (payload === null || payload === void 0 ? void 0 : payload.type)) {
+            this.pendingHeartbeatRef = null;
+          }
+          this.log("receive", `${payload.status || ""} ${topic} ${event} ${ref && "(" + ref + ")" || ""}`, payload);
+          this.channels.filter((channel) => channel._isMember(topic)).forEach((channel) => channel._trigger(event, payload, ref));
+          this.stateChangeCallbacks.message.forEach((callback) => callback(msg));
+        });
+      }
       _onConnOpen() {
-        this.log("transport", `connected to ${this.endPointURL()}`);
+        this.log("transport", `connected to ${this._endPointURL()}`);
         this._flushSendBuffer();
         this.reconnectTimer.reset();
         this.heartbeatTimer && clearInterval(this.heartbeatTimer);
@@ -16096,7 +15168,7 @@ var require_RealtimeClient = __commonJS({
         this.stateChangeCallbacks.error.forEach((callback) => callback(error));
       }
       _triggerChanError() {
-        this.channels.forEach((channel) => channel.trigger(constants_1.CHANNEL_EVENTS.error));
+        this.channels.forEach((channel) => channel._trigger(constants_1.CHANNEL_EVENTS.error));
       }
       _appendParams(url, params) {
         if (Object.keys(params).length === 0) {
@@ -16123,7 +15195,7 @@ var require_RealtimeClient = __commonJS({
           (_a = this.conn) === null || _a === void 0 ? void 0 : _a.close(constants_1.WS_CLOSE_NORMAL, "hearbeat timeout");
           return;
         }
-        this.pendingHeartbeatRef = this.makeRef();
+        this.pendingHeartbeatRef = this._makeRef();
         this.push({
           topic: "phoenix",
           event: "heartbeat",
@@ -16131,6 +15203,18 @@ var require_RealtimeClient = __commonJS({
           ref: this.pendingHeartbeatRef
         });
         this.setAuth(this.accessToken);
+      }
+      _throttle(callback, eventsPerSecondLimit = this.eventsPerSecondLimitMs) {
+        return () => {
+          if (this.inThrottle)
+            return true;
+          callback();
+          this.inThrottle = true;
+          setTimeout(() => {
+            this.inThrottle = false;
+          }, eventsPerSecondLimit);
+          return false;
+        };
       }
     };
     exports2.default = RealtimeClient;
@@ -16144,9 +15228,13 @@ var require_main3 = __commonJS({
     var __createBinding = exports2 && exports2.__createBinding || (Object.create ? function(o, m, k, k2) {
       if (k2 === void 0)
         k2 = k;
-      Object.defineProperty(o, k2, { enumerable: true, get: function() {
-        return m[k];
-      } });
+      var desc = Object.getOwnPropertyDescriptor(m, k);
+      if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+        desc = { enumerable: true, get: function() {
+          return m[k];
+        } };
+      }
+      Object.defineProperty(o, k2, desc);
     } : function(o, m, k, k2) {
       if (k2 === void 0)
         k2 = k;
@@ -16173,699 +15261,75 @@ var require_main3 = __commonJS({
       return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
-    exports2.Transformers = exports2.RealtimeSubscription = exports2.RealtimeClient = void 0;
-    var Transformers = __importStar(require_transformers());
-    exports2.Transformers = Transformers;
+    exports2.REALTIME_SUBSCRIBE_STATES = exports2.REALTIME_PRESENCE_LISTEN_EVENTS = exports2.REALTIME_POSTGRES_CHANGES_LISTEN_EVENT = exports2.REALTIME_LISTEN_TYPES = exports2.RealtimeClient = exports2.RealtimeChannel = exports2.RealtimePresence = void 0;
     var RealtimeClient_1 = __importDefault(require_RealtimeClient());
     exports2.RealtimeClient = RealtimeClient_1.default;
-    var RealtimeSubscription_1 = __importDefault(require_RealtimeSubscription());
-    exports2.RealtimeSubscription = RealtimeSubscription_1.default;
+    var RealtimeChannel_1 = __importStar(require_RealtimeChannel());
+    exports2.RealtimeChannel = RealtimeChannel_1.default;
+    Object.defineProperty(exports2, "REALTIME_LISTEN_TYPES", { enumerable: true, get: function() {
+      return RealtimeChannel_1.REALTIME_LISTEN_TYPES;
+    } });
+    Object.defineProperty(exports2, "REALTIME_POSTGRES_CHANGES_LISTEN_EVENT", { enumerable: true, get: function() {
+      return RealtimeChannel_1.REALTIME_POSTGRES_CHANGES_LISTEN_EVENT;
+    } });
+    Object.defineProperty(exports2, "REALTIME_SUBSCRIBE_STATES", { enumerable: true, get: function() {
+      return RealtimeChannel_1.REALTIME_SUBSCRIBE_STATES;
+    } });
+    var RealtimePresence_1 = __importStar(require_RealtimePresence());
+    exports2.RealtimePresence = RealtimePresence_1.default;
+    Object.defineProperty(exports2, "REALTIME_PRESENCE_LISTEN_EVENTS", { enumerable: true, get: function() {
+      return RealtimePresence_1.REALTIME_PRESENCE_LISTEN_EVENTS;
+    } });
   }
 });
 
-// node_modules/@supabase/supabase-js/dist/main/lib/SupabaseRealtimeClient.js
-var require_SupabaseRealtimeClient = __commonJS({
-  "node_modules/@supabase/supabase-js/dist/main/lib/SupabaseRealtimeClient.js"(exports2) {
+// node_modules/@supabase/storage-js/dist/main/lib/errors.js
+var require_errors = __commonJS({
+  "node_modules/@supabase/storage-js/dist/main/lib/errors.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
-    exports2.SupabaseRealtimeClient = void 0;
-    var realtime_js_1 = require_main3();
-    var SupabaseRealtimeClient = class {
-      constructor(socket, headers, schema, tableName) {
-        const chanParams = {};
-        const topic = tableName === "*" ? `realtime:${schema}` : `realtime:${schema}:${tableName}`;
-        const userToken = headers["Authorization"].split(" ")[1];
-        if (userToken) {
-          chanParams["user_token"] = userToken;
-        }
-        this.subscription = socket.channel(topic, chanParams);
+    exports2.StorageUnknownError = exports2.StorageApiError = exports2.isStorageError = exports2.StorageError = void 0;
+    var StorageError = class extends Error {
+      constructor(message) {
+        super(message);
+        this.__isStorageError = true;
+        this.name = "StorageError";
       }
-      getPayloadRecords(payload) {
-        const records = {
-          new: {},
-          old: {}
+    };
+    exports2.StorageError = StorageError;
+    function isStorageError(error) {
+      return typeof error === "object" && error !== null && "__isStorageError" in error;
+    }
+    exports2.isStorageError = isStorageError;
+    var StorageApiError = class extends StorageError {
+      constructor(message, status) {
+        super(message);
+        this.name = "StorageApiError";
+        this.status = status;
+      }
+      toJSON() {
+        return {
+          name: this.name,
+          message: this.message,
+          status: this.status
         };
-        if (payload.type === "INSERT" || payload.type === "UPDATE") {
-          records.new = realtime_js_1.Transformers.convertChangeData(payload.columns, payload.record);
-        }
-        if (payload.type === "UPDATE" || payload.type === "DELETE") {
-          records.old = realtime_js_1.Transformers.convertChangeData(payload.columns, payload.old_record);
-        }
-        return records;
-      }
-      on(event, callback) {
-        this.subscription.on(event, (payload) => {
-          let enrichedPayload = {
-            schema: payload.schema,
-            table: payload.table,
-            commit_timestamp: payload.commit_timestamp,
-            eventType: payload.type,
-            new: {},
-            old: {},
-            errors: payload.errors
-          };
-          enrichedPayload = Object.assign(Object.assign({}, enrichedPayload), this.getPayloadRecords(payload));
-          callback(enrichedPayload);
-        });
-        return this;
-      }
-      subscribe(callback = () => {
-      }) {
-        this.subscription.onError((e) => callback("SUBSCRIPTION_ERROR", e));
-        this.subscription.onClose(() => callback("CLOSED"));
-        this.subscription.subscribe().receive("ok", () => callback("SUBSCRIBED")).receive("error", (e) => callback("SUBSCRIPTION_ERROR", e)).receive("timeout", () => callback("RETRYING_AFTER_TIMEOUT"));
-        return this.subscription;
       }
     };
-    exports2.SupabaseRealtimeClient = SupabaseRealtimeClient;
-  }
-});
-
-// node_modules/@supabase/supabase-js/dist/main/lib/SupabaseQueryBuilder.js
-var require_SupabaseQueryBuilder = __commonJS({
-  "node_modules/@supabase/supabase-js/dist/main/lib/SupabaseQueryBuilder.js"(exports2) {
-    "use strict";
-    Object.defineProperty(exports2, "__esModule", { value: true });
-    exports2.SupabaseQueryBuilder = void 0;
-    var postgrest_js_1 = require_main2();
-    var SupabaseRealtimeClient_1 = require_SupabaseRealtimeClient();
-    var SupabaseQueryBuilder = class extends postgrest_js_1.PostgrestQueryBuilder {
-      constructor(url, { headers = {}, schema, realtime, table, fetch: fetch5, shouldThrowOnError }) {
-        super(url, { headers, schema, fetch: fetch5, shouldThrowOnError });
-        this._subscription = null;
-        this._realtime = realtime;
-        this._headers = headers;
-        this._schema = schema;
-        this._table = table;
-      }
-      on(event, callback) {
-        if (!this._realtime.isConnected()) {
-          this._realtime.connect();
-        }
-        if (!this._subscription) {
-          this._subscription = new SupabaseRealtimeClient_1.SupabaseRealtimeClient(this._realtime, this._headers, this._schema, this._table);
-        }
-        return this._subscription.on(event, callback);
+    exports2.StorageApiError = StorageApiError;
+    var StorageUnknownError = class extends StorageError {
+      constructor(message, originalError) {
+        super(message);
+        this.name = "StorageUnknownError";
+        this.originalError = originalError;
       }
     };
-    exports2.SupabaseQueryBuilder = SupabaseQueryBuilder;
-  }
-});
-
-// node_modules/@supabase/storage-js/dist/main/lib/version.js
-var require_version6 = __commonJS({
-  "node_modules/@supabase/storage-js/dist/main/lib/version.js"(exports2) {
-    "use strict";
-    Object.defineProperty(exports2, "__esModule", { value: true });
-    exports2.version = void 0;
-    exports2.version = "0.0.0";
-  }
-});
-
-// node_modules/@supabase/storage-js/dist/main/lib/constants.js
-var require_constants5 = __commonJS({
-  "node_modules/@supabase/storage-js/dist/main/lib/constants.js"(exports2) {
-    "use strict";
-    Object.defineProperty(exports2, "__esModule", { value: true });
-    exports2.DEFAULT_HEADERS = void 0;
-    var version_1 = require_version6();
-    exports2.DEFAULT_HEADERS = { "X-Client-Info": `storage-js/${version_1.version}` };
-  }
-});
-
-// node_modules/@supabase/storage-js/dist/main/lib/fetch.js
-var require_fetch2 = __commonJS({
-  "node_modules/@supabase/storage-js/dist/main/lib/fetch.js"(exports2) {
-    "use strict";
-    var __awaiter = exports2 && exports2.__awaiter || function(thisArg, _arguments, P, generator) {
-      function adopt(value) {
-        return value instanceof P ? value : new P(function(resolve10) {
-          resolve10(value);
-        });
-      }
-      return new (P || (P = Promise))(function(resolve10, reject) {
-        function fulfilled(value) {
-          try {
-            step(generator.next(value));
-          } catch (e) {
-            reject(e);
-          }
-        }
-        function rejected(value) {
-          try {
-            step(generator["throw"](value));
-          } catch (e) {
-            reject(e);
-          }
-        }
-        function step(result) {
-          result.done ? resolve10(result.value) : adopt(result.value).then(fulfilled, rejected);
-        }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-      });
-    };
-    Object.defineProperty(exports2, "__esModule", { value: true });
-    exports2.remove = exports2.put = exports2.post = exports2.get = void 0;
-    var _getErrorMessage = (err) => err.msg || err.message || err.error_description || err.error || JSON.stringify(err);
-    var handleError = (error, reject) => {
-      if (typeof error.json !== "function") {
-        return reject(error);
-      }
-      error.json().then((err) => {
-        return reject({
-          message: _getErrorMessage(err),
-          status: (error === null || error === void 0 ? void 0 : error.status) || 500
-        });
-      });
-    };
-    var _getRequestParams = (method, options, parameters, body) => {
-      const params = { method, headers: (options === null || options === void 0 ? void 0 : options.headers) || {} };
-      if (method === "GET") {
-        return params;
-      }
-      params.headers = Object.assign({ "Content-Type": "application/json" }, options === null || options === void 0 ? void 0 : options.headers);
-      params.body = JSON.stringify(body);
-      return Object.assign(Object.assign({}, params), parameters);
-    };
-    function _handleRequest(fetcher, method, url, options, parameters, body) {
-      return __awaiter(this, void 0, void 0, function* () {
-        return new Promise((resolve10, reject) => {
-          fetcher(url, _getRequestParams(method, options, parameters, body)).then((result) => {
-            if (!result.ok)
-              throw result;
-            if (options === null || options === void 0 ? void 0 : options.noResolveJson)
-              return resolve10(result);
-            return result.json();
-          }).then((data) => resolve10(data)).catch((error) => handleError(error, reject));
-        });
-      });
-    }
-    function get2(fetcher, url, options, parameters) {
-      return __awaiter(this, void 0, void 0, function* () {
-        return _handleRequest(fetcher, "GET", url, options, parameters);
-      });
-    }
-    exports2.get = get2;
-    function post(fetcher, url, body, options, parameters) {
-      return __awaiter(this, void 0, void 0, function* () {
-        return _handleRequest(fetcher, "POST", url, options, parameters, body);
-      });
-    }
-    exports2.post = post;
-    function put(fetcher, url, body, options, parameters) {
-      return __awaiter(this, void 0, void 0, function* () {
-        return _handleRequest(fetcher, "PUT", url, options, parameters, body);
-      });
-    }
-    exports2.put = put;
-    function remove(fetcher, url, body, options, parameters) {
-      return __awaiter(this, void 0, void 0, function* () {
-        return _handleRequest(fetcher, "DELETE", url, options, parameters, body);
-      });
-    }
-    exports2.remove = remove;
+    exports2.StorageUnknownError = StorageUnknownError;
   }
 });
 
 // node_modules/@supabase/storage-js/dist/main/lib/helpers.js
-var require_helpers3 = __commonJS({
+var require_helpers = __commonJS({
   "node_modules/@supabase/storage-js/dist/main/lib/helpers.js"(exports2) {
-    "use strict";
-    var __createBinding = exports2 && exports2.__createBinding || (Object.create ? function(o, m, k, k2) {
-      if (k2 === void 0)
-        k2 = k;
-      Object.defineProperty(o, k2, { enumerable: true, get: function() {
-        return m[k];
-      } });
-    } : function(o, m, k, k2) {
-      if (k2 === void 0)
-        k2 = k;
-      o[k2] = m[k];
-    });
-    var __setModuleDefault = exports2 && exports2.__setModuleDefault || (Object.create ? function(o, v) {
-      Object.defineProperty(o, "default", { enumerable: true, value: v });
-    } : function(o, v) {
-      o["default"] = v;
-    });
-    var __importStar = exports2 && exports2.__importStar || function(mod2) {
-      if (mod2 && mod2.__esModule)
-        return mod2;
-      var result = {};
-      if (mod2 != null) {
-        for (var k in mod2)
-          if (k !== "default" && Object.prototype.hasOwnProperty.call(mod2, k))
-            __createBinding(result, mod2, k);
-      }
-      __setModuleDefault(result, mod2);
-      return result;
-    };
-    var __awaiter = exports2 && exports2.__awaiter || function(thisArg, _arguments, P, generator) {
-      function adopt(value) {
-        return value instanceof P ? value : new P(function(resolve10) {
-          resolve10(value);
-        });
-      }
-      return new (P || (P = Promise))(function(resolve10, reject) {
-        function fulfilled(value) {
-          try {
-            step(generator.next(value));
-          } catch (e) {
-            reject(e);
-          }
-        }
-        function rejected(value) {
-          try {
-            step(generator["throw"](value));
-          } catch (e) {
-            reject(e);
-          }
-        }
-        function step(result) {
-          result.done ? resolve10(result.value) : adopt(result.value).then(fulfilled, rejected);
-        }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-      });
-    };
-    Object.defineProperty(exports2, "__esModule", { value: true });
-    exports2.resolveFetch = void 0;
-    exports2.resolveFetch = (customFetch) => {
-      let _fetch;
-      if (customFetch) {
-        _fetch = customFetch;
-      } else if (typeof fetch === "undefined") {
-        _fetch = (...args) => __awaiter(void 0, void 0, void 0, function* () {
-          return yield (yield Promise.resolve().then(() => __importStar(require_node_ponyfill()))).fetch(...args);
-        });
-      } else {
-        _fetch = fetch;
-      }
-      return (...args) => _fetch(...args);
-    };
-  }
-});
-
-// node_modules/@supabase/storage-js/dist/main/lib/StorageBucketApi.js
-var require_StorageBucketApi = __commonJS({
-  "node_modules/@supabase/storage-js/dist/main/lib/StorageBucketApi.js"(exports2) {
-    "use strict";
-    var __awaiter = exports2 && exports2.__awaiter || function(thisArg, _arguments, P, generator) {
-      function adopt(value) {
-        return value instanceof P ? value : new P(function(resolve10) {
-          resolve10(value);
-        });
-      }
-      return new (P || (P = Promise))(function(resolve10, reject) {
-        function fulfilled(value) {
-          try {
-            step(generator.next(value));
-          } catch (e) {
-            reject(e);
-          }
-        }
-        function rejected(value) {
-          try {
-            step(generator["throw"](value));
-          } catch (e) {
-            reject(e);
-          }
-        }
-        function step(result) {
-          result.done ? resolve10(result.value) : adopt(result.value).then(fulfilled, rejected);
-        }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-      });
-    };
-    Object.defineProperty(exports2, "__esModule", { value: true });
-    exports2.StorageBucketApi = void 0;
-    var constants_1 = require_constants5();
-    var fetch_1 = require_fetch2();
-    var helpers_1 = require_helpers3();
-    var StorageBucketApi = class {
-      constructor(url, headers = {}, fetch5) {
-        this.url = url;
-        this.headers = Object.assign(Object.assign({}, constants_1.DEFAULT_HEADERS), headers);
-        this.fetch = helpers_1.resolveFetch(fetch5);
-      }
-      listBuckets() {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            const data = yield fetch_1.get(this.fetch, `${this.url}/bucket`, { headers: this.headers });
-            return { data, error: null };
-          } catch (error) {
-            return { data: null, error };
-          }
-        });
-      }
-      getBucket(id) {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            const data = yield fetch_1.get(this.fetch, `${this.url}/bucket/${id}`, { headers: this.headers });
-            return { data, error: null };
-          } catch (error) {
-            return { data: null, error };
-          }
-        });
-      }
-      createBucket(id, options = { public: false }) {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            const data = yield fetch_1.post(this.fetch, `${this.url}/bucket`, { id, name: id, public: options.public }, { headers: this.headers });
-            return { data: data.name, error: null };
-          } catch (error) {
-            return { data: null, error };
-          }
-        });
-      }
-      updateBucket(id, options) {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            const data = yield fetch_1.put(this.fetch, `${this.url}/bucket/${id}`, { id, name: id, public: options.public }, { headers: this.headers });
-            return { data, error: null };
-          } catch (error) {
-            return { data: null, error };
-          }
-        });
-      }
-      emptyBucket(id) {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            const data = yield fetch_1.post(this.fetch, `${this.url}/bucket/${id}/empty`, {}, { headers: this.headers });
-            return { data, error: null };
-          } catch (error) {
-            return { data: null, error };
-          }
-        });
-      }
-      deleteBucket(id) {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            const data = yield fetch_1.remove(this.fetch, `${this.url}/bucket/${id}`, {}, { headers: this.headers });
-            return { data, error: null };
-          } catch (error) {
-            return { data: null, error };
-          }
-        });
-      }
-    };
-    exports2.StorageBucketApi = StorageBucketApi;
-  }
-});
-
-// node_modules/@supabase/storage-js/dist/main/lib/StorageFileApi.js
-var require_StorageFileApi = __commonJS({
-  "node_modules/@supabase/storage-js/dist/main/lib/StorageFileApi.js"(exports2) {
-    "use strict";
-    var __awaiter = exports2 && exports2.__awaiter || function(thisArg, _arguments, P, generator) {
-      function adopt(value) {
-        return value instanceof P ? value : new P(function(resolve10) {
-          resolve10(value);
-        });
-      }
-      return new (P || (P = Promise))(function(resolve10, reject) {
-        function fulfilled(value) {
-          try {
-            step(generator.next(value));
-          } catch (e) {
-            reject(e);
-          }
-        }
-        function rejected(value) {
-          try {
-            step(generator["throw"](value));
-          } catch (e) {
-            reject(e);
-          }
-        }
-        function step(result) {
-          result.done ? resolve10(result.value) : adopt(result.value).then(fulfilled, rejected);
-        }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-      });
-    };
-    Object.defineProperty(exports2, "__esModule", { value: true });
-    exports2.StorageFileApi = void 0;
-    var fetch_1 = require_fetch2();
-    var helpers_1 = require_helpers3();
-    var DEFAULT_SEARCH_OPTIONS = {
-      limit: 100,
-      offset: 0,
-      sortBy: {
-        column: "name",
-        order: "asc"
-      }
-    };
-    var DEFAULT_FILE_OPTIONS = {
-      cacheControl: "3600",
-      contentType: "text/plain;charset=UTF-8",
-      upsert: false
-    };
-    var StorageFileApi = class {
-      constructor(url, headers = {}, bucketId, fetch5) {
-        this.url = url;
-        this.headers = headers;
-        this.bucketId = bucketId;
-        this.fetch = helpers_1.resolveFetch(fetch5);
-      }
-      uploadOrUpdate(method, path4, fileBody, fileOptions) {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            let body;
-            const options = Object.assign(Object.assign({}, DEFAULT_FILE_OPTIONS), fileOptions);
-            const headers = Object.assign(Object.assign({}, this.headers), method === "POST" && { "x-upsert": String(options.upsert) });
-            if (typeof Blob !== "undefined" && fileBody instanceof Blob) {
-              body = new FormData();
-              body.append("cacheControl", options.cacheControl);
-              body.append("", fileBody);
-            } else if (typeof FormData !== "undefined" && fileBody instanceof FormData) {
-              body = fileBody;
-              body.append("cacheControl", options.cacheControl);
-            } else {
-              body = fileBody;
-              headers["cache-control"] = `max-age=${options.cacheControl}`;
-              headers["content-type"] = options.contentType;
-            }
-            const cleanPath = this._removeEmptyFolders(path4);
-            const _path = this._getFinalPath(cleanPath);
-            const res = yield this.fetch(`${this.url}/object/${_path}`, {
-              method,
-              body,
-              headers
-            });
-            if (res.ok) {
-              return { data: { Key: _path }, error: null };
-            } else {
-              const error = yield res.json();
-              return { data: null, error };
-            }
-          } catch (error) {
-            return { data: null, error };
-          }
-        });
-      }
-      upload(path4, fileBody, fileOptions) {
-        return __awaiter(this, void 0, void 0, function* () {
-          return this.uploadOrUpdate("POST", path4, fileBody, fileOptions);
-        });
-      }
-      update(path4, fileBody, fileOptions) {
-        return __awaiter(this, void 0, void 0, function* () {
-          return this.uploadOrUpdate("PUT", path4, fileBody, fileOptions);
-        });
-      }
-      move(fromPath, toPath) {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            const data = yield fetch_1.post(this.fetch, `${this.url}/object/move`, { bucketId: this.bucketId, sourceKey: fromPath, destinationKey: toPath }, { headers: this.headers });
-            return { data, error: null };
-          } catch (error) {
-            return { data: null, error };
-          }
-        });
-      }
-      copy(fromPath, toPath) {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            const data = yield fetch_1.post(this.fetch, `${this.url}/object/copy`, { bucketId: this.bucketId, sourceKey: fromPath, destinationKey: toPath }, { headers: this.headers });
-            return { data, error: null };
-          } catch (error) {
-            return { data: null, error };
-          }
-        });
-      }
-      createSignedUrl(path4, expiresIn) {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            const _path = this._getFinalPath(path4);
-            let data = yield fetch_1.post(this.fetch, `${this.url}/object/sign/${_path}`, { expiresIn }, { headers: this.headers });
-            const signedURL = `${this.url}${data.signedURL}`;
-            data = { signedURL };
-            return { data, error: null, signedURL };
-          } catch (error) {
-            return { data: null, error, signedURL: null };
-          }
-        });
-      }
-      createSignedUrls(paths, expiresIn) {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            const data = yield fetch_1.post(this.fetch, `${this.url}/object/sign/${this.bucketId}`, { expiresIn, paths }, { headers: this.headers });
-            return {
-              data: data.map((datum) => Object.assign(Object.assign({}, datum), { signedURL: datum.signedURL ? `${this.url}${datum.signedURL}` : null })),
-              error: null
-            };
-          } catch (error) {
-            return { data: null, error };
-          }
-        });
-      }
-      download(path4) {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            const _path = this._getFinalPath(path4);
-            const res = yield fetch_1.get(this.fetch, `${this.url}/object/${_path}`, {
-              headers: this.headers,
-              noResolveJson: true
-            });
-            const data = yield res.blob();
-            return { data, error: null };
-          } catch (error) {
-            return { data: null, error };
-          }
-        });
-      }
-      getPublicUrl(path4) {
-        try {
-          const _path = this._getFinalPath(path4);
-          const publicURL = `${this.url}/object/public/${_path}`;
-          const data = { publicURL };
-          return { data, error: null, publicURL };
-        } catch (error) {
-          return { data: null, error, publicURL: null };
-        }
-      }
-      remove(paths) {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            const data = yield fetch_1.remove(this.fetch, `${this.url}/object/${this.bucketId}`, { prefixes: paths }, { headers: this.headers });
-            return { data, error: null };
-          } catch (error) {
-            return { data: null, error };
-          }
-        });
-      }
-      list(path4, options, parameters) {
-        return __awaiter(this, void 0, void 0, function* () {
-          try {
-            const body = Object.assign(Object.assign(Object.assign({}, DEFAULT_SEARCH_OPTIONS), options), { prefix: path4 || "" });
-            const data = yield fetch_1.post(this.fetch, `${this.url}/object/list/${this.bucketId}`, body, { headers: this.headers }, parameters);
-            return { data, error: null };
-          } catch (error) {
-            return { data: null, error };
-          }
-        });
-      }
-      _getFinalPath(path4) {
-        return `${this.bucketId}/${path4}`;
-      }
-      _removeEmptyFolders(path4) {
-        return path4.replace(/^\/|\/$/g, "").replace(/\/+/g, "/");
-      }
-    };
-    exports2.StorageFileApi = StorageFileApi;
-  }
-});
-
-// node_modules/@supabase/storage-js/dist/main/lib/types.js
-var require_types3 = __commonJS({
-  "node_modules/@supabase/storage-js/dist/main/lib/types.js"(exports2) {
-    "use strict";
-    Object.defineProperty(exports2, "__esModule", { value: true });
-  }
-});
-
-// node_modules/@supabase/storage-js/dist/main/lib/index.js
-var require_lib5 = __commonJS({
-  "node_modules/@supabase/storage-js/dist/main/lib/index.js"(exports2) {
-    "use strict";
-    var __createBinding = exports2 && exports2.__createBinding || (Object.create ? function(o, m, k, k2) {
-      if (k2 === void 0)
-        k2 = k;
-      Object.defineProperty(o, k2, { enumerable: true, get: function() {
-        return m[k];
-      } });
-    } : function(o, m, k, k2) {
-      if (k2 === void 0)
-        k2 = k;
-      o[k2] = m[k];
-    });
-    var __exportStar = exports2 && exports2.__exportStar || function(m, exports3) {
-      for (var p in m)
-        if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports3, p))
-          __createBinding(exports3, m, p);
-    };
-    Object.defineProperty(exports2, "__esModule", { value: true });
-    __exportStar(require_StorageBucketApi(), exports2);
-    __exportStar(require_StorageFileApi(), exports2);
-    __exportStar(require_types3(), exports2);
-    __exportStar(require_constants5(), exports2);
-  }
-});
-
-// node_modules/@supabase/storage-js/dist/main/StorageClient.js
-var require_StorageClient = __commonJS({
-  "node_modules/@supabase/storage-js/dist/main/StorageClient.js"(exports2) {
-    "use strict";
-    Object.defineProperty(exports2, "__esModule", { value: true });
-    exports2.StorageClient = void 0;
-    var lib_1 = require_lib5();
-    var StorageClient = class extends lib_1.StorageBucketApi {
-      constructor(url, headers = {}, fetch5) {
-        super(url, headers, fetch5);
-      }
-      from(id) {
-        return new lib_1.StorageFileApi(this.url, this.headers, id, this.fetch);
-      }
-    };
-    exports2.StorageClient = StorageClient;
-  }
-});
-
-// node_modules/@supabase/storage-js/dist/main/index.js
-var require_main4 = __commonJS({
-  "node_modules/@supabase/storage-js/dist/main/index.js"(exports2) {
-    "use strict";
-    var __createBinding = exports2 && exports2.__createBinding || (Object.create ? function(o, m, k, k2) {
-      if (k2 === void 0)
-        k2 = k;
-      Object.defineProperty(o, k2, { enumerable: true, get: function() {
-        return m[k];
-      } });
-    } : function(o, m, k, k2) {
-      if (k2 === void 0)
-        k2 = k;
-      o[k2] = m[k];
-    });
-    var __exportStar = exports2 && exports2.__exportStar || function(m, exports3) {
-      for (var p in m)
-        if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports3, p))
-          __createBinding(exports3, m, p);
-    };
-    Object.defineProperty(exports2, "__esModule", { value: true });
-    exports2.SupabaseStorageClient = exports2.StorageClient = void 0;
-    var StorageClient_1 = require_StorageClient();
-    Object.defineProperty(exports2, "StorageClient", { enumerable: true, get: function() {
-      return StorageClient_1.StorageClient;
-    } });
-    Object.defineProperty(exports2, "SupabaseStorageClient", { enumerable: true, get: function() {
-      return StorageClient_1.StorageClient;
-    } });
-    __exportStar(require_types3(), exports2);
-  }
-});
-
-// node_modules/@supabase/functions-js/dist/main/helper.js
-var require_helper = __commonJS({
-  "node_modules/@supabase/functions-js/dist/main/helper.js"(exports2) {
     "use strict";
     var __createBinding = exports2 && exports2.__createBinding || (Object.create ? function(o, m, k, k2) {
       if (k2 === void 0)
@@ -16927,7 +15391,7 @@ var require_helper = __commonJS({
       });
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
-    exports2.resolveFetch = void 0;
+    exports2.resolveResponse = exports2.resolveFetch = void 0;
     var resolveFetch = (customFetch) => {
       let _fetch;
       if (customFetch) {
@@ -16942,12 +15406,19 @@ var require_helper = __commonJS({
       return (...args) => _fetch(...args);
     };
     exports2.resolveFetch = resolveFetch;
+    var resolveResponse = () => __awaiter(void 0, void 0, void 0, function* () {
+      if (typeof Response === "undefined") {
+        return (yield Promise.resolve().then(() => __importStar(require_node_ponyfill()))).Response;
+      }
+      return Response;
+    });
+    exports2.resolveResponse = resolveResponse;
   }
 });
 
-// node_modules/@supabase/functions-js/dist/main/index.js
-var require_main5 = __commonJS({
-  "node_modules/@supabase/functions-js/dist/main/index.js"(exports2) {
+// node_modules/@supabase/storage-js/dist/main/lib/fetch.js
+var require_fetch = __commonJS({
+  "node_modules/@supabase/storage-js/dist/main/lib/fetch.js"(exports2) {
     "use strict";
     var __awaiter = exports2 && exports2.__awaiter || function(thisArg, _arguments, P, generator) {
       function adopt(value) {
@@ -16977,49 +15448,2367 @@ var require_main5 = __commonJS({
       });
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
-    exports2.FunctionsClient = void 0;
-    var helper_1 = require_helper();
-    var FunctionsClient = class {
-      constructor(url, { headers = {}, customFetch } = {}) {
+    exports2.remove = exports2.put = exports2.post = exports2.get = void 0;
+    var errors_1 = require_errors();
+    var helpers_1 = require_helpers();
+    var _getErrorMessage = (err) => err.msg || err.message || err.error_description || err.error || JSON.stringify(err);
+    var handleError = (error, reject) => __awaiter(void 0, void 0, void 0, function* () {
+      const Res = yield (0, helpers_1.resolveResponse)();
+      if (error instanceof Res) {
+        error.json().then((err) => {
+          reject(new errors_1.StorageApiError(_getErrorMessage(err), error.status || 500));
+        });
+      } else {
+        reject(new errors_1.StorageUnknownError(_getErrorMessage(error), error));
+      }
+    });
+    var _getRequestParams = (method, options, parameters, body) => {
+      const params = { method, headers: (options === null || options === void 0 ? void 0 : options.headers) || {} };
+      if (method === "GET") {
+        return params;
+      }
+      params.headers = Object.assign({ "Content-Type": "application/json" }, options === null || options === void 0 ? void 0 : options.headers);
+      params.body = JSON.stringify(body);
+      return Object.assign(Object.assign({}, params), parameters);
+    };
+    function _handleRequest(fetcher, method, url, options, parameters, body) {
+      return __awaiter(this, void 0, void 0, function* () {
+        return new Promise((resolve10, reject) => {
+          fetcher(url, _getRequestParams(method, options, parameters, body)).then((result) => {
+            if (!result.ok)
+              throw result;
+            if (options === null || options === void 0 ? void 0 : options.noResolveJson)
+              return result;
+            return result.json();
+          }).then((data) => resolve10(data)).catch((error) => handleError(error, reject));
+        });
+      });
+    }
+    function get2(fetcher, url, options, parameters) {
+      return __awaiter(this, void 0, void 0, function* () {
+        return _handleRequest(fetcher, "GET", url, options, parameters);
+      });
+    }
+    exports2.get = get2;
+    function post(fetcher, url, body, options, parameters) {
+      return __awaiter(this, void 0, void 0, function* () {
+        return _handleRequest(fetcher, "POST", url, options, parameters, body);
+      });
+    }
+    exports2.post = post;
+    function put(fetcher, url, body, options, parameters) {
+      return __awaiter(this, void 0, void 0, function* () {
+        return _handleRequest(fetcher, "PUT", url, options, parameters, body);
+      });
+    }
+    exports2.put = put;
+    function remove(fetcher, url, body, options, parameters) {
+      return __awaiter(this, void 0, void 0, function* () {
+        return _handleRequest(fetcher, "DELETE", url, options, parameters, body);
+      });
+    }
+    exports2.remove = remove;
+  }
+});
+
+// node_modules/@supabase/storage-js/dist/main/packages/StorageFileApi.js
+var require_StorageFileApi = __commonJS({
+  "node_modules/@supabase/storage-js/dist/main/packages/StorageFileApi.js"(exports2) {
+    "use strict";
+    var __awaiter = exports2 && exports2.__awaiter || function(thisArg, _arguments, P, generator) {
+      function adopt(value) {
+        return value instanceof P ? value : new P(function(resolve10) {
+          resolve10(value);
+        });
+      }
+      return new (P || (P = Promise))(function(resolve10, reject) {
+        function fulfilled(value) {
+          try {
+            step(generator.next(value));
+          } catch (e) {
+            reject(e);
+          }
+        }
+        function rejected(value) {
+          try {
+            step(generator["throw"](value));
+          } catch (e) {
+            reject(e);
+          }
+        }
+        function step(result) {
+          result.done ? resolve10(result.value) : adopt(result.value).then(fulfilled, rejected);
+        }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+      });
+    };
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    var errors_1 = require_errors();
+    var fetch_1 = require_fetch();
+    var helpers_1 = require_helpers();
+    var DEFAULT_SEARCH_OPTIONS = {
+      limit: 100,
+      offset: 0,
+      sortBy: {
+        column: "name",
+        order: "asc"
+      }
+    };
+    var DEFAULT_FILE_OPTIONS = {
+      cacheControl: "3600",
+      contentType: "text/plain;charset=UTF-8",
+      upsert: false
+    };
+    var StorageFileApi = class {
+      constructor(url, headers = {}, bucketId, fetch5) {
         this.url = url;
         this.headers = headers;
-        this.fetch = (0, helper_1.resolveFetch)(customFetch);
+        this.bucketId = bucketId;
+        this.fetch = (0, helpers_1.resolveFetch)(fetch5);
       }
-      setAuth(token2) {
-        this.headers.Authorization = `Bearer ${token2}`;
-      }
-      invoke(functionName, invokeOptions) {
+      uploadOrUpdate(method, path4, fileBody, fileOptions) {
         return __awaiter(this, void 0, void 0, function* () {
           try {
-            const { headers, body } = invokeOptions !== null && invokeOptions !== void 0 ? invokeOptions : {};
-            const response = yield this.fetch(`${this.url}/${functionName}`, {
-              method: "POST",
-              headers: Object.assign({}, this.headers, headers),
-              body
-            });
-            const isRelayError = response.headers.get("x-relay-error");
-            if (isRelayError && isRelayError === "true") {
-              return { data: null, error: new Error(yield response.text()) };
-            }
-            let data;
-            const { responseType } = invokeOptions !== null && invokeOptions !== void 0 ? invokeOptions : {};
-            if (!responseType || responseType === "json") {
-              data = yield response.json();
-            } else if (responseType === "arrayBuffer") {
-              data = yield response.arrayBuffer();
-            } else if (responseType === "blob") {
-              data = yield response.blob();
+            let body;
+            const options = Object.assign(Object.assign({}, DEFAULT_FILE_OPTIONS), fileOptions);
+            const headers = Object.assign(Object.assign({}, this.headers), method === "POST" && { "x-upsert": String(options.upsert) });
+            if (typeof Blob !== "undefined" && fileBody instanceof Blob) {
+              body = new FormData();
+              body.append("cacheControl", options.cacheControl);
+              body.append("", fileBody);
+            } else if (typeof FormData !== "undefined" && fileBody instanceof FormData) {
+              body = fileBody;
+              body.append("cacheControl", options.cacheControl);
             } else {
-              data = yield response.text();
+              body = fileBody;
+              headers["cache-control"] = `max-age=${options.cacheControl}`;
+              headers["content-type"] = options.contentType;
             }
+            const cleanPath = this._removeEmptyFolders(path4);
+            const _path = this._getFinalPath(cleanPath);
+            const res = yield this.fetch(`${this.url}/object/${_path}`, {
+              method,
+              body,
+              headers
+            });
+            if (res.ok) {
+              return {
+                data: { path: cleanPath },
+                error: null
+              };
+            } else {
+              const error = yield res.json();
+              return { data: null, error };
+            }
+          } catch (error) {
+            if ((0, errors_1.isStorageError)(error)) {
+              return { data: null, error };
+            }
+            throw error;
+          }
+        });
+      }
+      upload(path4, fileBody, fileOptions) {
+        return __awaiter(this, void 0, void 0, function* () {
+          return this.uploadOrUpdate("POST", path4, fileBody, fileOptions);
+        });
+      }
+      update(path4, fileBody, fileOptions) {
+        return __awaiter(this, void 0, void 0, function* () {
+          return this.uploadOrUpdate("PUT", path4, fileBody, fileOptions);
+        });
+      }
+      move(fromPath, toPath) {
+        return __awaiter(this, void 0, void 0, function* () {
+          try {
+            const data = yield (0, fetch_1.post)(this.fetch, `${this.url}/object/move`, { bucketId: this.bucketId, sourceKey: fromPath, destinationKey: toPath }, { headers: this.headers });
             return { data, error: null };
           } catch (error) {
-            return { data: null, error };
+            if ((0, errors_1.isStorageError)(error)) {
+              return { data: null, error };
+            }
+            throw error;
+          }
+        });
+      }
+      copy(fromPath, toPath) {
+        return __awaiter(this, void 0, void 0, function* () {
+          try {
+            const data = yield (0, fetch_1.post)(this.fetch, `${this.url}/object/copy`, { bucketId: this.bucketId, sourceKey: fromPath, destinationKey: toPath }, { headers: this.headers });
+            return { data: { path: data.Key }, error: null };
+          } catch (error) {
+            if ((0, errors_1.isStorageError)(error)) {
+              return { data: null, error };
+            }
+            throw error;
+          }
+        });
+      }
+      createSignedUrl(path4, expiresIn, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+          try {
+            const _path = this._getFinalPath(path4);
+            let data = yield (0, fetch_1.post)(this.fetch, `${this.url}/object/sign/${_path}`, { expiresIn }, { headers: this.headers });
+            const downloadQueryParam = (options === null || options === void 0 ? void 0 : options.download) ? `&download=${options.download === true ? "" : options.download}` : "";
+            const signedUrl = encodeURI(`${this.url}${data.signedURL}${downloadQueryParam}`);
+            data = { signedUrl };
+            return { data, error: null };
+          } catch (error) {
+            if ((0, errors_1.isStorageError)(error)) {
+              return { data: null, error };
+            }
+            throw error;
+          }
+        });
+      }
+      createSignedUrls(paths, expiresIn, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+          try {
+            const data = yield (0, fetch_1.post)(this.fetch, `${this.url}/object/sign/${this.bucketId}`, { expiresIn, paths }, { headers: this.headers });
+            const downloadQueryParam = (options === null || options === void 0 ? void 0 : options.download) ? `&download=${options.download === true ? "" : options.download}` : "";
+            return {
+              data: data.map((datum) => Object.assign(Object.assign({}, datum), { signedUrl: datum.signedURL ? encodeURI(`${this.url}${datum.signedURL}${downloadQueryParam}`) : null })),
+              error: null
+            };
+          } catch (error) {
+            if ((0, errors_1.isStorageError)(error)) {
+              return { data: null, error };
+            }
+            throw error;
+          }
+        });
+      }
+      download(path4) {
+        return __awaiter(this, void 0, void 0, function* () {
+          try {
+            const _path = this._getFinalPath(path4);
+            const res = yield (0, fetch_1.get)(this.fetch, `${this.url}/object/${_path}`, {
+              headers: this.headers,
+              noResolveJson: true
+            });
+            const data = yield res.blob();
+            return { data, error: null };
+          } catch (error) {
+            if ((0, errors_1.isStorageError)(error)) {
+              return { data: null, error };
+            }
+            throw error;
+          }
+        });
+      }
+      getPublicUrl(path4, options) {
+        const _path = this._getFinalPath(path4);
+        const downloadQueryParam = (options === null || options === void 0 ? void 0 : options.download) ? `?download=${options.download === true ? "" : options.download}` : "";
+        return {
+          data: { publicUrl: encodeURI(`${this.url}/object/public/${_path}${downloadQueryParam}`) }
+        };
+      }
+      remove(paths) {
+        return __awaiter(this, void 0, void 0, function* () {
+          try {
+            const data = yield (0, fetch_1.remove)(this.fetch, `${this.url}/object/${this.bucketId}`, { prefixes: paths }, { headers: this.headers });
+            return { data, error: null };
+          } catch (error) {
+            if ((0, errors_1.isStorageError)(error)) {
+              return { data: null, error };
+            }
+            throw error;
+          }
+        });
+      }
+      list(path4, options, parameters) {
+        return __awaiter(this, void 0, void 0, function* () {
+          try {
+            const body = Object.assign(Object.assign(Object.assign({}, DEFAULT_SEARCH_OPTIONS), options), { prefix: path4 || "" });
+            const data = yield (0, fetch_1.post)(this.fetch, `${this.url}/object/list/${this.bucketId}`, body, { headers: this.headers }, parameters);
+            return { data, error: null };
+          } catch (error) {
+            if ((0, errors_1.isStorageError)(error)) {
+              return { data: null, error };
+            }
+            throw error;
+          }
+        });
+      }
+      _getFinalPath(path4) {
+        return `${this.bucketId}/${path4}`;
+      }
+      _removeEmptyFolders(path4) {
+        return path4.replace(/^\/|\/$/g, "").replace(/\/+/g, "/");
+      }
+    };
+    exports2.default = StorageFileApi;
+  }
+});
+
+// node_modules/@supabase/storage-js/dist/main/lib/version.js
+var require_version4 = __commonJS({
+  "node_modules/@supabase/storage-js/dist/main/lib/version.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.version = void 0;
+    exports2.version = "2.0.0";
+  }
+});
+
+// node_modules/@supabase/storage-js/dist/main/lib/constants.js
+var require_constants3 = __commonJS({
+  "node_modules/@supabase/storage-js/dist/main/lib/constants.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.DEFAULT_HEADERS = void 0;
+    var version_1 = require_version4();
+    exports2.DEFAULT_HEADERS = { "X-Client-Info": `storage-js/${version_1.version}` };
+  }
+});
+
+// node_modules/@supabase/storage-js/dist/main/packages/StorageBucketApi.js
+var require_StorageBucketApi = __commonJS({
+  "node_modules/@supabase/storage-js/dist/main/packages/StorageBucketApi.js"(exports2) {
+    "use strict";
+    var __awaiter = exports2 && exports2.__awaiter || function(thisArg, _arguments, P, generator) {
+      function adopt(value) {
+        return value instanceof P ? value : new P(function(resolve10) {
+          resolve10(value);
+        });
+      }
+      return new (P || (P = Promise))(function(resolve10, reject) {
+        function fulfilled(value) {
+          try {
+            step(generator.next(value));
+          } catch (e) {
+            reject(e);
+          }
+        }
+        function rejected(value) {
+          try {
+            step(generator["throw"](value));
+          } catch (e) {
+            reject(e);
+          }
+        }
+        function step(result) {
+          result.done ? resolve10(result.value) : adopt(result.value).then(fulfilled, rejected);
+        }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+      });
+    };
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    var constants_1 = require_constants3();
+    var errors_1 = require_errors();
+    var fetch_1 = require_fetch();
+    var helpers_1 = require_helpers();
+    var StorageBucketApi = class {
+      constructor(url, headers = {}, fetch5) {
+        this.url = url;
+        this.headers = Object.assign(Object.assign({}, constants_1.DEFAULT_HEADERS), headers);
+        this.fetch = (0, helpers_1.resolveFetch)(fetch5);
+      }
+      listBuckets() {
+        return __awaiter(this, void 0, void 0, function* () {
+          try {
+            const data = yield (0, fetch_1.get)(this.fetch, `${this.url}/bucket`, { headers: this.headers });
+            return { data, error: null };
+          } catch (error) {
+            if ((0, errors_1.isStorageError)(error)) {
+              return { data: null, error };
+            }
+            throw error;
+          }
+        });
+      }
+      getBucket(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+          try {
+            const data = yield (0, fetch_1.get)(this.fetch, `${this.url}/bucket/${id}`, { headers: this.headers });
+            return { data, error: null };
+          } catch (error) {
+            if ((0, errors_1.isStorageError)(error)) {
+              return { data: null, error };
+            }
+            throw error;
+          }
+        });
+      }
+      createBucket(id, options = { public: false }) {
+        return __awaiter(this, void 0, void 0, function* () {
+          try {
+            const data = yield (0, fetch_1.post)(this.fetch, `${this.url}/bucket`, { id, name: id, public: options.public }, { headers: this.headers });
+            return { data, error: null };
+          } catch (error) {
+            if ((0, errors_1.isStorageError)(error)) {
+              return { data: null, error };
+            }
+            throw error;
+          }
+        });
+      }
+      updateBucket(id, options) {
+        return __awaiter(this, void 0, void 0, function* () {
+          try {
+            const data = yield (0, fetch_1.put)(this.fetch, `${this.url}/bucket/${id}`, { id, name: id, public: options.public }, { headers: this.headers });
+            return { data, error: null };
+          } catch (error) {
+            if ((0, errors_1.isStorageError)(error)) {
+              return { data: null, error };
+            }
+            throw error;
+          }
+        });
+      }
+      emptyBucket(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+          try {
+            const data = yield (0, fetch_1.post)(this.fetch, `${this.url}/bucket/${id}/empty`, {}, { headers: this.headers });
+            return { data, error: null };
+          } catch (error) {
+            if ((0, errors_1.isStorageError)(error)) {
+              return { data: null, error };
+            }
+            throw error;
+          }
+        });
+      }
+      deleteBucket(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+          try {
+            const data = yield (0, fetch_1.remove)(this.fetch, `${this.url}/bucket/${id}`, {}, { headers: this.headers });
+            return { data, error: null };
+          } catch (error) {
+            if ((0, errors_1.isStorageError)(error)) {
+              return { data: null, error };
+            }
+            throw error;
           }
         });
       }
     };
-    exports2.FunctionsClient = FunctionsClient;
+    exports2.default = StorageBucketApi;
+  }
+});
+
+// node_modules/@supabase/storage-js/dist/main/StorageClient.js
+var require_StorageClient = __commonJS({
+  "node_modules/@supabase/storage-js/dist/main/StorageClient.js"(exports2) {
+    "use strict";
+    var __importDefault = exports2 && exports2.__importDefault || function(mod2) {
+      return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
+    };
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.StorageClient = void 0;
+    var StorageFileApi_1 = __importDefault(require_StorageFileApi());
+    var StorageBucketApi_1 = __importDefault(require_StorageBucketApi());
+    var StorageClient = class extends StorageBucketApi_1.default {
+      constructor(url, headers = {}, fetch5) {
+        super(url, headers, fetch5);
+      }
+      from(id) {
+        return new StorageFileApi_1.default(this.url, this.headers, id, this.fetch);
+      }
+    };
+    exports2.StorageClient = StorageClient;
+  }
+});
+
+// node_modules/@supabase/storage-js/dist/main/lib/types.js
+var require_types2 = __commonJS({
+  "node_modules/@supabase/storage-js/dist/main/lib/types.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+  }
+});
+
+// node_modules/@supabase/storage-js/dist/main/index.js
+var require_main4 = __commonJS({
+  "node_modules/@supabase/storage-js/dist/main/index.js"(exports2) {
+    "use strict";
+    var __createBinding = exports2 && exports2.__createBinding || (Object.create ? function(o, m, k, k2) {
+      if (k2 === void 0)
+        k2 = k;
+      var desc = Object.getOwnPropertyDescriptor(m, k);
+      if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+        desc = { enumerable: true, get: function() {
+          return m[k];
+        } };
+      }
+      Object.defineProperty(o, k2, desc);
+    } : function(o, m, k, k2) {
+      if (k2 === void 0)
+        k2 = k;
+      o[k2] = m[k];
+    });
+    var __exportStar = exports2 && exports2.__exportStar || function(m, exports3) {
+      for (var p in m)
+        if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports3, p))
+          __createBinding(exports3, m, p);
+    };
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.StorageClient = void 0;
+    var StorageClient_1 = require_StorageClient();
+    Object.defineProperty(exports2, "StorageClient", { enumerable: true, get: function() {
+      return StorageClient_1.StorageClient;
+    } });
+    __exportStar(require_types2(), exports2);
+    __exportStar(require_errors(), exports2);
+  }
+});
+
+// node_modules/@supabase/supabase-js/dist/main/lib/version.js
+var require_version5 = __commonJS({
+  "node_modules/@supabase/supabase-js/dist/main/lib/version.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.version = void 0;
+    exports2.version = "2.0.4";
+  }
+});
+
+// node_modules/@supabase/supabase-js/dist/main/lib/constants.js
+var require_constants4 = __commonJS({
+  "node_modules/@supabase/supabase-js/dist/main/lib/constants.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.DEFAULT_HEADERS = void 0;
+    var version_1 = require_version5();
+    exports2.DEFAULT_HEADERS = { "X-Client-Info": `supabase-js/${version_1.version}` };
+  }
+});
+
+// node_modules/@supabase/supabase-js/dist/main/lib/fetch.js
+var require_fetch2 = __commonJS({
+  "node_modules/@supabase/supabase-js/dist/main/lib/fetch.js"(exports2) {
+    "use strict";
+    var __createBinding = exports2 && exports2.__createBinding || (Object.create ? function(o, m, k, k2) {
+      if (k2 === void 0)
+        k2 = k;
+      var desc = Object.getOwnPropertyDescriptor(m, k);
+      if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+        desc = { enumerable: true, get: function() {
+          return m[k];
+        } };
+      }
+      Object.defineProperty(o, k2, desc);
+    } : function(o, m, k, k2) {
+      if (k2 === void 0)
+        k2 = k;
+      o[k2] = m[k];
+    });
+    var __setModuleDefault = exports2 && exports2.__setModuleDefault || (Object.create ? function(o, v) {
+      Object.defineProperty(o, "default", { enumerable: true, value: v });
+    } : function(o, v) {
+      o["default"] = v;
+    });
+    var __importStar = exports2 && exports2.__importStar || function(mod2) {
+      if (mod2 && mod2.__esModule)
+        return mod2;
+      var result = {};
+      if (mod2 != null) {
+        for (var k in mod2)
+          if (k !== "default" && Object.prototype.hasOwnProperty.call(mod2, k))
+            __createBinding(result, mod2, k);
+      }
+      __setModuleDefault(result, mod2);
+      return result;
+    };
+    var __awaiter = exports2 && exports2.__awaiter || function(thisArg, _arguments, P, generator) {
+      function adopt(value) {
+        return value instanceof P ? value : new P(function(resolve10) {
+          resolve10(value);
+        });
+      }
+      return new (P || (P = Promise))(function(resolve10, reject) {
+        function fulfilled(value) {
+          try {
+            step(generator.next(value));
+          } catch (e) {
+            reject(e);
+          }
+        }
+        function rejected(value) {
+          try {
+            step(generator["throw"](value));
+          } catch (e) {
+            reject(e);
+          }
+        }
+        function step(result) {
+          result.done ? resolve10(result.value) : adopt(result.value).then(fulfilled, rejected);
+        }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+      });
+    };
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.fetchWithAuth = exports2.resolveHeadersConstructor = exports2.resolveFetch = void 0;
+    var cross_fetch_1 = __importStar(require_node_ponyfill());
+    var resolveFetch = (customFetch) => {
+      let _fetch;
+      if (customFetch) {
+        _fetch = customFetch;
+      } else if (typeof fetch === "undefined") {
+        _fetch = cross_fetch_1.default;
+      } else {
+        _fetch = fetch;
+      }
+      return (...args) => _fetch(...args);
+    };
+    exports2.resolveFetch = resolveFetch;
+    var resolveHeadersConstructor = () => {
+      if (typeof Headers === "undefined") {
+        return cross_fetch_1.Headers;
+      }
+      return Headers;
+    };
+    exports2.resolveHeadersConstructor = resolveHeadersConstructor;
+    var fetchWithAuth = (supabaseKey, getAccessToken, customFetch) => {
+      const fetch5 = (0, exports2.resolveFetch)(customFetch);
+      const HeadersConstructor = (0, exports2.resolveHeadersConstructor)();
+      return (input, init) => __awaiter(void 0, void 0, void 0, function* () {
+        var _a;
+        const accessToken = (_a = yield getAccessToken()) !== null && _a !== void 0 ? _a : supabaseKey;
+        let headers = new HeadersConstructor(init === null || init === void 0 ? void 0 : init.headers);
+        if (!headers.has("apikey")) {
+          headers.set("apikey", supabaseKey);
+        }
+        if (!headers.has("Authorization")) {
+          headers.set("Authorization", `Bearer ${accessToken}`);
+        }
+        return fetch5(input, Object.assign(Object.assign({}, init), { headers }));
+      });
+    };
+    exports2.fetchWithAuth = fetchWithAuth;
+  }
+});
+
+// node_modules/@supabase/supabase-js/dist/main/lib/helpers.js
+var require_helpers2 = __commonJS({
+  "node_modules/@supabase/supabase-js/dist/main/lib/helpers.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.applySettingDefaults = exports2.isBrowser = exports2.stripTrailingSlash = exports2.uuid = void 0;
+    function uuid() {
+      return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
+        var r = Math.random() * 16 | 0, v = c == "x" ? r : r & 3 | 8;
+        return v.toString(16);
+      });
+    }
+    exports2.uuid = uuid;
+    function stripTrailingSlash(url) {
+      return url.replace(/\/$/, "");
+    }
+    exports2.stripTrailingSlash = stripTrailingSlash;
+    var isBrowser2 = () => typeof window !== "undefined";
+    exports2.isBrowser = isBrowser2;
+    function applySettingDefaults(options, defaults) {
+      const { db: dbOptions, auth: authOptions, realtime: realtimeOptions, global: globalOptions } = options;
+      const { db: DEFAULT_DB_OPTIONS, auth: DEFAULT_AUTH_OPTIONS, realtime: DEFAULT_REALTIME_OPTIONS, global: DEFAULT_GLOBAL_OPTIONS } = defaults;
+      return {
+        db: Object.assign(Object.assign({}, DEFAULT_DB_OPTIONS), dbOptions),
+        auth: Object.assign(Object.assign({}, DEFAULT_AUTH_OPTIONS), authOptions),
+        realtime: Object.assign(Object.assign({}, DEFAULT_REALTIME_OPTIONS), realtimeOptions),
+        global: Object.assign(Object.assign({}, DEFAULT_GLOBAL_OPTIONS), globalOptions)
+      };
+    }
+    exports2.applySettingDefaults = applySettingDefaults;
+  }
+});
+
+// node_modules/@supabase/gotrue-js/dist/main/lib/helpers.js
+var require_helpers3 = __commonJS({
+  "node_modules/@supabase/gotrue-js/dist/main/lib/helpers.js"(exports2) {
+    "use strict";
+    var __createBinding = exports2 && exports2.__createBinding || (Object.create ? function(o, m, k, k2) {
+      if (k2 === void 0)
+        k2 = k;
+      var desc = Object.getOwnPropertyDescriptor(m, k);
+      if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+        desc = { enumerable: true, get: function() {
+          return m[k];
+        } };
+      }
+      Object.defineProperty(o, k2, desc);
+    } : function(o, m, k, k2) {
+      if (k2 === void 0)
+        k2 = k;
+      o[k2] = m[k];
+    });
+    var __setModuleDefault = exports2 && exports2.__setModuleDefault || (Object.create ? function(o, v) {
+      Object.defineProperty(o, "default", { enumerable: true, value: v });
+    } : function(o, v) {
+      o["default"] = v;
+    });
+    var __importStar = exports2 && exports2.__importStar || function(mod2) {
+      if (mod2 && mod2.__esModule)
+        return mod2;
+      var result = {};
+      if (mod2 != null) {
+        for (var k in mod2)
+          if (k !== "default" && Object.prototype.hasOwnProperty.call(mod2, k))
+            __createBinding(result, mod2, k);
+      }
+      __setModuleDefault(result, mod2);
+      return result;
+    };
+    var __awaiter = exports2 && exports2.__awaiter || function(thisArg, _arguments, P, generator) {
+      function adopt(value) {
+        return value instanceof P ? value : new P(function(resolve10) {
+          resolve10(value);
+        });
+      }
+      return new (P || (P = Promise))(function(resolve10, reject) {
+        function fulfilled(value) {
+          try {
+            step(generator.next(value));
+          } catch (e) {
+            reject(e);
+          }
+        }
+        function rejected(value) {
+          try {
+            step(generator["throw"](value));
+          } catch (e) {
+            reject(e);
+          }
+        }
+        function step(result) {
+          result.done ? resolve10(result.value) : adopt(result.value).then(fulfilled, rejected);
+        }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+      });
+    };
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.decodeJWTPayload = exports2.Deferred = exports2.decodeBase64URL = exports2.removeItemAsync = exports2.getItemAsync = exports2.setItemAsync = exports2.looksLikeFetchResponse = exports2.resolveFetch = exports2.getParameterByName = exports2.isBrowser = exports2.uuid = exports2.expiresAt = void 0;
+    function expiresAt(expiresIn) {
+      const timeNow = Math.round(Date.now() / 1e3);
+      return timeNow + expiresIn;
+    }
+    exports2.expiresAt = expiresAt;
+    function uuid() {
+      return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
+        const r = Math.random() * 16 | 0, v = c == "x" ? r : r & 3 | 8;
+        return v.toString(16);
+      });
+    }
+    exports2.uuid = uuid;
+    var isBrowser2 = () => typeof window !== "undefined";
+    exports2.isBrowser = isBrowser2;
+    function getParameterByName(name8, url) {
+      var _a;
+      if (!url)
+        url = ((_a = window === null || window === void 0 ? void 0 : window.location) === null || _a === void 0 ? void 0 : _a.href) || "";
+      name8 = name8.replace(/[\[\]]/g, "\\$&");
+      const regex = new RegExp("[?&#]" + name8 + "(=([^&#]*)|&|#|$)"), results = regex.exec(url);
+      if (!results)
+        return null;
+      if (!results[2])
+        return "";
+      return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+    exports2.getParameterByName = getParameterByName;
+    var resolveFetch = (customFetch) => {
+      let _fetch;
+      if (customFetch) {
+        _fetch = customFetch;
+      } else if (typeof fetch === "undefined") {
+        _fetch = (...args) => __awaiter(void 0, void 0, void 0, function* () {
+          return yield (yield Promise.resolve().then(() => __importStar(require_node_ponyfill()))).fetch(...args);
+        });
+      } else {
+        _fetch = fetch;
+      }
+      return (...args) => _fetch(...args);
+    };
+    exports2.resolveFetch = resolveFetch;
+    var looksLikeFetchResponse = (maybeResponse) => {
+      return typeof maybeResponse === "object" && maybeResponse !== null && "status" in maybeResponse && "ok" in maybeResponse && "json" in maybeResponse && typeof maybeResponse.json === "function";
+    };
+    exports2.looksLikeFetchResponse = looksLikeFetchResponse;
+    var setItemAsync = (storage2, key, data) => __awaiter(void 0, void 0, void 0, function* () {
+      yield storage2.setItem(key, JSON.stringify(data));
+    });
+    exports2.setItemAsync = setItemAsync;
+    var getItemAsync = (storage2, key) => __awaiter(void 0, void 0, void 0, function* () {
+      const value = yield storage2.getItem(key);
+      if (!value) {
+        return null;
+      }
+      try {
+        return JSON.parse(value);
+      } catch (_a) {
+        return value;
+      }
+    });
+    exports2.getItemAsync = getItemAsync;
+    var removeItemAsync = (storage2, key) => __awaiter(void 0, void 0, void 0, function* () {
+      yield storage2.removeItem(key);
+    });
+    exports2.removeItemAsync = removeItemAsync;
+    var decodeBase64URL = (value) => {
+      try {
+        return atob(value.replace(/[-]/g, "+").replace(/[_]/g, "/"));
+      } catch (e) {
+        if (e instanceof ReferenceError) {
+          return Buffer.from(value, "base64").toString("utf-8");
+        } else {
+          throw e;
+        }
+      }
+    };
+    exports2.decodeBase64URL = decodeBase64URL;
+    var Deferred = class {
+      constructor() {
+        ;
+        this.promise = new Deferred.promiseConstructor((res, rej) => {
+          ;
+          this.resolve = res;
+          this.reject = rej;
+        });
+      }
+    };
+    exports2.Deferred = Deferred;
+    Deferred.promiseConstructor = Promise;
+    function decodeJWTPayload(token2) {
+      const parts = token2.split(".");
+      if (parts.length !== 3) {
+        throw new Error("JWT is not valid: not a JWT structure");
+      }
+      const base64Url = parts[1];
+      return JSON.parse((0, exports2.decodeBase64URL)(base64Url));
+    }
+    exports2.decodeJWTPayload = decodeJWTPayload;
+  }
+});
+
+// node_modules/@supabase/gotrue-js/dist/main/lib/errors.js
+var require_errors2 = __commonJS({
+  "node_modules/@supabase/gotrue-js/dist/main/lib/errors.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.AuthRetryableFetchError = exports2.AuthImplicitGrantRedirectError = exports2.AuthInvalidCredentialsError = exports2.AuthSessionMissingError = exports2.CustomAuthError = exports2.AuthUnknownError = exports2.AuthApiError = exports2.isAuthError = exports2.AuthError = void 0;
+    var AuthError = class extends Error {
+      constructor(message) {
+        super(message);
+        this.__isAuthError = true;
+        this.name = "AuthError";
+      }
+    };
+    exports2.AuthError = AuthError;
+    function isAuthError(error) {
+      return typeof error === "object" && error !== null && "__isAuthError" in error;
+    }
+    exports2.isAuthError = isAuthError;
+    var AuthApiError = class extends AuthError {
+      constructor(message, status) {
+        super(message);
+        this.name = "AuthApiError";
+        this.status = status;
+      }
+      toJSON() {
+        return {
+          name: this.name,
+          message: this.message,
+          status: this.status
+        };
+      }
+    };
+    exports2.AuthApiError = AuthApiError;
+    var AuthUnknownError = class extends AuthError {
+      constructor(message, originalError) {
+        super(message);
+        this.name = "AuthUnknownError";
+        this.originalError = originalError;
+      }
+    };
+    exports2.AuthUnknownError = AuthUnknownError;
+    var CustomAuthError = class extends AuthError {
+      constructor(message, name8, status) {
+        super(message);
+        this.name = name8;
+        this.status = status;
+      }
+      toJSON() {
+        return {
+          name: this.name,
+          message: this.message,
+          status: this.status
+        };
+      }
+    };
+    exports2.CustomAuthError = CustomAuthError;
+    var AuthSessionMissingError = class extends CustomAuthError {
+      constructor() {
+        super("Auth session missing!", "AuthSessionMissingError", 400);
+      }
+    };
+    exports2.AuthSessionMissingError = AuthSessionMissingError;
+    var AuthInvalidCredentialsError = class extends CustomAuthError {
+      constructor(message) {
+        super(message, "AuthInvalidCredentialsError", 400);
+      }
+    };
+    exports2.AuthInvalidCredentialsError = AuthInvalidCredentialsError;
+    var AuthImplicitGrantRedirectError = class extends CustomAuthError {
+      constructor(message, details = null) {
+        super(message, "AuthImplicitGrantRedirectError", 500);
+        this.details = null;
+        this.details = details;
+      }
+      toJSON() {
+        return {
+          name: this.name,
+          message: this.message,
+          status: this.status,
+          details: this.details
+        };
+      }
+    };
+    exports2.AuthImplicitGrantRedirectError = AuthImplicitGrantRedirectError;
+    var AuthRetryableFetchError = class extends CustomAuthError {
+      constructor(message, status) {
+        super(message, "AuthRetryableFetchError", status);
+      }
+    };
+    exports2.AuthRetryableFetchError = AuthRetryableFetchError;
+  }
+});
+
+// node_modules/@supabase/gotrue-js/dist/main/lib/fetch.js
+var require_fetch3 = __commonJS({
+  "node_modules/@supabase/gotrue-js/dist/main/lib/fetch.js"(exports2) {
+    "use strict";
+    var __awaiter = exports2 && exports2.__awaiter || function(thisArg, _arguments, P, generator) {
+      function adopt(value) {
+        return value instanceof P ? value : new P(function(resolve10) {
+          resolve10(value);
+        });
+      }
+      return new (P || (P = Promise))(function(resolve10, reject) {
+        function fulfilled(value) {
+          try {
+            step(generator.next(value));
+          } catch (e) {
+            reject(e);
+          }
+        }
+        function rejected(value) {
+          try {
+            step(generator["throw"](value));
+          } catch (e) {
+            reject(e);
+          }
+        }
+        function step(result) {
+          result.done ? resolve10(result.value) : adopt(result.value).then(fulfilled, rejected);
+        }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+      });
+    };
+    var __rest = exports2 && exports2.__rest || function(s, e) {
+      var t = {};
+      for (var p in s)
+        if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+          t[p] = s[p];
+      if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+          if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+            t[p[i]] = s[p[i]];
+        }
+      return t;
+    };
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2._generateLinkResponse = exports2._userResponse = exports2._sessionResponse = exports2._request = void 0;
+    var helpers_1 = require_helpers3();
+    var errors_1 = require_errors2();
+    var _getErrorMessage = (err) => err.msg || err.message || err.error_description || err.error || JSON.stringify(err);
+    var handleError = (error, reject) => __awaiter(void 0, void 0, void 0, function* () {
+      const NETWORK_ERROR_CODES = [502, 503, 504];
+      if (!(0, helpers_1.looksLikeFetchResponse)(error)) {
+        reject(new errors_1.AuthRetryableFetchError(_getErrorMessage(error), 0));
+      } else if (NETWORK_ERROR_CODES.includes(error.status)) {
+        reject(new errors_1.AuthRetryableFetchError(_getErrorMessage(error), error.status));
+      } else {
+        error.json().then((err) => {
+          reject(new errors_1.AuthApiError(_getErrorMessage(err), error.status || 500));
+        }).catch((e) => {
+          reject(new errors_1.AuthUnknownError(_getErrorMessage(e), e));
+        });
+      }
+    });
+    var _getRequestParams = (method, options, parameters, body) => {
+      const params = { method, headers: (options === null || options === void 0 ? void 0 : options.headers) || {} };
+      if (method === "GET") {
+        return params;
+      }
+      params.headers = Object.assign({ "Content-Type": "application/json;charset=UTF-8" }, options === null || options === void 0 ? void 0 : options.headers);
+      params.body = JSON.stringify(body);
+      return Object.assign(Object.assign({}, params), parameters);
+    };
+    function _request(fetcher, method, url, options) {
+      var _a, _b;
+      return __awaiter(this, void 0, void 0, function* () {
+        const headers = (_a = options === null || options === void 0 ? void 0 : options.headers) !== null && _a !== void 0 ? _a : {};
+        if (options === null || options === void 0 ? void 0 : options.jwt) {
+          headers["Authorization"] = `Bearer ${options.jwt}`;
+        }
+        const qs = (_b = options === null || options === void 0 ? void 0 : options.query) !== null && _b !== void 0 ? _b : {};
+        if (options === null || options === void 0 ? void 0 : options.redirectTo) {
+          qs["redirect_to"] = options.redirectTo;
+        }
+        const queryString = Object.keys(qs).length ? "?" + new URLSearchParams(qs).toString() : "";
+        const data = yield _handleRequest(fetcher, method, url + queryString, { headers, noResolveJson: options === null || options === void 0 ? void 0 : options.noResolveJson }, {}, options === null || options === void 0 ? void 0 : options.body);
+        return (options === null || options === void 0 ? void 0 : options.xform) ? options === null || options === void 0 ? void 0 : options.xform(data) : { data: Object.assign({}, data), error: null };
+      });
+    }
+    exports2._request = _request;
+    function _handleRequest(fetcher, method, url, options, parameters, body) {
+      return __awaiter(this, void 0, void 0, function* () {
+        return new Promise((resolve10, reject) => {
+          fetcher(url, _getRequestParams(method, options, parameters, body)).then((result) => {
+            if (!result.ok)
+              throw result;
+            if (options === null || options === void 0 ? void 0 : options.noResolveJson)
+              return result;
+            return result.json();
+          }).then((data) => resolve10(data)).catch((error) => handleError(error, reject));
+        });
+      });
+    }
+    function _sessionResponse(data) {
+      var _a;
+      let session = null;
+      if (hasSession(data)) {
+        session = Object.assign({}, data);
+        session.expires_at = (0, helpers_1.expiresAt)(data.expires_in);
+      }
+      const user = (_a = data.user) !== null && _a !== void 0 ? _a : data;
+      return { data: { session, user }, error: null };
+    }
+    exports2._sessionResponse = _sessionResponse;
+    function _userResponse(data) {
+      var _a;
+      const user = (_a = data.user) !== null && _a !== void 0 ? _a : data;
+      return { data: { user }, error: null };
+    }
+    exports2._userResponse = _userResponse;
+    function _generateLinkResponse(data) {
+      const { action_link, email_otp, hashed_token, redirect_to, verification_type } = data, rest = __rest(data, ["action_link", "email_otp", "hashed_token", "redirect_to", "verification_type"]);
+      const properties = {
+        action_link,
+        email_otp,
+        hashed_token,
+        redirect_to,
+        verification_type
+      };
+      const user = Object.assign({}, rest);
+      return {
+        data: {
+          properties,
+          user
+        },
+        error: null
+      };
+    }
+    exports2._generateLinkResponse = _generateLinkResponse;
+    function hasSession(data) {
+      return data.access_token && data.refresh_token && data.expires_in;
+    }
+  }
+});
+
+// node_modules/@supabase/gotrue-js/dist/main/GoTrueAdminApi.js
+var require_GoTrueAdminApi = __commonJS({
+  "node_modules/@supabase/gotrue-js/dist/main/GoTrueAdminApi.js"(exports2) {
+    "use strict";
+    var __awaiter = exports2 && exports2.__awaiter || function(thisArg, _arguments, P, generator) {
+      function adopt(value) {
+        return value instanceof P ? value : new P(function(resolve10) {
+          resolve10(value);
+        });
+      }
+      return new (P || (P = Promise))(function(resolve10, reject) {
+        function fulfilled(value) {
+          try {
+            step(generator.next(value));
+          } catch (e) {
+            reject(e);
+          }
+        }
+        function rejected(value) {
+          try {
+            step(generator["throw"](value));
+          } catch (e) {
+            reject(e);
+          }
+        }
+        function step(result) {
+          result.done ? resolve10(result.value) : adopt(result.value).then(fulfilled, rejected);
+        }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+      });
+    };
+    var __rest = exports2 && exports2.__rest || function(s, e) {
+      var t = {};
+      for (var p in s)
+        if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+          t[p] = s[p];
+      if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+          if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+            t[p[i]] = s[p[i]];
+        }
+      return t;
+    };
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    var fetch_1 = require_fetch3();
+    var helpers_1 = require_helpers3();
+    var errors_1 = require_errors2();
+    var GoTrueAdminApi = class {
+      constructor({ url = "", headers = {}, fetch: fetch5 }) {
+        this.url = url;
+        this.headers = headers;
+        this.fetch = (0, helpers_1.resolveFetch)(fetch5);
+        this.mfa = {
+          listFactors: this._listFactors.bind(this),
+          deleteFactor: this._deleteFactor.bind(this)
+        };
+      }
+      signOut(jwt) {
+        return __awaiter(this, void 0, void 0, function* () {
+          try {
+            yield (0, fetch_1._request)(this.fetch, "POST", `${this.url}/logout`, {
+              headers: this.headers,
+              jwt,
+              noResolveJson: true
+            });
+            return { data: null, error: null };
+          } catch (error) {
+            if ((0, errors_1.isAuthError)(error)) {
+              return { data: null, error };
+            }
+            throw error;
+          }
+        });
+      }
+      inviteUserByEmail(email, options = {}) {
+        return __awaiter(this, void 0, void 0, function* () {
+          try {
+            return yield (0, fetch_1._request)(this.fetch, "POST", `${this.url}/invite`, {
+              body: { email, data: options.data },
+              headers: this.headers,
+              redirectTo: options.redirectTo,
+              xform: fetch_1._userResponse
+            });
+          } catch (error) {
+            if ((0, errors_1.isAuthError)(error)) {
+              return { data: { user: null }, error };
+            }
+            throw error;
+          }
+        });
+      }
+      generateLink(params) {
+        return __awaiter(this, void 0, void 0, function* () {
+          try {
+            const { options } = params, rest = __rest(params, ["options"]);
+            const body = Object.assign(Object.assign({}, rest), options);
+            if ("newEmail" in rest) {
+              body.new_email = rest === null || rest === void 0 ? void 0 : rest.newEmail;
+              delete body["newEmail"];
+            }
+            return yield (0, fetch_1._request)(this.fetch, "POST", `${this.url}/admin/generate_link`, {
+              body,
+              headers: this.headers,
+              xform: fetch_1._generateLinkResponse,
+              redirectTo: options === null || options === void 0 ? void 0 : options.redirectTo
+            });
+          } catch (error) {
+            if ((0, errors_1.isAuthError)(error)) {
+              return {
+                data: {
+                  properties: null,
+                  user: null
+                },
+                error
+              };
+            }
+            throw error;
+          }
+        });
+      }
+      createUser(attributes) {
+        return __awaiter(this, void 0, void 0, function* () {
+          try {
+            return yield (0, fetch_1._request)(this.fetch, "POST", `${this.url}/admin/users`, {
+              body: attributes,
+              headers: this.headers,
+              xform: fetch_1._userResponse
+            });
+          } catch (error) {
+            if ((0, errors_1.isAuthError)(error)) {
+              return { data: { user: null }, error };
+            }
+            throw error;
+          }
+        });
+      }
+      listUsers() {
+        return __awaiter(this, void 0, void 0, function* () {
+          try {
+            const { data, error } = yield (0, fetch_1._request)(this.fetch, "GET", `${this.url}/admin/users`, {
+              headers: this.headers
+            });
+            if (error)
+              throw error;
+            return { data: Object.assign({}, data), error: null };
+          } catch (error) {
+            if ((0, errors_1.isAuthError)(error)) {
+              return { data: { users: [] }, error };
+            }
+            throw error;
+          }
+        });
+      }
+      getUserById(uid) {
+        return __awaiter(this, void 0, void 0, function* () {
+          try {
+            return yield (0, fetch_1._request)(this.fetch, "GET", `${this.url}/admin/users/${uid}`, {
+              headers: this.headers,
+              xform: fetch_1._userResponse
+            });
+          } catch (error) {
+            if ((0, errors_1.isAuthError)(error)) {
+              return { data: { user: null }, error };
+            }
+            throw error;
+          }
+        });
+      }
+      updateUserById(uid, attributes) {
+        return __awaiter(this, void 0, void 0, function* () {
+          try {
+            return yield (0, fetch_1._request)(this.fetch, "PUT", `${this.url}/admin/users/${uid}`, {
+              body: attributes,
+              headers: this.headers,
+              xform: fetch_1._userResponse
+            });
+          } catch (error) {
+            if ((0, errors_1.isAuthError)(error)) {
+              return { data: { user: null }, error };
+            }
+            throw error;
+          }
+        });
+      }
+      deleteUser(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+          try {
+            return yield (0, fetch_1._request)(this.fetch, "DELETE", `${this.url}/admin/users/${id}`, {
+              headers: this.headers,
+              xform: fetch_1._userResponse
+            });
+          } catch (error) {
+            if ((0, errors_1.isAuthError)(error)) {
+              return { data: { user: null }, error };
+            }
+            throw error;
+          }
+        });
+      }
+      _listFactors(params) {
+        return __awaiter(this, void 0, void 0, function* () {
+          try {
+            const data = yield (0, fetch_1._request)(this.fetch, "GET", `${this.url}/admin/users/${params.userId}/factors`, {
+              headers: this.headers
+            });
+            return { data, error: null };
+          } catch (error) {
+            if ((0, errors_1.isAuthError)(error)) {
+              return { data: null, error };
+            }
+            throw error;
+          }
+        });
+      }
+      _deleteFactor(params) {
+        return __awaiter(this, void 0, void 0, function* () {
+          try {
+            const data = yield (0, fetch_1._request)(this.fetch, "DELETE", `${this.url}/admin/users/${params.userId}/factors/${params.id}`, {
+              headers: this.headers
+            });
+            return { data, error: null };
+          } catch (error) {
+            if ((0, errors_1.isAuthError)(error)) {
+              return { data: null, error };
+            }
+            throw error;
+          }
+        });
+      }
+    };
+    exports2.default = GoTrueAdminApi;
+  }
+});
+
+// node_modules/@supabase/gotrue-js/dist/main/lib/version.js
+var require_version6 = __commonJS({
+  "node_modules/@supabase/gotrue-js/dist/main/lib/version.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.version = void 0;
+    exports2.version = "2.2.1";
+  }
+});
+
+// node_modules/@supabase/gotrue-js/dist/main/lib/constants.js
+var require_constants5 = __commonJS({
+  "node_modules/@supabase/gotrue-js/dist/main/lib/constants.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.NETWORK_FAILURE = exports2.EXPIRY_MARGIN = exports2.DEFAULT_HEADERS = exports2.AUDIENCE = exports2.STORAGE_KEY = exports2.GOTRUE_URL = void 0;
+    var version_1 = require_version6();
+    exports2.GOTRUE_URL = "http://localhost:9999";
+    exports2.STORAGE_KEY = "supabase.auth.token";
+    exports2.AUDIENCE = "";
+    exports2.DEFAULT_HEADERS = { "X-Client-Info": `gotrue-js/${version_1.version}` };
+    exports2.EXPIRY_MARGIN = 10;
+    exports2.NETWORK_FAILURE = {
+      MAX_RETRIES: 10,
+      RETRY_INTERVAL: 2
+    };
+  }
+});
+
+// node_modules/@supabase/gotrue-js/dist/main/lib/local-storage.js
+var require_local_storage = __commonJS({
+  "node_modules/@supabase/gotrue-js/dist/main/lib/local-storage.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    var helpers_1 = require_helpers3();
+    var localStorageAdapter = {
+      getItem: (key) => {
+        if (!(0, helpers_1.isBrowser)()) {
+          return null;
+        }
+        return globalThis.localStorage.getItem(key);
+      },
+      setItem: (key, value) => {
+        if (!(0, helpers_1.isBrowser)()) {
+          return;
+        }
+        globalThis.localStorage.setItem(key, value);
+      },
+      removeItem: (key) => {
+        if (!(0, helpers_1.isBrowser)()) {
+          return;
+        }
+        globalThis.localStorage.removeItem(key);
+      }
+    };
+    exports2.default = localStorageAdapter;
+  }
+});
+
+// node_modules/@supabase/gotrue-js/dist/main/lib/polyfills.js
+var require_polyfills = __commonJS({
+  "node_modules/@supabase/gotrue-js/dist/main/lib/polyfills.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.polyfillGlobalThis = void 0;
+    function polyfillGlobalThis() {
+      if (typeof globalThis === "object")
+        return;
+      try {
+        Object.defineProperty(Object.prototype, "__magic__", {
+          get: function() {
+            return this;
+          },
+          configurable: true
+        });
+        __magic__.globalThis = __magic__;
+        delete Object.prototype.__magic__;
+      } catch (e) {
+        if (typeof self !== "undefined") {
+          self.globalThis = self;
+        }
+      }
+    }
+    exports2.polyfillGlobalThis = polyfillGlobalThis;
+  }
+});
+
+// node_modules/@supabase/gotrue-js/dist/main/GoTrueClient.js
+var require_GoTrueClient = __commonJS({
+  "node_modules/@supabase/gotrue-js/dist/main/GoTrueClient.js"(exports2) {
+    "use strict";
+    var __awaiter = exports2 && exports2.__awaiter || function(thisArg, _arguments, P, generator) {
+      function adopt(value) {
+        return value instanceof P ? value : new P(function(resolve10) {
+          resolve10(value);
+        });
+      }
+      return new (P || (P = Promise))(function(resolve10, reject) {
+        function fulfilled(value) {
+          try {
+            step(generator.next(value));
+          } catch (e) {
+            reject(e);
+          }
+        }
+        function rejected(value) {
+          try {
+            step(generator["throw"](value));
+          } catch (e) {
+            reject(e);
+          }
+        }
+        function step(result) {
+          result.done ? resolve10(result.value) : adopt(result.value).then(fulfilled, rejected);
+        }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+      });
+    };
+    var __importDefault = exports2 && exports2.__importDefault || function(mod2) {
+      return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
+    };
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    var GoTrueAdminApi_1 = __importDefault(require_GoTrueAdminApi());
+    var constants_1 = require_constants5();
+    var errors_1 = require_errors2();
+    var fetch_1 = require_fetch3();
+    var helpers_1 = require_helpers3();
+    var local_storage_1 = __importDefault(require_local_storage());
+    var polyfills_1 = require_polyfills();
+    (0, polyfills_1.polyfillGlobalThis)();
+    var DEFAULT_OPTIONS = {
+      url: constants_1.GOTRUE_URL,
+      storageKey: constants_1.STORAGE_KEY,
+      autoRefreshToken: true,
+      persistSession: true,
+      detectSessionInUrl: true,
+      headers: constants_1.DEFAULT_HEADERS
+    };
+    var GoTrueClient = class {
+      constructor(options) {
+        this.stateChangeEmitters = /* @__PURE__ */ new Map();
+        this.networkRetries = 0;
+        this.refreshingDeferred = null;
+        this.initializePromise = null;
+        this.detectSessionInUrl = true;
+        const settings = Object.assign(Object.assign({}, DEFAULT_OPTIONS), options);
+        this.inMemorySession = null;
+        this.storageKey = settings.storageKey;
+        this.autoRefreshToken = settings.autoRefreshToken;
+        this.persistSession = settings.persistSession;
+        this.storage = settings.storage || local_storage_1.default;
+        this.admin = new GoTrueAdminApi_1.default({
+          url: settings.url,
+          headers: settings.headers,
+          fetch: settings.fetch
+        });
+        this.url = settings.url;
+        this.headers = settings.headers;
+        this.fetch = (0, helpers_1.resolveFetch)(settings.fetch);
+        this.detectSessionInUrl = settings.detectSessionInUrl;
+        this.initialize();
+        this.mfa = {
+          verify: this._verify.bind(this),
+          enroll: this._enroll.bind(this),
+          unenroll: this._unenroll.bind(this),
+          challenge: this._challenge.bind(this),
+          listFactors: this._listFactors.bind(this),
+          challengeAndVerify: this._challengeAndVerify.bind(this),
+          getAuthenticatorAssuranceLevel: this._getAuthenticatorAssuranceLevel.bind(this)
+        };
+      }
+      initialize() {
+        if (!this.initializePromise) {
+          this.initializePromise = this._initialize();
+        }
+        return this.initializePromise;
+      }
+      _initialize() {
+        return __awaiter(this, void 0, void 0, function* () {
+          if (this.initializePromise) {
+            return this.initializePromise;
+          }
+          try {
+            if (this.detectSessionInUrl && this._isImplicitGrantFlow()) {
+              const { data, error } = yield this._getSessionFromUrl();
+              if (error) {
+                yield this._removeSession();
+                return { error };
+              }
+              const { session, redirectType } = data;
+              yield this._saveSession(session);
+              this._notifyAllSubscribers("SIGNED_IN", session);
+              if (redirectType === "recovery") {
+                this._notifyAllSubscribers("PASSWORD_RECOVERY", session);
+              }
+              return { error: null };
+            }
+            yield this._recoverAndRefresh();
+            return { error: null };
+          } catch (error) {
+            if ((0, errors_1.isAuthError)(error)) {
+              return { error };
+            }
+            return {
+              error: new errors_1.AuthUnknownError("Unexpected error during initialization", error)
+            };
+          } finally {
+            this._handleVisibilityChange();
+          }
+        });
+      }
+      signUp(credentials) {
+        var _a, _b;
+        return __awaiter(this, void 0, void 0, function* () {
+          try {
+            yield this._removeSession();
+            let res;
+            if ("email" in credentials) {
+              const { email, password, options } = credentials;
+              res = yield (0, fetch_1._request)(this.fetch, "POST", `${this.url}/signup`, {
+                headers: this.headers,
+                redirectTo: options === null || options === void 0 ? void 0 : options.emailRedirectTo,
+                body: {
+                  email,
+                  password,
+                  data: (_a = options === null || options === void 0 ? void 0 : options.data) !== null && _a !== void 0 ? _a : {},
+                  gotrue_meta_security: { captcha_token: options === null || options === void 0 ? void 0 : options.captchaToken }
+                },
+                xform: fetch_1._sessionResponse
+              });
+            } else if ("phone" in credentials) {
+              const { phone, password, options } = credentials;
+              res = yield (0, fetch_1._request)(this.fetch, "POST", `${this.url}/signup`, {
+                headers: this.headers,
+                body: {
+                  phone,
+                  password,
+                  data: (_b = options === null || options === void 0 ? void 0 : options.data) !== null && _b !== void 0 ? _b : {},
+                  gotrue_meta_security: { captcha_token: options === null || options === void 0 ? void 0 : options.captchaToken }
+                },
+                xform: fetch_1._sessionResponse
+              });
+            } else {
+              throw new errors_1.AuthInvalidCredentialsError("You must provide either an email or phone number and a password");
+            }
+            const { data, error } = res;
+            if (error || !data) {
+              return { data: { user: null, session: null }, error };
+            }
+            const session = data.session;
+            const user = data.user;
+            if (data.session) {
+              yield this._saveSession(data.session);
+              this._notifyAllSubscribers("SIGNED_IN", session);
+            }
+            return { data: { user, session }, error: null };
+          } catch (error) {
+            if ((0, errors_1.isAuthError)(error)) {
+              return { data: { user: null, session: null }, error };
+            }
+            throw error;
+          }
+        });
+      }
+      signInWithPassword(credentials) {
+        var _a, _b;
+        return __awaiter(this, void 0, void 0, function* () {
+          try {
+            yield this._removeSession();
+            let res;
+            if ("email" in credentials) {
+              const { email, password, options } = credentials;
+              res = yield (0, fetch_1._request)(this.fetch, "POST", `${this.url}/token?grant_type=password`, {
+                headers: this.headers,
+                body: {
+                  email,
+                  password,
+                  data: (_a = options === null || options === void 0 ? void 0 : options.data) !== null && _a !== void 0 ? _a : {},
+                  gotrue_meta_security: { captcha_token: options === null || options === void 0 ? void 0 : options.captchaToken }
+                },
+                xform: fetch_1._sessionResponse
+              });
+            } else if ("phone" in credentials) {
+              const { phone, password, options } = credentials;
+              res = yield (0, fetch_1._request)(this.fetch, "POST", `${this.url}/token?grant_type=password`, {
+                headers: this.headers,
+                body: {
+                  phone,
+                  password,
+                  data: (_b = options === null || options === void 0 ? void 0 : options.data) !== null && _b !== void 0 ? _b : {},
+                  gotrue_meta_security: { captcha_token: options === null || options === void 0 ? void 0 : options.captchaToken }
+                },
+                xform: fetch_1._sessionResponse
+              });
+            } else {
+              throw new errors_1.AuthInvalidCredentialsError("You must provide either an email or phone number and a password");
+            }
+            const { data, error } = res;
+            if (error || !data)
+              return { data: { user: null, session: null }, error };
+            if (data.session) {
+              yield this._saveSession(data.session);
+              this._notifyAllSubscribers("SIGNED_IN", data.session);
+            }
+            return { data, error };
+          } catch (error) {
+            if ((0, errors_1.isAuthError)(error)) {
+              return { data: { user: null, session: null }, error };
+            }
+            throw error;
+          }
+        });
+      }
+      signInWithOAuth(credentials) {
+        var _a, _b, _c;
+        return __awaiter(this, void 0, void 0, function* () {
+          yield this._removeSession();
+          return this._handleProviderSignIn(credentials.provider, {
+            redirectTo: (_a = credentials.options) === null || _a === void 0 ? void 0 : _a.redirectTo,
+            scopes: (_b = credentials.options) === null || _b === void 0 ? void 0 : _b.scopes,
+            queryParams: (_c = credentials.options) === null || _c === void 0 ? void 0 : _c.queryParams
+          });
+        });
+      }
+      signInWithOtp(credentials) {
+        var _a, _b, _c, _d;
+        return __awaiter(this, void 0, void 0, function* () {
+          try {
+            yield this._removeSession();
+            if ("email" in credentials) {
+              const { email, options } = credentials;
+              const { error } = yield (0, fetch_1._request)(this.fetch, "POST", `${this.url}/otp`, {
+                headers: this.headers,
+                body: {
+                  email,
+                  data: (_a = options === null || options === void 0 ? void 0 : options.data) !== null && _a !== void 0 ? _a : {},
+                  create_user: (_b = options === null || options === void 0 ? void 0 : options.shouldCreateUser) !== null && _b !== void 0 ? _b : true,
+                  gotrue_meta_security: { captcha_token: options === null || options === void 0 ? void 0 : options.captchaToken }
+                },
+                redirectTo: options === null || options === void 0 ? void 0 : options.emailRedirectTo
+              });
+              return { data: { user: null, session: null }, error };
+            }
+            if ("phone" in credentials) {
+              const { phone, options } = credentials;
+              const { error } = yield (0, fetch_1._request)(this.fetch, "POST", `${this.url}/otp`, {
+                headers: this.headers,
+                body: {
+                  phone,
+                  data: (_c = options === null || options === void 0 ? void 0 : options.data) !== null && _c !== void 0 ? _c : {},
+                  create_user: (_d = options === null || options === void 0 ? void 0 : options.shouldCreateUser) !== null && _d !== void 0 ? _d : true,
+                  gotrue_meta_security: { captcha_token: options === null || options === void 0 ? void 0 : options.captchaToken }
+                }
+              });
+              return { data: { user: null, session: null }, error };
+            }
+            throw new errors_1.AuthInvalidCredentialsError("You must provide either an email or phone number.");
+          } catch (error) {
+            if ((0, errors_1.isAuthError)(error)) {
+              return { data: { user: null, session: null }, error };
+            }
+            throw error;
+          }
+        });
+      }
+      verifyOtp(params) {
+        var _a, _b;
+        return __awaiter(this, void 0, void 0, function* () {
+          try {
+            yield this._removeSession();
+            const { data, error } = yield (0, fetch_1._request)(this.fetch, "POST", `${this.url}/verify`, {
+              headers: this.headers,
+              body: Object.assign(Object.assign({}, params), { gotrue_meta_security: { captchaToken: (_a = params.options) === null || _a === void 0 ? void 0 : _a.captchaToken } }),
+              redirectTo: (_b = params.options) === null || _b === void 0 ? void 0 : _b.redirectTo,
+              xform: fetch_1._sessionResponse
+            });
+            if (error) {
+              throw error;
+            }
+            if (!data) {
+              throw "An error occurred on token verification.";
+            }
+            const session = data.session;
+            const user = data.user;
+            if (session === null || session === void 0 ? void 0 : session.access_token) {
+              yield this._saveSession(session);
+              this._notifyAllSubscribers("SIGNED_IN", session);
+            }
+            return { data: { user, session }, error: null };
+          } catch (error) {
+            if ((0, errors_1.isAuthError)(error)) {
+              return { data: { user: null, session: null }, error };
+            }
+            throw error;
+          }
+        });
+      }
+      getSession() {
+        return __awaiter(this, void 0, void 0, function* () {
+          yield this.initializePromise;
+          let currentSession = null;
+          if (this.persistSession) {
+            const maybeSession = yield (0, helpers_1.getItemAsync)(this.storage, this.storageKey);
+            if (maybeSession !== null) {
+              if (this._isValidSession(maybeSession)) {
+                currentSession = maybeSession;
+              } else {
+                yield this._removeSession();
+              }
+            }
+          } else {
+            currentSession = this.inMemorySession;
+          }
+          if (!currentSession) {
+            return { data: { session: null }, error: null };
+          }
+          const hasExpired = currentSession.expires_at ? currentSession.expires_at <= Date.now() / 1e3 : false;
+          if (!hasExpired) {
+            return { data: { session: currentSession }, error: null };
+          }
+          const { session, error } = yield this._callRefreshToken(currentSession.refresh_token);
+          if (error) {
+            return { data: { session: null }, error };
+          }
+          return { data: { session }, error: null };
+        });
+      }
+      getUser(jwt) {
+        var _a, _b;
+        return __awaiter(this, void 0, void 0, function* () {
+          try {
+            if (!jwt) {
+              const { data, error } = yield this.getSession();
+              if (error) {
+                throw error;
+              }
+              jwt = (_b = (_a = data.session) === null || _a === void 0 ? void 0 : _a.access_token) !== null && _b !== void 0 ? _b : void 0;
+            }
+            return yield (0, fetch_1._request)(this.fetch, "GET", `${this.url}/user`, {
+              headers: this.headers,
+              jwt,
+              xform: fetch_1._userResponse
+            });
+          } catch (error) {
+            if ((0, errors_1.isAuthError)(error)) {
+              return { data: { user: null }, error };
+            }
+            throw error;
+          }
+        });
+      }
+      updateUser(attributes) {
+        return __awaiter(this, void 0, void 0, function* () {
+          try {
+            const { data: sessionData, error: sessionError } = yield this.getSession();
+            if (sessionError) {
+              throw sessionError;
+            }
+            if (!sessionData.session) {
+              throw new errors_1.AuthSessionMissingError();
+            }
+            const session = sessionData.session;
+            const { data, error: userError } = yield (0, fetch_1._request)(this.fetch, "PUT", `${this.url}/user`, {
+              headers: this.headers,
+              body: attributes,
+              jwt: session.access_token,
+              xform: fetch_1._userResponse
+            });
+            if (userError)
+              throw userError;
+            session.user = data.user;
+            yield this._saveSession(session);
+            this._notifyAllSubscribers("USER_UPDATED", session);
+            return { data: { user: session.user }, error: null };
+          } catch (error) {
+            if ((0, errors_1.isAuthError)(error)) {
+              return { data: { user: null }, error };
+            }
+            throw error;
+          }
+        });
+      }
+      _decodeJWT(jwt) {
+        return (0, helpers_1.decodeJWTPayload)(jwt);
+      }
+      setSession(currentSession) {
+        return __awaiter(this, void 0, void 0, function* () {
+          try {
+            const timeNow = Date.now() / 1e3;
+            let expiresAt = timeNow;
+            let hasExpired = true;
+            let session = null;
+            if (currentSession.access_token && currentSession.access_token.split(".")[1]) {
+              const payload = this._decodeJWT(currentSession.access_token);
+              if (payload.exp) {
+                expiresAt = payload.exp;
+                hasExpired = expiresAt <= timeNow;
+              }
+            }
+            if (hasExpired) {
+              if (!currentSession.refresh_token) {
+                throw new errors_1.AuthSessionMissingError();
+              }
+              const { data, error } = yield this._refreshAccessToken(currentSession.refresh_token);
+              if (error) {
+                return { data: { session: null, user: null }, error };
+              }
+              if (!data.session) {
+                return { data: { session: null, user: null }, error: null };
+              }
+              session = data.session;
+            } else {
+              const { data, error } = yield this.getUser(currentSession.access_token);
+              if (error) {
+                throw error;
+              }
+              session = {
+                access_token: currentSession.access_token,
+                refresh_token: currentSession.refresh_token,
+                user: data.user,
+                token_type: "bearer",
+                expires_in: expiresAt - timeNow,
+                expires_at: expiresAt
+              };
+            }
+            yield this._saveSession(session);
+            this._notifyAllSubscribers("TOKEN_REFRESHED", session);
+            return { data: { session, user: session.user }, error: null };
+          } catch (error) {
+            if ((0, errors_1.isAuthError)(error)) {
+              return { data: { session: null, user: null }, error };
+            }
+            throw error;
+          }
+        });
+      }
+      refreshSession(currentSession) {
+        var _a;
+        return __awaiter(this, void 0, void 0, function* () {
+          try {
+            if (!currentSession) {
+              const { data, error: error2 } = yield this.getSession();
+              if (error2) {
+                throw error2;
+              }
+              currentSession = (_a = data.session) !== null && _a !== void 0 ? _a : void 0;
+            }
+            if (!(currentSession === null || currentSession === void 0 ? void 0 : currentSession.refresh_token)) {
+              throw new errors_1.AuthSessionMissingError();
+            }
+            const { session, error } = yield this._callRefreshToken(currentSession.refresh_token);
+            if (error) {
+              return { data: { user: null, session: null }, error };
+            }
+            if (!session) {
+              return { data: { user: null, session: null }, error: null };
+            }
+            return { data: { user: session.user, session }, error: null };
+          } catch (error) {
+            if ((0, errors_1.isAuthError)(error)) {
+              return { data: { user: null, session: null }, error };
+            }
+            throw error;
+          }
+        });
+      }
+      _getSessionFromUrl() {
+        return __awaiter(this, void 0, void 0, function* () {
+          try {
+            if (!(0, helpers_1.isBrowser)())
+              throw new errors_1.AuthImplicitGrantRedirectError("No browser detected.");
+            if (!this._isImplicitGrantFlow()) {
+              throw new errors_1.AuthImplicitGrantRedirectError("Not a valid implicit grant flow url.");
+            }
+            const error_description = (0, helpers_1.getParameterByName)("error_description");
+            if (error_description) {
+              const error_code = (0, helpers_1.getParameterByName)("error_code");
+              if (!error_code)
+                throw new errors_1.AuthImplicitGrantRedirectError("No error_code detected.");
+              const error2 = (0, helpers_1.getParameterByName)("error");
+              if (!error2)
+                throw new errors_1.AuthImplicitGrantRedirectError("No error detected.");
+              throw new errors_1.AuthImplicitGrantRedirectError(error_description, { error: error2, code: error_code });
+            }
+            const provider_token = (0, helpers_1.getParameterByName)("provider_token");
+            const provider_refresh_token = (0, helpers_1.getParameterByName)("provider_refresh_token");
+            const access_token = (0, helpers_1.getParameterByName)("access_token");
+            if (!access_token)
+              throw new errors_1.AuthImplicitGrantRedirectError("No access_token detected.");
+            const expires_in = (0, helpers_1.getParameterByName)("expires_in");
+            if (!expires_in)
+              throw new errors_1.AuthImplicitGrantRedirectError("No expires_in detected.");
+            const refresh_token = (0, helpers_1.getParameterByName)("refresh_token");
+            if (!refresh_token)
+              throw new errors_1.AuthImplicitGrantRedirectError("No refresh_token detected.");
+            const token_type = (0, helpers_1.getParameterByName)("token_type");
+            if (!token_type)
+              throw new errors_1.AuthImplicitGrantRedirectError("No token_type detected.");
+            const timeNow = Math.round(Date.now() / 1e3);
+            const expires_at = timeNow + parseInt(expires_in);
+            const { data, error } = yield this.getUser(access_token);
+            if (error)
+              throw error;
+            const user = data.user;
+            const session = {
+              provider_token,
+              provider_refresh_token,
+              access_token,
+              expires_in: parseInt(expires_in),
+              expires_at,
+              refresh_token,
+              token_type,
+              user
+            };
+            const redirectType = (0, helpers_1.getParameterByName)("type");
+            window.location.hash = "";
+            return { data: { session, redirectType }, error: null };
+          } catch (error) {
+            if ((0, errors_1.isAuthError)(error)) {
+              return { data: { session: null, redirectType: null }, error };
+            }
+            throw error;
+          }
+        });
+      }
+      _isImplicitGrantFlow() {
+        return (0, helpers_1.isBrowser)() && (Boolean((0, helpers_1.getParameterByName)("access_token")) || Boolean((0, helpers_1.getParameterByName)("error_description")));
+      }
+      signOut() {
+        var _a;
+        return __awaiter(this, void 0, void 0, function* () {
+          const { data, error: sessionError } = yield this.getSession();
+          if (sessionError) {
+            return { error: sessionError };
+          }
+          const accessToken = (_a = data.session) === null || _a === void 0 ? void 0 : _a.access_token;
+          if (accessToken) {
+            const { error } = yield this.admin.signOut(accessToken);
+            if (error)
+              return { error };
+          }
+          yield this._removeSession();
+          this._notifyAllSubscribers("SIGNED_OUT", null);
+          return { error: null };
+        });
+      }
+      onAuthStateChange(callback) {
+        const id = (0, helpers_1.uuid)();
+        const subscription = {
+          id,
+          callback,
+          unsubscribe: () => {
+            this.stateChangeEmitters.delete(id);
+          }
+        };
+        this.stateChangeEmitters.set(id, subscription);
+        return { data: { subscription } };
+      }
+      resetPasswordForEmail(email, options = {}) {
+        return __awaiter(this, void 0, void 0, function* () {
+          try {
+            return yield (0, fetch_1._request)(this.fetch, "POST", `${this.url}/recover`, {
+              body: { email, gotrue_meta_security: { captcha_token: options.captchaToken } },
+              headers: this.headers,
+              redirectTo: options.redirectTo
+            });
+          } catch (error) {
+            if ((0, errors_1.isAuthError)(error)) {
+              return { data: null, error };
+            }
+            throw error;
+          }
+        });
+      }
+      _refreshAccessToken(refreshToken) {
+        return __awaiter(this, void 0, void 0, function* () {
+          try {
+            return yield (0, fetch_1._request)(this.fetch, "POST", `${this.url}/token?grant_type=refresh_token`, {
+              body: { refresh_token: refreshToken },
+              headers: this.headers,
+              xform: fetch_1._sessionResponse
+            });
+          } catch (error) {
+            if ((0, errors_1.isAuthError)(error)) {
+              return { data: { session: null, user: null }, error };
+            }
+            throw error;
+          }
+        });
+      }
+      _isValidSession(maybeSession) {
+        const isValidSession = typeof maybeSession === "object" && maybeSession !== null && "access_token" in maybeSession && "refresh_token" in maybeSession && "expires_at" in maybeSession;
+        return isValidSession;
+      }
+      _handleProviderSignIn(provider, options = {}) {
+        const url = this._getUrlForProvider(provider, {
+          redirectTo: options.redirectTo,
+          scopes: options.scopes,
+          queryParams: options.queryParams
+        });
+        if ((0, helpers_1.isBrowser)()) {
+          window.location.href = url;
+        }
+        return { data: { provider, url }, error: null };
+      }
+      _recoverAndRefresh() {
+        var _a;
+        return __awaiter(this, void 0, void 0, function* () {
+          try {
+            const currentSession = yield (0, helpers_1.getItemAsync)(this.storage, this.storageKey);
+            if (!this._isValidSession(currentSession)) {
+              if (currentSession !== null) {
+                yield this._removeSession();
+              }
+              return;
+            }
+            const timeNow = Math.round(Date.now() / 1e3);
+            if (((_a = currentSession.expires_at) !== null && _a !== void 0 ? _a : Infinity) < timeNow + constants_1.EXPIRY_MARGIN) {
+              if (this.autoRefreshToken && currentSession.refresh_token) {
+                this.networkRetries++;
+                const { error } = yield this._callRefreshToken(currentSession.refresh_token);
+                if (error) {
+                  console.log(error.message);
+                  if (error instanceof errors_1.AuthRetryableFetchError && this.networkRetries < constants_1.NETWORK_FAILURE.MAX_RETRIES) {
+                    if (this.refreshTokenTimer)
+                      clearTimeout(this.refreshTokenTimer);
+                    this.refreshTokenTimer = setTimeout(
+                      () => this._recoverAndRefresh(),
+                      Math.pow(constants_1.NETWORK_FAILURE.RETRY_INTERVAL, this.networkRetries) * 100
+                    );
+                    return;
+                  }
+                  yield this._removeSession();
+                }
+                this.networkRetries = 0;
+              } else {
+                yield this._removeSession();
+              }
+            } else {
+              if (this.persistSession) {
+                yield this._saveSession(currentSession);
+              }
+              this._notifyAllSubscribers("SIGNED_IN", currentSession);
+            }
+          } catch (err) {
+            console.error(err);
+            return;
+          }
+        });
+      }
+      _callRefreshToken(refreshToken) {
+        var _a, _b;
+        return __awaiter(this, void 0, void 0, function* () {
+          if (this.refreshingDeferred) {
+            return this.refreshingDeferred.promise;
+          }
+          try {
+            this.refreshingDeferred = new helpers_1.Deferred();
+            if (!refreshToken) {
+              throw new errors_1.AuthSessionMissingError();
+            }
+            const { data, error } = yield this._refreshAccessToken(refreshToken);
+            if (error)
+              throw error;
+            if (!data.session)
+              throw new errors_1.AuthSessionMissingError();
+            yield this._saveSession(data.session);
+            this._notifyAllSubscribers("TOKEN_REFRESHED", data.session);
+            const result = { session: data.session, error: null };
+            this.refreshingDeferred.resolve(result);
+            return result;
+          } catch (error) {
+            if ((0, errors_1.isAuthError)(error)) {
+              const result = { session: null, error };
+              (_a = this.refreshingDeferred) === null || _a === void 0 ? void 0 : _a.resolve(result);
+              return result;
+            }
+            (_b = this.refreshingDeferred) === null || _b === void 0 ? void 0 : _b.reject(error);
+            throw error;
+          } finally {
+            this.refreshingDeferred = null;
+          }
+        });
+      }
+      _notifyAllSubscribers(event, session) {
+        this.stateChangeEmitters.forEach((x) => x.callback(event, session));
+      }
+      _saveSession(session) {
+        return __awaiter(this, void 0, void 0, function* () {
+          if (!this.persistSession) {
+            this.inMemorySession = session;
+          }
+          const expiresAt = session.expires_at;
+          if (expiresAt) {
+            const timeNow = Math.round(Date.now() / 1e3);
+            const expiresIn = expiresAt - timeNow;
+            const refreshDurationBeforeExpires = expiresIn > constants_1.EXPIRY_MARGIN ? constants_1.EXPIRY_MARGIN : 0.5;
+            this._startAutoRefreshToken((expiresIn - refreshDurationBeforeExpires) * 1e3);
+          }
+          if (this.persistSession && session.expires_at) {
+            yield this._persistSession(session);
+          }
+        });
+      }
+      _persistSession(currentSession) {
+        return (0, helpers_1.setItemAsync)(this.storage, this.storageKey, currentSession);
+      }
+      _removeSession() {
+        return __awaiter(this, void 0, void 0, function* () {
+          if (this.persistSession) {
+            yield (0, helpers_1.removeItemAsync)(this.storage, this.storageKey);
+          } else {
+            this.inMemorySession = null;
+          }
+          if (this.refreshTokenTimer) {
+            clearTimeout(this.refreshTokenTimer);
+          }
+        });
+      }
+      _startAutoRefreshToken(value) {
+        if (this.refreshTokenTimer)
+          clearTimeout(this.refreshTokenTimer);
+        if (value <= 0 || !this.autoRefreshToken)
+          return;
+        this.refreshTokenTimer = setTimeout(() => __awaiter(this, void 0, void 0, function* () {
+          this.networkRetries++;
+          const { data: { session }, error: sessionError } = yield this.getSession();
+          if (!sessionError && session) {
+            const { error } = yield this._callRefreshToken(session.refresh_token);
+            if (!error)
+              this.networkRetries = 0;
+            if (error instanceof errors_1.AuthRetryableFetchError && this.networkRetries < constants_1.NETWORK_FAILURE.MAX_RETRIES)
+              this._startAutoRefreshToken(Math.pow(constants_1.NETWORK_FAILURE.RETRY_INTERVAL, this.networkRetries) * 100);
+          }
+        }), value);
+        if (typeof this.refreshTokenTimer.unref === "function")
+          this.refreshTokenTimer.unref();
+      }
+      _handleVisibilityChange() {
+        if (!(0, helpers_1.isBrowser)() || !(window === null || window === void 0 ? void 0 : window.addEventListener)) {
+          return false;
+        }
+        try {
+          window === null || window === void 0 ? void 0 : window.addEventListener("visibilitychange", () => __awaiter(this, void 0, void 0, function* () {
+            if (document.visibilityState === "visible") {
+              yield this.initializePromise;
+              yield this._recoverAndRefresh();
+            }
+          }));
+        } catch (error) {
+          console.error("_handleVisibilityChange", error);
+        }
+      }
+      _getUrlForProvider(provider, options) {
+        const urlParams = [`provider=${encodeURIComponent(provider)}`];
+        if (options === null || options === void 0 ? void 0 : options.redirectTo) {
+          urlParams.push(`redirect_to=${encodeURIComponent(options.redirectTo)}`);
+        }
+        if (options === null || options === void 0 ? void 0 : options.scopes) {
+          urlParams.push(`scopes=${encodeURIComponent(options.scopes)}`);
+        }
+        if (options === null || options === void 0 ? void 0 : options.queryParams) {
+          const query = new URLSearchParams(options.queryParams);
+          urlParams.push(query.toString());
+        }
+        return `${this.url}/authorize?${urlParams.join("&")}`;
+      }
+      _unenroll(params) {
+        var _a;
+        return __awaiter(this, void 0, void 0, function* () {
+          const { data: sessionData, error: sessionError } = yield this.getSession();
+          if (sessionError) {
+            return { data: null, error: sessionError };
+          }
+          return yield (0, fetch_1._request)(this.fetch, "DELETE", `${this.url}/factors/${params.factorId}`, {
+            headers: this.headers,
+            jwt: (_a = sessionData === null || sessionData === void 0 ? void 0 : sessionData.session) === null || _a === void 0 ? void 0 : _a.access_token
+          });
+        });
+      }
+      _enroll(params) {
+        var _a, _b;
+        return __awaiter(this, void 0, void 0, function* () {
+          const { data: sessionData, error: sessionError } = yield this.getSession();
+          if (sessionError) {
+            return { data: null, error: sessionError };
+          }
+          const { data, error } = yield (0, fetch_1._request)(this.fetch, "POST", `${this.url}/factors`, {
+            body: {
+              friendly_name: params.friendlyName,
+              factor_type: params.factorType,
+              issuer: params.issuer
+            },
+            headers: this.headers,
+            jwt: (_a = sessionData === null || sessionData === void 0 ? void 0 : sessionData.session) === null || _a === void 0 ? void 0 : _a.access_token
+          });
+          if (error) {
+            return { data: null, error };
+          }
+          if ((_b = data === null || data === void 0 ? void 0 : data.totp) === null || _b === void 0 ? void 0 : _b.qr_code) {
+            data.totp.qr_code = `data:image/svg+xml;utf-8,${data.totp.qr_code}`;
+          }
+          return { data, error: null };
+        });
+      }
+      _verify(params) {
+        var _a;
+        return __awaiter(this, void 0, void 0, function* () {
+          const { data: sessionData, error: sessionError } = yield this.getSession();
+          if (sessionError) {
+            return { data: null, error: sessionError };
+          }
+          const { data, error } = yield (0, fetch_1._request)(this.fetch, "POST", `${this.url}/factors/${params.factorId}/verify`, {
+            body: { code: params.code, challenge_id: params.challengeId },
+            headers: this.headers,
+            jwt: (_a = sessionData === null || sessionData === void 0 ? void 0 : sessionData.session) === null || _a === void 0 ? void 0 : _a.access_token
+          });
+          if (error) {
+            return { data: null, error };
+          }
+          yield this._saveSession(Object.assign({ expires_at: Math.round(Date.now() / 1e3) + data.expires_in }, data));
+          this._notifyAllSubscribers("MFA_CHALLENGE_VERIFIED", data);
+          return { data, error };
+        });
+      }
+      _challenge(params) {
+        var _a;
+        return __awaiter(this, void 0, void 0, function* () {
+          const { data: sessionData, error: sessionError } = yield this.getSession();
+          if (sessionError) {
+            return { data: null, error: sessionError };
+          }
+          return yield (0, fetch_1._request)(this.fetch, "POST", `${this.url}/factors/${params.factorId}/challenge`, {
+            headers: this.headers,
+            jwt: (_a = sessionData === null || sessionData === void 0 ? void 0 : sessionData.session) === null || _a === void 0 ? void 0 : _a.access_token
+          });
+        });
+      }
+      _challengeAndVerify(params) {
+        return __awaiter(this, void 0, void 0, function* () {
+          const { data: challengeData, error: challengeError } = yield this._challenge({
+            factorId: params.factorId
+          });
+          if (challengeError) {
+            return { data: null, error: challengeError };
+          }
+          return yield this._verify({
+            factorId: params.factorId,
+            challengeId: challengeData.id,
+            code: params.code
+          });
+        });
+      }
+      _listFactors() {
+        return __awaiter(this, void 0, void 0, function* () {
+          const { data: { user }, error: userError } = yield this.getUser();
+          if (userError) {
+            return { data: null, error: userError };
+          }
+          const factors = (user === null || user === void 0 ? void 0 : user.factors) || [];
+          const totp = factors.filter((factor) => factor.factor_type === "totp" && factor.status === "verified");
+          return {
+            data: {
+              all: factors,
+              totp
+            },
+            error: null
+          };
+        });
+      }
+      _getAuthenticatorAssuranceLevel() {
+        var _a, _b;
+        return __awaiter(this, void 0, void 0, function* () {
+          const { data: { session }, error: sessionError } = yield this.getSession();
+          if (sessionError) {
+            return { data: null, error: sessionError };
+          }
+          if (!session) {
+            return {
+              data: { currentLevel: null, nextLevel: null, currentAuthenticationMethods: [] },
+              error: null
+            };
+          }
+          const payload = this._decodeJWT(session.access_token);
+          let currentLevel = null;
+          if (payload.aal) {
+            currentLevel = payload.aal;
+          }
+          let nextLevel = currentLevel;
+          const verifiedFactors = (_b = (_a = session.user.factors) === null || _a === void 0 ? void 0 : _a.filter((factor) => factor.status === "verified")) !== null && _b !== void 0 ? _b : [];
+          if (verifiedFactors.length > 0) {
+            nextLevel = "aal2";
+          }
+          const currentAuthenticationMethods = payload.amr || [];
+          return { data: { currentLevel, nextLevel, currentAuthenticationMethods }, error: null };
+        });
+      }
+    };
+    exports2.default = GoTrueClient;
+  }
+});
+
+// node_modules/@supabase/gotrue-js/dist/main/lib/types.js
+var require_types3 = __commonJS({
+  "node_modules/@supabase/gotrue-js/dist/main/lib/types.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+  }
+});
+
+// node_modules/@supabase/gotrue-js/dist/main/index.js
+var require_main5 = __commonJS({
+  "node_modules/@supabase/gotrue-js/dist/main/index.js"(exports2) {
+    "use strict";
+    var __createBinding = exports2 && exports2.__createBinding || (Object.create ? function(o, m, k, k2) {
+      if (k2 === void 0)
+        k2 = k;
+      var desc = Object.getOwnPropertyDescriptor(m, k);
+      if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+        desc = { enumerable: true, get: function() {
+          return m[k];
+        } };
+      }
+      Object.defineProperty(o, k2, desc);
+    } : function(o, m, k, k2) {
+      if (k2 === void 0)
+        k2 = k;
+      o[k2] = m[k];
+    });
+    var __exportStar = exports2 && exports2.__exportStar || function(m, exports3) {
+      for (var p in m)
+        if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports3, p))
+          __createBinding(exports3, m, p);
+    };
+    var __importDefault = exports2 && exports2.__importDefault || function(mod2) {
+      return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
+    };
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.GoTrueClient = exports2.GoTrueAdminApi = void 0;
+    var GoTrueAdminApi_1 = __importDefault(require_GoTrueAdminApi());
+    exports2.GoTrueAdminApi = GoTrueAdminApi_1.default;
+    var GoTrueClient_1 = __importDefault(require_GoTrueClient());
+    exports2.GoTrueClient = GoTrueClient_1.default;
+    __exportStar(require_types3(), exports2);
+    __exportStar(require_errors2(), exports2);
+  }
+});
+
+// node_modules/@supabase/supabase-js/dist/main/lib/SupabaseAuthClient.js
+var require_SupabaseAuthClient = __commonJS({
+  "node_modules/@supabase/supabase-js/dist/main/lib/SupabaseAuthClient.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.SupabaseAuthClient = void 0;
+    var gotrue_js_1 = require_main5();
+    var SupabaseAuthClient = class extends gotrue_js_1.GoTrueClient {
+      constructor(options) {
+        super(options);
+      }
+    };
+    exports2.SupabaseAuthClient = SupabaseAuthClient;
   }
 });
 
@@ -17055,24 +17844,29 @@ var require_SupabaseClient = __commonJS({
       });
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
-    var constants_1 = require_constants();
-    var helpers_1 = require_helpers();
-    var SupabaseAuthClient_1 = require_SupabaseAuthClient();
-    var SupabaseQueryBuilder_1 = require_SupabaseQueryBuilder();
-    var storage_js_1 = require_main4();
-    var functions_js_1 = require_main5();
+    var functions_js_1 = require_main();
     var postgrest_js_1 = require_main2();
     var realtime_js_1 = require_main3();
-    var DEFAULT_OPTIONS = {
-      schema: "public",
-      autoRefreshToken: true,
-      persistSession: true,
-      detectSessionInUrl: true,
-      multiTab: true,
+    var storage_js_1 = require_main4();
+    var constants_1 = require_constants4();
+    var fetch_1 = require_fetch2();
+    var helpers_1 = require_helpers2();
+    var SupabaseAuthClient_1 = require_SupabaseAuthClient();
+    var DEFAULT_GLOBAL_OPTIONS = {
       headers: constants_1.DEFAULT_HEADERS
     };
+    var DEFAULT_DB_OPTIONS = {
+      schema: "public"
+    };
+    var DEFAULT_AUTH_OPTIONS = {
+      autoRefreshToken: true,
+      persistSession: true,
+      detectSessionInUrl: true
+    };
+    var DEFAULT_REALTIME_OPTIONS = {};
     var SupabaseClient = class {
       constructor(supabaseUrl, supabaseKey, options) {
+        var _a, _b, _c, _d, _e, _f, _g, _h;
         this.supabaseUrl = supabaseUrl;
         this.supabaseKey = supabaseKey;
         if (!supabaseUrl)
@@ -17080,9 +17874,7 @@ var require_SupabaseClient = __commonJS({
         if (!supabaseKey)
           throw new Error("supabaseKey is required.");
         const _supabaseUrl = (0, helpers_1.stripTrailingSlash)(supabaseUrl);
-        const settings = Object.assign(Object.assign({}, DEFAULT_OPTIONS), options);
-        this.restUrl = `${_supabaseUrl}/rest/v1`;
-        this.realtimeUrl = `${_supabaseUrl}/realtime/v1`.replace("http", "ws");
+        this.realtimeUrl = `${_supabaseUrl}/realtime/v1`.replace(/^http/i, "ws");
         this.authUrl = `${_supabaseUrl}/auth/v1`;
         this.storageUrl = `${_supabaseUrl}/storage/v1`;
         const isPlatform = _supabaseUrl.match(/(supabase\.co)|(supabase\.in)/);
@@ -17092,154 +17884,88 @@ var require_SupabaseClient = __commonJS({
         } else {
           this.functionsUrl = `${_supabaseUrl}/functions/v1`;
         }
-        this.schema = settings.schema;
-        this.multiTab = settings.multiTab;
-        this.fetch = settings.fetch;
-        this.headers = Object.assign(Object.assign({}, constants_1.DEFAULT_HEADERS), options === null || options === void 0 ? void 0 : options.headers);
-        this.shouldThrowOnError = settings.shouldThrowOnError || false;
-        this.auth = this._initSupabaseAuthClient(settings);
+        const defaultStorageKey = `sb-${new URL(this.authUrl).hostname.split(".")[0]}-auth-token`;
+        const DEFAULTS = {
+          db: DEFAULT_DB_OPTIONS,
+          realtime: DEFAULT_REALTIME_OPTIONS,
+          auth: Object.assign(Object.assign({}, DEFAULT_AUTH_OPTIONS), { storageKey: defaultStorageKey }),
+          global: DEFAULT_GLOBAL_OPTIONS
+        };
+        const settings = (0, helpers_1.applySettingDefaults)(options !== null && options !== void 0 ? options : {}, DEFAULTS);
+        this.storageKey = (_b = (_a = settings.auth) === null || _a === void 0 ? void 0 : _a.storageKey) !== null && _b !== void 0 ? _b : "";
+        this.headers = (_d = (_c = settings.global) === null || _c === void 0 ? void 0 : _c.headers) !== null && _d !== void 0 ? _d : {};
+        this.auth = this._initSupabaseAuthClient((_e = settings.auth) !== null && _e !== void 0 ? _e : {}, this.headers, (_f = settings.global) === null || _f === void 0 ? void 0 : _f.fetch);
+        this.fetch = (0, fetch_1.fetchWithAuth)(supabaseKey, this._getAccessToken.bind(this), (_g = settings.global) === null || _g === void 0 ? void 0 : _g.fetch);
         this.realtime = this._initRealtimeClient(Object.assign({ headers: this.headers }, settings.realtime));
+        this.rest = new postgrest_js_1.PostgrestClient(`${_supabaseUrl}/rest/v1`, {
+          headers: this.headers,
+          schema: (_h = settings.db) === null || _h === void 0 ? void 0 : _h.schema,
+          fetch: this.fetch
+        });
         this._listenForAuthEvents();
-        this._listenForMultiTabEvents();
       }
       get functions() {
         return new functions_js_1.FunctionsClient(this.functionsUrl, {
-          headers: this._getAuthHeaders(),
+          headers: this.headers,
           customFetch: this.fetch
         });
       }
       get storage() {
-        return new storage_js_1.SupabaseStorageClient(this.storageUrl, this._getAuthHeaders(), this.fetch);
+        return new storage_js_1.StorageClient(this.storageUrl, this.headers, this.fetch);
       }
-      from(table) {
-        const url = `${this.restUrl}/${table}`;
-        return new SupabaseQueryBuilder_1.SupabaseQueryBuilder(url, {
-          headers: this._getAuthHeaders(),
-          schema: this.schema,
-          realtime: this.realtime,
-          table,
-          fetch: this.fetch,
-          shouldThrowOnError: this.shouldThrowOnError
-        });
+      from(relation) {
+        return this.rest.from(relation);
       }
-      rpc(fn, params, { head = false, count = null } = {}) {
-        const rest = this._initPostgRESTClient();
-        return rest.rpc(fn, params, { head, count });
+      rpc(fn, args = {}, options) {
+        return this.rest.rpc(fn, args, options);
       }
-      removeAllSubscriptions() {
+      channel(name8, opts = { config: {} }) {
+        return this.realtime.channel(name8, opts);
+      }
+      getChannels() {
+        return this.realtime.getChannels();
+      }
+      removeChannel(channel) {
+        return this.realtime.removeChannel(channel);
+      }
+      removeAllChannels() {
+        return this.realtime.removeAllChannels();
+      }
+      _getAccessToken() {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function* () {
-          const allSubs = this.getSubscriptions().slice();
-          const allSubPromises = allSubs.map((sub) => this.removeSubscription(sub));
-          const allRemovedSubs = yield Promise.all(allSubPromises);
-          return allRemovedSubs.map(({ error }, i) => {
-            return {
-              data: { subscription: allSubs[i] },
-              error
-            };
-          });
+          const { data } = yield this.auth.getSession();
+          return (_b = (_a = data.session) === null || _a === void 0 ? void 0 : _a.access_token) !== null && _b !== void 0 ? _b : null;
         });
       }
-      removeSubscription(subscription) {
-        return __awaiter(this, void 0, void 0, function* () {
-          const { error } = yield this._closeSubscription(subscription);
-          const allSubs = this.getSubscriptions();
-          const openSubCount = allSubs.filter((chan) => chan.isJoined()).length;
-          if (allSubs.length === 0)
-            yield this.realtime.disconnect();
-          return { data: { openSubscriptions: openSubCount }, error };
-        });
-      }
-      _closeSubscription(subscription) {
-        return __awaiter(this, void 0, void 0, function* () {
-          let error = null;
-          if (!subscription.isClosed()) {
-            const { error: unsubError } = yield this._unsubscribeSubscription(subscription);
-            error = unsubError;
-          }
-          this.realtime.remove(subscription);
-          return { error };
-        });
-      }
-      _unsubscribeSubscription(subscription) {
-        return new Promise((resolve10) => {
-          subscription.unsubscribe().receive("ok", () => resolve10({ error: null })).receive("error", (error) => resolve10({ error })).receive("timeout", () => resolve10({ error: new Error("timed out") }));
-        });
-      }
-      getSubscriptions() {
-        return this.realtime.channels;
-      }
-      _initSupabaseAuthClient({ autoRefreshToken, persistSession, detectSessionInUrl, localStorage: localStorage2, headers, fetch: fetch5, cookieOptions, multiTab }) {
+      _initSupabaseAuthClient({ autoRefreshToken, persistSession, detectSessionInUrl, storage: storage2, storageKey }, headers, fetch5) {
         const authHeaders = {
           Authorization: `Bearer ${this.supabaseKey}`,
           apikey: `${this.supabaseKey}`
         };
         return new SupabaseAuthClient_1.SupabaseAuthClient({
           url: this.authUrl,
-          headers: Object.assign(Object.assign({}, headers), authHeaders),
+          headers: Object.assign(Object.assign({}, authHeaders), headers),
+          storageKey,
           autoRefreshToken,
           persistSession,
           detectSessionInUrl,
-          localStorage: localStorage2,
-          fetch: fetch5,
-          cookieOptions,
-          multiTab
+          storage: storage2,
+          fetch: fetch5
         });
       }
       _initRealtimeClient(options) {
-        return new realtime_js_1.RealtimeClient(this.realtimeUrl, Object.assign(Object.assign({}, options), { params: Object.assign(Object.assign({}, options === null || options === void 0 ? void 0 : options.params), { apikey: this.supabaseKey }) }));
-      }
-      _initPostgRESTClient() {
-        return new postgrest_js_1.PostgrestClient(this.restUrl, {
-          headers: this._getAuthHeaders(),
-          schema: this.schema,
-          fetch: this.fetch,
-          throwOnError: this.shouldThrowOnError
-        });
-      }
-      _getAuthHeaders() {
-        var _a, _b;
-        const headers = Object.assign({}, this.headers);
-        const authBearer = (_b = (_a = this.auth.session()) === null || _a === void 0 ? void 0 : _a.access_token) !== null && _b !== void 0 ? _b : this.supabaseKey;
-        headers["apikey"] = this.supabaseKey;
-        headers["Authorization"] = headers["Authorization"] || `Bearer ${authBearer}`;
-        return headers;
-      }
-      _listenForMultiTabEvents() {
-        if (!this.multiTab || !(0, helpers_1.isBrowser)() || !(window === null || window === void 0 ? void 0 : window.addEventListener)) {
-          return null;
-        }
-        try {
-          return window === null || window === void 0 ? void 0 : window.addEventListener("storage", (e) => {
-            var _a, _b, _c;
-            if (e.key === constants_1.STORAGE_KEY) {
-              const newSession = JSON.parse(String(e.newValue));
-              const accessToken = (_b = (_a = newSession === null || newSession === void 0 ? void 0 : newSession.currentSession) === null || _a === void 0 ? void 0 : _a.access_token) !== null && _b !== void 0 ? _b : void 0;
-              const previousAccessToken = (_c = this.auth.session()) === null || _c === void 0 ? void 0 : _c.access_token;
-              if (!accessToken) {
-                this._handleTokenChanged("SIGNED_OUT", accessToken, "STORAGE");
-              } else if (!previousAccessToken && accessToken) {
-                this._handleTokenChanged("SIGNED_IN", accessToken, "STORAGE");
-              } else if (previousAccessToken !== accessToken) {
-                this._handleTokenChanged("TOKEN_REFRESHED", accessToken, "STORAGE");
-              }
-            }
-          });
-        } catch (error) {
-          console.error("_listenForMultiTabEvents", error);
-          return null;
-        }
+        return new realtime_js_1.RealtimeClient(this.realtimeUrl, Object.assign(Object.assign({}, options), { params: Object.assign({ apikey: this.supabaseKey }, options === null || options === void 0 ? void 0 : options.params) }));
       }
       _listenForAuthEvents() {
-        let { data } = this.auth.onAuthStateChange((event, session) => {
+        let data = this.auth.onAuthStateChange((event, session) => {
           this._handleTokenChanged(event, session === null || session === void 0 ? void 0 : session.access_token, "CLIENT");
         });
         return data;
       }
       _handleTokenChanged(event, token2, source) {
         if ((event === "TOKEN_REFRESHED" || event === "SIGNED_IN") && this.changedAccessToken !== token2) {
-          this.realtime.setAuth(token2);
-          if (source == "STORAGE")
-            this.auth.setAuth(token2);
+          this.realtime.setAuth(token2 !== null && token2 !== void 0 ? token2 : null);
           this.changedAccessToken = token2;
         } else if (event === "SIGNED_OUT" || event === "USER_DELETED") {
           this.realtime.setAuth(this.supabaseKey);
@@ -17280,11 +18006,27 @@ var require_main6 = __commonJS({
       return mod2 && mod2.__esModule ? mod2 : { "default": mod2 };
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
-    exports2.SupabaseClient = exports2.createClient = void 0;
+    exports2.createClient = exports2.SupabaseClient = exports2.FunctionsError = exports2.FunctionsRelayError = exports2.FunctionsFetchError = exports2.FunctionsHttpError = void 0;
     var SupabaseClient_1 = __importDefault(require_SupabaseClient());
-    exports2.SupabaseClient = SupabaseClient_1.default;
-    __exportStar(require_main(), exports2);
+    __exportStar(require_main5(), exports2);
+    var functions_js_1 = require_main();
+    Object.defineProperty(exports2, "FunctionsHttpError", { enumerable: true, get: function() {
+      return functions_js_1.FunctionsHttpError;
+    } });
+    Object.defineProperty(exports2, "FunctionsFetchError", { enumerable: true, get: function() {
+      return functions_js_1.FunctionsFetchError;
+    } });
+    Object.defineProperty(exports2, "FunctionsRelayError", { enumerable: true, get: function() {
+      return functions_js_1.FunctionsRelayError;
+    } });
+    Object.defineProperty(exports2, "FunctionsError", { enumerable: true, get: function() {
+      return functions_js_1.FunctionsError;
+    } });
     __exportStar(require_main3(), exports2);
+    var SupabaseClient_2 = require_SupabaseClient();
+    Object.defineProperty(exports2, "SupabaseClient", { enumerable: true, get: function() {
+      return __importDefault(SupabaseClient_2).default;
+    } });
     var createClient2 = (supabaseUrl, supabaseKey, options) => {
       return new SupabaseClient_1.default(supabaseUrl, supabaseKey, options);
     };
@@ -18365,7 +19107,7 @@ var require_stringify = __commonJS({
 });
 
 // node_modules/json5/lib/index.js
-var require_lib6 = __commonJS({
+var require_lib5 = __commonJS({
   "node_modules/json5/lib/index.js"(exports2, module2) {
     var parse4 = require_parse();
     var stringify = require_stringify();
@@ -19600,7 +20342,7 @@ var require_writer = __commonJS({
       this.next = void 0;
       this.val = val;
     }
-    function noop4() {
+    function noop3() {
     }
     function State(writer2) {
       this.head = writer2.head;
@@ -19610,7 +20352,7 @@ var require_writer = __commonJS({
     }
     function Writer() {
       this.len = 0;
-      this.head = new Op(noop4, 0, 0);
+      this.head = new Op(noop3, 0, 0);
       this.tail = this.head;
       this.states = null;
     }
@@ -19732,7 +20474,7 @@ var require_writer = __commonJS({
     };
     Writer.prototype.fork = function fork() {
       this.states = new State(this);
-      this.head = this.tail = new Op(noop4, 0, 0);
+      this.head = this.tail = new Op(noop3, 0, 0);
       this.len = 0;
       return this;
     };
@@ -19743,7 +20485,7 @@ var require_writer = __commonJS({
         this.len = this.states.len;
         this.states = this.states.next;
       } else {
-        this.head = this.tail = new Op(noop4, 0, 0);
+        this.head = this.tail = new Op(noop3, 0, 0);
         this.len = 0;
       }
       return this;
@@ -21691,7 +22433,7 @@ var require_writer2 = __commonJS({
       this.next = void 0;
       this.val = val;
     }
-    function noop4() {
+    function noop3() {
     }
     function State(writer2) {
       this.head = writer2.head;
@@ -21701,7 +22443,7 @@ var require_writer2 = __commonJS({
     }
     function Writer() {
       this.len = 0;
-      this.head = new Op(noop4, 0, 0);
+      this.head = new Op(noop3, 0, 0);
       this.tail = this.head;
       this.states = null;
     }
@@ -21823,7 +22565,7 @@ var require_writer2 = __commonJS({
     };
     Writer.prototype.fork = function fork() {
       this.states = new State(this);
-      this.head = this.tail = new Op(noop4, 0, 0);
+      this.head = this.tail = new Op(noop3, 0, 0);
       this.len = 0;
       return this;
     };
@@ -21834,7 +22576,7 @@ var require_writer2 = __commonJS({
         this.len = this.states.len;
         this.states = this.states.next;
       } else {
-        this.head = this.tail = new Op(noop4, 0, 0);
+        this.head = this.tail = new Op(noop3, 0, 0);
         this.len = 0;
       }
       return this;
@@ -30199,7 +30941,7 @@ var require_writer3 = __commonJS({
       this.next = void 0;
       this.val = val;
     }
-    function noop4() {
+    function noop3() {
     }
     function State(writer2) {
       this.head = writer2.head;
@@ -30209,7 +30951,7 @@ var require_writer3 = __commonJS({
     }
     function Writer() {
       this.len = 0;
-      this.head = new Op(noop4, 0, 0);
+      this.head = new Op(noop3, 0, 0);
       this.tail = this.head;
       this.states = null;
     }
@@ -30331,7 +31073,7 @@ var require_writer3 = __commonJS({
     };
     Writer.prototype.fork = function fork() {
       this.states = new State(this);
-      this.head = this.tail = new Op(noop4, 0, 0);
+      this.head = this.tail = new Op(noop3, 0, 0);
       this.len = 0;
       return this;
     };
@@ -30342,7 +31084,7 @@ var require_writer3 = __commonJS({
         this.len = this.states.len;
         this.states = this.states.next;
       } else {
-        this.head = this.tail = new Op(noop4, 0, 0);
+        this.head = this.tail = new Op(noop3, 0, 0);
         this.len = 0;
       }
       return this;
@@ -33042,7 +33784,7 @@ var require_graceful_fs = __commonJS({
       gracefulQueue = "___graceful-fs.queue";
       previousSymbol = "___graceful-fs.previous";
     }
-    function noop4() {
+    function noop3() {
     }
     function publishQueue(context, queue2) {
       Object.defineProperty(context, gracefulQueue, {
@@ -33051,11 +33793,11 @@ var require_graceful_fs = __commonJS({
         }
       });
     }
-    var debug17 = noop4;
+    var debug18 = noop3;
     if (util.debuglog)
-      debug17 = util.debuglog("gfs4");
+      debug18 = util.debuglog("gfs4");
     else if (/\bgfs4\b/i.test(process.env.NODE_DEBUG || ""))
-      debug17 = function() {
+      debug18 = function() {
         var m = util.format.apply(util, arguments);
         m = "GFS4: " + m.split(/\n/).join("\nGFS4: ");
         console.error(m);
@@ -33090,7 +33832,7 @@ var require_graceful_fs = __commonJS({
       }(fs5.closeSync);
       if (/\bgfs4\b/i.test(process.env.NODE_DEBUG || "")) {
         process.on("exit", function() {
-          debug17(fs5[gracefulQueue]);
+          debug18(fs5[gracefulQueue]);
           require("assert").equal(fs5[gracefulQueue].length, 0);
         });
       }
@@ -33321,7 +34063,7 @@ var require_graceful_fs = __commonJS({
       return fs6;
     }
     function enqueue(elem) {
-      debug17("ENQUEUE", elem[0].name, elem[1]);
+      debug18("ENQUEUE", elem[0].name, elem[1]);
       fs5[gracefulQueue].push(elem);
       retry();
     }
@@ -33348,10 +34090,10 @@ var require_graceful_fs = __commonJS({
       var startTime = elem[3];
       var lastTime = elem[4];
       if (startTime === void 0) {
-        debug17("RETRY", fn.name, args);
+        debug18("RETRY", fn.name, args);
         fn.apply(null, args);
       } else if (Date.now() - startTime >= 6e4) {
-        debug17("TIMEOUT", fn.name, args);
+        debug18("TIMEOUT", fn.name, args);
         var cb = args.pop();
         if (typeof cb === "function")
           cb.call(null, err);
@@ -33360,7 +34102,7 @@ var require_graceful_fs = __commonJS({
         var sinceStart = Math.max(lastTime - startTime, 1);
         var desiredDelay = Math.min(sinceStart * 1.2, 100);
         if (sinceAttempt >= desiredDelay) {
-          debug17("RETRY", fn.name, args);
+          debug18("RETRY", fn.name, args);
           fn.apply(null, args.concat([startTime]));
         } else {
           fs5[gracefulQueue].push(elem);
@@ -33732,7 +34474,7 @@ var require_minimatch = __commonJS({
       this.parseNegate();
       var set = this.globSet = this.braceExpand();
       if (options.debug)
-        this.debug = function debug17() {
+        this.debug = function debug18() {
           console.error.apply(console, arguments);
         };
       this.debug(this.pattern, set);
@@ -34350,7 +35092,7 @@ var require_ponyfill = __commonJS({
       var SymbolPolyfill = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? Symbol : function(description) {
         return "Symbol(" + description + ")";
       };
-      function noop4() {
+      function noop3() {
         return void 0;
       }
       function getGlobals() {
@@ -34367,7 +35109,7 @@ var require_ponyfill = __commonJS({
       function typeIsObject(x) {
         return typeof x === "object" && x !== null || typeof x === "function";
       }
-      var rethrowAssertionErrorRejection = noop4;
+      var rethrowAssertionErrorRejection = noop3;
       var originalPromise = Promise;
       var originalPromiseThen = Promise.prototype.then;
       var originalPromiseResolve = Promise.resolve.bind(originalPromise);
@@ -36743,7 +37485,7 @@ var require_ponyfill = __commonJS({
               return newPromise(function(resolveRead, rejectRead) {
                 ReadableStreamDefaultReaderRead(reader, {
                   _chunkSteps: function(chunk) {
-                    currentWrite = PerformPromiseThen(WritableStreamDefaultWriterWrite(writer2, chunk), void 0, noop4);
+                    currentWrite = PerformPromiseThen(WritableStreamDefaultWriterWrite(writer2, chunk), void 0, noop3);
                     resolveRead(false);
                   },
                   _closeSteps: function() {
@@ -37719,7 +38461,7 @@ var require_ponyfill = __commonJS({
           reader._readIntoRequests = new SimpleQueue();
         }
         var sourceCancelPromise = stream2._readableStreamController[CancelSteps](reason);
-        return transformPromiseWith(sourceCancelPromise, noop4);
+        return transformPromiseWith(sourceCancelPromise, noop3);
       }
       function ReadableStreamClose(stream2) {
         stream2._state = "closed";
@@ -38354,7 +39096,7 @@ var require_main7 = __commonJS({
     function config2(options) {
       let dotenvPath = path4.resolve(process.cwd(), ".env");
       let encoding = "utf8";
-      const debug17 = Boolean(options && options.debug);
+      const debug18 = Boolean(options && options.debug);
       const override = Boolean(options && options.override);
       if (options) {
         if (options.path != null) {
@@ -38373,7 +39115,7 @@ var require_main7 = __commonJS({
             if (override === true) {
               process.env[key] = parsed[key];
             }
-            if (debug17) {
+            if (debug18) {
               if (override === true) {
                 _log(`"${key}" is already defined in \`process.env\` and WAS overwritten`);
               } else {
@@ -38384,7 +39126,7 @@ var require_main7 = __commonJS({
         });
         return { parsed };
       } catch (e) {
-        if (debug17) {
+        if (debug18) {
           _log(`Failed to load ${dotenvPath} ${e.message}`);
         }
         return { error: e };
@@ -42275,7 +43017,7 @@ var require_cjs = __commonJS({
 });
 
 // node_modules/dag-jose/lib/index.js
-var require_lib7 = __commonJS({
+var require_lib6 = __commonJS({
   "node_modules/dag-jose/lib/index.js"(exports2) {
     "use strict";
     var __createBinding = exports2 && exports2.__createBinding || (Object.create ? function(o, m, k, k2) {
@@ -43277,7 +44019,7 @@ var require_error = __commonJS({
 });
 
 // node_modules/electron-fetch/lib/index.js
-var require_lib8 = __commonJS({
+var require_lib7 = __commonJS({
   "node_modules/electron-fetch/lib/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -43793,7 +44535,7 @@ var require_lib8 = __commonJS({
       return value;
     }
     var MAP = Symbol("map");
-    var Headers2 = class {
+    var Headers3 = class {
       constructor(init = void 0) {
         this[MAP] = /* @__PURE__ */ Object.create(null);
         if (init == null)
@@ -43882,8 +44624,8 @@ var require_lib8 = __commonJS({
         return createHeadersIterator(this, "key+value");
       }
     };
-    Headers2.prototype.entries = Headers2.prototype[Symbol.iterator];
-    Object.defineProperty(Headers2.prototype, Symbol.toStringTag, {
+    Headers3.prototype.entries = Headers3.prototype[Symbol.iterator];
+    Object.defineProperty(Headers3.prototype, Symbol.toStringTag, {
       value: "HeadersPrototype",
       writable: false,
       enumerable: false,
@@ -43954,7 +44696,7 @@ var require_lib8 = __commonJS({
         this.url = opts.url;
         this.status = opts.status || 200;
         this.statusText = opts.statusText || http4.STATUS_CODES[this.status];
-        this.headers = new Headers2(opts.headers);
+        this.headers = new Headers3(opts.headers);
         this.useElectronNet = opts.useElectronNet;
         Object.defineProperty(this, Symbol.toStringTag, {
           value: "Response",
@@ -44010,7 +44752,7 @@ var require_lib8 = __commonJS({
         this.method = method.toUpperCase();
         this.redirect = init.redirect || input.redirect || "follow";
         this.signal = init.signal || input.signal || null;
-        this.headers = new Headers2(init.headers || input.headers || {});
+        this.headers = new Headers3(init.headers || input.headers || {});
         this.headers.delete("Content-Length");
         this.chunkedEncoding = false;
         this.useElectronNet = init.useElectronNet !== void 0 ? init.useElectronNet : input.useElectronNet;
@@ -44055,7 +44797,7 @@ var require_lib8 = __commonJS({
     });
     function getNodeRequestOptions2(request) {
       const parsedURL = request[PARSED_URL];
-      const headers = new Headers2(request.headers);
+      const headers = new Headers3(request.headers);
       if (!headers.has("Accept")) {
         headers.set("Accept", "*/*");
       }
@@ -44209,7 +44951,7 @@ var require_lib8 = __commonJS({
             resolve10(fetch5(url.resolve(request.url, res.headers.location), request));
             return;
           }
-          const headers2 = new Headers2();
+          const headers2 = new Headers3();
           for (var _i = 0, _Object$keys = Object.keys(res.headers); _i < _Object$keys.length; _i++) {
             const name8 = _Object$keys[_i];
             if (Array.isArray(res.headers[name8])) {
@@ -44277,7 +45019,7 @@ var require_lib8 = __commonJS({
     }
     fetch5.isRedirect = (code8) => code8 === 301 || code8 === 302 || code8 === 303 || code8 === 307 || code8 === 308;
     exports2.FetchError = FetchError2;
-    exports2.Headers = Headers2;
+    exports2.Headers = Headers3;
     exports2.Request = Request2;
     exports2.Response = Response3;
     exports2["default"] = fetch5;
@@ -44307,12 +45049,12 @@ var require_src10 = __commonJS({
 });
 
 // node_modules/ipfs-utils/src/fetch.js
-var require_fetch3 = __commonJS({
+var require_fetch4 = __commonJS({
   "node_modules/ipfs-utils/src/fetch.js"(exports2, module2) {
     "use strict";
     var { isElectronMain } = require_env();
     if (isElectronMain) {
-      module2.exports = require_lib8();
+      module2.exports = require_lib7();
     } else {
       module2.exports = require_src10();
     }
@@ -44324,7 +45066,7 @@ var require_fetch_browser = __commonJS({
   "node_modules/ipfs-utils/src/http/fetch.browser.js"(exports2, module2) {
     "use strict";
     var { TimeoutError: TimeoutError2, AbortError: AbortError4 } = require_error();
-    var { Response: Response3, Request: Request2, Headers: Headers2, default: fetch5 } = require_fetch3();
+    var { Response: Response3, Request: Request2, Headers: Headers3, default: fetch5 } = require_fetch4();
     var fetchWithProgress = (url, options = {}) => {
       const request = new XMLHttpRequest();
       request.open(options.method || "GET", url.toString(), true);
@@ -44336,7 +45078,7 @@ var require_fetch_browser = __commonJS({
         request.overrideMimeType(options.overrideMimeType);
       }
       if (headers) {
-        for (const [name8, value] of new Headers2(headers)) {
+        for (const [name8, value] of new Headers3(headers)) {
           request.setRequestHeader(name8, value);
         }
       }
@@ -44387,7 +45129,7 @@ var require_fetch_browser = __commonJS({
     var fetchWithStreaming = fetch5;
     var fetchWith = (url, options = {}) => options.onUploadProgress != null ? fetchWithProgress(url, options) : fetchWithStreaming(url, options);
     var parseHeaders = (input) => {
-      const headers = new Headers2();
+      const headers = new Headers3();
       for (const line of input.trim().split(/[\r\n]+/)) {
         const index = line.indexOf(": ");
         if (index > 0) {
@@ -44405,7 +45147,7 @@ var require_fetch_browser = __commonJS({
     module2.exports = {
       fetch: fetchWith,
       Request: Request2,
-      Headers: Headers2
+      Headers: Headers3
     };
   }
 });
@@ -44590,7 +45332,7 @@ var require_src11 = __commonJS({
 var require_fetch_node = __commonJS({
   "node_modules/ipfs-utils/src/http/fetch.node.js"(exports2, module2) {
     "use strict";
-    var { Request: Request2, Response: Response3, Headers: Headers2, default: nativeFetch } = require_fetch3();
+    var { Request: Request2, Response: Response3, Headers: Headers3, default: nativeFetch } = require_fetch4();
     var toStream2 = require_src11();
     var { Buffer: Buffer3 } = require("buffer");
     var fetch5 = (url, options = {}) => nativeFetch(url, withUploadProgress(options));
@@ -44640,13 +45382,13 @@ var require_fetch_node = __commonJS({
     module2.exports = {
       fetch: fetch5,
       Request: Request2,
-      Headers: Headers2
+      Headers: Headers3
     };
   }
 });
 
 // node_modules/ipfs-utils/src/http/fetch.js
-var require_fetch4 = __commonJS({
+var require_fetch5 = __commonJS({
   "node_modules/ipfs-utils/src/http/fetch.js"(exports2, module2) {
     "use strict";
     if (typeof XMLHttpRequest === "function") {
@@ -44760,7 +45502,7 @@ var require_any_signal = __commonJS({
 var require_http = __commonJS({
   "node_modules/ipfs-utils/src/http.js"(exports2, module2) {
     "use strict";
-    var { fetch: fetch5, Request: Request2, Headers: Headers2 } = require_fetch4();
+    var { fetch: fetch5, Request: Request2, Headers: Headers3 } = require_fetch5();
     var { TimeoutError: TimeoutError2, HTTPError: HTTPError2 } = require_error();
     var merge4 = require_merge_options().bind({ ignoreUndefined: true });
     var { URL: URL2, URLSearchParams: URLSearchParams2 } = require_iso_url();
@@ -44805,7 +45547,7 @@ var require_http = __commonJS({
       }
       async fetch(resource, options = {}) {
         const opts = merge4(this.opts, options);
-        const headers = new Headers2(opts.headers);
+        const headers = new Headers3(opts.headers);
         if (typeof resource !== "string" && !(resource instanceof URL2 || resource instanceof Request2)) {
           throw new TypeError("`resource` must be a string, URL, or Request");
         }
@@ -50063,13 +50805,13 @@ var require_chokidar = __commonJS({
 // src/pollinate-cli.js
 var pollinate_cli_exports = {};
 __export(pollinate_cli_exports, {
-  debug: () => debug16,
+  debug: () => debug17,
   rootPath: () => rootPath
 });
 module.exports = __toCommonJS(pollinate_cli_exports);
 var import_await_sleep4 = __toESM(require_await_sleep(), 1);
 var import_child_process = require("child_process");
-var import_debug16 = __toESM(require_src(), 1);
+var import_debug17 = __toESM(require_src(), 1);
 var import_event_iterator = __toESM(require_node2(), 1);
 var import_fs8 = require("fs");
 var import_native_abort_controller2 = __toESM(require_src2(), 1);
@@ -50084,18 +50826,16 @@ import_commander.program.parse(process.argv);
 var options_default = import_commander.program.opts();
 
 // src/ipfs/receiver.js
-var import_debug7 = __toESM(require_src(), 1);
+var import_debug8 = __toESM(require_src(), 1);
 var import_fs5 = require("fs");
 var import_path = require("path");
 
 // src/ipfsPubSub.js
-var import_debug2 = __toESM(require_src(), 1);
+var import_debug3 = __toESM(require_src(), 1);
 var import_queueable2 = __toESM(require_lib(), 1);
 
-// src/supabase/pollen.js
+// src/keyValueStore.js
 var import_debug = __toESM(require_src(), 1);
-var import_node_fetch = __toESM(require_lib4(), 1);
-var import_queueable = __toESM(require_lib(), 1);
 
 // src/supabase/client.js
 var import_supabase_js = __toESM(require_main6(), 1);
@@ -50107,8 +50847,54 @@ var getClient = () => {
 };
 var client_default = getClient();
 
+// src/keyValueStore.js
+var debug = (0, import_debug.default)("pollenStore");
+var store = (name8) => {
+  let lastValue = null;
+  const get2 = async (key) => {
+    var _a;
+    const { data, error } = await client_default.from(name8).select("value").match({ key });
+    if (error)
+      console.error(error);
+    if (data.length === 0)
+      return null;
+    return JSON.parse((_a = data[0]) == null ? void 0 : _a.value);
+  };
+  const set = async (key, value) => {
+    debug("publishing", key, value);
+    lastValue = value;
+    return (await client_default.from(name8).upsert({ key, value: JSON.stringify(value) }).select("*")).data[0];
+  };
+  const subscribe = (key, callback) => {
+    const res = client_default.channel(`public:${name8}`).on(
+      "postgres_changes",
+      { event: "*", schema: "public", table: name8 },
+      (payload) => {
+        if (payload.new.key === key) {
+          const newValue = payload.new.value;
+          if (newValue !== lastValue) {
+            debug("got new value", newValue, "for key", key);
+            callback(payload.new.value);
+          }
+        }
+      }
+    ).subscribe();
+    get2(key).then((key2) => key2 && callback(key2));
+    return () => client_default.removeChannel(res);
+  };
+  return {
+    get: get2,
+    set,
+    subscribe
+  };
+};
+var keyValueStore_default = store;
+
 // src/supabase/pollen.js
-var debug = (0, import_debug.default)("pollen");
+var import_debug2 = __toESM(require_src(), 1);
+var import_node_fetch = __toESM(require_lib4(), 1);
+var import_queueable = __toESM(require_lib(), 1);
+var debug2 = (0, import_debug2.default)("pollen");
 var modelsMetadata = (0, import_node_fetch.default)("https://raw.githubusercontent.com/pollinations/model-index/main/metadata.json").then((res) => res.json());
 var DB_NAME = "pollen";
 if (typeof localStorage !== "undefined" && localStorage["isDev"]) {
@@ -50116,6 +50902,10 @@ if (typeof localStorage !== "undefined" && localStorage["isDev"]) {
 }
 if (process.env.NODE_ENV === "development") {
   DB_NAME = "pollen_dev";
+}
+function updatePollen(input, data) {
+  debug2("updatePollen", input, data);
+  return client_default.from(DB_NAME).upsert({ input, ...data }).then(({ data: data2 }) => data2);
 }
 async function getPlaceInQueue(data) {
   var _a;
@@ -50131,19 +50921,19 @@ async function getPlaceInQueue(data) {
   return await client_default.from(DB_NAME).select("*", { count: "exact" }).eq("processing_started", false).lte("request_submit_time", request_submit_time).in("image", competing_images).gte("priority", priority).then(({ count }) => count);
 }
 function subscribePollen(input, callback) {
-  debug("getting first pollen using select", input);
+  debug2("getting first pollen using select", input);
   let lastData = null;
   let lastPlaceInQueue = 9999;
   const getData = async () => {
-    debug("getting data");
+    debug2("getting data");
     const data = await getPollen(input);
-    debug("data", data);
+    debug2("data", data);
     const placeInQueue = await getPlaceInQueue(data);
-    debug("queue place", placeInQueue);
+    debug2("queue place", placeInQueue);
     if (data && (JSON.stringify(data) !== JSON.stringify(lastData) || placeInQueue !== lastPlaceInQueue)) {
       lastData = data;
       lastPlaceInQueue = placeInQueue;
-      debug("got new data or place in queue", data, placeInQueue);
+      debug2("got new data or place in queue", data, placeInQueue);
       callback(data, placeInQueue);
       if (data.success !== null)
         clearInterval(interval);
@@ -50159,11 +50949,15 @@ async function getPollen(input) {
 }
 
 // src/ipfsPubSub.js
-var debug2 = (0, import_debug2.default)("ipfs:pubsub");
+var debug3 = (0, import_debug3.default)("ipfs:pubsub");
+var store2 = keyValueStore_default("colab_nodes");
 function publisher(nodeID) {
-  debug2("Creating publisher for", nodeID);
-  const publish = () => console.error("publish does not exist anymore. do we need him?");
-  const close = () => console.error("close called. publish does not exist anymore. do we need him?");
+  debug3("Creating publisher for", nodeID);
+  const publish = (contentID) => {
+    debug3("Publishing", contentID);
+    store2.set(nodeID, contentID);
+  };
+  const close = () => debug3("closing the publisher is a no-op");
   return {
     publish,
     close
@@ -50171,7 +50965,7 @@ function publisher(nodeID) {
 }
 function subscribeGenerator(nodeID) {
   const channel = new import_queueable2.Channel();
-  debug2("Subscribing to pubsub events from", nodeID);
+  debug3("Subscribing to pubsub events from", nodeID);
   const unsubscribe = subscribeCID(
     nodeID,
     (cid) => channel.push(cid)
@@ -50179,20 +50973,27 @@ function subscribeGenerator(nodeID) {
   return [channel, unsubscribe];
 }
 function subscribeCID(nodeID, callback) {
-  const closeSub = subscribePollen(nodeID, (res) => {
-    if (res == null ? void 0 : res.output)
-      callback(res == null ? void 0 : res.output);
-  });
-  return closeSub;
+  if (nodeID.startsWith("Qm")) {
+    debug3("Subscribing to", nodeID, " for pollinator running on our own GPU backend");
+    const closeSub = subscribePollen(nodeID, (res) => {
+      if (res == null ? void 0 : res.output)
+        callback(res == null ? void 0 : res.output);
+    });
+    return closeSub;
+  } else {
+    debug3("Subscribing to", nodeID, " for pollinator running on Google Colab's GPU backend");
+    const closeSub = store2.subscribe(nodeID, callback);
+    return closeSub;
+  }
 }
 
 // src/ipfsState.js
-var import_debug6 = __toESM(require_src(), 1);
-var import_json52 = __toESM(require_lib6(), 1);
+var import_debug7 = __toESM(require_src(), 1);
+var import_json52 = __toESM(require_lib5(), 1);
 var import_path_browserify2 = __toESM(require_path_browserify(), 1);
 
 // src/pollenStoreClient.js
-var import_debug5 = __toESM(require_src(), 1);
+var import_debug6 = __toESM(require_src(), 1);
 
 // node_modules/ipfs-unixfs-exporter/src/index.js
 var import_err_code9 = __toESM(require_err_code(), 1);
@@ -57786,12 +58587,12 @@ var getWebURL = (cid, name8 = null) => {
 var getWebURL_default = getWebURL;
 
 // src/pollenStoreClient.js
-var import_json5 = __toESM(require_lib6(), 1);
+var import_json5 = __toESM(require_lib5(), 1);
 var import_path_browserify = __toESM(require_path_browserify(), 1);
 
 // src/s3/s3store.js
 var import_node_fetch2 = __toESM(require_lib4(), 1);
-var import_debug3 = __toESM(require_src(), 1);
+var import_debug4 = __toESM(require_src(), 1);
 
 // node_modules/blockstore-core/esm/src/errors.js
 var errors_exports = {};
@@ -57932,7 +58733,7 @@ var BaseBlockstore = class {
 var Errors = { ...errors_exports };
 
 // src/s3/s3store.js
-var debug3 = (0, import_debug3.default)("s3store");
+var debug4 = (0, import_debug4.default)("s3store");
 var S3Blockstore = class extends BaseBlockstore {
   constructor() {
     super();
@@ -57945,14 +58746,14 @@ var S3Blockstore = class extends BaseBlockstore {
     return Promise.resolve();
   }
   async put(key, val, options) {
-    debug3("put", key);
+    debug4("put", key);
     if (await this.has(key)) {
-      debug3("block already exists", key);
+      debug4("block already exists", key);
       return;
     }
     const urlResponse = await (0, import_node_fetch2.default)(`https://store.pollinations.ai/upload/${key.toString()}`);
     const url = await urlResponse.text();
-    debug3("signed url", url);
+    debug4("signed url", url, "for key", key.toString());
     const uploadResponse = await (0, import_node_fetch2.default)(url, {
       method: "PUT",
       body: val,
@@ -57960,15 +58761,15 @@ var S3Blockstore = class extends BaseBlockstore {
         "Content-Type": "application/octet-stream"
       }
     });
-    debug3("upload response ok", uploadResponse.ok);
+    debug4("upload response ok", uploadResponse.ok);
   }
   async get(key, options) {
     if (this.cache[key]) {
-      debug3("get cache hit", key);
+      debug4("get cache hit", key);
       return this.cache[key];
     }
     try {
-      debug3("get from s3", key.toString());
+      debug4("get from s3", key.toString());
       const response = await (0, import_node_fetch2.default)(`https://pollinations-ipfs.s3.amazonaws.com/${key.toString()}`);
       const buffer2 = await response.arrayBuffer();
       const result = new Uint8Array(buffer2);
@@ -57982,11 +58783,11 @@ var S3Blockstore = class extends BaseBlockstore {
   async has(key, options) {
     if (this.cache[key])
       return true;
-    debug3("has", key);
+    debug4("has", key);
     const response = await (0, import_node_fetch2.default)(`https://pollinations-ipfs.s3.amazonaws.com/${key.toString()}`, {
       method: "HEAD"
     });
-    debug3("has response", response.ok);
+    debug4("has response", response.ok);
     return response.ok;
   }
   async delete(key, options) {
@@ -58005,7 +58806,7 @@ var S3Blockstore = class extends BaseBlockstore {
 var s3store_default = S3Blockstore;
 
 // src/supabase/web3storage.js
-var import_debug4 = __toESM(require_src(), 1);
+var import_debug5 = __toESM(require_src(), 1);
 
 // node_modules/streaming-iterables/dist/index.mjs
 var TIMEOUT = Symbol("TIMEOUT");
@@ -58587,21 +59388,21 @@ function createEncoder(writer2) {
 }
 
 // node_modules/@ipld/car/esm/lib/iterator-channel.js
-function noop2() {
+function noop() {
 }
 function create3() {
   const chunkQueue = [];
   let drainer = null;
-  let drainerResolver = noop2;
+  let drainerResolver = noop;
   let ended = false;
   let outWait = null;
-  let outWaitResolver = noop2;
+  let outWaitResolver = noop;
   const makeDrainer = () => {
     if (!drainer) {
       drainer = new Promise((resolve10) => {
         drainerResolver = () => {
           drainer = null;
-          drainerResolver = noop2;
+          drainerResolver = noop;
           resolve10();
         };
       });
@@ -58645,7 +59446,7 @@ function create3() {
         outWait = new Promise((resolve10) => {
           outWaitResolver = () => {
             outWait = null;
-            outWaitResolver = noop2;
+            outWaitResolver = noop;
             return resolve10(iterator.next());
           };
         });
@@ -62852,10 +63653,10 @@ var validateHeaderValue = typeof validators.validateHeaderValue === "function" ?
     throw err;
   }
 };
-var Headers = class extends URLSearchParams {
+var Headers2 = class extends URLSearchParams {
   constructor(init) {
     let result = [];
-    if (init instanceof Headers) {
+    if (init instanceof Headers2) {
       const raw = init.raw();
       for (const [name8, values] of Object.entries(raw)) {
         result.push(...values.map((value) => [name8, value]));
@@ -62973,14 +63774,14 @@ var Headers = class extends URLSearchParams {
   }
 };
 Object.defineProperties(
-  Headers.prototype,
+  Headers2.prototype,
   ["get", "entries", "forEach", "values"].reduce((result, property) => {
     result[property] = { enumerable: true };
     return result;
   }, {})
 );
 function fromRawHeaders(headers = []) {
-  return new Headers(
+  return new Headers2(
     headers.reduce((result, value, index, array) => {
       if (index % 2 === 0) {
         result.push(array.slice(index, index + 2));
@@ -63010,7 +63811,7 @@ var Response2 = class extends Body {
   constructor(body = null, options = {}) {
     super(body, options);
     const status = options.status || 200;
-    const headers = new Headers(options.headers);
+    const headers = new Headers2(options.headers);
     if (body !== null && !headers.has("Content-Type")) {
       const contentType = extractContentType(this);
       if (contentType) {
@@ -63123,7 +63924,7 @@ var Request = class extends Body {
       size: init.size || settings.size || 0
     });
     const input = settings;
-    const headers = new Headers(init.headers || input.headers || {});
+    const headers = new Headers2(init.headers || input.headers || {});
     if (inputBody !== null && !headers.has("Content-Type")) {
       const contentType = extractContentType(this);
       if (contentType) {
@@ -63202,7 +64003,7 @@ Object.defineProperties(Request.prototype, {
 });
 var getNodeRequestOptions = (request) => {
   const { parsedURL } = request[INTERNALS3];
-  const headers = new Headers(request[INTERNALS3].headers);
+  const headers = new Headers2(request[INTERNALS3].headers);
   if (!headers.has("Accept")) {
     headers.set("Accept", "*/*");
   }
@@ -63358,7 +64159,7 @@ async function fetch4(url, options_ = {}) {
               return;
             }
             const requestOptions = {
-              headers: new Headers(request.headers),
+              headers: new Headers2(request.headers),
               follow: request.follow,
               counter: request.counter + 1,
               agent: request.agent,
@@ -63854,7 +64655,7 @@ var importOptions = {
   wrapWithDirectory: true
 };
 var blockstore = new s3store_default();
-var debug4 = (0, import_debug4.default)("web3storage");
+var debug5 = (0, import_debug5.default)("web3storage");
 var token = process.env.WEB3STORAGE_TOKEN;
 if (!token) {
   console.error("A token is needed. You can create one on https://web3.storage");
@@ -63864,19 +64665,19 @@ var storage = new Web3Storage({
   token
 });
 async function importFromWeb3Storage(cid) {
-  debug4("importing from web3 storage", cid);
+  debug5("importing from web3 storage", cid);
   const result = await storage.get(cid);
   const { files, ok } = result;
-  debug4("got result", ok);
+  debug5("got result", ok);
   if (!ok)
     return false;
-  debug4("importing files from web3storage", files);
+  debug5("importing files from web3storage", files);
   try {
     const filesIterator = await files();
     const mappedFilesIterator = mapAsyncIterator(filesIterator, formatFileForUnixFSImport);
     let lastCID = null;
     for await (const file of importer(mappedFilesIterator, blockstore, importOptions)) {
-      debug4("Imported file", file.path, file.cid);
+      debug5("Imported file", file.path, file.cid);
       lastCID = file.cid;
     }
     return lastCID;
@@ -63887,9 +64688,9 @@ async function importFromWeb3Storage(cid) {
   }
 }
 var formatFileForUnixFSImport = async (file) => {
-  debug4("mapping file", file, file.name, file.lastModified);
+  debug5("mapping file", file, file.name, file.lastModified);
   const content = Buffer.from(await file.arrayBuffer());
-  debug4("content", content);
+  debug5("content", content);
   return { path: file.name, content };
 };
 var mapAsyncIterator = async function* (iterator, fn) {
@@ -63904,7 +64705,7 @@ var mapAsyncIterator = async function* (iterator, fn) {
 var import_s3_request_presigner = __toESM(require_dist_cjs16(), 1);
 
 // src/pollenStoreClient.js
-var debug5 = (0, import_debug5.default)("pollenStoreClient");
+var debug6 = (0, import_debug6.default)("pollenStoreClient");
 var { extname } = import_path_browserify.default;
 var blockstore2 = new s3store_default();
 var importOptions2 = {
@@ -63914,11 +64715,11 @@ function pollenImporter() {
   let lastTree = null;
   let lastCID = null;
   const addFiles = async (files) => {
-    debug5("Adding files", files);
+    debug6("Adding files", files);
     if (files.length === 0)
       return lastCID;
     for await (const file of importer(files, blockstore2, { ...importOptions2, tree: lastTree })) {
-      debug5("Imported file", file.path, file.cid);
+      debug6("Imported file", file.path, file.cid);
       lastCID = file.cid.toString();
       lastTree = file.tree;
     }
@@ -63929,17 +64730,17 @@ function pollenImporter() {
 async function exportCID(cid, processor = null) {
   if (!processor)
     processor = processFile;
-  debug5("exporting CID", cid);
+  debug6("exporting CID", cid);
   const entries = await fetchWithWeb3storageFallback(cid);
-  debug5("Got final entry", entries);
+  debug6("Got final entry", entries);
   let resultObj = {};
   const cidWithoutEndingSlash = cid.replace(/\/$/, "");
   for await (const file of entries) {
-    debug5("exporting file", file.name);
+    debug6("exporting file", file.name);
     const pathArray = file.path.replace(cidWithoutEndingSlash, "").split("/").slice(1);
-    debug5("path array", file.path, pathArray);
+    debug6("path array", file.path, pathArray);
     if (file.type !== "directory") {
-      debug5("calling processfile for file", file.path);
+      debug6("calling processfile for file", file.path);
       let value = await processor({
         path: pathArray.join("/"),
         cid: file.cid,
@@ -63952,20 +64753,20 @@ async function exportCID(cid, processor = null) {
       resultObj = (0, import_ramda.assocPath)([...pathArray, ".cid"], file.cid.toString(), resultObj);
     }
   }
-  debug5("Got result", resultObj);
+  debug6("Got result", resultObj);
   return resultObj;
 }
 async function processFile({ cid, path: path4, name: name8, ...file }) {
   let value = getWebURL_default(cid, name8);
   if (!extname(path4)) {
     if (path4.length === 0) {
-      debug5("result is buffer. returning directly");
+      debug6("result is buffer. returning directly");
       value = await file.buffer();
     } else {
       try {
         value = await file.json();
       } catch (e) {
-        debug5("Could not parse file", file.path, "as JSON. Returning URL.");
+        debug6("Could not parse file", file.path, "as JSON. Returning URL.");
       }
     }
   }
@@ -63990,7 +64791,7 @@ function contentToString(content) {
   return String.fromCharCode.apply(null, content);
 }
 async function* fetchWithWeb3storageFallback(cid, skipWeb3storage = false) {
-  debug5("fetching", cid);
+  debug6("fetching", cid);
   try {
     const results = await recursive(cid, blockstore2);
     if (typeof results[Symbol.asyncIterator] === "function")
@@ -63998,11 +64799,11 @@ async function* fetchWithWeb3storageFallback(cid, skipWeb3storage = false) {
     else
       return results;
   } catch (e) {
-    debug5("Error fetching from S3", e);
+    debug6("Error fetching from S3", e);
     if (e.code === "ERR_NOT_FOUND" && !skipWeb3storage) {
-      debug5("cid not found locally. fetching from web3.storage");
+      debug6("cid not found locally. fetching from web3.storage");
       const importedCID = await importFromWeb3Storage(cid);
-      debug5("imported from web3.storage", importedCID);
+      debug6("imported from web3.storage", importedCID);
       if (importedCID) {
         if (importedCID.toString() !== cid.toString())
           console.error("imported CID does not match original CID", importedCID, cid, ". Some annoyance with different block sizes. Update the CID in the database?");
@@ -64017,7 +64818,7 @@ async function* fetchWithWeb3storageFallback(cid, skipWeb3storage = false) {
   }
 }
 var dataFetchers = (file) => {
-  debug5("creating data fetchers for cid", file.cid);
+  debug6("creating data fetchers for cid", file.cid);
   return {
     json: async () => parse(await extractContent(file)),
     text: async () => contentToString(await extractContent(file)),
@@ -64028,16 +64829,16 @@ var dataFetchers = (file) => {
 // src/ipfsState.js
 var { join } = import_path_browserify2.default;
 var { parse: parse2 } = import_json52.default;
-var debug6 = (0, import_debug6.default)("ipfsState");
+var debug7 = (0, import_debug7.default)("ipfsState");
 var getIPFSState = async (contentID, callback = (f) => f) => {
-  debug6("Getting state for CID", contentID);
+  debug7("Getting state for CID", contentID);
   return await exportCID(contentID, callback);
 };
 
 // src/ipfs/receiver.js
-var debug7 = (0, import_debug7.default)("ipfs/receiver");
+var debug8 = (0, import_debug8.default)("ipfs/receiver");
 async function processRemoteCID(contentID, rootPath2) {
-  debug7("Processing remote CID", contentID);
+  debug8("Processing remote CID", contentID);
   const ipfsState = await getIPFSState(contentID, (file) => processFile2(file, rootPath2));
 }
 var receive = async function* ({ subfolder, nodeid, path: rootPath2 }, process3 = processRemoteCID) {
@@ -64049,15 +64850,15 @@ var receive = async function* ({ subfolder, nodeid, path: rootPath2 }, process3 
   return remoteCID;
 };
 var writeFileAndCreateFolder = async (path4, content) => {
-  debug7("creating folder if it does not exist", (0, import_path.dirname)(path4));
+  debug8("creating folder if it does not exist", (0, import_path.dirname)(path4));
   (0, import_fs5.mkdirSync)((0, import_path.dirname)(path4), { recursive: true });
-  debug7("writing file of length", content.size, "to folder", path4);
+  debug8("writing file of length", content.size, "to folder", path4);
   (0, import_fs5.writeFileSync)(path4, content);
   return path4;
 };
 async function processFile2({ path: path4, cid, buffer: buffer2 }, rootPath2) {
-  debug7("processing file", path4, cid, rootPath2);
-  const _debug = debug7.extend(`processFile(${path4})`);
+  debug8("processing file", path4, cid, rootPath2);
+  const _debug = debug8.extend(`processFile(${path4})`);
   _debug("started");
   const destPath = (0, import_path.join)(rootPath2, path4);
   _debug("writeFile", destPath, cid, "queued");
@@ -64070,13 +64871,13 @@ async function processFile2({ path: path4, cid, buffer: buffer2 }, rootPath2) {
 
 // src/ipfs/sender.js
 var import_await_sleep3 = __toESM(require_await_sleep(), 1);
-var import_debug15 = __toESM(require_src(), 1);
+var import_debug16 = __toESM(require_src(), 1);
 var import_fs7 = require("fs");
 var import_native_abort_controller = __toESM(require_src2(), 1);
 
 // src/ipfsConnector.js
 var import_buffer = require("buffer");
-var import_debug12 = __toESM(require_src(), 1);
+var import_debug13 = __toESM(require_src(), 1);
 
 // node_modules/ipfs-core-utils/esm/src/multibases.js
 var LOAD_BASE = (name8) => Promise.reject(new Error(`No base found for "${name8}"`));
@@ -64882,7 +65683,7 @@ var decode14 = (data) => {
 };
 
 // node_modules/ipfs-http-client/esm/src/index.js
-var dagJOSE = __toESM(require_lib7(), 1);
+var dagJOSE = __toESM(require_lib6(), 1);
 
 // node_modules/ipfs-http-client/esm/src/lib/core.js
 var import_multiaddr2 = __toESM(require_src9(), 1);
@@ -64916,7 +65717,7 @@ function unitRatio(str) {
 var parse_duration_default = parse3;
 
 // node_modules/ipfs-http-client/esm/src/lib/core.js
-var import_debug8 = __toESM(require_src(), 1);
+var import_debug9 = __toESM(require_src(), 1);
 var import_http4 = __toESM(require_http(), 1);
 
 // node_modules/ipfs-core-utils/esm/src/to-url-string.js
@@ -64942,7 +65743,7 @@ var agent_default = (url) => {
 };
 
 // node_modules/ipfs-http-client/esm/src/lib/core.js
-var log = (0, import_debug8.default)("ipfs-http-client:lib:error-handler");
+var log = (0, import_debug9.default)("ipfs-http-client:lib:error-handler");
 var merge2 = merge_options_default.bind({ ignoreUndefined: true });
 var DEFAULT_PROTOCOL = import_env.isBrowser || import_env.isWebWorker ? location.protocol : "http";
 var DEFAULT_HOST = import_env.isBrowser || import_env.isWebWorker ? location.hostname : "localhost";
@@ -65432,10 +66233,10 @@ function modeToString2(mode) {
 
 // node_modules/ipfs-core-utils/esm/src/multipart-request.node.js
 var import_it_to_stream = __toESM(require_src11(), 1);
-var import_debug9 = __toESM(require_src(), 1);
+var import_debug10 = __toESM(require_src(), 1);
 var import_it_peekable6 = __toESM(require_it_peekable(), 1);
 var merge3 = merge_options_default.bind({ ignoreUndefined: true });
-var log2 = (0, import_debug9.default)("ipfs:core-utils:multipart-request");
+var log2 = (0, import_debug10.default)("ipfs:core-utils:multipart-request");
 async function multipartRequest(source, abortController, headers = {}, boundary = `-----------------------------${nanoid()}`) {
   async function* streamFiles(source2) {
     try {
@@ -67690,8 +68491,8 @@ var createPublish2 = configure((api) => {
 });
 
 // node_modules/ipfs-http-client/esm/src/pubsub/subscribe.js
-var import_debug10 = __toESM(require_src(), 1);
-var log3 = (0, import_debug10.default)("ipfs-http-client:pubsub:subscribe");
+var import_debug11 = __toESM(require_src(), 1);
+var log3 = (0, import_debug11.default)("ipfs-http-client:pubsub:subscribe");
 var createSubscribe = (options, subsTracker) => {
   return configure((api) => {
     async function subscribe(topic, handler, options2 = {}) {
@@ -68547,14 +69348,14 @@ function create5(options = {}) {
 var import_path_browserify3 = __toESM(require_path_browserify(), 1);
 
 // src/utils/utils.js
-var import_debug11 = __toESM(require_src(), 1);
+var import_debug12 = __toESM(require_src(), 1);
 var import_await_sleep = __toESM(require_await_sleep(), 1);
-var debug11 = (0, import_debug11.default)("utils");
-var noop3 = () => null;
+var debug12 = (0, import_debug12.default)("utils");
+var noop2 = () => null;
 
 // src/ipfsConnector.js
 var { join: join3 } = import_path_browserify3.default;
-var debug12 = (0, import_debug12.default)("ipfsConnector");
+var debug13 = (0, import_debug13.default)("ipfsConnector");
 var IPFS_HOST = "https://api.pollinations.ai";
 var _client = null;
 function getClient2() {
@@ -68572,17 +69373,17 @@ function writer(initialRootCID = null) {
   const returnRootCID = (func) => async (path4 = "/", ...args) => {
     await func(importer3, path4, ...args);
     const cid = await importer3([]);
-    debug12("returning root CID", cid);
+    debug13("returning root CID", cid);
     return cid;
   };
   const methods = {
     add: returnRootCID(ipfsAdd),
     rm: returnRootCID(ipfsRm),
     mkDir: returnRootCID(ipfsMkdir),
-    cid: returnRootCID(noop3),
+    cid: returnRootCID(noop2),
     cp: returnRootCID(ipfsCp),
     close: async () => {
-      debug12("closing input writer.");
+      debug13("closing input writer.");
     },
     pin: async (cid) => await ipfsPin(await getClient2(), cid)
   };
@@ -68593,19 +69394,19 @@ var localIPFSAvailable = async () => {
 };
 var getIPFSDaemonURL = async () => {
   if (await localIPFSAvailable()) {
-    debug12("Ipfs at localhost:5001 is reachable. Connecting...");
+    debug13("Ipfs at localhost:5001 is reachable. Connecting...");
     return "http://localhost:5001";
   }
-  debug12("localhost:5001 is not reachable. Connecting to", IPFS_HOST);
+  debug13("localhost:5001 is not reachable. Connecting to", IPFS_HOST);
   return IPFS_HOST;
 };
 var ipfsCp = async (client, ipfsPath, cid) => {
   throw new Error("Not implemented");
-  debug12("Copying from ", `/ipfs/${cid}`, "to", ipfsPath);
+  debug13("Copying from ", `/ipfs/${cid}`, "to", ipfsPath);
   return await client.files.cp(`/ipfs/${cid}`, ipfsPath);
 };
 var ipfsPin = async (client, cid) => {
-  debug12("Pinning to remote nft.storage", cid);
+  debug13("Pinning to remote nft.storage", cid);
   return await client.pin.remote.add(CID.parse(cid), { recursive: true, service: "nft_storage", background: true });
   return await client.pin.add(CID.parse(cid), { recursive: true });
 };
@@ -68617,27 +69418,27 @@ var stripSlashIPFS = (cidString) => {
 var firstLine = (s) => s.split("\n")[0];
 var stringCID = (file) => firstLine(stripSlashIPFS(file instanceof Object && "cid" in file ? file.cid.toString() : CID.asCID(file) ? file.toString() : file instanceof import_buffer.Buffer ? file.toString() : file));
 var ipfsAdd = async (importer3, path4, content, options = { pin: false }) => {
-  debug12("adding", path4, "options", options);
-  debug12("copying to", path4);
+  debug13("adding", path4, "options", options);
+  debug13("copying to", path4);
   const cid = await importer3([{ path: path4, content }]);
-  debug12("added", cid);
+  debug13("added", cid);
   return cid;
 };
 async function ipfsMkdir(importer3, path4) {
-  debug12("Creating directory", path4);
+  debug13("Creating directory", path4);
   return await importer3([{ path: path4, type: "directory" }]);
 }
 async function ipfsRm(client, path4) {
-  debug12("Deleting", path4);
+  debug13("Deleting", path4);
   try {
     await client.files.rm(path4, { force: true, recursive: true });
   } catch (e) {
-    debug12(`couldn't delete "${path4}"  because it probably doesn't exist`, e);
+    debug13(`couldn't delete "${path4}"  because it probably doesn't exist`, e);
   }
 }
 
 // src/ipfs/folderSync.js
-var import_debug14 = __toESM(require_src(), 1);
+var import_debug15 = __toESM(require_src(), 1);
 var import_fs6 = require("fs");
 var import_path2 = require("path");
 var import_ramda3 = __toESM(require_src5(), 1);
@@ -68645,12 +69446,12 @@ var import_ramda3 = __toESM(require_src5(), 1);
 // src/ipfs/fileWatcher.js
 var import_await_sleep2 = __toESM(require_await_sleep(), 1);
 var import_chokidar = __toESM(require_chokidar(), 1);
-var import_debug13 = __toESM(require_src(), 1);
+var import_debug14 = __toESM(require_src(), 1);
 var import_ramda2 = __toESM(require_src5(), 1);
-var debug13 = (0, import_debug13.default)("fileWatcher");
+var debug14 = (0, import_debug14.default)("fileWatcher");
 async function* chunkedFilewatcher({ path: path4, debounce, signal }) {
   debounce = parseInt(debounce);
-  debug13("Local: Watching", path4);
+  debug14("Local: Watching", path4);
   const watcher = import_chokidar.default.watch(path4, {
     awaitWriteFinish: {
       stabilityThreshold: debounce,
@@ -68661,45 +69462,45 @@ async function* chunkedFilewatcher({ path: path4, debounce, signal }) {
     interval: debounce
   });
   let changeQueue = [];
-  debug13("registering watcher for path", path4);
+  debug14("registering watcher for path", path4);
   watcher.on("all", async (event, path5) => {
-    debug13("got watcher event", event, path5);
+    debug14("got watcher event", event, path5);
     if (path5 !== "") {
       changeQueue.push({ event, path: path5 });
     }
   });
-  debug13("signal", signal);
+  debug14("signal", signal);
   while (!signal.aborted) {
     const files = changeQueue;
     changeQueue = [];
     if (files.length > 0) {
       const deduplicatedFiles = deduplicateChangedFiles(files);
-      debug13("Pushing to channel:", deduplicatedFiles);
+      debug14("Pushing to channel:", deduplicatedFiles);
       yield deduplicatedFiles;
-      debug13("Yielded files. Sleeping");
+      debug14("Yielded files. Sleeping");
     }
     await (0, import_await_sleep2.default)(debounce);
   }
-  debug13("fileWatcher aborted. closing watcher");
+  debug14("fileWatcher aborted. closing watcher");
   watcher.removeAllListeners();
   watcher.unwatch(path4);
   await watcher.close();
-  debug13("closed filewatcher");
+  debug14("closed filewatcher");
 }
 var deduplicateChangedFiles = (changed) => (0, import_ramda2.uniqBy)(({ event, path: path4 }) => `${event}-${path4}`, changed);
 var fileWatcher_default = chunkedFilewatcher;
 
 // src/ipfs/folderSync.js
-var debug14 = (0, import_debug14.default)("folderSync");
+var debug15 = (0, import_debug15.default)("folderSync");
 async function* folderSync({ writer: writer2, path: path4, debounce, signal }) {
   const { add, mkDir, rm, cid } = writer2;
   const addFile = async (ipfsPath, localPath) => {
-    debug14("Adding file", localPath, "to ipfs", ipfsPath);
+    debug15("Adding file", localPath, "to ipfs", ipfsPath);
     await add(ipfsPath, (0, import_fs6.createReadStream)(localPath));
   };
-  debug14("start consuming watched files");
+  debug15("start consuming watched files");
   if (!(0, import_fs6.existsSync)(path4)) {
-    debug14("Local: Root directory does not exist. Creating", path4);
+    debug15("Local: Root directory does not exist. Creating", path4);
     mkdirSync(path4, {
       recursive: true
     });
@@ -68711,25 +69512,25 @@ async function* folderSync({ writer: writer2, path: path4, debounce, signal }) {
   });
   for await (const changedFlat of fileChanges$) {
     const changedGrouped = groupSyncQueue(changedFlat);
-    debug14("changedGrouped", changedGrouped);
+    debug15("changedGrouped", changedGrouped);
     for (const changed of changedGrouped) {
       await Promise.all(
         changed.map(async ({ event, path: file }) => {
           if (signal.aborted)
             return;
-          debug14("Local:", event, file);
+          debug15("Local:", event, file);
           const localPath = (0, import_path2.join)(path4, file);
           const ipfsPath = file;
           if (event === "addDir") {
-            debug14("mkdir", ipfsPath);
+            debug15("mkdir", ipfsPath);
             await mkDir(ipfsPath);
           }
           if (event === "add" || event === "change") {
-            debug14("adding", ipfsPath, localPath);
+            debug15("adding", ipfsPath, localPath);
             await addFile(ipfsPath, localPath);
           }
           if (event === "unlink" || event === "unlinkDir") {
-            debug14("removing", file, event);
+            debug15("removing", file, event);
             await rm(ipfsPath);
           }
         })
@@ -68745,35 +69546,39 @@ var groupSyncQueue = (0, import_ramda3.groupWith)(
 );
 
 // src/ipfs/sender.js
-var debug15 = (0, import_debug15.default)("ipfs/sender");
+var debug16 = (0, import_debug16.default)("ipfs/sender");
 var sender = ({ path: path4, debounce, once, nodeid, publish }) => {
   const ipfsWriter = writer();
   let abortController = null;
   const close = async (error) => {
-    debug15("Closing sender", nodeid);
+    debug16("Closing sender", nodeid);
     if (abortController)
       abortController.abort();
     await (0, import_await_sleep3.default)(debounce * 2 + 1e3);
     await ipfsWriter.close();
-    debug15("closed all");
+    debug16("closed all");
   };
   async function startSending() {
     abortController = new import_native_abort_controller.AbortController();
     const cid$ = folderSync({ path: path4, debounce, writer: ipfsWriter, once, signal: abortController.signal });
-    debug15("start consuming watched files");
+    debug16("start consuming watched files");
     if (!(0, import_fs7.existsSync)(path4)) {
-      debug15("Local: Root directory does not exist. Creating", path4);
+      debug16("Local: Root directory does not exist. Creating", path4);
       (0, import_fs7.mkdirSync)(path4, { recursive: true });
     }
-    debug15("getting cid stream");
+    debug16("getting cid stream");
     for await (const cid of cid$) {
-      debug15("publishing new cid", cid);
+      debug16("publishing new cid", cid);
       await publish(cid);
+      if (nodeid) {
+        debug16("updating pollen", nodeid, cid);
+        updatePollen(nodeid, { output: cid });
+      }
       console.log(cid);
       if (once)
         await close();
     }
-    debug15("closed sender");
+    debug16("closed sender");
   }
   const stopSending = () => {
     abortController.abort();
@@ -68786,7 +69591,7 @@ var sender = ({ path: path4, debounce, once, nodeid, publish }) => {
 };
 
 // src/pollinate-cli.js
-var debug16 = (0, import_debug16.default)("pollinate");
+var debug17 = (0, import_debug17.default)("pollinate");
 var getPublisher = (nodeid) => {
   const { publish: publishFrontend, close: closeFrontendPublisher2 } = publisher(nodeid);
   const { publish: publishPollen, close: closePollenPublisher2 } = publisher("processing_pollen", "");
@@ -68800,44 +69605,44 @@ var getPublisher = (nodeid) => {
   };
   return { publish, close };
 };
-debug16("CLI options", options_default);
+debug17("CLI options", options_default);
 var rootPath = options_default.path;
 var enableSend = !options_default.receive;
 var enableReceive = !options_default.send;
 var executeCommand = options_default.execute;
 var sleepBeforeExit = options_default.debounce * 2 + 1e4;
 var execute = async (command, logfile = null, signal) => new Promise((resolve10, reject) => {
-  debug16("Executing command", command);
+  debug17("Executing command", command);
   const childProc = (0, import_child_process.spawn)(command);
   childProc.on("error", (err) => {
-    debug16("Error executing command", err);
+    debug17("Error executing command", err);
     reject(err);
   });
   childProc.on("close", resolve10);
   childProc.stdout.pipe(import_process.default.stderr);
   childProc.stderr.pipe(import_process.default.stderr);
   if (logfile) {
-    debug16("creating a write stream to ", logfile);
+    debug17("creating a write stream to ", logfile);
     const logout = (0, import_fs8.createWriteStream)(logfile, { "flags": "a" });
     childProc.stdout.pipe(logout);
     childProc.stderr.pipe(logout);
   }
   signal.addEventListener("abort", () => {
-    debug16("Abort requested. Killing child process");
+    debug17("Abort requested. Killing child process");
     (0, import_tree_kill.default)(childProc.pid);
   });
 });
 if (executeCommand)
   (async () => {
     let [executeSignal, abortExecute] = [null, null];
-    const [cidStream, unsubscribe] = options_default.ipns ? subscribeGenerator(options_default.nodeid) : [import_event_iterator.stream.call(import_process.default.stdin), noop];
+    const [cidStream, unsubscribe] = options_default.ipns ? subscribeGenerator(options_default.nodeid) : [import_event_iterator.stream.call(import_process.default.stdin), noop2];
     const { publish, close: closePublish } = getPublisher(options_default.nodeid);
     let close = null;
     for await (let receivedCID of await cidStream) {
       receivedCID = stringCID(receivedCID);
-      debug16("remoteCID", receivedCID);
+      debug17("remoteCID", receivedCID);
       if (abortExecute) {
-        debug16("aborting previous execution");
+        debug17("aborting previous execution");
         abortExecute();
         await close();
       }
@@ -68866,11 +69671,10 @@ else {
       const { publish, close: closePublish } = getPublisher(options_default.nodeid);
       const { startSending } = sender({ ...options_default, publish });
       await startSending();
-      debug16("process should exit");
+      debug17("process should exit");
       if (options_default.ipns)
         await (0, import_await_sleep4.default)(sleepBeforeExit);
       await closePublish();
-      import_process.default.exit(0);
     })();
   if (enableReceive) {
     (async () => {

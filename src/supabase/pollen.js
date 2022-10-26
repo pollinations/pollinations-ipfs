@@ -41,8 +41,8 @@ export function updatePollen(input, data) {
     debug("updatePollen", input, data)
     return supabase
             .from(DB_NAME)
-            .update(data)
-            .eq("input", input)
+            .upsert({input, ...data})
+            // .eq("input", input)
             .then(({data}) => data);
 }
 

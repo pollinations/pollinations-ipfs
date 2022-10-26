@@ -1,22 +1,26 @@
 import Debug from 'debug';
 // import { debounce } from 'lodash';
 import { Channel } from 'queueable';
+import Store from './keyValueStore.js';
 import { subscribePollen } from './supabase/pollen.js';
 
 
 const debug = Debug('ipfs:pubsub');
 
+const store = Store('colab_nodes');
 
 
 // create a publisher that sends periodic heartbeats as well as contentid updates
 export function publisher(nodeID) {
-    
-        
+            
     debug("Creating publisher for", nodeID)
 
-    const publish = () => console.error("publish does not exist anymore. do we need him?")
+    const publish = contentID => {
+        debug("Publishing", contentID)
+        store.set(nodeID, contentID)
+    }
 
-    const close = () => console.error("close called. publish does not exist anymore. do we need him?")
+    const close = () => debug("closing the publisher is a no-op")
 
     return {
         publish,
@@ -40,13 +44,19 @@ export function subscribeGenerator(nodeID) {
 
 
 // Subscribe to a content ids from a nodeID and suffix. Callback is called with the content ids
-// Also receives and logs heartbeats received from the publisher
+// this still has two branches to support colab nodes
 export function subscribeCID(nodeID, callback) {
 
-    const closeSub = subscribePollen(nodeID, (res) => {
-        if (res?.output)
-            callback(res?.output);
-    });
-    return closeSub;    
-    
+    if (nodeID.startsWith('Qm')) {
+        debug("Subscribing to", nodeID," for pollinator running on our own GPU backend");
+        const closeSub = subscribePollen(nodeID, (res) => {
+            if (res?.output)
+                callback(res?.output);
+        });
+        return closeSub;    
+    } else {
+        debug("Subscribing to", nodeID," for pollinator running on Google Colab's GPU backend");
+        const closeSub = store.subscribe(nodeID, callback);
+        return closeSub;
+    }
 };

@@ -10,6 +10,7 @@ import path from 'path-browserify';
 import S3Blockstore from './s3/s3store.js';
 import { importFromWeb3Storage } from './supabase/web3storage.js';
 export { getSignedURL } from './s3/s3client.js';
+export { getPollen } from "./supabase/pollen.js";
 // Debug.enable("*");
 const { extname } = path;
 
@@ -135,6 +136,7 @@ export async function exportCID(cid, processor=null) {
     debug("Got result", resultObj);
     return resultObj;
 }
+
 
 async function processFile({cid, path, name, ...file }) {
     let value = getWebURL(cid, name);
