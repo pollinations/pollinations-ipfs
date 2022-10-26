@@ -16,7 +16,7 @@ export async function processRemoteCID(contentID, rootPath) {
   debug("Processing remote CID", contentID);
     
   const ipfsState = (await getIPFSState(contentID, (file) => processFile(file, rootPath)));
-  // debug("got remote state", ipfsState);
+  debug("got remote state", ipfsState);
 }
 
 // Receives a stream of updates from IPFS pubsub or stdin and writes them to disk
