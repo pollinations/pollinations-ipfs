@@ -69492,8 +69492,18 @@ var fileWatcher_default = chunkedFilewatcher;
 
 // src/ipfs/folderSync.js
 var debug15 = (0, import_debug15.default)("folderSync");
-async function* folderSync({ writer: writer2, path: path4, debounce, signal }) {
-  const { add, mkDir, rm, cid } = writer2;
+async function* folderSync({
+  writer: writer2,
+  path: path4,
+  debounce,
+  signal
+}) {
+  const {
+    add,
+    mkDir,
+    rm,
+    cid
+  } = writer2;
   const addFile = async (ipfsPath, localPath) => {
     debug15("Adding file", localPath, "to ipfs", ipfsPath);
     await add(ipfsPath, (0, import_fs6.createReadStream)(localPath));
@@ -69514,33 +69524,37 @@ async function* folderSync({ writer: writer2, path: path4, debounce, signal }) {
     const changedGrouped = groupSyncQueue(changedFlat);
     debug15("changedGrouped", changedGrouped);
     for (const changed of changedGrouped) {
-      await Promise.all(
-        changed.map(async ({ event, path: file }) => {
-          if (signal.aborted)
-            return;
-          debug15("Local:", event, file);
-          const localPath = (0, import_path2.join)(path4, file);
-          const ipfsPath = file;
-          if (event === "addDir") {
-            debug15("mkdir", ipfsPath);
-            await mkDir(ipfsPath);
-          }
-          if (event === "add" || event === "change") {
-            debug15("adding", ipfsPath, localPath);
-            await addFile(ipfsPath, localPath);
-          }
-          if (event === "unlink" || event === "unlinkDir") {
-            debug15("removing", file, event);
-            await rm(ipfsPath);
-          }
-        })
-      );
+      for (const {
+        event,
+        path: file
+      } of changed) {
+        if (signal.aborted)
+          continue;
+        debug15("Local:", event, file);
+        const localPath = (0, import_path2.join)(path4, file);
+        const ipfsPath = file;
+        if (event === "addDir") {
+          debug15("mkdir", ipfsPath);
+          await mkDir(ipfsPath);
+        }
+        if (event === "add" || event === "change") {
+          debug15("adding", ipfsPath, localPath);
+          await addFile(ipfsPath, localPath);
+        }
+        if (event === "unlink" || event === "unlinkDir") {
+          debug15("removing", file, event);
+          await rm(ipfsPath);
+        }
+      }
     }
     const newContentID = await cid();
     yield newContentID;
   }
 }
-var groupKey = ({ event, path: path4 }) => (0, import_path2.dirname)(path4) + "_" + event;
+var groupKey = ({
+  event,
+  path: path4
+}) => (0, import_path2.dirname)(path4) + "_" + event;
 var groupSyncQueue = (0, import_ramda3.groupWith)(
   (a, b) => groupKey(a) === groupKey(b)
 );
