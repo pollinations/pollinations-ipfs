@@ -15,15 +15,15 @@ export async function processRemoteCID(contentID, rootPath) {
   //   return;
   debug("Processing remote CID", contentID);
     
-  const ipfsState = (await getIPFSState(contentID, (file, reader) => processFile(file, rootPath, reader), true));
+  const ipfsState = (await getIPFSState(contentID, (file) => processFile(file, rootPath)));
   debug("got remote state", ipfsState);
 }
 
 // Receives a stream of updates from IPFS pubsub or stdin and writes them to disk
-export const receive = async function* ({ subfolder, nodeid,path: rootPath }, process=processRemoteCID, suffix="/input") {
+export const receive = async function* ({ subfolder, nodeid,path: rootPath }, process=processRemoteCID) {
   // subscribe to content id updates either via IPNS or stdin
 
-  const [cidStream, unsubscribe] = subscribeGenerator(nodeid, suffix)
+  const [cidStream, unsubscribe] = subscribeGenerator(nodeid)
    
 
   for await (let receivedCID of await cidStream) {
@@ -45,14 +45,15 @@ export const writeFileAndCreateFolder = async (path, content) => {
 
 
 // Writes all files to disk coming from the IPFS state
-async function processFile({ path, cid }, rootPath, { get }) {
+async function processFile({ path, cid, buffer }, rootPath) {
+  debug("processing file", path, cid, rootPath);
   const _debug = debug.extend(`processFile(${path})`);
   _debug("started");
   const destPath = join(rootPath, path);
   _debug("writeFile", destPath, cid, "queued");
 
   // queue.add(async () => {
-  const content = await get(cid, { stream: true });
+  const content = await buffer();
   _debug("writefile content", content.length);
   await writeFileAndCreateFolder(destPath, content);
   _debug("done");

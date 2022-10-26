@@ -4,8 +4,8 @@ import Debug from 'debug';
 import { existsSync, mkdirSync } from 'fs';
 import { AbortController } from "native-abort-controller";
 import { writer } from "../ipfsConnector";
+import { updatePollen } from "../supabase/pollen.js";
 import folderSync from "./folderSync.js";
-
 const debug = Debug("ipfs/sender");
 
 
@@ -22,6 +22,7 @@ export const sender = ({ path, debounce, once, nodeid, publish }) => {
     debug("Closing sender", nodeid)
     if (abortController)
       abortController.abort()
+    
     await awaitSleep(debounce*2+1000)
     await ipfsWriter.close()
     debug("closed all")
@@ -44,6 +45,11 @@ export const sender = ({ path, debounce, once, nodeid, publish }) => {
       debug("publishing new cid", cid)
       await publish(cid)
       // yield cid
+      // debug("updating pollen if nodeID is set");
+      if (nodeid) {
+        debug("updating pollen", nodeid, cid);
+        updatePollen(nodeid, {output: cid});
+      }
       console.log(cid)
       if (once)
         await close()

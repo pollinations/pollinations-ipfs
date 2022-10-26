@@ -7,9 +7,20 @@ const debug = Debug("pollen");
 
 const modelsMetadata = fetch("https://raw.githubusercontent.com/pollinations/model-index/main/metadata.json").then(res => res.json())
 
-// DB Name should be "pollen" if environment is production else "pollen_dev"
-const DB_NAME = process.env.POLLINATIONS_ENV === "development" ? "pollen_dev" : "pollen";
 
+// DB Name should be "pollen" if environment is production else "pollen_dev"
+
+let DB_NAME = "pollen"
+
+if (typeof localStorage !== "undefined" && localStorage["isDev"]) {
+    DB_NAME = "pollen_dev"
+}
+
+if (process.env.NODE_ENV === "development") {
+    DB_NAME = "pollen_dev"
+}
+
+debug("DB_NAME", DB_NAME)
 
 export async function getPollens(params) {
     const { data } = await supabase
@@ -30,8 +41,8 @@ export function updatePollen(input, data) {
     debug("updatePollen", input, data)
     return supabase
             .from(DB_NAME)
-            .update(data)
-            .eq("input", input)
+            .upsert({input, ...data})
+            // .eq("input", input)
             .then(({data}) => data);
 }
 
@@ -72,7 +83,6 @@ export function subscribePollen(input, callback) {
     
     const getData = async () => {
 
-        debug("getting data")
         const data = await getPollen(input);
         debug("data", data);
         const placeInQueue = await getPlaceInQueue(data);
@@ -121,7 +131,7 @@ export async function dispatchPollenGenerator(params) {
 
 // returnImmediately true means we don't wait for the pollen to be done if it was not finished yet
 export async function dispatchAndReturnPollen(params, returnImmediately=false) {
-        debug("disopathing pollen", params);
+        debug("dispatching pollen", params);
         dispatchPollen(params);
         
         if (returnImmediately)
@@ -172,3 +182,5 @@ export async function dispatchAndReturnPollen(params, returnImmediately=false) {
 //     console.log("could not parse",pollen.output)
 //    }
 // }
+
+// console.log(await getPollen("QmPbPpJjA5bkSq2dw1ri8QWuCEa6NZRvwujh69AMwMu1qC"))

@@ -1,11 +1,10 @@
 
 import Debug from "debug";
-import { UploadInputstoIPFS } from './aws.js';
-import { writer } from './ipfsConnector.js';
 import { IPFSWebState } from './ipfsWebClient.js';
+import { importJSON } from "./pollenStoreClient.js";
 import { dispatchAndReturnPollen, dispatchPollen, dispatchPollenGenerator } from './supabase/pollen.js';
 
-export { getPollens, updatePollen } from './supabase/pollen.js';
+import { getPollens as getPollens1, updatePollen as updatePollen1 } from './supabase/pollen.js';
  
 const debug = Debug("pollen");
 
@@ -13,15 +12,16 @@ const debug = Debug("pollen");
 
 // }
 
-
+export const getPollens = getPollens1;
+export const updatePollen = updatePollen1;
 
 const runModelOnce = async (inputs, image="voodoohop/dalle-playground", returnImmediately=false, params={}) => {
   debug("running model", inputs, image);
-  inputs = {...inputs, model_image:image};
-  const inputCID = await UploadInputstoIPFS(inputs, writer());
+  inputs = {...inputs, model_image: image};
+  const inputCID = await importJSON({input: inputs});
   debug("got input content ID", inputCID);
   
-  const outputCID = await dispatchAndReturnPollen({input: inputCID, image, ...params }, returnImmediately);
+  const outputCID = await dispatchAndReturnPollen({input: inputCID.toString(), image, ...params }, returnImmediately);
   if (!outputCID)
     return null;
   const data = await IPFSWebState(outputCID);
@@ -33,17 +33,17 @@ const runModelOnce = async (inputs, image="voodoohop/dalle-playground", returnIm
   return data;
 }
 
-export async function dispatch(inputs, image="voodoohop/dalle-playground", params={}) {
-  const inputCID = await UploadInputstoIPFS({...inputs, model_image: image}, writer());
+export async function dispatch(inputs, image, params={}) {
+  const inputCID = await importJSON({input: {...inputs, model_image: image}});
   await dispatchPollen({input: inputCID, image, ...params });
   return inputCID;
 }
 
-export async function* runModelGenerator(inputs, image="voodoohop/dalle-playground", params={}) {
+export async function* runModelGenerator(inputs, image, params={}) {
   debug("running model", image);
   inputs = {...inputs, model_image:image};
 
-  const inputCID = await UploadInputstoIPFS(inputs, writer());
+  const inputCID = await importJSON({input: inputs});
   debug("got input content ID", inputCID);
   
   const pollenStream = await dispatchPollenGenerator({input: inputCID, image, ...params })
@@ -54,8 +54,6 @@ export async function* runModelGenerator(inputs, image="voodoohop/dalle-playgrou
     yield data;
   }
 }
-
-
 
 
 export default runModelOnce;
