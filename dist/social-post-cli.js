@@ -51703,7 +51703,8 @@ var debug7 = (0, import_debug7.default)("ipfsWebClient");
 var host = "https://store.pollinations.ai";
 var IPFSWebState = async (contentID) => {
   debug7("Getting state for CID", contentID);
-  const response = await (0, import_node_fetch2.default)(`${host}/ipfs/${contentID}`);
+  const url = contentID.startsWith("/") ? `${host}${contentID}` : `${host}/ipfs/${contentID}`;
+  const response = await (0, import_node_fetch2.default)(url);
   const json = await response.json();
   debug7("Got state", json);
   return json;
