@@ -16,7 +16,7 @@ if (typeof localStorage !== "undefined" && localStorage["isDev"]) {
     DB_NAME = "pollen_dev"
 }
 
-if (process.env.NODE_ENV === "development") {
+if (true || process.env.NODE_ENV === "development") {
     DB_NAME = "pollen_dev"
 }
 

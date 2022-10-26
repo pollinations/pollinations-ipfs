@@ -62105,7 +62105,7 @@ var DB_NAME = "pollen";
 if (typeof localStorage !== "undefined" && localStorage["isDev"]) {
   DB_NAME = "pollen_dev";
 }
-if (process.env.NODE_ENV === "development") {
+if (true) {
   DB_NAME = "pollen_dev";
 }
 debug6("DB_NAME", DB_NAME);
