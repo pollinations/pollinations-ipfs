@@ -50903,6 +50903,7 @@ if (typeof localStorage !== "undefined" && localStorage["isDev"]) {
 if (process.env.NODE_ENV === "development") {
   DB_NAME = "pollen_dev";
 }
+debug2("DB_NAME", DB_NAME);
 function updatePollen(input, data) {
   debug2("updatePollen", input, data);
   return client_default.from(DB_NAME).upsert({ input, ...data }).then(({ data: data2 }) => data2);
@@ -50925,7 +50926,6 @@ function subscribePollen(input, callback) {
   let lastData = null;
   let lastPlaceInQueue = 9999;
   const getData = async () => {
-    debug2("getting data");
     const data = await getPollen(input);
     debug2("data", data);
     const placeInQueue = await getPlaceInQueue(data);

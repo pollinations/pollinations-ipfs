@@ -11,7 +11,8 @@ const host = "https://store.pollinations.ai"
 // Return IPFS state. Converts all JSON/text content to objects and binary cids to URLs.
 export const IPFSWebState = async contentID => {
     debug("Getting state for CID", contentID)
-    const response = await fetch(`${host}/ipfs/${contentID}`);
+    const url = contentID.startsWith("/") ? `${host}${contentID}` : `${host}/ipfs/${contentID}`
+    const response = await fetch(url);
     const json = await response.json();
     debug("Got state", json);
     return json;

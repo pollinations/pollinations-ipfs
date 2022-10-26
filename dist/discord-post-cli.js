@@ -41448,6 +41448,7 @@ if (typeof localStorage !== "undefined" && localStorage["isDev"]) {
 if (process.env.NODE_ENV === "development") {
   DB_NAME = "pollen_dev";
 }
+debug2("DB_NAME", DB_NAME);
 async function getPlaceInQueue(data) {
   var _a;
   if (!data)
@@ -41466,7 +41467,6 @@ function subscribePollen(input, callback) {
   let lastData = null;
   let lastPlaceInQueue = 9999;
   const getData = async () => {
-    debug2("getting data");
     const data = await getPollen(input);
     debug2("data", data);
     const placeInQueue = await getPlaceInQueue(data);

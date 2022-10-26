@@ -32746,6 +32746,7 @@ if (typeof localStorage !== "undefined" && localStorage["isDev"]) {
 if (process.env.NODE_ENV === "development") {
   DB_NAME = "pollen_dev";
 }
+debug("DB_NAME", DB_NAME);
 function dispatchPollen(params) {
   return client_default.from(DB_NAME).insert(params).then(({ data }) => data);
 }
@@ -32767,7 +32768,6 @@ function subscribePollen(input, callback) {
   let lastData = null;
   let lastPlaceInQueue = 9999;
   const getData = async () => {
-    debug("getting data");
     const data = await getPollen(input);
     debug("data", data);
     const placeInQueue = await getPlaceInQueue(data);

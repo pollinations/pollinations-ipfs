@@ -20,7 +20,7 @@ if (process.env.NODE_ENV === "development") {
     DB_NAME = "pollen_dev"
 }
 
-
+debug("DB_NAME", DB_NAME)
 
 export async function getPollens(params) {
     const { data } = await supabase
@@ -83,7 +83,6 @@ export function subscribePollen(input, callback) {
     
     const getData = async () => {
 
-        debug("getting data")
         const data = await getPollen(input);
         debug("data", data);
         const placeInQueue = await getPlaceInQueue(data);
@@ -183,3 +182,5 @@ export async function dispatchAndReturnPollen(params, returnImmediately=false) {
 //     console.log("could not parse",pollen.output)
 //    }
 // }
+
+// console.log(await getPollen("QmPbPpJjA5bkSq2dw1ri8QWuCEa6NZRvwujh69AMwMu1qC"))
