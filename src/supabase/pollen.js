@@ -14,10 +14,12 @@ let DB_NAME = "pollen"
 
 if (typeof localStorage !== "undefined" && localStorage["isDev"]) {
     DB_NAME = "pollen_dev"
+    debug("localStorage triggered dev mode")
 }
 
 if (process.env.NODE_ENV === "development") {
     DB_NAME = "pollen_dev"
+    debug("NODE_ENV triggered dev mode")
 }
 
 debug("DB_NAME", DB_NAME)
