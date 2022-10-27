@@ -2,7 +2,7 @@
 import Debug from "debug";
 import fetch from "node-fetch";
 
-export { getPollens, updatePollen } from './supabase/pollen.js';
+export { getPollen, getPollens, updatePollen } from './supabase/pollen.js';
 export { default as getWebURL } from "./utils/getWebURL.js";
 
 const debug = Debug("ipfsWebClient")

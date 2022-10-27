@@ -184,3 +184,5 @@ export async function dispatchAndReturnPollen(params, returnImmediately=false) {
 // }
 
 // console.log(await getPollen("QmPbPpJjA5bkSq2dw1ri8QWuCEa6NZRvwujh69AMwMu1qC"))
+
+// console.log(await getPollens({image: '614871946825.dkr.ecr.us-east-1.amazonaws.com/pollinations/stable-diffusion-private', success: true, example: true}))
