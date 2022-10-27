@@ -12,15 +12,18 @@ const modelsMetadata = fetch("https://raw.githubusercontent.com/pollinations/mod
 
 let DB_NAME = "pollen"
 
-if (typeof localStorage !== "undefined" && localStorage["isDev"]) {
-    DB_NAME = "pollen_dev"
+if (typeof localStorage !== "undefined" && localStorage["DB_NAME"]) {
+    DB_NAME = localStorage["DB_NAME"]
     debug("localStorage triggered dev mode")
 }
 
-if (process.env.NODE_ENV === "development") {
-    DB_NAME = "pollen_dev"
-    debug("NODE_ENV triggered dev mode")
-}
+// if (process.env.NODE_ENV === "development") {
+//     DB_NAME = "pollen_dev"
+//     debug("NODE_ENV triggered dev mode")
+// }
+
+if (process.env.DB_NAME)
+    DB_NAME = process.env.DB_NAME
 
 debug("DB_NAME", DB_NAME)
 
