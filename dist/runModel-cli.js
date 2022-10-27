@@ -32754,14 +32754,14 @@ async function getPlaceInQueue(data) {
   var _a;
   if (!data)
     return -1;
-  const { image, request_submit_time, priority } = data;
+  const { image, request_submit_time, priority: priority2 } = data;
   const metadata = await modelsMetadata;
   const groups = (_a = metadata[image].meta) == null ? void 0 : _a.pollinator_group;
   const competing_images = Object.keys(metadata).filter((i) => {
     var _a2, _b;
     return ((_b = (_a2 = metadata[i]) == null ? void 0 : _a2.meta.pollinator_group) == null ? void 0 : _b.filter((g) => groups.includes(g)).length) > 0;
   });
-  return await client_default.from(DB_NAME).select("*", { count: "exact" }).eq("processing_started", false).lte("request_submit_time", request_submit_time).in("image", competing_images).gte("priority", priority).then(({ count }) => count);
+  return await client_default.from(DB_NAME).select("*", { count: "exact" }).eq("processing_started", false).lte("request_submit_time", request_submit_time).in("image", competing_images).gte("priority", priority2).then(({ count }) => count);
 }
 function subscribePollen(input, callback) {
   debug("getting first pollen using select", input);
@@ -46349,7 +46349,7 @@ var debug4 = (0, import_debug4.default)("web3storage");
 var token = process.env.WEB3STORAGE_TOKEN;
 if (!token) {
   console.error("A token is needed. You can create one on https://web3.storage");
-  console.error("env", process.env);
+  console.error("env", process.env.WEB3STORAGE_TOKEN);
 }
 var storage = new Web3Storage({
   token
@@ -46392,7 +46392,6 @@ function objectToFiles(obj, path2 = "") {
 // src/awsPollenRunner.js
 var debug6 = (0, import_debug6.default)("pollen");
 var runModelOnce = async (inputs2, image = "voodoohop/dalle-playground", returnImmediately = false, params = {}) => {
-  var _a;
   debug6("running model", inputs2, image);
   inputs2 = { ...inputs2, model_image: image };
   const inputCID = await importJSON({ input: inputs2 });
@@ -46402,8 +46401,6 @@ var runModelOnce = async (inputs2, image = "voodoohop/dalle-playground", returnI
     return null;
   const data = await IPFSWebState(outputCID);
   debug6("got and returning output data", data);
-  if (!((_a = data == null ? void 0 : data.output) == null ? void 0 : _a.done))
-    throw new Error("output not done");
   return data;
 };
 async function dispatch(inputs2, image, params = {}) {
@@ -46414,15 +46411,16 @@ async function dispatch(inputs2, image, params = {}) {
 var awsPollenRunner_default = runModelOnce;
 
 // src/runModel-cli.js
-var [, , model, inputsString, onlyDispatch] = process.argv;
+var [, , model, inputsString, stringPriority = "1", onlyDispatch = false] = process.argv;
+var priority = parseInt(stringPriority);
 var inputs = JSON.parse(inputsString);
 async function run(model2, inputs2) {
   if (onlyDispatch) {
-    const inputCid = await dispatch(inputs2, model2, { priority: 1 });
+    const inputCid = await dispatch(inputs2, model2, { priority });
     console.log(inputCid);
     return inputCid;
   }
-  const imageUrl = await awsPollenRunner_default(inputs2, model2, false, { priority: 1 });
+  const imageUrl = await awsPollenRunner_default(inputs2, model2, false, { priority });
   console.log(imageUrl);
   process.exit(0);
 }

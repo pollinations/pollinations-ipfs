@@ -65426,7 +65426,7 @@ var debug9 = (0, import_debug9.default)("web3storage");
 var token = process.env.WEB3STORAGE_TOKEN;
 if (!token) {
   console.error("A token is needed. You can create one on https://web3.storage");
-  console.error("env", process.env);
+  console.error("env", process.env.WEB3STORAGE_TOKEN);
 }
 var storage = new Web3Storage({
   token
