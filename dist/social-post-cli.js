@@ -59529,6 +59529,7 @@ var S3Blockstore = class extends BaseBlockstore {
       }
     });
     debug8("upload response ok", uploadResponse.ok);
+    this.cache[key] = val;
   }
   async get(key, options) {
     if (this.cache[key]) {
@@ -59558,7 +59559,8 @@ var S3Blockstore = class extends BaseBlockstore {
     return response.ok;
   }
   async delete(key, options) {
-    console.error("delete not implemented");
+    delete this.cache[key];
+    console.error("delete from s3 not implemented");
     throw new Error("delete not implemented");
   }
   async *_all() {
@@ -65548,7 +65550,7 @@ async function* fetchWithWeb3storageFallback(cid, skipWeb3storage = false) {
       return results;
   } catch (e) {
     debug10("Error fetching from S3", e);
-    if (e.code === "ERR_NOT_FOUND" && !skipWeb3storage) {
+    if (!skipWeb3storage) {
       debug10("cid not found locally. fetching from web3.storage");
       const importedCID = await importFromWeb3Storage(cid);
       debug10("imported from web3.storage", importedCID);

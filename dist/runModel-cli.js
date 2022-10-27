@@ -40455,6 +40455,7 @@ var S3Blockstore = class extends BaseBlockstore {
       }
     });
     debug3("upload response ok", uploadResponse.ok);
+    this.cache[key] = val;
   }
   async get(key, options) {
     if (this.cache[key]) {
@@ -40484,7 +40485,8 @@ var S3Blockstore = class extends BaseBlockstore {
     return response.ok;
   }
   async delete(key, options) {
-    console.error("delete not implemented");
+    delete this.cache[key];
+    console.error("delete from s3 not implemented");
     throw new Error("delete not implemented");
   }
   async *_all() {

@@ -50821,7 +50821,7 @@ var import_tree_kill = __toESM(require_tree_kill(), 1);
 
 // src/backend/options.js
 var import_commander = __toESM(require_commander(), 1);
-import_commander.program.option("-p, --path <path>", "local folder to synchronize", "/tmp/ipfs").option("-r, --receive", "only receive state", false).option("-s, --send", "only send state", false).option("-o, --once", "run once and exit", false).option("-i, --ipns", "publish to /ipns/pollinations.ai", false).option("-n, --nodeid <nodeid>", "local node id", null).option("-d, --debounce <ms>", "file watch debounce time", 100).option("-e, --execute <command>", "run command on receive and stream back to ipfs", null).option("-l, --logout <path>", "log to file", null).option("-w, --writetodb", "write CIDs to pollinations db", null).option("-sf, --subfolder <subfolder>", "subfolder to download", "");
+import_commander.program.option("-p, --path <path>", "local folder to synchronize", "/tmp/ipfs").option("-r, --receive", "only receive state", false).option("-s, --send", "only send state", false).option("-o, --once", "run once and exit", false).option("-i, --ipns", "publish to /ipns/pollinations.ai", false).option("-n, --nodeid <nodeid>", "local node id", null).option("-d, --debounce <ms>", "file watch debounce time", 1e3).option("-e, --execute <command>", "run command on receive and stream back to ipfs", null).option("-l, --logout <path>", "log to file", null).option("-w, --writetodb", "write CIDs to pollinations db", null).option("-sf, --subfolder <subfolder>", "subfolder to download", "");
 import_commander.program.parse(process.argv);
 var options_default = import_commander.program.opts();
 
@@ -58762,6 +58762,7 @@ var S3Blockstore = class extends BaseBlockstore {
       }
     });
     debug4("upload response ok", uploadResponse.ok);
+    this.cache[key] = val;
   }
   async get(key, options) {
     if (this.cache[key]) {
@@ -58791,7 +58792,8 @@ var S3Blockstore = class extends BaseBlockstore {
     return response.ok;
   }
   async delete(key, options) {
-    console.error("delete not implemented");
+    delete this.cache[key];
+    console.error("delete from s3 not implemented");
     throw new Error("delete not implemented");
   }
   async *_all() {
@@ -64800,7 +64802,7 @@ async function* fetchWithWeb3storageFallback(cid, skipWeb3storage = false) {
       return results;
   } catch (e) {
     debug6("Error fetching from S3", e);
-    if (e.code === "ERR_NOT_FOUND" && !skipWeb3storage) {
+    if (!skipWeb3storage) {
       debug6("cid not found locally. fetching from web3.storage");
       const importedCID = await importFromWeb3Storage(cid);
       debug6("imported from web3.storage", importedCID);
