@@ -18,7 +18,7 @@ const store = name => {
     const set = async (key, value) => {
         debug("publishing", key, value);
         lastValue = value;
-        return (await db.from(name).upsert({ key, value: JSON.stringify(value) }).select("*")).data[0];
+        await db.from(name).upsert({ key, value: JSON.stringify(value) });
     }
 
     const subscribe = (key, callback) => {

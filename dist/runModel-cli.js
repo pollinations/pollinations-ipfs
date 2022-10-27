@@ -32740,12 +32740,12 @@ var client_default = getClient();
 var debug = (0, import_debug.default)("pollen");
 var modelsMetadata = (0, import_node_fetch.default)("https://raw.githubusercontent.com/pollinations/model-index/main/metadata.json").then((res) => res.json());
 var DB_NAME = "pollen";
-if (typeof localStorage !== "undefined" && localStorage["isDev"]) {
-  DB_NAME = "pollen_dev";
+if (typeof localStorage !== "undefined" && localStorage["DB_NAME"]) {
+  DB_NAME = localStorage["DB_NAME"];
+  debug("localStorage triggered dev mode");
 }
-if (process.env.NODE_ENV === "development") {
-  DB_NAME = "pollen_dev";
-}
+if (process.env.DB_NAME)
+  DB_NAME = process.env.DB_NAME;
 debug("DB_NAME", DB_NAME);
 function dispatchPollen(params) {
   return client_default.from(DB_NAME).insert(params).then(({ data }) => data);

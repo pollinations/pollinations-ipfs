@@ -50863,7 +50863,7 @@ var store = (name8) => {
   const set = async (key, value) => {
     debug("publishing", key, value);
     lastValue = value;
-    return (await client_default.from(name8).upsert({ key, value: JSON.stringify(value) }).select("*")).data[0];
+    await client_default.from(name8).upsert({ key, value: JSON.stringify(value) });
   };
   const subscribe = (key, callback) => {
     const res = client_default.channel(`public:${name8}`).on(
@@ -50897,12 +50897,12 @@ var import_queueable = __toESM(require_lib(), 1);
 var debug2 = (0, import_debug2.default)("pollen");
 var modelsMetadata = (0, import_node_fetch.default)("https://raw.githubusercontent.com/pollinations/model-index/main/metadata.json").then((res) => res.json());
 var DB_NAME = "pollen";
-if (typeof localStorage !== "undefined" && localStorage["isDev"]) {
-  DB_NAME = "pollen_dev";
+if (typeof localStorage !== "undefined" && localStorage["DB_NAME"]) {
+  DB_NAME = localStorage["DB_NAME"];
+  debug2("localStorage triggered dev mode");
 }
-if (process.env.NODE_ENV === "development") {
-  DB_NAME = "pollen_dev";
-}
+if (process.env.DB_NAME)
+  DB_NAME = process.env.DB_NAME;
 debug2("DB_NAME", DB_NAME);
 function updatePollen(input, data) {
   debug2("updatePollen", input, data);
