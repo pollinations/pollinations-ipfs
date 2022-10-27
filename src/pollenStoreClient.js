@@ -191,7 +191,7 @@ async function* fetchWithWeb3storageFallback(cid, skipWeb3storage=false) {
     } catch (e) {
         // check if exception is ERR_NOT_FOUND
         debug("Error fetching from S3", e);
-    if (e.code === "ERR_NOT_FOUND" && !skipWeb3storage) {
+    if (!skipWeb3storage) {
             debug("cid not found locally. fetching from web3.storage");
             const importedCID = await importFromWeb3Storage(cid);
             
