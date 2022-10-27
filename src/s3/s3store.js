@@ -32,19 +32,12 @@ class S3Blockstore extends BaseBlockstore {
             debug("block already exists", key)
             return;
         }
-        // // store a block to the bucket
-        // const params = {
-        //     Bucket,
-        //     Key: key.toString(),
-        //     Body: val,
-        // };
-
-        // debug("put result", await await s3.send(new PutObjectCommand(params)));
 
         // get a signed url from https://store.pollinations.ai/upload/[key]
         const urlResponse = await fetch(`https://store.pollinations.ai/upload/${key.toString()}`)
         const url = await urlResponse.text();
         debug("signed url", url, "for key", key.toString())
+        
         // upload to signed url
         // val is a Uint8Array
         const uploadResponse = await fetch(url, {
@@ -55,6 +48,7 @@ class S3Blockstore extends BaseBlockstore {
             }
         });
         debug("upload response ok", uploadResponse.ok)
+        this.cache[key] = val;
     }
 
     async get (key, options) {
@@ -89,16 +83,6 @@ class S3Blockstore extends BaseBlockstore {
             return true;
             
         debug("has", key);
-        // const params = {
-        //     Bucket,
-        //     Key: key.toString()
-        // };
-        // try {
-        //     await s3.send(new HeadObjectCommand(params));
-        //     return true;
-        // } catch (err) {
-        //     return false;
-        // }
 
         // check if a block exists using fetch with a HEAD request
         const response = await fetch(`https://pollinations-ipfs.s3.amazonaws.com/${key.toString()}`, {
@@ -110,7 +94,8 @@ class S3Blockstore extends BaseBlockstore {
 
     async delete (key, options) {
         // delete a block
-        console.error("delete not implemented")
+        delete this.cache[key];
+        console.error("delete from s3 not implemented")
         throw new Error("delete not implemented")
     }
 
