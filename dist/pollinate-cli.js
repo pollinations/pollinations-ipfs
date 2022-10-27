@@ -69507,7 +69507,10 @@ async function* folderSync({
   } = writer2;
   const addFile = async (ipfsPath, localPath) => {
     debug15("Adding file", localPath, "to ipfs", ipfsPath);
-    await add(ipfsPath, (0, import_fs6.createReadStream)(localPath));
+    if ((0, import_fs6.existsSync)(localPath))
+      await add(ipfsPath, (0, import_fs6.createReadStream)(localPath));
+    else
+      debug15("File does not exist. Was probably deleted or moved.");
   };
   debug15("start consuming watched files");
   if (!(0, import_fs6.existsSync)(path4)) {

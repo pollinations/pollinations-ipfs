@@ -30,7 +30,10 @@ export default async function* folderSync({
   const addFile = async (ipfsPath, localPath) => {
     debug("Adding file", localPath, "to ipfs", ipfsPath);
     // get filename from path
-    await add(ipfsPath, createReadStream(localPath))
+    if (existsSync(localPath))
+      await add(ipfsPath, createReadStream(localPath))
+    else
+      debug("File does not exist. Was probably deleted or moved.")
   }
 
 
