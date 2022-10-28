@@ -6,6 +6,7 @@ import getWebURL from './utils/getWebURL.js';
 const debug = Debug('pollenStoreClient');
 
 import json5 from "json5";
+import fetch from 'node-fetch';
 import path from 'path-browserify';
 import S3Blockstore from './s3/s3store.js';
 import { importFromWeb3Storage } from './supabase/web3storage.js';
@@ -27,8 +28,7 @@ const importOptions = {
 export async function importJSON(inputs) {
     let lastCID = null;
 
-    const files = objectToFiles(inputs);
-
+    const files = await objectToFiles(inputs);
     for await (const file of importer(files, blockstore, importOptions)) {
         debug("Imported file", file.path, file.cid)
         lastCID = file.cid;
@@ -57,7 +57,7 @@ export function pollenImporter() {
 }
 
 // convert the object to an array of files in the format {"path" : "/path/to/file", "content": <content>}
-function objectToFiles(obj, path="") {  
+async function objectToFiles(obj, path="") {  
     const result = [];
     for (const key of Object.keys(obj)) {
         
@@ -66,11 +66,22 @@ function objectToFiles(obj, path="") {
         if (key === ".cid")
             continue;
         
-            const value = obj[key];
+        const value = obj[key];
+        const fullPath = `${path}/${key}`;
+        
         if (typeof value === "object") {
-            result.push(...objectToFiles(value, `${path}/${key}`))
+
+            result.push(...(await objectToFiles(value, fullPath)))
         } else {
-            result.push({path: `${path}/${key}`, content: Buffer.from(JSON.stringify(value))})
+            if (isURL(value)) {
+                debug("value is uri", value, "fetching from web");
+                // if the value is a URI download the file and add it to the result
+                const response = await fetch(value);
+                const content = await response.arrayBuffer();
+                result.push({path: fullPath, content});
+            } else {
+                result.push({path: fullPath, content: Buffer.from(JSON.stringify(value))})
+            }
         }
     }
     return result;
@@ -235,3 +246,11 @@ const dataFetchers = (file) => {
 // } catch (e) {
 //     console.error("erroir", e)
 // }
+
+
+
+function isURL(str) {
+    var urlRegex = '^(?!mailto:)(?:(?:http|https|ftp)://)(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:(/|\\?|#)[^\\s]*)?$';
+    var url = new RegExp(urlRegex, 'i');
+    return str.length < 2083 && url.test(str);
+}
