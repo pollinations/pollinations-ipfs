@@ -50147,7 +50147,7 @@ function isURL(str) {
   return str.length < 2083 && url.test(str);
 }
 function isDataURL(str) {
-  return str.startsWith("data:");
+  return typeof str === "string" && str.startsWith("data:");
 }
 
 // src/awsPollenRunner.js
