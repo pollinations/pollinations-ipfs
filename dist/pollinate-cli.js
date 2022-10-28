@@ -9556,12 +9556,12 @@ var require_lib4 = __commonJS({
       const dest = new URL$1(destination).hostname;
       return orig === dest || orig[orig.length - dest.length - 1] === "." && orig.endsWith(dest);
     };
-    function fetch5(url, opts) {
-      if (!fetch5.Promise) {
+    function fetch6(url, opts) {
+      if (!fetch6.Promise) {
         throw new Error("native promise missing, set fetch.Promise to your favorite alternative");
       }
-      Body2.Promise = fetch5.Promise;
-      return new fetch5.Promise(function(resolve10, reject) {
+      Body2.Promise = fetch6.Promise;
+      return new fetch6.Promise(function(resolve10, reject) {
         const request = new Request2(url, opts);
         const options = getNodeRequestOptions2(request);
         const send = (options.protocol === "https:" ? https3 : http4).request;
@@ -9611,7 +9611,7 @@ var require_lib4 = __commonJS({
         req.on("response", function(res) {
           clearTimeout(reqTimeout);
           const headers = createHeadersLenient(res.headers);
-          if (fetch5.isRedirect(res.statusCode)) {
+          if (fetch6.isRedirect(res.statusCode)) {
             const location2 = headers.get("Location");
             let locationURL = null;
             try {
@@ -9673,7 +9673,7 @@ var require_lib4 = __commonJS({
                   requestOpts.body = void 0;
                   requestOpts.headers.delete("content-length");
                 }
-                resolve10(fetch5(new Request2(locationURL, requestOpts)));
+                resolve10(fetch6(new Request2(locationURL, requestOpts)));
                 finalize();
                 return;
             }
@@ -9733,11 +9733,11 @@ var require_lib4 = __commonJS({
         writeToStream2(req, request);
       });
     }
-    fetch5.isRedirect = function(code8) {
+    fetch6.isRedirect = function(code8) {
       return code8 === 301 || code8 === 302 || code8 === 303 || code8 === 307 || code8 === 308;
     };
-    fetch5.Promise = global.Promise;
-    module2.exports = exports2 = fetch5;
+    fetch6.Promise = global.Promise;
+    module2.exports = exports2 = fetch6;
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.default = exports2;
     exports2.Headers = Headers3;
@@ -9752,19 +9752,19 @@ var require_node_ponyfill = __commonJS({
   "node_modules/cross-fetch/dist/node-ponyfill.js"(exports2, module2) {
     var nodeFetch = require_lib4();
     var realFetch = nodeFetch.default || nodeFetch;
-    var fetch5 = function(url, options) {
+    var fetch6 = function(url, options) {
       if (/^\/\//.test(url)) {
         url = "https:" + url;
       }
       return realFetch.call(this, url, options);
     };
-    fetch5.ponyfill = true;
-    module2.exports = exports2 = fetch5;
-    exports2.fetch = fetch5;
+    fetch6.ponyfill = true;
+    module2.exports = exports2 = fetch6;
+    exports2.fetch = fetch6;
     exports2.Headers = nodeFetch.Headers;
     exports2.Request = nodeFetch.Request;
     exports2.Response = nodeFetch.Response;
-    exports2.default = fetch5;
+    exports2.default = fetch6;
   }
 });
 
@@ -10409,11 +10409,11 @@ var require_PostgrestQueryBuilder = __commonJS({
     Object.defineProperty(exports2, "__esModule", { value: true });
     var PostgrestFilterBuilder_1 = __importDefault(require_PostgrestFilterBuilder());
     var PostgrestQueryBuilder = class {
-      constructor(url, { headers = {}, schema, fetch: fetch5 }) {
+      constructor(url, { headers = {}, schema, fetch: fetch6 }) {
         this.url = url;
         this.headers = headers;
         this.schema = schema;
-        this.fetch = fetch5;
+        this.fetch = fetch6;
       }
       select(columns, { head = false, count } = {}) {
         const method = head ? "HEAD" : "GET";
@@ -10569,11 +10569,11 @@ var require_PostgrestClient = __commonJS({
     var PostgrestFilterBuilder_1 = __importDefault(require_PostgrestFilterBuilder());
     var constants_1 = require_constants();
     var PostgrestClient = class {
-      constructor(url, { headers = {}, schema, fetch: fetch5 } = {}) {
+      constructor(url, { headers = {}, schema, fetch: fetch6 } = {}) {
         this.url = url;
         this.headers = Object.assign(Object.assign({}, constants_1.DEFAULT_HEADERS), headers);
         this.schema = schema;
-        this.fetch = fetch5;
+        this.fetch = fetch6;
       }
       from(relation) {
         const url = new URL(`${this.url}/${relation}`);
@@ -15560,11 +15560,11 @@ var require_StorageFileApi = __commonJS({
       upsert: false
     };
     var StorageFileApi = class {
-      constructor(url, headers = {}, bucketId, fetch5) {
+      constructor(url, headers = {}, bucketId, fetch6) {
         this.url = url;
         this.headers = headers;
         this.bucketId = bucketId;
-        this.fetch = (0, helpers_1.resolveFetch)(fetch5);
+        this.fetch = (0, helpers_1.resolveFetch)(fetch6);
       }
       uploadOrUpdate(method, path4, fileBody, fileOptions) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -15799,10 +15799,10 @@ var require_StorageBucketApi = __commonJS({
     var fetch_1 = require_fetch();
     var helpers_1 = require_helpers();
     var StorageBucketApi = class {
-      constructor(url, headers = {}, fetch5) {
+      constructor(url, headers = {}, fetch6) {
         this.url = url;
         this.headers = Object.assign(Object.assign({}, constants_1.DEFAULT_HEADERS), headers);
-        this.fetch = (0, helpers_1.resolveFetch)(fetch5);
+        this.fetch = (0, helpers_1.resolveFetch)(fetch6);
       }
       listBuckets() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -15899,8 +15899,8 @@ var require_StorageClient = __commonJS({
     var StorageFileApi_1 = __importDefault(require_StorageFileApi());
     var StorageBucketApi_1 = __importDefault(require_StorageBucketApi());
     var StorageClient = class extends StorageBucketApi_1.default {
-      constructor(url, headers = {}, fetch5) {
-        super(url, headers, fetch5);
+      constructor(url, headers = {}, fetch6) {
+        super(url, headers, fetch6);
       }
       from(id) {
         return new StorageFileApi_1.default(this.url, this.headers, id, this.fetch);
@@ -16060,7 +16060,7 @@ var require_fetch2 = __commonJS({
     };
     exports2.resolveHeadersConstructor = resolveHeadersConstructor;
     var fetchWithAuth = (supabaseKey, getAccessToken, customFetch) => {
-      const fetch5 = (0, exports2.resolveFetch)(customFetch);
+      const fetch6 = (0, exports2.resolveFetch)(customFetch);
       const HeadersConstructor = (0, exports2.resolveHeadersConstructor)();
       return (input, init) => __awaiter(void 0, void 0, void 0, function* () {
         var _a;
@@ -16072,7 +16072,7 @@ var require_fetch2 = __commonJS({
         if (!headers.has("Authorization")) {
           headers.set("Authorization", `Bearer ${accessToken}`);
         }
-        return fetch5(input, Object.assign(Object.assign({}, init), { headers }));
+        return fetch6(input, Object.assign(Object.assign({}, init), { headers }));
       });
     };
     exports2.fetchWithAuth = fetchWithAuth;
@@ -16562,10 +16562,10 @@ var require_GoTrueAdminApi = __commonJS({
     var helpers_1 = require_helpers3();
     var errors_1 = require_errors2();
     var GoTrueAdminApi = class {
-      constructor({ url = "", headers = {}, fetch: fetch5 }) {
+      constructor({ url = "", headers = {}, fetch: fetch6 }) {
         this.url = url;
         this.headers = headers;
-        this.fetch = (0, helpers_1.resolveFetch)(fetch5);
+        this.fetch = (0, helpers_1.resolveFetch)(fetch6);
         this.mfa = {
           listFactors: this._listFactors.bind(this),
           deleteFactor: this._deleteFactor.bind(this)
@@ -17938,7 +17938,7 @@ var require_SupabaseClient = __commonJS({
           return (_b = (_a = data.session) === null || _a === void 0 ? void 0 : _a.access_token) !== null && _b !== void 0 ? _b : null;
         });
       }
-      _initSupabaseAuthClient({ autoRefreshToken, persistSession, detectSessionInUrl, storage: storage2, storageKey }, headers, fetch5) {
+      _initSupabaseAuthClient({ autoRefreshToken, persistSession, detectSessionInUrl, storage: storage2, storageKey }, headers, fetch6) {
         const authHeaders = {
           Authorization: `Bearer ${this.supabaseKey}`,
           apikey: `${this.supabaseKey}`
@@ -17951,7 +17951,7 @@ var require_SupabaseClient = __commonJS({
           persistSession,
           detectSessionInUrl,
           storage: storage2,
-          fetch: fetch5
+          fetch: fetch6
         });
       }
       _initRealtimeClient(options) {
@@ -44840,7 +44840,7 @@ var require_lib7 = __commonJS({
       electron = require("electron");
     }
     var isReady = electron && electron.app && !electron.app.isReady() ? new Promise((resolve10) => electron.app.once("ready", resolve10)) : Promise.resolve();
-    function fetch5(url$1, opts = {}) {
+    function fetch6(url$1, opts = {}) {
       return isReady.then(() => new Promise((resolve10, reject) => {
         const request = new Request2(url$1, opts);
         const options = getNodeRequestOptions2(request);
@@ -44929,7 +44929,7 @@ var require_lib7 = __commonJS({
           if (request.signal) {
             request.signal.removeEventListener("abort", abortRequest);
           }
-          if (fetch5.isRedirect(res.statusCode) && request.redirect !== "manual") {
+          if (fetch6.isRedirect(res.statusCode) && request.redirect !== "manual") {
             if (request.redirect === "error") {
               reject(new FetchError2(`redirect mode is set to error: ${request.url}`, "no-redirect"));
               return;
@@ -44948,7 +44948,7 @@ var require_lib7 = __commonJS({
               request.headers.delete("content-length");
             }
             request.counter++;
-            resolve10(fetch5(url.resolve(request.url, res.headers.location), request));
+            resolve10(fetch6(url.resolve(request.url, res.headers.location), request));
             return;
           }
           const headers2 = new Headers3();
@@ -45017,12 +45017,12 @@ var require_lib7 = __commonJS({
         writeToStream2(req, request);
       }));
     }
-    fetch5.isRedirect = (code8) => code8 === 301 || code8 === 302 || code8 === 303 || code8 === 307 || code8 === 308;
+    fetch6.isRedirect = (code8) => code8 === 301 || code8 === 302 || code8 === 303 || code8 === 307 || code8 === 308;
     exports2.FetchError = FetchError2;
     exports2.Headers = Headers3;
     exports2.Request = Request2;
     exports2.Response = Response3;
-    exports2["default"] = fetch5;
+    exports2["default"] = fetch6;
   }
 });
 
@@ -45066,7 +45066,7 @@ var require_fetch_browser = __commonJS({
   "node_modules/ipfs-utils/src/http/fetch.browser.js"(exports2, module2) {
     "use strict";
     var { TimeoutError: TimeoutError2, AbortError: AbortError4 } = require_error();
-    var { Response: Response3, Request: Request2, Headers: Headers3, default: fetch5 } = require_fetch4();
+    var { Response: Response3, Request: Request2, Headers: Headers3, default: fetch6 } = require_fetch4();
     var fetchWithProgress = (url, options = {}) => {
       const request = new XMLHttpRequest();
       request.open(options.method || "GET", url.toString(), true);
@@ -45126,7 +45126,7 @@ var require_fetch_browser = __commonJS({
         request.send(options.body);
       });
     };
-    var fetchWithStreaming = fetch5;
+    var fetchWithStreaming = fetch6;
     var fetchWith = (url, options = {}) => options.onUploadProgress != null ? fetchWithProgress(url, options) : fetchWithStreaming(url, options);
     var parseHeaders = (input) => {
       const headers = new Headers3();
@@ -45335,7 +45335,7 @@ var require_fetch_node = __commonJS({
     var { Request: Request2, Response: Response3, Headers: Headers3, default: nativeFetch } = require_fetch4();
     var toStream2 = require_src11();
     var { Buffer: Buffer3 } = require("buffer");
-    var fetch5 = (url, options = {}) => nativeFetch(url, withUploadProgress(options));
+    var fetch6 = (url, options = {}) => nativeFetch(url, withUploadProgress(options));
     var withUploadProgress = (options) => {
       const { onUploadProgress, body } = options;
       if (onUploadProgress && body) {
@@ -45380,7 +45380,7 @@ var require_fetch_node = __commonJS({
       }
     };
     module2.exports = {
-      fetch: fetch5,
+      fetch: fetch6,
       Request: Request2,
       Headers: Headers3
     };
@@ -45502,7 +45502,7 @@ var require_any_signal = __commonJS({
 var require_http = __commonJS({
   "node_modules/ipfs-utils/src/http.js"(exports2, module2) {
     "use strict";
-    var { fetch: fetch5, Request: Request2, Headers: Headers3 } = require_fetch5();
+    var { fetch: fetch6, Request: Request2, Headers: Headers3 } = require_fetch5();
     var { TimeoutError: TimeoutError2, HTTPError: HTTPError2 } = require_error();
     var merge4 = require_merge_options().bind({ ignoreUndefined: true });
     var { URL: URL2, URLSearchParams: URLSearchParams2 } = require_iso_url();
@@ -45571,7 +45571,7 @@ var require_http = __commonJS({
         const abortController = new AbortController();
         const signal = anySignal2([abortController.signal, opts.signal]);
         const response = await timeout(
-          fetch5(
+          fetch6(
             url.toString(),
             {
               ...opts,
@@ -58588,6 +58588,7 @@ var getWebURL_default = getWebURL;
 
 // src/pollenStoreClient.js
 var import_json5 = __toESM(require_lib5(), 1);
+var import_node_fetch3 = __toESM(require_lib4(), 1);
 var import_path_browserify = __toESM(require_path_browserify(), 1);
 
 // src/s3/s3store.js
@@ -64383,12 +64384,12 @@ var Web3Storage = class {
     token: token2,
     endpoint = new URL("https://api.web3.storage"),
     rateLimiter,
-    fetch: fetch5 = fetch4
+    fetch: fetch6 = fetch4
   }) {
     this.token = token2;
     this.endpoint = endpoint;
     this.rateLimiter = rateLimiter || createRateLimiter();
-    this.fetch = fetch5;
+    this.fetch = fetch6;
   }
   static headers(token2) {
     if (!token2)
@@ -64398,7 +64399,7 @@ var Web3Storage = class {
       "X-Client": "web3.storage/js"
     };
   }
-  static async put({ endpoint, token: token2, rateLimiter = globalRateLimiter, fetch: fetch5 = fetch4 }, files, {
+  static async put({ endpoint, token: token2, rateLimiter = globalRateLimiter, fetch: fetch6 = fetch4 }, files, {
     onRootCidReady,
     onStoredChunk,
     maxRetries = MAX_PUT_RETRIES,
@@ -64421,12 +64422,12 @@ var Web3Storage = class {
       });
       onRootCidReady && onRootCidReady(root.toString());
       const car = await CarReader2.fromIterable(out);
-      return await Web3Storage.putCar({ endpoint, token: token2, rateLimiter, fetch: fetch5 }, car, { onStoredChunk, maxRetries, maxChunkSize, name: name8, signal });
+      return await Web3Storage.putCar({ endpoint, token: token2, rateLimiter, fetch: fetch6 }, car, { onStoredChunk, maxRetries, maxChunkSize, name: name8, signal });
     } finally {
       await blockstore3.close();
     }
   }
-  static async putCar({ endpoint, token: token2, rateLimiter = globalRateLimiter, fetch: fetch5 = fetch4 }, car, {
+  static async putCar({ endpoint, token: token2, rateLimiter = globalRateLimiter, fetch: fetch6 = fetch4 }, car, {
     name: name8,
     onStoredChunk,
     maxRetries = MAX_PUT_RETRIES,
@@ -64463,7 +64464,7 @@ var Web3Storage = class {
           await rateLimiter();
           let response;
           try {
-            response = await fetch5(url.toString(), {
+            response = await fetch6(url.toString(), {
               method: "POST",
               headers,
               body: carFile,
@@ -64494,10 +64495,10 @@ var Web3Storage = class {
     }
     return carRoot;
   }
-  static async get({ endpoint, token: token2, rateLimiter = globalRateLimiter, fetch: fetch5 = fetch4 }, cid, options = {}) {
+  static async get({ endpoint, token: token2, rateLimiter = globalRateLimiter, fetch: fetch6 = fetch4 }, cid, options = {}) {
     const url = new URL(`car/${cid}`, endpoint);
     await rateLimiter();
-    const res = await fetch5(url.toString(), {
+    const res = await fetch6(url.toString(), {
       method: "GET",
       headers: Web3Storage.headers(token2),
       signal: options.signal
@@ -64511,10 +64512,10 @@ var Web3Storage = class {
     console.log("Not deleting", cid, endpoint, token2, rateLimiter, options);
     throw Error(".delete not implemented yet");
   }
-  static async status({ endpoint, token: token2, rateLimiter = globalRateLimiter, fetch: fetch5 = fetch4 }, cid, options = {}) {
+  static async status({ endpoint, token: token2, rateLimiter = globalRateLimiter, fetch: fetch6 = fetch4 }, cid, options = {}) {
     const url = new URL(`status/${cid}`, endpoint);
     await rateLimiter();
-    const res = await fetch5(url.toString(), {
+    const res = await fetch6(url.toString(), {
       method: "GET",
       headers: Web3Storage.headers(token2),
       signal: options.signal
@@ -64531,11 +64532,11 @@ var Web3Storage = class {
     return res.json();
   }
   static async *list(service, { before = new Date().toISOString(), maxResults = Infinity, signal } = {}) {
-    async function listPage({ endpoint, token: token2, rateLimiter = globalRateLimiter, fetch: fetch5 = fetch4 }, { before: before2, size: size2 }) {
+    async function listPage({ endpoint, token: token2, rateLimiter = globalRateLimiter, fetch: fetch6 = fetch4 }, { before: before2, size: size2 }) {
       const search = new URLSearchParams({ before: before2, size: size2.toString() });
       const url = new URL(`user/uploads?${search}`, endpoint);
       await rateLimiter();
-      return fetch5(url.toString(), {
+      return fetch6(url.toString(), {
         method: "GET",
         headers: {
           ...Web3Storage.headers(token2),
@@ -64760,16 +64761,14 @@ async function exportCID(cid, processor = null) {
 }
 async function processFile({ cid, path: path4, name: name8, ...file }) {
   let value = getWebURL_default(cid, name8);
+  debug6("processFile extname", extname(path4), value);
   if (!extname(path4)) {
     if (path4.length === 0) {
       debug6("result is buffer. returning directly");
       value = await file.buffer();
     } else {
-      try {
-        value = await file.json();
-      } catch (e) {
-        debug6("Could not parse file", file.path, "as JSON. Returning URL.");
-      }
+      debug6("result is json. parsing", value);
+      value = await file.json();
     }
   }
   return value;
@@ -65860,12 +65859,12 @@ var Client = class extends import_http4.default {
     delete this.put;
     delete this.delete;
     delete this.options;
-    const fetch5 = this.fetch;
+    const fetch6 = this.fetch;
     this.fetch = (resource, options2 = {}) => {
       if (typeof resource === "string" && !resource.startsWith("/")) {
         resource = `${opts.url}/${resource}`;
       }
-      return fetch5.call(this, resource, merge2(options2, { method: "POST" }));
+      return fetch6.call(this, resource, merge2(options2, { method: "POST" }));
     };
   }
 };

@@ -160,12 +160,8 @@ async function processFile({cid, path, name, ...file }) {
             debug("result is buffer. returning directly");
             value = await file.buffer();
         } else {
-            try {
-                debug("result is json. parsing", value);
-                value = await file.json();
-            } catch (e) {
-                debug("Could not parse file", file.path, "as JSON. Returning URL.");
-            }
+            debug("result is json. parsing", value);
+            value = await file.json();
         }
     }
     return value;
@@ -181,11 +177,11 @@ async function extractContent(file) {
 
 function parse(content) {
     const str = contentToString(content);
-    // try {
+    try {
         return json5.parse(str);
-    // } catch (e) {
-    //     return str;
-    // }
+    } catch (e) {
+        return str;
+    }
 }
 
 
