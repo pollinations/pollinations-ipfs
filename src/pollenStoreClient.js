@@ -5,6 +5,7 @@ import { assocPath } from 'ramda';
 import getWebURL from './utils/getWebURL.js';
 const debug = Debug('pollenStoreClient');
 
+import parseDataURL from 'data-urls';
 import json5 from "json5";
 import fetch from 'node-fetch';
 import path from 'path-browserify';
@@ -81,7 +82,14 @@ async function objectToFiles(obj, path="") {
                 // debug("value", content)
                 result.push({path: fullPath, content: Buffer.from(content)});
             } else {
-                result.push({path: fullPath, content: Buffer.from(JSON.stringify(value))})
+                if (isDataURL(value)) {
+                    debug("value is data url, parsing...");
+                    const { body } = parseDataURL(value);
+                    debug("got data length", body.length);
+                    result.push({path: fullPath, content: Buffer.from(body,'base64')});
+                } else {
+                    result.push({path: fullPath, content: Buffer.from(JSON.stringify(value))})
+                }
             }
         }
     }
@@ -253,3 +261,10 @@ function isURL(str) {
     var url = new RegExp(urlRegex, 'i');
     return str.length < 2083 && url.test(str);
 }
+
+function isDataURL(str) {
+    return str.startsWith("data:");
+}
+
+
+// console.log(await importJSON({"image.gif": "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"}))
