@@ -78,7 +78,8 @@ async function objectToFiles(obj, path="") {
                 // if the value is a URI download the file and add it to the result
                 const response = await fetch(value);
                 const content = await response.arrayBuffer();
-                result.push({path: fullPath, content});
+                // debug("value", content)
+                result.push({path: fullPath, content: Buffer.from(content)});
             } else {
                 result.push({path: fullPath, content: Buffer.from(JSON.stringify(value))})
             }
@@ -153,12 +154,14 @@ async function processFile({cid, path, name, ...file }) {
     let value = getWebURL(cid, name);
     // if there is no extension read the file as a JSON string
     // console.log("file path", file.path)
-    if (!extname(path)) {
+    debug("processFile extname", extname(path), value)
+    if (!extname(path) || extname(path) === ".ipynb") {
         if (path.length === 0) {
             debug("result is buffer. returning directly");
             value = await file.buffer();
         } else {
             try {
+                debug("result is json. parsing", value);
                 value = await file.json();
             } catch (e) {
                 debug("Could not parse file", file.path, "as JSON. Returning URL.");
@@ -178,11 +181,11 @@ async function extractContent(file) {
 
 function parse(content) {
     const str = contentToString(content);
-    try {
+    // try {
         return json5.parse(str);
-    } catch (e) {
-        return str;
-    }
+    // } catch (e) {
+    //     return str;
+    // }
 }
 
 
