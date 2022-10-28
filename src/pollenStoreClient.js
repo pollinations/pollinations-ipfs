@@ -155,7 +155,7 @@ async function processFile({cid, path, name, ...file }) {
     // if there is no extension read the file as a JSON string
     // console.log("file path", file.path)
     debug("processFile extname", extname(path), value)
-    if (!extname(path) || extname(path) === ".ipynb") {
+    if (!extname(path)) {
         if (path.length === 0) {
             debug("result is buffer. returning directly");
             value = await file.buffer();
