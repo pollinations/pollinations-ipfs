@@ -59704,7 +59704,7 @@ var S3Blockstore = class extends BaseBlockstore {
     return Promise.resolve();
   }
   async put(key, val, options) {
-    debug4("put", key);
+    debug4("put", key, "options", options);
     if (await this.has(key)) {
       debug4("block already exists", key);
       return;

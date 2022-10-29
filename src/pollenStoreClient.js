@@ -5,11 +5,13 @@ import { assocPath } from 'ramda';
 import getWebURL from './utils/getWebURL.js';
 const debug = Debug('pollenStoreClient');
 
+import { MemoryBlockstore } from 'blockstore-core/memory';
 import parseDataURL from 'data-urls';
 import json5 from "json5";
 import fetch from 'node-fetch';
 import path from 'path-browserify';
 import S3Blockstore from './s3/s3store.js';
+
 import { importFromWeb3Storage } from './supabase/web3storage.js';
 export { getSignedURL } from './s3/s3client.js';
 export { getPollen } from "./supabase/pollen.js";
@@ -17,6 +19,7 @@ export { getPollen } from "./supabase/pollen.js";
 const { extname } = path;
 
 const blockstore = new S3Blockstore()
+const memoryBlockstore = new MemoryBlockstore()
 
 const importOptions = {
     // maxChunkSize: 262144*20,
@@ -26,7 +29,7 @@ const importOptions = {
 
 
 // import a javascript object to our ipfs blockstore
-export async function importJSON(inputs) {
+export async function importJSON(inputs, options = { pin: false}) {
     let lastCID = null;
 
     const files = await objectToFiles(inputs);

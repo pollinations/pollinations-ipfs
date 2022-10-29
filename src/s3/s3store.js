@@ -26,7 +26,8 @@ class S3Blockstore extends BaseBlockstore {
     }
 
     async put (key, val, options) {
-        debug("put", key)
+        key = key.toString();
+        debug("put", key, "options", options)
         // check if a block exists
         if (await this.has(key)) {
             debug("block already exists", key)
@@ -52,7 +53,7 @@ class S3Blockstore extends BaseBlockstore {
     }
 
     async get (key, options) {
-
+        key = key.toString();
         if (this.cache[key]) {
             debug("get cache hit", key)
             return this.cache[key];
@@ -78,6 +79,7 @@ class S3Blockstore extends BaseBlockstore {
     }
 
     async has (key, options) {
+        key = key.toString();
         // check if a block exists
         if (this.cache[key]) 
             return true;

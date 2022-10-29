@@ -36,10 +36,14 @@ export async function getPollens(params) {
 }
 
 export function dispatchPollen(params) {
-    return supabase
-            .from(DB_NAME)
-            .insert(params)
-            .then(({data}) => data);
+    try {
+        return supabase
+                .from(DB_NAME)
+                .insert(params)
+                .then(({data}) => data);
+    } catch (e) {
+        debug("pollen probably already exists",e);
+    }
 }
 
 export function updatePollen(input, data) {
