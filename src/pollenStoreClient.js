@@ -167,7 +167,7 @@ async function processFile({cid, path, name, ...file }) {
         if (path.length === 0) {
             debug("result is buffer. returning directly");
             value = await file.buffer();
-        } if (path === "log") {
+        } if (path.endsWith("log")) {
             debug("result is log. returning text");
             value = await file.text();
         } else {
@@ -197,7 +197,11 @@ function parse(str) {
 
 
 function contentToString(content) {
-    return String.fromCharCode.apply(null, content);
+    //return String.fromCharCode.apply(null, content);
+
+    // use the TextDecoder API to convert the bytes to a string
+    const decoder = new TextDecoder();
+    return decoder.decode(content);
 }
 
 async function* fetchWithWeb3storageFallback(cid, skipWeb3storage=false) {
@@ -240,7 +244,7 @@ const dataFetchers = (file) => {
     const buffer = async () => (await extractContent(file));
     const text =  async () => contentToString(await buffer());
     // log is not JSON encoded and causes call stack errors when parsing. This could be nicer but whatever
-    const json =  async () => file.name === "log" ? await text() : parse(await text());
+    const json =  async () => parse(await text());
     
     return{
       json,
