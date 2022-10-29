@@ -167,9 +167,6 @@ async function processFile({cid, path, name, ...file }) {
         if (path.length === 0) {
             debug("result is buffer. returning directly");
             value = await file.buffer();
-        } if (path.endsWith("log")) {
-            debug("result is log. returning text");
-            value = await file.text();
         } else {
             debug("result is json. parsing", value);
             value = await file.json();
