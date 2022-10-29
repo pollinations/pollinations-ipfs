@@ -183,8 +183,7 @@ async function extractContent(file) {
     return new Uint8Array(content);
 }
 
-function parse(content) {
-    const str = contentToString(content);
+function parse(str) {
     try {
         return json5.parse(str);
     } catch (e) {
@@ -233,11 +232,17 @@ async function* fetchWithWeb3storageFallback(cid, skipWeb3storage=false) {
 
 // Provide functions similar to http response for getting contents of a file on IPFS
 const dataFetchers = (file) => {
+    
     debug("creating data fetchers for cid",file.cid);
+    const buffer = async () => (await extractContent(file));
+    const text =  async () => contentToString(await buffer());
+    // log is not JSON encoded and causes call stack errors when parsing. This could be nicer but whatever
+    const json =  async () => file.name === "log" ? await text() : parse(await text());
+    
     return{
-      json: async () => parse(await extractContent(file)),
-      text: async () => contentToString(await extractContent(file)),
-      buffer: async () => (await extractContent(file))
+      json,
+      text,
+      buffer
     };
 };
 
@@ -267,4 +272,6 @@ function isDataURL(str) {
 }
 
 
-// console.log(await importJSON({"image.png": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAElBMVEX8/vz///8pKikAAAAtLS2Oj47hKWeDAAABEElEQVR4nO3PBxEDMRAAMZcLf8p5GuuRGGjdO+dhc9f97afNmr1ets86hm2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2Gfd9w9ttm3Tkvm/sHIDIKk6RLvD4AAAAASUVORK5CYII="}))
+// console.log(await importJSON({"log":"hello", "image.png": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAElBMVEX8/vz///8pKikAAAAtLS2Oj47hKWeDAAABEElEQVR4nO3PBxEDMRAAMZcLf8p5GuuRGGjdO+dhc9f97afNmr1ets86hm2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2Gfd9w9ttm3Tkvm/sHIDIKk6RLvD4AAAAASUVORK5CYII="}))
+
+// console.log(await exportCID("Qmf2DRoagPA1gYghjNF2iETgvnBAhi3nANQ8jbEemG8uAu"))
