@@ -69249,10 +69249,6 @@ async function processFile({ cid, path: path3, name: name5, ...file }) {
     if (path3.length === 0) {
       debug10("result is buffer. returning directly");
       value = await file.buffer();
-    }
-    if (path3 === "log") {
-      debug10("result is log. returning text");
-      value = await file.text();
     } else {
       debug10("result is json. parsing", value);
       value = await file.json();
@@ -69275,7 +69271,8 @@ function parse2(str) {
   }
 }
 function contentToString(content) {
-  return String.fromCharCode.apply(null, content);
+  const decoder2 = new TextDecoder();
+  return decoder2.decode(content);
 }
 async function* fetchWithWeb3storageFallback(cid, skipWeb3storage = false) {
   debug10("fetching", cid);
@@ -69308,7 +69305,7 @@ var dataFetchers = (file) => {
   debug10("creating data fetchers for cid", file.cid);
   const buffer2 = async () => await extractContent(file);
   const text = async () => contentToString(await buffer2());
-  const json = async () => file.name === "log" ? await text() : parse2(await text());
+  const json = async () => parse2(await text());
   return {
     json,
     text,
