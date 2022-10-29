@@ -1,32 +1,12 @@
 
 import { Buffer } from "buffer";
 import Debug from "debug";
-import { create } from "ipfs-http-client";
 import { CID } from "multiformats/cid";
-import path from "path-browserify";
 import { last } from "ramda";
 import { exportCIDBuffer, lsCID, pollenImporter } from "./pollenStoreClient.js";
 import { noop, toPromise } from "./utils/utils.js";
 
-const { join } = path;
 const debug = Debug("ipfsConnector")
-
-// Get IPFS_API_ENDPOINT from env
-const IPFS_HOST = "https://api.pollinations.ai"
-
-
-let _client = null;
-
-// create a new IPFS session
-export function getClient() {
-    if (!_client) {
-        _client = getIPFSDaemonURL().then(url => create({
-            port: 5005,
-            url, timeout: "2h",
-        }))
-    }
-    return _client;
-}
 
 
 // basic IPFS read access
@@ -86,7 +66,7 @@ export function writer(initialRootCID = null) {
         close: async () => {
             debug("closing input writer.")
         },
-        pin: async cid => await ipfsPin(await getClient(), cid)
+        pin: () => console.error("Pin not implemented")
     }
 
     // const methodsWithRetry = mapObjIndexed(retryException, methods)

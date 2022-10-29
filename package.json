@@ -1,6 +1,6 @@
 {
   "name": "@pollinations/ipfs",
-  "version": "0.2.36",
+  "version": "0.2.37",
   "description": "pollinations ipfs state, messaging and storage",
   "type": "module",
   "exports": {
@@ -40,8 +40,7 @@
     "event-iterator": "^2.0.0",
     "file-type": "^18.0.0",
     "fs-extra": "^10.0.0",
-    "ipfs-http-client": "^56.0.3",
-    "ipfs-unixfs-exporter": "^8.0.6",
+    "ipfs-unixfs-exporter": "^9.0.1",
     "ipfs-unixfs-importer": "https://gitpkg.now.sh/pollinations/js-ipfs-unixfs/packages/ipfs-unixfs-importer?master",
     "is-ipfs": "^6.0.2",
     "is-port-reachable": "^3.0.0",

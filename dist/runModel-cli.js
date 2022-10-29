@@ -8,14 +8,14 @@ var __commonJS = (cb, mod2) => function __require() {
   return mod2 || (0, cb[__getOwnPropNames(cb)[0]])((mod2 = { exports: {} }).exports, mod2), mod2.exports;
 };
 var __export = (target, all5) => {
-  for (var name5 in all5)
-    __defProp(target, name5, { get: all5[name5], enumerable: true });
+  for (var name7 in all5)
+    __defProp(target, name7, { get: all5[name7], enumerable: true });
 };
-var __copyProps = (to, from3, except, desc) => {
-  if (from3 && typeof from3 === "object" || typeof from3 === "function") {
-    for (let key of __getOwnPropNames(from3))
+var __copyProps = (to, from7, except, desc) => {
+  if (from7 && typeof from7 === "object" || typeof from7 === "function") {
+    for (let key of __getOwnPropNames(from7))
       if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from3[key], enumerable: !(desc = __getOwnPropDesc(from3, key)) || desc.enumerable });
+        __defProp(to, key, { get: () => from7[key], enumerable: !(desc = __getOwnPropDesc(from7, key)) || desc.enumerable });
   }
   return to;
 };
@@ -281,11 +281,11 @@ var require_commander = __commonJS({
       }
     };
     var CommanderError = class extends Error {
-      constructor(exitCode, code6, message) {
+      constructor(exitCode, code11, message) {
         super(message);
         Error.captureStackTrace(this, this.constructor);
         this.name = this.constructor.name;
-        this.code = code6;
+        this.code = code11;
         this.exitCode = exitCode;
         this.nestedError = void 0;
       }
@@ -298,7 +298,7 @@ var require_commander = __commonJS({
       }
     };
     var Command = class extends EventEmitter2 {
-      constructor(name5) {
+      constructor(name7) {
         super();
         this.commands = [];
         this.options = [];
@@ -308,7 +308,7 @@ var require_commander = __commonJS({
         this._args = [];
         this.rawArgs = null;
         this._scriptPath = null;
-        this._name = name5 || "";
+        this._name = name7 || "";
         this._optionValues = {};
         this._storeOptionsAsProperties = false;
         this._actionResults = [];
@@ -382,8 +382,8 @@ var require_commander = __commonJS({
           return this;
         return cmd;
       }
-      createCommand(name5) {
-        return new Command(name5);
+      createCommand(name7) {
+        return new Command(name7);
       }
       createHelp() {
         return Object.assign(new Help(), this.configureHelp());
@@ -489,9 +489,9 @@ var require_commander = __commonJS({
         }
         return this;
       }
-      _exit(exitCode, code6, message) {
+      _exit(exitCode, code11, message) {
         if (this._exitCallback) {
-          this._exitCallback(new CommanderError(exitCode, code6, message));
+          this._exitCallback(new CommanderError(exitCode, code11, message));
         }
         process.exit(exitCode);
       }
@@ -520,20 +520,20 @@ var require_commander = __commonJS({
       }
       addOption(option) {
         const oname = option.name();
-        const name5 = option.attributeName();
+        const name7 = option.attributeName();
         let defaultValue = option.defaultValue;
         if (option.negate || option.optional || option.required || typeof defaultValue === "boolean") {
           if (option.negate) {
             const positiveLongFlag = option.long.replace(/^--no-/, "--");
-            defaultValue = this._findOption(positiveLongFlag) ? this._getOptionValue(name5) : true;
+            defaultValue = this._findOption(positiveLongFlag) ? this._getOptionValue(name7) : true;
           }
           if (defaultValue !== void 0) {
-            this._setOptionValue(name5, defaultValue);
+            this._setOptionValue(name7, defaultValue);
           }
         }
         this.options.push(option);
         this.on("option:" + oname, (val) => {
-          const oldValue = this._getOptionValue(name5);
+          const oldValue = this._getOptionValue(name7);
           if (val !== null && option.parseArg) {
             try {
               val = option.parseArg(val, oldValue === void 0 ? defaultValue : oldValue);
@@ -549,12 +549,12 @@ var require_commander = __commonJS({
           }
           if (typeof oldValue === "boolean" || typeof oldValue === "undefined") {
             if (val == null) {
-              this._setOptionValue(name5, option.negate ? false : defaultValue || true);
+              this._setOptionValue(name7, option.negate ? false : defaultValue || true);
             } else {
-              this._setOptionValue(name5, val);
+              this._setOptionValue(name7, val);
             }
           } else if (val !== null) {
-            this._setOptionValue(name5, option.negate ? false : val);
+            this._setOptionValue(name7, option.negate ? false : val);
           }
         });
         return this;
@@ -824,10 +824,10 @@ var require_commander = __commonJS({
           }
         }
       }
-      _findCommand(name5) {
-        if (!name5)
+      _findCommand(name7) {
+        if (!name7)
           return void 0;
-        return this.commands.find((cmd) => cmd._name === name5 || cmd._aliases.includes(name5));
+        return this.commands.find((cmd) => cmd._name === name7 || cmd._aliases.includes(name7));
       }
       _findOption(arg) {
         return this.options.find((option) => option.is(arg));
@@ -947,13 +947,13 @@ var require_commander = __commonJS({
         }
         return this._optionValues;
       }
-      _displayError(exitCode, code6, message) {
+      _displayError(exitCode, code11, message) {
         this._outputConfiguration.outputError(`${message}
 `, this._outputConfiguration.writeErr);
-        this._exit(exitCode, code6, message);
+        this._exit(exitCode, code11, message);
       }
-      missingArgument(name5) {
-        const message = `error: missing required argument '${name5}'`;
+      missingArgument(name7) {
+        const message = `error: missing required argument '${name7}'`;
         this._displayError(1, "commander.missingArgument", message);
       }
       optionMissingArgument(option) {
@@ -1317,9 +1317,9 @@ var require_ms = __commonJS({
       }
       return ms + " ms";
     }
-    function plural(ms, msAbs, n, name5) {
+    function plural(ms, msAbs, n, name7) {
       var isPlural = msAbs >= n * 1.5;
-      return Math.round(ms / n) + " " + name5 + (isPlural ? "s" : "");
+      return Math.round(ms / n) + " " + name7 + (isPlural ? "s" : "");
     }
   }
 });
@@ -1330,7 +1330,7 @@ var require_common = __commonJS({
     function setup(env) {
       createDebug.debug = createDebug;
       createDebug.default = createDebug;
-      createDebug.coerce = coerce3;
+      createDebug.coerce = coerce5;
       createDebug.disable = disable;
       createDebug.enable = enable;
       createDebug.enabled = enabled;
@@ -1372,12 +1372,12 @@ var require_common = __commonJS({
             args.unshift("%O");
           }
           let index = 0;
-          args[0] = args[0].replace(/%([a-zA-Z%])/g, (match, format) => {
+          args[0] = args[0].replace(/%([a-zA-Z%])/g, (match, format2) => {
             if (match === "%%") {
               return "%";
             }
             index++;
-            const formatter = createDebug.formatters[format];
+            const formatter = createDebug.formatters[format2];
             if (typeof formatter === "function") {
               const val = args[index];
               match = formatter.call(self2, val);
@@ -1450,19 +1450,19 @@ var require_common = __commonJS({
         createDebug.enable("");
         return namespaces;
       }
-      function enabled(name5) {
-        if (name5[name5.length - 1] === "*") {
+      function enabled(name7) {
+        if (name7[name7.length - 1] === "*") {
           return true;
         }
         let i;
         let len;
         for (i = 0, len = createDebug.skips.length; i < len; i++) {
-          if (createDebug.skips[i].test(name5)) {
+          if (createDebug.skips[i].test(name7)) {
             return false;
           }
         }
         for (i = 0, len = createDebug.names.length; i < len; i++) {
-          if (createDebug.names[i].test(name5)) {
+          if (createDebug.names[i].test(name7)) {
             return true;
           }
         }
@@ -1471,7 +1471,7 @@ var require_common = __commonJS({
       function toNamespace(regexp) {
         return regexp.toString().substring(2, regexp.toString().length - 2).replace(/\.\*\?$/, "*");
       }
-      function coerce3(val) {
+      function coerce5(val) {
         if (val instanceof Error) {
           return val.stack || val.message;
         }
@@ -1736,10 +1736,10 @@ var require_supports_color = __commonJS({
         return 3;
       }
       if ("TERM_PROGRAM" in env) {
-        const version2 = parseInt((env.TERM_PROGRAM_VERSION || "").split(".")[0], 10);
+        const version3 = parseInt((env.TERM_PROGRAM_VERSION || "").split(".")[0], 10);
         switch (env.TERM_PROGRAM) {
           case "iTerm.app":
-            return version2 >= 3 ? 3 : 2;
+            return version3 >= 3 ? 3 : 2;
           case "Apple_Terminal":
             return 2;
         }
@@ -1891,15 +1891,15 @@ var require_node = __commonJS({
       return "colors" in exports2.inspectOpts ? Boolean(exports2.inspectOpts.colors) : tty.isatty(process.stderr.fd);
     }
     function formatArgs(args) {
-      const { namespace: name5, useColors: useColors2 } = this;
+      const { namespace: name7, useColors: useColors2 } = this;
       if (useColors2) {
         const c = this.color;
         const colorCode = "\x1B[3" + (c < 8 ? c : "8;5;" + c);
-        const prefix = `  ${colorCode};1m${name5} \x1B[0m`;
+        const prefix = `  ${colorCode};1m${name7} \x1B[0m`;
         args[0] = prefix + args[0].split("\n").join("\n" + prefix);
         args.push(colorCode + "m+" + module2.exports.humanize(this.diff) + "\x1B[0m");
       } else {
-        args[0] = getDate() + name5 + " " + args[0];
+        args[0] = getDate() + name7 + " " + args[0];
       }
     }
     function getDate() {
@@ -2169,8 +2169,8 @@ var require_tr46 = __commonJS({
       return null;
     }
     var regexAstralSymbols = /[\uD800-\uDBFF][\uDC00-\uDFFF]/g;
-    function countSymbols(string2) {
-      return string2.replace(regexAstralSymbols, "_").length;
+    function countSymbols(string3) {
+      return string3.replace(regexAstralSymbols, "_").length;
     }
     function mapChars(domain_name, useSTD3, processing_option) {
       var hasError = false;
@@ -2344,17 +2344,17 @@ var require_url_state_machine = __commonJS({
     function isWindowsDriveLetterCodePoints(cp1, cp2) {
       return isASCIIAlpha(cp1) && (cp2 === 58 || cp2 === 124);
     }
-    function isWindowsDriveLetterString(string2) {
-      return string2.length === 2 && isASCIIAlpha(string2.codePointAt(0)) && (string2[1] === ":" || string2[1] === "|");
+    function isWindowsDriveLetterString(string3) {
+      return string3.length === 2 && isASCIIAlpha(string3.codePointAt(0)) && (string3[1] === ":" || string3[1] === "|");
     }
-    function isNormalizedWindowsDriveLetterString(string2) {
-      return string2.length === 2 && isASCIIAlpha(string2.codePointAt(0)) && string2[1] === ":";
+    function isNormalizedWindowsDriveLetterString(string3) {
+      return string3.length === 2 && isASCIIAlpha(string3.codePointAt(0)) && string3[1] === ":";
     }
-    function containsForbiddenHostCodePoint(string2) {
-      return string2.search(/\u0000|\u0009|\u000A|\u000D|\u0020|#|%|\/|:|\?|@|\[|\\|\]/) !== -1;
+    function containsForbiddenHostCodePoint(string3) {
+      return string3.search(/\u0000|\u0009|\u000A|\u000D|\u0020|#|%|\/|:|\?|@|\[|\\|\]/) !== -1;
     }
-    function containsForbiddenHostCodePointExcludingPercent(string2) {
-      return string2.search(/\u0000|\u0009|\u000A|\u000D|\u0020|#|\/|:|\?|@|\[|\\|\]/) !== -1;
+    function containsForbiddenHostCodePointExcludingPercent(string3) {
+      return string3.search(/\u0000|\u0009|\u000A|\u000D|\u0020|#|\/|:|\?|@|\[|\\|\]/) !== -1;
     }
     function isSpecialScheme(scheme) {
       return specialSchemes[scheme] !== void 0;
@@ -2508,17 +2508,17 @@ var require_url_state_machine = __commonJS({
           continue;
         }
         let value = 0;
-        let length2 = 0;
-        while (length2 < 4 && isASCIIHex(input2[pointer])) {
+        let length4 = 0;
+        while (length4 < 4 && isASCIIHex(input2[pointer])) {
           value = value * 16 + parseInt(at(input2, pointer), 16);
           ++pointer;
-          ++length2;
+          ++length4;
         }
         if (input2[pointer] === 46) {
-          if (length2 === 0) {
+          if (length4 === 0) {
             return failure;
           }
-          pointer -= length2;
+          pointer -= length4;
           if (pieceIndex > 6) {
             return failure;
           }
@@ -2704,13 +2704,13 @@ var require_url_state_machine = __commonJS({
     function cannotHaveAUsernamePasswordPort(url) {
       return url.host === null || url.host === "" || url.cannotBeABaseURL || url.scheme === "file";
     }
-    function isNormalizedWindowsDriveLetter(string2) {
-      return /^[A-Za-z]:$/.test(string2);
+    function isNormalizedWindowsDriveLetter(string3) {
+      return /^[A-Za-z]:$/.test(string3);
     }
-    function URLStateMachine(input2, base3, encodingOverride, url, stateOverride) {
+    function URLStateMachine(input2, base4, encodingOverride, url, stateOverride) {
       this.pointer = 0;
       this.input = input2;
-      this.base = base3 || null;
+      this.base = base4 || null;
       this.encodingOverride = encodingOverride || "utf-8";
       this.stateOverride = stateOverride;
       this.url = url;
@@ -3285,8 +3285,8 @@ var require_url_state_machine = __commonJS({
       if (url.cannotBeABaseURL) {
         output += url.path[0];
       } else {
-        for (const string2 of url.path) {
-          output += "/" + string2;
+        for (const string3 of url.path) {
+          output += "/" + string3;
         }
       }
       if (url.query !== null) {
@@ -3377,10 +3377,10 @@ var require_URL_impl = __commonJS({
     exports2.implementation = class URLImpl {
       constructor(constructorArgs) {
         const url = constructorArgs[0];
-        const base3 = constructorArgs[1];
+        const base4 = constructorArgs[1];
         let parsedBase = null;
-        if (base3 !== void 0) {
-          parsedBase = usm.basicURLParse(base3);
+        if (base4 !== void 0) {
+          parsedBase = usm.basicURLParse(base4);
           if (parsedBase === "failure") {
             throw new TypeError("Invalid base URL");
           }
@@ -3750,14 +3750,14 @@ var require_safer = __commonJS({
     }
     safer.Buffer.prototype = Buffer2.prototype;
     if (!Safer.from || Safer.from === Uint8Array.from) {
-      Safer.from = function(value, encodingOrOffset, length2) {
+      Safer.from = function(value, encodingOrOffset, length4) {
         if (typeof value === "number") {
           throw new TypeError('The "value" argument must not be of type number. Received type ' + typeof value);
         }
         if (value && typeof value.length === "undefined") {
           throw new TypeError("The first argument must be one of type string, Buffer, ArrayBuffer, Array, or Array-like Object. Received type " + typeof value);
         }
-        return Buffer2(value, encodingOrOffset, length2);
+        return Buffer2(value, encodingOrOffset, length4);
       };
     }
     if (!Safer.alloc) {
@@ -4013,20 +4013,20 @@ var require_utf32 = __commonJS({
       this.highSurrogate = 0;
     }
     Utf32Encoder.prototype.write = function(str) {
-      var src2 = Buffer2.from(str, "ucs2");
-      var dst = Buffer2.alloc(src2.length * 2);
+      var src4 = Buffer2.from(str, "ucs2");
+      var dst = Buffer2.alloc(src4.length * 2);
       var write32 = this.isLE ? dst.writeUInt32LE : dst.writeUInt32BE;
       var offset = 0;
-      for (var i = 0; i < src2.length; i += 2) {
-        var code6 = src2.readUInt16LE(i);
-        var isHighSurrogate = 55296 <= code6 && code6 < 56320;
-        var isLowSurrogate = 56320 <= code6 && code6 < 57344;
+      for (var i = 0; i < src4.length; i += 2) {
+        var code11 = src4.readUInt16LE(i);
+        var isHighSurrogate = 55296 <= code11 && code11 < 56320;
+        var isLowSurrogate = 56320 <= code11 && code11 < 57344;
         if (this.highSurrogate) {
           if (isHighSurrogate || !isLowSurrogate) {
             write32.call(dst, this.highSurrogate, offset);
             offset += 4;
           } else {
-            var codepoint = (this.highSurrogate - 55296 << 10 | code6 - 56320) + 65536;
+            var codepoint = (this.highSurrogate - 55296 << 10 | code11 - 56320) + 65536;
             write32.call(dst, codepoint, offset);
             offset += 4;
             this.highSurrogate = 0;
@@ -4034,9 +4034,9 @@ var require_utf32 = __commonJS({
           }
         }
         if (isHighSurrogate)
-          this.highSurrogate = code6;
+          this.highSurrogate = code11;
         else {
-          write32.call(dst, code6, offset);
+          write32.call(dst, code11, offset);
           offset += 4;
           this.highSurrogate = 0;
         }
@@ -4061,19 +4061,19 @@ var require_utf32 = __commonJS({
       this.badChar = codec.iconv.defaultCharUnicode.charCodeAt(0);
       this.overflow = [];
     }
-    Utf32Decoder.prototype.write = function(src2) {
-      if (src2.length === 0)
+    Utf32Decoder.prototype.write = function(src4) {
+      if (src4.length === 0)
         return "";
       var i = 0;
       var codepoint = 0;
-      var dst = Buffer2.alloc(src2.length + 4);
+      var dst = Buffer2.alloc(src4.length + 4);
       var offset = 0;
       var isLE = this.isLE;
       var overflow = this.overflow;
       var badChar = this.badChar;
       if (overflow.length > 0) {
-        for (; i < src2.length && overflow.length < 4; i++)
-          overflow.push(src2[i]);
+        for (; i < src4.length && overflow.length < 4; i++)
+          overflow.push(src4[i]);
         if (overflow.length === 4) {
           if (isLE) {
             codepoint = overflow[i] | overflow[i + 1] << 8 | overflow[i + 2] << 16 | overflow[i + 3] << 24;
@@ -4084,16 +4084,16 @@ var require_utf32 = __commonJS({
           offset = _writeCodepoint(dst, offset, codepoint, badChar);
         }
       }
-      for (; i < src2.length - 3; i += 4) {
+      for (; i < src4.length - 3; i += 4) {
         if (isLE) {
-          codepoint = src2[i] | src2[i + 1] << 8 | src2[i + 2] << 16 | src2[i + 3] << 24;
+          codepoint = src4[i] | src4[i + 1] << 8 | src4[i + 2] << 16 | src4[i + 3] << 24;
         } else {
-          codepoint = src2[i + 3] | src2[i + 2] << 8 | src2[i + 1] << 16 | src2[i] << 24;
+          codepoint = src4[i + 3] | src4[i + 2] << 8 | src4[i + 1] << 16 | src4[i] << 24;
         }
         offset = _writeCodepoint(dst, offset, codepoint, badChar);
       }
-      for (; i < src2.length; i++) {
-        overflow.push(src2[i]);
+      for (; i < src4.length; i++) {
+        overflow.push(src4[i]);
       }
       return dst.slice(0, offset).toString("ucs2");
     };
@@ -5333,22 +5333,22 @@ var require_dbcs_codec = __commonJS({
         var part = chunk[k];
         if (typeof part === "string") {
           for (var l = 0; l < part.length; ) {
-            var code6 = part.charCodeAt(l++);
-            if (55296 <= code6 && code6 < 56320) {
+            var code11 = part.charCodeAt(l++);
+            if (55296 <= code11 && code11 < 56320) {
               var codeTrail = part.charCodeAt(l++);
               if (56320 <= codeTrail && codeTrail < 57344)
-                writeTable[curAddr++] = 65536 + (code6 - 55296) * 1024 + (codeTrail - 56320);
+                writeTable[curAddr++] = 65536 + (code11 - 55296) * 1024 + (codeTrail - 56320);
               else
                 throw new Error("Incorrect surrogate pair in " + this.encodingName + " at chunk " + chunk[0]);
-            } else if (4080 < code6 && code6 <= 4095) {
-              var len = 4095 - code6 + 2;
+            } else if (4080 < code11 && code11 <= 4095) {
+              var len = 4095 - code11 + 2;
               var seq = [];
               for (var m = 0; m < len; m++)
                 seq.push(part.charCodeAt(l++));
               writeTable[curAddr++] = SEQ_START - this.decodeTableSeq.length;
               this.decodeTableSeq.push(seq);
             } else
-              writeTable[curAddr++] = code6;
+              writeTable[curAddr++] = code11;
           }
         } else if (typeof part === "number") {
           var charCode = writeTable[curAddr - 1] + 1;
@@ -7198,14 +7198,14 @@ var require_lib2 = __commonJS({
     iconv.encodings = null;
     iconv.defaultCharUnicode = "\uFFFD";
     iconv.defaultCharSingleByte = "?";
-    iconv.encode = function encode11(str, encoding, options) {
+    iconv.encode = function encode18(str, encoding, options) {
       str = "" + (str || "");
       var encoder2 = iconv.getEncoder(encoding, options);
       var res = encoder2.write(str);
       var trail = encoder2.end();
       return trail && trail.length > 0 ? Buffer2.concat([res, trail]) : res;
     };
-    iconv.decode = function decode12(buf2, encoding, options) {
+    iconv.decode = function decode23(buf2, encoding, options) {
       if (typeof buf2 === "string") {
         if (!iconv.skipDecodeWarning) {
           console.error("Iconv-lite warning: decode()-ing strings is deprecated. Refer to https://github.com/ashtuchkin/iconv-lite/wiki/Use-Buffers-when-decoding");
@@ -7314,15 +7314,15 @@ var require_encoding = __commonJS({
     "use strict";
     var iconvLite = require_lib2();
     module2.exports.convert = convert;
-    function convert(str, to, from3) {
-      from3 = checkEncoding(from3 || "UTF-8");
+    function convert(str, to, from7) {
+      from7 = checkEncoding(from7 || "UTF-8");
       to = checkEncoding(to || "UTF-8");
       str = str || "";
       var result;
-      if (from3 !== "UTF-8" && typeof str === "string") {
+      if (from7 !== "UTF-8" && typeof str === "string") {
         str = Buffer.from(str, "binary");
       }
-      if (from3 === to) {
+      if (from7 === to) {
         if (typeof str === "string") {
           result = Buffer.from(str);
         } else {
@@ -7330,7 +7330,7 @@ var require_encoding = __commonJS({
         }
       } else {
         try {
-          result = convertIconvLite(str, to, from3);
+          result = convertIconvLite(str, to, from7);
         } catch (E) {
           console.error(E);
           result = str;
@@ -7341,17 +7341,17 @@ var require_encoding = __commonJS({
       }
       return result;
     }
-    function convertIconvLite(str, to, from3) {
+    function convertIconvLite(str, to, from7) {
       if (to === "UTF-8") {
-        return iconvLite.decode(str, from3);
-      } else if (from3 === "UTF-8") {
+        return iconvLite.decode(str, from7);
+      } else if (from7 === "UTF-8") {
         return iconvLite.encode(str, to);
       } else {
-        return iconvLite.encode(iconvLite.decode(str, from3), to);
+        return iconvLite.encode(iconvLite.decode(str, from7), to);
       }
     }
-    function checkEncoding(name5) {
-      return (name5 || "").toString().trim().replace(/^latin[\-_]?(\d+)$/i, "ISO-8859-$1").replace(/^win(?:dows)?[\-_]?(\d+)$/i, "WINDOWS-$1").replace(/^utf[\-_]?(\d+)$/i, "UTF-$1").replace(/^ks_c_5601\-1987$/i, "CP949").replace(/^us[\-_]?ascii$/i, "ASCII").toUpperCase();
+    function checkEncoding(name7) {
+      return (name7 || "").toString().trim().replace(/^latin[\-_]?(\d+)$/i, "ISO-8859-$1").replace(/^win(?:dows)?[\-_]?(\d+)$/i, "WINDOWS-$1").replace(/^utf[\-_]?(\d+)$/i, "UTF-$1").replace(/^ks_c_5601\-1987$/i, "CP949").replace(/^us[\-_]?ascii$/i, "ASCII").toUpperCase();
     }
   }
 });
@@ -7382,8 +7382,8 @@ var require_lib3 = __commonJS({
         let size = 0;
         if (blobParts) {
           const a = blobParts;
-          const length2 = Number(a.length);
-          for (let i = 0; i < length2; i++) {
+          const length4 = Number(a.length);
+          for (let i = 0; i < length4; i++) {
             const element = a[i];
             let buffer2;
             if (element instanceof Buffer) {
@@ -7585,10 +7585,10 @@ var require_lib3 = __commonJS({
       text: { enumerable: true }
     });
     Body2.mixIn = function(proto) {
-      for (const name5 of Object.getOwnPropertyNames(Body2.prototype)) {
-        if (!(name5 in proto)) {
-          const desc = Object.getOwnPropertyDescriptor(Body2.prototype, name5);
-          Object.defineProperty(proto, name5, desc);
+      for (const name7 of Object.getOwnPropertyNames(Body2.prototype)) {
+        if (!(name7 in proto)) {
+          const desc = Object.getOwnPropertyDescriptor(Body2.prototype, name7);
+          Object.defineProperty(proto, name7, desc);
         }
       }
     };
@@ -7776,10 +7776,10 @@ var require_lib3 = __commonJS({
     Body2.Promise = global.Promise;
     var invalidTokenRegex = /[^\^_`a-zA-Z\-0-9!#$%&'*+.|~]/;
     var invalidHeaderCharRegex = /[^\t\x20-\x7e\x80-\xff]/;
-    function validateName(name5) {
-      name5 = `${name5}`;
-      if (invalidTokenRegex.test(name5) || name5 === "") {
-        throw new TypeError(`${name5} is not a legal HTTP header name`);
+    function validateName(name7) {
+      name7 = `${name7}`;
+      if (invalidTokenRegex.test(name7) || name7 === "") {
+        throw new TypeError(`${name7} is not a legal HTTP header name`);
       }
     }
     function validateValue(value) {
@@ -7788,10 +7788,10 @@ var require_lib3 = __commonJS({
         throw new TypeError(`${value} is not a legal HTTP header value`);
       }
     }
-    function find(map4, name5) {
-      name5 = name5.toLowerCase();
+    function find(map4, name7) {
+      name7 = name7.toLowerCase();
       for (const key in map4) {
-        if (key.toLowerCase() === name5) {
+        if (key.toLowerCase() === name7) {
           return key;
         }
       }
@@ -7843,10 +7843,10 @@ var require_lib3 = __commonJS({
           throw new TypeError("Provided initializer must be an object");
         }
       }
-      get(name5) {
-        name5 = `${name5}`;
-        validateName(name5);
-        const key = find(this[MAP], name5);
+      get(name7) {
+        name7 = `${name7}`;
+        validateName(name7);
+        const key = find(this[MAP], name7);
         if (key === void 0) {
           return null;
         }
@@ -7858,41 +7858,41 @@ var require_lib3 = __commonJS({
         let i = 0;
         while (i < pairs.length) {
           var _pairs$i = pairs[i];
-          const name5 = _pairs$i[0], value = _pairs$i[1];
-          callback.call(thisArg, value, name5, this);
+          const name7 = _pairs$i[0], value = _pairs$i[1];
+          callback.call(thisArg, value, name7, this);
           pairs = getHeaders(this);
           i++;
         }
       }
-      set(name5, value) {
-        name5 = `${name5}`;
+      set(name7, value) {
+        name7 = `${name7}`;
         value = `${value}`;
-        validateName(name5);
+        validateName(name7);
         validateValue(value);
-        const key = find(this[MAP], name5);
-        this[MAP][key !== void 0 ? key : name5] = [value];
+        const key = find(this[MAP], name7);
+        this[MAP][key !== void 0 ? key : name7] = [value];
       }
-      append(name5, value) {
-        name5 = `${name5}`;
+      append(name7, value) {
+        name7 = `${name7}`;
         value = `${value}`;
-        validateName(name5);
+        validateName(name7);
         validateValue(value);
-        const key = find(this[MAP], name5);
+        const key = find(this[MAP], name7);
         if (key !== void 0) {
           this[MAP][key].push(value);
         } else {
-          this[MAP][name5] = [value];
+          this[MAP][name7] = [value];
         }
       }
-      has(name5) {
-        name5 = `${name5}`;
-        validateName(name5);
-        return find(this[MAP], name5) !== void 0;
+      has(name7) {
+        name7 = `${name7}`;
+        validateName(name7);
+        return find(this[MAP], name7) !== void 0;
       }
-      delete(name5) {
-        name5 = `${name5}`;
-        validateName(name5);
-        const key = find(this[MAP], name5);
+      delete(name7) {
+        name7 = `${name7}`;
+        validateName(name7);
+        const key = find(this[MAP], name7);
         if (key !== void 0) {
           delete this[MAP][key];
         }
@@ -7987,23 +7987,23 @@ var require_lib3 = __commonJS({
     }
     function createHeadersLenient(obj) {
       const headers = new Headers3();
-      for (const name5 of Object.keys(obj)) {
-        if (invalidTokenRegex.test(name5)) {
+      for (const name7 of Object.keys(obj)) {
+        if (invalidTokenRegex.test(name7)) {
           continue;
         }
-        if (Array.isArray(obj[name5])) {
-          for (const val of obj[name5]) {
+        if (Array.isArray(obj[name7])) {
+          for (const val of obj[name7]) {
             if (invalidHeaderCharRegex.test(val)) {
               continue;
             }
-            if (headers[MAP][name5] === void 0) {
-              headers[MAP][name5] = [val];
+            if (headers[MAP][name7] === void 0) {
+              headers[MAP][name7] = [val];
             } else {
-              headers[MAP][name5].push(val);
+              headers[MAP][name7].push(val);
             }
           }
-        } else if (!invalidHeaderCharRegex.test(obj[name5])) {
-          headers[MAP][name5] = [obj[name5]];
+        } else if (!invalidHeaderCharRegex.test(obj[name7])) {
+          headers[MAP][name7] = [obj[name7]];
         }
       }
       return headers;
@@ -8343,8 +8343,8 @@ var require_lib3 = __commonJS({
                   size: request.size
                 };
                 if (!isDomainOrSubdomain(request.url, locationURL)) {
-                  for (const name5 of ["authorization", "www-authenticate", "cookie", "cookie2"]) {
-                    requestOpts.headers.delete(name5);
+                  for (const name7 of ["authorization", "www-authenticate", "cookie", "cookie2"]) {
+                    requestOpts.headers.delete(name7);
                   }
                 }
                 if (res.statusCode !== 303 && request.body && getTotalBytes2(request) === null) {
@@ -8417,8 +8417,8 @@ var require_lib3 = __commonJS({
         writeToStream2(req, request);
       });
     }
-    fetch7.isRedirect = function(code6) {
-      return code6 === 301 || code6 === 302 || code6 === 303 || code6 === 307 || code6 === 308;
+    fetch7.isRedirect = function(code11) {
+      return code11 === 301 || code11 === 302 || code11 === 303 || code11 === 307 || code11 === 308;
     };
     fetch7.Promise = global.Promise;
     module2.exports = exports2 = fetch7;
@@ -9032,9 +9032,9 @@ var require_types = __commonJS({
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.FunctionsHttpError = exports2.FunctionsRelayError = exports2.FunctionsFetchError = exports2.FunctionsError = void 0;
     var FunctionsError = class extends Error {
-      constructor(message, name5 = "FunctionsError", context) {
+      constructor(message, name7 = "FunctionsError", context) {
         super(message);
-        super.name = name5;
+        super.name = name7;
         this.context = context;
       }
     };
@@ -9373,11 +9373,11 @@ var require_PostgrestTransformBuilder = __commonJS({
         this.url.searchParams.set(key, `${count}`);
         return this;
       }
-      range(from3, to, { foreignTable } = {}) {
+      range(from7, to, { foreignTable } = {}) {
         const keyOffset = typeof foreignTable === "undefined" ? "offset" : `${foreignTable}.offset`;
         const keyLimit = typeof foreignTable === "undefined" ? "limit" : `${foreignTable}.limit`;
-        this.url.searchParams.set(keyOffset, `${from3}`);
-        this.url.searchParams.set(keyLimit, `${to - from3 + 1}`);
+        this.url.searchParams.set(keyOffset, `${from7}`);
+        this.url.searchParams.set(keyLimit, `${to - from7 + 1}`);
         return this;
       }
       abortSignal(signal) {
@@ -9401,7 +9401,7 @@ var require_PostgrestTransformBuilder = __commonJS({
         this.headers["Accept"] = "application/geo+json";
         return this;
       }
-      explain({ analyze = false, verbose = false, settings = false, buffers = false, wal = false, format = "text" } = {}) {
+      explain({ analyze = false, verbose = false, settings = false, buffers = false, wal = false, format: format2 = "text" } = {}) {
         const options = [
           analyze ? "analyze" : null,
           verbose ? "verbose" : null,
@@ -9410,8 +9410,8 @@ var require_PostgrestTransformBuilder = __commonJS({
           wal ? "wal" : null
         ].filter(Boolean).join("|");
         const forMediatype = this.headers["Accept"];
-        this.headers["Accept"] = `application/vnd.pgrst.plan+${format}; for="${forMediatype}"; options=${options};`;
-        if (format === "json")
+        this.headers["Accept"] = `application/vnd.pgrst.plan+${format2}; for="${forMediatype}"; options=${options};`;
+        if (format2 === "json")
           return this;
         else
           return this;
@@ -9764,8 +9764,8 @@ var require_PostgrestClient = __commonJS({
         let body;
         if (head) {
           method = "HEAD";
-          Object.entries(args).forEach(([name5, value]) => {
-            url.searchParams.append(name5, `${value}`);
+          Object.entries(args).forEach(([name7, value]) => {
+            url.searchParams.append(name7, `${value}`);
           });
         } else {
           method = "POST";
@@ -9912,14 +9912,14 @@ var require_ms2 = __commonJS({
     function fmtLong(ms) {
       return plural(ms, d, "day") || plural(ms, h, "hour") || plural(ms, m, "minute") || plural(ms, s, "second") || ms + " ms";
     }
-    function plural(ms, n, name5) {
+    function plural(ms, n, name7) {
       if (ms < n) {
         return;
       }
       if (ms < n * 1.5) {
-        return Math.floor(ms / n) + " " + name5;
+        return Math.floor(ms / n) + " " + name7;
       }
-      return Math.ceil(ms / n) + " " + name5 + "s";
+      return Math.ceil(ms / n) + " " + name7 + "s";
     }
   }
 });
@@ -9928,7 +9928,7 @@ var require_ms2 = __commonJS({
 var require_debug = __commonJS({
   "node_modules/websocket/node_modules/debug/src/debug.js"(exports2, module2) {
     exports2 = module2.exports = createDebug.debug = createDebug["default"] = createDebug;
-    exports2.coerce = coerce3;
+    exports2.coerce = coerce5;
     exports2.disable = disable;
     exports2.enable = enable;
     exports2.enabled = enabled;
@@ -9965,11 +9965,11 @@ var require_debug = __commonJS({
           args.unshift("%O");
         }
         var index = 0;
-        args[0] = args[0].replace(/%([a-zA-Z%])/g, function(match, format) {
+        args[0] = args[0].replace(/%([a-zA-Z%])/g, function(match, format2) {
           if (match === "%%")
             return match;
           index++;
-          var formatter = exports2.formatters[format];
+          var formatter = exports2.formatters[format2];
           if ("function" === typeof formatter) {
             var val = args[index];
             match = formatter.call(self2, val);
@@ -10011,21 +10011,21 @@ var require_debug = __commonJS({
     function disable() {
       exports2.enable("");
     }
-    function enabled(name5) {
+    function enabled(name7) {
       var i, len;
       for (i = 0, len = exports2.skips.length; i < len; i++) {
-        if (exports2.skips[i].test(name5)) {
+        if (exports2.skips[i].test(name7)) {
           return false;
         }
       }
       for (i = 0, len = exports2.names.length; i < len; i++) {
-        if (exports2.names[i].test(name5)) {
+        if (exports2.names[i].test(name7)) {
           return true;
         }
       }
       return false;
     }
-    function coerce3(val) {
+    function coerce5(val) {
       if (val instanceof Error)
         return val.stack || val.message;
       return val;
@@ -10168,15 +10168,15 @@ var require_node2 = __commonJS({
       return util.inspect(v, this.inspectOpts);
     };
     function formatArgs(args) {
-      var name5 = this.namespace;
+      var name7 = this.namespace;
       var useColors2 = this.useColors;
       if (useColors2) {
         var c = this.color;
-        var prefix = "  \x1B[3" + c + ";1m" + name5 + " \x1B[0m";
+        var prefix = "  \x1B[3" + c + ";1m" + name7 + " \x1B[0m";
         args[0] = prefix + args[0].split("\n").join("\n" + prefix);
         args.push("\x1B[3" + c + "m+" + exports2.humanize(this.diff) + "\x1B[0m");
       } else {
-        args[0] = new Date().toUTCString() + " " + name5 + " " + args[0];
+        args[0] = new Date().toUTCString() + " " + name7 + " " + args[0];
       }
     }
     function log() {
@@ -10268,8 +10268,8 @@ var require_utils2 = __commonJS({
     exports2.bufferAllocUnsafe = Buffer.allocUnsafe ? Buffer.allocUnsafe : function oldBufferAllocUnsafe(size) {
       return new Buffer(size);
     };
-    exports2.bufferFromString = Buffer.from ? Buffer.from : function oldBufferFromString(string2, encoding) {
-      return new Buffer(string2, encoding);
+    exports2.bufferFromString = Buffer.from ? Buffer.from : function oldBufferFromString(string3, encoding) {
+      return new Buffer(string3, encoding);
     };
     exports2.BufferingLogger = function createBufferingLogger(identifier, uniqueID) {
       var logFunction = require_src2()(identifier);
@@ -10339,9 +10339,9 @@ var require_node_gyp_build = __commonJS({
     load.path = function(dir) {
       dir = path3.resolve(dir || ".");
       try {
-        var name5 = runtimeRequire(path3.join(dir, "package.json")).name.toUpperCase().replace(/-/g, "_");
-        if (process.env[name5 + "_PREBUILD"])
-          dir = process.env[name5 + "_PREBUILD"];
+        var name7 = runtimeRequire(path3.join(dir, "package.json")).name.toUpperCase().replace(/-/g, "_");
+        if (process.env[name7 + "_PREBUILD"])
+          dir = process.env[name7 + "_PREBUILD"];
       } catch (err) {
       }
       if (!prebuildsOnly) {
@@ -10395,11 +10395,11 @@ var require_node_gyp_build = __commonJS({
       var files = readdirSync(dir).filter(filter2);
       return files[0] && path3.join(dir, files[0]);
     }
-    function matchBuild(name5) {
-      return /\.node$/.test(name5);
+    function matchBuild(name7) {
+      return /\.node$/.test(name7);
     }
-    function parseTuple(name5) {
-      var arr = name5.split("-");
+    function parseTuple(name7) {
+      var arr = name7.split("-");
       if (arr.length !== 2)
         return;
       var platform2 = arr[0];
@@ -10410,7 +10410,7 @@ var require_node_gyp_build = __commonJS({
         return;
       if (!architectures.every(Boolean))
         return;
-      return { name: name5, platform: platform2, architectures };
+      return { name: name7, platform: platform2, architectures };
     }
     function matchTuple(platform2, arch2) {
       return function(tuple) {
@@ -10510,14 +10510,14 @@ var require_node_gyp_build = __commonJS({
 var require_fallback = __commonJS({
   "node_modules/bufferutil/fallback.js"(exports2, module2) {
     "use strict";
-    var mask = (source, mask2, output, offset, length2) => {
-      for (var i = 0; i < length2; i++) {
+    var mask = (source, mask2, output, offset, length4) => {
+      for (var i = 0; i < length4; i++) {
         output[offset + i] = source[i] ^ mask2[i & 3];
       }
     };
     var unmask = (buffer2, mask2) => {
-      const length2 = buffer2.length;
-      for (var i = 0; i < length2; i++) {
+      const length4 = buffer2.length;
+      for (var i = 0; i < length4; i++) {
         buffer2[i] ^= mask2[i & 3];
       }
     };
@@ -10768,9 +10768,9 @@ var require_FastBufferList = __commonJS({
       self2.encoding = opts2.encoding;
       var head = { next: null, buffer: null };
       var last4 = { next: null, buffer: null };
-      var length2 = 0;
+      var length4 = 0;
       self2.__defineGetter__("length", function() {
-        return length2;
+        return length4;
       });
       var offset = 0;
       self2.write = function(buf2) {
@@ -10781,7 +10781,7 @@ var require_FastBufferList = __commonJS({
           last4.next = { next: null, buffer: buf2 };
           last4 = last4.next;
         }
-        length2 += buf2.length;
+        length4 += buf2.length;
         self2.emit("write", buf2);
         return true;
       };
@@ -10862,7 +10862,7 @@ var require_FastBufferList = __commonJS({
       };
       self2.advance = function(n) {
         offset += n;
-        length2 -= n;
+        length4 -= n;
         while (head.buffer && offset >= head.buffer.length) {
           offset -= head.buffer.length;
           head = head.next ? head.next : { buffer: null, next: null };
@@ -11064,20 +11064,20 @@ var require_WebSocketConnection = __commonJS({
       1011: "Internal Server Error",
       1015: "TLS Handshake Failed"
     };
-    function validateCloseReason(code6) {
-      if (code6 < 1e3) {
+    function validateCloseReason(code11) {
+      if (code11 < 1e3) {
         return false;
       }
-      if (code6 >= 1e3 && code6 <= 2999) {
-        return [1e3, 1001, 1002, 1003, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015].indexOf(code6) !== -1;
+      if (code11 >= 1e3 && code11 <= 2999) {
+        return [1e3, 1001, 1002, 1003, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015].indexOf(code11) !== -1;
       }
-      if (code6 >= 3e3 && code6 <= 3999) {
+      if (code11 >= 3e3 && code11 <= 3999) {
         return true;
       }
-      if (code6 >= 4e3 && code6 <= 4999) {
+      if (code11 >= 4e3 && code11 <= 4999) {
         return true;
       }
-      if (code6 >= 5e3) {
+      if (code11 >= 5e3) {
         return false;
       }
     }
@@ -11582,13 +11582,13 @@ var require_WebSocketConnection = __commonJS({
         throw new Error("You cannot fragment control frames.");
       }
       var threshold = this.config.fragmentationThreshold;
-      var length2 = frame.binaryPayload.length;
-      if (!this.config.fragmentOutgoingMessages || frame.binaryPayload && length2 <= threshold) {
+      var length4 = frame.binaryPayload.length;
+      if (!this.config.fragmentOutgoingMessages || frame.binaryPayload && length4 <= threshold) {
         frame.fin = true;
         this.sendFrame(frame, cb);
         return;
       }
-      var numFragments = Math.ceil(length2 / threshold);
+      var numFragments = Math.ceil(length4 / threshold);
       var sentFragments = 0;
       var sentCallback = function fragmentSentCallback(err) {
         if (err) {
@@ -11607,7 +11607,7 @@ var require_WebSocketConnection = __commonJS({
         var currentFrame = new WebSocketFrame(this.maskBytes, this.frameHeader, this.config);
         currentFrame.opcode = i === 1 ? frame.opcode : 0;
         currentFrame.fin = i === numFragments;
-        var currentLength = i === numFragments ? length2 - threshold * (i - 1) : threshold;
+        var currentLength = i === numFragments ? length4 - threshold * (i - 1) : threshold;
         var sliceStart = threshold * (i - 1);
         currentFrame.binaryPayload = frame.binaryPayload.slice(sliceStart, sliceStart + currentLength);
         this.sendFrame(currentFrame, sentCallback);
@@ -11677,7 +11677,7 @@ var require_WebSocketConnection = __commonJS({
 // node_modules/websocket/lib/WebSocketRequest.js
 var require_WebSocketRequest = __commonJS({
   "node_modules/websocket/lib/WebSocketRequest.js"(exports2, module2) {
-    var crypto2 = require("crypto");
+    var crypto3 = require("crypto");
     var util = require("util");
     var url = require("url");
     var EventEmitter2 = require("events").EventEmitter;
@@ -11900,7 +11900,7 @@ var require_WebSocketRequest = __commonJS({
         protocolFullCase = acceptedProtocol;
       }
       this.protocolFullCaseMap = null;
-      var sha1 = crypto2.createHash("sha1");
+      var sha1 = crypto3.createHash("sha1");
       sha1.update(this.key + "258EAFA5-E914-47DA-95CA-C5AB0DC85B11");
       var acceptKey = sha1.digest("base64");
       var response = "HTTP/1.1 101 Switching Protocols\r\nUpgrade: websocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: " + acceptKey + "\r\n";
@@ -12243,7 +12243,7 @@ var require_WebSocketClient = __commonJS({
     var http3 = require("http");
     var https2 = require("https");
     var url = require("url");
-    var crypto2 = require("crypto");
+    var crypto3 = require("crypto");
     var WebSocketConnection = require_WebSocketConnection();
     var bufferAllocUnsafe = utils.bufferAllocUnsafe;
     var protocolSeparators = [
@@ -12461,7 +12461,7 @@ var require_WebSocketClient = __commonJS({
         this.failHandshake("Expected an Upgrade: websocket header from the server");
         return;
       }
-      var sha1 = crypto2.createHash("sha1");
+      var sha1 = crypto3.createHash("sha1");
       sha1.update(this.base64nonce + "258EAFA5-E914-47DA-95CA-C5AB0DC85B11");
       var expectedKey = sha1.digest("base64");
       if (!headers["sec-websocket-accept"]) {
@@ -12658,7 +12658,7 @@ var require_is_typedarray = __commonJS({
     module2.exports = isTypedArray;
     isTypedArray.strict = isStrictTypedArray;
     isTypedArray.loose = isLooseTypedArray;
-    var toString3 = Object.prototype.toString;
+    var toString5 = Object.prototype.toString;
     var names = {
       "[object Int8Array]": true,
       "[object Int16Array]": true,
@@ -12677,7 +12677,7 @@ var require_is_typedarray = __commonJS({
       return arr instanceof Int8Array || arr instanceof Int16Array || arr instanceof Int32Array || arr instanceof Uint8Array || arr instanceof Uint8ClampedArray || arr instanceof Uint16Array || arr instanceof Uint32Array || arr instanceof Float32Array || arr instanceof Float64Array;
     }
     function isLooseTypedArray(arr) {
-      return names[toString3.call(arr)];
+      return names[toString5.call(arr)];
     }
   }
 });
@@ -12902,13 +12902,13 @@ var require_W3CWebSocket = __commonJS({
         }
       }
     };
-    W3CWebSocket.prototype.close = function(code6, reason) {
+    W3CWebSocket.prototype.close = function(code11, reason) {
       switch (this._readyState) {
         case CONNECTING:
           onConnectFailed.call(this);
           this._client.on("connect", function(connection) {
-            if (code6) {
-              connection.close(code6, reason);
+            if (code11) {
+              connection.close(code11, reason);
             } else {
               connection.close();
             }
@@ -12916,8 +12916,8 @@ var require_W3CWebSocket = __commonJS({
           break;
         case OPEN:
           this._readyState = CLOSING;
-          if (code6) {
-            this._connection.close(code6, reason);
+          if (code11) {
+            this._connection.close(code11, reason);
           } else {
             this._connection.close();
           }
@@ -12927,11 +12927,11 @@ var require_W3CWebSocket = __commonJS({
           break;
       }
     };
-    function createCloseEvent(code6, reason) {
+    function createCloseEvent(code11, reason) {
       var event = new yaeti.Event("close");
-      event.code = code6;
+      event.code = code11;
       event.reason = reason;
-      event.wasClean = typeof code6 === "undefined" || code6 === 1e3;
+      event.wasClean = typeof code11 === "undefined" || code11 === 1e3;
       return event;
     }
     function createMessageEvent(data) {
@@ -12945,8 +12945,8 @@ var require_W3CWebSocket = __commonJS({
       this._connection = connection;
       this._protocol = connection.protocol;
       this._extensions = connection.extensions;
-      this._connection.on("close", function(code6, reason) {
-        onClose.call(self2, code6, reason);
+      this._connection.on("close", function(code11, reason) {
+        onClose.call(self2, code11, reason);
       });
       this._connection.on("message", function(msg) {
         onMessage.call(self2, msg);
@@ -12962,10 +12962,10 @@ var require_W3CWebSocket = __commonJS({
         this.dispatchEvent(createCloseEvent(1006, "connection failed"));
       }
     }
-    function onClose(code6, reason) {
+    function onClose(code11, reason) {
       destroy.call(this);
       this._readyState = CLOSED;
-      this.dispatchEvent(createCloseEvent(code6, reason || ""));
+      this.dispatchEvent(createCloseEvent(code11, reason || ""));
     }
     function onMessage(message) {
       if (message.utf8Data) {
@@ -14201,12 +14201,12 @@ var require_RealtimeClient = __commonJS({
           this.conn.onclose = (event) => this._onConnClose(event);
         }
       }
-      disconnect(code6, reason) {
+      disconnect(code11, reason) {
         if (this.conn) {
           this.conn.onclose = function() {
           };
-          if (code6) {
-            this.conn.close(code6, reason !== null && reason !== void 0 ? reason : "");
+          if (code11) {
+            this.conn.close(code11, reason !== null && reason !== void 0 ? reason : "");
           } else {
             this.conn.close();
           }
@@ -15366,12 +15366,12 @@ var require_helpers3 = __commonJS({
     exports2.uuid = uuid;
     var isBrowser = () => typeof window !== "undefined";
     exports2.isBrowser = isBrowser;
-    function getParameterByName(name5, url) {
+    function getParameterByName(name7, url) {
       var _a;
       if (!url)
         url = ((_a = window === null || window === void 0 ? void 0 : window.location) === null || _a === void 0 ? void 0 : _a.href) || "";
-      name5 = name5.replace(/[\[\]]/g, "\\$&");
-      const regex = new RegExp("[?&#]" + name5 + "(=([^&#]*)|&|#|$)"), results = regex.exec(url);
+      name7 = name7.replace(/[\[\]]/g, "\\$&");
+      const regex = new RegExp("[?&#]" + name7 + "(=([^&#]*)|&|#|$)"), results = regex.exec(url);
       if (!results)
         return null;
       if (!results[2])
@@ -15495,9 +15495,9 @@ var require_errors2 = __commonJS({
     };
     exports2.AuthUnknownError = AuthUnknownError;
     var CustomAuthError = class extends AuthError {
-      constructor(message, name5, status) {
+      constructor(message, name7, status) {
         super(message);
-        this.name = name5;
+        this.name = name7;
         this.status = status;
       }
       toJSON() {
@@ -17094,8 +17094,8 @@ var require_SupabaseClient = __commonJS({
       rpc(fn, args = {}, options) {
         return this.rest.rpc(fn, args, options);
       }
-      channel(name5, opts2 = { config: {} }) {
-        return this.realtime.channel(name5, opts2);
+      channel(name7, opts2 = { config: {} }) {
+        return this.realtime.channel(name7, opts2);
       }
       getChannels() {
         return this.realtime.getChannels();
@@ -17223,19 +17223,19 @@ var require_err_code = __commonJS({
       }
       return obj;
     }
-    function createError(err, code6, props) {
+    function createError(err, code11, props) {
       if (!err || typeof err === "string") {
         throw new TypeError("Please pass an Error to err-code");
       }
       if (!props) {
         props = {};
       }
-      if (typeof code6 === "object") {
-        props = code6;
-        code6 = "";
+      if (typeof code11 === "object") {
+        props = code11;
+        code11 = "";
       }
-      if (code6) {
-        props.code = code6;
+      if (code11) {
+        props.code = code11;
       }
       try {
         return assign(err, props);
@@ -17293,22 +17293,22 @@ var require_aspromise = __commonJS({
 var require_base64 = __commonJS({
   "node_modules/@protobufjs/base64/index.js"(exports2) {
     "use strict";
-    var base642 = exports2;
-    base642.length = function length2(string2) {
-      var p = string2.length;
+    var base643 = exports2;
+    base643.length = function length4(string3) {
+      var p = string3.length;
       if (!p)
         return 0;
       var n = 0;
-      while (--p % 4 > 1 && string2.charAt(p) === "=")
+      while (--p % 4 > 1 && string3.charAt(p) === "=")
         ++n;
-      return Math.ceil(string2.length * 3) / 4 - n;
+      return Math.ceil(string3.length * 3) / 4 - n;
     };
     var b64 = new Array(64);
     var s64 = new Array(123);
     for (i = 0; i < 64; )
       s64[b64[i] = i < 26 ? i + 65 : i < 52 ? i + 71 : i < 62 ? i - 4 : i - 59 | 43] = i++;
     var i;
-    base642.encode = function encode11(buffer2, start, end) {
+    base643.encode = function encode18(buffer2, start, end) {
       var parts = null, chunk = [];
       var i2 = 0, j = 0, t;
       while (start < end) {
@@ -17349,11 +17349,11 @@ var require_base64 = __commonJS({
       return String.fromCharCode.apply(String, chunk.slice(0, i2));
     };
     var invalidEncoding = "invalid encoding";
-    base642.decode = function decode12(string2, buffer2, offset) {
+    base643.decode = function decode23(string3, buffer2, offset) {
       var start = offset;
       var j = 0, t;
-      for (var i2 = 0; i2 < string2.length; ) {
-        var c = string2.charCodeAt(i2++);
+      for (var i2 = 0; i2 < string3.length; ) {
+        var c = string3.charCodeAt(i2++);
         if (c === 61 && j > 1)
           break;
         if ((c = s64[c]) === void 0)
@@ -17383,8 +17383,8 @@ var require_base64 = __commonJS({
         throw Error(invalidEncoding);
       return offset - start;
     };
-    base642.test = function test(string2) {
-      return /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(string2);
+    base643.test = function test(string3) {
+      return /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(string3);
     };
   }
 });
@@ -17643,15 +17643,15 @@ var require_utf8 = __commonJS({
   "node_modules/@protobufjs/utf8/index.js"(exports2) {
     "use strict";
     var utf8 = exports2;
-    utf8.length = function utf8_length(string2) {
+    utf8.length = function utf8_length(string3) {
       var len = 0, c = 0;
-      for (var i = 0; i < string2.length; ++i) {
-        c = string2.charCodeAt(i);
+      for (var i = 0; i < string3.length; ++i) {
+        c = string3.charCodeAt(i);
         if (c < 128)
           len += 1;
         else if (c < 2048)
           len += 2;
-        else if ((c & 64512) === 55296 && (string2.charCodeAt(i + 1) & 64512) === 56320) {
+        else if ((c & 64512) === 55296 && (string3.charCodeAt(i + 1) & 64512) === 56320) {
           ++i;
           len += 4;
         } else
@@ -17688,16 +17688,16 @@ var require_utf8 = __commonJS({
       }
       return String.fromCharCode.apply(String, chunk.slice(0, i));
     };
-    utf8.write = function utf8_write(string2, buffer2, offset) {
+    utf8.write = function utf8_write(string3, buffer2, offset) {
       var start = offset, c1, c2;
-      for (var i = 0; i < string2.length; ++i) {
-        c1 = string2.charCodeAt(i);
+      for (var i = 0; i < string3.length; ++i) {
+        c1 = string3.charCodeAt(i);
         if (c1 < 128) {
           buffer2[offset++] = c1;
         } else if (c1 < 2048) {
           buffer2[offset++] = c1 >> 6 | 192;
           buffer2[offset++] = c1 & 63 | 128;
-        } else if ((c1 & 64512) === 55296 && ((c2 = string2.charCodeAt(i + 1)) & 64512) === 56320) {
+        } else if ((c1 & 64512) === 55296 && ((c2 = string3.charCodeAt(i + 1)) & 64512) === 56320) {
           c1 = 65536 + ((c1 & 1023) << 10) + (c2 & 1023);
           ++i;
           buffer2[offset++] = c1 >> 18 | 240;
@@ -17780,7 +17780,7 @@ var require_longbits = __commonJS({
       }
       return new LongBits(lo, hi);
     };
-    LongBits.from = function from3(value) {
+    LongBits.from = function from7(value) {
       if (typeof value === "number")
         return LongBits.fromNumber(value);
       if (util.isString(value)) {
@@ -17836,7 +17836,7 @@ var require_longbits = __commonJS({
       this.hi = (this.hi >>> 1 ^ mask) >>> 0;
       return this;
     };
-    LongBits.prototype.length = function length2() {
+    LongBits.prototype.length = function length4() {
       var part0 = this.lo, part1 = (this.lo >>> 28 | this.hi << 4) >>> 0, part2 = this.hi >>> 24;
       return part2 === 0 ? part1 === 0 ? part0 < 16384 ? part0 < 128 ? 1 : 2 : part0 < 2097152 ? 3 : 4 : part1 < 16384 ? part1 < 128 ? 5 : 6 : part1 < 2097152 ? 7 : 8 : part2 < 128 ? 9 : 10;
     };
@@ -17902,17 +17902,17 @@ var require_minimal = __commonJS({
         return util.Long.fromBits(bits.lo, bits.hi, unsigned);
       return bits.toNumber(Boolean(unsigned));
     };
-    function merge2(dst, src2, ifNotSet) {
-      for (var keys = Object.keys(src2), i = 0; i < keys.length; ++i)
+    function merge2(dst, src4, ifNotSet) {
+      for (var keys = Object.keys(src4), i = 0; i < keys.length; ++i)
         if (dst[keys[i]] === void 0 || !ifNotSet)
-          dst[keys[i]] = src2[keys[i]];
+          dst[keys[i]] = src4[keys[i]];
       return dst;
     }
     util.merge = merge2;
     util.lcFirst = function lcFirst(str) {
       return str.charAt(0).toLowerCase() + str.substring(1);
     };
-    function newError(name5) {
+    function newError(name7) {
       function CustomError(message, properties) {
         if (!(this instanceof CustomError))
           return new CustomError(message, properties);
@@ -17935,7 +17935,7 @@ var require_minimal = __commonJS({
         },
         name: {
           get() {
-            return name5;
+            return name7;
           },
           set: void 0,
           enumerable: false,
@@ -17965,9 +17965,9 @@ var require_minimal = __commonJS({
       };
     };
     util.oneOfSetter = function setOneOf(fieldNames) {
-      return function(name5) {
+      return function(name7) {
         for (var i = 0; i < fieldNames.length; ++i)
-          if (fieldNames[i] !== name5)
+          if (fieldNames[i] !== name7)
             delete this[fieldNames[i]];
       };
     };
@@ -18001,7 +18001,7 @@ var require_writer = __commonJS({
     var util = require_minimal();
     var BufferWriter;
     var LongBits = util.LongBits;
-    var base642 = util.base64;
+    var base643 = util.base64;
     var utf8 = util.utf8;
     function Op(fn, len, val) {
       this.fn = fn;
@@ -18023,7 +18023,7 @@ var require_writer = __commonJS({
       this.tail = this.head;
       this.states = null;
     }
-    var create5 = function create6() {
+    var create7 = function create8() {
       return util.Buffer ? function create_buffer_setup() {
         return (Writer.create = function create_buffer() {
           return new BufferWriter();
@@ -18032,7 +18032,7 @@ var require_writer = __commonJS({
         return new Writer();
       };
     };
-    Writer.create = create5();
+    Writer.create = create7();
     Writer.alloc = function alloc2(size) {
       return new util.Array(size);
     };
@@ -18129,8 +18129,8 @@ var require_writer = __commonJS({
       if (!len)
         return this._push(writeByte, 1, 0);
       if (util.isString(value)) {
-        var buf2 = Writer.alloc(len = base642.length(value));
-        base642.decode(value, buf2, 0);
+        var buf2 = Writer.alloc(len = base643.length(value));
+        base643.decode(value, buf2, 0);
         value = buf2;
       }
       return this.uint32(len)._push(writeBytes2, len, value);
@@ -18178,7 +18178,7 @@ var require_writer = __commonJS({
     };
     Writer._configure = function(BufferWriter_) {
       BufferWriter = BufferWriter_;
-      Writer.create = create5();
+      Writer.create = create7();
       BufferWriter._configure();
     };
   }
@@ -18261,14 +18261,14 @@ var require_reader = __commonJS({
         return new Reader(buffer2);
       throw Error("illegal buffer");
     };
-    var create5 = function create6() {
+    var create7 = function create8() {
       return util.Buffer ? function create_buffer_setup(buffer2) {
         return (Reader.create = function create_buffer(buffer3) {
           return util.Buffer.isBuffer(buffer3) ? new BufferReader(buffer3) : create_array(buffer3);
         })(buffer2);
       } : create_array;
     };
-    Reader.create = create5();
+    Reader.create = create7();
     Reader.prototype._slice = util.Array.prototype.subarray || util.Array.prototype.slice;
     Reader.prototype.uint32 = function read_uint32_setup() {
       var value = 4294967295;
@@ -18380,10 +18380,10 @@ var require_reader = __commonJS({
       return value;
     };
     Reader.prototype.bytes = function read_bytes() {
-      var length2 = this.uint32(), start = this.pos, end = this.pos + length2;
+      var length4 = this.uint32(), start = this.pos, end = this.pos + length4;
       if (end > this.len)
-        throw indexOutOfRange(this, length2);
-      this.pos += length2;
+        throw indexOutOfRange(this, length4);
+      this.pos += length4;
       if (Array.isArray(this.buf))
         return this.buf.slice(start, end);
       return start === end ? new this.buf.constructor(0) : this._slice.call(this.buf, start, end);
@@ -18392,11 +18392,11 @@ var require_reader = __commonJS({
       var bytes = this.bytes();
       return utf8.read(bytes, 0, bytes.length);
     };
-    Reader.prototype.skip = function skip(length2) {
-      if (typeof length2 === "number") {
-        if (this.pos + length2 > this.len)
-          throw indexOutOfRange(this, length2);
-        this.pos += length2;
+    Reader.prototype.skip = function skip(length4) {
+      if (typeof length4 === "number") {
+        if (this.pos + length4 > this.len)
+          throw indexOutOfRange(this, length4);
+        this.pos += length4;
       } else {
         do {
           if (this.pos >= this.len)
@@ -18431,7 +18431,7 @@ var require_reader = __commonJS({
     };
     Reader._configure = function(BufferReader_) {
       BufferReader = BufferReader_;
-      Reader.create = create5();
+      Reader.create = create7();
       BufferReader._configure();
       var fn = util.Long ? "toLong" : "toNumber";
       util.merge(Reader.prototype, {
@@ -19203,137 +19203,6 @@ var require_murmurhash3js_revisited = __commonJS({
   }
 });
 
-// node_modules/p-defer/index.js
-var require_p_defer = __commonJS({
-  "node_modules/p-defer/index.js"(exports2, module2) {
-    "use strict";
-    var pDefer = () => {
-      const deferred = {};
-      deferred.promise = new Promise((resolve9, reject) => {
-        deferred.resolve = resolve9;
-        deferred.reject = reject;
-      });
-      return deferred;
-    };
-    module2.exports = pDefer;
-  }
-});
-
-// node_modules/it-parallel/index.js
-var require_it_parallel = __commonJS({
-  "node_modules/it-parallel/index.js"(exports2, module2) {
-    "use strict";
-    var defer2 = require_p_defer();
-    var CustomEvent = globalThis.CustomEvent || Event;
-    async function* parallel2(source, options = {}) {
-      let concurrency = options.concurrency || Infinity;
-      if (concurrency < 1) {
-        concurrency = Infinity;
-      }
-      const ordered = options.ordered == null ? false : options.ordered;
-      const emitter = new EventTarget();
-      const ops = [];
-      let slotAvailable = defer2();
-      let resultAvailable = defer2();
-      let sourceFinished = false;
-      let sourceErr;
-      let opErred = false;
-      emitter.addEventListener("task-complete", () => {
-        resultAvailable.resolve();
-      });
-      Promise.resolve().then(async () => {
-        try {
-          for await (const task of source) {
-            if (ops.length === concurrency) {
-              slotAvailable = defer2();
-              await slotAvailable.promise;
-            }
-            if (opErred) {
-              break;
-            }
-            const op = {
-              done: false
-            };
-            ops.push(op);
-            task().then((result) => {
-              op.done = true;
-              op.ok = true;
-              op.value = result;
-              emitter.dispatchEvent(new CustomEvent("task-complete"));
-            }, (err) => {
-              op.done = true;
-              op.err = err;
-              emitter.dispatchEvent(new CustomEvent("task-complete"));
-            });
-          }
-          sourceFinished = true;
-          emitter.dispatchEvent(new CustomEvent("task-complete"));
-        } catch (err) {
-          sourceErr = err;
-          emitter.dispatchEvent(new CustomEvent("task-complete"));
-        }
-      });
-      function valuesAvailable() {
-        if (ordered) {
-          return Boolean(ops[0] && ops[0].done);
-        }
-        return Boolean(ops.find((op) => op.done));
-      }
-      function* yieldOrderedValues() {
-        while (ops.length && ops[0].done) {
-          const op = ops[0];
-          ops.shift();
-          if (op.ok) {
-            yield op.value;
-          } else {
-            opErred = true;
-            slotAvailable.resolve();
-            throw op.err;
-          }
-          slotAvailable.resolve();
-        }
-      }
-      function* yieldUnOrderedValues() {
-        while (valuesAvailable()) {
-          for (let i = 0; i < ops.length; i++) {
-            if (ops[i].done) {
-              const op = ops[i];
-              ops.splice(i, 1);
-              i--;
-              if (op.ok) {
-                yield op.value;
-              } else {
-                opErred = true;
-                slotAvailable.resolve();
-                throw op.err;
-              }
-              slotAvailable.resolve();
-            }
-          }
-        }
-      }
-      while (true) {
-        if (!valuesAvailable()) {
-          resultAvailable = defer2();
-          await resultAvailable.promise;
-        }
-        if (sourceErr) {
-          throw sourceErr;
-        }
-        if (ordered) {
-          yield* yieldOrderedValues();
-        } else {
-          yield* yieldUnOrderedValues();
-        }
-        if (sourceFinished && ops.length === 0) {
-          break;
-        }
-      }
-    }
-    module2.exports = parallel2;
-  }
-});
-
 // node_modules/fast-fifo/fixed-size.js
 var require_fixed_size = __commonJS({
   "node_modules/fast-fifo/fixed-size.js"(exports2, module2) {
@@ -19571,19 +19440,6 @@ var require_it_merge = __commonJS({
   }
 });
 
-// node_modules/it-map/index.js
-var require_it_map = __commonJS({
-  "node_modules/it-map/index.js"(exports2, module2) {
-    "use strict";
-    var map4 = async function* (source, func) {
-      for await (const val of source) {
-        yield func(val);
-      }
-    };
-    module2.exports = map4;
-  }
-});
-
 // node_modules/eventemitter3/index.js
 var require_eventemitter3 = __commonJS({
   "node_modules/eventemitter3/index.js"(exports2, module2) {
@@ -19626,12 +19482,12 @@ var require_eventemitter3 = __commonJS({
       this._eventsCount = 0;
     }
     EventEmitter2.prototype.eventNames = function eventNames() {
-      var names = [], events, name5;
+      var names = [], events, name7;
       if (this._eventsCount === 0)
         return names;
-      for (name5 in events = this._events) {
-        if (has.call(events, name5))
-          names.push(prefix ? name5.slice(1) : name5);
+      for (name7 in events = this._events) {
+        if (has.call(events, name7))
+          names.push(prefix ? name7.slice(1) : name7);
       }
       if (Object.getOwnPropertySymbols) {
         return names.concat(Object.getOwnPropertySymbols(events));
@@ -19684,8 +19540,8 @@ var require_eventemitter3 = __commonJS({
         }
         listeners.fn.apply(listeners.context, args);
       } else {
-        var length2 = listeners.length, j;
-        for (i = 0; i < length2; i++) {
+        var length4 = listeners.length, j;
+        for (i = 0; i < length4; i++) {
           if (listeners[i].once)
             this.removeListener(event, listeners[i].fn, void 0, true);
           switch (len) {
@@ -19732,7 +19588,7 @@ var require_eventemitter3 = __commonJS({
           clearEvent(this, evt);
         }
       } else {
-        for (var i = 0, events = [], length2 = listeners.length; i < length2; i++) {
+        for (var i = 0, events = [], length4 = listeners.length; i < length4; i++) {
           if (listeners[i].fn !== fn || once && !listeners[i].once || context && listeners[i].context !== context) {
             events.push(listeners[i]);
           }
@@ -19763,21 +19619,6 @@ var require_eventemitter3 = __commonJS({
     if ("undefined" !== typeof module2) {
       module2.exports = EventEmitter2;
     }
-  }
-});
-
-// node_modules/it-last/index.js
-var require_it_last = __commonJS({
-  "node_modules/it-last/index.js"(exports2, module2) {
-    "use strict";
-    var last4 = async (source) => {
-      let res;
-      for await (const entry of source) {
-        res = entry;
-      }
-      return res;
-    };
-    module2.exports = last4;
   }
 });
 
@@ -19871,7 +19712,7 @@ var require_longbits2 = __commonJS({
       }
       return new LongBits(lo, hi);
     };
-    LongBits.from = function from3(value) {
+    LongBits.from = function from7(value) {
       if (typeof value === "number")
         return LongBits.fromNumber(value);
       if (util.isString(value)) {
@@ -19927,7 +19768,7 @@ var require_longbits2 = __commonJS({
       this.hi = (this.hi >>> 1 ^ mask) >>> 0;
       return this;
     };
-    LongBits.prototype.length = function length2() {
+    LongBits.prototype.length = function length4() {
       var part0 = this.lo, part1 = (this.lo >>> 28 | this.hi << 4) >>> 0, part2 = this.hi >>> 24;
       return part2 === 0 ? part1 === 0 ? part0 < 16384 ? part0 < 128 ? 1 : 2 : part0 < 2097152 ? 3 : 4 : part1 < 16384 ? part1 < 128 ? 5 : 6 : part1 < 2097152 ? 7 : 8 : part2 < 128 ? 9 : 10;
     };
@@ -19993,17 +19834,17 @@ var require_minimal3 = __commonJS({
         return util.Long.fromBits(bits.lo, bits.hi, unsigned);
       return bits.toNumber(Boolean(unsigned));
     };
-    function merge2(dst, src2, ifNotSet) {
-      for (var keys = Object.keys(src2), i = 0; i < keys.length; ++i)
+    function merge2(dst, src4, ifNotSet) {
+      for (var keys = Object.keys(src4), i = 0; i < keys.length; ++i)
         if (dst[keys[i]] === void 0 || !ifNotSet)
-          dst[keys[i]] = src2[keys[i]];
+          dst[keys[i]] = src4[keys[i]];
       return dst;
     }
     util.merge = merge2;
     util.lcFirst = function lcFirst(str) {
       return str.charAt(0).toLowerCase() + str.substring(1);
     };
-    function newError(name5) {
+    function newError(name7) {
       function CustomError(message, properties) {
         if (!(this instanceof CustomError))
           return new CustomError(message, properties);
@@ -20026,7 +19867,7 @@ var require_minimal3 = __commonJS({
         },
         name: {
           get() {
-            return name5;
+            return name7;
           },
           set: void 0,
           enumerable: false,
@@ -20056,9 +19897,9 @@ var require_minimal3 = __commonJS({
       };
     };
     util.oneOfSetter = function setOneOf(fieldNames) {
-      return function(name5) {
+      return function(name7) {
         for (var i = 0; i < fieldNames.length; ++i)
-          if (fieldNames[i] !== name5)
+          if (fieldNames[i] !== name7)
             delete this[fieldNames[i]];
       };
     };
@@ -20092,7 +19933,7 @@ var require_writer2 = __commonJS({
     var util = require_minimal3();
     var BufferWriter;
     var LongBits = util.LongBits;
-    var base642 = util.base64;
+    var base643 = util.base64;
     var utf8 = util.utf8;
     function Op(fn, len, val) {
       this.fn = fn;
@@ -20114,7 +19955,7 @@ var require_writer2 = __commonJS({
       this.tail = this.head;
       this.states = null;
     }
-    var create5 = function create6() {
+    var create7 = function create8() {
       return util.Buffer ? function create_buffer_setup() {
         return (Writer.create = function create_buffer() {
           return new BufferWriter();
@@ -20123,7 +19964,7 @@ var require_writer2 = __commonJS({
         return new Writer();
       };
     };
-    Writer.create = create5();
+    Writer.create = create7();
     Writer.alloc = function alloc2(size) {
       return new util.Array(size);
     };
@@ -20220,8 +20061,8 @@ var require_writer2 = __commonJS({
       if (!len)
         return this._push(writeByte, 1, 0);
       if (util.isString(value)) {
-        var buf2 = Writer.alloc(len = base642.length(value));
-        base642.decode(value, buf2, 0);
+        var buf2 = Writer.alloc(len = base643.length(value));
+        base643.decode(value, buf2, 0);
         value = buf2;
       }
       return this.uint32(len)._push(writeBytes2, len, value);
@@ -20269,7 +20110,7 @@ var require_writer2 = __commonJS({
     };
     Writer._configure = function(BufferWriter_) {
       BufferWriter = BufferWriter_;
-      Writer.create = create5();
+      Writer.create = create7();
       BufferWriter._configure();
     };
   }
@@ -20352,14 +20193,14 @@ var require_reader2 = __commonJS({
         return new Reader(buffer2);
       throw Error("illegal buffer");
     };
-    var create5 = function create6() {
+    var create7 = function create8() {
       return util.Buffer ? function create_buffer_setup(buffer2) {
         return (Reader.create = function create_buffer(buffer3) {
           return util.Buffer.isBuffer(buffer3) ? new BufferReader(buffer3) : create_array(buffer3);
         })(buffer2);
       } : create_array;
     };
-    Reader.create = create5();
+    Reader.create = create7();
     Reader.prototype._slice = util.Array.prototype.subarray || util.Array.prototype.slice;
     Reader.prototype.uint32 = function read_uint32_setup() {
       var value = 4294967295;
@@ -20471,10 +20312,10 @@ var require_reader2 = __commonJS({
       return value;
     };
     Reader.prototype.bytes = function read_bytes() {
-      var length2 = this.uint32(), start = this.pos, end = this.pos + length2;
+      var length4 = this.uint32(), start = this.pos, end = this.pos + length4;
       if (end > this.len)
-        throw indexOutOfRange(this, length2);
-      this.pos += length2;
+        throw indexOutOfRange(this, length4);
+      this.pos += length4;
       if (Array.isArray(this.buf))
         return this.buf.slice(start, end);
       return start === end ? new this.buf.constructor(0) : this._slice.call(this.buf, start, end);
@@ -20483,11 +20324,11 @@ var require_reader2 = __commonJS({
       var bytes = this.bytes();
       return utf8.read(bytes, 0, bytes.length);
     };
-    Reader.prototype.skip = function skip(length2) {
-      if (typeof length2 === "number") {
-        if (this.pos + length2 > this.len)
-          throw indexOutOfRange(this, length2);
-        this.pos += length2;
+    Reader.prototype.skip = function skip(length4) {
+      if (typeof length4 === "number") {
+        if (this.pos + length4 > this.len)
+          throw indexOutOfRange(this, length4);
+        this.pos += length4;
       } else {
         do {
           if (this.pos >= this.len)
@@ -20522,7 +20363,7 @@ var require_reader2 = __commonJS({
     };
     Reader._configure = function(BufferReader_) {
       BufferReader = BufferReader_;
-      Reader.create = create5();
+      Reader.create = create7();
       BufferReader._configure();
       var fn = util.Long ? "toLong" : "toNumber";
       util.merge(Reader.prototype, {
@@ -20843,7 +20684,7 @@ var require_BufferList = __commonJS({
       }
       return this._new(buffers);
     };
-    BufferList5.prototype.toString = function toString3(encoding, start, end) {
+    BufferList5.prototype.toString = function toString5(encoding, start, end) {
       return this.slice(start, end).toString(encoding);
     };
     BufferList5.prototype.consume = function consume(bytes) {
@@ -21080,18 +20921,18 @@ var require_loader = __commonJS({
     function getStringImpl(buffer2, ptr) {
       const U32 = new Uint32Array(buffer2);
       const U16 = new Uint16Array(buffer2);
-      var length2 = U32[ptr + SIZE_OFFSET >>> 2] >>> 1;
+      var length4 = U32[ptr + SIZE_OFFSET >>> 2] >>> 1;
       var offset = ptr >>> 1;
-      if (length2 <= CHUNKSIZE)
-        return String.fromCharCode.apply(String, U16.subarray(offset, offset + length2));
+      if (length4 <= CHUNKSIZE)
+        return String.fromCharCode.apply(String, U16.subarray(offset, offset + length4));
       const parts = [];
       do {
         const last4 = U16[offset + CHUNKSIZE - 1];
         const size = last4 >= 55296 && last4 < 56320 ? CHUNKSIZE - 1 : CHUNKSIZE;
         parts.push(String.fromCharCode.apply(String, U16.subarray(offset, offset += size)));
-        length2 -= size;
-      } while (length2 > CHUNKSIZE);
-      return parts.join("") + String.fromCharCode.apply(String, U16.subarray(offset, offset + length2));
+        length4 -= size;
+      } while (length4 > CHUNKSIZE);
+      return parts.join("") + String.fromCharCode.apply(String, U16.subarray(offset, offset + length4));
     }
     function preInstantiate(imports) {
       const baseModule = {};
@@ -21141,10 +20982,10 @@ var require_loader = __commonJS({
         return 31 - Math.clz32(info >>> KEY_ALIGN_OFFSET & 31);
       }
       function __allocString(str) {
-        const length2 = str.length;
-        const ptr = alloc2(length2 << 1, STRING_ID);
+        const length4 = str.length;
+        const ptr = alloc2(length4 << 1, STRING_ID);
         const U16 = new Uint16Array(memory.buffer);
-        for (var i = 0, p = ptr >>> 1; i < length2; ++i)
+        for (var i = 0, p = ptr >>> 1; i < length4; ++i)
           U16[p + i] = str.charCodeAt(i);
         return ptr;
       }
@@ -21185,18 +21026,18 @@ var require_loader = __commonJS({
         if (!(info & (ARRAYBUFFERVIEW | ARRAY)))
           throw Error("not an array: " + id + " @ " + info);
         const align = getValueAlign(info);
-        const length2 = values.length;
-        const buf2 = alloc2(length2 << align, ARRAYBUFFER_ID);
+        const length4 = values.length;
+        const buf2 = alloc2(length4 << align, ARRAYBUFFER_ID);
         const arr = alloc2(info & ARRAY ? ARRAY_SIZE : ARRAYBUFFERVIEW_SIZE, id);
         const U32 = new Uint32Array(memory.buffer);
         U32[arr + ARRAYBUFFERVIEW_BUFFER_OFFSET >>> 2] = retain(buf2);
         U32[arr + ARRAYBUFFERVIEW_DATASTART_OFFSET >>> 2] = buf2;
-        U32[arr + ARRAYBUFFERVIEW_DATALENGTH_OFFSET >>> 2] = length2 << align;
+        U32[arr + ARRAYBUFFERVIEW_DATALENGTH_OFFSET >>> 2] = length4 << align;
         if (info & ARRAY)
-          U32[arr + ARRAY_LENGTH_OFFSET >>> 2] = length2;
+          U32[arr + ARRAY_LENGTH_OFFSET >>> 2] = length4;
         const view = getView(align, info & VAL_SIGNED, info & VAL_FLOAT);
         if (info & VAL_MANAGED) {
-          for (let i = 0; i < length2; ++i)
+          for (let i = 0; i < length4; ++i)
             view[(buf2 >>> align) + i] = retain(values[i]);
         } else {
           view.set(values, buf2 >>> align);
@@ -21212,8 +21053,8 @@ var require_loader = __commonJS({
           throw Error("not an array: " + id);
         const align = getValueAlign(info);
         var buf2 = U32[arr + ARRAYBUFFERVIEW_DATASTART_OFFSET >>> 2];
-        const length2 = info & ARRAY ? U32[arr + ARRAY_LENGTH_OFFSET >>> 2] : U32[buf2 + SIZE_OFFSET >>> 2] >>> align;
-        return getView(align, info & VAL_SIGNED, info & VAL_FLOAT).subarray(buf2 >>>= align, buf2 + length2);
+        const length4 = info & ARRAY ? U32[arr + ARRAY_LENGTH_OFFSET >>> 2] : U32[buf2 + SIZE_OFFSET >>> 2] >>> align;
+        return getView(align, info & VAL_SIGNED, info & VAL_FLOAT).subarray(buf2 >>>= align, buf2 + length4);
       }
       baseModule.__getArrayView = __getArrayView;
       function __getArray(arr) {
@@ -21227,8 +21068,8 @@ var require_loader = __commonJS({
       baseModule.__getArray = __getArray;
       function __getArrayBuffer(ptr) {
         const buffer2 = memory.buffer;
-        const length2 = new Uint32Array(buffer2)[ptr + SIZE_OFFSET >>> 2];
-        return buffer2.slice(ptr, ptr + length2);
+        const length4 = new Uint32Array(buffer2)[ptr + SIZE_OFFSET >>> 2];
+        return buffer2.slice(ptr, ptr + length4);
       }
       baseModule.__getArrayBuffer = __getArrayBuffer;
       function getTypedArray(Type2, alignLog2, ptr) {
@@ -21320,8 +21161,8 @@ var require_loader = __commonJS({
     exports2.instantiateStreaming = instantiateStreaming;
     function demangle(exports3, baseModule) {
       var module3 = baseModule ? Object.create(baseModule) : {};
-      var setArgumentsLength = exports3["__argumentsLength"] ? function(length2) {
-        exports3["__argumentsLength"].value = length2;
+      var setArgumentsLength = exports3["__argumentsLength"] ? function(length4) {
+        exports3["__argumentsLength"].value = length4;
       } : exports3["__setArgumentsLength"] || exports3["__setargc"] || function() {
       };
       for (let internalName in exports3) {
@@ -21336,10 +21177,10 @@ var require_loader = __commonJS({
             curr[part] = {};
           curr = curr[part];
         }
-        let name5 = parts[0];
-        let hash = name5.indexOf("#");
+        let name7 = parts[0];
+        let hash = name7.indexOf("#");
         if (hash >= 0) {
-          let className = name5.substring(0, hash);
+          let className = name7.substring(0, hash);
           let classElem = curr[className];
           if (typeof classElem === "undefined" || !classElem.prototype) {
             let ctor = function(...args) {
@@ -21355,17 +21196,17 @@ var require_loader = __commonJS({
             };
             if (classElem)
               Object.getOwnPropertyNames(classElem).forEach(
-                (name6) => Object.defineProperty(ctor, name6, Object.getOwnPropertyDescriptor(classElem, name6))
+                (name8) => Object.defineProperty(ctor, name8, Object.getOwnPropertyDescriptor(classElem, name8))
               );
             curr[className] = ctor;
           }
-          name5 = name5.substring(hash + 1);
+          name7 = name7.substring(hash + 1);
           curr = curr[className].prototype;
-          if (/^(get|set):/.test(name5)) {
-            if (!Object.prototype.hasOwnProperty.call(curr, name5 = name5.substring(4))) {
+          if (/^(get|set):/.test(name7)) {
+            if (!Object.prototype.hasOwnProperty.call(curr, name7 = name7.substring(4))) {
               let getter = exports3[internalName.replace("set:", "get:")];
               let setter = exports3[internalName.replace("get:", "set:")];
-              Object.defineProperty(curr, name5, {
+              Object.defineProperty(curr, name7, {
                 get: function() {
                   return getter(this[THIS]);
                 },
@@ -21376,34 +21217,34 @@ var require_loader = __commonJS({
               });
             }
           } else {
-            if (name5 === "constructor") {
-              (curr[name5] = (...args) => {
+            if (name7 === "constructor") {
+              (curr[name7] = (...args) => {
                 setArgumentsLength(args.length);
                 return elem(...args);
               }).original = elem;
             } else {
-              (curr[name5] = function(...args) {
+              (curr[name7] = function(...args) {
                 setArgumentsLength(args.length);
                 return elem(this[THIS], ...args);
               }).original = elem;
             }
           }
         } else {
-          if (/^(get|set):/.test(name5)) {
-            if (!Object.prototype.hasOwnProperty.call(curr, name5 = name5.substring(4))) {
-              Object.defineProperty(curr, name5, {
+          if (/^(get|set):/.test(name7)) {
+            if (!Object.prototype.hasOwnProperty.call(curr, name7 = name7.substring(4))) {
+              Object.defineProperty(curr, name7, {
                 get: exports3[internalName.replace("set:", "get:")],
                 set: exports3[internalName.replace("get:", "set:")],
                 enumerable: true
               });
             }
           } else if (typeof elem === "function" && elem !== setArgumentsLength) {
-            (curr[name5] = (...args) => {
+            (curr[name7] = (...args) => {
               setArgumentsLength(args.length);
               return elem(...args);
             }).original = elem;
           } else {
-            curr[name5] = elem;
+            curr[name7] = elem;
           }
         }
       }
@@ -21433,13 +21274,13 @@ var require_src3 = __commonJS({
   "node_modules/rabin-wasm/src/index.js"(exports2, module2) {
     var Rabin = require_rabin();
     var getRabin = require_rabin_wasm_node();
-    var create5 = async (avg, min, max, windowSize, polynomial) => {
+    var create7 = async (avg, min, max, windowSize, polynomial) => {
       const compiled = await getRabin();
       return new Rabin(compiled, avg, min, max, windowSize, polynomial);
     };
     module2.exports = {
       Rabin,
-      create: create5
+      create: create7
     };
   }
 });
@@ -21465,7 +21306,7 @@ var require_merge_options = __commonJS({
     var isOptionObject = require_is_plain_obj();
     var { hasOwnProperty } = Object.prototype;
     var { propertyIsEnumerable } = Object;
-    var defineProperty = (object, name5, value) => Object.defineProperty(object, name5, {
+    var defineProperty = (object, name7, value) => Object.defineProperty(object, name7, {
       value,
       writable: true,
       enumerable: true,
@@ -21757,11 +21598,11 @@ var require_curryN = __commonJS({
   "node_modules/ramda/src/internal/_curryN.js"(exports2, module2) {
     var _arity = require_arity();
     var _isPlaceholder = require_isPlaceholder();
-    function _curryN(length2, received, fn) {
+    function _curryN(length4, received, fn) {
       return function() {
         var combined = [];
         var argsIdx = 0;
-        var left = length2;
+        var left = length4;
         var combinedIdx = 0;
         while (combinedIdx < received.length || argsIdx < arguments.length) {
           var result;
@@ -21777,7 +21618,7 @@ var require_curryN = __commonJS({
           }
           combinedIdx += 1;
         }
-        return left <= 0 ? fn.apply(this, combined) : _arity(left, _curryN(length2, combined, fn));
+        return left <= 0 ? fn.apply(this, combined) : _arity(left, _curryN(length4, combined, fn));
       };
     }
     module2.exports = _curryN;
@@ -21791,11 +21632,11 @@ var require_curryN2 = __commonJS({
     var _curry1 = require_curry1();
     var _curry2 = require_curry2();
     var _curryN = require_curryN();
-    var curryN = /* @__PURE__ */ _curry2(function curryN2(length2, fn) {
-      if (length2 === 1) {
+    var curryN = /* @__PURE__ */ _curry2(function curryN2(length4, fn) {
+      if (length4 === 1) {
         return _curry1(fn);
       }
-      return _arity(length2, _curryN(length2, [], fn));
+      return _arity(length4, _curryN(length4, [], fn));
     });
     module2.exports = curryN;
   }
@@ -22232,10 +22073,10 @@ var require_has = __commonJS({
 var require_isArguments = __commonJS({
   "node_modules/ramda/src/internal/_isArguments.js"(exports2, module2) {
     var _has = require_has();
-    var toString3 = Object.prototype.toString;
+    var toString5 = Object.prototype.toString;
     var _isArguments = /* @__PURE__ */ function() {
-      return toString3.call(arguments) === "[object Arguments]" ? function _isArguments2(x) {
-        return toString3.call(x) === "[object Arguments]";
+      return toString5.call(arguments) === "[object Arguments]" ? function _isArguments2(x) {
+        return toString5.call(x) === "[object Arguments]";
       } : function _isArguments2(x) {
         return _has("callee", x);
       };
@@ -23204,12 +23045,12 @@ var require_checkForMethod = __commonJS({
     var _isArray = require_isArray();
     function _checkForMethod(methodname, fn) {
       return function() {
-        var length2 = arguments.length;
-        if (length2 === 0) {
+        var length4 = arguments.length;
+        if (length4 === 0) {
           return fn();
         }
-        var obj = arguments[length2 - 1];
-        return _isArray(obj) || typeof obj[methodname] !== "function" ? fn.apply(this, arguments) : obj[methodname].apply(obj, Array.prototype.slice.call(arguments, 0, length2 - 1));
+        var obj = arguments[length4 - 1];
+        return _isArray(obj) || typeof obj[methodname] !== "function" ? fn.apply(this, arguments) : obj[methodname].apply(obj, Array.prototype.slice.call(arguments, 0, length4 - 1));
       };
     }
     module2.exports = _checkForMethod;
@@ -23379,8 +23220,8 @@ var require_identity2 = __commonJS({
   "node_modules/ramda/src/identity.js"(exports2, module2) {
     var _curry1 = require_curry1();
     var _identity = require_identity();
-    var identity3 = /* @__PURE__ */ _curry1(_identity);
-    module2.exports = identity3;
+    var identity6 = /* @__PURE__ */ _curry1(_identity);
+    module2.exports = identity6;
   }
 });
 
@@ -23392,10 +23233,10 @@ var require_pipeWith = __commonJS({
     var head = require_head();
     var _reduce = require_reduce();
     var tail = require_tail();
-    var identity3 = require_identity2();
+    var identity6 = require_identity2();
     var pipeWith = /* @__PURE__ */ _curry2(function pipeWith2(xf, list) {
       if (list.length <= 0) {
-        return identity3;
+        return identity6;
       }
       var headList = head(list);
       var tailList = tail(list);
@@ -23611,17 +23452,17 @@ var require_equals2 = __commonJS({
   "node_modules/ramda/src/equals.js"(exports2, module2) {
     var _curry2 = require_curry2();
     var _equals = require_equals();
-    var equals4 = /* @__PURE__ */ _curry2(function equals5(a, b) {
+    var equals8 = /* @__PURE__ */ _curry2(function equals9(a, b) {
       return _equals(a, b, [], []);
     });
-    module2.exports = equals4;
+    module2.exports = equals8;
   }
 });
 
 // node_modules/ramda/src/internal/_indexOf.js
 var require_indexOf = __commonJS({
   "node_modules/ramda/src/internal/_indexOf.js"(exports2, module2) {
-    var equals4 = require_equals2();
+    var equals8 = require_equals2();
     function _indexOf(list, a, idx) {
       var inf, item;
       if (typeof list.indexOf === "function") {
@@ -23660,7 +23501,7 @@ var require_indexOf = __commonJS({
         }
       }
       while (idx < list.length) {
-        if (equals4(list[idx], a)) {
+        if (equals8(list[idx], a)) {
           return idx;
         }
         idx += 1;
@@ -23867,10 +23708,10 @@ var require_toString2 = __commonJS({
   "node_modules/ramda/src/toString.js"(exports2, module2) {
     var _curry1 = require_curry1();
     var _toString = require_toString();
-    var toString3 = /* @__PURE__ */ _curry1(function toString4(val) {
+    var toString5 = /* @__PURE__ */ _curry1(function toString6(val) {
       return _toString(val, []);
     });
-    module2.exports = toString3;
+    module2.exports = toString5;
   }
 });
 
@@ -23881,19 +23722,19 @@ var require_concat2 = __commonJS({
     var _isArray = require_isArray();
     var _isFunction = require_isFunction();
     var _isString = require_isString();
-    var toString3 = require_toString2();
-    var concat3 = /* @__PURE__ */ _curry2(function concat4(a, b) {
+    var toString5 = require_toString2();
+    var concat4 = /* @__PURE__ */ _curry2(function concat5(a, b) {
       if (_isArray(a)) {
         if (_isArray(b)) {
           return a.concat(b);
         }
-        throw new TypeError(toString3(b) + " is not an array");
+        throw new TypeError(toString5(b) + " is not an array");
       }
       if (_isString(a)) {
         if (_isString(b)) {
           return a + b;
         }
-        throw new TypeError(toString3(b) + " is not a string");
+        throw new TypeError(toString5(b) + " is not a string");
       }
       if (a != null && _isFunction(a["fantasy-land/concat"])) {
         return a["fantasy-land/concat"](b);
@@ -23901,9 +23742,9 @@ var require_concat2 = __commonJS({
       if (a != null && _isFunction(a.concat)) {
         return a.concat(b);
       }
-      throw new TypeError(toString3(a) + ' does not have a method named "concat" or "fantasy-land/concat"');
+      throw new TypeError(toString5(a) + ' does not have a method named "concat" or "fantasy-land/concat"');
     });
-    module2.exports = concat3;
+    module2.exports = concat4;
   }
 });
 
@@ -24703,12 +24544,12 @@ var require_dropRepeats = __commonJS({
     var _dispatchable = require_dispatchable();
     var _xdropRepeatsWith = require_xdropRepeatsWith();
     var dropRepeatsWith = require_dropRepeatsWith();
-    var equals4 = require_equals2();
+    var equals8 = require_equals2();
     var dropRepeats = /* @__PURE__ */ _curry1(
       /* @__PURE__ */ _dispatchable(
         [],
-        /* @__PURE__ */ _xdropRepeatsWith(equals4),
-        /* @__PURE__ */ dropRepeatsWith(equals4)
+        /* @__PURE__ */ _xdropRepeatsWith(equals8),
+        /* @__PURE__ */ dropRepeatsWith(equals8)
       )
     );
     module2.exports = dropRepeats;
@@ -24770,10 +24611,10 @@ var require_dropWhile = __commonJS({
 var require_or = __commonJS({
   "node_modules/ramda/src/or.js"(exports2, module2) {
     var _curry2 = require_curry2();
-    var or2 = /* @__PURE__ */ _curry2(function or3(a, b) {
+    var or4 = /* @__PURE__ */ _curry2(function or5(a, b) {
       return a || b;
     });
-    module2.exports = or2;
+    module2.exports = or4;
   }
 });
 
@@ -24783,11 +24624,11 @@ var require_either = __commonJS({
     var _curry2 = require_curry2();
     var _isFunction = require_isFunction();
     var lift = require_lift();
-    var or2 = require_or();
+    var or4 = require_or();
     var either = /* @__PURE__ */ _curry2(function either2(f, g) {
       return _isFunction(f) ? function _either() {
         return f.apply(this, arguments) || g.apply(this, arguments);
-      } : lift(or2)(f, g);
+      } : lift(or4)(f, g);
     });
     module2.exports = either;
   }
@@ -24801,12 +24642,12 @@ var require_empty = __commonJS({
     var _isArray = require_isArray();
     var _isObject = require_isObject();
     var _isString = require_isString();
-    var empty2 = /* @__PURE__ */ _curry1(function empty3(x) {
+    var empty4 = /* @__PURE__ */ _curry1(function empty5(x) {
       return x != null && typeof x["fantasy-land/empty"] === "function" ? x["fantasy-land/empty"]() : x != null && x.constructor != null && typeof x.constructor["fantasy-land/empty"] === "function" ? x.constructor["fantasy-land/empty"]() : x != null && typeof x.empty === "function" ? x.empty() : x != null && x.constructor != null && typeof x.constructor.empty === "function" ? x.constructor.empty() : _isArray(x) ? [] : _isString(x) ? "" : _isObject(x) ? {} : _isArguments(x) ? function() {
         return arguments;
       }() : void 0;
     });
-    module2.exports = empty2;
+    module2.exports = empty4;
   }
 });
 
@@ -24826,10 +24667,10 @@ var require_takeLast = __commonJS({
 var require_endsWith = __commonJS({
   "node_modules/ramda/src/endsWith.js"(exports2, module2) {
     var _curry2 = require_curry2();
-    var equals4 = require_equals2();
+    var equals8 = require_equals2();
     var takeLast = require_takeLast();
     var endsWith = /* @__PURE__ */ _curry2(function(suffix, list) {
-      return equals4(takeLast(suffix.length, list), suffix);
+      return equals8(takeLast(suffix.length, list), suffix);
     });
     module2.exports = endsWith;
   }
@@ -24839,9 +24680,9 @@ var require_endsWith = __commonJS({
 var require_eqBy = __commonJS({
   "node_modules/ramda/src/eqBy.js"(exports2, module2) {
     var _curry3 = require_curry3();
-    var equals4 = require_equals2();
+    var equals8 = require_equals2();
     var eqBy = /* @__PURE__ */ _curry3(function eqBy2(f, x, y) {
-      return equals4(f(x), f(y));
+      return equals8(f(x), f(y));
     });
     module2.exports = eqBy;
   }
@@ -24851,9 +24692,9 @@ var require_eqBy = __commonJS({
 var require_eqProps = __commonJS({
   "node_modules/ramda/src/eqProps.js"(exports2, module2) {
     var _curry3 = require_curry3();
-    var equals4 = require_equals2();
+    var equals8 = require_equals2();
     var eqProps = /* @__PURE__ */ _curry3(function eqProps2(prop, obj1, obj2) {
-      return equals4(obj1[prop], obj2[prop]);
+      return equals8(obj1[prop], obj2[prop]);
     });
     module2.exports = eqProps;
   }
@@ -25442,9 +25283,9 @@ var require_uniqBy = __commonJS({
 // node_modules/ramda/src/uniq.js
 var require_uniq = __commonJS({
   "node_modules/ramda/src/uniq.js"(exports2, module2) {
-    var identity3 = require_identity2();
+    var identity6 = require_identity2();
     var uniqBy = require_uniqBy();
-    var uniq = /* @__PURE__ */ uniqBy(identity3);
+    var uniq = /* @__PURE__ */ uniqBy(identity6);
     module2.exports = uniq;
   }
 });
@@ -25481,9 +25322,9 @@ var require_intersperse = __commonJS({
       /* @__PURE__ */ _checkForMethod("intersperse", function intersperse2(separator, list) {
         var out = [];
         var idx = 0;
-        var length2 = list.length;
-        while (idx < length2) {
-          if (idx === length2 - 1) {
+        var length4 = list.length;
+        while (idx < length4) {
+          if (idx === length4 - 1) {
             out.push(list[idx]);
           } else {
             out.push(list[idx], separator);
@@ -25507,8 +25348,8 @@ var require_objectAssign = __commonJS({
       }
       var output = Object(target);
       var idx = 1;
-      var length2 = arguments.length;
-      while (idx < length2) {
+      var length4 = arguments.length;
+      while (idx < length4) {
         var source = arguments[idx];
         if (source != null) {
           for (var nextKey in source) {
@@ -25653,14 +25494,14 @@ var require_invoker = __commonJS({
     var _curry2 = require_curry2();
     var _isFunction = require_isFunction();
     var curryN = require_curryN2();
-    var toString3 = require_toString2();
+    var toString5 = require_toString2();
     var invoker = /* @__PURE__ */ _curry2(function invoker2(arity, method) {
       return curryN(arity + 1, function() {
         var target = arguments[arity];
         if (target != null && _isFunction(target[method])) {
           return target[method].apply(target, Array.prototype.slice.call(arguments, 0, arity));
         }
-        throw new TypeError(toString3(target) + ' does not have a method named "' + method + '"');
+        throw new TypeError(toString5(target) + ' does not have a method named "' + method + '"');
       });
     });
     module2.exports = invoker;
@@ -25682,10 +25523,10 @@ var require_is = __commonJS({
 var require_isEmpty = __commonJS({
   "node_modules/ramda/src/isEmpty.js"(exports2, module2) {
     var _curry1 = require_curry1();
-    var empty2 = require_empty();
-    var equals4 = require_equals2();
+    var empty4 = require_empty();
+    var equals8 = require_equals2();
     var isEmpty = /* @__PURE__ */ _curry1(function isEmpty2(x) {
-      return x != null && equals4(x, empty2(x));
+      return x != null && equals8(x, empty4(x));
     });
     module2.exports = isEmpty;
   }
@@ -25735,14 +25576,14 @@ var require_lastIndexOf = __commonJS({
   "node_modules/ramda/src/lastIndexOf.js"(exports2, module2) {
     var _curry2 = require_curry2();
     var _isArray = require_isArray();
-    var equals4 = require_equals2();
+    var equals8 = require_equals2();
     var lastIndexOf = /* @__PURE__ */ _curry2(function lastIndexOf2(target, xs) {
       if (typeof xs.lastIndexOf === "function" && !_isArray(xs)) {
         return xs.lastIndexOf(target);
       } else {
         var idx = xs.length - 1;
         while (idx >= 0) {
-          if (equals4(xs[idx], target)) {
+          if (equals8(xs[idx], target)) {
             return idx;
           }
           idx -= 1;
@@ -25769,10 +25610,10 @@ var require_length = __commonJS({
   "node_modules/ramda/src/length.js"(exports2, module2) {
     var _curry1 = require_curry1();
     var _isNumber = require_isNumber();
-    var length2 = /* @__PURE__ */ _curry1(function length3(list) {
+    var length4 = /* @__PURE__ */ _curry1(function length5(list) {
       return list != null && _isNumber(list.length) ? list.length : NaN;
     });
-    module2.exports = length2;
+    module2.exports = length4;
   }
 });
 
@@ -26002,13 +25843,13 @@ var require_memoizeWith = __commonJS({
     var _curry2 = require_curry2();
     var _has = require_has();
     var memoizeWith = /* @__PURE__ */ _curry2(function memoizeWith2(mFn, fn) {
-      var cache = {};
+      var cache2 = {};
       return _arity(fn.length, function() {
         var key = mFn.apply(this, arguments);
-        if (!_has(key, cache)) {
-          cache[key] = fn.apply(this, arguments);
+        if (!_has(key, cache2)) {
+          cache2[key] = fn.apply(this, arguments);
         }
-        return cache[key];
+        return cache2[key];
       });
     });
     module2.exports = memoizeWith;
@@ -26199,11 +26040,11 @@ var require_modulo = __commonJS({
 var require_move = __commonJS({
   "node_modules/ramda/src/move.js"(exports2, module2) {
     var _curry3 = require_curry3();
-    var move = /* @__PURE__ */ _curry3(function(from3, to, list) {
-      var length2 = list.length;
+    var move = /* @__PURE__ */ _curry3(function(from7, to, list) {
+      var length4 = list.length;
       var result = list.slice();
-      var positiveFrom = from3 < 0 ? length2 + from3 : from3;
-      var positiveTo = to < 0 ? length2 + to : to;
+      var positiveFrom = from7 < 0 ? length4 + from7 : from7;
+      var positiveTo = to < 0 ? length4 + to : to;
       var item = result.splice(positiveFrom, 1);
       return positiveFrom < 0 || positiveFrom >= list.length || positiveTo < 0 || positiveTo >= list.length ? list : [].concat(result.slice(0, positiveTo)).concat(item).concat(result.slice(positiveTo, list.length));
     });
@@ -26343,9 +26184,9 @@ var require_assertPromise = __commonJS({
   "node_modules/ramda/src/internal/_assertPromise.js"(exports2, module2) {
     var _isFunction = require_isFunction();
     var _toString = require_toString();
-    function _assertPromise(name5, p) {
+    function _assertPromise(name7, p) {
       if (p == null || !_isFunction(p.then)) {
-        throw new TypeError("`" + name5 + "` expected a Promise, received " + _toString(p, []));
+        throw new TypeError("`" + name7 + "` expected a Promise, received " + _toString(p, []));
       }
     }
     module2.exports = _assertPromise;
@@ -26402,10 +26243,10 @@ var require_createPartialApplicator = __commonJS({
   "node_modules/ramda/src/internal/_createPartialApplicator.js"(exports2, module2) {
     var _arity = require_arity();
     var _curry2 = require_curry2();
-    function _createPartialApplicator(concat3) {
+    function _createPartialApplicator(concat4) {
       return _curry2(function(fn, args) {
         return _arity(Math.max(0, fn.length - args.length), function() {
-          return fn.apply(this, concat3(args, arguments));
+          return fn.apply(this, concat4(args, arguments));
         });
       });
     }
@@ -26451,10 +26292,10 @@ var require_partition = __commonJS({
 var require_pathEq = __commonJS({
   "node_modules/ramda/src/pathEq.js"(exports2, module2) {
     var _curry3 = require_curry3();
-    var equals4 = require_equals2();
+    var equals8 = require_equals2();
     var path3 = require_path();
     var pathEq = /* @__PURE__ */ _curry3(function pathEq2(_path, val, obj) {
-      return equals4(path3(_path, obj), val);
+      return equals8(path3(_path, obj), val);
     });
     module2.exports = pathEq;
   }
@@ -26513,8 +26354,8 @@ var require_pickAll = __commonJS({
       var idx = 0;
       var len = names.length;
       while (idx < len) {
-        var name5 = names[idx];
-        result[name5] = obj[name5];
+        var name7 = names[idx];
+        result[name7] = obj[name7];
         idx += 1;
       }
       return result;
@@ -26601,10 +26442,10 @@ var require_useWith = __commonJS({
 var require_project = __commonJS({
   "node_modules/ramda/src/project.js"(exports2, module2) {
     var _map = require_map();
-    var identity3 = require_identity2();
+    var identity6 = require_identity2();
     var pickAll = require_pickAll();
     var useWith = require_useWith();
-    var project = /* @__PURE__ */ useWith(_map, [pickAll, identity3]);
+    var project = /* @__PURE__ */ useWith(_map, [pickAll, identity6]);
     module2.exports = project;
   }
 });
@@ -26613,9 +26454,9 @@ var require_project = __commonJS({
 var require_propEq = __commonJS({
   "node_modules/ramda/src/propEq.js"(exports2, module2) {
     var _curry3 = require_curry3();
-    var equals4 = require_equals2();
-    var propEq = /* @__PURE__ */ _curry3(function propEq2(name5, val, obj) {
-      return equals4(val, obj[name5]);
+    var equals8 = require_equals2();
+    var propEq = /* @__PURE__ */ _curry3(function propEq2(name7, val, obj) {
+      return equals8(val, obj[name7]);
     });
     module2.exports = propEq;
   }
@@ -26626,8 +26467,8 @@ var require_propIs = __commonJS({
   "node_modules/ramda/src/propIs.js"(exports2, module2) {
     var _curry3 = require_curry3();
     var is2 = require_is();
-    var propIs = /* @__PURE__ */ _curry3(function propIs2(type, name5, obj) {
-      return is2(type, obj[name5]);
+    var propIs = /* @__PURE__ */ _curry3(function propIs2(type, name7, obj) {
+      return is2(type, obj[name7]);
     });
     module2.exports = propIs;
   }
@@ -26649,8 +26490,8 @@ var require_propOr = __commonJS({
 var require_propSatisfies = __commonJS({
   "node_modules/ramda/src/propSatisfies.js"(exports2, module2) {
     var _curry3 = require_curry3();
-    var propSatisfies = /* @__PURE__ */ _curry3(function propSatisfies2(pred, name5, obj) {
-      return pred(obj[name5]);
+    var propSatisfies = /* @__PURE__ */ _curry3(function propSatisfies2(pred, name7, obj) {
+      return pred(obj[name7]);
     });
     module2.exports = propSatisfies;
   }
@@ -26675,12 +26516,12 @@ var require_range = __commonJS({
   "node_modules/ramda/src/range.js"(exports2, module2) {
     var _curry2 = require_curry2();
     var _isNumber = require_isNumber();
-    var range = /* @__PURE__ */ _curry2(function range2(from3, to) {
-      if (!(_isNumber(from3) && _isNumber(to))) {
+    var range = /* @__PURE__ */ _curry2(function range2(from7, to) {
+      if (!(_isNumber(from7) && _isNumber(to))) {
         throw new TypeError("Both arguments to range must be numbers");
       }
       var result = [];
-      var n = from3;
+      var n = from7;
       while (n < to) {
         result.push(n);
         n += 1;
@@ -26885,10 +26726,10 @@ var require_split = __commonJS({
 var require_splitAt = __commonJS({
   "node_modules/ramda/src/splitAt.js"(exports2, module2) {
     var _curry2 = require_curry2();
-    var length2 = require_length();
+    var length4 = require_length();
     var slice2 = require_slice();
     var splitAt = /* @__PURE__ */ _curry2(function splitAt2(index, array) {
-      return [slice2(0, index, array), slice2(index, length2(array), array)];
+      return [slice2(0, index, array), slice2(index, length4(array), array)];
     });
     module2.exports = splitAt;
   }
@@ -26936,10 +26777,10 @@ var require_splitWhen = __commonJS({
 var require_startsWith = __commonJS({
   "node_modules/ramda/src/startsWith.js"(exports2, module2) {
     var _curry2 = require_curry2();
-    var equals4 = require_equals2();
+    var equals8 = require_equals2();
     var take2 = require_take();
     var startsWith = /* @__PURE__ */ _curry2(function(prefix, list) {
-      return equals4(take2(prefix.length, list), prefix);
+      return equals8(take2(prefix.length, list), prefix);
     });
     module2.exports = startsWith;
   }
@@ -26960,10 +26801,10 @@ var require_subtract = __commonJS({
 var require_symmetricDifference = __commonJS({
   "node_modules/ramda/src/symmetricDifference.js"(exports2, module2) {
     var _curry2 = require_curry2();
-    var concat3 = require_concat2();
+    var concat4 = require_concat2();
     var difference = require_difference();
     var symmetricDifference = /* @__PURE__ */ _curry2(function symmetricDifference2(list1, list2) {
-      return concat3(difference(list1, list2), difference(list2, list1));
+      return concat4(difference(list1, list2), difference(list2, list1));
     });
     module2.exports = symmetricDifference;
   }
@@ -26973,10 +26814,10 @@ var require_symmetricDifference = __commonJS({
 var require_symmetricDifferenceWith = __commonJS({
   "node_modules/ramda/src/symmetricDifferenceWith.js"(exports2, module2) {
     var _curry3 = require_curry3();
-    var concat3 = require_concat2();
+    var concat4 = require_concat2();
     var differenceWith = require_differenceWith();
     var symmetricDifferenceWith = /* @__PURE__ */ _curry3(function symmetricDifferenceWith2(pred, list1, list2) {
-      return concat3(differenceWith(pred, list1, list2), differenceWith(pred, list2, list1));
+      return concat4(differenceWith(pred, list1, list2), differenceWith(pred, list2, list1));
     });
     module2.exports = symmetricDifferenceWith;
   }
@@ -27101,10 +26942,10 @@ var require_test = __commonJS({
     var _cloneRegExp = require_cloneRegExp();
     var _curry2 = require_curry2();
     var _isRegExp = require_isRegExp();
-    var toString3 = require_toString2();
+    var toString5 = require_toString2();
     var test = /* @__PURE__ */ _curry2(function test2(pattern, str) {
       if (!_isRegExp(pattern)) {
-        throw new TypeError("\u2018test\u2019 requires a value of type RegExp as its first argument; received " + toString3(pattern));
+        throw new TypeError("\u2018test\u2019 requires a value of type RegExp as its first argument; received " + toString5(pattern));
       }
       return _cloneRegExp(pattern).test(str);
     });
@@ -27483,11 +27324,11 @@ var require_where = __commonJS({
 var require_whereEq = __commonJS({
   "node_modules/ramda/src/whereEq.js"(exports2, module2) {
     var _curry2 = require_curry2();
-    var equals4 = require_equals2();
+    var equals8 = require_equals2();
     var map4 = require_map2();
     var where = require_where();
     var whereEq = /* @__PURE__ */ _curry2(function whereEq2(spec, testObj) {
-      return where(map4(equals4, spec), testObj);
+      return where(map4(equals8, spec), testObj);
     });
     module2.exports = whereEq;
   }
@@ -27881,23 +27722,23 @@ var require_src4 = __commonJS({
 var require_utils3 = __commonJS({
   "node_modules/whatwg-mimetype/lib/utils.js"(exports2) {
     "use strict";
-    exports2.removeLeadingAndTrailingHTTPWhitespace = (string2) => {
-      return string2.replace(/^[ \t\n\r]+/u, "").replace(/[ \t\n\r]+$/u, "");
+    exports2.removeLeadingAndTrailingHTTPWhitespace = (string3) => {
+      return string3.replace(/^[ \t\n\r]+/u, "").replace(/[ \t\n\r]+$/u, "");
     };
-    exports2.removeTrailingHTTPWhitespace = (string2) => {
-      return string2.replace(/[ \t\n\r]+$/u, "");
+    exports2.removeTrailingHTTPWhitespace = (string3) => {
+      return string3.replace(/[ \t\n\r]+$/u, "");
     };
     exports2.isHTTPWhitespaceChar = (char) => {
       return char === " " || char === "	" || char === "\n" || char === "\r";
     };
-    exports2.solelyContainsHTTPTokenCodePoints = (string2) => {
-      return /^[-!#$%&'*+.^_`|~A-Za-z0-9]*$/u.test(string2);
+    exports2.solelyContainsHTTPTokenCodePoints = (string3) => {
+      return /^[-!#$%&'*+.^_`|~A-Za-z0-9]*$/u.test(string3);
     };
-    exports2.soleyContainsHTTPQuotedStringTokenCodePoints = (string2) => {
-      return /^[\t\u0020-\u007E\u0080-\u00FF]*$/u.test(string2);
+    exports2.soleyContainsHTTPQuotedStringTokenCodePoints = (string3) => {
+      return /^[\t\u0020-\u007E\u0080-\u00FF]*$/u.test(string3);
     };
-    exports2.asciiLowercase = (string2) => {
-      return string2.replace(/[A-Z]/ug, (l) => l.toLowerCase());
+    exports2.asciiLowercase = (string3) => {
+      return string3.replace(/[A-Z]/ug, (l) => l.toLowerCase());
     };
     exports2.collectAnHTTPQuotedString = (input2, position) => {
       let value = "";
@@ -27944,31 +27785,31 @@ var require_mime_type_parameters = __commonJS({
       get size() {
         return this._map.size;
       }
-      get(name5) {
-        name5 = asciiLowercase(String(name5));
-        return this._map.get(name5);
+      get(name7) {
+        name7 = asciiLowercase(String(name7));
+        return this._map.get(name7);
       }
-      has(name5) {
-        name5 = asciiLowercase(String(name5));
-        return this._map.has(name5);
+      has(name7) {
+        name7 = asciiLowercase(String(name7));
+        return this._map.has(name7);
       }
-      set(name5, value) {
-        name5 = asciiLowercase(String(name5));
+      set(name7, value) {
+        name7 = asciiLowercase(String(name7));
         value = String(value);
-        if (!solelyContainsHTTPTokenCodePoints(name5)) {
-          throw new Error(`Invalid MIME type parameter name "${name5}": only HTTP token code points are valid.`);
+        if (!solelyContainsHTTPTokenCodePoints(name7)) {
+          throw new Error(`Invalid MIME type parameter name "${name7}": only HTTP token code points are valid.`);
         }
         if (!soleyContainsHTTPQuotedStringTokenCodePoints(value)) {
           throw new Error(`Invalid MIME type parameter value "${value}": only HTTP quoted-string token code points are valid.`);
         }
-        return this._map.set(name5, value);
+        return this._map.set(name7, value);
       }
       clear() {
         this._map.clear();
       }
-      delete(name5) {
-        name5 = asciiLowercase(String(name5));
-        return this._map.delete(name5);
+      delete(name7) {
+        name7 = asciiLowercase(String(name7));
+        return this._map.delete(name7);
       }
       forEach(callbackFn, thisArg) {
         this._map.forEach(callbackFn, thisArg);
@@ -28084,9 +27925,9 @@ var require_serializer2 = __commonJS({
       if (mimeType.parameters.size === 0) {
         return serialization;
       }
-      for (let [name5, value] of mimeType.parameters) {
+      for (let [name7, value] of mimeType.parameters) {
         serialization += ";";
-        serialization += name5;
+        serialization += name7;
         serialization += "=";
         if (!solelyContainsHTTPTokenCodePoints(value) || value.length === 0) {
           value = value.replace(/(["\\])/ug, "\\$1");
@@ -28111,19 +27952,19 @@ var require_mime_type = __commonJS({
       solelyContainsHTTPTokenCodePoints
     } = require_utils3();
     module2.exports = class MIMEType {
-      constructor(string2) {
-        string2 = String(string2);
-        const result = parse3(string2);
+      constructor(string3) {
+        string3 = String(string3);
+        const result = parse3(string3);
         if (result === null) {
-          throw new Error(`Could not parse MIME type string "${string2}"`);
+          throw new Error(`Could not parse MIME type string "${string3}"`);
         }
         this._type = result.type;
         this._subtype = result.subtype;
         this._parameters = new MIMETypeParameters(result.parameters);
       }
-      static parse(string2) {
+      static parse(string3) {
         try {
-          return new this(string2);
+          return new this(string3);
         } catch (e) {
           return null;
         }
@@ -28508,11 +28349,11 @@ var require_lib5 = __commonJS({
       Float32Array,
       Float64Array
     ].forEach((func) => {
-      const { name: name5 } = func;
-      const article = /^[AEIOU]/u.test(name5) ? "an" : "a";
-      exports2[name5] = (value, options = {}) => {
-        if (!ArrayBuffer.isView(value) || typedArrayNameGetter.call(value) !== name5) {
-          throw makeException(TypeError, `is not ${article} ${name5} object`, options);
+      const { name: name7 } = func;
+      const article = /^[AEIOU]/u.test(name7) ? "an" : "a";
+      exports2[name7] = (value, options = {}) => {
+        if (!ArrayBuffer.isView(value) || typedArrayNameGetter.call(value) !== name7) {
+          throw makeException(TypeError, `is not ${article} ${name7} object`, options);
         }
         if (!options.allowShared && isSharedArrayBuffer(value.buffer)) {
           throw makeException(TypeError, "is a view on a SharedArrayBuffer, which is not allowed", options);
@@ -28923,9 +28764,9 @@ var require_tr462 = __commonJS({
     }
     function processing(domainName, options) {
       const { processingOption } = options;
-      let { string: string2, error } = mapChars(domainName, options);
-      string2 = string2.normalize("NFC");
-      const labels = string2.split(".");
+      let { string: string3, error } = mapChars(domainName, options);
+      string3 = string3.normalize("NFC");
+      const labels = string3.split(".");
       const isBidi = isBidiDomain(labels);
       for (const [i, origLabel] of labels.entries()) {
         let label = origLabel;
@@ -29060,8 +28901,8 @@ var require_encoding2 = __commonJS({
     "use strict";
     var utf8Encoder = new TextEncoder();
     var utf8Decoder = new TextDecoder("utf-8", { ignoreBOM: true });
-    function utf8Encode(string2) {
-      return utf8Encoder.encode(string2);
+    function utf8Encode(string3) {
+      return utf8Encoder.encode(string3);
     }
     function utf8DecodeWithoutBOM(bytes) {
       return utf8Decoder.decode(bytes);
@@ -29229,17 +29070,17 @@ var require_url_state_machine2 = __commonJS({
     function isWindowsDriveLetterCodePoints(cp1, cp2) {
       return infra.isASCIIAlpha(cp1) && (cp2 === p(":") || cp2 === p("|"));
     }
-    function isWindowsDriveLetterString(string2) {
-      return string2.length === 2 && infra.isASCIIAlpha(string2.codePointAt(0)) && (string2[1] === ":" || string2[1] === "|");
+    function isWindowsDriveLetterString(string3) {
+      return string3.length === 2 && infra.isASCIIAlpha(string3.codePointAt(0)) && (string3[1] === ":" || string3[1] === "|");
     }
-    function isNormalizedWindowsDriveLetterString(string2) {
-      return string2.length === 2 && infra.isASCIIAlpha(string2.codePointAt(0)) && string2[1] === ":";
+    function isNormalizedWindowsDriveLetterString(string3) {
+      return string3.length === 2 && infra.isASCIIAlpha(string3.codePointAt(0)) && string3[1] === ":";
     }
-    function containsForbiddenHostCodePoint(string2) {
-      return string2.search(/\u0000|\u0009|\u000A|\u000D|\u0020|#|%|\/|:|<|>|\?|@|\[|\\|\]|\^|\|/u) !== -1;
+    function containsForbiddenHostCodePoint(string3) {
+      return string3.search(/\u0000|\u0009|\u000A|\u000D|\u0020|#|%|\/|:|<|>|\?|@|\[|\\|\]|\^|\|/u) !== -1;
     }
-    function containsForbiddenHostCodePointExcludingPercent(string2) {
-      return string2.search(/\u0000|\u0009|\u000A|\u000D|\u0020|#|\/|:|<|>|\?|@|\[|\\|\]|\^|\|/u) !== -1;
+    function containsForbiddenHostCodePointExcludingPercent(string3) {
+      return string3.search(/\u0000|\u0009|\u000A|\u000D|\u0020|#|\/|:|<|>|\?|@|\[|\\|\]|\^|\|/u) !== -1;
     }
     function isSpecialScheme(scheme) {
       return specialSchemes[scheme] !== void 0;
@@ -29354,17 +29195,17 @@ var require_url_state_machine2 = __commonJS({
           continue;
         }
         let value = 0;
-        let length2 = 0;
-        while (length2 < 4 && infra.isASCIIHex(input2[pointer])) {
+        let length4 = 0;
+        while (length4 < 4 && infra.isASCIIHex(input2[pointer])) {
           value = value * 16 + parseInt(at(input2, pointer), 16);
           ++pointer;
-          ++length2;
+          ++length4;
         }
         if (input2[pointer] === p(".")) {
-          if (length2 === 0) {
+          if (length4 === 0) {
             return failure;
           }
-          pointer -= length2;
+          pointer -= length4;
           if (pieceIndex > 6) {
             return failure;
           }
@@ -29572,13 +29413,13 @@ var require_url_state_machine2 = __commonJS({
     function hasAnOpaquePath(url) {
       return typeof url.path === "string";
     }
-    function isNormalizedWindowsDriveLetter(string2) {
-      return /^[A-Za-z]:$/u.test(string2);
+    function isNormalizedWindowsDriveLetter(string3) {
+      return /^[A-Za-z]:$/u.test(string3);
     }
-    function URLStateMachine(input2, base3, encodingOverride, url, stateOverride) {
+    function URLStateMachine(input2, base4, encodingOverride, url, stateOverride) {
       this.pointer = 0;
       this.input = input2;
-      this.base = base3 || null;
+      this.base = base4 || null;
       this.encodingOverride = encodingOverride || "utf-8";
       this.stateOverride = stateOverride;
       this.url = url;
@@ -29903,8 +29744,8 @@ var require_url_state_machine2 = __commonJS({
     };
     var fileOtherwiseCodePoints = /* @__PURE__ */ new Set([p("/"), p("\\"), p("?"), p("#")]);
     function startsWithWindowsDriveLetter(input2, pointer) {
-      const length2 = input2.length - pointer;
-      return length2 >= 2 && isWindowsDriveLetterCodePoints(input2[pointer], input2[pointer + 1]) && (length2 === 2 || fileOtherwiseCodePoints.has(input2[pointer + 2]));
+      const length4 = input2.length - pointer;
+      return length4 >= 2 && isWindowsDriveLetterCodePoints(input2[pointer], input2[pointer + 1]) && (length4 === 2 || fileOtherwiseCodePoints.has(input2[pointer + 2]));
     }
     URLStateMachine.prototype["parse file"] = function parseFile(c) {
       this.url.scheme = "file";
@@ -30219,18 +30060,18 @@ var require_urlencoded = __commonJS({
         if (bytes.length === 0) {
           continue;
         }
-        let name5, value;
+        let name7, value;
         const indexOfEqual = bytes.indexOf(p("="));
         if (indexOfEqual >= 0) {
-          name5 = bytes.slice(0, indexOfEqual);
+          name7 = bytes.slice(0, indexOfEqual);
           value = bytes.slice(indexOfEqual + 1);
         } else {
-          name5 = bytes;
+          name7 = bytes;
           value = new Uint8Array(0);
         }
-        name5 = replaceByteInByteSequence(name5, 43, 32);
+        name7 = replaceByteInByteSequence(name7, 43, 32);
         value = replaceByteInByteSequence(value, 43, 32);
-        const nameString = utf8DecodeWithoutBOM(percentDecodeBytes(name5));
+        const nameString = utf8DecodeWithoutBOM(percentDecodeBytes(name7));
         const valueString = utf8DecodeWithoutBOM(percentDecodeBytes(value));
         output.push([nameString, valueString]);
       }
@@ -30246,10 +30087,10 @@ var require_urlencoded = __commonJS({
       }
       let output = "";
       for (const [i, tuple] of tuples.entries()) {
-        const name5 = utf8PercentEncodeString(tuple[0], isURLEncodedPercentEncode, true);
+        const name7 = utf8PercentEncodeString(tuple[0], isURLEncodedPercentEncode, true);
         let value = tuple[1];
         if (tuple.length > 2 && tuple[2] !== void 0) {
-          if (tuple[2] === "hidden" && name5 === "_charset_") {
+          if (tuple[2] === "hidden" && name7 === "_charset_") {
             value = encoding;
           } else if (tuple[2] === "file") {
             value = value.name;
@@ -30259,7 +30100,7 @@ var require_urlencoded = __commonJS({
         if (i !== 0) {
           output += "&";
         }
-        output += `${name5}=${value}`;
+        output += `${name7}=${value}`;
       }
       return output;
     }
@@ -30277,11 +30118,11 @@ var require_urlencoded = __commonJS({
       }
       return list;
     }
-    function replaceByteInByteSequence(buf2, from3, to) {
-      let i = buf2.indexOf(from3);
+    function replaceByteInByteSequence(buf2, from7, to) {
+      let i = buf2.indexOf(from7);
       while (i >= 0) {
         buf2[i] = to;
-        i = buf2.indexOf(from3, i + 1);
+        i = buf2.indexOf(from7, i + 1);
       }
       return buf2;
     }
@@ -30348,9 +30189,9 @@ var require_URLSearchParams_impl = __commonJS({
             this._list.push([pair[0], pair[1]]);
           }
         } else if (typeof init === "object" && Object.getPrototypeOf(init) === null) {
-          for (const name5 of Object.keys(init)) {
-            const value = init[name5];
-            this._list.push([name5, value]);
+          for (const name7 of Object.keys(init)) {
+            const value = init[name7];
+            this._list.push([name7, value]);
           }
         } else {
           this._list = urlencoded.parseUrlencodedString(init);
@@ -30365,14 +30206,14 @@ var require_URLSearchParams_impl = __commonJS({
           this._url._url.query = query;
         }
       }
-      append(name5, value) {
-        this._list.push([name5, value]);
+      append(name7, value) {
+        this._list.push([name7, value]);
         this._updateSteps();
       }
-      delete(name5) {
+      delete(name7) {
         let i = 0;
         while (i < this._list.length) {
-          if (this._list[i][0] === name5) {
+          if (this._list[i][0] === name7) {
             this._list.splice(i, 1);
           } else {
             i++;
@@ -30380,36 +30221,36 @@ var require_URLSearchParams_impl = __commonJS({
         }
         this._updateSteps();
       }
-      get(name5) {
+      get(name7) {
         for (const tuple of this._list) {
-          if (tuple[0] === name5) {
+          if (tuple[0] === name7) {
             return tuple[1];
           }
         }
         return null;
       }
-      getAll(name5) {
+      getAll(name7) {
         const output = [];
         for (const tuple of this._list) {
-          if (tuple[0] === name5) {
+          if (tuple[0] === name7) {
             output.push(tuple[1]);
           }
         }
         return output;
       }
-      has(name5) {
+      has(name7) {
         for (const tuple of this._list) {
-          if (tuple[0] === name5) {
+          if (tuple[0] === name7) {
             return true;
           }
         }
         return false;
       }
-      set(name5, value) {
+      set(name7, value) {
         let found = false;
         let i = 0;
         while (i < this._list.length) {
-          if (this._list[i][0] === name5) {
+          if (this._list[i][0] === name7) {
             if (found) {
               this._list.splice(i, 1);
             } else {
@@ -30422,7 +30263,7 @@ var require_URLSearchParams_impl = __commonJS({
           }
         }
         if (!found) {
-          this._list.push([name5, value]);
+          this._list.push([name7, value]);
         }
         this._updateSteps();
       }
@@ -30608,7 +30449,7 @@ var require_URLSearchParams = __commonJS({
           }
           return exports2.setup(Object.create(new.target.prototype), globalObject, args);
         }
-        append(name5, value) {
+        append(name7, value) {
           const esValue = this !== null && this !== void 0 ? this : globalObject;
           if (!exports2.is(esValue)) {
             throw new globalObject.TypeError(
@@ -30639,7 +30480,7 @@ var require_URLSearchParams = __commonJS({
           }
           return utils.tryWrapperForImpl(esValue[implSymbol].append(...args));
         }
-        delete(name5) {
+        delete(name7) {
           const esValue = this !== null && this !== void 0 ? this : globalObject;
           if (!exports2.is(esValue)) {
             throw new globalObject.TypeError(
@@ -30662,7 +30503,7 @@ var require_URLSearchParams = __commonJS({
           }
           return utils.tryWrapperForImpl(esValue[implSymbol].delete(...args));
         }
-        get(name5) {
+        get(name7) {
           const esValue = this !== null && this !== void 0 ? this : globalObject;
           if (!exports2.is(esValue)) {
             throw new globalObject.TypeError("'get' called on an object that is not a valid instance of URLSearchParams.");
@@ -30683,7 +30524,7 @@ var require_URLSearchParams = __commonJS({
           }
           return esValue[implSymbol].get(...args);
         }
-        getAll(name5) {
+        getAll(name7) {
           const esValue = this !== null && this !== void 0 ? this : globalObject;
           if (!exports2.is(esValue)) {
             throw new globalObject.TypeError(
@@ -30706,7 +30547,7 @@ var require_URLSearchParams = __commonJS({
           }
           return utils.tryWrapperForImpl(esValue[implSymbol].getAll(...args));
         }
-        has(name5) {
+        has(name7) {
           const esValue = this !== null && this !== void 0 ? this : globalObject;
           if (!exports2.is(esValue)) {
             throw new globalObject.TypeError("'has' called on an object that is not a valid instance of URLSearchParams.");
@@ -30727,7 +30568,7 @@ var require_URLSearchParams = __commonJS({
           }
           return esValue[implSymbol].has(...args);
         }
-        set(name5, value) {
+        set(name7, value) {
           const esValue = this !== null && this !== void 0 ? this : globalObject;
           if (!exports2.is(esValue)) {
             throw new globalObject.TypeError("'set' called on an object that is not a valid instance of URLSearchParams.");
@@ -30879,12 +30720,12 @@ var require_URL_impl2 = __commonJS({
     exports2.implementation = class URLImpl {
       constructor(globalObject, constructorArgs) {
         const url = constructorArgs[0];
-        const base3 = constructorArgs[1];
+        const base4 = constructorArgs[1];
         let parsedBase = null;
-        if (base3 !== void 0) {
-          parsedBase = usm.basicURLParse(base3);
+        if (base4 !== void 0) {
+          parsedBase = usm.basicURLParse(base4);
           if (parsedBase === null) {
-            throw new TypeError(`Invalid base URL: ${base3}`);
+            throw new TypeError(`Invalid base URL: ${base4}`);
           }
         }
         const parsedURL = usm.basicURLParse(url, { baseURL: parsedBase });
@@ -31537,8 +31378,8 @@ var require_utils5 = __commonJS({
   "node_modules/data-urls/lib/utils.js"(exports2) {
     "use strict";
     var { atob: atob2 } = require_abab();
-    exports2.stripLeadingAndTrailingASCIIWhitespace = (string2) => {
-      return string2.replace(/^[ \t\n\f\r]+/u, "").replace(/[ \t\n\f\r]+$/u, "");
+    exports2.stripLeadingAndTrailingASCIIWhitespace = (string3) => {
+      return string3.replace(/^[ \t\n\f\r]+/u, "").replace(/[ \t\n\f\r]+$/u, "");
     };
     exports2.isomorphicDecode = (input2) => {
       return Array.from(input2, (byte) => String.fromCodePoint(byte)).join("");
@@ -31676,8 +31517,8 @@ var require_parse = __commonJS({
       }
       return root;
     };
-    function internalize(holder, name5, reviver) {
-      const value = holder[name5];
+    function internalize(holder, name7, reviver) {
+      const value = holder[name7];
       if (value != null && typeof value === "object") {
         for (const key2 in value) {
           const replacement = internalize(value, key2, reviver);
@@ -31688,7 +31529,7 @@ var require_parse = __commonJS({
           }
         }
       }
-      return reviver.call(holder, name5, value);
+      return reviver.call(holder, name7, value);
     }
     var lexState;
     var buffer2;
@@ -31713,7 +31554,7 @@ var require_parse = __commonJS({
         return String.fromCodePoint(source.codePointAt(pos));
       }
     }
-    function read2() {
+    function read4() {
       const c2 = peek();
       if (c2 === "\n") {
         line++;
@@ -31741,18 +31582,18 @@ var require_parse = __commonJS({
           case "\r":
           case "\u2028":
           case "\u2029":
-            read2();
+            read4();
             return;
           case "/":
-            read2();
+            read4();
             lexState = "comment";
             return;
           case void 0:
-            read2();
+            read4();
             return newToken("eof");
         }
         if (util.isSpaceSeparator(c)) {
-          read2();
+          read4();
           return;
         }
         return lexStates[parseState]();
@@ -31760,40 +31601,40 @@ var require_parse = __commonJS({
       comment() {
         switch (c) {
           case "*":
-            read2();
+            read4();
             lexState = "multiLineComment";
             return;
           case "/":
-            read2();
+            read4();
             lexState = "singleLineComment";
             return;
         }
-        throw invalidChar(read2());
+        throw invalidChar(read4());
       },
       multiLineComment() {
         switch (c) {
           case "*":
-            read2();
+            read4();
             lexState = "multiLineCommentAsterisk";
             return;
           case void 0:
-            throw invalidChar(read2());
+            throw invalidChar(read4());
         }
-        read2();
+        read4();
       },
       multiLineCommentAsterisk() {
         switch (c) {
           case "*":
-            read2();
+            read4();
             return;
           case "/":
-            read2();
+            read4();
             lexState = "default";
             return;
           case void 0:
-            throw invalidChar(read2());
+            throw invalidChar(read4());
         }
-        read2();
+        read4();
         lexState = "multiLineComment";
       },
       singleLineComment() {
@@ -31802,45 +31643,45 @@ var require_parse = __commonJS({
           case "\r":
           case "\u2028":
           case "\u2029":
-            read2();
+            read4();
             lexState = "default";
             return;
           case void 0:
-            read2();
+            read4();
             return newToken("eof");
         }
-        read2();
+        read4();
       },
       value() {
         switch (c) {
           case "{":
           case "[":
-            return newToken("punctuator", read2());
+            return newToken("punctuator", read4());
           case "n":
-            read2();
+            read4();
             literal("ull");
             return newToken("null", null);
           case "t":
-            read2();
+            read4();
             literal("rue");
             return newToken("boolean", true);
           case "f":
-            read2();
+            read4();
             literal("alse");
             return newToken("boolean", false);
           case "-":
           case "+":
-            if (read2() === "-") {
+            if (read4() === "-") {
               sign = -1;
             }
             lexState = "sign";
             return;
           case ".":
-            buffer2 = read2();
+            buffer2 = read4();
             lexState = "decimalPointLeading";
             return;
           case "0":
-            buffer2 = read2();
+            buffer2 = read4();
             lexState = "zero";
             return;
           case "1":
@@ -31852,31 +31693,31 @@ var require_parse = __commonJS({
           case "7":
           case "8":
           case "9":
-            buffer2 = read2();
+            buffer2 = read4();
             lexState = "decimalInteger";
             return;
           case "I":
-            read2();
+            read4();
             literal("nfinity");
             return newToken("numeric", Infinity);
           case "N":
-            read2();
+            read4();
             literal("aN");
             return newToken("numeric", NaN);
           case '"':
           case "'":
-            doubleQuote = read2() === '"';
+            doubleQuote = read4() === '"';
             buffer2 = "";
             lexState = "string";
             return;
         }
-        throw invalidChar(read2());
+        throw invalidChar(read4());
       },
       identifierNameStartEscape() {
         if (c !== "u") {
-          throw invalidChar(read2());
+          throw invalidChar(read4());
         }
-        read2();
+        read4();
         const u = unicodeEscape();
         switch (u) {
           case "$":
@@ -31897,24 +31738,24 @@ var require_parse = __commonJS({
           case "_":
           case "\u200C":
           case "\u200D":
-            buffer2 += read2();
+            buffer2 += read4();
             return;
           case "\\":
-            read2();
+            read4();
             lexState = "identifierNameEscape";
             return;
         }
         if (util.isIdContinueChar(c)) {
-          buffer2 += read2();
+          buffer2 += read4();
           return;
         }
         return newToken("identifier", buffer2);
       },
       identifierNameEscape() {
         if (c !== "u") {
-          throw invalidChar(read2());
+          throw invalidChar(read4());
         }
-        read2();
+        read4();
         const u = unicodeEscape();
         switch (u) {
           case "$":
@@ -31934,11 +31775,11 @@ var require_parse = __commonJS({
       sign() {
         switch (c) {
           case ".":
-            buffer2 = read2();
+            buffer2 = read4();
             lexState = "decimalPointLeading";
             return;
           case "0":
-            buffer2 = read2();
+            buffer2 = read4();
             lexState = "zero";
             return;
           case "1":
@@ -31950,34 +31791,34 @@ var require_parse = __commonJS({
           case "7":
           case "8":
           case "9":
-            buffer2 = read2();
+            buffer2 = read4();
             lexState = "decimalInteger";
             return;
           case "I":
-            read2();
+            read4();
             literal("nfinity");
             return newToken("numeric", sign * Infinity);
           case "N":
-            read2();
+            read4();
             literal("aN");
             return newToken("numeric", NaN);
         }
-        throw invalidChar(read2());
+        throw invalidChar(read4());
       },
       zero() {
         switch (c) {
           case ".":
-            buffer2 += read2();
+            buffer2 += read4();
             lexState = "decimalPoint";
             return;
           case "e":
           case "E":
-            buffer2 += read2();
+            buffer2 += read4();
             lexState = "decimalExponent";
             return;
           case "x":
           case "X":
-            buffer2 += read2();
+            buffer2 += read4();
             lexState = "hexadecimal";
             return;
         }
@@ -31986,39 +31827,39 @@ var require_parse = __commonJS({
       decimalInteger() {
         switch (c) {
           case ".":
-            buffer2 += read2();
+            buffer2 += read4();
             lexState = "decimalPoint";
             return;
           case "e":
           case "E":
-            buffer2 += read2();
+            buffer2 += read4();
             lexState = "decimalExponent";
             return;
         }
         if (util.isDigit(c)) {
-          buffer2 += read2();
+          buffer2 += read4();
           return;
         }
         return newToken("numeric", sign * Number(buffer2));
       },
       decimalPointLeading() {
         if (util.isDigit(c)) {
-          buffer2 += read2();
+          buffer2 += read4();
           lexState = "decimalFraction";
           return;
         }
-        throw invalidChar(read2());
+        throw invalidChar(read4());
       },
       decimalPoint() {
         switch (c) {
           case "e":
           case "E":
-            buffer2 += read2();
+            buffer2 += read4();
             lexState = "decimalExponent";
             return;
         }
         if (util.isDigit(c)) {
-          buffer2 += read2();
+          buffer2 += read4();
           lexState = "decimalFraction";
           return;
         }
@@ -32028,12 +31869,12 @@ var require_parse = __commonJS({
         switch (c) {
           case "e":
           case "E":
-            buffer2 += read2();
+            buffer2 += read4();
             lexState = "decimalExponent";
             return;
         }
         if (util.isDigit(c)) {
-          buffer2 += read2();
+          buffer2 += read4();
           return;
         }
         return newToken("numeric", sign * Number(buffer2));
@@ -32042,43 +31883,43 @@ var require_parse = __commonJS({
         switch (c) {
           case "+":
           case "-":
-            buffer2 += read2();
+            buffer2 += read4();
             lexState = "decimalExponentSign";
             return;
         }
         if (util.isDigit(c)) {
-          buffer2 += read2();
+          buffer2 += read4();
           lexState = "decimalExponentInteger";
           return;
         }
-        throw invalidChar(read2());
+        throw invalidChar(read4());
       },
       decimalExponentSign() {
         if (util.isDigit(c)) {
-          buffer2 += read2();
+          buffer2 += read4();
           lexState = "decimalExponentInteger";
           return;
         }
-        throw invalidChar(read2());
+        throw invalidChar(read4());
       },
       decimalExponentInteger() {
         if (util.isDigit(c)) {
-          buffer2 += read2();
+          buffer2 += read4();
           return;
         }
         return newToken("numeric", sign * Number(buffer2));
       },
       hexadecimal() {
         if (util.isHexDigit(c)) {
-          buffer2 += read2();
+          buffer2 += read4();
           lexState = "hexadecimalInteger";
           return;
         }
-        throw invalidChar(read2());
+        throw invalidChar(read4());
       },
       hexadecimalInteger() {
         if (util.isHexDigit(c)) {
-          buffer2 += read2();
+          buffer2 += read4();
           return;
         }
         return newToken("numeric", sign * Number(buffer2));
@@ -32086,40 +31927,40 @@ var require_parse = __commonJS({
       string() {
         switch (c) {
           case "\\":
-            read2();
+            read4();
             buffer2 += escape2();
             return;
           case '"':
             if (doubleQuote) {
-              read2();
+              read4();
               return newToken("string", buffer2);
             }
-            buffer2 += read2();
+            buffer2 += read4();
             return;
           case "'":
             if (!doubleQuote) {
-              read2();
+              read4();
               return newToken("string", buffer2);
             }
-            buffer2 += read2();
+            buffer2 += read4();
             return;
           case "\n":
           case "\r":
-            throw invalidChar(read2());
+            throw invalidChar(read4());
           case "\u2028":
           case "\u2029":
             separatorChar(c);
             break;
           case void 0:
-            throw invalidChar(read2());
+            throw invalidChar(read4());
         }
-        buffer2 += read2();
+        buffer2 += read4();
       },
       start() {
         switch (c) {
           case "{":
           case "[":
-            return newToken("punctuator", read2());
+            return newToken("punctuator", read4());
         }
         lexState = "value";
       },
@@ -32127,33 +31968,33 @@ var require_parse = __commonJS({
         switch (c) {
           case "$":
           case "_":
-            buffer2 = read2();
+            buffer2 = read4();
             lexState = "identifierName";
             return;
           case "\\":
-            read2();
+            read4();
             lexState = "identifierNameStartEscape";
             return;
           case "}":
-            return newToken("punctuator", read2());
+            return newToken("punctuator", read4());
           case '"':
           case "'":
-            doubleQuote = read2() === '"';
+            doubleQuote = read4() === '"';
             lexState = "string";
             return;
         }
         if (util.isIdStartChar(c)) {
-          buffer2 += read2();
+          buffer2 += read4();
           lexState = "identifierName";
           return;
         }
-        throw invalidChar(read2());
+        throw invalidChar(read4());
       },
       afterPropertyName() {
         if (c === ":") {
-          return newToken("punctuator", read2());
+          return newToken("punctuator", read4());
         }
-        throw invalidChar(read2());
+        throw invalidChar(read4());
       },
       beforePropertyValue() {
         lexState = "value";
@@ -32162,13 +32003,13 @@ var require_parse = __commonJS({
         switch (c) {
           case ",":
           case "}":
-            return newToken("punctuator", read2());
+            return newToken("punctuator", read4());
         }
-        throw invalidChar(read2());
+        throw invalidChar(read4());
       },
       beforeArrayValue() {
         if (c === "]") {
-          return newToken("punctuator", read2());
+          return newToken("punctuator", read4());
         }
         lexState = "value";
       },
@@ -32176,12 +32017,12 @@ var require_parse = __commonJS({
         switch (c) {
           case ",":
           case "]":
-            return newToken("punctuator", read2());
+            return newToken("punctuator", read4());
         }
-        throw invalidChar(read2());
+        throw invalidChar(read4());
       },
       end() {
-        throw invalidChar(read2());
+        throw invalidChar(read4());
       }
     };
     function newToken(type, value) {
@@ -32196,53 +32037,53 @@ var require_parse = __commonJS({
       for (const c2 of s) {
         const p = peek();
         if (p !== c2) {
-          throw invalidChar(read2());
+          throw invalidChar(read4());
         }
-        read2();
+        read4();
       }
     }
     function escape2() {
       const c2 = peek();
       switch (c2) {
         case "b":
-          read2();
+          read4();
           return "\b";
         case "f":
-          read2();
+          read4();
           return "\f";
         case "n":
-          read2();
+          read4();
           return "\n";
         case "r":
-          read2();
+          read4();
           return "\r";
         case "t":
-          read2();
+          read4();
           return "	";
         case "v":
-          read2();
+          read4();
           return "\v";
         case "0":
-          read2();
+          read4();
           if (util.isDigit(peek())) {
-            throw invalidChar(read2());
+            throw invalidChar(read4());
           }
           return "\0";
         case "x":
-          read2();
+          read4();
           return hexEscape();
         case "u":
-          read2();
+          read4();
           return unicodeEscape();
         case "\n":
         case "\u2028":
         case "\u2029":
-          read2();
+          read4();
           return "";
         case "\r":
-          read2();
+          read4();
           if (peek() === "\n") {
-            read2();
+            read4();
           }
           return "";
         case "1":
@@ -32254,24 +32095,24 @@ var require_parse = __commonJS({
         case "7":
         case "8":
         case "9":
-          throw invalidChar(read2());
+          throw invalidChar(read4());
         case void 0:
-          throw invalidChar(read2());
+          throw invalidChar(read4());
       }
-      return read2();
+      return read4();
     }
     function hexEscape() {
       let buffer3 = "";
       let c2 = peek();
       if (!util.isHexDigit(c2)) {
-        throw invalidChar(read2());
+        throw invalidChar(read4());
       }
-      buffer3 += read2();
+      buffer3 += read4();
       c2 = peek();
       if (!util.isHexDigit(c2)) {
-        throw invalidChar(read2());
+        throw invalidChar(read4());
       }
-      buffer3 += read2();
+      buffer3 += read4();
       return String.fromCodePoint(parseInt(buffer3, 16));
     }
     function unicodeEscape() {
@@ -32280,9 +32121,9 @@ var require_parse = __commonJS({
       while (count-- > 0) {
         const c2 = peek();
         if (!util.isHexDigit(c2)) {
-          throw invalidChar(read2());
+          throw invalidChar(read4());
         }
-        buffer3 += read2();
+        buffer3 += read4();
       }
       return String.fromCodePoint(parseInt(buffer3, 16));
     }
@@ -32710,15 +32551,15 @@ var require_path_browserify = __commonJS({
       var lastSegmentLength = 0;
       var lastSlash = -1;
       var dots = 0;
-      var code6;
+      var code11;
       for (var i = 0; i <= path3.length; ++i) {
         if (i < path3.length)
-          code6 = path3.charCodeAt(i);
-        else if (code6 === 47)
+          code11 = path3.charCodeAt(i);
+        else if (code11 === 47)
           break;
         else
-          code6 = 47;
-        if (code6 === 47) {
+          code11 = 47;
+        if (code11 === 47) {
           if (lastSlash === i - 1 || dots === 1) {
           } else if (lastSlash !== i - 1 && dots === 2) {
             if (res.length < 2 || lastSegmentLength !== 2 || res.charCodeAt(res.length - 1) !== 46 || res.charCodeAt(res.length - 2) !== 46) {
@@ -32760,7 +32601,7 @@ var require_path_browserify = __commonJS({
           }
           lastSlash = i;
           dots = 0;
-        } else if (code6 === 46 && dots !== -1) {
+        } else if (code11 === 46 && dots !== -1) {
           ++dots;
         } else {
           dots = -1;
@@ -32770,14 +32611,14 @@ var require_path_browserify = __commonJS({
     }
     function _format(sep, pathObject) {
       var dir = pathObject.dir || pathObject.root;
-      var base3 = pathObject.base || (pathObject.name || "") + (pathObject.ext || "");
+      var base4 = pathObject.base || (pathObject.name || "") + (pathObject.ext || "");
       if (!dir) {
-        return base3;
+        return base4;
       }
       if (dir === pathObject.root) {
-        return dir + base3;
+        return dir + base4;
       }
-      return dir + sep + base3;
+      return dir + sep + base4;
     }
     var posix = {
       resolve: function resolve9() {
@@ -32849,21 +32690,21 @@ var require_path_browserify = __commonJS({
           return ".";
         return posix.normalize(joined);
       },
-      relative: function relative(from3, to) {
-        assertPath(from3);
+      relative: function relative(from7, to) {
+        assertPath(from7);
         assertPath(to);
-        if (from3 === to)
+        if (from7 === to)
           return "";
-        from3 = posix.resolve(from3);
+        from7 = posix.resolve(from7);
         to = posix.resolve(to);
-        if (from3 === to)
+        if (from7 === to)
           return "";
         var fromStart = 1;
-        for (; fromStart < from3.length; ++fromStart) {
-          if (from3.charCodeAt(fromStart) !== 47)
+        for (; fromStart < from7.length; ++fromStart) {
+          if (from7.charCodeAt(fromStart) !== 47)
             break;
         }
-        var fromEnd = from3.length;
+        var fromEnd = from7.length;
         var fromLen = fromEnd - fromStart;
         var toStart = 1;
         for (; toStart < to.length; ++toStart) {
@@ -32872,19 +32713,19 @@ var require_path_browserify = __commonJS({
         }
         var toEnd = to.length;
         var toLen = toEnd - toStart;
-        var length2 = fromLen < toLen ? fromLen : toLen;
+        var length4 = fromLen < toLen ? fromLen : toLen;
         var lastCommonSep = -1;
         var i = 0;
-        for (; i <= length2; ++i) {
-          if (i === length2) {
-            if (toLen > length2) {
+        for (; i <= length4; ++i) {
+          if (i === length4) {
+            if (toLen > length4) {
               if (to.charCodeAt(toStart + i) === 47) {
                 return to.slice(toStart + i + 1);
               } else if (i === 0) {
                 return to.slice(toStart + i);
               }
-            } else if (fromLen > length2) {
-              if (from3.charCodeAt(fromStart + i) === 47) {
+            } else if (fromLen > length4) {
+              if (from7.charCodeAt(fromStart + i) === 47) {
                 lastCommonSep = i;
               } else if (i === 0) {
                 lastCommonSep = 0;
@@ -32892,7 +32733,7 @@ var require_path_browserify = __commonJS({
             }
             break;
           }
-          var fromCode = from3.charCodeAt(fromStart + i);
+          var fromCode = from7.charCodeAt(fromStart + i);
           var toCode = to.charCodeAt(toStart + i);
           if (fromCode !== toCode)
             break;
@@ -32901,7 +32742,7 @@ var require_path_browserify = __commonJS({
         }
         var out = "";
         for (i = fromStart + lastCommonSep + 1; i <= fromEnd; ++i) {
-          if (i === fromEnd || from3.charCodeAt(i) === 47) {
+          if (i === fromEnd || from7.charCodeAt(i) === 47) {
             if (out.length === 0)
               out += "..";
             else
@@ -32924,13 +32765,13 @@ var require_path_browserify = __commonJS({
         assertPath(path3);
         if (path3.length === 0)
           return ".";
-        var code6 = path3.charCodeAt(0);
-        var hasRoot = code6 === 47;
+        var code11 = path3.charCodeAt(0);
+        var hasRoot = code11 === 47;
         var end = -1;
         var matchedSlash = true;
         for (var i = path3.length - 1; i >= 1; --i) {
-          code6 = path3.charCodeAt(i);
-          if (code6 === 47) {
+          code11 = path3.charCodeAt(i);
+          if (code11 === 47) {
             if (!matchedSlash) {
               end = i;
               break;
@@ -32959,8 +32800,8 @@ var require_path_browserify = __commonJS({
           var extIdx = ext.length - 1;
           var firstNonSlashEnd = -1;
           for (i = path3.length - 1; i >= 0; --i) {
-            var code6 = path3.charCodeAt(i);
-            if (code6 === 47) {
+            var code11 = path3.charCodeAt(i);
+            if (code11 === 47) {
               if (!matchedSlash) {
                 start = i + 1;
                 break;
@@ -32971,7 +32812,7 @@ var require_path_browserify = __commonJS({
                 firstNonSlashEnd = i + 1;
               }
               if (extIdx >= 0) {
-                if (code6 === ext.charCodeAt(extIdx)) {
+                if (code11 === ext.charCodeAt(extIdx)) {
                   if (--extIdx === -1) {
                     end = i;
                   }
@@ -33012,8 +32853,8 @@ var require_path_browserify = __commonJS({
         var matchedSlash = true;
         var preDotState = 0;
         for (var i = path3.length - 1; i >= 0; --i) {
-          var code6 = path3.charCodeAt(i);
-          if (code6 === 47) {
+          var code11 = path3.charCodeAt(i);
+          if (code11 === 47) {
             if (!matchedSlash) {
               startPart = i + 1;
               break;
@@ -33024,7 +32865,7 @@ var require_path_browserify = __commonJS({
             matchedSlash = false;
             end = i + 1;
           }
-          if (code6 === 46) {
+          if (code11 === 46) {
             if (startDot === -1)
               startDot = i;
             else if (preDotState !== 1)
@@ -33038,7 +32879,7 @@ var require_path_browserify = __commonJS({
         }
         return path3.slice(startDot, end);
       },
-      format: function format(pathObject) {
+      format: function format2(pathObject) {
         if (pathObject === null || typeof pathObject !== "object") {
           throw new TypeError('The "pathObject" argument must be of type Object. Received type ' + typeof pathObject);
         }
@@ -33049,8 +32890,8 @@ var require_path_browserify = __commonJS({
         var ret = { root: "", dir: "", base: "", ext: "", name: "" };
         if (path3.length === 0)
           return ret;
-        var code6 = path3.charCodeAt(0);
-        var isAbsolute = code6 === 47;
+        var code11 = path3.charCodeAt(0);
+        var isAbsolute = code11 === 47;
         var start;
         if (isAbsolute) {
           ret.root = "/";
@@ -33065,8 +32906,8 @@ var require_path_browserify = __commonJS({
         var i = path3.length - 1;
         var preDotState = 0;
         for (; i >= start; --i) {
-          code6 = path3.charCodeAt(i);
-          if (code6 === 47) {
+          code11 = path3.charCodeAt(i);
+          if (code11 === 47) {
             if (!matchedSlash) {
               startPart = i + 1;
               break;
@@ -33077,7 +32918,7 @@ var require_path_browserify = __commonJS({
             matchedSlash = false;
             end = i + 1;
           }
-          if (code6 === 46) {
+          if (code11 === 46) {
             if (startDot === -1)
               startDot = i;
             else if (preDotState !== 1)
@@ -33470,6 +33311,21 @@ var require_p_retry = __commonJS({
   }
 });
 
+// node_modules/it-last/index.js
+var require_it_last = __commonJS({
+  "node_modules/it-last/index.js"(exports2, module2) {
+    "use strict";
+    var last4 = async (source) => {
+      let res;
+      for await (const entry of source) {
+        res = entry;
+      }
+      return res;
+    };
+    module2.exports = last4;
+  }
+});
+
 // node_modules/it-pipe/index.js
 var require_it_pipe = __commonJS({
   "node_modules/it-pipe/index.js"(exports2, module2) {
@@ -33519,29 +33375,29 @@ var require_it_pipe = __commonJS({
 // node_modules/varint/encode.js
 var require_encode = __commonJS({
   "node_modules/varint/encode.js"(exports2, module2) {
-    module2.exports = encode11;
-    var MSB2 = 128;
-    var REST2 = 127;
-    var MSBALL2 = ~REST2;
-    var INT2 = Math.pow(2, 31);
-    function encode11(num, out, offset) {
+    module2.exports = encode18;
+    var MSB4 = 128;
+    var REST4 = 127;
+    var MSBALL4 = ~REST4;
+    var INT4 = Math.pow(2, 31);
+    function encode18(num, out, offset) {
       if (Number.MAX_SAFE_INTEGER && num > Number.MAX_SAFE_INTEGER) {
-        encode11.bytes = 0;
+        encode18.bytes = 0;
         throw new RangeError("Could not encode varint");
       }
       out = out || [];
       offset = offset || 0;
       var oldOffset = offset;
-      while (num >= INT2) {
-        out[offset++] = num & 255 | MSB2;
+      while (num >= INT4) {
+        out[offset++] = num & 255 | MSB4;
         num /= 128;
       }
-      while (num & MSBALL2) {
-        out[offset++] = num & 255 | MSB2;
+      while (num & MSBALL4) {
+        out[offset++] = num & 255 | MSB4;
         num >>>= 7;
       }
       out[offset] = num | 0;
-      encode11.bytes = offset - oldOffset + 1;
+      encode18.bytes = offset - oldOffset + 1;
       return out;
     }
   }
@@ -33550,21 +33406,21 @@ var require_encode = __commonJS({
 // node_modules/varint/decode.js
 var require_decode = __commonJS({
   "node_modules/varint/decode.js"(exports2, module2) {
-    module2.exports = read2;
-    var MSB2 = 128;
-    var REST2 = 127;
-    function read2(buf2, offset) {
+    module2.exports = read4;
+    var MSB4 = 128;
+    var REST4 = 127;
+    function read4(buf2, offset) {
       var res = 0, offset = offset || 0, shift = 0, counter = offset, b, l = buf2.length;
       do {
         if (counter >= l || shift > 49) {
-          read2.bytes = 0;
+          read4.bytes = 0;
           throw new RangeError("Could not decode varint");
         }
         b = buf2[counter++];
-        res += shift < 28 ? (b & REST2) << shift : (b & REST2) * Math.pow(2, shift);
+        res += shift < 28 ? (b & REST4) << shift : (b & REST4) * Math.pow(2, shift);
         shift += 7;
-      } while (b >= MSB2);
-      read2.bytes = counter - offset;
+      } while (b >= MSB4);
+      read4.bytes = counter - offset;
       return res;
     }
   }
@@ -33573,17 +33429,17 @@ var require_decode = __commonJS({
 // node_modules/varint/length.js
 var require_length2 = __commonJS({
   "node_modules/varint/length.js"(exports2, module2) {
-    var N12 = Math.pow(2, 7);
-    var N22 = Math.pow(2, 14);
-    var N32 = Math.pow(2, 21);
-    var N42 = Math.pow(2, 28);
-    var N52 = Math.pow(2, 35);
-    var N62 = Math.pow(2, 42);
-    var N72 = Math.pow(2, 49);
-    var N82 = Math.pow(2, 56);
-    var N92 = Math.pow(2, 63);
+    var N14 = Math.pow(2, 7);
+    var N24 = Math.pow(2, 14);
+    var N34 = Math.pow(2, 21);
+    var N44 = Math.pow(2, 28);
+    var N54 = Math.pow(2, 35);
+    var N64 = Math.pow(2, 42);
+    var N74 = Math.pow(2, 49);
+    var N84 = Math.pow(2, 56);
+    var N94 = Math.pow(2, 63);
     module2.exports = function(value) {
-      return value < N12 ? 1 : value < N22 ? 2 : value < N32 ? 3 : value < N42 ? 4 : value < N52 ? 5 : value < N62 ? 6 : value < N72 ? 7 : value < N82 ? 8 : value < N92 ? 9 : 10;
+      return value < N14 ? 1 : value < N24 ? 2 : value < N34 ? 3 : value < N44 ? 4 : value < N54 ? 5 : value < N64 ? 6 : value < N74 ? 7 : value < N84 ? 8 : value < N94 ? 9 : 10;
     };
   }
 });
@@ -33638,7 +33494,7 @@ var require_longbits3 = __commonJS({
       }
       return new LongBits(lo, hi);
     };
-    LongBits.from = function from3(value) {
+    LongBits.from = function from7(value) {
       if (typeof value === "number")
         return LongBits.fromNumber(value);
       if (util.isString(value)) {
@@ -33694,7 +33550,7 @@ var require_longbits3 = __commonJS({
       this.hi = (this.hi >>> 1 ^ mask) >>> 0;
       return this;
     };
-    LongBits.prototype.length = function length2() {
+    LongBits.prototype.length = function length4() {
       var part0 = this.lo, part1 = (this.lo >>> 28 | this.hi << 4) >>> 0, part2 = this.hi >>> 24;
       return part2 === 0 ? part1 === 0 ? part0 < 16384 ? part0 < 128 ? 1 : 2 : part0 < 2097152 ? 3 : 4 : part1 < 16384 ? part1 < 128 ? 5 : 6 : part1 < 2097152 ? 7 : 8 : part2 < 128 ? 9 : 10;
     };
@@ -33760,17 +33616,17 @@ var require_minimal5 = __commonJS({
         return util.Long.fromBits(bits.lo, bits.hi, unsigned);
       return bits.toNumber(Boolean(unsigned));
     };
-    function merge2(dst, src2, ifNotSet) {
-      for (var keys = Object.keys(src2), i = 0; i < keys.length; ++i)
+    function merge2(dst, src4, ifNotSet) {
+      for (var keys = Object.keys(src4), i = 0; i < keys.length; ++i)
         if (dst[keys[i]] === void 0 || !ifNotSet)
-          dst[keys[i]] = src2[keys[i]];
+          dst[keys[i]] = src4[keys[i]];
       return dst;
     }
     util.merge = merge2;
     util.lcFirst = function lcFirst(str) {
       return str.charAt(0).toLowerCase() + str.substring(1);
     };
-    function newError(name5) {
+    function newError(name7) {
       function CustomError(message, properties) {
         if (!(this instanceof CustomError))
           return new CustomError(message, properties);
@@ -33786,9 +33642,9 @@ var require_minimal5 = __commonJS({
       }
       (CustomError.prototype = Object.create(Error.prototype)).constructor = CustomError;
       Object.defineProperty(CustomError.prototype, "name", { get: function() {
-        return name5;
+        return name7;
       } });
-      CustomError.prototype.toString = function toString3() {
+      CustomError.prototype.toString = function toString5() {
         return this.name + ": " + this.message;
       };
       return CustomError;
@@ -33806,9 +33662,9 @@ var require_minimal5 = __commonJS({
       };
     };
     util.oneOfSetter = function setOneOf(fieldNames) {
-      return function(name5) {
+      return function(name7) {
         for (var i = 0; i < fieldNames.length; ++i)
-          if (fieldNames[i] !== name5)
+          if (fieldNames[i] !== name7)
             delete this[fieldNames[i]];
       };
     };
@@ -33842,7 +33698,7 @@ var require_writer3 = __commonJS({
     var util = require_minimal5();
     var BufferWriter;
     var LongBits = util.LongBits;
-    var base642 = util.base64;
+    var base643 = util.base64;
     var utf8 = util.utf8;
     function Op(fn, len, val) {
       this.fn = fn;
@@ -33864,7 +33720,7 @@ var require_writer3 = __commonJS({
       this.tail = this.head;
       this.states = null;
     }
-    var create5 = function create6() {
+    var create7 = function create8() {
       return util.Buffer ? function create_buffer_setup() {
         return (Writer.create = function create_buffer() {
           return new BufferWriter();
@@ -33873,7 +33729,7 @@ var require_writer3 = __commonJS({
         return new Writer();
       };
     };
-    Writer.create = create5();
+    Writer.create = create7();
     Writer.alloc = function alloc2(size) {
       return new util.Array(size);
     };
@@ -33970,8 +33826,8 @@ var require_writer3 = __commonJS({
       if (!len)
         return this._push(writeByte, 1, 0);
       if (util.isString(value)) {
-        var buf2 = Writer.alloc(len = base642.length(value));
-        base642.decode(value, buf2, 0);
+        var buf2 = Writer.alloc(len = base643.length(value));
+        base643.decode(value, buf2, 0);
         value = buf2;
       }
       return this.uint32(len)._push(writeBytes2, len, value);
@@ -34019,7 +33875,7 @@ var require_writer3 = __commonJS({
     };
     Writer._configure = function(BufferWriter_) {
       BufferWriter = BufferWriter_;
-      Writer.create = create5();
+      Writer.create = create7();
       BufferWriter._configure();
     };
   }
@@ -34102,14 +33958,14 @@ var require_reader3 = __commonJS({
         return new Reader(buffer2);
       throw Error("illegal buffer");
     };
-    var create5 = function create6() {
+    var create7 = function create8() {
       return util.Buffer ? function create_buffer_setup(buffer2) {
         return (Reader.create = function create_buffer(buffer3) {
           return util.Buffer.isBuffer(buffer3) ? new BufferReader(buffer3) : create_array(buffer3);
         })(buffer2);
       } : create_array;
     };
-    Reader.create = create5();
+    Reader.create = create7();
     Reader.prototype._slice = util.Array.prototype.subarray || util.Array.prototype.slice;
     Reader.prototype.uint32 = function read_uint32_setup() {
       var value = 4294967295;
@@ -34221,10 +34077,10 @@ var require_reader3 = __commonJS({
       return value;
     };
     Reader.prototype.bytes = function read_bytes() {
-      var length2 = this.uint32(), start = this.pos, end = this.pos + length2;
+      var length4 = this.uint32(), start = this.pos, end = this.pos + length4;
       if (end > this.len)
-        throw indexOutOfRange(this, length2);
-      this.pos += length2;
+        throw indexOutOfRange(this, length4);
+      this.pos += length4;
       if (Array.isArray(this.buf))
         return this.buf.slice(start, end);
       return start === end ? new this.buf.constructor(0) : this._slice.call(this.buf, start, end);
@@ -34233,11 +34089,11 @@ var require_reader3 = __commonJS({
       var bytes = this.bytes();
       return utf8.read(bytes, 0, bytes.length);
     };
-    Reader.prototype.skip = function skip(length2) {
-      if (typeof length2 === "number") {
-        if (this.pos + length2 > this.len)
-          throw indexOutOfRange(this, length2);
-        this.pos += length2;
+    Reader.prototype.skip = function skip(length4) {
+      if (typeof length4 === "number") {
+        if (this.pos + length4 > this.len)
+          throw indexOutOfRange(this, length4);
+        this.pos += length4;
       } else {
         do {
           if (this.pos >= this.len)
@@ -34272,7 +34128,7 @@ var require_reader3 = __commonJS({
     };
     Reader._configure = function(BufferReader_) {
       BufferReader = BufferReader_;
-      Reader.create = create5();
+      Reader.create = create7();
       BufferReader._configure();
       var fn = util.Long ? "toLong" : "toNumber";
       util.merge(Reader.prototype, {
@@ -34443,7 +34299,7 @@ var require_minimal6 = __commonJS({
 var require_base_x = __commonJS({
   "node_modules/multiformats/cjs/vendor/base-x.js"(exports2, module2) {
     "use strict";
-    function base3(ALPHABET, name5) {
+    function base4(ALPHABET, name7) {
       if (ALPHABET.length >= 255) {
         throw new TypeError("Alphabet too long");
       }
@@ -34463,7 +34319,7 @@ var require_base_x = __commonJS({
       var LEADER = ALPHABET.charAt(0);
       var FACTOR = Math.log(BASE) / Math.log(256);
       var iFACTOR = Math.log(256) / Math.log(BASE);
-      function encode11(source) {
+      function encode18(source) {
         if (source instanceof Uint8Array)
           ;
         else if (ArrayBuffer.isView(source)) {
@@ -34478,7 +34334,7 @@ var require_base_x = __commonJS({
           return "";
         }
         var zeroes = 0;
-        var length2 = 0;
+        var length4 = 0;
         var pbegin = 0;
         var pend = source.length;
         while (pbegin !== pend && source[pbegin] === 0) {
@@ -34490,7 +34346,7 @@ var require_base_x = __commonJS({
         while (pbegin !== pend) {
           var carry = source[pbegin];
           var i2 = 0;
-          for (var it1 = size - 1; (carry !== 0 || i2 < length2) && it1 !== -1; it1--, i2++) {
+          for (var it1 = size - 1; (carry !== 0 || i2 < length4) && it1 !== -1; it1--, i2++) {
             carry += 256 * b58[it1] >>> 0;
             b58[it1] = carry % BASE >>> 0;
             carry = carry / BASE >>> 0;
@@ -34498,10 +34354,10 @@ var require_base_x = __commonJS({
           if (carry !== 0) {
             throw new Error("Non-zero carry");
           }
-          length2 = i2;
+          length4 = i2;
           pbegin++;
         }
-        var it2 = size - length2;
+        var it2 = size - length4;
         while (it2 !== size && b58[it2] === 0) {
           it2++;
         }
@@ -34523,7 +34379,7 @@ var require_base_x = __commonJS({
           return;
         }
         var zeroes = 0;
-        var length2 = 0;
+        var length4 = 0;
         while (source[psz] === LEADER) {
           zeroes++;
           psz++;
@@ -34536,7 +34392,7 @@ var require_base_x = __commonJS({
             return;
           }
           var i2 = 0;
-          for (var it3 = size - 1; (carry !== 0 || i2 < length2) && it3 !== -1; it3--, i2++) {
+          for (var it3 = size - 1; (carry !== 0 || i2 < length4) && it3 !== -1; it3--, i2++) {
             carry += BASE * b256[it3] >>> 0;
             b256[it3] = carry % 256 >>> 0;
             carry = carry / 256 >>> 0;
@@ -34544,13 +34400,13 @@ var require_base_x = __commonJS({
           if (carry !== 0) {
             throw new Error("Non-zero carry");
           }
-          length2 = i2;
+          length4 = i2;
           psz++;
         }
         if (source[psz] === " ") {
           return;
         }
-        var it4 = size - length2;
+        var it4 = size - length4;
         while (it4 !== size && b256[it4] === 0) {
           it4++;
         }
@@ -34561,22 +34417,22 @@ var require_base_x = __commonJS({
         }
         return vch;
       }
-      function decode12(string2) {
-        var buffer2 = decodeUnsafe(string2);
+      function decode23(string3) {
+        var buffer2 = decodeUnsafe(string3);
         if (buffer2) {
           return buffer2;
         }
-        throw new Error(`Non-${name5} character`);
+        throw new Error(`Non-${name7} character`);
       }
       return {
-        encode: encode11,
+        encode: encode18,
         decodeUnsafe,
-        decode: decode12
+        decode: decode23
       };
     }
-    var src2 = base3;
-    var _brrp__multiformats_scope_baseX2 = src2;
-    module2.exports = _brrp__multiformats_scope_baseX2;
+    var src4 = base4;
+    var _brrp__multiformats_scope_baseX4 = src4;
+    module2.exports = _brrp__multiformats_scope_baseX4;
   }
 });
 
@@ -34585,13 +34441,13 @@ var require_bytes = __commonJS({
   "node_modules/multiformats/cjs/src/bytes.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
-    var empty2 = new Uint8Array(0);
-    var toHex2 = (d) => d.reduce((hex, byte) => hex + byte.toString(16).padStart(2, "0"), "");
-    var fromHex2 = (hex) => {
+    var empty4 = new Uint8Array(0);
+    var toHex3 = (d) => d.reduce((hex, byte) => hex + byte.toString(16).padStart(2, "0"), "");
+    var fromHex3 = (hex) => {
       const hexes = hex.match(/../g);
-      return hexes ? new Uint8Array(hexes.map((b) => parseInt(b, 16))) : empty2;
+      return hexes ? new Uint8Array(hexes.map((b) => parseInt(b, 16))) : empty4;
     };
-    var equals4 = (aa, bb) => {
+    var equals8 = (aa, bb) => {
       if (aa === bb)
         return true;
       if (aa.byteLength !== bb.byteLength) {
@@ -34604,7 +34460,7 @@ var require_bytes = __commonJS({
       }
       return true;
     };
-    var coerce3 = (o) => {
+    var coerce5 = (o) => {
       if (o instanceof Uint8Array && o.constructor.name === "Uint8Array")
         return o;
       if (o instanceof ArrayBuffer)
@@ -34614,17 +34470,17 @@ var require_bytes = __commonJS({
       }
       throw new Error("Unknown type, must be binary type");
     };
-    var isBinary2 = (o) => o instanceof ArrayBuffer || ArrayBuffer.isView(o);
-    var fromString4 = (str) => new TextEncoder().encode(str);
-    var toString3 = (b) => new TextDecoder().decode(b);
-    exports2.coerce = coerce3;
-    exports2.empty = empty2;
-    exports2.equals = equals4;
-    exports2.fromHex = fromHex2;
-    exports2.fromString = fromString4;
-    exports2.isBinary = isBinary2;
-    exports2.toHex = toHex2;
-    exports2.toString = toString3;
+    var isBinary3 = (o) => o instanceof ArrayBuffer || ArrayBuffer.isView(o);
+    var fromString7 = (str) => new TextEncoder().encode(str);
+    var toString5 = (b) => new TextDecoder().decode(b);
+    exports2.coerce = coerce5;
+    exports2.empty = empty4;
+    exports2.equals = equals8;
+    exports2.fromHex = fromHex3;
+    exports2.fromString = fromString7;
+    exports2.isBinary = isBinary3;
+    exports2.toHex = toHex3;
+    exports2.toString = toString5;
   }
 });
 
@@ -34635,9 +34491,9 @@ var require_base = __commonJS({
     Object.defineProperty(exports2, "__esModule", { value: true });
     var baseX$1 = require_base_x();
     var bytes = require_bytes();
-    var Encoder3 = class {
-      constructor(name5, prefix, baseEncode) {
-        this.name = name5;
+    var Encoder5 = class {
+      constructor(name7, prefix, baseEncode) {
+        this.name = name7;
         this.prefix = prefix;
         this.baseEncode = baseEncode;
       }
@@ -34649,9 +34505,9 @@ var require_base = __commonJS({
         }
       }
     };
-    var Decoder3 = class {
-      constructor(name5, prefix, baseDecode) {
-        this.name = name5;
+    var Decoder5 = class {
+      constructor(name7, prefix, baseDecode) {
+        this.name = name7;
         this.prefix = prefix;
         if (prefix.codePointAt(0) === void 0) {
           throw new Error("Invalid prefix character");
@@ -34670,15 +34526,15 @@ var require_base = __commonJS({
         }
       }
       or(decoder2) {
-        return or2(this, decoder2);
+        return or4(this, decoder2);
       }
     };
-    var ComposedDecoder2 = class {
+    var ComposedDecoder4 = class {
       constructor(decoders) {
         this.decoders = decoders;
       }
       or(decoder2) {
-        return or2(this, decoder2);
+        return or4(this, decoder2);
       }
       decode(input2) {
         const prefix = input2[0];
@@ -34690,18 +34546,18 @@ var require_base = __commonJS({
         }
       }
     };
-    var or2 = (left, right) => new ComposedDecoder2({
+    var or4 = (left, right) => new ComposedDecoder4({
       ...left.decoders || { [left.prefix]: left },
       ...right.decoders || { [right.prefix]: right }
     });
-    var Codec2 = class {
-      constructor(name5, prefix, baseEncode, baseDecode) {
-        this.name = name5;
+    var Codec4 = class {
+      constructor(name7, prefix, baseEncode, baseDecode) {
+        this.name = name7;
         this.prefix = prefix;
         this.baseEncode = baseEncode;
         this.baseDecode = baseDecode;
-        this.encoder = new Encoder3(name5, prefix, baseEncode);
-        this.decoder = new Decoder3(name5, prefix, baseDecode);
+        this.encoder = new Encoder5(name7, prefix, baseEncode);
+        this.decoder = new Decoder5(name7, prefix, baseDecode);
       }
       encode(input2) {
         return this.encoder.encode(input2);
@@ -34710,23 +34566,23 @@ var require_base = __commonJS({
         return this.decoder.decode(input2);
       }
     };
-    var from3 = ({ name: name5, prefix, encode: encode12, decode: decode13 }) => new Codec2(name5, prefix, encode12, decode13);
-    var baseX2 = ({ prefix, name: name5, alphabet: alphabet2 }) => {
-      const { encode: encode12, decode: decode13 } = baseX$1(alphabet2, name5);
-      return from3({
+    var from7 = ({ name: name7, prefix, encode: encode19, decode: decode24 }) => new Codec4(name7, prefix, encode19, decode24);
+    var baseX4 = ({ prefix, name: name7, alphabet: alphabet3 }) => {
+      const { encode: encode19, decode: decode24 } = baseX$1(alphabet3, name7);
+      return from7({
         prefix,
-        name: name5,
-        encode: encode12,
-        decode: (text) => bytes.coerce(decode13(text))
+        name: name7,
+        encode: encode19,
+        decode: (text) => bytes.coerce(decode24(text))
       });
     };
-    var decode12 = (string2, alphabet2, bitsPerChar, name5) => {
+    var decode23 = (string3, alphabet3, bitsPerChar, name7) => {
       const codes = {};
-      for (let i = 0; i < alphabet2.length; ++i) {
-        codes[alphabet2[i]] = i;
+      for (let i = 0; i < alphabet3.length; ++i) {
+        codes[alphabet3[i]] = i;
       }
-      let end = string2.length;
-      while (string2[end - 1] === "=") {
+      let end = string3.length;
+      while (string3[end - 1] === "=") {
         --end;
       }
       const out = new Uint8Array(end * bitsPerChar / 8 | 0);
@@ -34734,9 +34590,9 @@ var require_base = __commonJS({
       let buffer2 = 0;
       let written = 0;
       for (let i = 0; i < end; ++i) {
-        const value = codes[string2[i]];
+        const value = codes[string3[i]];
         if (value === void 0) {
-          throw new SyntaxError(`Non-${name5} character`);
+          throw new SyntaxError(`Non-${name7} character`);
         }
         buffer2 = buffer2 << bitsPerChar | value;
         bits += bitsPerChar;
@@ -34750,8 +34606,8 @@ var require_base = __commonJS({
       }
       return out;
     };
-    var encode11 = (data, alphabet2, bitsPerChar) => {
-      const pad = alphabet2[alphabet2.length - 1] === "=";
+    var encode18 = (data, alphabet3, bitsPerChar) => {
+      const pad = alphabet3[alphabet3.length - 1] === "=";
       const mask = (1 << bitsPerChar) - 1;
       let out = "";
       let bits = 0;
@@ -34761,11 +34617,11 @@ var require_base = __commonJS({
         bits += 8;
         while (bits > bitsPerChar) {
           bits -= bitsPerChar;
-          out += alphabet2[mask & buffer2 >> bits];
+          out += alphabet3[mask & buffer2 >> bits];
         }
       }
       if (bits) {
-        out += alphabet2[mask & buffer2 << bitsPerChar - bits];
+        out += alphabet3[mask & buffer2 << bitsPerChar - bits];
       }
       if (pad) {
         while (out.length * bitsPerChar & 7) {
@@ -34774,23 +34630,23 @@ var require_base = __commonJS({
       }
       return out;
     };
-    var rfc46482 = ({ name: name5, prefix, bitsPerChar, alphabet: alphabet2 }) => {
-      return from3({
+    var rfc46484 = ({ name: name7, prefix, bitsPerChar, alphabet: alphabet3 }) => {
+      return from7({
         prefix,
-        name: name5,
+        name: name7,
         encode(input2) {
-          return encode11(input2, alphabet2, bitsPerChar);
+          return encode18(input2, alphabet3, bitsPerChar);
         },
         decode(input2) {
-          return decode12(input2, alphabet2, bitsPerChar, name5);
+          return decode23(input2, alphabet3, bitsPerChar, name7);
         }
       });
     };
-    exports2.Codec = Codec2;
-    exports2.baseX = baseX2;
-    exports2.from = from3;
-    exports2.or = or2;
-    exports2.rfc4648 = rfc46482;
+    exports2.Codec = Codec4;
+    exports2.baseX = baseX4;
+    exports2.from = from7;
+    exports2.or = or4;
+    exports2.rfc4648 = rfc46484;
   }
 });
 
@@ -34799,15 +34655,15 @@ var require_identity3 = __commonJS({
   "node_modules/multiformats/cjs/src/bases/identity.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
-    var base3 = require_base();
+    var base4 = require_base();
     var bytes = require_bytes();
-    var identity3 = base3.from({
+    var identity6 = base4.from({
       prefix: "\0",
       name: "identity",
       encode: (buf2) => bytes.toString(buf2),
       decode: (str) => bytes.fromString(str)
     });
-    exports2.identity = identity3;
+    exports2.identity = identity6;
   }
 });
 
@@ -34816,14 +34672,14 @@ var require_base2 = __commonJS({
   "node_modules/multiformats/cjs/src/bases/base2.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
-    var base3 = require_base();
-    var base22 = base3.rfc4648({
+    var base4 = require_base();
+    var base24 = base4.rfc4648({
       prefix: "0",
       name: "base2",
       alphabet: "01",
       bitsPerChar: 1
     });
-    exports2.base2 = base22;
+    exports2.base2 = base24;
   }
 });
 
@@ -34832,14 +34688,14 @@ var require_base8 = __commonJS({
   "node_modules/multiformats/cjs/src/bases/base8.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
-    var base3 = require_base();
-    var base82 = base3.rfc4648({
+    var base4 = require_base();
+    var base83 = base4.rfc4648({
       prefix: "7",
       name: "base8",
       alphabet: "01234567",
       bitsPerChar: 3
     });
-    exports2.base8 = base82;
+    exports2.base8 = base83;
   }
 });
 
@@ -34848,13 +34704,13 @@ var require_base10 = __commonJS({
   "node_modules/multiformats/cjs/src/bases/base10.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
-    var base3 = require_base();
-    var base102 = base3.baseX({
+    var base4 = require_base();
+    var base103 = base4.baseX({
       prefix: "9",
       name: "base10",
       alphabet: "0123456789"
     });
-    exports2.base10 = base102;
+    exports2.base10 = base103;
   }
 });
 
@@ -34863,21 +34719,21 @@ var require_base16 = __commonJS({
   "node_modules/multiformats/cjs/src/bases/base16.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
-    var base3 = require_base();
-    var base162 = base3.rfc4648({
+    var base4 = require_base();
+    var base163 = base4.rfc4648({
       prefix: "f",
       name: "base16",
       alphabet: "0123456789abcdef",
       bitsPerChar: 4
     });
-    var base16upper2 = base3.rfc4648({
+    var base16upper3 = base4.rfc4648({
       prefix: "F",
       name: "base16upper",
       alphabet: "0123456789ABCDEF",
       bitsPerChar: 4
     });
-    exports2.base16 = base162;
-    exports2.base16upper = base16upper2;
+    exports2.base16 = base163;
+    exports2.base16upper = base16upper3;
   }
 });
 
@@ -34886,70 +34742,70 @@ var require_base32 = __commonJS({
   "node_modules/multiformats/cjs/src/bases/base32.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
-    var base3 = require_base();
-    var base322 = base3.rfc4648({
+    var base4 = require_base();
+    var base324 = base4.rfc4648({
       prefix: "b",
       name: "base32",
       alphabet: "abcdefghijklmnopqrstuvwxyz234567",
       bitsPerChar: 5
     });
-    var base32upper2 = base3.rfc4648({
+    var base32upper4 = base4.rfc4648({
       prefix: "B",
       name: "base32upper",
       alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567",
       bitsPerChar: 5
     });
-    var base32pad2 = base3.rfc4648({
+    var base32pad4 = base4.rfc4648({
       prefix: "c",
       name: "base32pad",
       alphabet: "abcdefghijklmnopqrstuvwxyz234567=",
       bitsPerChar: 5
     });
-    var base32padupper2 = base3.rfc4648({
+    var base32padupper4 = base4.rfc4648({
       prefix: "C",
       name: "base32padupper",
       alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567=",
       bitsPerChar: 5
     });
-    var base32hex2 = base3.rfc4648({
+    var base32hex4 = base4.rfc4648({
       prefix: "v",
       name: "base32hex",
       alphabet: "0123456789abcdefghijklmnopqrstuv",
       bitsPerChar: 5
     });
-    var base32hexupper2 = base3.rfc4648({
+    var base32hexupper4 = base4.rfc4648({
       prefix: "V",
       name: "base32hexupper",
       alphabet: "0123456789ABCDEFGHIJKLMNOPQRSTUV",
       bitsPerChar: 5
     });
-    var base32hexpad2 = base3.rfc4648({
+    var base32hexpad4 = base4.rfc4648({
       prefix: "t",
       name: "base32hexpad",
       alphabet: "0123456789abcdefghijklmnopqrstuv=",
       bitsPerChar: 5
     });
-    var base32hexpadupper2 = base3.rfc4648({
+    var base32hexpadupper4 = base4.rfc4648({
       prefix: "T",
       name: "base32hexpadupper",
       alphabet: "0123456789ABCDEFGHIJKLMNOPQRSTUV=",
       bitsPerChar: 5
     });
-    var base32z2 = base3.rfc4648({
+    var base32z4 = base4.rfc4648({
       prefix: "h",
       name: "base32z",
       alphabet: "ybndrfg8ejkmcpqxot1uwisza345h769",
       bitsPerChar: 5
     });
-    exports2.base32 = base322;
-    exports2.base32hex = base32hex2;
-    exports2.base32hexpad = base32hexpad2;
-    exports2.base32hexpadupper = base32hexpadupper2;
-    exports2.base32hexupper = base32hexupper2;
-    exports2.base32pad = base32pad2;
-    exports2.base32padupper = base32padupper2;
-    exports2.base32upper = base32upper2;
-    exports2.base32z = base32z2;
+    exports2.base32 = base324;
+    exports2.base32hex = base32hex4;
+    exports2.base32hexpad = base32hexpad4;
+    exports2.base32hexpadupper = base32hexpadupper4;
+    exports2.base32hexupper = base32hexupper4;
+    exports2.base32pad = base32pad4;
+    exports2.base32padupper = base32padupper4;
+    exports2.base32upper = base32upper4;
+    exports2.base32z = base32z4;
   }
 });
 
@@ -34958,19 +34814,19 @@ var require_base36 = __commonJS({
   "node_modules/multiformats/cjs/src/bases/base36.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
-    var base3 = require_base();
-    var base362 = base3.baseX({
+    var base4 = require_base();
+    var base363 = base4.baseX({
       prefix: "k",
       name: "base36",
       alphabet: "0123456789abcdefghijklmnopqrstuvwxyz"
     });
-    var base36upper2 = base3.baseX({
+    var base36upper3 = base4.baseX({
       prefix: "K",
       name: "base36upper",
       alphabet: "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     });
-    exports2.base36 = base362;
-    exports2.base36upper = base36upper2;
+    exports2.base36 = base363;
+    exports2.base36upper = base36upper3;
   }
 });
 
@@ -34979,19 +34835,19 @@ var require_base58 = __commonJS({
   "node_modules/multiformats/cjs/src/bases/base58.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
-    var base3 = require_base();
-    var base58btc2 = base3.baseX({
+    var base4 = require_base();
+    var base58btc4 = base4.baseX({
       name: "base58btc",
       prefix: "z",
       alphabet: "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
     });
-    var base58flickr2 = base3.baseX({
+    var base58flickr4 = base4.baseX({
       name: "base58flickr",
       prefix: "Z",
       alphabet: "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
     });
-    exports2.base58btc = base58btc2;
-    exports2.base58flickr = base58flickr2;
+    exports2.base58btc = base58btc4;
+    exports2.base58flickr = base58flickr4;
   }
 });
 
@@ -35000,35 +34856,35 @@ var require_base642 = __commonJS({
   "node_modules/multiformats/cjs/src/bases/base64.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
-    var base3 = require_base();
-    var base642 = base3.rfc4648({
+    var base4 = require_base();
+    var base643 = base4.rfc4648({
       prefix: "m",
       name: "base64",
       alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",
       bitsPerChar: 6
     });
-    var base64pad2 = base3.rfc4648({
+    var base64pad3 = base4.rfc4648({
       prefix: "M",
       name: "base64pad",
       alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
       bitsPerChar: 6
     });
-    var base64url2 = base3.rfc4648({
+    var base64url3 = base4.rfc4648({
       prefix: "u",
       name: "base64url",
       alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_",
       bitsPerChar: 6
     });
-    var base64urlpad2 = base3.rfc4648({
+    var base64urlpad3 = base4.rfc4648({
       prefix: "U",
       name: "base64urlpad",
       alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_=",
       bitsPerChar: 6
     });
-    exports2.base64 = base642;
-    exports2.base64pad = base64pad2;
-    exports2.base64url = base64url2;
-    exports2.base64urlpad = base64urlpad2;
+    exports2.base64 = base643;
+    exports2.base64pad = base64pad3;
+    exports2.base64url = base64url3;
+    exports2.base64urlpad = base64urlpad3;
   }
 });
 
@@ -35037,26 +34893,26 @@ var require_base256emoji = __commonJS({
   "node_modules/multiformats/cjs/src/bases/base256emoji.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
-    var base3 = require_base();
-    var alphabet2 = Array.from("\u{1F680}\u{1FA90}\u2604\u{1F6F0}\u{1F30C}\u{1F311}\u{1F312}\u{1F313}\u{1F314}\u{1F315}\u{1F316}\u{1F317}\u{1F318}\u{1F30D}\u{1F30F}\u{1F30E}\u{1F409}\u2600\u{1F4BB}\u{1F5A5}\u{1F4BE}\u{1F4BF}\u{1F602}\u2764\u{1F60D}\u{1F923}\u{1F60A}\u{1F64F}\u{1F495}\u{1F62D}\u{1F618}\u{1F44D}\u{1F605}\u{1F44F}\u{1F601}\u{1F525}\u{1F970}\u{1F494}\u{1F496}\u{1F499}\u{1F622}\u{1F914}\u{1F606}\u{1F644}\u{1F4AA}\u{1F609}\u263A\u{1F44C}\u{1F917}\u{1F49C}\u{1F614}\u{1F60E}\u{1F607}\u{1F339}\u{1F926}\u{1F389}\u{1F49E}\u270C\u2728\u{1F937}\u{1F631}\u{1F60C}\u{1F338}\u{1F64C}\u{1F60B}\u{1F497}\u{1F49A}\u{1F60F}\u{1F49B}\u{1F642}\u{1F493}\u{1F929}\u{1F604}\u{1F600}\u{1F5A4}\u{1F603}\u{1F4AF}\u{1F648}\u{1F447}\u{1F3B6}\u{1F612}\u{1F92D}\u2763\u{1F61C}\u{1F48B}\u{1F440}\u{1F62A}\u{1F611}\u{1F4A5}\u{1F64B}\u{1F61E}\u{1F629}\u{1F621}\u{1F92A}\u{1F44A}\u{1F973}\u{1F625}\u{1F924}\u{1F449}\u{1F483}\u{1F633}\u270B\u{1F61A}\u{1F61D}\u{1F634}\u{1F31F}\u{1F62C}\u{1F643}\u{1F340}\u{1F337}\u{1F63B}\u{1F613}\u2B50\u2705\u{1F97A}\u{1F308}\u{1F608}\u{1F918}\u{1F4A6}\u2714\u{1F623}\u{1F3C3}\u{1F490}\u2639\u{1F38A}\u{1F498}\u{1F620}\u261D\u{1F615}\u{1F33A}\u{1F382}\u{1F33B}\u{1F610}\u{1F595}\u{1F49D}\u{1F64A}\u{1F639}\u{1F5E3}\u{1F4AB}\u{1F480}\u{1F451}\u{1F3B5}\u{1F91E}\u{1F61B}\u{1F534}\u{1F624}\u{1F33C}\u{1F62B}\u26BD\u{1F919}\u2615\u{1F3C6}\u{1F92B}\u{1F448}\u{1F62E}\u{1F646}\u{1F37B}\u{1F343}\u{1F436}\u{1F481}\u{1F632}\u{1F33F}\u{1F9E1}\u{1F381}\u26A1\u{1F31E}\u{1F388}\u274C\u270A\u{1F44B}\u{1F630}\u{1F928}\u{1F636}\u{1F91D}\u{1F6B6}\u{1F4B0}\u{1F353}\u{1F4A2}\u{1F91F}\u{1F641}\u{1F6A8}\u{1F4A8}\u{1F92C}\u2708\u{1F380}\u{1F37A}\u{1F913}\u{1F619}\u{1F49F}\u{1F331}\u{1F616}\u{1F476}\u{1F974}\u25B6\u27A1\u2753\u{1F48E}\u{1F4B8}\u2B07\u{1F628}\u{1F31A}\u{1F98B}\u{1F637}\u{1F57A}\u26A0\u{1F645}\u{1F61F}\u{1F635}\u{1F44E}\u{1F932}\u{1F920}\u{1F927}\u{1F4CC}\u{1F535}\u{1F485}\u{1F9D0}\u{1F43E}\u{1F352}\u{1F617}\u{1F911}\u{1F30A}\u{1F92F}\u{1F437}\u260E\u{1F4A7}\u{1F62F}\u{1F486}\u{1F446}\u{1F3A4}\u{1F647}\u{1F351}\u2744\u{1F334}\u{1F4A3}\u{1F438}\u{1F48C}\u{1F4CD}\u{1F940}\u{1F922}\u{1F445}\u{1F4A1}\u{1F4A9}\u{1F450}\u{1F4F8}\u{1F47B}\u{1F910}\u{1F92E}\u{1F3BC}\u{1F975}\u{1F6A9}\u{1F34E}\u{1F34A}\u{1F47C}\u{1F48D}\u{1F4E3}\u{1F942}");
-    var alphabetBytesToChars2 = alphabet2.reduce((p, c, i) => {
+    var base4 = require_base();
+    var alphabet3 = Array.from("\u{1F680}\u{1FA90}\u2604\u{1F6F0}\u{1F30C}\u{1F311}\u{1F312}\u{1F313}\u{1F314}\u{1F315}\u{1F316}\u{1F317}\u{1F318}\u{1F30D}\u{1F30F}\u{1F30E}\u{1F409}\u2600\u{1F4BB}\u{1F5A5}\u{1F4BE}\u{1F4BF}\u{1F602}\u2764\u{1F60D}\u{1F923}\u{1F60A}\u{1F64F}\u{1F495}\u{1F62D}\u{1F618}\u{1F44D}\u{1F605}\u{1F44F}\u{1F601}\u{1F525}\u{1F970}\u{1F494}\u{1F496}\u{1F499}\u{1F622}\u{1F914}\u{1F606}\u{1F644}\u{1F4AA}\u{1F609}\u263A\u{1F44C}\u{1F917}\u{1F49C}\u{1F614}\u{1F60E}\u{1F607}\u{1F339}\u{1F926}\u{1F389}\u{1F49E}\u270C\u2728\u{1F937}\u{1F631}\u{1F60C}\u{1F338}\u{1F64C}\u{1F60B}\u{1F497}\u{1F49A}\u{1F60F}\u{1F49B}\u{1F642}\u{1F493}\u{1F929}\u{1F604}\u{1F600}\u{1F5A4}\u{1F603}\u{1F4AF}\u{1F648}\u{1F447}\u{1F3B6}\u{1F612}\u{1F92D}\u2763\u{1F61C}\u{1F48B}\u{1F440}\u{1F62A}\u{1F611}\u{1F4A5}\u{1F64B}\u{1F61E}\u{1F629}\u{1F621}\u{1F92A}\u{1F44A}\u{1F973}\u{1F625}\u{1F924}\u{1F449}\u{1F483}\u{1F633}\u270B\u{1F61A}\u{1F61D}\u{1F634}\u{1F31F}\u{1F62C}\u{1F643}\u{1F340}\u{1F337}\u{1F63B}\u{1F613}\u2B50\u2705\u{1F97A}\u{1F308}\u{1F608}\u{1F918}\u{1F4A6}\u2714\u{1F623}\u{1F3C3}\u{1F490}\u2639\u{1F38A}\u{1F498}\u{1F620}\u261D\u{1F615}\u{1F33A}\u{1F382}\u{1F33B}\u{1F610}\u{1F595}\u{1F49D}\u{1F64A}\u{1F639}\u{1F5E3}\u{1F4AB}\u{1F480}\u{1F451}\u{1F3B5}\u{1F91E}\u{1F61B}\u{1F534}\u{1F624}\u{1F33C}\u{1F62B}\u26BD\u{1F919}\u2615\u{1F3C6}\u{1F92B}\u{1F448}\u{1F62E}\u{1F646}\u{1F37B}\u{1F343}\u{1F436}\u{1F481}\u{1F632}\u{1F33F}\u{1F9E1}\u{1F381}\u26A1\u{1F31E}\u{1F388}\u274C\u270A\u{1F44B}\u{1F630}\u{1F928}\u{1F636}\u{1F91D}\u{1F6B6}\u{1F4B0}\u{1F353}\u{1F4A2}\u{1F91F}\u{1F641}\u{1F6A8}\u{1F4A8}\u{1F92C}\u2708\u{1F380}\u{1F37A}\u{1F913}\u{1F619}\u{1F49F}\u{1F331}\u{1F616}\u{1F476}\u{1F974}\u25B6\u27A1\u2753\u{1F48E}\u{1F4B8}\u2B07\u{1F628}\u{1F31A}\u{1F98B}\u{1F637}\u{1F57A}\u26A0\u{1F645}\u{1F61F}\u{1F635}\u{1F44E}\u{1F932}\u{1F920}\u{1F927}\u{1F4CC}\u{1F535}\u{1F485}\u{1F9D0}\u{1F43E}\u{1F352}\u{1F617}\u{1F911}\u{1F30A}\u{1F92F}\u{1F437}\u260E\u{1F4A7}\u{1F62F}\u{1F486}\u{1F446}\u{1F3A4}\u{1F647}\u{1F351}\u2744\u{1F334}\u{1F4A3}\u{1F438}\u{1F48C}\u{1F4CD}\u{1F940}\u{1F922}\u{1F445}\u{1F4A1}\u{1F4A9}\u{1F450}\u{1F4F8}\u{1F47B}\u{1F910}\u{1F92E}\u{1F3BC}\u{1F975}\u{1F6A9}\u{1F34E}\u{1F34A}\u{1F47C}\u{1F48D}\u{1F4E3}\u{1F942}");
+    var alphabetBytesToChars3 = alphabet3.reduce((p, c, i) => {
       p[i] = c;
       return p;
     }, []);
-    var alphabetCharsToBytes2 = alphabet2.reduce((p, c, i) => {
+    var alphabetCharsToBytes3 = alphabet3.reduce((p, c, i) => {
       p[c.codePointAt(0)] = i;
       return p;
     }, []);
-    function encode11(data) {
+    function encode18(data) {
       return data.reduce((p, c) => {
-        p += alphabetBytesToChars2[c];
+        p += alphabetBytesToChars3[c];
         return p;
       }, "");
     }
-    function decode12(str) {
+    function decode23(str) {
       const byts = [];
       for (const char of str) {
-        const byt = alphabetCharsToBytes2[char.codePointAt(0)];
+        const byt = alphabetCharsToBytes3[char.codePointAt(0)];
         if (byt === void 0) {
           throw new Error(`Non-base256emoji character: ${char}`);
         }
@@ -35064,13 +34920,13 @@ var require_base256emoji = __commonJS({
       }
       return new Uint8Array(byts);
     }
-    var base256emoji2 = base3.from({
+    var base256emoji3 = base4.from({
       prefix: "\u{1F680}",
       name: "base256emoji",
-      encode: encode11,
-      decode: decode12
+      encode: encode18,
+      decode: decode23
     });
-    exports2.base256emoji = base256emoji2;
+    exports2.base256emoji = base256emoji3;
   }
 });
 
@@ -35078,63 +34934,63 @@ var require_base256emoji = __commonJS({
 var require_varint2 = __commonJS({
   "node_modules/multiformats/cjs/vendor/varint.js"(exports2, module2) {
     "use strict";
-    var encode_12 = encode11;
-    var MSB2 = 128;
-    var REST2 = 127;
-    var MSBALL2 = ~REST2;
-    var INT2 = Math.pow(2, 31);
-    function encode11(num, out, offset) {
+    var encode_14 = encode18;
+    var MSB4 = 128;
+    var REST4 = 127;
+    var MSBALL4 = ~REST4;
+    var INT4 = Math.pow(2, 31);
+    function encode18(num, out, offset) {
       out = out || [];
       offset = offset || 0;
       var oldOffset = offset;
-      while (num >= INT2) {
-        out[offset++] = num & 255 | MSB2;
+      while (num >= INT4) {
+        out[offset++] = num & 255 | MSB4;
         num /= 128;
       }
-      while (num & MSBALL2) {
-        out[offset++] = num & 255 | MSB2;
+      while (num & MSBALL4) {
+        out[offset++] = num & 255 | MSB4;
         num >>>= 7;
       }
       out[offset] = num | 0;
-      encode11.bytes = offset - oldOffset + 1;
+      encode18.bytes = offset - oldOffset + 1;
       return out;
     }
-    var decode12 = read2;
-    var MSB$12 = 128;
-    var REST$12 = 127;
-    function read2(buf2, offset) {
+    var decode23 = read4;
+    var MSB$14 = 128;
+    var REST$14 = 127;
+    function read4(buf2, offset) {
       var res = 0, offset = offset || 0, shift = 0, counter = offset, b, l = buf2.length;
       do {
         if (counter >= l) {
-          read2.bytes = 0;
+          read4.bytes = 0;
           throw new RangeError("Could not decode varint");
         }
         b = buf2[counter++];
-        res += shift < 28 ? (b & REST$12) << shift : (b & REST$12) * Math.pow(2, shift);
+        res += shift < 28 ? (b & REST$14) << shift : (b & REST$14) * Math.pow(2, shift);
         shift += 7;
-      } while (b >= MSB$12);
-      read2.bytes = counter - offset;
+      } while (b >= MSB$14);
+      read4.bytes = counter - offset;
       return res;
     }
-    var N12 = Math.pow(2, 7);
-    var N22 = Math.pow(2, 14);
-    var N32 = Math.pow(2, 21);
-    var N42 = Math.pow(2, 28);
-    var N52 = Math.pow(2, 35);
-    var N62 = Math.pow(2, 42);
-    var N72 = Math.pow(2, 49);
-    var N82 = Math.pow(2, 56);
-    var N92 = Math.pow(2, 63);
-    var length2 = function(value) {
-      return value < N12 ? 1 : value < N22 ? 2 : value < N32 ? 3 : value < N42 ? 4 : value < N52 ? 5 : value < N62 ? 6 : value < N72 ? 7 : value < N82 ? 8 : value < N92 ? 9 : 10;
+    var N14 = Math.pow(2, 7);
+    var N24 = Math.pow(2, 14);
+    var N34 = Math.pow(2, 21);
+    var N44 = Math.pow(2, 28);
+    var N54 = Math.pow(2, 35);
+    var N64 = Math.pow(2, 42);
+    var N74 = Math.pow(2, 49);
+    var N84 = Math.pow(2, 56);
+    var N94 = Math.pow(2, 63);
+    var length4 = function(value) {
+      return value < N14 ? 1 : value < N24 ? 2 : value < N34 ? 3 : value < N44 ? 4 : value < N54 ? 5 : value < N64 ? 6 : value < N74 ? 7 : value < N84 ? 8 : value < N94 ? 9 : 10;
     };
-    var varint4 = {
-      encode: encode_12,
-      decode: decode12,
-      encodingLength: length2
+    var varint6 = {
+      encode: encode_14,
+      decode: decode23,
+      encodingLength: length4
     };
-    var _brrp_varint2 = varint4;
-    var varint$1 = _brrp_varint2;
+    var _brrp_varint4 = varint6;
+    var varint$1 = _brrp_varint4;
     module2.exports = varint$1;
   }
 });
@@ -35145,23 +35001,23 @@ var require_varint3 = __commonJS({
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var varint$1 = require_varint2();
-    var decode12 = (data) => {
-      const code6 = varint$1.decode(data);
+    var decode23 = (data) => {
+      const code11 = varint$1.decode(data);
       return [
-        code6,
+        code11,
         varint$1.decode.bytes
       ];
     };
-    var encodeTo2 = (int, target, offset = 0) => {
+    var encodeTo4 = (int, target, offset = 0) => {
       varint$1.encode(int, target, offset);
       return target;
     };
-    var encodingLength2 = (int) => {
+    var encodingLength4 = (int) => {
       return varint$1.encodingLength(int);
     };
-    exports2.decode = decode12;
-    exports2.encodeTo = encodeTo2;
-    exports2.encodingLength = encodingLength2;
+    exports2.decode = decode23;
+    exports2.encodeTo = encodeTo4;
+    exports2.encodingLength = encodingLength4;
   }
 });
 
@@ -35171,46 +35027,46 @@ var require_digest = __commonJS({
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var bytes = require_bytes();
-    var varint4 = require_varint3();
-    var create5 = (code6, digest2) => {
-      const size = digest2.byteLength;
-      const sizeOffset = varint4.encodingLength(code6);
-      const digestOffset = sizeOffset + varint4.encodingLength(size);
+    var varint6 = require_varint3();
+    var create7 = (code11, digest4) => {
+      const size = digest4.byteLength;
+      const sizeOffset = varint6.encodingLength(code11);
+      const digestOffset = sizeOffset + varint6.encodingLength(size);
       const bytes2 = new Uint8Array(digestOffset + size);
-      varint4.encodeTo(code6, bytes2, 0);
-      varint4.encodeTo(size, bytes2, sizeOffset);
-      bytes2.set(digest2, digestOffset);
-      return new Digest2(code6, size, digest2, bytes2);
+      varint6.encodeTo(code11, bytes2, 0);
+      varint6.encodeTo(size, bytes2, sizeOffset);
+      bytes2.set(digest4, digestOffset);
+      return new Digest4(code11, size, digest4, bytes2);
     };
-    var decode12 = (multihash) => {
+    var decode23 = (multihash) => {
       const bytes$1 = bytes.coerce(multihash);
-      const [code6, sizeOffset] = varint4.decode(bytes$1);
-      const [size, digestOffset] = varint4.decode(bytes$1.subarray(sizeOffset));
-      const digest2 = bytes$1.subarray(sizeOffset + digestOffset);
-      if (digest2.byteLength !== size) {
+      const [code11, sizeOffset] = varint6.decode(bytes$1);
+      const [size, digestOffset] = varint6.decode(bytes$1.subarray(sizeOffset));
+      const digest4 = bytes$1.subarray(sizeOffset + digestOffset);
+      if (digest4.byteLength !== size) {
         throw new Error("Incorrect length");
       }
-      return new Digest2(code6, size, digest2, bytes$1);
+      return new Digest4(code11, size, digest4, bytes$1);
     };
-    var equals4 = (a, b) => {
+    var equals8 = (a, b) => {
       if (a === b) {
         return true;
       } else {
         return a.code === b.code && a.size === b.size && bytes.equals(a.bytes, b.bytes);
       }
     };
-    var Digest2 = class {
-      constructor(code6, size, digest2, bytes2) {
-        this.code = code6;
+    var Digest4 = class {
+      constructor(code11, size, digest4, bytes2) {
+        this.code = code11;
         this.size = size;
-        this.digest = digest2;
+        this.digest = digest4;
         this.bytes = bytes2;
       }
     };
-    exports2.Digest = Digest2;
-    exports2.create = create5;
-    exports2.decode = decode12;
-    exports2.equals = equals4;
+    exports2.Digest = Digest4;
+    exports2.create = create7;
+    exports2.decode = decode23;
+    exports2.equals = equals8;
   }
 });
 
@@ -35219,25 +35075,25 @@ var require_hasher = __commonJS({
   "node_modules/multiformats/cjs/src/hashes/hasher.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
-    var digest2 = require_digest();
-    var from3 = ({ name: name5, code: code6, encode: encode11 }) => new Hasher2(name5, code6, encode11);
-    var Hasher2 = class {
-      constructor(name5, code6, encode11) {
-        this.name = name5;
-        this.code = code6;
-        this.encode = encode11;
+    var digest4 = require_digest();
+    var from7 = ({ name: name7, code: code11, encode: encode18 }) => new Hasher4(name7, code11, encode18);
+    var Hasher4 = class {
+      constructor(name7, code11, encode18) {
+        this.name = name7;
+        this.code = code11;
+        this.encode = encode18;
       }
       digest(input2) {
         if (input2 instanceof Uint8Array) {
           const result = this.encode(input2);
-          return result instanceof Uint8Array ? digest2.create(this.code, result) : result.then((digest$1) => digest2.create(this.code, digest$1));
+          return result instanceof Uint8Array ? digest4.create(this.code, result) : result.then((digest$1) => digest4.create(this.code, digest$1));
         } else {
           throw Error("Unknown type, must be binary type");
         }
       }
     };
-    exports2.Hasher = Hasher2;
-    exports2.from = from3;
+    exports2.Hasher = Hasher4;
+    exports2.from = from7;
   }
 });
 
@@ -35246,25 +35102,25 @@ var require_sha2 = __commonJS({
   "node_modules/multiformats/cjs/src/hashes/sha2.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
-    var crypto2 = require("crypto");
+    var crypto3 = require("crypto");
     var hasher = require_hasher();
     var bytes = require_bytes();
     function _interopDefaultLegacy(e) {
       return e && typeof e === "object" && "default" in e ? e : { "default": e };
     }
-    var crypto__default = /* @__PURE__ */ _interopDefaultLegacy(crypto2);
-    var sha2562 = hasher.from({
+    var crypto__default = /* @__PURE__ */ _interopDefaultLegacy(crypto3);
+    var sha2563 = hasher.from({
       name: "sha2-256",
       code: 18,
       encode: (input2) => bytes.coerce(crypto__default["default"].createHash("sha256").update(input2).digest())
     });
-    var sha5122 = hasher.from({
+    var sha5123 = hasher.from({
       name: "sha2-512",
       code: 19,
       encode: (input2) => bytes.coerce(crypto__default["default"].createHash("sha512").update(input2).digest())
     });
-    exports2.sha256 = sha2562;
-    exports2.sha512 = sha5122;
+    exports2.sha256 = sha2563;
+    exports2.sha512 = sha5123;
   }
 });
 
@@ -35275,17 +35131,17 @@ var require_identity4 = __commonJS({
     Object.defineProperty(exports2, "__esModule", { value: true });
     var bytes = require_bytes();
     var digest$1 = require_digest();
-    var code6 = 0;
-    var name5 = "identity";
-    var encode11 = bytes.coerce;
-    var digest2 = (input2) => digest$1.create(code6, encode11(input2));
-    var identity3 = {
-      code: code6,
-      name: name5,
-      encode: encode11,
-      digest: digest2
+    var code11 = 0;
+    var name7 = "identity";
+    var encode18 = bytes.coerce;
+    var digest4 = (input2) => digest$1.create(code11, encode18(input2));
+    var identity6 = {
+      code: code11,
+      name: name7,
+      encode: encode18,
+      digest: digest4
     };
-    exports2.identity = identity3;
+    exports2.identity = identity6;
   }
 });
 
@@ -35295,14 +35151,14 @@ var require_raw = __commonJS({
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var bytes = require_bytes();
-    var name5 = "raw";
-    var code6 = 85;
-    var encode11 = (node) => bytes.coerce(node);
-    var decode12 = (data) => bytes.coerce(data);
-    exports2.code = code6;
-    exports2.decode = decode12;
-    exports2.encode = encode11;
-    exports2.name = name5;
+    var name7 = "raw";
+    var code11 = 85;
+    var encode18 = (node) => bytes.coerce(node);
+    var decode23 = (data) => bytes.coerce(data);
+    exports2.code = code11;
+    exports2.decode = decode23;
+    exports2.encode = encode18;
+    exports2.name = name7;
   }
 });
 
@@ -35311,16 +35167,16 @@ var require_json = __commonJS({
   "node_modules/multiformats/cjs/src/codecs/json.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
-    var textEncoder5 = new TextEncoder();
-    var textDecoder4 = new TextDecoder();
-    var name5 = "json";
-    var code6 = 512;
-    var encode11 = (node) => textEncoder5.encode(JSON.stringify(node));
-    var decode12 = (data) => JSON.parse(textDecoder4.decode(data));
-    exports2.code = code6;
-    exports2.decode = decode12;
-    exports2.encode = encode11;
-    exports2.name = name5;
+    var textEncoder8 = new TextEncoder();
+    var textDecoder6 = new TextDecoder();
+    var name7 = "json";
+    var code11 = 512;
+    var encode18 = (node) => textEncoder8.encode(JSON.stringify(node));
+    var decode23 = (data) => JSON.parse(textDecoder6.decode(data));
+    exports2.code = code11;
+    exports2.decode = decode23;
+    exports2.encode = encode18;
+    exports2.name = name7;
   }
 });
 
@@ -35329,15 +35185,15 @@ var require_cid = __commonJS({
   "node_modules/multiformats/cjs/src/cid.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
-    var varint4 = require_varint3();
-    var digest2 = require_digest();
+    var varint6 = require_varint3();
+    var digest4 = require_digest();
     var base58 = require_base58();
-    var base322 = require_base32();
+    var base324 = require_base32();
     var bytes = require_bytes();
-    var CID2 = class {
-      constructor(version3, code6, multihash, bytes2) {
-        this.code = code6;
-        this.version = version3;
+    var CID4 = class {
+      constructor(version4, code11, multihash, bytes2) {
+        this.code = code11;
+        this.version = version4;
         this.multihash = multihash;
         this.bytes = bytes2;
         this.byteOffset = bytes2.byteOffset;
@@ -35345,14 +35201,14 @@ var require_cid = __commonJS({
         this.asCID = this;
         this._baseCache = /* @__PURE__ */ new Map();
         Object.defineProperties(this, {
-          byteOffset: hidden2,
-          byteLength: hidden2,
-          code: readonly3,
-          version: readonly3,
-          multihash: readonly3,
-          bytes: readonly3,
-          _baseCache: hidden2,
-          asCID: hidden2
+          byteOffset: hidden3,
+          byteLength: hidden3,
+          code: readonly4,
+          version: readonly4,
+          multihash: readonly4,
+          bytes: readonly4,
+          _baseCache: hidden3,
+          asCID: hidden3
         });
       }
       toV0() {
@@ -35361,23 +35217,23 @@ var require_cid = __commonJS({
             return this;
           }
           default: {
-            const { code: code6, multihash } = this;
-            if (code6 !== DAG_PB_CODE2) {
+            const { code: code11, multihash } = this;
+            if (code11 !== DAG_PB_CODE4) {
               throw new Error("Cannot convert a non dag-pb CID to CIDv0");
             }
-            if (multihash.code !== SHA_256_CODE2) {
+            if (multihash.code !== SHA_256_CODE4) {
               throw new Error("Cannot convert non sha2-256 multihash CID to CIDv0");
             }
-            return CID2.createV0(multihash);
+            return CID4.createV0(multihash);
           }
         }
       }
       toV1() {
         switch (this.version) {
           case 0: {
-            const { code: code6, digest: digest$1 } = this.multihash;
-            const multihash = digest2.create(code6, digest$1);
-            return CID2.createV1(this.code, multihash);
+            const { code: code11, digest: digest$1 } = this.multihash;
+            const multihash = digest4.create(code11, digest$1);
+            return CID4.createV1(this.code, multihash);
           }
           case 1: {
             return this;
@@ -35388,15 +35244,15 @@ var require_cid = __commonJS({
         }
       }
       equals(other) {
-        return other && this.code === other.code && this.version === other.version && digest2.equals(this.multihash, other.multihash);
+        return other && this.code === other.code && this.version === other.version && digest4.equals(this.multihash, other.multihash);
       }
-      toString(base3) {
-        const { bytes: bytes2, version: version3, _baseCache } = this;
-        switch (version3) {
+      toString(base4) {
+        const { bytes: bytes2, version: version4, _baseCache } = this;
+        switch (version4) {
           case 0:
-            return toStringV02(bytes2, _baseCache, base3 || base58.base58btc.encoder);
+            return toStringV04(bytes2, _baseCache, base4 || base58.base58btc.encoder);
           default:
-            return toStringV12(bytes2, _baseCache, base3 || base322.base32.encoder);
+            return toStringV14(bytes2, _baseCache, base4 || base324.base32.encoder);
         }
       }
       toJSON() {
@@ -35413,8 +35269,8 @@ var require_cid = __commonJS({
         return "CID(" + this.toString() + ")";
       }
       static isCID(value) {
-        deprecate2(/^0\.0/, IS_CID_DEPRECATION2);
-        return !!(value && (value[cidSymbol2] || value.asCID === value));
+        deprecate3(/^0\.0/, IS_CID_DEPRECATION3);
+        return !!(value && (value[cidSymbol4] || value.asCID === value));
       }
       get toBaseEncodedString() {
         throw new Error("Deprecated, use .toString()");
@@ -35432,63 +35288,63 @@ var require_cid = __commonJS({
         throw new Error('"prefix" property is deprecated');
       }
       static asCID(value) {
-        if (value instanceof CID2) {
+        if (value instanceof CID4) {
           return value;
         } else if (value != null && value.asCID === value) {
-          const { version: version3, code: code6, multihash, bytes: bytes2 } = value;
-          return new CID2(version3, code6, multihash, bytes2 || encodeCID2(version3, code6, multihash.bytes));
-        } else if (value != null && value[cidSymbol2] === true) {
-          const { version: version3, multihash, code: code6 } = value;
-          const digest$1 = digest2.decode(multihash);
-          return CID2.create(version3, code6, digest$1);
+          const { version: version4, code: code11, multihash, bytes: bytes2 } = value;
+          return new CID4(version4, code11, multihash, bytes2 || encodeCID4(version4, code11, multihash.bytes));
+        } else if (value != null && value[cidSymbol4] === true) {
+          const { version: version4, multihash, code: code11 } = value;
+          const digest$1 = digest4.decode(multihash);
+          return CID4.create(version4, code11, digest$1);
         } else {
           return null;
         }
       }
-      static create(version3, code6, digest3) {
-        if (typeof code6 !== "number") {
+      static create(version4, code11, digest5) {
+        if (typeof code11 !== "number") {
           throw new Error("String codecs are no longer supported");
         }
-        switch (version3) {
+        switch (version4) {
           case 0: {
-            if (code6 !== DAG_PB_CODE2) {
-              throw new Error(`Version 0 CID must use dag-pb (code: ${DAG_PB_CODE2}) block encoding`);
+            if (code11 !== DAG_PB_CODE4) {
+              throw new Error(`Version 0 CID must use dag-pb (code: ${DAG_PB_CODE4}) block encoding`);
             } else {
-              return new CID2(version3, code6, digest3, digest3.bytes);
+              return new CID4(version4, code11, digest5, digest5.bytes);
             }
           }
           case 1: {
-            const bytes2 = encodeCID2(version3, code6, digest3.bytes);
-            return new CID2(version3, code6, digest3, bytes2);
+            const bytes2 = encodeCID4(version4, code11, digest5.bytes);
+            return new CID4(version4, code11, digest5, bytes2);
           }
           default: {
             throw new Error("Invalid version");
           }
         }
       }
-      static createV0(digest3) {
-        return CID2.create(0, DAG_PB_CODE2, digest3);
+      static createV0(digest5) {
+        return CID4.create(0, DAG_PB_CODE4, digest5);
       }
-      static createV1(code6, digest3) {
-        return CID2.create(1, code6, digest3);
+      static createV1(code11, digest5) {
+        return CID4.create(1, code11, digest5);
       }
       static decode(bytes2) {
-        const [cid, remainder] = CID2.decodeFirst(bytes2);
+        const [cid, remainder] = CID4.decodeFirst(bytes2);
         if (remainder.length) {
           throw new Error("Incorrect length");
         }
         return cid;
       }
       static decodeFirst(bytes$1) {
-        const specs = CID2.inspectBytes(bytes$1);
+        const specs = CID4.inspectBytes(bytes$1);
         const prefixSize = specs.size - specs.multihashSize;
         const multihashBytes = bytes.coerce(bytes$1.subarray(prefixSize, prefixSize + specs.multihashSize));
         if (multihashBytes.byteLength !== specs.multihashSize) {
           throw new Error("Incorrect length");
         }
         const digestBytes = multihashBytes.subarray(specs.multihashSize - specs.digestSize);
-        const digest$1 = new digest2.Digest(specs.multihashCode, specs.digestSize, digestBytes, multihashBytes);
-        const cid = specs.version === 0 ? CID2.createV0(digest$1) : CID2.createV1(specs.codec, digest$1);
+        const digest$1 = new digest4.Digest(specs.multihashCode, specs.digestSize, digestBytes, multihashBytes);
+        const cid = specs.version === 0 ? CID4.createV0(digest$1) : CID4.createV1(specs.codec, digest$1);
         return [
           cid,
           bytes$1.subarray(specs.size)
@@ -35497,20 +35353,20 @@ var require_cid = __commonJS({
       static inspectBytes(initialBytes) {
         let offset = 0;
         const next = () => {
-          const [i, length2] = varint4.decode(initialBytes.subarray(offset));
-          offset += length2;
+          const [i, length4] = varint6.decode(initialBytes.subarray(offset));
+          offset += length4;
           return i;
         };
-        let version3 = next();
-        let codec = DAG_PB_CODE2;
-        if (version3 === 18) {
-          version3 = 0;
+        let version4 = next();
+        let codec = DAG_PB_CODE4;
+        if (version4 === 18) {
+          version4 = 0;
           offset = 0;
-        } else if (version3 === 1) {
+        } else if (version4 === 1) {
           codec = next();
         }
-        if (version3 !== 0 && version3 !== 1) {
-          throw new RangeError(`Invalid CID version ${version3}`);
+        if (version4 !== 0 && version4 !== 1) {
+          throw new RangeError(`Invalid CID version ${version4}`);
         }
         const prefixSize = offset;
         const multihashCode = next();
@@ -35518,7 +35374,7 @@ var require_cid = __commonJS({
         const size = offset + digestSize;
         const multihashSize = size - prefixSize;
         return {
-          version: version3,
+          version: version4,
           codec,
           multihashCode,
           digestSize,
@@ -35526,103 +35382,103 @@ var require_cid = __commonJS({
           size
         };
       }
-      static parse(source, base3) {
-        const [prefix, bytes2] = parseCIDtoBytes2(source, base3);
-        const cid = CID2.decode(bytes2);
+      static parse(source, base4) {
+        const [prefix, bytes2] = parseCIDtoBytes4(source, base4);
+        const cid = CID4.decode(bytes2);
         cid._baseCache.set(prefix, source);
         return cid;
       }
     };
-    var parseCIDtoBytes2 = (source, base3) => {
+    var parseCIDtoBytes4 = (source, base4) => {
       switch (source[0]) {
         case "Q": {
-          const decoder2 = base3 || base58.base58btc;
+          const decoder2 = base4 || base58.base58btc;
           return [
             base58.base58btc.prefix,
             decoder2.decode(`${base58.base58btc.prefix}${source}`)
           ];
         }
         case base58.base58btc.prefix: {
-          const decoder2 = base3 || base58.base58btc;
+          const decoder2 = base4 || base58.base58btc;
           return [
             base58.base58btc.prefix,
             decoder2.decode(source)
           ];
         }
-        case base322.base32.prefix: {
-          const decoder2 = base3 || base322.base32;
+        case base324.base32.prefix: {
+          const decoder2 = base4 || base324.base32;
           return [
-            base322.base32.prefix,
+            base324.base32.prefix,
             decoder2.decode(source)
           ];
         }
         default: {
-          if (base3 == null) {
+          if (base4 == null) {
             throw Error("To parse non base32 or base58btc encoded CID multibase decoder must be provided");
           }
           return [
             source[0],
-            base3.decode(source)
+            base4.decode(source)
           ];
         }
       }
     };
-    var toStringV02 = (bytes2, cache, base3) => {
-      const { prefix } = base3;
+    var toStringV04 = (bytes2, cache2, base4) => {
+      const { prefix } = base4;
       if (prefix !== base58.base58btc.prefix) {
-        throw Error(`Cannot string encode V0 in ${base3.name} encoding`);
+        throw Error(`Cannot string encode V0 in ${base4.name} encoding`);
       }
-      const cid = cache.get(prefix);
+      const cid = cache2.get(prefix);
       if (cid == null) {
-        const cid2 = base3.encode(bytes2).slice(1);
-        cache.set(prefix, cid2);
+        const cid2 = base4.encode(bytes2).slice(1);
+        cache2.set(prefix, cid2);
         return cid2;
       } else {
         return cid;
       }
     };
-    var toStringV12 = (bytes2, cache, base3) => {
-      const { prefix } = base3;
-      const cid = cache.get(prefix);
+    var toStringV14 = (bytes2, cache2, base4) => {
+      const { prefix } = base4;
+      const cid = cache2.get(prefix);
       if (cid == null) {
-        const cid2 = base3.encode(bytes2);
-        cache.set(prefix, cid2);
+        const cid2 = base4.encode(bytes2);
+        cache2.set(prefix, cid2);
         return cid2;
       } else {
         return cid;
       }
     };
-    var DAG_PB_CODE2 = 112;
-    var SHA_256_CODE2 = 18;
-    var encodeCID2 = (version3, code6, multihash) => {
-      const codeOffset = varint4.encodingLength(version3);
-      const hashOffset = codeOffset + varint4.encodingLength(code6);
+    var DAG_PB_CODE4 = 112;
+    var SHA_256_CODE4 = 18;
+    var encodeCID4 = (version4, code11, multihash) => {
+      const codeOffset = varint6.encodingLength(version4);
+      const hashOffset = codeOffset + varint6.encodingLength(code11);
       const bytes2 = new Uint8Array(hashOffset + multihash.byteLength);
-      varint4.encodeTo(version3, bytes2, 0);
-      varint4.encodeTo(code6, bytes2, codeOffset);
+      varint6.encodeTo(version4, bytes2, 0);
+      varint6.encodeTo(code11, bytes2, codeOffset);
       bytes2.set(multihash, hashOffset);
       return bytes2;
     };
-    var cidSymbol2 = Symbol.for("@ipld/js-cid/CID");
-    var readonly3 = {
+    var cidSymbol4 = Symbol.for("@ipld/js-cid/CID");
+    var readonly4 = {
       writable: false,
       configurable: false,
       enumerable: true
     };
-    var hidden2 = {
+    var hidden3 = {
       writable: false,
       enumerable: false,
       configurable: false
     };
-    var version2 = "0.0.0-dev";
-    var deprecate2 = (range, message) => {
-      if (range.test(version2)) {
+    var version3 = "0.0.0-dev";
+    var deprecate3 = (range, message) => {
+      if (range.test(version3)) {
         console.warn(message);
       } else {
         throw new Error(message);
       }
     };
-    var IS_CID_DEPRECATION2 = `CID.isCID(v) is deprecated and will be removed in the next major release.
+    var IS_CID_DEPRECATION3 = `CID.isCID(v) is deprecated and will be removed in the next major release.
 Following code pattern:
 
 if (CID.isCID(value)) {
@@ -35637,7 +35493,7 @@ if (cid) {
   doSomethingWithCID(cid)
 }
 `;
-    exports2.CID = CID2;
+    exports2.CID = CID4;
   }
 });
 
@@ -35647,15 +35503,15 @@ var require_src5 = __commonJS({
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var cid = require_cid();
-    var varint4 = require_varint3();
+    var varint6 = require_varint3();
     var bytes = require_bytes();
     var hasher = require_hasher();
-    var digest2 = require_digest();
+    var digest4 = require_digest();
     exports2.CID = cid.CID;
-    exports2.varint = varint4;
+    exports2.varint = varint6;
     exports2.bytes = bytes;
     exports2.hasher = hasher;
-    exports2.digest = digest2;
+    exports2.digest = digest4;
   }
 });
 
@@ -35664,16 +35520,16 @@ var require_basics = __commonJS({
   "node_modules/multiformats/cjs/src/basics.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
-    var identity3 = require_identity3();
-    var base22 = require_base2();
-    var base82 = require_base8();
-    var base102 = require_base10();
-    var base162 = require_base16();
-    var base322 = require_base32();
-    var base362 = require_base36();
+    var identity6 = require_identity3();
+    var base24 = require_base2();
+    var base83 = require_base8();
+    var base103 = require_base10();
+    var base163 = require_base16();
+    var base324 = require_base32();
+    var base363 = require_base36();
     var base58 = require_base58();
-    var base642 = require_base642();
-    var base256emoji2 = require_base256emoji();
+    var base643 = require_base642();
+    var base256emoji3 = require_base256emoji();
     var sha2 = require_sha2();
     var identity$1 = require_identity4();
     var raw = require_raw();
@@ -35681,22 +35537,22 @@ var require_basics = __commonJS({
     require_src5();
     var cid = require_cid();
     var hasher = require_hasher();
-    var digest2 = require_digest();
-    var varint4 = require_varint3();
+    var digest4 = require_digest();
+    var varint6 = require_varint3();
     var bytes = require_bytes();
-    var bases2 = {
-      ...identity3,
-      ...base22,
-      ...base82,
-      ...base102,
-      ...base162,
-      ...base322,
-      ...base362,
+    var bases3 = {
+      ...identity6,
+      ...base24,
+      ...base83,
+      ...base103,
+      ...base163,
+      ...base324,
+      ...base363,
       ...base58,
-      ...base642,
-      ...base256emoji2
+      ...base643,
+      ...base256emoji3
     };
-    var hashes2 = {
+    var hashes3 = {
       ...sha2,
       ...identity$1
     };
@@ -35706,12 +35562,12 @@ var require_basics = __commonJS({
     };
     exports2.CID = cid.CID;
     exports2.hasher = hasher;
-    exports2.digest = digest2;
-    exports2.varint = varint4;
+    exports2.digest = digest4;
+    exports2.varint = varint6;
     exports2.bytes = bytes;
-    exports2.bases = bases2;
+    exports2.bases = bases3;
     exports2.codecs = codecs;
-    exports2.hashes = hashes2;
+    exports2.hashes = hashes3;
   }
 });
 
@@ -35720,31 +35576,31 @@ var require_bases = __commonJS({
   "node_modules/uint8arrays/cjs/src/util/bases.js"(exports2, module2) {
     "use strict";
     var basics = require_basics();
-    function createCodec2(name5, prefix, encode11, decode12) {
+    function createCodec3(name7, prefix, encode18, decode23) {
       return {
-        name: name5,
+        name: name7,
         prefix,
         encoder: {
-          name: name5,
+          name: name7,
           prefix,
-          encode: encode11
+          encode: encode18
         },
-        decoder: { decode: decode12 }
+        decoder: { decode: decode23 }
       };
     }
-    var string2 = createCodec2("utf8", "u", (buf2) => {
+    var string3 = createCodec3("utf8", "u", (buf2) => {
       const decoder2 = new TextDecoder("utf8");
       return "u" + decoder2.decode(buf2);
     }, (str) => {
       const encoder2 = new TextEncoder();
       return encoder2.encode(str.substring(1));
     });
-    var ascii2 = createCodec2("ascii", "a", (buf2) => {
-      let string3 = "a";
+    var ascii3 = createCodec3("ascii", "a", (buf2) => {
+      let string4 = "a";
       for (let i = 0; i < buf2.length; i++) {
-        string3 += String.fromCharCode(buf2[i]);
+        string4 += String.fromCharCode(buf2[i]);
       }
-      return string3;
+      return string4;
     }, (str) => {
       str = str.substring(1);
       const buf2 = new Uint8Array(str.length);
@@ -35753,16 +35609,16 @@ var require_bases = __commonJS({
       }
       return buf2;
     });
-    var BASES2 = {
-      utf8: string2,
-      "utf-8": string2,
+    var BASES3 = {
+      utf8: string3,
+      "utf-8": string3,
       hex: basics.bases.base16,
-      latin1: ascii2,
-      ascii: ascii2,
-      binary: ascii2,
+      latin1: ascii3,
+      ascii: ascii3,
+      binary: ascii3,
       ...basics.bases
     };
-    module2.exports = BASES2;
+    module2.exports = BASES3;
   }
 });
 
@@ -35771,15 +35627,15 @@ var require_from_string = __commonJS({
   "node_modules/uint8arrays/cjs/src/from-string.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
-    var bases2 = require_bases();
-    function fromString4(string2, encoding = "utf8") {
-      const base3 = bases2[encoding];
-      if (!base3) {
+    var bases3 = require_bases();
+    function fromString7(string3, encoding = "utf8") {
+      const base4 = bases3[encoding];
+      if (!base4) {
         throw new Error(`Unsupported encoding "${encoding}"`);
       }
-      return base3.decoder.decode(`${base3.prefix}${string2}`);
+      return base4.decoder.decode(`${base4.prefix}${string3}`);
     }
-    exports2.fromString = fromString4;
+    exports2.fromString = fromString7;
   }
 });
 
@@ -36040,12 +35896,12 @@ var require_consumable_buffer = __commonJS({
         return this._currentBytePos >= 0;
       }
     };
-    function byteBitsToInt3(byte, start, length2) {
-      const mask = maskFor3(start, length2);
+    function byteBitsToInt3(byte, start, length4) {
+      const mask = maskFor3(start, length4);
       return (byte & mask) >>> start;
     }
-    function maskFor3(start, length2) {
-      return START_MASKS3[start] & STOP_MASKS3[Math.min(length2 + start - 1, 7)];
+    function maskFor3(start, length4) {
+      return START_MASKS3[start] & STOP_MASKS3[Math.min(length4 + start - 1, 7)];
     }
   }
 });
@@ -36055,11 +35911,11 @@ var require_concat3 = __commonJS({
   "node_modules/uint8arrays/cjs/src/concat.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
-    function concat3(arrays, length2) {
-      if (!length2) {
-        length2 = arrays.reduce((acc, curr) => acc + curr.length, 0);
+    function concat4(arrays, length4) {
+      if (!length4) {
+        length4 = arrays.reduce((acc, curr) => acc + curr.length, 0);
       }
-      const output = new Uint8Array(length2);
+      const output = new Uint8Array(length4);
       let offset = 0;
       for (const arr of arrays) {
         output.set(arr, offset);
@@ -36067,7 +35923,7 @@ var require_concat3 = __commonJS({
       }
       return output;
     }
-    exports2.concat = concat3;
+    exports2.concat = concat4;
   }
 });
 
@@ -36241,6 +36097,19 @@ var require_it_peekable = __commonJS({
   }
 });
 
+// node_modules/it-map/index.js
+var require_it_map = __commonJS({
+  "node_modules/it-map/index.js"(exports2, module2) {
+    "use strict";
+    var map4 = async function* (source, func) {
+      for await (const val of source) {
+        yield func(val);
+      }
+    };
+    module2.exports = map4;
+  }
+});
+
 // node_modules/graceful-fs/polyfills.js
 var require_polyfills2 = __commonJS({
   "node_modules/graceful-fs/polyfills.js"(exports2, module2) {
@@ -36311,15 +36180,15 @@ var require_polyfills2 = __commonJS({
       }
       if (platform === "win32") {
         fs5.rename = function(fs$rename) {
-          return function(from3, to, cb) {
+          return function(from7, to, cb) {
             var start = Date.now();
             var backoff = 0;
-            fs$rename(from3, to, function CB(er) {
+            fs$rename(from7, to, function CB(er) {
               if (er && (er.code === "EACCES" || er.code === "EPERM") && Date.now() - start < 6e4) {
                 setTimeout(function() {
                   fs5.stat(to, function(stater, st) {
                     if (stater && stater.code === "ENOENT")
-                      fs$rename(from3, to, CB);
+                      fs$rename(from7, to, CB);
                     else
                       cb(er);
                   });
@@ -36335,30 +36204,30 @@ var require_polyfills2 = __commonJS({
         }(fs5.rename);
       }
       fs5.read = function(fs$read) {
-        function read2(fd, buffer2, offset, length2, position, callback_) {
+        function read4(fd, buffer2, offset, length4, position, callback_) {
           var callback;
           if (callback_ && typeof callback_ === "function") {
             var eagCounter = 0;
             callback = function(er, _, __) {
               if (er && er.code === "EAGAIN" && eagCounter < 10) {
                 eagCounter++;
-                return fs$read.call(fs5, fd, buffer2, offset, length2, position, callback);
+                return fs$read.call(fs5, fd, buffer2, offset, length4, position, callback);
               }
               callback_.apply(this, arguments);
             };
           }
-          return fs$read.call(fs5, fd, buffer2, offset, length2, position, callback);
+          return fs$read.call(fs5, fd, buffer2, offset, length4, position, callback);
         }
         if (Object.setPrototypeOf)
-          Object.setPrototypeOf(read2, fs$read);
-        return read2;
+          Object.setPrototypeOf(read4, fs$read);
+        return read4;
       }(fs5.read);
       fs5.readSync = function(fs$readSync) {
-        return function(fd, buffer2, offset, length2, position) {
+        return function(fd, buffer2, offset, length4, position) {
           var eagCounter = 0;
           while (true) {
             try {
-              return fs$readSync.call(fs5, fd, buffer2, offset, length2, position);
+              return fs$readSync.call(fs5, fd, buffer2, offset, length4, position);
             } catch (er) {
               if (er.code === "EAGAIN" && eagCounter < 10) {
                 eagCounter++;
@@ -36578,7 +36447,7 @@ var require_legacy_streams = __commonJS({
         this.bufferSize = 64 * 1024;
         options = options || {};
         var keys = Object.keys(options);
-        for (var index = 0, length2 = keys.length; index < length2; index++) {
+        for (var index = 0, length4 = keys.length; index < length4; index++) {
           var key = keys[index];
           this[key] = options[key];
         }
@@ -36628,7 +36497,7 @@ var require_legacy_streams = __commonJS({
         this.bytesWritten = 0;
         options = options || {};
         var keys = Object.keys(options);
-        for (var index = 0, length2 = keys.length; index < length2; index++) {
+        for (var index = 0, length4 = keys.length; index < length4; index++) {
           var key = keys[index];
           this[key] = options[key];
         }
@@ -36815,16 +36684,16 @@ var require_graceful_fs = __commonJS({
       var fs$copyFile = fs6.copyFile;
       if (fs$copyFile)
         fs6.copyFile = copyFile;
-      function copyFile(src2, dest, flags, cb) {
+      function copyFile(src4, dest, flags, cb) {
         if (typeof flags === "function") {
           cb = flags;
           flags = 0;
         }
-        return go$copyFile(src2, dest, flags, cb);
-        function go$copyFile(src3, dest2, flags2, cb2, startTime) {
-          return fs$copyFile(src3, dest2, flags2, function(err) {
+        return go$copyFile(src4, dest, flags, cb);
+        function go$copyFile(src5, dest2, flags2, cb2, startTime) {
+          return fs$copyFile(src5, dest2, flags2, function(err) {
             if (err && (err.code === "EMFILE" || err.code === "ENFILE"))
-              enqueue([go$copyFile, [src3, dest2, flags2, cb2], err, startTime || Date.now(), Date.now()]);
+              enqueue([go$copyFile, [src5, dest2, flags2, cb2], err, startTime || Date.now(), Date.now()]);
             else {
               if (typeof cb2 === "function")
                 cb2.apply(this, arguments);
@@ -37860,10 +37729,10 @@ var require_it_glob = __commonJS({
         yield options.absolute ? absoluteDir : relativeDir;
       }
     }
-    async function* _glob(base3, dir, pattern, options) {
-      for await (const entry of await fs5.readdir(path3.join(base3, dir))) {
+    async function* _glob(base4, dir, pattern, options) {
+      for await (const entry of await fs5.readdir(path3.join(base4, dir))) {
         const relativeEntryPath = path3.join(dir, entry);
-        const absoluteEntryPath = path3.join(base3, dir, entry);
+        const absoluteEntryPath = path3.join(base4, dir, entry);
         const stats = await fs5.stat(absoluteEntryPath);
         let match = minimatch(relativeEntryPath, pattern, options);
         if (options.ignore && match && options.ignore.reduce((acc, curr) => {
@@ -37875,7 +37744,7 @@ var require_it_glob = __commonJS({
           yield options.absolute ? absoluteEntryPath : relativeEntryPath;
         }
         if (stats.isDirectory()) {
-          yield* _glob(base3, relativeEntryPath, pattern, options);
+          yield* _glob(base4, relativeEntryPath, pattern, options);
         }
       }
     }
@@ -37962,12 +37831,12 @@ var require_src7 = __commonJS({
       }
       const meta = uri.substring(5, firstComma).split(";");
       let charset = "";
-      let base642 = false;
+      let base643 = false;
       const type = meta[0] || "text/plain";
       let typeFull = type;
       for (let i = 1; i < meta.length; i++) {
         if (meta[i] === "base64") {
-          base642 = true;
+          base643 = true;
         } else {
           typeFull += `;${meta[i]}`;
           if (meta[i].indexOf("charset=") === 0) {
@@ -37979,7 +37848,7 @@ var require_src7 = __commonJS({
         typeFull += ";charset=US-ASCII";
         charset = "US-ASCII";
       }
-      const encoding = base642 ? "base64" : "ascii";
+      const encoding = base643 ? "base64" : "ascii";
       const data = unescape(uri.substring(firstComma + 1));
       const buffer2 = Buffer.from(data, encoding);
       buffer2.type = type;
@@ -38176,8 +38045,8 @@ var require_ponyfill = __commonJS({
         reader._ownerReadableStream._reader = void 0;
         reader._ownerReadableStream = void 0;
       }
-      function readerLockException(name5) {
-        return new TypeError("Cannot " + name5 + " a stream using a released reader");
+      function readerLockException(name7) {
+        return new TypeError("Cannot " + name7 + " a stream using a released reader");
       }
       function defaultReaderClosedPromiseInitialize(reader) {
         reader._closedPromise = newPromise(function(resolve9, reject) {
@@ -38418,8 +38287,8 @@ var require_ponyfill = __commonJS({
           stream._readableStreamController[PullSteps](readRequest);
         }
       }
-      function defaultReaderBrandCheckException(name5) {
-        return new TypeError("ReadableStreamDefaultReader.prototype." + name5 + " can only be used on a ReadableStreamDefaultReader");
+      function defaultReaderBrandCheckException(name7) {
+        return new TypeError("ReadableStreamDefaultReader.prototype." + name7 + " can only be used on a ReadableStreamDefaultReader");
       }
       var _a;
       var AsyncIteratorPrototype;
@@ -38547,8 +38416,8 @@ var require_ponyfill = __commonJS({
           return false;
         }
       }
-      function streamAsyncIteratorBrandCheckException(name5) {
-        return new TypeError("ReadableStreamAsyncIterator." + name5 + " can only be used on a ReadableSteamAsyncIterator");
+      function streamAsyncIteratorBrandCheckException(name7) {
+        return new TypeError("ReadableStreamAsyncIterator." + name7 + " can only be used on a ReadableSteamAsyncIterator");
       }
       var NumberIsNaN = Number.isNaN || function(x) {
         return x !== x;
@@ -38556,8 +38425,8 @@ var require_ponyfill = __commonJS({
       function CreateArrayFromList(elements) {
         return elements.slice();
       }
-      function CopyDataBlockBytes(dest, destOffset, src2, srcOffset, n) {
-        new Uint8Array(dest).set(new Uint8Array(src2, srcOffset, n), destOffset);
+      function CopyDataBlockBytes(dest, destOffset, src4, srcOffset, n) {
+        new Uint8Array(dest).set(new Uint8Array(src4, srcOffset, n), destOffset);
       }
       function TransferArrayBuffer(O) {
         return O;
@@ -38569,9 +38438,9 @@ var require_ponyfill = __commonJS({
         if (buffer2.slice) {
           return buffer2.slice(begin, end);
         }
-        var length2 = end - begin;
-        var slice2 = new ArrayBuffer(length2);
-        CopyDataBlockBytes(slice2, 0, buffer2, begin, length2);
+        var length4 = end - begin;
+        var slice2 = new ArrayBuffer(length4);
+        CopyDataBlockBytes(slice2, 0, buffer2, begin, length4);
         return slice2;
       }
       function IsNonNegativeNumber(v) {
@@ -39217,11 +39086,11 @@ var require_ponyfill = __commonJS({
         request._associatedReadableByteStreamController = controller;
         request._view = view;
       }
-      function byobRequestBrandCheckException(name5) {
-        return new TypeError("ReadableStreamBYOBRequest.prototype." + name5 + " can only be used on a ReadableStreamBYOBRequest");
+      function byobRequestBrandCheckException(name7) {
+        return new TypeError("ReadableStreamBYOBRequest.prototype." + name7 + " can only be used on a ReadableStreamBYOBRequest");
       }
-      function byteStreamControllerBrandCheckException(name5) {
-        return new TypeError("ReadableByteStreamController.prototype." + name5 + " can only be used on a ReadableByteStreamController");
+      function byteStreamControllerBrandCheckException(name7) {
+        return new TypeError("ReadableByteStreamController.prototype." + name7 + " can only be used on a ReadableByteStreamController");
       }
       function AcquireReadableStreamBYOBReader(stream) {
         return new ReadableStreamBYOBReader2(stream);
@@ -39368,8 +39237,8 @@ var require_ponyfill = __commonJS({
           ReadableByteStreamControllerPullInto(stream._readableStreamController, view, readIntoRequest);
         }
       }
-      function byobReaderBrandCheckException(name5) {
-        return new TypeError("ReadableStreamBYOBReader.prototype." + name5 + " can only be used on a ReadableStreamBYOBReader");
+      function byobReaderBrandCheckException(name7) {
+        return new TypeError("ReadableStreamBYOBReader.prototype." + name7 + " can only be used on a ReadableStreamBYOBReader");
       }
       function ExtractHighWaterMark(strategy, defaultHWM) {
         var highWaterMark = strategy.highWaterMark;
@@ -40220,17 +40089,17 @@ var require_ponyfill = __commonJS({
         WritableStreamDefaultControllerClearAlgorithms(controller);
         WritableStreamStartErroring(stream, error);
       }
-      function streamBrandCheckException$2(name5) {
-        return new TypeError("WritableStream.prototype." + name5 + " can only be used on a WritableStream");
+      function streamBrandCheckException$2(name7) {
+        return new TypeError("WritableStream.prototype." + name7 + " can only be used on a WritableStream");
       }
-      function defaultControllerBrandCheckException$2(name5) {
-        return new TypeError("WritableStreamDefaultController.prototype." + name5 + " can only be used on a WritableStreamDefaultController");
+      function defaultControllerBrandCheckException$2(name7) {
+        return new TypeError("WritableStreamDefaultController.prototype." + name7 + " can only be used on a WritableStreamDefaultController");
       }
-      function defaultWriterBrandCheckException(name5) {
-        return new TypeError("WritableStreamDefaultWriter.prototype." + name5 + " can only be used on a WritableStreamDefaultWriter");
+      function defaultWriterBrandCheckException(name7) {
+        return new TypeError("WritableStreamDefaultWriter.prototype." + name7 + " can only be used on a WritableStreamDefaultWriter");
       }
-      function defaultWriterLockException(name5) {
-        return new TypeError("Cannot " + name5 + " a stream using a released writer");
+      function defaultWriterLockException(name7) {
+        return new TypeError("Cannot " + name7 + " a stream using a released writer");
       }
       function defaultWriterClosedPromiseInitialize(writer) {
         writer._closedPromise = newPromise(function(resolve9, reject) {
@@ -40322,9 +40191,9 @@ var require_ponyfill = __commonJS({
         }
       }
       function createDOMExceptionPolyfill() {
-        var ctor = function DOMException2(message, name5) {
+        var ctor = function DOMException2(message, name7) {
           this.message = message || "";
-          this.name = name5 || "Error";
+          this.name = name7 || "Error";
           if (Error.captureStackTrace) {
             Error.captureStackTrace(this, this.constructor);
           }
@@ -40757,8 +40626,8 @@ var require_ponyfill = __commonJS({
         }
         SetUpReadableStreamDefaultController(stream, controller, startAlgorithm, pullAlgorithm, cancelAlgorithm, highWaterMark, sizeAlgorithm);
       }
-      function defaultControllerBrandCheckException$1(name5) {
-        return new TypeError("ReadableStreamDefaultController.prototype." + name5 + " can only be used on a ReadableStreamDefaultController");
+      function defaultControllerBrandCheckException$1(name7) {
+        return new TypeError("ReadableStreamDefaultController.prototype." + name7 + " can only be used on a ReadableStreamDefaultController");
       }
       function ReadableStreamTee(stream, cloneForBranch2) {
         if (IsReadableByteStreamController(stream._readableStreamController)) {
@@ -41406,8 +41275,8 @@ var require_ponyfill = __commonJS({
           reader._readIntoRequests = new SimpleQueue();
         }
       }
-      function streamBrandCheckException$1(name5) {
-        return new TypeError("ReadableStream.prototype." + name5 + " can only be used on a ReadableStream");
+      function streamBrandCheckException$1(name7) {
+        return new TypeError("ReadableStream.prototype." + name7 + " can only be used on a ReadableStream");
       }
       function convertQueuingStrategyInit(init, context) {
         assertDictionary(init, context);
@@ -41465,8 +41334,8 @@ var require_ponyfill = __commonJS({
           configurable: true
         });
       }
-      function byteLengthBrandCheckException(name5) {
-        return new TypeError("ByteLengthQueuingStrategy.prototype." + name5 + " can only be used on a ByteLengthQueuingStrategy");
+      function byteLengthBrandCheckException(name7) {
+        return new TypeError("ByteLengthQueuingStrategy.prototype." + name7 + " can only be used on a ByteLengthQueuingStrategy");
       }
       function IsByteLengthQueuingStrategy(x) {
         if (!typeIsObject(x)) {
@@ -41525,8 +41394,8 @@ var require_ponyfill = __commonJS({
           configurable: true
         });
       }
-      function countBrandCheckException(name5) {
-        return new TypeError("CountQueuingStrategy.prototype." + name5 + " can only be used on a CountQueuingStrategy");
+      function countBrandCheckException(name7) {
+        return new TypeError("CountQueuingStrategy.prototype." + name7 + " can only be used on a CountQueuingStrategy");
       }
       function IsCountQueuingStrategy(x) {
         if (!typeIsObject(x)) {
@@ -41867,11 +41736,11 @@ var require_ponyfill = __commonJS({
         TransformStreamSetBackpressure(stream, false);
         return stream._backpressureChangePromise;
       }
-      function defaultControllerBrandCheckException(name5) {
-        return new TypeError("TransformStreamDefaultController.prototype." + name5 + " can only be used on a TransformStreamDefaultController");
+      function defaultControllerBrandCheckException(name7) {
+        return new TypeError("TransformStreamDefaultController.prototype." + name7 + " can only be used on a TransformStreamDefaultController");
       }
-      function streamBrandCheckException(name5) {
-        return new TypeError("TransformStream.prototype." + name5 + " can only be used on a TransformStream");
+      function streamBrandCheckException(name7) {
+        return new TypeError("TransformStream.prototype." + name7 + " can only be used on a TransformStream");
       }
       exports3.ByteLengthQueuingStrategy = ByteLengthQueuingStrategy2;
       exports3.CountQueuingStrategy = CountQueuingStrategy2;
@@ -41975,11 +41844,11 @@ var require_main7 = __commonJS({
     var path3 = require("path");
     var os2 = require("os");
     var packageJson = require_package2();
-    var version2 = packageJson.version;
+    var version3 = packageJson.version;
     var LINE = /(?:^|^)\s*(?:export\s+)?([\w.-]+)(?:\s*=\s*?|:\s+?)(\s*'(?:\\'|[^'])*'|\s*"(?:\\"|[^"])*"|\s*`(?:\\`|[^`])*`|[^#\r\n]+)?\s*(?:#.*)?(?:$|$)/mg;
-    function parse3(src2) {
+    function parse3(src4) {
       const obj = {};
-      let lines = src2.toString();
+      let lines = src4.toString();
       lines = lines.replace(/\r\n?/mg, "\n");
       let match;
       while ((match = LINE.exec(lines)) != null) {
@@ -41997,7 +41866,7 @@ var require_main7 = __commonJS({
       return obj;
     }
     function _log(message) {
-      console.log(`[dotenv@${version2}][DEBUG] ${message}`);
+      console.log(`[dotenv@${version3}][DEBUG] ${message}`);
     }
     function _resolveHome(envPath) {
       return envPath[0] === "~" ? path3.join(os2.homedir(), envPath.slice(1)) : envPath;
@@ -42325,16 +42194,16 @@ var require_tslib = __commonJS({
             r[k] = a[j];
         return r;
       };
-      __spreadArray = function(to, from3, pack2) {
+      __spreadArray = function(to, from7, pack2) {
         if (pack2 || arguments.length === 2)
-          for (var i = 0, l = from3.length, ar; i < l; i++) {
-            if (ar || !(i in from3)) {
+          for (var i = 0, l = from7.length, ar; i < l; i++) {
+            if (ar || !(i in from7)) {
               if (!ar)
-                ar = Array.prototype.slice.call(from3, 0, i);
-              ar[i] = from3[i];
+                ar = Array.prototype.slice.call(from7, 0, i);
+              ar[i] = from7[i];
             }
           }
-        return to.concat(ar || Array.prototype.slice.call(from3));
+        return to.concat(ar || Array.prototype.slice.call(from7));
       };
       __await = function(v) {
         return this instanceof __await ? (this.v = v, this) : new __await(v);
@@ -42555,17 +42424,17 @@ var require_getEndpointFromInstructions = __commonJS({
       var _a;
       const endpointParams = {};
       const instructions = ((_a = instructionsSupplier === null || instructionsSupplier === void 0 ? void 0 : instructionsSupplier.getEndpointParameterInstructions) === null || _a === void 0 ? void 0 : _a.call(instructionsSupplier)) || {};
-      for (const [name5, instruction] of Object.entries(instructions)) {
+      for (const [name7, instruction] of Object.entries(instructions)) {
         switch (instruction.type) {
           case "staticContextParams":
-            endpointParams[name5] = instruction.value;
+            endpointParams[name7] = instruction.value;
             break;
           case "contextParams":
-            endpointParams[name5] = commandInput[instruction.name];
+            endpointParams[name7] = commandInput[instruction.name];
             break;
           case "clientContextParams":
           case "builtInParams":
-            endpointParams[name5] = await createConfigProvider(instruction.name, name5, clientConfig)();
+            endpointParams[name7] = await createConfigProvider(instruction.name, name7, clientConfig)();
             break;
           default:
             throw new Error("Unrecognized endpoint parameter instruction: " + JSON.stringify(instruction));
@@ -43122,7 +42991,7 @@ var require_dist_cjs10 = __commonJS({
       SHORT_TO_HEX[i] = encodedByte;
       HEX_TO_SHORT[encodedByte] = i;
     }
-    function fromHex2(encoded) {
+    function fromHex3(encoded) {
       if (encoded.length % 2 !== 0) {
         throw new Error("Hex encoded strings must have an even number length");
       }
@@ -43137,15 +43006,15 @@ var require_dist_cjs10 = __commonJS({
       }
       return out;
     }
-    exports2.fromHex = fromHex2;
-    function toHex2(bytes) {
+    exports2.fromHex = fromHex3;
+    function toHex3(bytes) {
       let out = "";
       for (let i = 0; i < bytes.byteLength; i++) {
         out += SHORT_TO_HEX[bytes[i]];
       }
       return out;
     }
-    exports2.toHex = toHex2;
+    exports2.toHex = toHex3;
   }
 });
 
@@ -43472,11 +43341,11 @@ var require_moveHeadersToQuery = __commonJS({
     var moveHeadersToQuery = (request, options = {}) => {
       var _a;
       const { headers, query = {} } = typeof request.clone === "function" ? request.clone() : (0, cloneRequest_1.cloneRequest)(request);
-      for (const name5 of Object.keys(headers)) {
-        const lname = name5.toLowerCase();
+      for (const name7 of Object.keys(headers)) {
+        const lname = name7.toLowerCase();
         if (lname.slice(0, 6) === "x-amz-" && !((_a = options.unhoistableHeaders) === null || _a === void 0 ? void 0 : _a.has(lname))) {
-          query[name5] = headers[name5];
-          delete headers[name5];
+          query[name7] = headers[name7];
+          delete headers[name7];
         }
       }
       return {
@@ -43552,9 +43421,9 @@ var require_SignatureV4 = __commonJS({
     var prepareRequest_1 = require_prepareRequest();
     var utilDate_1 = require_utilDate();
     var SignatureV4 = class {
-      constructor({ applyChecksum, credentials, region, service, sha256: sha2562, uriEscapePath = true }) {
+      constructor({ applyChecksum, credentials, region, service, sha256: sha2563, uriEscapePath = true }) {
         this.service = service;
-        this.sha256 = sha2562;
+        this.sha256 = sha2563;
         this.uriEscapePath = uriEscapePath;
         this.applyChecksum = typeof applyChecksum === "boolean" ? applyChecksum : true;
         this.regionProvider = (0, util_middleware_1.normalizeProvider)(region);
@@ -43644,7 +43513,7 @@ var require_SignatureV4 = __commonJS({
         return `${request.method}
 ${this.getCanonicalPath(request)}
 ${(0, getCanonicalQuery_1.getCanonicalQuery)(request)}
-${sortedHeaders.map((name5) => `${name5}:${canonicalHeaders[name5]}`).join("\n")}
+${sortedHeaders.map((name7) => `${name7}:${canonicalHeaders[name7]}`).join("\n")}
 
 ${sortedHeaders.join(";")}
 ${payloadHash}`;
@@ -44025,8 +43894,8 @@ async function dispatchAndReturnPollen(params, returnImmediately = false) {
 }
 
 // src/utils/getWebURL.js
-var getWebURL = (cid, name5 = null) => {
-  const filename = name5 ? `?filename=${name5}` : "";
+var getWebURL = (cid, name7 = null) => {
+  const filename = name7 ? `?filename=${name7}` : "";
   return `https://store.pollinations.ai/ipfs/${cid.toString()}${filename}`;
 };
 var getWebURL_default = getWebURL;
@@ -44049,7 +43918,7 @@ var import_debug5 = __toESM(require_src(), 1);
 // node_modules/ipfs-unixfs-exporter/src/index.js
 var import_err_code9 = __toESM(require_err_code(), 1);
 
-// node_modules/multiformats/esm/vendor/varint.js
+// node_modules/ipfs-unixfs-exporter/node_modules/multiformats/vendor/varint.js
 var encode_1 = encode;
 var MSB = 128;
 var REST = 127;
@@ -44108,13 +43977,10 @@ var varint = {
 var _brrp_varint = varint;
 var varint_default = _brrp_varint;
 
-// node_modules/multiformats/esm/src/varint.js
-var decode2 = (data) => {
-  const code6 = varint_default.decode(data);
-  return [
-    code6,
-    varint_default.decode.bytes
-  ];
+// node_modules/ipfs-unixfs-exporter/node_modules/multiformats/src/varint.js
+var decode2 = (data, offset = 0) => {
+  const code11 = varint_default.decode(data, offset);
+  return [code11, varint_default.decode.bytes];
 };
 var encodeTo = (int, target, offset = 0) => {
   varint_default.encode(int, target, offset);
@@ -44124,7 +43990,7 @@ var encodingLength = (int) => {
   return varint_default.encodingLength(int);
 };
 
-// node_modules/multiformats/esm/src/bytes.js
+// node_modules/ipfs-unixfs-exporter/node_modules/multiformats/src/bytes.js
 var bytes_exports = {};
 __export(bytes_exports, {
   coerce: () => coerce,
@@ -44169,52 +44035,46 @@ var isBinary = (o) => o instanceof ArrayBuffer || ArrayBuffer.isView(o);
 var fromString = (str) => new TextEncoder().encode(str);
 var toString = (b) => new TextDecoder().decode(b);
 
-// node_modules/multiformats/esm/src/hashes/digest.js
-var create = (code6, digest2) => {
-  const size = digest2.byteLength;
-  const sizeOffset = encodingLength(code6);
+// node_modules/ipfs-unixfs-exporter/node_modules/multiformats/src/hashes/digest.js
+var create = (code11, digest4) => {
+  const size = digest4.byteLength;
+  const sizeOffset = encodingLength(code11);
   const digestOffset = sizeOffset + encodingLength(size);
   const bytes = new Uint8Array(digestOffset + size);
-  encodeTo(code6, bytes, 0);
+  encodeTo(code11, bytes, 0);
   encodeTo(size, bytes, sizeOffset);
-  bytes.set(digest2, digestOffset);
-  return new Digest(code6, size, digest2, bytes);
+  bytes.set(digest4, digestOffset);
+  return new Digest(code11, size, digest4, bytes);
 };
 var decode3 = (multihash) => {
   const bytes = coerce(multihash);
-  const [code6, sizeOffset] = decode2(bytes);
+  const [code11, sizeOffset] = decode2(bytes);
   const [size, digestOffset] = decode2(bytes.subarray(sizeOffset));
-  const digest2 = bytes.subarray(sizeOffset + digestOffset);
-  if (digest2.byteLength !== size) {
+  const digest4 = bytes.subarray(sizeOffset + digestOffset);
+  if (digest4.byteLength !== size) {
     throw new Error("Incorrect length");
   }
-  return new Digest(code6, size, digest2, bytes);
+  return new Digest(code11, size, digest4, bytes);
 };
 var equals2 = (a, b) => {
   if (a === b) {
     return true;
   } else {
-    return a.code === b.code && a.size === b.size && equals(a.bytes, b.bytes);
+    const data = b;
+    return a.code === data.code && a.size === data.size && data.bytes instanceof Uint8Array && equals(a.bytes, data.bytes);
   }
 };
 var Digest = class {
-  constructor(code6, size, digest2, bytes) {
-    this.code = code6;
+  constructor(code11, size, digest4, bytes) {
+    this.code = code11;
     this.size = size;
-    this.digest = digest2;
+    this.digest = digest4;
     this.bytes = bytes;
   }
 };
 
-// node_modules/multiformats/esm/src/bases/base58.js
-var base58_exports = {};
-__export(base58_exports, {
-  base58btc: () => base58btc,
-  base58flickr: () => base58flickr
-});
-
-// node_modules/multiformats/esm/vendor/base-x.js
-function base(ALPHABET, name5) {
+// node_modules/ipfs-unixfs-exporter/node_modules/multiformats/vendor/base-x.js
+function base(ALPHABET, name7) {
   if (ALPHABET.length >= 255) {
     throw new TypeError("Alphabet too long");
   }
@@ -44234,7 +44094,7 @@ function base(ALPHABET, name5) {
   var LEADER = ALPHABET.charAt(0);
   var FACTOR = Math.log(BASE) / Math.log(256);
   var iFACTOR = Math.log(256) / Math.log(BASE);
-  function encode11(source) {
+  function encode18(source) {
     if (source instanceof Uint8Array)
       ;
     else if (ArrayBuffer.isView(source)) {
@@ -44249,7 +44109,7 @@ function base(ALPHABET, name5) {
       return "";
     }
     var zeroes = 0;
-    var length2 = 0;
+    var length4 = 0;
     var pbegin = 0;
     var pend = source.length;
     while (pbegin !== pend && source[pbegin] === 0) {
@@ -44261,7 +44121,7 @@ function base(ALPHABET, name5) {
     while (pbegin !== pend) {
       var carry = source[pbegin];
       var i2 = 0;
-      for (var it1 = size - 1; (carry !== 0 || i2 < length2) && it1 !== -1; it1--, i2++) {
+      for (var it1 = size - 1; (carry !== 0 || i2 < length4) && it1 !== -1; it1--, i2++) {
         carry += 256 * b58[it1] >>> 0;
         b58[it1] = carry % BASE >>> 0;
         carry = carry / BASE >>> 0;
@@ -44269,10 +44129,10 @@ function base(ALPHABET, name5) {
       if (carry !== 0) {
         throw new Error("Non-zero carry");
       }
-      length2 = i2;
+      length4 = i2;
       pbegin++;
     }
-    var it2 = size - length2;
+    var it2 = size - length4;
     while (it2 !== size && b58[it2] === 0) {
       it2++;
     }
@@ -44294,7 +44154,7 @@ function base(ALPHABET, name5) {
       return;
     }
     var zeroes = 0;
-    var length2 = 0;
+    var length4 = 0;
     while (source[psz] === LEADER) {
       zeroes++;
       psz++;
@@ -44307,7 +44167,7 @@ function base(ALPHABET, name5) {
         return;
       }
       var i2 = 0;
-      for (var it3 = size - 1; (carry !== 0 || i2 < length2) && it3 !== -1; it3--, i2++) {
+      for (var it3 = size - 1; (carry !== 0 || i2 < length4) && it3 !== -1; it3--, i2++) {
         carry += BASE * b256[it3] >>> 0;
         b256[it3] = carry % 256 >>> 0;
         carry = carry / 256 >>> 0;
@@ -44315,13 +44175,13 @@ function base(ALPHABET, name5) {
       if (carry !== 0) {
         throw new Error("Non-zero carry");
       }
-      length2 = i2;
+      length4 = i2;
       psz++;
     }
     if (source[psz] === " ") {
       return;
     }
-    var it4 = size - length2;
+    var it4 = size - length4;
     while (it4 !== size && b256[it4] === 0) {
       it4++;
     }
@@ -44332,27 +44192,27 @@ function base(ALPHABET, name5) {
     }
     return vch;
   }
-  function decode12(string2) {
-    var buffer2 = decodeUnsafe(string2);
+  function decode23(string3) {
+    var buffer2 = decodeUnsafe(string3);
     if (buffer2) {
       return buffer2;
     }
-    throw new Error(`Non-${name5} character`);
+    throw new Error(`Non-${name7} character`);
   }
   return {
-    encode: encode11,
+    encode: encode18,
     decodeUnsafe,
-    decode: decode12
+    decode: decode23
   };
 }
 var src = base;
 var _brrp__multiformats_scope_baseX = src;
 var base_x_default = _brrp__multiformats_scope_baseX;
 
-// node_modules/multiformats/esm/src/bases/base.js
+// node_modules/ipfs-unixfs-exporter/node_modules/multiformats/src/bases/base.js
 var Encoder = class {
-  constructor(name5, prefix, baseEncode) {
-    this.name = name5;
+  constructor(name7, prefix, baseEncode) {
+    this.name = name7;
     this.prefix = prefix;
     this.baseEncode = baseEncode;
   }
@@ -44365,8 +44225,8 @@ var Encoder = class {
   }
 };
 var Decoder = class {
-  constructor(name5, prefix, baseDecode) {
-    this.name = name5;
+  constructor(name7, prefix, baseDecode) {
+    this.name = name7;
     this.prefix = prefix;
     if (prefix.codePointAt(0) === void 0) {
       throw new Error("Invalid prefix character");
@@ -44410,13 +44270,13 @@ var or = (left, right) => new ComposedDecoder({
   ...right.decoders || { [right.prefix]: right }
 });
 var Codec = class {
-  constructor(name5, prefix, baseEncode, baseDecode) {
-    this.name = name5;
+  constructor(name7, prefix, baseEncode, baseDecode) {
+    this.name = name7;
     this.prefix = prefix;
     this.baseEncode = baseEncode;
     this.baseDecode = baseDecode;
-    this.encoder = new Encoder(name5, prefix, baseEncode);
-    this.decoder = new Decoder(name5, prefix, baseDecode);
+    this.encoder = new Encoder(name7, prefix, baseEncode);
+    this.decoder = new Decoder(name7, prefix, baseDecode);
   }
   encode(input2) {
     return this.encoder.encode(input2);
@@ -44425,23 +44285,23 @@ var Codec = class {
     return this.decoder.decode(input2);
   }
 };
-var from = ({ name: name5, prefix, encode: encode11, decode: decode12 }) => new Codec(name5, prefix, encode11, decode12);
-var baseX = ({ prefix, name: name5, alphabet: alphabet2 }) => {
-  const { encode: encode11, decode: decode12 } = base_x_default(alphabet2, name5);
+var from = ({ name: name7, prefix, encode: encode18, decode: decode23 }) => new Codec(name7, prefix, encode18, decode23);
+var baseX = ({ prefix, name: name7, alphabet: alphabet3 }) => {
+  const { encode: encode18, decode: decode23 } = base_x_default(alphabet3, name7);
   return from({
     prefix,
-    name: name5,
-    encode: encode11,
-    decode: (text) => coerce(decode12(text))
+    name: name7,
+    encode: encode18,
+    decode: (text) => coerce(decode23(text))
   });
 };
-var decode4 = (string2, alphabet2, bitsPerChar, name5) => {
+var decode4 = (string3, alphabet3, bitsPerChar, name7) => {
   const codes = {};
-  for (let i = 0; i < alphabet2.length; ++i) {
-    codes[alphabet2[i]] = i;
+  for (let i = 0; i < alphabet3.length; ++i) {
+    codes[alphabet3[i]] = i;
   }
-  let end = string2.length;
-  while (string2[end - 1] === "=") {
+  let end = string3.length;
+  while (string3[end - 1] === "=") {
     --end;
   }
   const out = new Uint8Array(end * bitsPerChar / 8 | 0);
@@ -44449,9 +44309,9 @@ var decode4 = (string2, alphabet2, bitsPerChar, name5) => {
   let buffer2 = 0;
   let written = 0;
   for (let i = 0; i < end; ++i) {
-    const value = codes[string2[i]];
+    const value = codes[string3[i]];
     if (value === void 0) {
-      throw new SyntaxError(`Non-${name5} character`);
+      throw new SyntaxError(`Non-${name7} character`);
     }
     buffer2 = buffer2 << bitsPerChar | value;
     bits += bitsPerChar;
@@ -44465,8 +44325,8 @@ var decode4 = (string2, alphabet2, bitsPerChar, name5) => {
   }
   return out;
 };
-var encode2 = (data, alphabet2, bitsPerChar) => {
-  const pad = alphabet2[alphabet2.length - 1] === "=";
+var encode2 = (data, alphabet3, bitsPerChar) => {
+  const pad = alphabet3[alphabet3.length - 1] === "=";
   const mask = (1 << bitsPerChar) - 1;
   let out = "";
   let bits = 0;
@@ -44476,11 +44336,11 @@ var encode2 = (data, alphabet2, bitsPerChar) => {
     bits += 8;
     while (bits > bitsPerChar) {
       bits -= bitsPerChar;
-      out += alphabet2[mask & buffer2 >> bits];
+      out += alphabet3[mask & buffer2 >> bits];
     }
   }
   if (bits) {
-    out += alphabet2[mask & buffer2 << bitsPerChar - bits];
+    out += alphabet3[mask & buffer2 << bitsPerChar - bits];
   }
   if (pad) {
     while (out.length * bitsPerChar & 7) {
@@ -44489,20 +44349,20 @@ var encode2 = (data, alphabet2, bitsPerChar) => {
   }
   return out;
 };
-var rfc4648 = ({ name: name5, prefix, bitsPerChar, alphabet: alphabet2 }) => {
+var rfc4648 = ({ name: name7, prefix, bitsPerChar, alphabet: alphabet3 }) => {
   return from({
     prefix,
-    name: name5,
+    name: name7,
     encode(input2) {
-      return encode2(input2, alphabet2, bitsPerChar);
+      return encode2(input2, alphabet3, bitsPerChar);
     },
     decode(input2) {
-      return decode4(input2, alphabet2, bitsPerChar, name5);
+      return decode4(input2, alphabet3, bitsPerChar, name7);
     }
   });
 };
 
-// node_modules/multiformats/esm/src/bases/base58.js
+// node_modules/ipfs-unixfs-exporter/node_modules/multiformats/src/bases/base58.js
 var base58btc = baseX({
   name: "base58btc",
   prefix: "z",
@@ -44514,19 +44374,7 @@ var base58flickr = baseX({
   alphabet: "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
 });
 
-// node_modules/multiformats/esm/src/bases/base32.js
-var base32_exports = {};
-__export(base32_exports, {
-  base32: () => base32,
-  base32hex: () => base32hex,
-  base32hexpad: () => base32hexpad,
-  base32hexpadupper: () => base32hexpadupper,
-  base32hexupper: () => base32hexupper,
-  base32pad: () => base32pad,
-  base32padupper: () => base32padupper,
-  base32upper: () => base32upper,
-  base32z: () => base32z
-});
+// node_modules/ipfs-unixfs-exporter/node_modules/multiformats/src/bases/base32.js
 var base32 = rfc4648({
   prefix: "b",
   name: "base32",
@@ -44582,71 +44430,101 @@ var base32z = rfc4648({
   bitsPerChar: 5
 });
 
-// node_modules/multiformats/esm/src/cid.js
+// node_modules/ipfs-unixfs-exporter/node_modules/multiformats/src/cid.js
+var format = (link, base4) => {
+  const { bytes, version: version3 } = link;
+  switch (version3) {
+    case 0:
+      return toStringV0(
+        bytes,
+        baseCache(link),
+        base4 || base58btc.encoder
+      );
+    default:
+      return toStringV1(
+        bytes,
+        baseCache(link),
+        base4 || base32.encoder
+      );
+  }
+};
+var cache = /* @__PURE__ */ new WeakMap();
+var baseCache = (cid) => {
+  const baseCache2 = cache.get(cid);
+  if (baseCache2 == null) {
+    const baseCache3 = /* @__PURE__ */ new Map();
+    cache.set(cid, baseCache3);
+    return baseCache3;
+  }
+  return baseCache2;
+};
 var CID = class {
-  constructor(version2, code6, multihash, bytes) {
-    this.code = code6;
-    this.version = version2;
+  constructor(version3, code11, multihash, bytes) {
+    this.code = code11;
+    this.version = version3;
     this.multihash = multihash;
     this.bytes = bytes;
-    this.byteOffset = bytes.byteOffset;
-    this.byteLength = bytes.byteLength;
-    this.asCID = this;
-    this._baseCache = /* @__PURE__ */ new Map();
-    Object.defineProperties(this, {
-      byteOffset: hidden,
-      byteLength: hidden,
-      code: readonly,
-      version: readonly,
-      multihash: readonly,
-      bytes: readonly,
-      _baseCache: hidden,
-      asCID: hidden
-    });
+    this["/"] = bytes;
+  }
+  get asCID() {
+    return this;
+  }
+  get byteOffset() {
+    return this.bytes.byteOffset;
+  }
+  get byteLength() {
+    return this.bytes.byteLength;
   }
   toV0() {
     switch (this.version) {
       case 0: {
         return this;
       }
-      default: {
-        const { code: code6, multihash } = this;
-        if (code6 !== DAG_PB_CODE) {
+      case 1: {
+        const { code: code11, multihash } = this;
+        if (code11 !== DAG_PB_CODE) {
           throw new Error("Cannot convert a non dag-pb CID to CIDv0");
         }
         if (multihash.code !== SHA_256_CODE) {
           throw new Error("Cannot convert non sha2-256 multihash CID to CIDv0");
         }
-        return CID.createV0(multihash);
+        return CID.createV0(
+          multihash
+        );
+      }
+      default: {
+        throw Error(
+          `Can not convert CID version ${this.version} to version 0. This is a bug please report`
+        );
       }
     }
   }
   toV1() {
     switch (this.version) {
       case 0: {
-        const { code: code6, digest: digest2 } = this.multihash;
-        const multihash = create(code6, digest2);
+        const { code: code11, digest: digest4 } = this.multihash;
+        const multihash = create(code11, digest4);
         return CID.createV1(this.code, multihash);
       }
       case 1: {
         return this;
       }
       default: {
-        throw Error(`Can not convert CID version ${this.version} to version 0. This is a bug please report`);
+        throw Error(
+          `Can not convert CID version ${this.version} to version 1. This is a bug please report`
+        );
       }
     }
   }
   equals(other) {
-    return other && this.code === other.code && this.version === other.version && equals2(this.multihash, other.multihash);
+    return CID.equals(this, other);
   }
-  toString(base3) {
-    const { bytes, version: version2, _baseCache } = this;
-    switch (version2) {
-      case 0:
-        return toStringV0(bytes, _baseCache, base3 || base58btc.encoder);
-      default:
-        return toStringV1(bytes, _baseCache, base3 || base32.encoder);
-    }
+  static equals(self2, other) {
+    const unknown = other;
+    return unknown && self2.code === unknown.code && self2.version === unknown.version && equals2(self2.multihash, unknown.multihash);
+  }
+  toString(base4) {
+    return format(this, base4);
   }
   toJSON() {
     return {
@@ -44655,71 +44533,69 @@ var CID = class {
       hash: this.multihash.bytes
     };
   }
+  link() {
+    return this;
+  }
   get [Symbol.toStringTag]() {
     return "CID";
   }
   [Symbol.for("nodejs.util.inspect.custom")]() {
-    return "CID(" + this.toString() + ")";
+    return `CID(${this.toString()})`;
   }
-  static isCID(value) {
-    deprecate(/^0\.0/, IS_CID_DEPRECATION);
-    return !!(value && (value[cidSymbol] || value.asCID === value));
-  }
-  get toBaseEncodedString() {
-    throw new Error("Deprecated, use .toString()");
-  }
-  get codec() {
-    throw new Error('"codec" property is deprecated, use integer "code" property instead');
-  }
-  get buffer() {
-    throw new Error("Deprecated .buffer property, use .bytes to get Uint8Array instead");
-  }
-  get multibaseName() {
-    throw new Error('"multibaseName" property is deprecated');
-  }
-  get prefix() {
-    throw new Error('"prefix" property is deprecated');
-  }
-  static asCID(value) {
+  static asCID(input2) {
+    if (input2 == null) {
+      return null;
+    }
+    const value = input2;
     if (value instanceof CID) {
       return value;
-    } else if (value != null && value.asCID === value) {
-      const { version: version2, code: code6, multihash, bytes } = value;
-      return new CID(version2, code6, multihash, bytes || encodeCID(version2, code6, multihash.bytes));
-    } else if (value != null && value[cidSymbol] === true) {
-      const { version: version2, multihash, code: code6 } = value;
-      const digest2 = decode3(multihash);
-      return CID.create(version2, code6, digest2);
+    } else if (value["/"] != null && value["/"] === value.bytes || value.asCID === value) {
+      const { version: version3, code: code11, multihash, bytes } = value;
+      return new CID(
+        version3,
+        code11,
+        multihash,
+        bytes || encodeCID(version3, code11, multihash.bytes)
+      );
+    } else if (value[cidSymbol] === true) {
+      const { version: version3, multihash, code: code11 } = value;
+      const digest4 = decode3(multihash);
+      return CID.create(version3, code11, digest4);
     } else {
       return null;
     }
   }
-  static create(version2, code6, digest2) {
-    if (typeof code6 !== "number") {
+  static create(version3, code11, digest4) {
+    if (typeof code11 !== "number") {
       throw new Error("String codecs are no longer supported");
     }
-    switch (version2) {
+    if (!(digest4.bytes instanceof Uint8Array)) {
+      throw new Error("Invalid digest");
+    }
+    switch (version3) {
       case 0: {
-        if (code6 !== DAG_PB_CODE) {
-          throw new Error(`Version 0 CID must use dag-pb (code: ${DAG_PB_CODE}) block encoding`);
+        if (code11 !== DAG_PB_CODE) {
+          throw new Error(
+            `Version 0 CID must use dag-pb (code: ${DAG_PB_CODE}) block encoding`
+          );
         } else {
-          return new CID(version2, code6, digest2, digest2.bytes);
+          return new CID(version3, code11, digest4, digest4.bytes);
         }
       }
       case 1: {
-        const bytes = encodeCID(version2, code6, digest2.bytes);
-        return new CID(version2, code6, digest2, bytes);
+        const bytes = encodeCID(version3, code11, digest4.bytes);
+        return new CID(version3, code11, digest4, bytes);
       }
       default: {
         throw new Error("Invalid version");
       }
     }
   }
-  static createV0(digest2) {
-    return CID.create(0, DAG_PB_CODE, digest2);
+  static createV0(digest4) {
+    return CID.create(0, DAG_PB_CODE, digest4);
   }
-  static createV1(code6, digest2) {
-    return CID.create(1, code6, digest2);
+  static createV1(code11, digest4) {
+    return CID.create(1, code11, digest4);
   }
   static decode(bytes) {
     const [cid, remainder] = CID.decodeFirst(bytes);
@@ -44731,111 +44607,103 @@ var CID = class {
   static decodeFirst(bytes) {
     const specs = CID.inspectBytes(bytes);
     const prefixSize = specs.size - specs.multihashSize;
-    const multihashBytes = coerce(bytes.subarray(prefixSize, prefixSize + specs.multihashSize));
+    const multihashBytes = coerce(
+      bytes.subarray(prefixSize, prefixSize + specs.multihashSize)
+    );
     if (multihashBytes.byteLength !== specs.multihashSize) {
       throw new Error("Incorrect length");
     }
-    const digestBytes = multihashBytes.subarray(specs.multihashSize - specs.digestSize);
-    const digest2 = new Digest(specs.multihashCode, specs.digestSize, digestBytes, multihashBytes);
-    const cid = specs.version === 0 ? CID.createV0(digest2) : CID.createV1(specs.codec, digest2);
-    return [
-      cid,
-      bytes.subarray(specs.size)
-    ];
+    const digestBytes = multihashBytes.subarray(
+      specs.multihashSize - specs.digestSize
+    );
+    const digest4 = new Digest(
+      specs.multihashCode,
+      specs.digestSize,
+      digestBytes,
+      multihashBytes
+    );
+    const cid = specs.version === 0 ? CID.createV0(digest4) : CID.createV1(specs.codec, digest4);
+    return [cid, bytes.subarray(specs.size)];
   }
   static inspectBytes(initialBytes) {
     let offset = 0;
     const next = () => {
-      const [i, length2] = decode2(initialBytes.subarray(offset));
-      offset += length2;
+      const [i, length4] = decode2(initialBytes.subarray(offset));
+      offset += length4;
       return i;
     };
-    let version2 = next();
+    let version3 = next();
     let codec = DAG_PB_CODE;
-    if (version2 === 18) {
-      version2 = 0;
+    if (version3 === 18) {
+      version3 = 0;
       offset = 0;
-    } else if (version2 === 1) {
+    } else {
       codec = next();
     }
-    if (version2 !== 0 && version2 !== 1) {
-      throw new RangeError(`Invalid CID version ${version2}`);
+    if (version3 !== 0 && version3 !== 1) {
+      throw new RangeError(`Invalid CID version ${version3}`);
     }
     const prefixSize = offset;
     const multihashCode = next();
     const digestSize = next();
     const size = offset + digestSize;
     const multihashSize = size - prefixSize;
-    return {
-      version: version2,
-      codec,
-      multihashCode,
-      digestSize,
-      multihashSize,
-      size
-    };
+    return { version: version3, codec, multihashCode, digestSize, multihashSize, size };
   }
-  static parse(source, base3) {
-    const [prefix, bytes] = parseCIDtoBytes(source, base3);
+  static parse(source, base4) {
+    const [prefix, bytes] = parseCIDtoBytes(source, base4);
     const cid = CID.decode(bytes);
-    cid._baseCache.set(prefix, source);
+    baseCache(cid).set(prefix, source);
     return cid;
   }
 };
-var parseCIDtoBytes = (source, base3) => {
+var parseCIDtoBytes = (source, base4) => {
   switch (source[0]) {
     case "Q": {
-      const decoder2 = base3 || base58btc;
+      const decoder2 = base4 || base58btc;
       return [
         base58btc.prefix,
         decoder2.decode(`${base58btc.prefix}${source}`)
       ];
     }
     case base58btc.prefix: {
-      const decoder2 = base3 || base58btc;
-      return [
-        base58btc.prefix,
-        decoder2.decode(source)
-      ];
+      const decoder2 = base4 || base58btc;
+      return [base58btc.prefix, decoder2.decode(source)];
     }
     case base32.prefix: {
-      const decoder2 = base3 || base32;
-      return [
-        base32.prefix,
-        decoder2.decode(source)
-      ];
+      const decoder2 = base4 || base32;
+      return [base32.prefix, decoder2.decode(source)];
     }
     default: {
-      if (base3 == null) {
-        throw Error("To parse non base32 or base58btc encoded CID multibase decoder must be provided");
+      if (base4 == null) {
+        throw Error(
+          "To parse non base32 or base58btc encoded CID multibase decoder must be provided"
+        );
       }
-      return [
-        source[0],
-        base3.decode(source)
-      ];
+      return [source[0], base4.decode(source)];
     }
   }
 };
-var toStringV0 = (bytes, cache, base3) => {
-  const { prefix } = base3;
+var toStringV0 = (bytes, cache2, base4) => {
+  const { prefix } = base4;
   if (prefix !== base58btc.prefix) {
-    throw Error(`Cannot string encode V0 in ${base3.name} encoding`);
+    throw Error(`Cannot string encode V0 in ${base4.name} encoding`);
   }
-  const cid = cache.get(prefix);
+  const cid = cache2.get(prefix);
   if (cid == null) {
-    const cid2 = base3.encode(bytes).slice(1);
-    cache.set(prefix, cid2);
+    const cid2 = base4.encode(bytes).slice(1);
+    cache2.set(prefix, cid2);
     return cid2;
   } else {
     return cid;
   }
 };
-var toStringV1 = (bytes, cache, base3) => {
-  const { prefix } = base3;
-  const cid = cache.get(prefix);
+var toStringV1 = (bytes, cache2, base4) => {
+  const { prefix } = base4;
+  const cid = cache2.get(prefix);
   if (cid == null) {
-    const cid2 = base3.encode(bytes);
-    cache.set(prefix, cid2);
+    const cid2 = base4.encode(bytes);
+    cache2.set(prefix, cid2);
     return cid2;
   } else {
     return cid;
@@ -44843,67 +44711,21 @@ var toStringV1 = (bytes, cache, base3) => {
 };
 var DAG_PB_CODE = 112;
 var SHA_256_CODE = 18;
-var encodeCID = (version2, code6, multihash) => {
-  const codeOffset = encodingLength(version2);
-  const hashOffset = codeOffset + encodingLength(code6);
+var encodeCID = (version3, code11, multihash) => {
+  const codeOffset = encodingLength(version3);
+  const hashOffset = codeOffset + encodingLength(code11);
   const bytes = new Uint8Array(hashOffset + multihash.byteLength);
-  encodeTo(version2, bytes, 0);
-  encodeTo(code6, bytes, codeOffset);
+  encodeTo(version3, bytes, 0);
+  encodeTo(code11, bytes, codeOffset);
   bytes.set(multihash, hashOffset);
   return bytes;
 };
 var cidSymbol = Symbol.for("@ipld/js-cid/CID");
-var readonly = {
-  writable: false,
-  configurable: false,
-  enumerable: true
-};
-var hidden = {
-  writable: false,
-  enumerable: false,
-  configurable: false
-};
-var version = "0.0.0-dev";
-var deprecate = (range, message) => {
-  if (range.test(version)) {
-    console.warn(message);
-  } else {
-    throw new Error(message);
-  }
-};
-var IS_CID_DEPRECATION = `CID.isCID(v) is deprecated and will be removed in the next major release.
-Following code pattern:
-
-if (CID.isCID(value)) {
-  doSomethingWithCID(value)
-}
-
-Is replaced with:
-
-const cid = CID.asCID(value)
-if (cid) {
-  // Make sure to use cid instead of value
-  doSomethingWithCID(cid)
-}
-`;
 
 // node_modules/ipfs-unixfs-exporter/src/resolvers/index.js
 var import_err_code8 = __toESM(require_err_code(), 1);
 
-// node_modules/@ipld/dag-pb/esm/src/index.js
-var src_exports = {};
-__export(src_exports, {
-  code: () => code,
-  createLink: () => createLink,
-  createNode: () => createNode,
-  decode: () => decode5,
-  encode: () => encode3,
-  name: () => name,
-  prepare: () => prepare,
-  validate: () => validate
-});
-
-// node_modules/@ipld/dag-pb/esm/src/pb-decode.js
+// node_modules/ipfs-unixfs-exporter/node_modules/@ipld/dag-pb/src/pb-decode.js
 var textDecoder = new TextDecoder();
 function decodeVarint(bytes, offset) {
   let v = 0;
@@ -44920,10 +44742,7 @@ function decodeVarint(bytes, offset) {
       break;
     }
   }
-  return [
-    v,
-    offset
-  ];
+  return [v, offset];
 }
 function decodeBytes(bytes, offset) {
   let byteLen;
@@ -44935,19 +44754,12 @@ function decodeBytes(bytes, offset) {
   if (postOffset > bytes.length) {
     throw new Error("protobuf: unexpected end of data");
   }
-  return [
-    bytes.subarray(offset, postOffset),
-    postOffset
-  ];
+  return [bytes.subarray(offset, postOffset), postOffset];
 }
 function decodeKey(bytes, index) {
   let wire;
   [wire, index] = decodeVarint(bytes, index);
-  return [
-    wire & 7,
-    wire >> 3,
-    index
-  ];
+  return [wire & 7, wire >> 3, index];
 }
 function decodeLink(bytes) {
   const link = {};
@@ -44969,7 +44781,6 @@ function decodeLink(bytes) {
       if (link.Tsize !== void 0) {
         throw new Error("protobuf: (PBLink) invalid order, found Tsize before Hash");
       }
-      ;
       [link.Hash, index] = decodeBytes(bytes, index);
     } else if (fieldNum === 2) {
       if (link.Name !== void 0) {
@@ -44991,7 +44802,6 @@ function decodeLink(bytes) {
       if (wireType !== 0) {
         throw new Error(`protobuf: (PBLink) wrong wireType (${wireType}) for Tsize`);
       }
-      ;
       [link.Tsize, index] = decodeVarint(bytes, index);
     } else {
       throw new Error(`protobuf: (PBLink) invalid fieldNumber, expected 1, 2 or 3, got ${fieldNum}`);
@@ -45018,7 +44828,6 @@ function decodeNode(bytes) {
       if (data) {
         throw new Error("protobuf: (PBNode) duplicate Data section");
       }
-      ;
       [data, index] = decodeBytes(bytes, index);
       if (links2) {
         linksBeforeData = true;
@@ -45047,559 +44856,16 @@ function decodeNode(bytes) {
   return node;
 }
 
-// node_modules/@ipld/dag-pb/esm/src/pb-encode.js
+// node_modules/ipfs-unixfs-exporter/node_modules/@ipld/dag-pb/src/pb-encode.js
 var textEncoder = new TextEncoder();
 var maxInt32 = 2 ** 32;
 var maxUInt32 = 2 ** 31;
-function encodeLink(link, bytes) {
-  let i = bytes.length;
-  if (typeof link.Tsize === "number") {
-    if (link.Tsize < 0) {
-      throw new Error("Tsize cannot be negative");
-    }
-    if (!Number.isSafeInteger(link.Tsize)) {
-      throw new Error("Tsize too large for encoding");
-    }
-    i = encodeVarint(bytes, i, link.Tsize) - 1;
-    bytes[i] = 24;
-  }
-  if (typeof link.Name === "string") {
-    const nameBytes = textEncoder.encode(link.Name);
-    i -= nameBytes.length;
-    bytes.set(nameBytes, i);
-    i = encodeVarint(bytes, i, nameBytes.length) - 1;
-    bytes[i] = 18;
-  }
-  if (link.Hash) {
-    i -= link.Hash.length;
-    bytes.set(link.Hash, i);
-    i = encodeVarint(bytes, i, link.Hash.length) - 1;
-    bytes[i] = 10;
-  }
-  return bytes.length - i;
-}
-function encodeNode(node) {
-  const size = sizeNode(node);
-  const bytes = new Uint8Array(size);
-  let i = size;
-  if (node.Data) {
-    i -= node.Data.length;
-    bytes.set(node.Data, i);
-    i = encodeVarint(bytes, i, node.Data.length) - 1;
-    bytes[i] = 10;
-  }
-  if (node.Links) {
-    for (let index = node.Links.length - 1; index >= 0; index--) {
-      const size2 = encodeLink(node.Links[index], bytes.subarray(0, i));
-      i -= size2;
-      i = encodeVarint(bytes, i, size2) - 1;
-      bytes[i] = 18;
-    }
-  }
-  return bytes;
-}
-function sizeLink(link) {
-  let n = 0;
-  if (link.Hash) {
-    const l = link.Hash.length;
-    n += 1 + l + sov(l);
-  }
-  if (typeof link.Name === "string") {
-    const l = textEncoder.encode(link.Name).length;
-    n += 1 + l + sov(l);
-  }
-  if (typeof link.Tsize === "number") {
-    n += 1 + sov(link.Tsize);
-  }
-  return n;
-}
-function sizeNode(node) {
-  let n = 0;
-  if (node.Data) {
-    const l = node.Data.length;
-    n += 1 + l + sov(l);
-  }
-  if (node.Links) {
-    for (const link of node.Links) {
-      const l = sizeLink(link);
-      n += 1 + l + sov(l);
-    }
-  }
-  return n;
-}
-function encodeVarint(bytes, offset, v) {
-  offset -= sov(v);
-  const base3 = offset;
-  while (v >= maxUInt32) {
-    bytes[offset++] = v & 127 | 128;
-    v /= 128;
-  }
-  while (v >= 128) {
-    bytes[offset++] = v & 127 | 128;
-    v >>>= 7;
-  }
-  bytes[offset] = v;
-  return base3;
-}
-function sov(x) {
-  if (x % 2 === 0) {
-    x++;
-  }
-  return Math.floor((len64(x) + 6) / 7);
-}
-function len64(x) {
-  let n = 0;
-  if (x >= maxInt32) {
-    x = Math.floor(x / maxInt32);
-    n = 32;
-  }
-  if (x >= 1 << 16) {
-    x >>>= 16;
-    n += 16;
-  }
-  if (x >= 1 << 8) {
-    x >>>= 8;
-    n += 8;
-  }
-  return n + len8tab[x];
-}
-var len8tab = [
-  0,
-  1,
-  2,
-  2,
-  3,
-  3,
-  3,
-  3,
-  4,
-  4,
-  4,
-  4,
-  4,
-  4,
-  4,
-  4,
-  5,
-  5,
-  5,
-  5,
-  5,
-  5,
-  5,
-  5,
-  5,
-  5,
-  5,
-  5,
-  5,
-  5,
-  5,
-  5,
-  6,
-  6,
-  6,
-  6,
-  6,
-  6,
-  6,
-  6,
-  6,
-  6,
-  6,
-  6,
-  6,
-  6,
-  6,
-  6,
-  6,
-  6,
-  6,
-  6,
-  6,
-  6,
-  6,
-  6,
-  6,
-  6,
-  6,
-  6,
-  6,
-  6,
-  6,
-  6,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  7,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8,
-  8
-];
 
-// node_modules/@ipld/dag-pb/esm/src/util.js
-var pbNodeProperties = [
-  "Data",
-  "Links"
-];
-var pbLinkProperties = [
-  "Hash",
-  "Name",
-  "Tsize"
-];
+// node_modules/ipfs-unixfs-exporter/node_modules/@ipld/dag-pb/src/util.js
 var textEncoder2 = new TextEncoder();
-function linkComparator(a, b) {
-  if (a === b) {
-    return 0;
-  }
-  const abuf = a.Name ? textEncoder2.encode(a.Name) : [];
-  const bbuf = b.Name ? textEncoder2.encode(b.Name) : [];
-  let x = abuf.length;
-  let y = bbuf.length;
-  for (let i = 0, len = Math.min(x, y); i < len; ++i) {
-    if (abuf[i] !== bbuf[i]) {
-      x = abuf[i];
-      y = bbuf[i];
-      break;
-    }
-  }
-  return x < y ? -1 : y < x ? 1 : 0;
-}
-function hasOnlyProperties(node, properties) {
-  return !Object.keys(node).some((p) => !properties.includes(p));
-}
-function asLink(link) {
-  if (typeof link.asCID === "object") {
-    const Hash = CID.asCID(link);
-    if (!Hash) {
-      throw new TypeError("Invalid DAG-PB form");
-    }
-    return { Hash };
-  }
-  if (typeof link !== "object" || Array.isArray(link)) {
-    throw new TypeError("Invalid DAG-PB form");
-  }
-  const pbl = {};
-  if (link.Hash) {
-    let cid = CID.asCID(link.Hash);
-    try {
-      if (!cid) {
-        if (typeof link.Hash === "string") {
-          cid = CID.parse(link.Hash);
-        } else if (link.Hash instanceof Uint8Array) {
-          cid = CID.decode(link.Hash);
-        }
-      }
-    } catch (e) {
-      throw new TypeError(`Invalid DAG-PB form: ${e.message}`);
-    }
-    if (cid) {
-      pbl.Hash = cid;
-    }
-  }
-  if (!pbl.Hash) {
-    throw new TypeError("Invalid DAG-PB form");
-  }
-  if (typeof link.Name === "string") {
-    pbl.Name = link.Name;
-  }
-  if (typeof link.Tsize === "number") {
-    pbl.Tsize = link.Tsize;
-  }
-  return pbl;
-}
-function prepare(node) {
-  if (node instanceof Uint8Array || typeof node === "string") {
-    node = { Data: node };
-  }
-  if (typeof node !== "object" || Array.isArray(node)) {
-    throw new TypeError("Invalid DAG-PB form");
-  }
-  const pbn = {};
-  if (node.Data !== void 0) {
-    if (typeof node.Data === "string") {
-      pbn.Data = textEncoder2.encode(node.Data);
-    } else if (node.Data instanceof Uint8Array) {
-      pbn.Data = node.Data;
-    } else {
-      throw new TypeError("Invalid DAG-PB form");
-    }
-  }
-  if (node.Links !== void 0) {
-    if (Array.isArray(node.Links)) {
-      pbn.Links = node.Links.map(asLink);
-      pbn.Links.sort(linkComparator);
-    } else {
-      throw new TypeError("Invalid DAG-PB form");
-    }
-  } else {
-    pbn.Links = [];
-  }
-  return pbn;
-}
-function validate(node) {
-  if (!node || typeof node !== "object" || Array.isArray(node)) {
-    throw new TypeError("Invalid DAG-PB form");
-  }
-  if (!hasOnlyProperties(node, pbNodeProperties)) {
-    throw new TypeError("Invalid DAG-PB form (extraneous properties)");
-  }
-  if (node.Data !== void 0 && !(node.Data instanceof Uint8Array)) {
-    throw new TypeError("Invalid DAG-PB form (Data must be a Uint8Array)");
-  }
-  if (!Array.isArray(node.Links)) {
-    throw new TypeError("Invalid DAG-PB form (Links must be an array)");
-  }
-  for (let i = 0; i < node.Links.length; i++) {
-    const link = node.Links[i];
-    if (!link || typeof link !== "object" || Array.isArray(link)) {
-      throw new TypeError("Invalid DAG-PB form (bad link object)");
-    }
-    if (!hasOnlyProperties(link, pbLinkProperties)) {
-      throw new TypeError("Invalid DAG-PB form (extraneous properties on link object)");
-    }
-    if (!link.Hash) {
-      throw new TypeError("Invalid DAG-PB form (link must have a Hash)");
-    }
-    if (link.Hash.asCID !== link.Hash) {
-      throw new TypeError("Invalid DAG-PB form (link Hash must be a CID)");
-    }
-    if (link.Name !== void 0 && typeof link.Name !== "string") {
-      throw new TypeError("Invalid DAG-PB form (link Name must be a string)");
-    }
-    if (link.Tsize !== void 0 && (typeof link.Tsize !== "number" || link.Tsize % 1 !== 0)) {
-      throw new TypeError("Invalid DAG-PB form (link Tsize must be an integer)");
-    }
-    if (i > 0 && linkComparator(link, node.Links[i - 1]) === -1) {
-      throw new TypeError("Invalid DAG-PB form (links must be sorted by Name bytes)");
-    }
-  }
-}
-function createNode(data, links2 = []) {
-  return prepare({
-    Data: data,
-    Links: links2
-  });
-}
-function createLink(name5, size, cid) {
-  return asLink({
-    Hash: cid,
-    Name: name5,
-    Tsize: size
-  });
-}
 
-// node_modules/@ipld/dag-pb/esm/src/index.js
-var name = "dag-pb";
+// node_modules/ipfs-unixfs-exporter/node_modules/@ipld/dag-pb/src/index.js
 var code = 112;
-function encode3(node) {
-  validate(node);
-  const pbn = {};
-  if (node.Links) {
-    pbn.Links = node.Links.map((l) => {
-      const link = {};
-      if (l.Hash) {
-        link.Hash = l.Hash.bytes;
-      }
-      if (l.Name !== void 0) {
-        link.Name = l.Name;
-      }
-      if (l.Tsize !== void 0) {
-        link.Tsize = l.Tsize;
-      }
-      return link;
-    });
-  }
-  if (node.Data) {
-    pbn.Data = node.Data;
-  }
-  return encodeNode(pbn);
-}
 function decode5(bytes) {
   const pbn = decodeNode(bytes);
   const node = {};
@@ -45713,10 +44979,10 @@ function getObjectType(value) {
 
 // node_modules/cborg/esm/lib/token.js
 var Type = class {
-  constructor(major, name5, terminal) {
+  constructor(major, name7, terminal) {
     this.major = major;
     this.majorEncoded = major << 5;
-    this.name = name5;
+    this.name = name7;
     this.terminal = terminal;
   }
   toString() {
@@ -45770,10 +45036,10 @@ var toString2 = useBuffer ? (bytes, start, end) => {
 } : (bytes, start, end) => {
   return end - start > 64 ? textDecoder2.decode(bytes.subarray(start, end)) : utf8Slice(bytes, start, end);
 };
-var fromString2 = useBuffer ? (string2) => {
-  return string2.length > 64 ? globalThis.Buffer.from(string2) : utf8ToBytes(string2);
-} : (string2) => {
-  return string2.length > 64 ? textEncoder3.encode(string2) : utf8ToBytes(string2);
+var fromString2 = useBuffer ? (string3) => {
+  return string3.length > 64 ? globalThis.Buffer.from(string3) : utf8ToBytes(string3);
+} : (string3) => {
+  return string3.length > 64 ? textEncoder3.encode(string3) : utf8ToBytes(string3);
 };
 var fromArray = (arr) => {
   return Uint8Array.from(arr);
@@ -45786,11 +45052,11 @@ var slice = useBuffer ? (bytes, start, end) => {
 } : (bytes, start, end) => {
   return bytes.slice(start, end);
 };
-var concat = useBuffer ? (chunks, length2) => {
+var concat = useBuffer ? (chunks, length4) => {
   chunks = chunks.map((c) => c instanceof Uint8Array ? c : globalThis.Buffer.from(c));
-  return asU8A(globalThis.Buffer.concat(chunks, length2));
-} : (chunks, length2) => {
-  const out = new Uint8Array(length2);
+  return asU8A(globalThis.Buffer.concat(chunks, length4));
+} : (chunks, length4) => {
+  const out = new Uint8Array(length4);
   let off = 0;
   for (let b of chunks) {
     if (off + b.length > out.length) {
@@ -45818,20 +45084,20 @@ function compare(b1, b2) {
   }
   return 0;
 }
-function utf8ToBytes(string2, units = Infinity) {
+function utf8ToBytes(string3, units = Infinity) {
   let codePoint;
-  const length2 = string2.length;
+  const length4 = string3.length;
   let leadSurrogate = null;
   const bytes = [];
-  for (let i = 0; i < length2; ++i) {
-    codePoint = string2.charCodeAt(i);
+  for (let i = 0; i < length4; ++i) {
+    codePoint = string3.charCodeAt(i);
     if (codePoint > 55295 && codePoint < 57344) {
       if (!leadSurrogate) {
         if (codePoint > 56319) {
           if ((units -= 3) > -1)
             bytes.push(239, 191, 189);
           continue;
-        } else if (i + 1 === length2) {
+        } else if (i + 1 === length4) {
           if ((units -= 3) > -1)
             bytes.push(239, 191, 189);
           continue;
@@ -46229,10 +45495,10 @@ encodeNegint.compareTokens = function compareTokens2(tok1, tok2) {
 };
 
 // node_modules/cborg/esm/lib/2bytes.js
-function toToken(data, pos, prefix, length2) {
-  assertEnoughData(data, pos, prefix + length2);
-  const buf2 = slice(data, pos + prefix, pos + prefix + length2);
-  return new Token(Type.bytes, buf2, prefix + length2);
+function toToken(data, pos, prefix, length4) {
+  assertEnoughData(data, pos, prefix + length4);
+  const buf2 = slice(data, pos + prefix, pos + prefix + length4);
+  return new Token(Type.bytes, buf2, prefix + length4);
 }
 function decodeBytesCompact(data, pos, minor, _options) {
   return toToken(data, pos, 1, minor);
@@ -46276,8 +45542,8 @@ function compareBytes(b1, b2) {
 }
 
 // node_modules/cborg/esm/lib/3string.js
-function toToken2(data, pos, prefix, length2, options) {
-  const totLength = prefix + length2;
+function toToken2(data, pos, prefix, length4, options) {
+  const totLength = prefix + length4;
   assertEnoughData(data, pos, totLength);
   const tok = new Token(Type.string, toString2(data, pos + prefix, pos + totLength), totLength);
   if (options.retainStringBytes === true) {
@@ -46307,8 +45573,8 @@ function decodeString64(data, pos, _minor, options) {
 var encodeString = encodeBytes;
 
 // node_modules/cborg/esm/lib/4array.js
-function toToken3(_data, _pos, prefix, length2) {
-  return new Token(Type.array, length2, prefix);
+function toToken3(_data, _pos, prefix, length4) {
+  return new Token(Type.array, length4, prefix);
 }
 function decodeArrayCompact(data, pos, minor, _options) {
   return toToken3(data, pos, 1, minor);
@@ -46344,8 +45610,8 @@ encodeArray.encodedSize = function encodedSize5(token2) {
 };
 
 // node_modules/cborg/esm/lib/5map.js
-function toToken4(_data, _pos, prefix, length2) {
-  return new Token(Type.map, length2, prefix);
+function toToken4(_data, _pos, prefix, length4) {
+  return new Token(Type.map, length4, prefix);
 }
 function decodeMapCompact(data, pos, minor, _options) {
   return toToken4(data, pos, 1, minor);
@@ -46853,8 +46119,8 @@ var typeEncoders = {
   Object(obj, typ, options, refStack) {
     const isMap = typ !== "Object";
     const keys = isMap ? obj.keys() : Object.keys(obj);
-    const length2 = isMap ? obj.size : keys.length;
-    if (!length2) {
+    const length4 = isMap ? obj.size : keys.length;
+    if (!length4) {
       if (options.addBreakTokens === true) {
         return [
           simpleTokens.emptyMap,
@@ -46875,13 +46141,13 @@ var typeEncoders = {
     sortMapEntries(entries, options);
     if (options.addBreakTokens) {
       return [
-        new Token(Type.map, length2),
+        new Token(Type.map, length4),
         entries,
         new Token(Type.break)
       ];
     }
     return [
-      new Token(Type.map, length2),
+      new Token(Type.map, length4),
       entries
     ];
   }
@@ -46955,7 +46221,7 @@ function encodeCustom(data, encoders, options) {
   tokensToEncoded(buf, tokens, encoders, options);
   return buf.toBytes(true);
 }
-function encode4(data, options) {
+function encode3(data, options) {
   options = Object.assign({}, defaultEncodeOptions, options);
   return encodeCustom(data, cborEncoders, options);
 }
@@ -47085,43 +46351,8 @@ function decode6(data, options) {
   return decoded;
 }
 
-// node_modules/@ipld/dag-cbor/esm/index.js
+// node_modules/ipfs-unixfs-exporter/node_modules/@ipld/dag-cbor/src/index.js
 var CID_CBOR_TAG = 42;
-function cidEncoder(obj) {
-  if (obj.asCID !== obj) {
-    return null;
-  }
-  const cid = CID.asCID(obj);
-  if (!cid) {
-    return null;
-  }
-  const bytes = new Uint8Array(cid.bytes.byteLength + 1);
-  bytes.set(cid.bytes, 1);
-  return [
-    new Token(Type.tag, CID_CBOR_TAG),
-    new Token(Type.bytes, bytes)
-  ];
-}
-function undefinedEncoder() {
-  throw new Error("`undefined` is not supported by the IPLD Data Model and cannot be encoded");
-}
-function numberEncoder(num) {
-  if (Number.isNaN(num)) {
-    throw new Error("`NaN` is not supported by the IPLD Data Model and cannot be encoded");
-  }
-  if (num === Infinity || num === -Infinity) {
-    throw new Error("`Infinity` and `-Infinity` is not supported by the IPLD Data Model and cannot be encoded");
-  }
-  return null;
-}
-var encodeOptions = {
-  float64: true,
-  typeEncoders: {
-    Object: cidEncoder,
-    undefined: undefinedEncoder,
-    number: numberEncoder
-  }
-};
 function cidDecoder(bytes) {
   if (bytes[0] !== 0) {
     throw new Error("Invalid CID for CBOR tag 42; expected leading 0x00");
@@ -47140,37 +46371,17 @@ var decodeOptions = {
 };
 decodeOptions.tags[CID_CBOR_TAG] = cidDecoder;
 var code2 = 113;
-var encode5 = (node) => encode4(node, encodeOptions);
 var decode7 = (data) => decode6(data, decodeOptions);
 
-// node_modules/multiformats/esm/src/codecs/raw.js
-var raw_exports = {};
-__export(raw_exports, {
-  code: () => code3,
-  decode: () => decode8,
-  encode: () => encode6,
-  name: () => name2
-});
-var name2 = "raw";
+// node_modules/ipfs-unixfs-exporter/node_modules/multiformats/src/codecs/raw.js
 var code3 = 85;
-var encode6 = (node) => coerce(node);
-var decode8 = (data) => coerce(data);
 
-// node_modules/multiformats/esm/src/hashes/identity.js
-var identity_exports = {};
-__export(identity_exports, {
-  identity: () => identity
-});
+// node_modules/ipfs-unixfs-exporter/node_modules/multiformats/src/hashes/identity.js
 var code4 = 0;
-var name3 = "identity";
-var encode7 = coerce;
-var digest = (input2) => create(code4, encode7(input2));
-var identity = {
-  code: code4,
-  name: name3,
-  encode: encode7,
-  digest
-};
+var name = "identity";
+var encode4 = coerce;
+var digest = (input2) => create(code4, encode4(input2));
+var identity = { code: code4, name, encode: encode4, digest };
 
 // node_modules/ipfs-unixfs-exporter/src/resolvers/unixfs-v1/index.js
 var import_err_code4 = __toESM(require_err_code(), 1);
@@ -47201,7 +46412,7 @@ var Data = $root.Data = (() => {
   Data4.prototype.fanout = $util.Long ? $util.Long.fromBits(0, 0, true) : 0;
   Data4.prototype.mode = 0;
   Data4.prototype.mtime = null;
-  Data4.encode = function encode11(m, w) {
+  Data4.encode = function encode18(m, w) {
     if (!w)
       w = $Writer.create();
     w.uint32(8).int32(m.Type);
@@ -47223,7 +46434,7 @@ var Data = $root.Data = (() => {
       $root.UnixTime.encode(m.mtime, w.uint32(66).fork()).ldelim();
     return w;
   };
-  Data4.decode = function decode12(r, l) {
+  Data4.decode = function decode23(r, l) {
     if (!(r instanceof $Reader))
       r = $Reader.create(r);
     var c = l === void 0 ? r.len : r.pos + l, m = new $root.Data();
@@ -47461,7 +46672,7 @@ var UnixTime = $root.UnixTime = (() => {
   }
   UnixTime4.prototype.Seconds = $util.Long ? $util.Long.fromBits(0, 0, false) : 0;
   UnixTime4.prototype.FractionalNanoseconds = 0;
-  UnixTime4.encode = function encode11(m, w) {
+  UnixTime4.encode = function encode18(m, w) {
     if (!w)
       w = $Writer.create();
     w.uint32(8).int64(m.Seconds);
@@ -47469,7 +46680,7 @@ var UnixTime = $root.UnixTime = (() => {
       w.uint32(21).fixed32(m.FractionalNanoseconds);
     return w;
   };
-  UnixTime4.decode = function decode12(r, l) {
+  UnixTime4.decode = function decode23(r, l) {
     if (!(r instanceof $Reader))
       r = $Reader.create(r);
     var c = l === void 0 ? r.len : r.pos + l, m = new $root.UnixTime();
@@ -47547,14 +46758,14 @@ var Metadata = $root.Metadata = (() => {
     }
   }
   Metadata4.prototype.MimeType = "";
-  Metadata4.encode = function encode11(m, w) {
+  Metadata4.encode = function encode18(m, w) {
     if (!w)
       w = $Writer.create();
     if (m.MimeType != null && Object.hasOwnProperty.call(m, "MimeType"))
       w.uint32(10).string(m.MimeType);
     return w;
   };
-  Metadata4.decode = function decode12(r, l) {
+  Metadata4.decode = function decode23(r, l) {
     if (!(r instanceof $Reader))
       r = $Reader.create(r);
     var c = l === void 0 ? r.len : r.pos + l, m = new $root.Metadata();
@@ -47817,90 +47028,494 @@ var UnixFS = class {
 // node_modules/ipfs-unixfs-exporter/node_modules/hamt-sharding/dist/src/bucket.js
 var import_sparse_array = __toESM(require_sparse_array(), 1);
 
-// node_modules/multiformats/esm/src/bases/identity.js
-var identity_exports2 = {};
-__export(identity_exports2, {
+// node_modules/ipfs-unixfs-exporter/node_modules/hamt-sharding/node_modules/multiformats/esm/src/bases/identity.js
+var identity_exports = {};
+__export(identity_exports, {
   identity: () => identity2
 });
-var identity2 = from({
+
+// node_modules/ipfs-unixfs-exporter/node_modules/hamt-sharding/node_modules/multiformats/esm/vendor/base-x.js
+function base2(ALPHABET, name7) {
+  if (ALPHABET.length >= 255) {
+    throw new TypeError("Alphabet too long");
+  }
+  var BASE_MAP = new Uint8Array(256);
+  for (var j = 0; j < BASE_MAP.length; j++) {
+    BASE_MAP[j] = 255;
+  }
+  for (var i = 0; i < ALPHABET.length; i++) {
+    var x = ALPHABET.charAt(i);
+    var xc = x.charCodeAt(0);
+    if (BASE_MAP[xc] !== 255) {
+      throw new TypeError(x + " is ambiguous");
+    }
+    BASE_MAP[xc] = i;
+  }
+  var BASE = ALPHABET.length;
+  var LEADER = ALPHABET.charAt(0);
+  var FACTOR = Math.log(BASE) / Math.log(256);
+  var iFACTOR = Math.log(256) / Math.log(BASE);
+  function encode18(source) {
+    if (source instanceof Uint8Array)
+      ;
+    else if (ArrayBuffer.isView(source)) {
+      source = new Uint8Array(source.buffer, source.byteOffset, source.byteLength);
+    } else if (Array.isArray(source)) {
+      source = Uint8Array.from(source);
+    }
+    if (!(source instanceof Uint8Array)) {
+      throw new TypeError("Expected Uint8Array");
+    }
+    if (source.length === 0) {
+      return "";
+    }
+    var zeroes = 0;
+    var length4 = 0;
+    var pbegin = 0;
+    var pend = source.length;
+    while (pbegin !== pend && source[pbegin] === 0) {
+      pbegin++;
+      zeroes++;
+    }
+    var size = (pend - pbegin) * iFACTOR + 1 >>> 0;
+    var b58 = new Uint8Array(size);
+    while (pbegin !== pend) {
+      var carry = source[pbegin];
+      var i2 = 0;
+      for (var it1 = size - 1; (carry !== 0 || i2 < length4) && it1 !== -1; it1--, i2++) {
+        carry += 256 * b58[it1] >>> 0;
+        b58[it1] = carry % BASE >>> 0;
+        carry = carry / BASE >>> 0;
+      }
+      if (carry !== 0) {
+        throw new Error("Non-zero carry");
+      }
+      length4 = i2;
+      pbegin++;
+    }
+    var it2 = size - length4;
+    while (it2 !== size && b58[it2] === 0) {
+      it2++;
+    }
+    var str = LEADER.repeat(zeroes);
+    for (; it2 < size; ++it2) {
+      str += ALPHABET.charAt(b58[it2]);
+    }
+    return str;
+  }
+  function decodeUnsafe(source) {
+    if (typeof source !== "string") {
+      throw new TypeError("Expected String");
+    }
+    if (source.length === 0) {
+      return new Uint8Array();
+    }
+    var psz = 0;
+    if (source[psz] === " ") {
+      return;
+    }
+    var zeroes = 0;
+    var length4 = 0;
+    while (source[psz] === LEADER) {
+      zeroes++;
+      psz++;
+    }
+    var size = (source.length - psz) * FACTOR + 1 >>> 0;
+    var b256 = new Uint8Array(size);
+    while (source[psz]) {
+      var carry = BASE_MAP[source.charCodeAt(psz)];
+      if (carry === 255) {
+        return;
+      }
+      var i2 = 0;
+      for (var it3 = size - 1; (carry !== 0 || i2 < length4) && it3 !== -1; it3--, i2++) {
+        carry += BASE * b256[it3] >>> 0;
+        b256[it3] = carry % 256 >>> 0;
+        carry = carry / 256 >>> 0;
+      }
+      if (carry !== 0) {
+        throw new Error("Non-zero carry");
+      }
+      length4 = i2;
+      psz++;
+    }
+    if (source[psz] === " ") {
+      return;
+    }
+    var it4 = size - length4;
+    while (it4 !== size && b256[it4] === 0) {
+      it4++;
+    }
+    var vch = new Uint8Array(zeroes + (size - it4));
+    var j2 = zeroes;
+    while (it4 !== size) {
+      vch[j2++] = b256[it4++];
+    }
+    return vch;
+  }
+  function decode23(string3) {
+    var buffer2 = decodeUnsafe(string3);
+    if (buffer2) {
+      return buffer2;
+    }
+    throw new Error(`Non-${name7} character`);
+  }
+  return {
+    encode: encode18,
+    decodeUnsafe,
+    decode: decode23
+  };
+}
+var src2 = base2;
+var _brrp__multiformats_scope_baseX2 = src2;
+var base_x_default2 = _brrp__multiformats_scope_baseX2;
+
+// node_modules/ipfs-unixfs-exporter/node_modules/hamt-sharding/node_modules/multiformats/esm/src/bytes.js
+var empty2 = new Uint8Array(0);
+var equals3 = (aa, bb) => {
+  if (aa === bb)
+    return true;
+  if (aa.byteLength !== bb.byteLength) {
+    return false;
+  }
+  for (let ii = 0; ii < aa.byteLength; ii++) {
+    if (aa[ii] !== bb[ii]) {
+      return false;
+    }
+  }
+  return true;
+};
+var coerce2 = (o) => {
+  if (o instanceof Uint8Array && o.constructor.name === "Uint8Array")
+    return o;
+  if (o instanceof ArrayBuffer)
+    return new Uint8Array(o);
+  if (ArrayBuffer.isView(o)) {
+    return new Uint8Array(o.buffer, o.byteOffset, o.byteLength);
+  }
+  throw new Error("Unknown type, must be binary type");
+};
+var fromString3 = (str) => new TextEncoder().encode(str);
+var toString3 = (b) => new TextDecoder().decode(b);
+
+// node_modules/ipfs-unixfs-exporter/node_modules/hamt-sharding/node_modules/multiformats/esm/src/bases/base.js
+var Encoder2 = class {
+  constructor(name7, prefix, baseEncode) {
+    this.name = name7;
+    this.prefix = prefix;
+    this.baseEncode = baseEncode;
+  }
+  encode(bytes) {
+    if (bytes instanceof Uint8Array) {
+      return `${this.prefix}${this.baseEncode(bytes)}`;
+    } else {
+      throw Error("Unknown type, must be binary type");
+    }
+  }
+};
+var Decoder2 = class {
+  constructor(name7, prefix, baseDecode) {
+    this.name = name7;
+    this.prefix = prefix;
+    if (prefix.codePointAt(0) === void 0) {
+      throw new Error("Invalid prefix character");
+    }
+    this.prefixCodePoint = prefix.codePointAt(0);
+    this.baseDecode = baseDecode;
+  }
+  decode(text) {
+    if (typeof text === "string") {
+      if (text.codePointAt(0) !== this.prefixCodePoint) {
+        throw Error(`Unable to decode multibase string ${JSON.stringify(text)}, ${this.name} decoder only supports inputs prefixed with ${this.prefix}`);
+      }
+      return this.baseDecode(text.slice(this.prefix.length));
+    } else {
+      throw Error("Can only multibase decode strings");
+    }
+  }
+  or(decoder2) {
+    return or2(this, decoder2);
+  }
+};
+var ComposedDecoder2 = class {
+  constructor(decoders) {
+    this.decoders = decoders;
+  }
+  or(decoder2) {
+    return or2(this, decoder2);
+  }
+  decode(input2) {
+    const prefix = input2[0];
+    const decoder2 = this.decoders[prefix];
+    if (decoder2) {
+      return decoder2.decode(input2);
+    } else {
+      throw RangeError(`Unable to decode multibase string ${JSON.stringify(input2)}, only inputs prefixed with ${Object.keys(this.decoders)} are supported`);
+    }
+  }
+};
+var or2 = (left, right) => new ComposedDecoder2({
+  ...left.decoders || { [left.prefix]: left },
+  ...right.decoders || { [right.prefix]: right }
+});
+var Codec2 = class {
+  constructor(name7, prefix, baseEncode, baseDecode) {
+    this.name = name7;
+    this.prefix = prefix;
+    this.baseEncode = baseEncode;
+    this.baseDecode = baseDecode;
+    this.encoder = new Encoder2(name7, prefix, baseEncode);
+    this.decoder = new Decoder2(name7, prefix, baseDecode);
+  }
+  encode(input2) {
+    return this.encoder.encode(input2);
+  }
+  decode(input2) {
+    return this.decoder.decode(input2);
+  }
+};
+var from2 = ({ name: name7, prefix, encode: encode18, decode: decode23 }) => new Codec2(name7, prefix, encode18, decode23);
+var baseX2 = ({ prefix, name: name7, alphabet: alphabet3 }) => {
+  const { encode: encode18, decode: decode23 } = base_x_default2(alphabet3, name7);
+  return from2({
+    prefix,
+    name: name7,
+    encode: encode18,
+    decode: (text) => coerce2(decode23(text))
+  });
+};
+var decode8 = (string3, alphabet3, bitsPerChar, name7) => {
+  const codes = {};
+  for (let i = 0; i < alphabet3.length; ++i) {
+    codes[alphabet3[i]] = i;
+  }
+  let end = string3.length;
+  while (string3[end - 1] === "=") {
+    --end;
+  }
+  const out = new Uint8Array(end * bitsPerChar / 8 | 0);
+  let bits = 0;
+  let buffer2 = 0;
+  let written = 0;
+  for (let i = 0; i < end; ++i) {
+    const value = codes[string3[i]];
+    if (value === void 0) {
+      throw new SyntaxError(`Non-${name7} character`);
+    }
+    buffer2 = buffer2 << bitsPerChar | value;
+    bits += bitsPerChar;
+    if (bits >= 8) {
+      bits -= 8;
+      out[written++] = 255 & buffer2 >> bits;
+    }
+  }
+  if (bits >= bitsPerChar || 255 & buffer2 << 8 - bits) {
+    throw new SyntaxError("Unexpected end of data");
+  }
+  return out;
+};
+var encode5 = (data, alphabet3, bitsPerChar) => {
+  const pad = alphabet3[alphabet3.length - 1] === "=";
+  const mask = (1 << bitsPerChar) - 1;
+  let out = "";
+  let bits = 0;
+  let buffer2 = 0;
+  for (let i = 0; i < data.length; ++i) {
+    buffer2 = buffer2 << 8 | data[i];
+    bits += 8;
+    while (bits > bitsPerChar) {
+      bits -= bitsPerChar;
+      out += alphabet3[mask & buffer2 >> bits];
+    }
+  }
+  if (bits) {
+    out += alphabet3[mask & buffer2 << bitsPerChar - bits];
+  }
+  if (pad) {
+    while (out.length * bitsPerChar & 7) {
+      out += "=";
+    }
+  }
+  return out;
+};
+var rfc46482 = ({ name: name7, prefix, bitsPerChar, alphabet: alphabet3 }) => {
+  return from2({
+    prefix,
+    name: name7,
+    encode(input2) {
+      return encode5(input2, alphabet3, bitsPerChar);
+    },
+    decode(input2) {
+      return decode8(input2, alphabet3, bitsPerChar, name7);
+    }
+  });
+};
+
+// node_modules/ipfs-unixfs-exporter/node_modules/hamt-sharding/node_modules/multiformats/esm/src/bases/identity.js
+var identity2 = from2({
   prefix: "\0",
   name: "identity",
-  encode: (buf2) => toString(buf2),
-  decode: (str) => fromString(str)
+  encode: (buf2) => toString3(buf2),
+  decode: (str) => fromString3(str)
 });
 
-// node_modules/multiformats/esm/src/bases/base2.js
+// node_modules/ipfs-unixfs-exporter/node_modules/hamt-sharding/node_modules/multiformats/esm/src/bases/base2.js
 var base2_exports = {};
 __export(base2_exports, {
-  base2: () => base2
+  base2: () => base22
 });
-var base2 = rfc4648({
+var base22 = rfc46482({
   prefix: "0",
   name: "base2",
   alphabet: "01",
   bitsPerChar: 1
 });
 
-// node_modules/multiformats/esm/src/bases/base8.js
+// node_modules/ipfs-unixfs-exporter/node_modules/hamt-sharding/node_modules/multiformats/esm/src/bases/base8.js
 var base8_exports = {};
 __export(base8_exports, {
   base8: () => base8
 });
-var base8 = rfc4648({
+var base8 = rfc46482({
   prefix: "7",
   name: "base8",
   alphabet: "01234567",
   bitsPerChar: 3
 });
 
-// node_modules/multiformats/esm/src/bases/base10.js
+// node_modules/ipfs-unixfs-exporter/node_modules/hamt-sharding/node_modules/multiformats/esm/src/bases/base10.js
 var base10_exports = {};
 __export(base10_exports, {
   base10: () => base10
 });
-var base10 = baseX({
+var base10 = baseX2({
   prefix: "9",
   name: "base10",
   alphabet: "0123456789"
 });
 
-// node_modules/multiformats/esm/src/bases/base16.js
+// node_modules/ipfs-unixfs-exporter/node_modules/hamt-sharding/node_modules/multiformats/esm/src/bases/base16.js
 var base16_exports = {};
 __export(base16_exports, {
   base16: () => base16,
   base16upper: () => base16upper
 });
-var base16 = rfc4648({
+var base16 = rfc46482({
   prefix: "f",
   name: "base16",
   alphabet: "0123456789abcdef",
   bitsPerChar: 4
 });
-var base16upper = rfc4648({
+var base16upper = rfc46482({
   prefix: "F",
   name: "base16upper",
   alphabet: "0123456789ABCDEF",
   bitsPerChar: 4
 });
 
-// node_modules/multiformats/esm/src/bases/base36.js
+// node_modules/ipfs-unixfs-exporter/node_modules/hamt-sharding/node_modules/multiformats/esm/src/bases/base32.js
+var base32_exports = {};
+__export(base32_exports, {
+  base32: () => base322,
+  base32hex: () => base32hex2,
+  base32hexpad: () => base32hexpad2,
+  base32hexpadupper: () => base32hexpadupper2,
+  base32hexupper: () => base32hexupper2,
+  base32pad: () => base32pad2,
+  base32padupper: () => base32padupper2,
+  base32upper: () => base32upper2,
+  base32z: () => base32z2
+});
+var base322 = rfc46482({
+  prefix: "b",
+  name: "base32",
+  alphabet: "abcdefghijklmnopqrstuvwxyz234567",
+  bitsPerChar: 5
+});
+var base32upper2 = rfc46482({
+  prefix: "B",
+  name: "base32upper",
+  alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567",
+  bitsPerChar: 5
+});
+var base32pad2 = rfc46482({
+  prefix: "c",
+  name: "base32pad",
+  alphabet: "abcdefghijklmnopqrstuvwxyz234567=",
+  bitsPerChar: 5
+});
+var base32padupper2 = rfc46482({
+  prefix: "C",
+  name: "base32padupper",
+  alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567=",
+  bitsPerChar: 5
+});
+var base32hex2 = rfc46482({
+  prefix: "v",
+  name: "base32hex",
+  alphabet: "0123456789abcdefghijklmnopqrstuv",
+  bitsPerChar: 5
+});
+var base32hexupper2 = rfc46482({
+  prefix: "V",
+  name: "base32hexupper",
+  alphabet: "0123456789ABCDEFGHIJKLMNOPQRSTUV",
+  bitsPerChar: 5
+});
+var base32hexpad2 = rfc46482({
+  prefix: "t",
+  name: "base32hexpad",
+  alphabet: "0123456789abcdefghijklmnopqrstuv=",
+  bitsPerChar: 5
+});
+var base32hexpadupper2 = rfc46482({
+  prefix: "T",
+  name: "base32hexpadupper",
+  alphabet: "0123456789ABCDEFGHIJKLMNOPQRSTUV=",
+  bitsPerChar: 5
+});
+var base32z2 = rfc46482({
+  prefix: "h",
+  name: "base32z",
+  alphabet: "ybndrfg8ejkmcpqxot1uwisza345h769",
+  bitsPerChar: 5
+});
+
+// node_modules/ipfs-unixfs-exporter/node_modules/hamt-sharding/node_modules/multiformats/esm/src/bases/base36.js
 var base36_exports = {};
 __export(base36_exports, {
   base36: () => base36,
   base36upper: () => base36upper
 });
-var base36 = baseX({
+var base36 = baseX2({
   prefix: "k",
   name: "base36",
   alphabet: "0123456789abcdefghijklmnopqrstuvwxyz"
 });
-var base36upper = baseX({
+var base36upper = baseX2({
   prefix: "K",
   name: "base36upper",
   alphabet: "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 });
 
-// node_modules/multiformats/esm/src/bases/base64.js
+// node_modules/ipfs-unixfs-exporter/node_modules/hamt-sharding/node_modules/multiformats/esm/src/bases/base58.js
+var base58_exports = {};
+__export(base58_exports, {
+  base58btc: () => base58btc2,
+  base58flickr: () => base58flickr2
+});
+var base58btc2 = baseX2({
+  name: "base58btc",
+  prefix: "z",
+  alphabet: "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
+});
+var base58flickr2 = baseX2({
+  name: "base58flickr",
+  prefix: "Z",
+  alphabet: "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
+});
+
+// node_modules/ipfs-unixfs-exporter/node_modules/hamt-sharding/node_modules/multiformats/esm/src/bases/base64.js
 var base64_exports = {};
 __export(base64_exports, {
   base64: () => base64,
@@ -47908,32 +47523,32 @@ __export(base64_exports, {
   base64url: () => base64url,
   base64urlpad: () => base64urlpad
 });
-var base64 = rfc4648({
+var base64 = rfc46482({
   prefix: "m",
   name: "base64",
   alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",
   bitsPerChar: 6
 });
-var base64pad = rfc4648({
+var base64pad = rfc46482({
   prefix: "M",
   name: "base64pad",
   alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
   bitsPerChar: 6
 });
-var base64url = rfc4648({
+var base64url = rfc46482({
   prefix: "u",
   name: "base64url",
   alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_",
   bitsPerChar: 6
 });
-var base64urlpad = rfc4648({
+var base64urlpad = rfc46482({
   prefix: "U",
   name: "base64urlpad",
   alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_=",
   bitsPerChar: 6
 });
 
-// node_modules/multiformats/esm/src/bases/base256emoji.js
+// node_modules/ipfs-unixfs-exporter/node_modules/hamt-sharding/node_modules/multiformats/esm/src/bases/base256emoji.js
 var base256emoji_exports = {};
 __export(base256emoji_exports, {
   base256emoji: () => base256emoji
@@ -47947,7 +47562,7 @@ var alphabetCharsToBytes = alphabet.reduce((p, c, i) => {
   p[c.codePointAt(0)] = i;
   return p;
 }, []);
-function encode8(data) {
+function encode6(data) {
   return data.reduce((p, c) => {
     p += alphabetBytesToChars[c];
     return p;
@@ -47964,14 +47579,14 @@ function decode9(str) {
   }
   return new Uint8Array(byts);
 }
-var base256emoji = from({
+var base256emoji = from2({
   prefix: "\u{1F680}",
   name: "base256emoji",
-  encode: encode8,
+  encode: encode6,
   decode: decode9
 });
 
-// node_modules/multiformats/esm/src/hashes/sha2.js
+// node_modules/ipfs-unixfs-exporter/node_modules/hamt-sharding/node_modules/multiformats/esm/src/hashes/sha2.js
 var sha2_exports = {};
 __export(sha2_exports, {
   sha256: () => sha256,
@@ -47979,43 +47594,476 @@ __export(sha2_exports, {
 });
 var import_crypto = __toESM(require("crypto"), 1);
 
-// node_modules/multiformats/esm/src/hashes/hasher.js
-var from2 = ({ name: name5, code: code6, encode: encode11 }) => new Hasher(name5, code6, encode11);
+// node_modules/ipfs-unixfs-exporter/node_modules/hamt-sharding/node_modules/multiformats/esm/vendor/varint.js
+var encode_12 = encode7;
+var MSB2 = 128;
+var REST2 = 127;
+var MSBALL2 = ~REST2;
+var INT2 = Math.pow(2, 31);
+function encode7(num, out, offset) {
+  out = out || [];
+  offset = offset || 0;
+  var oldOffset = offset;
+  while (num >= INT2) {
+    out[offset++] = num & 255 | MSB2;
+    num /= 128;
+  }
+  while (num & MSBALL2) {
+    out[offset++] = num & 255 | MSB2;
+    num >>>= 7;
+  }
+  out[offset] = num | 0;
+  encode7.bytes = offset - oldOffset + 1;
+  return out;
+}
+var decode10 = read2;
+var MSB$12 = 128;
+var REST$12 = 127;
+function read2(buf2, offset) {
+  var res = 0, offset = offset || 0, shift = 0, counter = offset, b, l = buf2.length;
+  do {
+    if (counter >= l) {
+      read2.bytes = 0;
+      throw new RangeError("Could not decode varint");
+    }
+    b = buf2[counter++];
+    res += shift < 28 ? (b & REST$12) << shift : (b & REST$12) * Math.pow(2, shift);
+    shift += 7;
+  } while (b >= MSB$12);
+  read2.bytes = counter - offset;
+  return res;
+}
+var N12 = Math.pow(2, 7);
+var N22 = Math.pow(2, 14);
+var N32 = Math.pow(2, 21);
+var N42 = Math.pow(2, 28);
+var N52 = Math.pow(2, 35);
+var N62 = Math.pow(2, 42);
+var N72 = Math.pow(2, 49);
+var N82 = Math.pow(2, 56);
+var N92 = Math.pow(2, 63);
+var length2 = function(value) {
+  return value < N12 ? 1 : value < N22 ? 2 : value < N32 ? 3 : value < N42 ? 4 : value < N52 ? 5 : value < N62 ? 6 : value < N72 ? 7 : value < N82 ? 8 : value < N92 ? 9 : 10;
+};
+var varint2 = {
+  encode: encode_12,
+  decode: decode10,
+  encodingLength: length2
+};
+var _brrp_varint2 = varint2;
+var varint_default2 = _brrp_varint2;
+
+// node_modules/ipfs-unixfs-exporter/node_modules/hamt-sharding/node_modules/multiformats/esm/src/varint.js
+var decode11 = (data, offset = 0) => {
+  const code11 = varint_default2.decode(data, offset);
+  return [
+    code11,
+    varint_default2.decode.bytes
+  ];
+};
+var encodeTo2 = (int, target, offset = 0) => {
+  varint_default2.encode(int, target, offset);
+  return target;
+};
+var encodingLength2 = (int) => {
+  return varint_default2.encodingLength(int);
+};
+
+// node_modules/ipfs-unixfs-exporter/node_modules/hamt-sharding/node_modules/multiformats/esm/src/hashes/digest.js
+var create2 = (code11, digest4) => {
+  const size = digest4.byteLength;
+  const sizeOffset = encodingLength2(code11);
+  const digestOffset = sizeOffset + encodingLength2(size);
+  const bytes = new Uint8Array(digestOffset + size);
+  encodeTo2(code11, bytes, 0);
+  encodeTo2(size, bytes, sizeOffset);
+  bytes.set(digest4, digestOffset);
+  return new Digest2(code11, size, digest4, bytes);
+};
+var decode12 = (multihash) => {
+  const bytes = coerce2(multihash);
+  const [code11, sizeOffset] = decode11(bytes);
+  const [size, digestOffset] = decode11(bytes.subarray(sizeOffset));
+  const digest4 = bytes.subarray(sizeOffset + digestOffset);
+  if (digest4.byteLength !== size) {
+    throw new Error("Incorrect length");
+  }
+  return new Digest2(code11, size, digest4, bytes);
+};
+var equals4 = (a, b) => {
+  if (a === b) {
+    return true;
+  } else {
+    return a.code === b.code && a.size === b.size && equals3(a.bytes, b.bytes);
+  }
+};
+var Digest2 = class {
+  constructor(code11, size, digest4, bytes) {
+    this.code = code11;
+    this.size = size;
+    this.digest = digest4;
+    this.bytes = bytes;
+  }
+};
+
+// node_modules/ipfs-unixfs-exporter/node_modules/hamt-sharding/node_modules/multiformats/esm/src/hashes/hasher.js
+var from3 = ({ name: name7, code: code11, encode: encode18 }) => new Hasher(name7, code11, encode18);
 var Hasher = class {
-  constructor(name5, code6, encode11) {
-    this.name = name5;
-    this.code = code6;
-    this.encode = encode11;
+  constructor(name7, code11, encode18) {
+    this.name = name7;
+    this.code = code11;
+    this.encode = encode18;
   }
   digest(input2) {
     if (input2 instanceof Uint8Array) {
       const result = this.encode(input2);
-      return result instanceof Uint8Array ? create(this.code, result) : result.then((digest2) => create(this.code, digest2));
+      return result instanceof Uint8Array ? create2(this.code, result) : result.then((digest4) => create2(this.code, digest4));
     } else {
       throw Error("Unknown type, must be binary type");
     }
   }
 };
 
-// node_modules/multiformats/esm/src/hashes/sha2.js
-var sha256 = from2({
+// node_modules/ipfs-unixfs-exporter/node_modules/hamt-sharding/node_modules/multiformats/esm/src/hashes/sha2.js
+var sha256 = from3({
   name: "sha2-256",
   code: 18,
-  encode: (input2) => coerce(import_crypto.default.createHash("sha256").update(input2).digest())
+  encode: (input2) => coerce2(import_crypto.default.createHash("sha256").update(input2).digest())
 });
-var sha512 = from2({
+var sha512 = from3({
   name: "sha2-512",
   code: 19,
-  encode: (input2) => coerce(import_crypto.default.createHash("sha512").update(input2).digest())
+  encode: (input2) => coerce2(import_crypto.default.createHash("sha512").update(input2).digest())
 });
 
-// node_modules/multiformats/esm/src/codecs/json.js
+// node_modules/ipfs-unixfs-exporter/node_modules/hamt-sharding/node_modules/multiformats/esm/src/hashes/identity.js
+var identity_exports2 = {};
+__export(identity_exports2, {
+  identity: () => identity3
+});
+var code5 = 0;
+var name2 = "identity";
+var encode8 = coerce2;
+var digest2 = (input2) => create2(code5, encode8(input2));
+var identity3 = {
+  code: code5,
+  name: name2,
+  encode: encode8,
+  digest: digest2
+};
+
+// node_modules/ipfs-unixfs-exporter/node_modules/hamt-sharding/node_modules/multiformats/esm/src/codecs/json.js
 var textEncoder4 = new TextEncoder();
 var textDecoder3 = new TextDecoder();
 
-// node_modules/multiformats/esm/src/basics.js
+// node_modules/ipfs-unixfs-exporter/node_modules/hamt-sharding/node_modules/multiformats/esm/src/cid.js
+var CID2 = class {
+  constructor(version3, code11, multihash, bytes) {
+    this.code = code11;
+    this.version = version3;
+    this.multihash = multihash;
+    this.bytes = bytes;
+    this.byteOffset = bytes.byteOffset;
+    this.byteLength = bytes.byteLength;
+    this.asCID = this;
+    this._baseCache = /* @__PURE__ */ new Map();
+    Object.defineProperties(this, {
+      byteOffset: hidden,
+      byteLength: hidden,
+      code: readonly,
+      version: readonly,
+      multihash: readonly,
+      bytes: readonly,
+      _baseCache: hidden,
+      asCID: hidden
+    });
+  }
+  toV0() {
+    switch (this.version) {
+      case 0: {
+        return this;
+      }
+      default: {
+        const { code: code11, multihash } = this;
+        if (code11 !== DAG_PB_CODE2) {
+          throw new Error("Cannot convert a non dag-pb CID to CIDv0");
+        }
+        if (multihash.code !== SHA_256_CODE2) {
+          throw new Error("Cannot convert non sha2-256 multihash CID to CIDv0");
+        }
+        return CID2.createV0(multihash);
+      }
+    }
+  }
+  toV1() {
+    switch (this.version) {
+      case 0: {
+        const { code: code11, digest: digest4 } = this.multihash;
+        const multihash = create2(code11, digest4);
+        return CID2.createV1(this.code, multihash);
+      }
+      case 1: {
+        return this;
+      }
+      default: {
+        throw Error(`Can not convert CID version ${this.version} to version 0. This is a bug please report`);
+      }
+    }
+  }
+  equals(other) {
+    return other && this.code === other.code && this.version === other.version && equals4(this.multihash, other.multihash);
+  }
+  toString(base4) {
+    const { bytes, version: version3, _baseCache } = this;
+    switch (version3) {
+      case 0:
+        return toStringV02(bytes, _baseCache, base4 || base58btc2.encoder);
+      default:
+        return toStringV12(bytes, _baseCache, base4 || base322.encoder);
+    }
+  }
+  toJSON() {
+    return {
+      code: this.code,
+      version: this.version,
+      hash: this.multihash.bytes
+    };
+  }
+  get [Symbol.toStringTag]() {
+    return "CID";
+  }
+  [Symbol.for("nodejs.util.inspect.custom")]() {
+    return "CID(" + this.toString() + ")";
+  }
+  static isCID(value) {
+    deprecate(/^0\.0/, IS_CID_DEPRECATION);
+    return !!(value && (value[cidSymbol2] || value.asCID === value));
+  }
+  get toBaseEncodedString() {
+    throw new Error("Deprecated, use .toString()");
+  }
+  get codec() {
+    throw new Error('"codec" property is deprecated, use integer "code" property instead');
+  }
+  get buffer() {
+    throw new Error("Deprecated .buffer property, use .bytes to get Uint8Array instead");
+  }
+  get multibaseName() {
+    throw new Error('"multibaseName" property is deprecated');
+  }
+  get prefix() {
+    throw new Error('"prefix" property is deprecated');
+  }
+  static asCID(value) {
+    if (value instanceof CID2) {
+      return value;
+    } else if (value != null && value.asCID === value) {
+      const { version: version3, code: code11, multihash, bytes } = value;
+      return new CID2(version3, code11, multihash, bytes || encodeCID2(version3, code11, multihash.bytes));
+    } else if (value != null && value[cidSymbol2] === true) {
+      const { version: version3, multihash, code: code11 } = value;
+      const digest4 = decode12(multihash);
+      return CID2.create(version3, code11, digest4);
+    } else {
+      return null;
+    }
+  }
+  static create(version3, code11, digest4) {
+    if (typeof code11 !== "number") {
+      throw new Error("String codecs are no longer supported");
+    }
+    switch (version3) {
+      case 0: {
+        if (code11 !== DAG_PB_CODE2) {
+          throw new Error(`Version 0 CID must use dag-pb (code: ${DAG_PB_CODE2}) block encoding`);
+        } else {
+          return new CID2(version3, code11, digest4, digest4.bytes);
+        }
+      }
+      case 1: {
+        const bytes = encodeCID2(version3, code11, digest4.bytes);
+        return new CID2(version3, code11, digest4, bytes);
+      }
+      default: {
+        throw new Error("Invalid version");
+      }
+    }
+  }
+  static createV0(digest4) {
+    return CID2.create(0, DAG_PB_CODE2, digest4);
+  }
+  static createV1(code11, digest4) {
+    return CID2.create(1, code11, digest4);
+  }
+  static decode(bytes) {
+    const [cid, remainder] = CID2.decodeFirst(bytes);
+    if (remainder.length) {
+      throw new Error("Incorrect length");
+    }
+    return cid;
+  }
+  static decodeFirst(bytes) {
+    const specs = CID2.inspectBytes(bytes);
+    const prefixSize = specs.size - specs.multihashSize;
+    const multihashBytes = coerce2(bytes.subarray(prefixSize, prefixSize + specs.multihashSize));
+    if (multihashBytes.byteLength !== specs.multihashSize) {
+      throw new Error("Incorrect length");
+    }
+    const digestBytes = multihashBytes.subarray(specs.multihashSize - specs.digestSize);
+    const digest4 = new Digest2(specs.multihashCode, specs.digestSize, digestBytes, multihashBytes);
+    const cid = specs.version === 0 ? CID2.createV0(digest4) : CID2.createV1(specs.codec, digest4);
+    return [
+      cid,
+      bytes.subarray(specs.size)
+    ];
+  }
+  static inspectBytes(initialBytes) {
+    let offset = 0;
+    const next = () => {
+      const [i, length4] = decode11(initialBytes.subarray(offset));
+      offset += length4;
+      return i;
+    };
+    let version3 = next();
+    let codec = DAG_PB_CODE2;
+    if (version3 === 18) {
+      version3 = 0;
+      offset = 0;
+    } else if (version3 === 1) {
+      codec = next();
+    }
+    if (version3 !== 0 && version3 !== 1) {
+      throw new RangeError(`Invalid CID version ${version3}`);
+    }
+    const prefixSize = offset;
+    const multihashCode = next();
+    const digestSize = next();
+    const size = offset + digestSize;
+    const multihashSize = size - prefixSize;
+    return {
+      version: version3,
+      codec,
+      multihashCode,
+      digestSize,
+      multihashSize,
+      size
+    };
+  }
+  static parse(source, base4) {
+    const [prefix, bytes] = parseCIDtoBytes2(source, base4);
+    const cid = CID2.decode(bytes);
+    cid._baseCache.set(prefix, source);
+    return cid;
+  }
+};
+var parseCIDtoBytes2 = (source, base4) => {
+  switch (source[0]) {
+    case "Q": {
+      const decoder2 = base4 || base58btc2;
+      return [
+        base58btc2.prefix,
+        decoder2.decode(`${base58btc2.prefix}${source}`)
+      ];
+    }
+    case base58btc2.prefix: {
+      const decoder2 = base4 || base58btc2;
+      return [
+        base58btc2.prefix,
+        decoder2.decode(source)
+      ];
+    }
+    case base322.prefix: {
+      const decoder2 = base4 || base322;
+      return [
+        base322.prefix,
+        decoder2.decode(source)
+      ];
+    }
+    default: {
+      if (base4 == null) {
+        throw Error("To parse non base32 or base58btc encoded CID multibase decoder must be provided");
+      }
+      return [
+        source[0],
+        base4.decode(source)
+      ];
+    }
+  }
+};
+var toStringV02 = (bytes, cache2, base4) => {
+  const { prefix } = base4;
+  if (prefix !== base58btc2.prefix) {
+    throw Error(`Cannot string encode V0 in ${base4.name} encoding`);
+  }
+  const cid = cache2.get(prefix);
+  if (cid == null) {
+    const cid2 = base4.encode(bytes).slice(1);
+    cache2.set(prefix, cid2);
+    return cid2;
+  } else {
+    return cid;
+  }
+};
+var toStringV12 = (bytes, cache2, base4) => {
+  const { prefix } = base4;
+  const cid = cache2.get(prefix);
+  if (cid == null) {
+    const cid2 = base4.encode(bytes);
+    cache2.set(prefix, cid2);
+    return cid2;
+  } else {
+    return cid;
+  }
+};
+var DAG_PB_CODE2 = 112;
+var SHA_256_CODE2 = 18;
+var encodeCID2 = (version3, code11, multihash) => {
+  const codeOffset = encodingLength2(version3);
+  const hashOffset = codeOffset + encodingLength2(code11);
+  const bytes = new Uint8Array(hashOffset + multihash.byteLength);
+  encodeTo2(version3, bytes, 0);
+  encodeTo2(code11, bytes, codeOffset);
+  bytes.set(multihash, hashOffset);
+  return bytes;
+};
+var cidSymbol2 = Symbol.for("@ipld/js-cid/CID");
+var readonly = {
+  writable: false,
+  configurable: false,
+  enumerable: true
+};
+var hidden = {
+  writable: false,
+  enumerable: false,
+  configurable: false
+};
+var version = "0.0.0-dev";
+var deprecate = (range, message) => {
+  if (range.test(version)) {
+    console.warn(message);
+  } else {
+    throw new Error(message);
+  }
+};
+var IS_CID_DEPRECATION = `CID.isCID(v) is deprecated and will be removed in the next major release.
+Following code pattern:
+
+if (CID.isCID(value)) {
+  doSomethingWithCID(value)
+}
+
+Is replaced with:
+
+const cid = CID.asCID(value)
+if (cid) {
+  // Make sure to use cid instead of value
+  doSomethingWithCID(cid)
+}
+`;
+
+// node_modules/ipfs-unixfs-exporter/node_modules/hamt-sharding/node_modules/multiformats/esm/src/basics.js
 var bases = {
-  ...identity_exports2,
+  ...identity_exports,
   ...base2_exports,
   ...base8_exports,
   ...base10_exports,
@@ -48028,20 +48076,36 @@ var bases = {
 };
 var hashes = {
   ...sha2_exports,
-  ...identity_exports
+  ...identity_exports2
 };
 
-// node_modules/uint8arrays/esm/src/util/bases.js
-function createCodec(name5, prefix, encode11, decode12) {
+// node_modules/ipfs-unixfs-exporter/node_modules/hamt-sharding/node_modules/uint8arrays/esm/src/util/as-uint8array.js
+function asUint8Array(buf2) {
+  if (globalThis.Buffer != null) {
+    return new Uint8Array(buf2.buffer, buf2.byteOffset, buf2.byteLength);
+  }
+  return buf2;
+}
+
+// node_modules/ipfs-unixfs-exporter/node_modules/hamt-sharding/node_modules/uint8arrays/esm/src/alloc.js
+function allocUnsafe(size = 0) {
+  if (globalThis.Buffer != null && globalThis.Buffer.allocUnsafe != null) {
+    return asUint8Array(globalThis.Buffer.allocUnsafe(size));
+  }
+  return new Uint8Array(size);
+}
+
+// node_modules/ipfs-unixfs-exporter/node_modules/hamt-sharding/node_modules/uint8arrays/esm/src/util/bases.js
+function createCodec(name7, prefix, encode18, decode23) {
   return {
-    name: name5,
+    name: name7,
     prefix,
     encoder: {
-      name: name5,
+      name: name7,
       prefix,
-      encode: encode11
+      encode: encode18
     },
-    decoder: { decode: decode12 }
+    decoder: { decode: decode23 }
   };
 }
 var string = createCodec("utf8", "u", (buf2) => {
@@ -48052,14 +48116,14 @@ var string = createCodec("utf8", "u", (buf2) => {
   return encoder2.encode(str.substring(1));
 });
 var ascii = createCodec("ascii", "a", (buf2) => {
-  let string2 = "a";
+  let string3 = "a";
   for (let i = 0; i < buf2.length; i++) {
-    string2 += String.fromCharCode(buf2[i]);
+    string3 += String.fromCharCode(buf2[i]);
   }
-  return string2;
+  return string3;
 }, (str) => {
   str = str.substring(1);
-  const buf2 = new Uint8Array(str.length);
+  const buf2 = allocUnsafe(str.length);
   for (let i = 0; i < str.length; i++) {
     buf2[i] = str.charCodeAt(i);
   }
@@ -48076,13 +48140,16 @@ var BASES = {
 };
 var bases_default = BASES;
 
-// node_modules/uint8arrays/esm/src/from-string.js
-function fromString3(string2, encoding = "utf8") {
-  const base3 = bases_default[encoding];
-  if (!base3) {
+// node_modules/ipfs-unixfs-exporter/node_modules/hamt-sharding/node_modules/uint8arrays/esm/src/from-string.js
+function fromString4(string3, encoding = "utf8") {
+  const base4 = bases_default[encoding];
+  if (!base4) {
     throw new Error(`Unsupported encoding "${encoding}"`);
   }
-  return base3.decoder.decode(`${base3.prefix}${string2}`);
+  if ((encoding === "utf8" || encoding === "utf-8") && globalThis.Buffer != null && globalThis.Buffer.from != null) {
+    return asUint8Array(globalThis.Buffer.from(string3, "utf-8"));
+  }
+  return base4.decoder.decode(`${base4.prefix}${string3}`);
 }
 
 // node_modules/ipfs-unixfs-exporter/node_modules/hamt-sharding/dist/src/bucket.js
@@ -48173,7 +48240,7 @@ var Bucket = class {
     }
   }
   async _findPlace(key) {
-    const hashValue = this._options.hash(typeof key === "string" ? fromString3(key) : key);
+    const hashValue = this._options.hash(typeof key === "string" ? fromString4(key) : key);
     const index = await hashValue.take(this._options.bits);
     const child = this._children.get(index);
     if (child instanceof Bucket) {
@@ -48330,26 +48397,26 @@ var ConsumableBuffer = class {
     return this._currentBytePos >= 0;
   }
 };
-function byteBitsToInt(byte, start, length2) {
-  const mask = maskFor(start, length2);
+function byteBitsToInt(byte, start, length4) {
+  const mask = maskFor(start, length4);
   return (byte & mask) >>> start;
 }
-function maskFor(start, length2) {
-  return START_MASKS[start] & STOP_MASKS[Math.min(length2 + start - 1, 7)];
+function maskFor(start, length4) {
+  return START_MASKS[start] & STOP_MASKS[Math.min(length4 + start - 1, 7)];
 }
 
-// node_modules/uint8arrays/esm/src/concat.js
-function concat2(arrays, length2) {
-  if (!length2) {
-    length2 = arrays.reduce((acc, curr) => acc + curr.length, 0);
+// node_modules/ipfs-unixfs-exporter/node_modules/hamt-sharding/node_modules/uint8arrays/esm/src/concat.js
+function concat2(arrays, length4) {
+  if (!length4) {
+    length4 = arrays.reduce((acc, curr) => acc + curr.length, 0);
   }
-  const output = new Uint8Array(length2);
+  const output = allocUnsafe(length4);
   let offset = 0;
   for (const arr of arrays) {
     output.set(arr, offset);
     offset += arr.length;
   }
-  return output;
+  return asUint8Array(output);
 }
 
 // node_modules/ipfs-unixfs-exporter/node_modules/hamt-sharding/dist/src/consumable-hash.js
@@ -48430,7 +48497,25 @@ function createHAMT(options) {
   return new Bucket(bucketOptions);
 }
 
-// node_modules/@multiformats/murmur3/esm/index.js
+// node_modules/ipfs-unixfs-exporter/node_modules/multiformats/src/hashes/hasher.js
+var from4 = ({ name: name7, code: code11, encode: encode18 }) => new Hasher2(name7, code11, encode18);
+var Hasher2 = class {
+  constructor(name7, code11, encode18) {
+    this.name = name7;
+    this.code = code11;
+    this.encode = encode18;
+  }
+  digest(input2) {
+    if (input2 instanceof Uint8Array) {
+      const result = this.encode(input2);
+      return result instanceof Uint8Array ? create(this.code, result) : result.then((digest4) => create(this.code, digest4));
+    } else {
+      throw Error("Unknown type, must be binary type");
+    }
+  }
+};
+
+// node_modules/ipfs-unixfs-exporter/node_modules/@multiformats/murmur3/src/index.js
 var import_murmurhash3js_revisited = __toESM(require_murmurhash3js_revisited(), 1);
 function fromNumberTo32BitBuf(number) {
   const bytes = new Array(4);
@@ -48440,12 +48525,12 @@ function fromNumberTo32BitBuf(number) {
   }
   return new Uint8Array(bytes);
 }
-var murmur332 = from2({
+var murmur332 = from4({
   name: "murmur3-32",
   code: 35,
   encode: (input2) => fromNumberTo32BitBuf(import_murmurhash3js_revisited.default.x86.hash32(input2))
 });
-var murmur3128 = from2({
+var murmur3128 = from4({
   name: "murmur3-128",
   code: 34,
   encode: (input2) => bytes_exports.fromHex(import_murmurhash3js_revisited.default.x64.hash128(input2))
@@ -48485,7 +48570,7 @@ var toBucketPath = (position) => {
   path3.push(bucket);
   return path3.reverse();
 };
-var findShardCid = async (node, name5, blockstore3, context, options) => {
+var findShardCid = async (node, name7, blockstore3, context, options) => {
   if (!context) {
     const rootBucket = createHAMT({
       hashFn
@@ -48497,7 +48582,7 @@ var findShardCid = async (node, name5, blockstore3, context, options) => {
     };
   }
   await addLinksToHamtBucket(node.Links, context.lastBucket, context.rootBucket);
-  const position = await context.rootBucket._findNewBucketAndPos(name5);
+  const position = await context.rootBucket._findNewBucketAndPos(name7);
   let prefix = toPrefix(position.pos);
   const bucketPath = toBucketPath(position);
   if (bucketPath.length > context.hamtDepth) {
@@ -48513,7 +48598,7 @@ var findShardCid = async (node, name5, blockstore3, context, options) => {
     if (entryPrefix !== prefix) {
       return false;
     }
-    if (entryName && entryName !== name5) {
+    if (entryName && entryName !== name7) {
       return false;
     }
     return true;
@@ -48521,13 +48606,13 @@ var findShardCid = async (node, name5, blockstore3, context, options) => {
   if (!link) {
     return null;
   }
-  if (link.Name != null && link.Name.substring(2) === name5) {
+  if (link.Name != null && link.Name.substring(2) === name7) {
     return link.Hash;
   }
   context.hamtDepth++;
   const block = await blockstore3.get(link.Hash, options);
   node = decode5(block);
-  return findShardCid(node, name5, blockstore3, context, options);
+  return findShardCid(node, name7, blockstore3, context, options);
 };
 var find_cid_in_shard_default = findShardCid;
 
@@ -48550,7 +48635,7 @@ var extract_data_from_block_default = extractDataFromBlock;
 
 // node_modules/ipfs-unixfs-exporter/src/utils/validate-offset-and-length.js
 var import_err_code2 = __toESM(require_err_code(), 1);
-var validateOffsetAndLength = (size, offset, length2) => {
+var validateOffsetAndLength = (size, offset, length4) => {
   if (!offset) {
     offset = 0;
   }
@@ -48560,18 +48645,18 @@ var validateOffsetAndLength = (size, offset, length2) => {
   if (offset > size) {
     throw (0, import_err_code2.default)(new Error("Offset must be less than the file size"), "ERR_INVALID_PARAMS");
   }
-  if (!length2 && length2 !== 0) {
-    length2 = size - offset;
+  if (!length4 && length4 !== 0) {
+    length4 = size - offset;
   }
-  if (length2 < 0) {
+  if (length4 < 0) {
     throw (0, import_err_code2.default)(new Error("Length must be greater than or equal to 0"), "ERR_INVALID_PARAMS");
   }
-  if (offset + length2 > size) {
-    length2 = size - offset;
+  if (offset + length4 > size) {
+    length4 = size - offset;
   }
   return {
     offset,
-    length: length2
+    length: length4
   };
 };
 var validate_offset_and_length_default = validateOffsetAndLength;
@@ -48792,8 +48877,124 @@ function _pushable(getNext, options) {
   return pushable2;
 }
 
-// node_modules/ipfs-unixfs-exporter/src/resolvers/unixfs-v1/content/file.js
-var import_it_parallel = __toESM(require_it_parallel(), 1);
+// node_modules/it-parallel/node_modules/p-defer/index.js
+function pDefer() {
+  const deferred = {};
+  deferred.promise = new Promise((resolve9, reject) => {
+    deferred.resolve = resolve9;
+    deferred.reject = reject;
+  });
+  return deferred;
+}
+
+// node_modules/it-parallel/dist/src/index.js
+var CustomEvent = globalThis.CustomEvent ?? Event;
+async function* parallel(source, options = {}) {
+  let concurrency = options.concurrency ?? Infinity;
+  if (concurrency < 1) {
+    concurrency = Infinity;
+  }
+  const ordered = options.ordered == null ? false : options.ordered;
+  const emitter = new EventTarget();
+  const ops = [];
+  let slotAvailable = pDefer();
+  let resultAvailable = pDefer();
+  let sourceFinished = false;
+  let sourceErr;
+  let opErred = false;
+  emitter.addEventListener("task-complete", () => {
+    resultAvailable.resolve();
+  });
+  void Promise.resolve().then(async () => {
+    try {
+      for await (const task of source) {
+        if (ops.length === concurrency) {
+          slotAvailable = pDefer();
+          await slotAvailable.promise;
+        }
+        if (opErred) {
+          break;
+        }
+        const op = {
+          done: false
+        };
+        ops.push(op);
+        task().then((result) => {
+          op.done = true;
+          op.ok = true;
+          op.value = result;
+          emitter.dispatchEvent(new CustomEvent("task-complete"));
+        }, (err) => {
+          op.done = true;
+          op.err = err;
+          emitter.dispatchEvent(new CustomEvent("task-complete"));
+        });
+      }
+      sourceFinished = true;
+      emitter.dispatchEvent(new CustomEvent("task-complete"));
+    } catch (err) {
+      sourceErr = err;
+      emitter.dispatchEvent(new CustomEvent("task-complete"));
+    }
+  });
+  function valuesAvailable() {
+    var _a;
+    if (ordered) {
+      return (_a = ops[0]) == null ? void 0 : _a.done;
+    }
+    return Boolean(ops.find((op) => op.done));
+  }
+  function* yieldOrderedValues() {
+    while (ops.length > 0 && ops[0].done) {
+      const op = ops[0];
+      ops.shift();
+      if (op.ok) {
+        yield op.value;
+      } else {
+        opErred = true;
+        slotAvailable.resolve();
+        throw op.err;
+      }
+      slotAvailable.resolve();
+    }
+  }
+  function* yieldUnOrderedValues() {
+    while (valuesAvailable()) {
+      for (let i = 0; i < ops.length; i++) {
+        if (ops[i].done) {
+          const op = ops[i];
+          ops.splice(i, 1);
+          i--;
+          if (op.ok) {
+            yield op.value;
+          } else {
+            opErred = true;
+            slotAvailable.resolve();
+            throw op.err;
+          }
+          slotAvailable.resolve();
+        }
+      }
+    }
+  }
+  while (true) {
+    if (!valuesAvailable()) {
+      resultAvailable = pDefer();
+      await resultAvailable.promise;
+    }
+    if (sourceErr != null) {
+      throw sourceErr;
+    }
+    if (ordered) {
+      yield* yieldOrderedValues();
+    } else {
+      yield* yieldUnOrderedValues();
+    }
+    if (sourceFinished && ops.length === 0) {
+      break;
+    }
+  }
+}
 
 // node_modules/ipfs-unixfs-exporter/node_modules/it-pipe/dist/src/index.js
 var import_it_merge = __toESM(require_it_merge(), 1);
@@ -48855,8 +49056,12 @@ function pipe(first, ...rest) {
   return rawPipe(...fns);
 }
 
-// node_modules/ipfs-unixfs-exporter/src/resolvers/unixfs-v1/content/file.js
-var import_it_map = __toESM(require_it_map(), 1);
+// node_modules/ipfs-unixfs-exporter/node_modules/it-map/dist/src/index.js
+async function* map(source, func) {
+  for await (const val of source) {
+    yield func(val);
+  }
+}
 
 // node_modules/p-queue/dist/index.js
 var import_eventemitter3 = __toESM(require_eventemitter3(), 1);
@@ -49290,7 +49495,7 @@ async function walkDAG(blockstore3, node, queue, streamPosition, start, end, wal
   }
   await pipe(
     childOps,
-    (source) => (0, import_it_map.default)(source, (op) => {
+    (source) => map(source, (op) => {
       return async () => {
         const block = await blockstore3.get(op.link.Hash, {
           signal: options.signal
@@ -49301,7 +49506,7 @@ async function walkDAG(blockstore3, node, queue, streamPosition, start, end, wal
         };
       };
     }),
-    (source) => (0, import_it_parallel.default)(source, {
+    (source) => parallel(source, {
       ordered: true
     }),
     async (source) => {
@@ -49333,9 +49538,9 @@ var fileContent = (cid, node, unixfs, path3, resolve9, depth, blockstore3) => {
     }
     const {
       offset,
-      length: length2
+      length: length4
     } = validate_offset_and_length_default(fileSize, options.offset, options.length);
-    if (length2 === 0) {
+    if (length4 === 0) {
       return;
     }
     const walkQueue = new PQueue({
@@ -49343,18 +49548,18 @@ var fileContent = (cid, node, unixfs, path3, resolve9, depth, blockstore3) => {
     });
     const queue = pushable();
     walkQueue.add(async () => {
-      await walkDAG(blockstore3, node, queue, 0, offset, offset + length2, walkQueue, options);
+      await walkDAG(blockstore3, node, queue, 0, offset, offset + length4, walkQueue, options);
     });
     walkQueue.on("error", (error) => {
       queue.end(error);
     });
-    let read2 = 0;
+    let read4 = 0;
     for await (const buf2 of queue) {
       if (buf2 == null) {
         continue;
       }
-      read2 += buf2.byteLength;
-      if (read2 === length2) {
+      read4 += buf2.byteLength;
+      if (read4 === length4) {
         queue.end();
       }
       yield buf2;
@@ -49368,8 +49573,8 @@ var file_default = fileContent;
 var directoryContent = (cid, node, unixfs, path3, resolve9, depth, blockstore3) => {
   async function* yieldDirectoryContent(options = {}) {
     const offset = options.offset || 0;
-    const length2 = options.length || node.Links.length;
-    const links2 = node.Links.slice(offset, length2);
+    const length4 = options.length || node.Links.length;
+    const links2 = node.Links.slice(offset, length4);
     for (const link of links2) {
       const result = await resolve9(link.Hash, link.Name || "", `${path3}/${link.Name || ""}`, [], depth + 1, blockstore3, options);
       if (result.entry) {
@@ -49391,9 +49596,9 @@ var hamtShardedDirectoryContent = (cid, node, unixfs, path3, resolve9, depth, bl
 async function* listDirectory(node, path3, resolve9, depth, blockstore3, options) {
   const links2 = node.Links;
   for (const link of links2) {
-    const name5 = link.Name != null ? link.Name.substring(2) : null;
-    if (name5) {
-      const result = await resolve9(link.Hash, name5, `${path3}/${name5}`, [], depth + 1, blockstore3, options);
+    const name7 = link.Name != null ? link.Name.substring(2) : null;
+    if (name7) {
+      const result = await resolve9(link.Hash, name7, `${path3}/${name7}`, [], depth + 1, blockstore3, options);
       yield result.entry;
     } else {
       const block = await blockstore3.get(link.Hash);
@@ -49407,8 +49612,8 @@ async function* listDirectory(node, path3, resolve9, depth, blockstore3, options
 var hamt_sharded_directory_default = hamtShardedDirectoryContent;
 
 // node_modules/ipfs-unixfs-exporter/src/resolvers/unixfs-v1/index.js
-var findLinkCid = (node, name5) => {
-  const link = node.Links.find((link2) => link2.Name === name5);
+var findLinkCid = (node, name7) => {
+  const link = node.Links.find((link2) => link2.Name === name7);
   return link && link.Hash;
 };
 var contentExporters = {
@@ -49423,13 +49628,13 @@ var contentExporters = {
     return () => [];
   }
 };
-var unixFsResolver = async (cid, name5, path3, toResolve, resolve9, depth, blockstore3, options) => {
+var unixFsResolver = async (cid, name7, path3, toResolve, resolve9, depth, blockstore3, options) => {
   const block = await blockstore3.get(cid, options);
   const node = decode5(block);
   let unixfs;
   let next;
-  if (!name5) {
-    name5 = cid.toString();
+  if (!name7) {
+    name7 = cid.toString();
   }
   if (node.Data == null) {
     throw (0, import_err_code4.default)(new Error("no data in PBNode"), "ERR_NOT_UNIXFS");
@@ -49440,7 +49645,7 @@ var unixFsResolver = async (cid, name5, path3, toResolve, resolve9, depth, block
     throw (0, import_err_code4.default)(err, "ERR_NOT_UNIXFS");
   }
   if (!path3) {
-    path3 = name5;
+    path3 = name7;
   }
   if (toResolve.length) {
     let linkCid;
@@ -49464,7 +49669,7 @@ var unixFsResolver = async (cid, name5, path3, toResolve, resolve9, depth, block
   return {
     entry: {
       type: unixfs.isDirectory() ? "directory" : "file",
-      name: name5,
+      name: name7,
       path: path3,
       cid,
       content: contentExporters[unixfs.type](cid, node, unixfs, path3, resolve9, depth, blockstore3),
@@ -49484,13 +49689,13 @@ var rawContent = (node) => {
   async function* contentGenerator(options = {}) {
     const {
       offset,
-      length: length2
+      length: length4
     } = validate_offset_and_length_default(node.length, options.offset, options.length);
-    yield extract_data_from_block_default(node, 0, offset, offset + length2);
+    yield extract_data_from_block_default(node, 0, offset, offset + length4);
   }
   return contentGenerator;
 };
-var resolve = async (cid, name5, path3, toResolve, resolve9, depth, blockstore3, options) => {
+var resolve = async (cid, name7, path3, toResolve, resolve9, depth, blockstore3, options) => {
   if (toResolve.length) {
     throw (0, import_err_code5.default)(new Error(`No link named ${path3} found in raw node ${cid}`), "ERR_NOT_FOUND");
   }
@@ -49498,7 +49703,7 @@ var resolve = async (cid, name5, path3, toResolve, resolve9, depth, blockstore3,
   return {
     entry: {
       type: "raw",
-      name: name5,
+      name: name7,
       path: path3,
       cid,
       content: rawContent(block),
@@ -49512,7 +49717,7 @@ var raw_default = resolve;
 
 // node_modules/ipfs-unixfs-exporter/src/resolvers/dag-cbor.js
 var import_err_code6 = __toESM(require_err_code(), 1);
-var resolve2 = async (cid, name5, path3, toResolve, resolve9, depth, blockstore3, options) => {
+var resolve2 = async (cid, name7, path3, toResolve, resolve9, depth, blockstore3, options) => {
   const block = await blockstore3.get(cid);
   const object = decode7(block);
   let subObject = object;
@@ -49527,7 +49732,7 @@ var resolve2 = async (cid, name5, path3, toResolve, resolve9, depth, blockstore3
         return {
           entry: {
             type: "object",
-            name: name5,
+            name: name7,
             path: path3,
             cid,
             node: block,
@@ -49553,7 +49758,7 @@ var resolve2 = async (cid, name5, path3, toResolve, resolve9, depth, blockstore3
   return {
     entry: {
       type: "object",
-      name: name5,
+      name: name7,
       path: path3,
       cid,
       node: block,
@@ -49573,13 +49778,13 @@ var rawContent2 = (node) => {
   async function* contentGenerator(options = {}) {
     const {
       offset,
-      length: length2
+      length: length4
     } = validate_offset_and_length_default(node.length, options.offset, options.length);
-    yield extract_data_from_block_default(node, 0, offset, offset + length2);
+    yield extract_data_from_block_default(node, 0, offset, offset + length4);
   }
   return contentGenerator;
 };
-var resolve3 = async (cid, name5, path3, toResolve, resolve9, depth, blockstore3, options) => {
+var resolve3 = async (cid, name7, path3, toResolve, resolve9, depth, blockstore3, options) => {
   if (toResolve.length) {
     throw (0, import_err_code7.default)(new Error(`No link named ${path3} found in raw node ${cid}`), "ERR_NOT_FOUND");
   }
@@ -49587,7 +49792,7 @@ var resolve3 = async (cid, name5, path3, toResolve, resolve9, depth, blockstore3
   return {
     entry: {
       type: "identity",
-      name: name5,
+      name: name7,
       path: path3,
       cid,
       content: rawContent2(buf2.digest),
@@ -49606,17 +49811,25 @@ var resolvers = {
   [code2]: dag_cbor_default,
   [identity.code]: identity_default
 };
-function resolve4(cid, name5, path3, toResolve, depth, blockstore3, options) {
+function resolve4(cid, name7, path3, toResolve, depth, blockstore3, options) {
   const resolver = resolvers[cid.code];
   if (!resolver) {
     throw (0, import_err_code8.default)(new Error(`No resolver for code ${cid.code}`), "ERR_NO_RESOLVER");
   }
-  return resolver(cid, name5, path3, toResolve, resolve4, depth, blockstore3, options);
+  return resolver(cid, name7, path3, toResolve, resolve4, depth, blockstore3, options);
 }
 var resolvers_default = resolve4;
 
+// node_modules/ipfs-unixfs-exporter/node_modules/it-last/dist/src/index.js
+async function last(source) {
+  let res;
+  for await (const entry of source) {
+    res = entry;
+  }
+  return res;
+}
+
 // node_modules/ipfs-unixfs-exporter/src/index.js
-var import_it_last = __toESM(require_it_last(), 1);
 var toPathComponents = (path3 = "") => {
   return (path3.trim().match(/([^\\^/]|\\\/)+/g) || []).filter(Boolean);
 };
@@ -49651,11 +49864,11 @@ async function* walkPath(path3, blockstore3, options = {}) {
     cid,
     toResolve
   } = cidAndRest(path3);
-  let name5 = cid.toString();
-  let entryPath = name5;
+  let name7 = cid.toString();
+  let entryPath = name7;
   const startingDepth = toResolve.length;
   while (true) {
-    const result = await resolvers_default(cid, name5, entryPath, toResolve, startingDepth, blockstore3, options);
+    const result = await resolvers_default(cid, name7, entryPath, toResolve, startingDepth, blockstore3, options);
     if (!result.entry && !result.next) {
       throw (0, import_err_code9.default)(new Error(`Could not resolve ${path3}`), "ERR_NOT_FOUND");
     }
@@ -49667,12 +49880,12 @@ async function* walkPath(path3, blockstore3, options = {}) {
     }
     toResolve = result.next.toResolve;
     cid = result.next.cid;
-    name5 = result.next.name;
+    name7 = result.next.name;
     entryPath = result.next.path;
   }
 }
 async function exporter(path3, blockstore3, options = {}) {
-  const result = await (0, import_it_last.default)(walkPath(path3, blockstore3, options));
+  const result = await last(walkPath(path3, blockstore3, options));
   if (!result) {
     throw (0, import_err_code9.default)(new Error(`Could not resolve ${path3}`), "ERR_NOT_FOUND");
   }
@@ -49731,7 +49944,7 @@ var Data2 = $root2.Data = (() => {
   Data4.prototype.fanout = $util2.Long ? $util2.Long.fromBits(0, 0, true) : 0;
   Data4.prototype.mode = 0;
   Data4.prototype.mtime = null;
-  Data4.encode = function encode11(m, w) {
+  Data4.encode = function encode18(m, w) {
     if (!w)
       w = $Writer2.create();
     w.uint32(8).int32(m.Type);
@@ -49753,7 +49966,7 @@ var Data2 = $root2.Data = (() => {
       $root2.UnixTime.encode(m.mtime, w.uint32(66).fork()).ldelim();
     return w;
   };
-  Data4.decode = function decode12(r, l) {
+  Data4.decode = function decode23(r, l) {
     if (!(r instanceof $Reader2))
       r = $Reader2.create(r);
     var c = l === void 0 ? r.len : r.pos + l, m = new $root2.Data();
@@ -49991,7 +50204,7 @@ var UnixTime2 = $root2.UnixTime = (() => {
   }
   UnixTime4.prototype.Seconds = $util2.Long ? $util2.Long.fromBits(0, 0, false) : 0;
   UnixTime4.prototype.FractionalNanoseconds = 0;
-  UnixTime4.encode = function encode11(m, w) {
+  UnixTime4.encode = function encode18(m, w) {
     if (!w)
       w = $Writer2.create();
     w.uint32(8).int64(m.Seconds);
@@ -49999,7 +50212,7 @@ var UnixTime2 = $root2.UnixTime = (() => {
       w.uint32(21).fixed32(m.FractionalNanoseconds);
     return w;
   };
-  UnixTime4.decode = function decode12(r, l) {
+  UnixTime4.decode = function decode23(r, l) {
     if (!(r instanceof $Reader2))
       r = $Reader2.create(r);
     var c = l === void 0 ? r.len : r.pos + l, m = new $root2.UnixTime();
@@ -50077,14 +50290,14 @@ var Metadata2 = $root2.Metadata = (() => {
     }
   }
   Metadata4.prototype.MimeType = "";
-  Metadata4.encode = function encode11(m, w) {
+  Metadata4.encode = function encode18(m, w) {
     if (!w)
       w = $Writer2.create();
     if (m.MimeType != null && Object.hasOwnProperty.call(m, "MimeType"))
       w.uint32(10).string(m.MimeType);
     return w;
   };
-  Metadata4.decode = function decode12(r, l) {
+  Metadata4.decode = function decode23(r, l) {
     if (!(r instanceof $Reader2))
       r = $Reader2.create(r);
     var c = l === void 0 ? r.len : r.pos + l, m = new $root2.Metadata();
@@ -50344,22 +50557,1636 @@ var UnixFS2 = class {
   }
 };
 
+// node_modules/multiformats/esm/vendor/varint.js
+var encode_13 = encode9;
+var MSB3 = 128;
+var REST3 = 127;
+var MSBALL3 = ~REST3;
+var INT3 = Math.pow(2, 31);
+function encode9(num, out, offset) {
+  out = out || [];
+  offset = offset || 0;
+  var oldOffset = offset;
+  while (num >= INT3) {
+    out[offset++] = num & 255 | MSB3;
+    num /= 128;
+  }
+  while (num & MSBALL3) {
+    out[offset++] = num & 255 | MSB3;
+    num >>>= 7;
+  }
+  out[offset] = num | 0;
+  encode9.bytes = offset - oldOffset + 1;
+  return out;
+}
+var decode13 = read3;
+var MSB$13 = 128;
+var REST$13 = 127;
+function read3(buf2, offset) {
+  var res = 0, offset = offset || 0, shift = 0, counter = offset, b, l = buf2.length;
+  do {
+    if (counter >= l) {
+      read3.bytes = 0;
+      throw new RangeError("Could not decode varint");
+    }
+    b = buf2[counter++];
+    res += shift < 28 ? (b & REST$13) << shift : (b & REST$13) * Math.pow(2, shift);
+    shift += 7;
+  } while (b >= MSB$13);
+  read3.bytes = counter - offset;
+  return res;
+}
+var N13 = Math.pow(2, 7);
+var N23 = Math.pow(2, 14);
+var N33 = Math.pow(2, 21);
+var N43 = Math.pow(2, 28);
+var N53 = Math.pow(2, 35);
+var N63 = Math.pow(2, 42);
+var N73 = Math.pow(2, 49);
+var N83 = Math.pow(2, 56);
+var N93 = Math.pow(2, 63);
+var length3 = function(value) {
+  return value < N13 ? 1 : value < N23 ? 2 : value < N33 ? 3 : value < N43 ? 4 : value < N53 ? 5 : value < N63 ? 6 : value < N73 ? 7 : value < N83 ? 8 : value < N93 ? 9 : 10;
+};
+var varint3 = {
+  encode: encode_13,
+  decode: decode13,
+  encodingLength: length3
+};
+var _brrp_varint3 = varint3;
+var varint_default3 = _brrp_varint3;
+
+// node_modules/multiformats/esm/src/varint.js
+var decode14 = (data) => {
+  const code11 = varint_default3.decode(data);
+  return [
+    code11,
+    varint_default3.decode.bytes
+  ];
+};
+var encodeTo3 = (int, target, offset = 0) => {
+  varint_default3.encode(int, target, offset);
+  return target;
+};
+var encodingLength3 = (int) => {
+  return varint_default3.encodingLength(int);
+};
+
+// node_modules/multiformats/esm/src/bytes.js
+var bytes_exports4 = {};
+__export(bytes_exports4, {
+  coerce: () => coerce3,
+  empty: () => empty3,
+  equals: () => equals5,
+  fromHex: () => fromHex2,
+  fromString: () => fromString5,
+  isBinary: () => isBinary2,
+  toHex: () => toHex2,
+  toString: () => toString4
+});
+var empty3 = new Uint8Array(0);
+var toHex2 = (d) => d.reduce((hex, byte) => hex + byte.toString(16).padStart(2, "0"), "");
+var fromHex2 = (hex) => {
+  const hexes = hex.match(/../g);
+  return hexes ? new Uint8Array(hexes.map((b) => parseInt(b, 16))) : empty3;
+};
+var equals5 = (aa, bb) => {
+  if (aa === bb)
+    return true;
+  if (aa.byteLength !== bb.byteLength) {
+    return false;
+  }
+  for (let ii = 0; ii < aa.byteLength; ii++) {
+    if (aa[ii] !== bb[ii]) {
+      return false;
+    }
+  }
+  return true;
+};
+var coerce3 = (o) => {
+  if (o instanceof Uint8Array && o.constructor.name === "Uint8Array")
+    return o;
+  if (o instanceof ArrayBuffer)
+    return new Uint8Array(o);
+  if (ArrayBuffer.isView(o)) {
+    return new Uint8Array(o.buffer, o.byteOffset, o.byteLength);
+  }
+  throw new Error("Unknown type, must be binary type");
+};
+var isBinary2 = (o) => o instanceof ArrayBuffer || ArrayBuffer.isView(o);
+var fromString5 = (str) => new TextEncoder().encode(str);
+var toString4 = (b) => new TextDecoder().decode(b);
+
+// node_modules/multiformats/esm/src/hashes/digest.js
+var create3 = (code11, digest4) => {
+  const size = digest4.byteLength;
+  const sizeOffset = encodingLength3(code11);
+  const digestOffset = sizeOffset + encodingLength3(size);
+  const bytes = new Uint8Array(digestOffset + size);
+  encodeTo3(code11, bytes, 0);
+  encodeTo3(size, bytes, sizeOffset);
+  bytes.set(digest4, digestOffset);
+  return new Digest3(code11, size, digest4, bytes);
+};
+var decode15 = (multihash) => {
+  const bytes = coerce3(multihash);
+  const [code11, sizeOffset] = decode14(bytes);
+  const [size, digestOffset] = decode14(bytes.subarray(sizeOffset));
+  const digest4 = bytes.subarray(sizeOffset + digestOffset);
+  if (digest4.byteLength !== size) {
+    throw new Error("Incorrect length");
+  }
+  return new Digest3(code11, size, digest4, bytes);
+};
+var equals6 = (a, b) => {
+  if (a === b) {
+    return true;
+  } else {
+    return a.code === b.code && a.size === b.size && equals5(a.bytes, b.bytes);
+  }
+};
+var Digest3 = class {
+  constructor(code11, size, digest4, bytes) {
+    this.code = code11;
+    this.size = size;
+    this.digest = digest4;
+    this.bytes = bytes;
+  }
+};
+
+// node_modules/multiformats/esm/src/bases/base58.js
+var base58_exports2 = {};
+__export(base58_exports2, {
+  base58btc: () => base58btc3,
+  base58flickr: () => base58flickr3
+});
+
+// node_modules/multiformats/esm/vendor/base-x.js
+function base3(ALPHABET, name7) {
+  if (ALPHABET.length >= 255) {
+    throw new TypeError("Alphabet too long");
+  }
+  var BASE_MAP = new Uint8Array(256);
+  for (var j = 0; j < BASE_MAP.length; j++) {
+    BASE_MAP[j] = 255;
+  }
+  for (var i = 0; i < ALPHABET.length; i++) {
+    var x = ALPHABET.charAt(i);
+    var xc = x.charCodeAt(0);
+    if (BASE_MAP[xc] !== 255) {
+      throw new TypeError(x + " is ambiguous");
+    }
+    BASE_MAP[xc] = i;
+  }
+  var BASE = ALPHABET.length;
+  var LEADER = ALPHABET.charAt(0);
+  var FACTOR = Math.log(BASE) / Math.log(256);
+  var iFACTOR = Math.log(256) / Math.log(BASE);
+  function encode18(source) {
+    if (source instanceof Uint8Array)
+      ;
+    else if (ArrayBuffer.isView(source)) {
+      source = new Uint8Array(source.buffer, source.byteOffset, source.byteLength);
+    } else if (Array.isArray(source)) {
+      source = Uint8Array.from(source);
+    }
+    if (!(source instanceof Uint8Array)) {
+      throw new TypeError("Expected Uint8Array");
+    }
+    if (source.length === 0) {
+      return "";
+    }
+    var zeroes = 0;
+    var length4 = 0;
+    var pbegin = 0;
+    var pend = source.length;
+    while (pbegin !== pend && source[pbegin] === 0) {
+      pbegin++;
+      zeroes++;
+    }
+    var size = (pend - pbegin) * iFACTOR + 1 >>> 0;
+    var b58 = new Uint8Array(size);
+    while (pbegin !== pend) {
+      var carry = source[pbegin];
+      var i2 = 0;
+      for (var it1 = size - 1; (carry !== 0 || i2 < length4) && it1 !== -1; it1--, i2++) {
+        carry += 256 * b58[it1] >>> 0;
+        b58[it1] = carry % BASE >>> 0;
+        carry = carry / BASE >>> 0;
+      }
+      if (carry !== 0) {
+        throw new Error("Non-zero carry");
+      }
+      length4 = i2;
+      pbegin++;
+    }
+    var it2 = size - length4;
+    while (it2 !== size && b58[it2] === 0) {
+      it2++;
+    }
+    var str = LEADER.repeat(zeroes);
+    for (; it2 < size; ++it2) {
+      str += ALPHABET.charAt(b58[it2]);
+    }
+    return str;
+  }
+  function decodeUnsafe(source) {
+    if (typeof source !== "string") {
+      throw new TypeError("Expected String");
+    }
+    if (source.length === 0) {
+      return new Uint8Array();
+    }
+    var psz = 0;
+    if (source[psz] === " ") {
+      return;
+    }
+    var zeroes = 0;
+    var length4 = 0;
+    while (source[psz] === LEADER) {
+      zeroes++;
+      psz++;
+    }
+    var size = (source.length - psz) * FACTOR + 1 >>> 0;
+    var b256 = new Uint8Array(size);
+    while (source[psz]) {
+      var carry = BASE_MAP[source.charCodeAt(psz)];
+      if (carry === 255) {
+        return;
+      }
+      var i2 = 0;
+      for (var it3 = size - 1; (carry !== 0 || i2 < length4) && it3 !== -1; it3--, i2++) {
+        carry += BASE * b256[it3] >>> 0;
+        b256[it3] = carry % 256 >>> 0;
+        carry = carry / 256 >>> 0;
+      }
+      if (carry !== 0) {
+        throw new Error("Non-zero carry");
+      }
+      length4 = i2;
+      psz++;
+    }
+    if (source[psz] === " ") {
+      return;
+    }
+    var it4 = size - length4;
+    while (it4 !== size && b256[it4] === 0) {
+      it4++;
+    }
+    var vch = new Uint8Array(zeroes + (size - it4));
+    var j2 = zeroes;
+    while (it4 !== size) {
+      vch[j2++] = b256[it4++];
+    }
+    return vch;
+  }
+  function decode23(string3) {
+    var buffer2 = decodeUnsafe(string3);
+    if (buffer2) {
+      return buffer2;
+    }
+    throw new Error(`Non-${name7} character`);
+  }
+  return {
+    encode: encode18,
+    decodeUnsafe,
+    decode: decode23
+  };
+}
+var src3 = base3;
+var _brrp__multiformats_scope_baseX3 = src3;
+var base_x_default3 = _brrp__multiformats_scope_baseX3;
+
+// node_modules/multiformats/esm/src/bases/base.js
+var Encoder3 = class {
+  constructor(name7, prefix, baseEncode) {
+    this.name = name7;
+    this.prefix = prefix;
+    this.baseEncode = baseEncode;
+  }
+  encode(bytes) {
+    if (bytes instanceof Uint8Array) {
+      return `${this.prefix}${this.baseEncode(bytes)}`;
+    } else {
+      throw Error("Unknown type, must be binary type");
+    }
+  }
+};
+var Decoder3 = class {
+  constructor(name7, prefix, baseDecode) {
+    this.name = name7;
+    this.prefix = prefix;
+    if (prefix.codePointAt(0) === void 0) {
+      throw new Error("Invalid prefix character");
+    }
+    this.prefixCodePoint = prefix.codePointAt(0);
+    this.baseDecode = baseDecode;
+  }
+  decode(text) {
+    if (typeof text === "string") {
+      if (text.codePointAt(0) !== this.prefixCodePoint) {
+        throw Error(`Unable to decode multibase string ${JSON.stringify(text)}, ${this.name} decoder only supports inputs prefixed with ${this.prefix}`);
+      }
+      return this.baseDecode(text.slice(this.prefix.length));
+    } else {
+      throw Error("Can only multibase decode strings");
+    }
+  }
+  or(decoder2) {
+    return or3(this, decoder2);
+  }
+};
+var ComposedDecoder3 = class {
+  constructor(decoders) {
+    this.decoders = decoders;
+  }
+  or(decoder2) {
+    return or3(this, decoder2);
+  }
+  decode(input2) {
+    const prefix = input2[0];
+    const decoder2 = this.decoders[prefix];
+    if (decoder2) {
+      return decoder2.decode(input2);
+    } else {
+      throw RangeError(`Unable to decode multibase string ${JSON.stringify(input2)}, only inputs prefixed with ${Object.keys(this.decoders)} are supported`);
+    }
+  }
+};
+var or3 = (left, right) => new ComposedDecoder3({
+  ...left.decoders || { [left.prefix]: left },
+  ...right.decoders || { [right.prefix]: right }
+});
+var Codec3 = class {
+  constructor(name7, prefix, baseEncode, baseDecode) {
+    this.name = name7;
+    this.prefix = prefix;
+    this.baseEncode = baseEncode;
+    this.baseDecode = baseDecode;
+    this.encoder = new Encoder3(name7, prefix, baseEncode);
+    this.decoder = new Decoder3(name7, prefix, baseDecode);
+  }
+  encode(input2) {
+    return this.encoder.encode(input2);
+  }
+  decode(input2) {
+    return this.decoder.decode(input2);
+  }
+};
+var from5 = ({ name: name7, prefix, encode: encode18, decode: decode23 }) => new Codec3(name7, prefix, encode18, decode23);
+var baseX3 = ({ prefix, name: name7, alphabet: alphabet3 }) => {
+  const { encode: encode18, decode: decode23 } = base_x_default3(alphabet3, name7);
+  return from5({
+    prefix,
+    name: name7,
+    encode: encode18,
+    decode: (text) => coerce3(decode23(text))
+  });
+};
+var decode16 = (string3, alphabet3, bitsPerChar, name7) => {
+  const codes = {};
+  for (let i = 0; i < alphabet3.length; ++i) {
+    codes[alphabet3[i]] = i;
+  }
+  let end = string3.length;
+  while (string3[end - 1] === "=") {
+    --end;
+  }
+  const out = new Uint8Array(end * bitsPerChar / 8 | 0);
+  let bits = 0;
+  let buffer2 = 0;
+  let written = 0;
+  for (let i = 0; i < end; ++i) {
+    const value = codes[string3[i]];
+    if (value === void 0) {
+      throw new SyntaxError(`Non-${name7} character`);
+    }
+    buffer2 = buffer2 << bitsPerChar | value;
+    bits += bitsPerChar;
+    if (bits >= 8) {
+      bits -= 8;
+      out[written++] = 255 & buffer2 >> bits;
+    }
+  }
+  if (bits >= bitsPerChar || 255 & buffer2 << 8 - bits) {
+    throw new SyntaxError("Unexpected end of data");
+  }
+  return out;
+};
+var encode10 = (data, alphabet3, bitsPerChar) => {
+  const pad = alphabet3[alphabet3.length - 1] === "=";
+  const mask = (1 << bitsPerChar) - 1;
+  let out = "";
+  let bits = 0;
+  let buffer2 = 0;
+  for (let i = 0; i < data.length; ++i) {
+    buffer2 = buffer2 << 8 | data[i];
+    bits += 8;
+    while (bits > bitsPerChar) {
+      bits -= bitsPerChar;
+      out += alphabet3[mask & buffer2 >> bits];
+    }
+  }
+  if (bits) {
+    out += alphabet3[mask & buffer2 << bitsPerChar - bits];
+  }
+  if (pad) {
+    while (out.length * bitsPerChar & 7) {
+      out += "=";
+    }
+  }
+  return out;
+};
+var rfc46483 = ({ name: name7, prefix, bitsPerChar, alphabet: alphabet3 }) => {
+  return from5({
+    prefix,
+    name: name7,
+    encode(input2) {
+      return encode10(input2, alphabet3, bitsPerChar);
+    },
+    decode(input2) {
+      return decode16(input2, alphabet3, bitsPerChar, name7);
+    }
+  });
+};
+
+// node_modules/multiformats/esm/src/bases/base58.js
+var base58btc3 = baseX3({
+  name: "base58btc",
+  prefix: "z",
+  alphabet: "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
+});
+var base58flickr3 = baseX3({
+  name: "base58flickr",
+  prefix: "Z",
+  alphabet: "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
+});
+
+// node_modules/multiformats/esm/src/bases/base32.js
+var base32_exports2 = {};
+__export(base32_exports2, {
+  base32: () => base323,
+  base32hex: () => base32hex3,
+  base32hexpad: () => base32hexpad3,
+  base32hexpadupper: () => base32hexpadupper3,
+  base32hexupper: () => base32hexupper3,
+  base32pad: () => base32pad3,
+  base32padupper: () => base32padupper3,
+  base32upper: () => base32upper3,
+  base32z: () => base32z3
+});
+var base323 = rfc46483({
+  prefix: "b",
+  name: "base32",
+  alphabet: "abcdefghijklmnopqrstuvwxyz234567",
+  bitsPerChar: 5
+});
+var base32upper3 = rfc46483({
+  prefix: "B",
+  name: "base32upper",
+  alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567",
+  bitsPerChar: 5
+});
+var base32pad3 = rfc46483({
+  prefix: "c",
+  name: "base32pad",
+  alphabet: "abcdefghijklmnopqrstuvwxyz234567=",
+  bitsPerChar: 5
+});
+var base32padupper3 = rfc46483({
+  prefix: "C",
+  name: "base32padupper",
+  alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567=",
+  bitsPerChar: 5
+});
+var base32hex3 = rfc46483({
+  prefix: "v",
+  name: "base32hex",
+  alphabet: "0123456789abcdefghijklmnopqrstuv",
+  bitsPerChar: 5
+});
+var base32hexupper3 = rfc46483({
+  prefix: "V",
+  name: "base32hexupper",
+  alphabet: "0123456789ABCDEFGHIJKLMNOPQRSTUV",
+  bitsPerChar: 5
+});
+var base32hexpad3 = rfc46483({
+  prefix: "t",
+  name: "base32hexpad",
+  alphabet: "0123456789abcdefghijklmnopqrstuv=",
+  bitsPerChar: 5
+});
+var base32hexpadupper3 = rfc46483({
+  prefix: "T",
+  name: "base32hexpadupper",
+  alphabet: "0123456789ABCDEFGHIJKLMNOPQRSTUV=",
+  bitsPerChar: 5
+});
+var base32z3 = rfc46483({
+  prefix: "h",
+  name: "base32z",
+  alphabet: "ybndrfg8ejkmcpqxot1uwisza345h769",
+  bitsPerChar: 5
+});
+
+// node_modules/multiformats/esm/src/cid.js
+var CID3 = class {
+  constructor(version3, code11, multihash, bytes) {
+    this.code = code11;
+    this.version = version3;
+    this.multihash = multihash;
+    this.bytes = bytes;
+    this.byteOffset = bytes.byteOffset;
+    this.byteLength = bytes.byteLength;
+    this.asCID = this;
+    this._baseCache = /* @__PURE__ */ new Map();
+    Object.defineProperties(this, {
+      byteOffset: hidden2,
+      byteLength: hidden2,
+      code: readonly2,
+      version: readonly2,
+      multihash: readonly2,
+      bytes: readonly2,
+      _baseCache: hidden2,
+      asCID: hidden2
+    });
+  }
+  toV0() {
+    switch (this.version) {
+      case 0: {
+        return this;
+      }
+      default: {
+        const { code: code11, multihash } = this;
+        if (code11 !== DAG_PB_CODE3) {
+          throw new Error("Cannot convert a non dag-pb CID to CIDv0");
+        }
+        if (multihash.code !== SHA_256_CODE3) {
+          throw new Error("Cannot convert non sha2-256 multihash CID to CIDv0");
+        }
+        return CID3.createV0(multihash);
+      }
+    }
+  }
+  toV1() {
+    switch (this.version) {
+      case 0: {
+        const { code: code11, digest: digest4 } = this.multihash;
+        const multihash = create3(code11, digest4);
+        return CID3.createV1(this.code, multihash);
+      }
+      case 1: {
+        return this;
+      }
+      default: {
+        throw Error(`Can not convert CID version ${this.version} to version 0. This is a bug please report`);
+      }
+    }
+  }
+  equals(other) {
+    return other && this.code === other.code && this.version === other.version && equals6(this.multihash, other.multihash);
+  }
+  toString(base4) {
+    const { bytes, version: version3, _baseCache } = this;
+    switch (version3) {
+      case 0:
+        return toStringV03(bytes, _baseCache, base4 || base58btc3.encoder);
+      default:
+        return toStringV13(bytes, _baseCache, base4 || base323.encoder);
+    }
+  }
+  toJSON() {
+    return {
+      code: this.code,
+      version: this.version,
+      hash: this.multihash.bytes
+    };
+  }
+  get [Symbol.toStringTag]() {
+    return "CID";
+  }
+  [Symbol.for("nodejs.util.inspect.custom")]() {
+    return "CID(" + this.toString() + ")";
+  }
+  static isCID(value) {
+    deprecate2(/^0\.0/, IS_CID_DEPRECATION2);
+    return !!(value && (value[cidSymbol3] || value.asCID === value));
+  }
+  get toBaseEncodedString() {
+    throw new Error("Deprecated, use .toString()");
+  }
+  get codec() {
+    throw new Error('"codec" property is deprecated, use integer "code" property instead');
+  }
+  get buffer() {
+    throw new Error("Deprecated .buffer property, use .bytes to get Uint8Array instead");
+  }
+  get multibaseName() {
+    throw new Error('"multibaseName" property is deprecated');
+  }
+  get prefix() {
+    throw new Error('"prefix" property is deprecated');
+  }
+  static asCID(value) {
+    if (value instanceof CID3) {
+      return value;
+    } else if (value != null && value.asCID === value) {
+      const { version: version3, code: code11, multihash, bytes } = value;
+      return new CID3(version3, code11, multihash, bytes || encodeCID3(version3, code11, multihash.bytes));
+    } else if (value != null && value[cidSymbol3] === true) {
+      const { version: version3, multihash, code: code11 } = value;
+      const digest4 = decode15(multihash);
+      return CID3.create(version3, code11, digest4);
+    } else {
+      return null;
+    }
+  }
+  static create(version3, code11, digest4) {
+    if (typeof code11 !== "number") {
+      throw new Error("String codecs are no longer supported");
+    }
+    switch (version3) {
+      case 0: {
+        if (code11 !== DAG_PB_CODE3) {
+          throw new Error(`Version 0 CID must use dag-pb (code: ${DAG_PB_CODE3}) block encoding`);
+        } else {
+          return new CID3(version3, code11, digest4, digest4.bytes);
+        }
+      }
+      case 1: {
+        const bytes = encodeCID3(version3, code11, digest4.bytes);
+        return new CID3(version3, code11, digest4, bytes);
+      }
+      default: {
+        throw new Error("Invalid version");
+      }
+    }
+  }
+  static createV0(digest4) {
+    return CID3.create(0, DAG_PB_CODE3, digest4);
+  }
+  static createV1(code11, digest4) {
+    return CID3.create(1, code11, digest4);
+  }
+  static decode(bytes) {
+    const [cid, remainder] = CID3.decodeFirst(bytes);
+    if (remainder.length) {
+      throw new Error("Incorrect length");
+    }
+    return cid;
+  }
+  static decodeFirst(bytes) {
+    const specs = CID3.inspectBytes(bytes);
+    const prefixSize = specs.size - specs.multihashSize;
+    const multihashBytes = coerce3(bytes.subarray(prefixSize, prefixSize + specs.multihashSize));
+    if (multihashBytes.byteLength !== specs.multihashSize) {
+      throw new Error("Incorrect length");
+    }
+    const digestBytes = multihashBytes.subarray(specs.multihashSize - specs.digestSize);
+    const digest4 = new Digest3(specs.multihashCode, specs.digestSize, digestBytes, multihashBytes);
+    const cid = specs.version === 0 ? CID3.createV0(digest4) : CID3.createV1(specs.codec, digest4);
+    return [
+      cid,
+      bytes.subarray(specs.size)
+    ];
+  }
+  static inspectBytes(initialBytes) {
+    let offset = 0;
+    const next = () => {
+      const [i, length4] = decode14(initialBytes.subarray(offset));
+      offset += length4;
+      return i;
+    };
+    let version3 = next();
+    let codec = DAG_PB_CODE3;
+    if (version3 === 18) {
+      version3 = 0;
+      offset = 0;
+    } else if (version3 === 1) {
+      codec = next();
+    }
+    if (version3 !== 0 && version3 !== 1) {
+      throw new RangeError(`Invalid CID version ${version3}`);
+    }
+    const prefixSize = offset;
+    const multihashCode = next();
+    const digestSize = next();
+    const size = offset + digestSize;
+    const multihashSize = size - prefixSize;
+    return {
+      version: version3,
+      codec,
+      multihashCode,
+      digestSize,
+      multihashSize,
+      size
+    };
+  }
+  static parse(source, base4) {
+    const [prefix, bytes] = parseCIDtoBytes3(source, base4);
+    const cid = CID3.decode(bytes);
+    cid._baseCache.set(prefix, source);
+    return cid;
+  }
+};
+var parseCIDtoBytes3 = (source, base4) => {
+  switch (source[0]) {
+    case "Q": {
+      const decoder2 = base4 || base58btc3;
+      return [
+        base58btc3.prefix,
+        decoder2.decode(`${base58btc3.prefix}${source}`)
+      ];
+    }
+    case base58btc3.prefix: {
+      const decoder2 = base4 || base58btc3;
+      return [
+        base58btc3.prefix,
+        decoder2.decode(source)
+      ];
+    }
+    case base323.prefix: {
+      const decoder2 = base4 || base323;
+      return [
+        base323.prefix,
+        decoder2.decode(source)
+      ];
+    }
+    default: {
+      if (base4 == null) {
+        throw Error("To parse non base32 or base58btc encoded CID multibase decoder must be provided");
+      }
+      return [
+        source[0],
+        base4.decode(source)
+      ];
+    }
+  }
+};
+var toStringV03 = (bytes, cache2, base4) => {
+  const { prefix } = base4;
+  if (prefix !== base58btc3.prefix) {
+    throw Error(`Cannot string encode V0 in ${base4.name} encoding`);
+  }
+  const cid = cache2.get(prefix);
+  if (cid == null) {
+    const cid2 = base4.encode(bytes).slice(1);
+    cache2.set(prefix, cid2);
+    return cid2;
+  } else {
+    return cid;
+  }
+};
+var toStringV13 = (bytes, cache2, base4) => {
+  const { prefix } = base4;
+  const cid = cache2.get(prefix);
+  if (cid == null) {
+    const cid2 = base4.encode(bytes);
+    cache2.set(prefix, cid2);
+    return cid2;
+  } else {
+    return cid;
+  }
+};
+var DAG_PB_CODE3 = 112;
+var SHA_256_CODE3 = 18;
+var encodeCID3 = (version3, code11, multihash) => {
+  const codeOffset = encodingLength3(version3);
+  const hashOffset = codeOffset + encodingLength3(code11);
+  const bytes = new Uint8Array(hashOffset + multihash.byteLength);
+  encodeTo3(version3, bytes, 0);
+  encodeTo3(code11, bytes, codeOffset);
+  bytes.set(multihash, hashOffset);
+  return bytes;
+};
+var cidSymbol3 = Symbol.for("@ipld/js-cid/CID");
+var readonly2 = {
+  writable: false,
+  configurable: false,
+  enumerable: true
+};
+var hidden2 = {
+  writable: false,
+  enumerable: false,
+  configurable: false
+};
+var version2 = "0.0.0-dev";
+var deprecate2 = (range, message) => {
+  if (range.test(version2)) {
+    console.warn(message);
+  } else {
+    throw new Error(message);
+  }
+};
+var IS_CID_DEPRECATION2 = `CID.isCID(v) is deprecated and will be removed in the next major release.
+Following code pattern:
+
+if (CID.isCID(value)) {
+  doSomethingWithCID(value)
+}
+
+Is replaced with:
+
+const cid = CID.asCID(value)
+if (cid) {
+  // Make sure to use cid instead of value
+  doSomethingWithCID(cid)
+}
+`;
+
+// node_modules/@ipld/dag-pb/esm/src/index.js
+var src_exports3 = {};
+__export(src_exports3, {
+  code: () => code6,
+  createLink: () => createLink2,
+  createNode: () => createNode2,
+  decode: () => decode17,
+  encode: () => encode11,
+  name: () => name3,
+  prepare: () => prepare2,
+  validate: () => validate2
+});
+
+// node_modules/@ipld/dag-pb/esm/src/pb-decode.js
+var textDecoder4 = new TextDecoder();
+function decodeVarint2(bytes, offset) {
+  let v = 0;
+  for (let shift = 0; ; shift += 7) {
+    if (shift >= 64) {
+      throw new Error("protobuf: varint overflow");
+    }
+    if (offset >= bytes.length) {
+      throw new Error("protobuf: unexpected end of data");
+    }
+    const b = bytes[offset++];
+    v += shift < 28 ? (b & 127) << shift : (b & 127) * 2 ** shift;
+    if (b < 128) {
+      break;
+    }
+  }
+  return [
+    v,
+    offset
+  ];
+}
+function decodeBytes2(bytes, offset) {
+  let byteLen;
+  [byteLen, offset] = decodeVarint2(bytes, offset);
+  const postOffset = offset + byteLen;
+  if (byteLen < 0 || postOffset < 0) {
+    throw new Error("protobuf: invalid length");
+  }
+  if (postOffset > bytes.length) {
+    throw new Error("protobuf: unexpected end of data");
+  }
+  return [
+    bytes.subarray(offset, postOffset),
+    postOffset
+  ];
+}
+function decodeKey2(bytes, index) {
+  let wire;
+  [wire, index] = decodeVarint2(bytes, index);
+  return [
+    wire & 7,
+    wire >> 3,
+    index
+  ];
+}
+function decodeLink2(bytes) {
+  const link = {};
+  const l = bytes.length;
+  let index = 0;
+  while (index < l) {
+    let wireType, fieldNum;
+    [wireType, fieldNum, index] = decodeKey2(bytes, index);
+    if (fieldNum === 1) {
+      if (link.Hash) {
+        throw new Error("protobuf: (PBLink) duplicate Hash section");
+      }
+      if (wireType !== 2) {
+        throw new Error(`protobuf: (PBLink) wrong wireType (${wireType}) for Hash`);
+      }
+      if (link.Name !== void 0) {
+        throw new Error("protobuf: (PBLink) invalid order, found Name before Hash");
+      }
+      if (link.Tsize !== void 0) {
+        throw new Error("protobuf: (PBLink) invalid order, found Tsize before Hash");
+      }
+      ;
+      [link.Hash, index] = decodeBytes2(bytes, index);
+    } else if (fieldNum === 2) {
+      if (link.Name !== void 0) {
+        throw new Error("protobuf: (PBLink) duplicate Name section");
+      }
+      if (wireType !== 2) {
+        throw new Error(`protobuf: (PBLink) wrong wireType (${wireType}) for Name`);
+      }
+      if (link.Tsize !== void 0) {
+        throw new Error("protobuf: (PBLink) invalid order, found Tsize before Name");
+      }
+      let byts;
+      [byts, index] = decodeBytes2(bytes, index);
+      link.Name = textDecoder4.decode(byts);
+    } else if (fieldNum === 3) {
+      if (link.Tsize !== void 0) {
+        throw new Error("protobuf: (PBLink) duplicate Tsize section");
+      }
+      if (wireType !== 0) {
+        throw new Error(`protobuf: (PBLink) wrong wireType (${wireType}) for Tsize`);
+      }
+      ;
+      [link.Tsize, index] = decodeVarint2(bytes, index);
+    } else {
+      throw new Error(`protobuf: (PBLink) invalid fieldNumber, expected 1, 2 or 3, got ${fieldNum}`);
+    }
+  }
+  if (index > l) {
+    throw new Error("protobuf: (PBLink) unexpected end of data");
+  }
+  return link;
+}
+function decodeNode2(bytes) {
+  const l = bytes.length;
+  let index = 0;
+  let links2;
+  let linksBeforeData = false;
+  let data;
+  while (index < l) {
+    let wireType, fieldNum;
+    [wireType, fieldNum, index] = decodeKey2(bytes, index);
+    if (wireType !== 2) {
+      throw new Error(`protobuf: (PBNode) invalid wireType, expected 2, got ${wireType}`);
+    }
+    if (fieldNum === 1) {
+      if (data) {
+        throw new Error("protobuf: (PBNode) duplicate Data section");
+      }
+      ;
+      [data, index] = decodeBytes2(bytes, index);
+      if (links2) {
+        linksBeforeData = true;
+      }
+    } else if (fieldNum === 2) {
+      if (linksBeforeData) {
+        throw new Error("protobuf: (PBNode) duplicate Links section");
+      } else if (!links2) {
+        links2 = [];
+      }
+      let byts;
+      [byts, index] = decodeBytes2(bytes, index);
+      links2.push(decodeLink2(byts));
+    } else {
+      throw new Error(`protobuf: (PBNode) invalid fieldNumber, expected 1 or 2, got ${fieldNum}`);
+    }
+  }
+  if (index > l) {
+    throw new Error("protobuf: (PBNode) unexpected end of data");
+  }
+  const node = {};
+  if (data) {
+    node.Data = data;
+  }
+  node.Links = links2 || [];
+  return node;
+}
+
+// node_modules/@ipld/dag-pb/esm/src/pb-encode.js
+var textEncoder5 = new TextEncoder();
+var maxInt322 = 2 ** 32;
+var maxUInt322 = 2 ** 31;
+function encodeLink(link, bytes) {
+  let i = bytes.length;
+  if (typeof link.Tsize === "number") {
+    if (link.Tsize < 0) {
+      throw new Error("Tsize cannot be negative");
+    }
+    if (!Number.isSafeInteger(link.Tsize)) {
+      throw new Error("Tsize too large for encoding");
+    }
+    i = encodeVarint(bytes, i, link.Tsize) - 1;
+    bytes[i] = 24;
+  }
+  if (typeof link.Name === "string") {
+    const nameBytes = textEncoder5.encode(link.Name);
+    i -= nameBytes.length;
+    bytes.set(nameBytes, i);
+    i = encodeVarint(bytes, i, nameBytes.length) - 1;
+    bytes[i] = 18;
+  }
+  if (link.Hash) {
+    i -= link.Hash.length;
+    bytes.set(link.Hash, i);
+    i = encodeVarint(bytes, i, link.Hash.length) - 1;
+    bytes[i] = 10;
+  }
+  return bytes.length - i;
+}
+function encodeNode2(node) {
+  const size = sizeNode(node);
+  const bytes = new Uint8Array(size);
+  let i = size;
+  if (node.Data) {
+    i -= node.Data.length;
+    bytes.set(node.Data, i);
+    i = encodeVarint(bytes, i, node.Data.length) - 1;
+    bytes[i] = 10;
+  }
+  if (node.Links) {
+    for (let index = node.Links.length - 1; index >= 0; index--) {
+      const size2 = encodeLink(node.Links[index], bytes.subarray(0, i));
+      i -= size2;
+      i = encodeVarint(bytes, i, size2) - 1;
+      bytes[i] = 18;
+    }
+  }
+  return bytes;
+}
+function sizeLink(link) {
+  let n = 0;
+  if (link.Hash) {
+    const l = link.Hash.length;
+    n += 1 + l + sov(l);
+  }
+  if (typeof link.Name === "string") {
+    const l = textEncoder5.encode(link.Name).length;
+    n += 1 + l + sov(l);
+  }
+  if (typeof link.Tsize === "number") {
+    n += 1 + sov(link.Tsize);
+  }
+  return n;
+}
+function sizeNode(node) {
+  let n = 0;
+  if (node.Data) {
+    const l = node.Data.length;
+    n += 1 + l + sov(l);
+  }
+  if (node.Links) {
+    for (const link of node.Links) {
+      const l = sizeLink(link);
+      n += 1 + l + sov(l);
+    }
+  }
+  return n;
+}
+function encodeVarint(bytes, offset, v) {
+  offset -= sov(v);
+  const base4 = offset;
+  while (v >= maxUInt322) {
+    bytes[offset++] = v & 127 | 128;
+    v /= 128;
+  }
+  while (v >= 128) {
+    bytes[offset++] = v & 127 | 128;
+    v >>>= 7;
+  }
+  bytes[offset] = v;
+  return base4;
+}
+function sov(x) {
+  if (x % 2 === 0) {
+    x++;
+  }
+  return Math.floor((len64(x) + 6) / 7);
+}
+function len64(x) {
+  let n = 0;
+  if (x >= maxInt322) {
+    x = Math.floor(x / maxInt322);
+    n = 32;
+  }
+  if (x >= 1 << 16) {
+    x >>>= 16;
+    n += 16;
+  }
+  if (x >= 1 << 8) {
+    x >>>= 8;
+    n += 8;
+  }
+  return n + len8tab[x];
+}
+var len8tab = [
+  0,
+  1,
+  2,
+  2,
+  3,
+  3,
+  3,
+  3,
+  4,
+  4,
+  4,
+  4,
+  4,
+  4,
+  4,
+  4,
+  5,
+  5,
+  5,
+  5,
+  5,
+  5,
+  5,
+  5,
+  5,
+  5,
+  5,
+  5,
+  5,
+  5,
+  5,
+  5,
+  6,
+  6,
+  6,
+  6,
+  6,
+  6,
+  6,
+  6,
+  6,
+  6,
+  6,
+  6,
+  6,
+  6,
+  6,
+  6,
+  6,
+  6,
+  6,
+  6,
+  6,
+  6,
+  6,
+  6,
+  6,
+  6,
+  6,
+  6,
+  6,
+  6,
+  6,
+  6,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  7,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8
+];
+
+// node_modules/@ipld/dag-pb/esm/src/util.js
+var pbNodeProperties = [
+  "Data",
+  "Links"
+];
+var pbLinkProperties = [
+  "Hash",
+  "Name",
+  "Tsize"
+];
+var textEncoder6 = new TextEncoder();
+function linkComparator(a, b) {
+  if (a === b) {
+    return 0;
+  }
+  const abuf = a.Name ? textEncoder6.encode(a.Name) : [];
+  const bbuf = b.Name ? textEncoder6.encode(b.Name) : [];
+  let x = abuf.length;
+  let y = bbuf.length;
+  for (let i = 0, len = Math.min(x, y); i < len; ++i) {
+    if (abuf[i] !== bbuf[i]) {
+      x = abuf[i];
+      y = bbuf[i];
+      break;
+    }
+  }
+  return x < y ? -1 : y < x ? 1 : 0;
+}
+function hasOnlyProperties(node, properties) {
+  return !Object.keys(node).some((p) => !properties.includes(p));
+}
+function asLink(link) {
+  if (typeof link.asCID === "object") {
+    const Hash = CID3.asCID(link);
+    if (!Hash) {
+      throw new TypeError("Invalid DAG-PB form");
+    }
+    return { Hash };
+  }
+  if (typeof link !== "object" || Array.isArray(link)) {
+    throw new TypeError("Invalid DAG-PB form");
+  }
+  const pbl = {};
+  if (link.Hash) {
+    let cid = CID3.asCID(link.Hash);
+    try {
+      if (!cid) {
+        if (typeof link.Hash === "string") {
+          cid = CID3.parse(link.Hash);
+        } else if (link.Hash instanceof Uint8Array) {
+          cid = CID3.decode(link.Hash);
+        }
+      }
+    } catch (e) {
+      throw new TypeError(`Invalid DAG-PB form: ${e.message}`);
+    }
+    if (cid) {
+      pbl.Hash = cid;
+    }
+  }
+  if (!pbl.Hash) {
+    throw new TypeError("Invalid DAG-PB form");
+  }
+  if (typeof link.Name === "string") {
+    pbl.Name = link.Name;
+  }
+  if (typeof link.Tsize === "number") {
+    pbl.Tsize = link.Tsize;
+  }
+  return pbl;
+}
+function prepare2(node) {
+  if (node instanceof Uint8Array || typeof node === "string") {
+    node = { Data: node };
+  }
+  if (typeof node !== "object" || Array.isArray(node)) {
+    throw new TypeError("Invalid DAG-PB form");
+  }
+  const pbn = {};
+  if (node.Data !== void 0) {
+    if (typeof node.Data === "string") {
+      pbn.Data = textEncoder6.encode(node.Data);
+    } else if (node.Data instanceof Uint8Array) {
+      pbn.Data = node.Data;
+    } else {
+      throw new TypeError("Invalid DAG-PB form");
+    }
+  }
+  if (node.Links !== void 0) {
+    if (Array.isArray(node.Links)) {
+      pbn.Links = node.Links.map(asLink);
+      pbn.Links.sort(linkComparator);
+    } else {
+      throw new TypeError("Invalid DAG-PB form");
+    }
+  } else {
+    pbn.Links = [];
+  }
+  return pbn;
+}
+function validate2(node) {
+  if (!node || typeof node !== "object" || Array.isArray(node)) {
+    throw new TypeError("Invalid DAG-PB form");
+  }
+  if (!hasOnlyProperties(node, pbNodeProperties)) {
+    throw new TypeError("Invalid DAG-PB form (extraneous properties)");
+  }
+  if (node.Data !== void 0 && !(node.Data instanceof Uint8Array)) {
+    throw new TypeError("Invalid DAG-PB form (Data must be a Uint8Array)");
+  }
+  if (!Array.isArray(node.Links)) {
+    throw new TypeError("Invalid DAG-PB form (Links must be an array)");
+  }
+  for (let i = 0; i < node.Links.length; i++) {
+    const link = node.Links[i];
+    if (!link || typeof link !== "object" || Array.isArray(link)) {
+      throw new TypeError("Invalid DAG-PB form (bad link object)");
+    }
+    if (!hasOnlyProperties(link, pbLinkProperties)) {
+      throw new TypeError("Invalid DAG-PB form (extraneous properties on link object)");
+    }
+    if (!link.Hash) {
+      throw new TypeError("Invalid DAG-PB form (link must have a Hash)");
+    }
+    if (link.Hash.asCID !== link.Hash) {
+      throw new TypeError("Invalid DAG-PB form (link Hash must be a CID)");
+    }
+    if (link.Name !== void 0 && typeof link.Name !== "string") {
+      throw new TypeError("Invalid DAG-PB form (link Name must be a string)");
+    }
+    if (link.Tsize !== void 0 && (typeof link.Tsize !== "number" || link.Tsize % 1 !== 0)) {
+      throw new TypeError("Invalid DAG-PB form (link Tsize must be an integer)");
+    }
+    if (i > 0 && linkComparator(link, node.Links[i - 1]) === -1) {
+      throw new TypeError("Invalid DAG-PB form (links must be sorted by Name bytes)");
+    }
+  }
+}
+function createNode2(data, links2 = []) {
+  return prepare2({
+    Data: data,
+    Links: links2
+  });
+}
+function createLink2(name7, size, cid) {
+  return asLink({
+    Hash: cid,
+    Name: name7,
+    Tsize: size
+  });
+}
+
+// node_modules/@ipld/dag-pb/esm/src/index.js
+var name3 = "dag-pb";
+var code6 = 112;
+function encode11(node) {
+  validate2(node);
+  const pbn = {};
+  if (node.Links) {
+    pbn.Links = node.Links.map((l) => {
+      const link = {};
+      if (l.Hash) {
+        link.Hash = l.Hash.bytes;
+      }
+      if (l.Name !== void 0) {
+        link.Name = l.Name;
+      }
+      if (l.Tsize !== void 0) {
+        link.Tsize = l.Tsize;
+      }
+      return link;
+    });
+  }
+  if (node.Data) {
+    pbn.Data = node.Data;
+  }
+  return encodeNode2(pbn);
+}
+function decode17(bytes) {
+  const pbn = decodeNode2(bytes);
+  const node = {};
+  if (pbn.Data) {
+    node.Data = pbn.Data;
+  }
+  if (pbn.Links) {
+    node.Links = pbn.Links.map((l) => {
+      const link = {};
+      try {
+        link.Hash = CID3.decode(l.Hash);
+      } catch (e) {
+      }
+      if (!link.Hash) {
+        throw new Error("Invalid Hash field found in link, expected CID");
+      }
+      if (l.Name !== void 0) {
+        link.Name = l.Name;
+      }
+      if (l.Tsize !== void 0) {
+        link.Tsize = l.Tsize;
+      }
+      return link;
+    });
+  }
+  return node;
+}
+
+// node_modules/multiformats/esm/src/hashes/sha2.js
+var sha2_exports2 = {};
+__export(sha2_exports2, {
+  sha256: () => sha2562,
+  sha512: () => sha5122
+});
+var import_crypto2 = __toESM(require("crypto"), 1);
+
+// node_modules/multiformats/esm/src/hashes/hasher.js
+var from6 = ({ name: name7, code: code11, encode: encode18 }) => new Hasher3(name7, code11, encode18);
+var Hasher3 = class {
+  constructor(name7, code11, encode18) {
+    this.name = name7;
+    this.code = code11;
+    this.encode = encode18;
+  }
+  digest(input2) {
+    if (input2 instanceof Uint8Array) {
+      const result = this.encode(input2);
+      return result instanceof Uint8Array ? create3(this.code, result) : result.then((digest4) => create3(this.code, digest4));
+    } else {
+      throw Error("Unknown type, must be binary type");
+    }
+  }
+};
+
+// node_modules/multiformats/esm/src/hashes/sha2.js
+var sha2562 = from6({
+  name: "sha2-256",
+  code: 18,
+  encode: (input2) => coerce3(import_crypto2.default.createHash("sha256").update(input2).digest())
+});
+var sha5122 = from6({
+  name: "sha2-512",
+  code: 19,
+  encode: (input2) => coerce3(import_crypto2.default.createHash("sha512").update(input2).digest())
+});
+
 // node_modules/ipfs-unixfs-importer/src/utils/persist.js
 var persist = async (buffer2, blockstore3, options) => {
   if (!options.codec) {
-    options.codec = src_exports;
+    options.codec = src_exports3;
   }
   if (!options.hasher) {
-    options.hasher = sha256;
+    options.hasher = sha2562;
   }
   if (options.cidVersion === void 0) {
     options.cidVersion = 1;
   }
-  if (options.codec === src_exports && options.hasher !== sha256) {
+  if (options.codec === src_exports3 && options.hasher !== sha2562) {
     options.cidVersion = 1;
   }
   const multihash = await options.hasher.digest(buffer2);
-  const cid = CID.create(options.cidVersion, options.codec.code, multihash);
+  const cid = CID3.create(options.cidVersion, options.codec.code, multihash);
   if (!options.onlyHash) {
     await blockstore3.put(cid, buffer2, {
       signal: options.signal
@@ -50376,7 +52203,7 @@ var dirBuilder = async (item, blockstore3, options) => {
     mtime: item.mtime,
     mode: item.mode
   });
-  const buffer2 = encode3(prepare({ Data: unixfs.marshal() }));
+  const buffer2 = encode11(prepare2({ Data: unixfs.marshal() }));
   const cid = await persist_default(buffer2, blockstore3, options);
   const path3 = item.path;
   return {
@@ -50391,6 +52218,19 @@ var dir_default = dirBuilder;
 // node_modules/ipfs-unixfs-importer/src/dag-builder/file/index.js
 var import_err_code11 = __toESM(require_err_code(), 1);
 var import_it_parallel_batch = __toESM(require_it_parallel_batch(), 1);
+
+// node_modules/multiformats/esm/src/codecs/raw.js
+var raw_exports3 = {};
+__export(raw_exports3, {
+  code: () => code7,
+  decode: () => decode18,
+  encode: () => encode12,
+  name: () => name4
+});
+var name4 = "raw";
+var code7 = 85;
+var encode12 = (node) => coerce3(node);
+var decode18 = (data) => coerce3(data);
 
 // node_modules/ipfs-unixfs-importer/src/dag-builder/file/flat.js
 var import_it_all = __toESM(require_it_all(), 1);
@@ -50530,20 +52370,20 @@ async function* bufferImporter(file, block, options) {
       options.progress(buffer2.length, file.path);
       let unixfs;
       const opts2 = {
-        codec: src_exports,
+        codec: src_exports3,
         cidVersion: options.cidVersion,
         hasher: options.hasher,
         onlyHash: options.onlyHash
       };
       if (options.rawLeaves) {
-        opts2.codec = raw_exports;
+        opts2.codec = raw_exports3;
         opts2.cidVersion = 1;
       } else {
         unixfs = new UnixFS2({
           type: options.leafType,
           data: buffer2
         });
-        buffer2 = encode3({
+        buffer2 = encode11({
           Data: unixfs.marshal(),
           Links: []
         });
@@ -50601,10 +52441,10 @@ var reduce = (file, blockstore3, options) => {
           mode: file.mode,
           data: buffer3
         });
-        buffer3 = encode3(prepare({ Data: leaf.unixfs.marshal() }));
+        buffer3 = encode11(prepare2({ Data: leaf.unixfs.marshal() }));
         leaf.cid = await persist_default(buffer3, blockstore3, {
           ...options,
-          codec: src_exports,
+          codec: src_exports3,
           hasher: options.hasher,
           cidVersion: options.cidVersion
         });
@@ -50623,7 +52463,7 @@ var reduce = (file, blockstore3, options) => {
       mode: file.mode
     });
     const links2 = leaves.filter((leaf) => {
-      if (leaf.cid.code === code3 && leaf.size) {
+      if (leaf.cid.code === code7 && leaf.size) {
         return true;
       }
       if (leaf.unixfs && !leaf.unixfs.data && leaf.unixfs.fileSize()) {
@@ -50631,7 +52471,7 @@ var reduce = (file, blockstore3, options) => {
       }
       return Boolean(leaf.unixfs && leaf.unixfs.data && leaf.unixfs.data.length);
     }).map((leaf) => {
-      if (leaf.cid.code === code3) {
+      if (leaf.cid.code === code7) {
         f.addBlockSize(leaf.size);
         return {
           Name: "",
@@ -50654,7 +52494,7 @@ var reduce = (file, blockstore3, options) => {
       Data: f.marshal(),
       Links: links2
     };
-    const buffer2 = encode3(prepare(node));
+    const buffer2 = encode11(prepare2(node));
     const cid = await persist_default(buffer2, blockstore3, options);
     return {
       cid,
@@ -50765,13 +52605,261 @@ var fixed_size_default = fixedSizeChunker;
 
 // node_modules/ipfs-unixfs-importer/src/dag-builder/validate-chunks.js
 var import_err_code13 = __toESM(require_err_code(), 1);
+
+// node_modules/multiformats/esm/src/bases/identity.js
+var identity_exports3 = {};
+__export(identity_exports3, {
+  identity: () => identity4
+});
+var identity4 = from5({
+  prefix: "\0",
+  name: "identity",
+  encode: (buf2) => toString4(buf2),
+  decode: (str) => fromString5(str)
+});
+
+// node_modules/multiformats/esm/src/bases/base2.js
+var base2_exports2 = {};
+__export(base2_exports2, {
+  base2: () => base23
+});
+var base23 = rfc46483({
+  prefix: "0",
+  name: "base2",
+  alphabet: "01",
+  bitsPerChar: 1
+});
+
+// node_modules/multiformats/esm/src/bases/base8.js
+var base8_exports2 = {};
+__export(base8_exports2, {
+  base8: () => base82
+});
+var base82 = rfc46483({
+  prefix: "7",
+  name: "base8",
+  alphabet: "01234567",
+  bitsPerChar: 3
+});
+
+// node_modules/multiformats/esm/src/bases/base10.js
+var base10_exports2 = {};
+__export(base10_exports2, {
+  base10: () => base102
+});
+var base102 = baseX3({
+  prefix: "9",
+  name: "base10",
+  alphabet: "0123456789"
+});
+
+// node_modules/multiformats/esm/src/bases/base16.js
+var base16_exports2 = {};
+__export(base16_exports2, {
+  base16: () => base162,
+  base16upper: () => base16upper2
+});
+var base162 = rfc46483({
+  prefix: "f",
+  name: "base16",
+  alphabet: "0123456789abcdef",
+  bitsPerChar: 4
+});
+var base16upper2 = rfc46483({
+  prefix: "F",
+  name: "base16upper",
+  alphabet: "0123456789ABCDEF",
+  bitsPerChar: 4
+});
+
+// node_modules/multiformats/esm/src/bases/base36.js
+var base36_exports2 = {};
+__export(base36_exports2, {
+  base36: () => base362,
+  base36upper: () => base36upper2
+});
+var base362 = baseX3({
+  prefix: "k",
+  name: "base36",
+  alphabet: "0123456789abcdefghijklmnopqrstuvwxyz"
+});
+var base36upper2 = baseX3({
+  prefix: "K",
+  name: "base36upper",
+  alphabet: "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+});
+
+// node_modules/multiformats/esm/src/bases/base64.js
+var base64_exports2 = {};
+__export(base64_exports2, {
+  base64: () => base642,
+  base64pad: () => base64pad2,
+  base64url: () => base64url2,
+  base64urlpad: () => base64urlpad2
+});
+var base642 = rfc46483({
+  prefix: "m",
+  name: "base64",
+  alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",
+  bitsPerChar: 6
+});
+var base64pad2 = rfc46483({
+  prefix: "M",
+  name: "base64pad",
+  alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
+  bitsPerChar: 6
+});
+var base64url2 = rfc46483({
+  prefix: "u",
+  name: "base64url",
+  alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_",
+  bitsPerChar: 6
+});
+var base64urlpad2 = rfc46483({
+  prefix: "U",
+  name: "base64urlpad",
+  alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_=",
+  bitsPerChar: 6
+});
+
+// node_modules/multiformats/esm/src/bases/base256emoji.js
+var base256emoji_exports2 = {};
+__export(base256emoji_exports2, {
+  base256emoji: () => base256emoji2
+});
+var alphabet2 = Array.from("\u{1F680}\u{1FA90}\u2604\u{1F6F0}\u{1F30C}\u{1F311}\u{1F312}\u{1F313}\u{1F314}\u{1F315}\u{1F316}\u{1F317}\u{1F318}\u{1F30D}\u{1F30F}\u{1F30E}\u{1F409}\u2600\u{1F4BB}\u{1F5A5}\u{1F4BE}\u{1F4BF}\u{1F602}\u2764\u{1F60D}\u{1F923}\u{1F60A}\u{1F64F}\u{1F495}\u{1F62D}\u{1F618}\u{1F44D}\u{1F605}\u{1F44F}\u{1F601}\u{1F525}\u{1F970}\u{1F494}\u{1F496}\u{1F499}\u{1F622}\u{1F914}\u{1F606}\u{1F644}\u{1F4AA}\u{1F609}\u263A\u{1F44C}\u{1F917}\u{1F49C}\u{1F614}\u{1F60E}\u{1F607}\u{1F339}\u{1F926}\u{1F389}\u{1F49E}\u270C\u2728\u{1F937}\u{1F631}\u{1F60C}\u{1F338}\u{1F64C}\u{1F60B}\u{1F497}\u{1F49A}\u{1F60F}\u{1F49B}\u{1F642}\u{1F493}\u{1F929}\u{1F604}\u{1F600}\u{1F5A4}\u{1F603}\u{1F4AF}\u{1F648}\u{1F447}\u{1F3B6}\u{1F612}\u{1F92D}\u2763\u{1F61C}\u{1F48B}\u{1F440}\u{1F62A}\u{1F611}\u{1F4A5}\u{1F64B}\u{1F61E}\u{1F629}\u{1F621}\u{1F92A}\u{1F44A}\u{1F973}\u{1F625}\u{1F924}\u{1F449}\u{1F483}\u{1F633}\u270B\u{1F61A}\u{1F61D}\u{1F634}\u{1F31F}\u{1F62C}\u{1F643}\u{1F340}\u{1F337}\u{1F63B}\u{1F613}\u2B50\u2705\u{1F97A}\u{1F308}\u{1F608}\u{1F918}\u{1F4A6}\u2714\u{1F623}\u{1F3C3}\u{1F490}\u2639\u{1F38A}\u{1F498}\u{1F620}\u261D\u{1F615}\u{1F33A}\u{1F382}\u{1F33B}\u{1F610}\u{1F595}\u{1F49D}\u{1F64A}\u{1F639}\u{1F5E3}\u{1F4AB}\u{1F480}\u{1F451}\u{1F3B5}\u{1F91E}\u{1F61B}\u{1F534}\u{1F624}\u{1F33C}\u{1F62B}\u26BD\u{1F919}\u2615\u{1F3C6}\u{1F92B}\u{1F448}\u{1F62E}\u{1F646}\u{1F37B}\u{1F343}\u{1F436}\u{1F481}\u{1F632}\u{1F33F}\u{1F9E1}\u{1F381}\u26A1\u{1F31E}\u{1F388}\u274C\u270A\u{1F44B}\u{1F630}\u{1F928}\u{1F636}\u{1F91D}\u{1F6B6}\u{1F4B0}\u{1F353}\u{1F4A2}\u{1F91F}\u{1F641}\u{1F6A8}\u{1F4A8}\u{1F92C}\u2708\u{1F380}\u{1F37A}\u{1F913}\u{1F619}\u{1F49F}\u{1F331}\u{1F616}\u{1F476}\u{1F974}\u25B6\u27A1\u2753\u{1F48E}\u{1F4B8}\u2B07\u{1F628}\u{1F31A}\u{1F98B}\u{1F637}\u{1F57A}\u26A0\u{1F645}\u{1F61F}\u{1F635}\u{1F44E}\u{1F932}\u{1F920}\u{1F927}\u{1F4CC}\u{1F535}\u{1F485}\u{1F9D0}\u{1F43E}\u{1F352}\u{1F617}\u{1F911}\u{1F30A}\u{1F92F}\u{1F437}\u260E\u{1F4A7}\u{1F62F}\u{1F486}\u{1F446}\u{1F3A4}\u{1F647}\u{1F351}\u2744\u{1F334}\u{1F4A3}\u{1F438}\u{1F48C}\u{1F4CD}\u{1F940}\u{1F922}\u{1F445}\u{1F4A1}\u{1F4A9}\u{1F450}\u{1F4F8}\u{1F47B}\u{1F910}\u{1F92E}\u{1F3BC}\u{1F975}\u{1F6A9}\u{1F34E}\u{1F34A}\u{1F47C}\u{1F48D}\u{1F4E3}\u{1F942}");
+var alphabetBytesToChars2 = alphabet2.reduce((p, c, i) => {
+  p[i] = c;
+  return p;
+}, []);
+var alphabetCharsToBytes2 = alphabet2.reduce((p, c, i) => {
+  p[c.codePointAt(0)] = i;
+  return p;
+}, []);
+function encode13(data) {
+  return data.reduce((p, c) => {
+    p += alphabetBytesToChars2[c];
+    return p;
+  }, "");
+}
+function decode19(str) {
+  const byts = [];
+  for (const char of str) {
+    const byt = alphabetCharsToBytes2[char.codePointAt(0)];
+    if (byt === void 0) {
+      throw new Error(`Non-base256emoji character: ${char}`);
+    }
+    byts.push(byt);
+  }
+  return new Uint8Array(byts);
+}
+var base256emoji2 = from5({
+  prefix: "\u{1F680}",
+  name: "base256emoji",
+  encode: encode13,
+  decode: decode19
+});
+
+// node_modules/multiformats/esm/src/hashes/identity.js
+var identity_exports4 = {};
+__export(identity_exports4, {
+  identity: () => identity5
+});
+var code8 = 0;
+var name5 = "identity";
+var encode14 = coerce3;
+var digest3 = (input2) => create3(code8, encode14(input2));
+var identity5 = {
+  code: code8,
+  name: name5,
+  encode: encode14,
+  digest: digest3
+};
+
+// node_modules/multiformats/esm/src/codecs/json.js
+var textEncoder7 = new TextEncoder();
+var textDecoder5 = new TextDecoder();
+
+// node_modules/multiformats/esm/src/basics.js
+var bases2 = {
+  ...identity_exports3,
+  ...base2_exports2,
+  ...base8_exports2,
+  ...base10_exports2,
+  ...base16_exports2,
+  ...base32_exports2,
+  ...base36_exports2,
+  ...base58_exports2,
+  ...base64_exports2,
+  ...base256emoji_exports2
+};
+var hashes2 = {
+  ...sha2_exports2,
+  ...identity_exports4
+};
+
+// node_modules/uint8arrays/esm/src/util/bases.js
+function createCodec2(name7, prefix, encode18, decode23) {
+  return {
+    name: name7,
+    prefix,
+    encoder: {
+      name: name7,
+      prefix,
+      encode: encode18
+    },
+    decoder: { decode: decode23 }
+  };
+}
+var string2 = createCodec2("utf8", "u", (buf2) => {
+  const decoder2 = new TextDecoder("utf8");
+  return "u" + decoder2.decode(buf2);
+}, (str) => {
+  const encoder2 = new TextEncoder();
+  return encoder2.encode(str.substring(1));
+});
+var ascii2 = createCodec2("ascii", "a", (buf2) => {
+  let string3 = "a";
+  for (let i = 0; i < buf2.length; i++) {
+    string3 += String.fromCharCode(buf2[i]);
+  }
+  return string3;
+}, (str) => {
+  str = str.substring(1);
+  const buf2 = new Uint8Array(str.length);
+  for (let i = 0; i < str.length; i++) {
+    buf2[i] = str.charCodeAt(i);
+  }
+  return buf2;
+});
+var BASES2 = {
+  utf8: string2,
+  "utf-8": string2,
+  hex: bases2.base16,
+  latin1: ascii2,
+  ascii: ascii2,
+  binary: ascii2,
+  ...bases2
+};
+var bases_default2 = BASES2;
+
+// node_modules/uint8arrays/esm/src/from-string.js
+function fromString6(string3, encoding = "utf8") {
+  const base4 = bases_default2[encoding];
+  if (!base4) {
+    throw new Error(`Unsupported encoding "${encoding}"`);
+  }
+  return base4.decoder.decode(`${base4.prefix}${string3}`);
+}
+
+// node_modules/ipfs-unixfs-importer/src/dag-builder/validate-chunks.js
 async function* validateChunks(source) {
   for await (const content of source) {
     if (content.length === void 0) {
       throw (0, import_err_code13.default)(new Error("Content was invalid"), "ERR_INVALID_CONTENT");
     }
     if (typeof content === "string" || content instanceof String) {
-      yield fromString3(content.toString());
+      yield fromString6(content.toString());
     } else if (Array.isArray(content)) {
       yield Uint8Array.from(content);
     } else if (content instanceof Uint8Array) {
@@ -50853,12 +52941,33 @@ async function* dagBuilder(source, blockstore3, options) {
 var dag_builder_default = dagBuilder;
 
 // node_modules/merge-options/index.mjs
-var import_index2 = __toESM(require_merge_options(), 1);
-var merge_options_default = import_index2.default;
+var import_index3 = __toESM(require_merge_options(), 1);
+var merge_options_default = import_index3.default;
+
+// node_modules/@multiformats/murmur3/esm/index.js
+var import_murmurhash3js_revisited2 = __toESM(require_murmurhash3js_revisited(), 1);
+function fromNumberTo32BitBuf2(number) {
+  const bytes = new Array(4);
+  for (let i = 0; i < 4; i++) {
+    bytes[i] = number & 255;
+    number = number >> 8;
+  }
+  return new Uint8Array(bytes);
+}
+var murmur3322 = from6({
+  name: "murmur3-32",
+  code: 35,
+  encode: (input2) => fromNumberTo32BitBuf2(import_murmurhash3js_revisited2.default.x86.hash32(input2))
+});
+var murmur31282 = from6({
+  name: "murmur3-128",
+  code: 34,
+  encode: (input2) => bytes_exports4.fromHex(import_murmurhash3js_revisited2.default.x64.hash128(input2))
+});
 
 // node_modules/ipfs-unixfs-importer/src/options.js
 async function hamtHashFn(buf2) {
-  return (await murmur3128.encode(buf2)).slice(0, 8).reverse();
+  return (await murmur31282.encode(buf2)).slice(0, 8).reverse();
 }
 var defaultOptions = {
   chunker: "fixed",
@@ -50866,7 +52975,7 @@ var defaultOptions = {
   rawLeaves: false,
   onlyHash: false,
   reduceSingleLeafToSelf: true,
-  hasher: sha256,
+  hasher: sha2562,
   leafType: "file",
   cidVersion: 0,
   progress: () => () => {
@@ -50911,9 +53020,9 @@ var Dir = class {
     this.cid = void 0;
     this.size = void 0;
   }
-  async put(name5, value) {
+  async put(name7, value) {
   }
-  get(name5) {
+  get(name7) {
     return Promise.resolve(this);
   }
   async *eachChildSeries() {
@@ -50929,13 +53038,13 @@ var DirFlat = class extends dir_default2 {
     super(props, options);
     this._children = {};
   }
-  async put(name5, value) {
+  async put(name7, value) {
     this.cid = void 0;
     this.size = void 0;
-    this._children[name5] = value;
+    this._children[name7] = value;
   }
-  get(name5) {
-    return Promise.resolve(this._children[name5]);
+  get(name7) {
+    return Promise.resolve(this._children[name7]);
   }
   childCount() {
     return Object.keys(this._children).length;
@@ -50981,7 +53090,7 @@ var DirFlat = class extends dir_default2 {
       mode: this.mode
     });
     const node = { Data: unixfs.marshal(), Links: links2 };
-    const buffer2 = encode3(prepare(node));
+    const buffer2 = encode11(prepare2(node));
     const cid = await persist_default(buffer2, block, this.options);
     const size = buffer2.length + node.Links.reduce(
       (acc, curr) => acc + (curr.Tsize == null ? 0 : curr.Tsize),
@@ -51088,7 +53197,7 @@ var Bucket2 = class {
     }
   }
   async _findPlace(key) {
-    const hashValue = this._options.hash(typeof key === "string" ? fromString3(key) : key);
+    const hashValue = this._options.hash(typeof key === "string" ? fromString6(key) : key);
     const index = await hashValue.take(this._options.bits);
     const child = this._children.get(index);
     if (child instanceof Bucket2) {
@@ -51245,12 +53354,26 @@ var ConsumableBuffer2 = class {
     return this._currentBytePos >= 0;
   }
 };
-function byteBitsToInt2(byte, start, length2) {
-  const mask = maskFor2(start, length2);
+function byteBitsToInt2(byte, start, length4) {
+  const mask = maskFor2(start, length4);
   return (byte & mask) >>> start;
 }
-function maskFor2(start, length2) {
-  return START_MASKS2[start] & STOP_MASKS2[Math.min(length2 + start - 1, 7)];
+function maskFor2(start, length4) {
+  return START_MASKS2[start] & STOP_MASKS2[Math.min(length4 + start - 1, 7)];
+}
+
+// node_modules/uint8arrays/esm/src/concat.js
+function concat3(arrays, length4) {
+  if (!length4) {
+    length4 = arrays.reduce((acc, curr) => acc + curr.length, 0);
+  }
+  const output = new Uint8Array(length4);
+  let offset = 0;
+  for (const arr of arrays) {
+    output.set(arr, offset);
+    offset += arr.length;
+  }
+  return output;
 }
 
 // node_modules/ipfs-unixfs-importer/node_modules/hamt-sharding/dist/src/consumable-hash.js
@@ -51311,7 +53434,7 @@ var InfiniteHash2 = class {
   }
   async _produceMoreBits() {
     this._depth++;
-    const value = this._depth > 0 ? concat2([this._value, Uint8Array.from([this._depth])]) : this._value;
+    const value = this._depth > 0 ? concat3([this._value, Uint8Array.from([this._depth])]) : this._value;
     const hashValue = await this._hashFn(value);
     const buffer2 = new ConsumableBuffer2(hashValue);
     this._buffers.push(buffer2);
@@ -51340,11 +53463,11 @@ var DirSharded = class extends dir_default2 {
       bits: options.hamtBucketBits
     });
   }
-  async put(name5, value) {
-    await this._bucket.put(name5, value);
+  async put(name7, value) {
+    await this._bucket.put(name7, value);
   }
-  get(name5) {
-    return this._bucket.get(name5);
+  get(name7) {
+    return this._bucket.get(name7);
   }
   childCount() {
     return this._bucket.leafCount();
@@ -51439,7 +53562,7 @@ async function* flush(bucket, blockstore3, shardRoot, options) {
     Data: dir.marshal(),
     Links: links2
   };
-  const buffer2 = encode3(prepare(node));
+  const buffer2 = encode11(prepare2(node));
   const cid = await persist_default(buffer2, blockstore3, options);
   const size = buffer2.length + childrenSize;
   yield {
@@ -51959,10 +54082,70 @@ var import_it_pipe2 = __toESM(require_it_pipe(), 1);
 
 // node_modules/@ipld/car/esm/lib/reader.js
 var import_fs = __toESM(require("fs"), 1);
-var import_util2 = require("util");
+var import_util3 = require("util");
 
 // node_modules/@ipld/car/esm/lib/decoder.js
-var import_varint2 = __toESM(require_varint(), 1);
+var import_varint4 = __toESM(require_varint(), 1);
+
+// node_modules/@ipld/dag-cbor/esm/index.js
+var CID_CBOR_TAG2 = 42;
+function cidEncoder(obj) {
+  if (obj.asCID !== obj) {
+    return null;
+  }
+  const cid = CID3.asCID(obj);
+  if (!cid) {
+    return null;
+  }
+  const bytes = new Uint8Array(cid.bytes.byteLength + 1);
+  bytes.set(cid.bytes, 1);
+  return [
+    new Token(Type.tag, CID_CBOR_TAG2),
+    new Token(Type.bytes, bytes)
+  ];
+}
+function undefinedEncoder() {
+  throw new Error("`undefined` is not supported by the IPLD Data Model and cannot be encoded");
+}
+function numberEncoder(num) {
+  if (Number.isNaN(num)) {
+    throw new Error("`NaN` is not supported by the IPLD Data Model and cannot be encoded");
+  }
+  if (num === Infinity || num === -Infinity) {
+    throw new Error("`Infinity` and `-Infinity` is not supported by the IPLD Data Model and cannot be encoded");
+  }
+  return null;
+}
+var encodeOptions = {
+  float64: true,
+  typeEncoders: {
+    Object: cidEncoder,
+    undefined: undefinedEncoder,
+    number: numberEncoder
+  }
+};
+function cidDecoder2(bytes) {
+  if (bytes[0] !== 0) {
+    throw new Error("Invalid CID for CBOR tag 42; expected leading 0x00");
+  }
+  return CID3.decode(bytes.subarray(1));
+}
+var decodeOptions2 = {
+  allowIndefinite: false,
+  coerceUndefinedToNull: true,
+  allowNaN: false,
+  allowInfinity: false,
+  allowBigInt: true,
+  strict: true,
+  useMaps: false,
+  tags: []
+};
+decodeOptions2.tags[CID_CBOR_TAG2] = cidDecoder2;
+var code9 = 113;
+var encode15 = (node) => encode3(node, encodeOptions);
+var decode20 = (data) => decode6(data, decodeOptions2);
+
+// node_modules/@ipld/car/esm/lib/decoder.js
 var CIDV0_BYTES = {
   SHA2_256: 18,
   LENGTH: 32,
@@ -51970,18 +54153,18 @@ var CIDV0_BYTES = {
 };
 async function readVarint(reader) {
   const bytes = await reader.upTo(8);
-  const i = import_varint2.default.decode(bytes);
-  reader.seek(import_varint2.default.decode.bytes);
+  const i = import_varint4.default.decode(bytes);
+  reader.seek(import_varint4.default.decode.bytes);
   return i;
 }
 async function readHeader(reader) {
-  const length2 = await readVarint(reader);
-  if (length2 === 0) {
+  const length4 = await readVarint(reader);
+  if (length4 === 0) {
     throw new Error("Invalid CAR header (zero length)");
   }
-  const header = await reader.exactly(length2);
-  reader.seek(length2);
-  const block = decode7(header);
+  const header = await reader.exactly(length4);
+  reader.seek(length4);
+  const block = decode20(header);
   if (block == null || Array.isArray(block) || typeof block !== "object") {
     throw new Error("Invalid CAR header format");
   }
@@ -52001,11 +54184,11 @@ async function readHeader(reader) {
 }
 async function readMultihash(reader) {
   const bytes = await reader.upTo(8);
-  import_varint2.default.decode(bytes);
-  const codeLength = import_varint2.default.decode.bytes;
-  const length2 = import_varint2.default.decode(bytes.subarray(import_varint2.default.decode.bytes));
-  const lengthLength = import_varint2.default.decode.bytes;
-  const mhLength = codeLength + lengthLength + length2;
+  import_varint4.default.decode(bytes);
+  const codeLength = import_varint4.default.decode.bytes;
+  const length4 = import_varint4.default.decode(bytes.subarray(import_varint4.default.decode.bytes));
+  const lengthLength = import_varint4.default.decode.bytes;
+  const mhLength = codeLength + lengthLength + length4;
   const multihash = await reader.exactly(mhLength);
   reader.seek(mhLength);
   return multihash;
@@ -52015,30 +54198,30 @@ async function readCid(reader) {
   if (first[0] === CIDV0_BYTES.SHA2_256 && first[1] === CIDV0_BYTES.LENGTH) {
     const bytes2 = await reader.exactly(34);
     reader.seek(34);
-    const multihash2 = decode3(bytes2);
-    return CID.create(0, CIDV0_BYTES.DAG_PB, multihash2);
+    const multihash2 = decode15(bytes2);
+    return CID3.create(0, CIDV0_BYTES.DAG_PB, multihash2);
   }
-  const version2 = await readVarint(reader);
-  if (version2 !== 1) {
-    throw new Error(`Unexpected CID version (${version2})`);
+  const version3 = await readVarint(reader);
+  if (version3 !== 1) {
+    throw new Error(`Unexpected CID version (${version3})`);
   }
   const codec = await readVarint(reader);
   const bytes = await readMultihash(reader);
-  const multihash = decode3(bytes);
-  return CID.create(version2, codec, multihash);
+  const multihash = decode15(bytes);
+  return CID3.create(version3, codec, multihash);
 }
 async function readBlockHead(reader) {
   const start = reader.pos;
-  let length2 = await readVarint(reader);
-  if (length2 === 0) {
+  let length4 = await readVarint(reader);
+  if (length4 === 0) {
     throw new Error("Invalid CAR section (zero length)");
   }
-  length2 += reader.pos - start;
+  length4 += reader.pos - start;
   const cid = await readCid(reader);
-  const blockLength = length2 - (reader.pos - start);
+  const blockLength = length4 - (reader.pos - start);
   return {
     cid,
-    length: length2,
+    length: length4,
     blockLength
   };
 }
@@ -52053,10 +54236,10 @@ async function readBlock(reader) {
 }
 async function readBlockIndex(reader) {
   const offset = reader.pos;
-  const { cid, length: length2, blockLength } = await readBlockHead(reader);
+  const { cid, length: length4, blockLength } = await readBlockHead(reader);
   const index = {
     cid,
-    length: length2,
+    length: length4,
     blockLength,
     offset,
     blockOffset: reader.pos
@@ -52085,17 +54268,17 @@ function createDecoder(reader) {
 function bytesReader(bytes) {
   let pos = 0;
   return {
-    async upTo(length2) {
-      return bytes.subarray(pos, pos + Math.min(length2, bytes.length - pos));
+    async upTo(length4) {
+      return bytes.subarray(pos, pos + Math.min(length4, bytes.length - pos));
     },
-    async exactly(length2) {
-      if (length2 > bytes.length - pos) {
+    async exactly(length4) {
+      if (length4 > bytes.length - pos) {
         throw new Error("Unexpected end of data");
       }
-      return bytes.subarray(pos, pos + length2);
+      return bytes.subarray(pos, pos + length4);
     },
-    seek(length2) {
-      pos += length2;
+    seek(length4) {
+      pos += length4;
     },
     get pos() {
       return pos;
@@ -52107,10 +54290,10 @@ function chunkReader(readChunk) {
   let have = 0;
   let offset = 0;
   let currentChunk = new Uint8Array(0);
-  const read2 = async (length2) => {
+  const read4 = async (length4) => {
     have = currentChunk.length - offset;
     const bufa = [currentChunk.subarray(offset)];
-    while (have < length2) {
+    while (have < length4) {
       const chunk = await readChunk();
       if (chunk == null) {
         break;
@@ -52133,24 +54316,24 @@ function chunkReader(readChunk) {
     offset = 0;
   };
   return {
-    async upTo(length2) {
-      if (currentChunk.length - offset < length2) {
-        await read2(length2);
+    async upTo(length4) {
+      if (currentChunk.length - offset < length4) {
+        await read4(length4);
       }
-      return currentChunk.subarray(offset, offset + Math.min(currentChunk.length - offset, length2));
+      return currentChunk.subarray(offset, offset + Math.min(currentChunk.length - offset, length4));
     },
-    async exactly(length2) {
-      if (currentChunk.length - offset < length2) {
-        await read2(length2);
+    async exactly(length4) {
+      if (currentChunk.length - offset < length4) {
+        await read4(length4);
       }
-      if (currentChunk.length - offset < length2) {
+      if (currentChunk.length - offset < length4) {
         throw new Error("Unexpected end of data");
       }
-      return currentChunk.subarray(offset, offset + length2);
+      return currentChunk.subarray(offset, offset + length4);
     },
-    seek(length2) {
-      pos += length2;
-      offset += length2;
+    seek(length4) {
+      pos += length4;
+      offset += length4;
     },
     get pos() {
       return pos;
@@ -52171,8 +54354,8 @@ function asyncIterableReader(asyncIterable) {
 
 // node_modules/@ipld/car/esm/lib/reader-browser.js
 var CarReader = class {
-  constructor(version2, roots, blocks) {
-    this._version = version2;
+  constructor(version3, roots, blocks) {
+    this._version = version3;
     this._roots = roots;
     this._blocks = blocks;
     this._keys = blocks.map((b) => b.cid.toString());
@@ -52215,30 +54398,30 @@ var CarReader = class {
 };
 async function decodeReaderComplete(reader) {
   const decoder2 = createDecoder(reader);
-  const { version: version2, roots } = await decoder2.header();
+  const { version: version3, roots } = await decoder2.header();
   const blocks = [];
   for await (const block of decoder2.blocks()) {
     blocks.push(block);
   }
-  return new CarReader(version2, roots, blocks);
+  return new CarReader(version3, roots, blocks);
 }
 
 // node_modules/@ipld/car/esm/lib/reader.js
-var fsread = (0, import_util2.promisify)(import_fs.default.read);
+var fsread = (0, import_util3.promisify)(import_fs.default.read);
 var CarReader2 = class extends CarReader {
   static async readRaw(fd, blockIndex) {
     const { cid, blockLength, blockOffset } = blockIndex;
     const bytes = new Uint8Array(blockLength);
-    let read2;
+    let read4;
     if (typeof fd === "number") {
-      read2 = (await fsread(fd, bytes, 0, blockLength, blockOffset)).bytesRead;
+      read4 = (await fsread(fd, bytes, 0, blockLength, blockOffset)).bytesRead;
     } else if (typeof fd === "object" && typeof fd.read === "function") {
-      read2 = (await fd.read(bytes, 0, blockLength, blockOffset)).bytesRead;
+      read4 = (await fd.read(bytes, 0, blockLength, blockOffset)).bytesRead;
     } else {
       throw new TypeError("Bad fd");
     }
-    if (read2 !== blockLength) {
-      throw new Error(`Failed to read entire block (${read2} instead of ${blockLength})`);
+    if (read4 !== blockLength) {
+      throw new Error(`Failed to read entire block (${read4} instead of ${blockLength})`);
     }
     return {
       cid,
@@ -52249,8 +54432,8 @@ var CarReader2 = class extends CarReader {
 
 // node_modules/@ipld/car/esm/lib/indexer.js
 var CarIndexer = class {
-  constructor(version2, roots, iterator) {
-    this._version = version2;
+  constructor(version3, roots, iterator) {
+    this._version = version3;
     this._roots = roots;
     this._iterator = iterator;
   }
@@ -52278,14 +54461,14 @@ var CarIndexer = class {
 };
 async function decodeIndexerComplete(reader) {
   const decoder2 = createDecoder(reader);
-  const { version: version2, roots } = await decoder2.header();
-  return new CarIndexer(version2, roots, decoder2.blocksIndex());
+  const { version: version3, roots } = await decoder2.header();
+  return new CarIndexer(version3, roots, decoder2.blocksIndex());
 }
 
 // node_modules/@ipld/car/esm/lib/iterator.js
 var CarIteratorBase = class {
-  constructor(version2, roots, iterable) {
-    this._version = version2;
+  constructor(version3, roots, iterable) {
+    this._version = version3;
     this._roots = roots;
     this._iterable = iterable;
     this._decoded = false;
@@ -52309,12 +54492,12 @@ var CarBlockIterator = class extends CarIteratorBase {
     return this._iterable[Symbol.asyncIterator]();
   }
   static async fromBytes(bytes) {
-    const { version: version2, roots, iterator } = await fromBytes(bytes);
-    return new CarBlockIterator(version2, roots, iterator);
+    const { version: version3, roots, iterator } = await fromBytes(bytes);
+    return new CarBlockIterator(version3, roots, iterator);
   }
   static async fromIterable(asyncIterable) {
-    const { version: version2, roots, iterator } = await fromIterable(asyncIterable);
-    return new CarBlockIterator(version2, roots, iterator);
+    const { version: version3, roots, iterator } = await fromIterable(asyncIterable);
+    return new CarBlockIterator(version3, roots, iterator);
   }
 };
 var CarCIDIterator = class extends CarIteratorBase {
@@ -52341,12 +54524,12 @@ var CarCIDIterator = class extends CarIteratorBase {
     };
   }
   static async fromBytes(bytes) {
-    const { version: version2, roots, iterator } = await fromBytes(bytes);
-    return new CarCIDIterator(version2, roots, iterator);
+    const { version: version3, roots, iterator } = await fromBytes(bytes);
+    return new CarCIDIterator(version3, roots, iterator);
   }
   static async fromIterable(asyncIterable) {
-    const { version: version2, roots, iterator } = await fromIterable(asyncIterable);
-    return new CarCIDIterator(version2, roots, iterator);
+    const { version: version3, roots, iterator } = await fromIterable(asyncIterable);
+    return new CarCIDIterator(version3, roots, iterator);
   }
 };
 async function fromBytes(bytes) {
@@ -52363,9 +54546,9 @@ async function fromIterable(asyncIterable) {
 }
 async function decodeIterator(reader) {
   const decoder2 = createDecoder(reader);
-  const { version: version2, roots } = await decoder2.header();
+  const { version: version3, roots } = await decoder2.header();
   return {
-    version: version2,
+    version: version3,
     roots,
     iterator: decoder2.blocks()
   };
@@ -52373,16 +54556,16 @@ async function decodeIterator(reader) {
 
 // node_modules/@ipld/car/esm/lib/writer.js
 var import_fs2 = __toESM(require("fs"), 1);
-var import_util3 = require("util");
+var import_util4 = require("util");
 
 // node_modules/@ipld/car/esm/lib/encoder.js
-var import_varint3 = __toESM(require_varint(), 1);
+var import_varint5 = __toESM(require_varint(), 1);
 function createHeader(roots) {
-  const headerBytes = encode5({
+  const headerBytes = encode15({
     version: 1,
     roots
   });
-  const varintBytes = import_varint3.default.encode(headerBytes.length);
+  const varintBytes = import_varint5.default.encode(headerBytes.length);
   const header = new Uint8Array(varintBytes.length + headerBytes.length);
   header.set(varintBytes, 0);
   header.set(headerBytes, varintBytes.length);
@@ -52396,7 +54579,7 @@ function createEncoder(writer) {
     },
     async writeBlock(block) {
       const { cid, bytes } = block;
-      await writer.write(new Uint8Array(import_varint3.default.encode(cid.bytes.length + bytes.length)));
+      await writer.write(new Uint8Array(import_varint5.default.encode(cid.bytes.length + bytes.length)));
       await writer.write(cid.bytes);
       if (bytes.length) {
         await writer.write(bytes);
@@ -52411,7 +54594,7 @@ function createEncoder(writer) {
 // node_modules/@ipld/car/esm/lib/iterator-channel.js
 function noop() {
 }
-function create3() {
+function create5() {
   const chunkQueue = [];
   let drainer = null;
   let drainerResolver = noop;
@@ -52495,7 +54678,7 @@ var CarWriter = class {
     if (this._ended) {
       throw new Error("Already closed");
     }
-    const cid = CID.asCID(block.cid);
+    const cid = CID3.asCID(block.cid);
     if (!cid) {
       throw new TypeError("Can only write {cid, bytes} objects");
     }
@@ -52557,7 +54740,7 @@ var CarWriterOut = class {
   }
 };
 function encodeWriter() {
-  const iw = create3();
+  const iw = create5();
   const { writer, iterator } = iw;
   const encoder2 = createEncoder(writer);
   return {
@@ -52570,7 +54753,7 @@ function toRoots(roots) {
     return [];
   }
   if (!Array.isArray(roots)) {
-    const cid = CID.asCID(roots);
+    const cid = CID3.asCID(roots);
     if (!cid) {
       throw new TypeError("roots must be a single CID or an array of CIDs");
     }
@@ -52578,7 +54761,7 @@ function toRoots(roots) {
   }
   const _roots = [];
   for (const root of roots) {
-    const _root = CID.asCID(root);
+    const _root = CID3.asCID(root);
     if (!_root) {
       throw new TypeError("roots must be a single CID or an array of CIDs");
     }
@@ -52588,8 +54771,8 @@ function toRoots(roots) {
 }
 
 // node_modules/@ipld/car/esm/lib/writer.js
-var fsread2 = (0, import_util3.promisify)(import_fs2.default.read);
-var fswrite = (0, import_util3.promisify)(import_fs2.default.write);
+var fsread2 = (0, import_util4.promisify)(import_fs2.default.read);
+var fswrite = (0, import_util4.promisify)(import_fs2.default.write);
 var CarWriter2 = class extends CarWriter {
   static async updateRootsInFile(fd, roots) {
     const chunkSize = 256;
@@ -52605,9 +54788,9 @@ var CarWriter2 = class extends CarWriter {
     }
     const fdReader = chunkReader(async () => {
       bytes = new Uint8Array(chunkSize);
-      const read2 = await readChunk();
-      offset += read2;
-      return read2 < chunkSize ? bytes.subarray(0, read2) : bytes;
+      const read4 = await readChunk();
+      offset += read4;
+      return read4 < chunkSize ? bytes.subarray(0, read4) : bytes;
     });
     await readHeader(fdReader);
     const newHeader = createHeader(roots);
@@ -52627,7 +54810,7 @@ var import_it_parallel_batch4 = __toESM(require_it_parallel_batch(), 1);
 
 // node_modules/ipfs-car/node_modules/ipfs-unixfs-importer/esm/src/options.js
 async function hamtHashFn2(buf2) {
-  return (await murmur3128.encode(buf2)).slice(0, 8).reverse();
+  return (await murmur31282.encode(buf2)).slice(0, 8).reverse();
 }
 var defaultOptions2 = {
   chunker: "fixed",
@@ -52635,7 +54818,7 @@ var defaultOptions2 = {
   rawLeaves: false,
   onlyHash: false,
   reduceSingleLeafToSelf: true,
-  hasher: sha256,
+  hasher: sha2562,
   leafType: "file",
   cidVersion: 0,
   progress: () => () => {
@@ -52689,7 +54872,7 @@ var Data3 = $root3.Data = (() => {
   Data4.prototype.fanout = $util3.Long ? $util3.Long.fromBits(0, 0, true) : 0;
   Data4.prototype.mode = 0;
   Data4.prototype.mtime = null;
-  Data4.encode = function encode11(m, w) {
+  Data4.encode = function encode18(m, w) {
     if (!w)
       w = $Writer3.create();
     w.uint32(8).int32(m.Type);
@@ -52711,7 +54894,7 @@ var Data3 = $root3.Data = (() => {
       $root3.UnixTime.encode(m.mtime, w.uint32(66).fork()).ldelim();
     return w;
   };
-  Data4.decode = function decode12(r, l) {
+  Data4.decode = function decode23(r, l) {
     if (!(r instanceof $Reader3))
       r = $Reader3.create(r);
     var c = l === void 0 ? r.len : r.pos + l, m = new $root3.Data();
@@ -52949,7 +55132,7 @@ var UnixTime3 = $root3.UnixTime = (() => {
   }
   UnixTime4.prototype.Seconds = $util3.Long ? $util3.Long.fromBits(0, 0, false) : 0;
   UnixTime4.prototype.FractionalNanoseconds = 0;
-  UnixTime4.encode = function encode11(m, w) {
+  UnixTime4.encode = function encode18(m, w) {
     if (!w)
       w = $Writer3.create();
     w.uint32(8).int64(m.Seconds);
@@ -52957,7 +55140,7 @@ var UnixTime3 = $root3.UnixTime = (() => {
       w.uint32(21).fixed32(m.FractionalNanoseconds);
     return w;
   };
-  UnixTime4.decode = function decode12(r, l) {
+  UnixTime4.decode = function decode23(r, l) {
     if (!(r instanceof $Reader3))
       r = $Reader3.create(r);
     var c = l === void 0 ? r.len : r.pos + l, m = new $root3.UnixTime();
@@ -53035,14 +55218,14 @@ var Metadata3 = $root3.Metadata = (() => {
     }
   }
   Metadata4.prototype.MimeType = "";
-  Metadata4.encode = function encode11(m, w) {
+  Metadata4.encode = function encode18(m, w) {
     if (!w)
       w = $Writer3.create();
     if (m.MimeType != null && Object.hasOwnProperty.call(m, "MimeType"))
       w.uint32(10).string(m.MimeType);
     return w;
   };
-  Metadata4.decode = function decode12(r, l) {
+  Metadata4.decode = function decode23(r, l) {
     if (!(r instanceof $Reader3))
       r = $Reader3.create(r);
     var c = l === void 0 ? r.len : r.pos + l, m = new $root3.Metadata();
@@ -53295,19 +55478,19 @@ var UnixFS3 = class {
 // node_modules/ipfs-car/node_modules/ipfs-unixfs-importer/esm/src/utils/persist.js
 var persist2 = async (buffer2, blockstore3, options) => {
   if (!options.codec) {
-    options.codec = src_exports;
+    options.codec = src_exports3;
   }
   if (!options.hasher) {
-    options.hasher = sha256;
+    options.hasher = sha2562;
   }
   if (options.cidVersion === void 0) {
     options.cidVersion = 1;
   }
-  if (options.codec === src_exports && options.hasher !== sha256) {
+  if (options.codec === src_exports3 && options.hasher !== sha2562) {
     options.cidVersion = 1;
   }
   const multihash = await options.hasher.digest(buffer2);
-  const cid = CID.create(options.cidVersion, options.codec.code, multihash);
+  const cid = CID3.create(options.cidVersion, options.codec.code, multihash);
   if (!options.onlyHash) {
     await blockstore3.put(cid, buffer2, { signal: options.signal });
   }
@@ -53322,7 +55505,7 @@ var dirBuilder2 = async (item, blockstore3, options) => {
     mtime: item.mtime,
     mode: item.mode
   });
-  const buffer2 = encode3(prepare({ Data: unixfs.marshal() }));
+  const buffer2 = encode11(prepare2({ Data: unixfs.marshal() }));
   const cid = await persist_default2(buffer2, blockstore3, options);
   const path3 = item.path;
   return {
@@ -53474,20 +55657,20 @@ async function* bufferImporter2(file, block, options) {
       options.progress(buffer2.length, file.path);
       let unixfs;
       const opts2 = {
-        codec: src_exports,
+        codec: src_exports3,
         cidVersion: options.cidVersion,
         hasher: options.hasher,
         onlyHash: options.onlyHash
       };
       if (options.rawLeaves) {
-        opts2.codec = raw_exports;
+        opts2.codec = raw_exports3;
         opts2.cidVersion = 1;
       } else {
         unixfs = new UnixFS3({
           type: options.leafType,
           data: buffer2
         });
-        buffer2 = encode3({
+        buffer2 = encode11({
           Data: unixfs.marshal(),
           Links: []
         });
@@ -53545,10 +55728,10 @@ var reduce2 = (file, blockstore3, options) => {
           mode: file.mode,
           data: buffer3
         });
-        buffer3 = encode3(prepare({ Data: leaf.unixfs.marshal() }));
+        buffer3 = encode11(prepare2({ Data: leaf.unixfs.marshal() }));
         leaf.cid = await persist_default2(buffer3, blockstore3, {
           ...options,
-          codec: src_exports,
+          codec: src_exports3,
           hasher: options.hasher,
           cidVersion: options.cidVersion
         });
@@ -53567,7 +55750,7 @@ var reduce2 = (file, blockstore3, options) => {
       mode: file.mode
     });
     const links2 = leaves.filter((leaf) => {
-      if (leaf.cid.code === code3 && leaf.size) {
+      if (leaf.cid.code === code7 && leaf.size) {
         return true;
       }
       if (leaf.unixfs && !leaf.unixfs.data && leaf.unixfs.fileSize()) {
@@ -53575,7 +55758,7 @@ var reduce2 = (file, blockstore3, options) => {
       }
       return Boolean(leaf.unixfs && leaf.unixfs.data && leaf.unixfs.data.length);
     }).map((leaf) => {
-      if (leaf.cid.code === code3) {
+      if (leaf.cid.code === code7) {
         f.addBlockSize(leaf.size);
         return {
           Name: "",
@@ -53598,7 +55781,7 @@ var reduce2 = (file, blockstore3, options) => {
       Data: f.marshal(),
       Links: links2
     };
-    const buffer2 = encode3(prepare(node));
+    const buffer2 = encode11(prepare2(node));
     const cid = await persist_default2(buffer2, blockstore3, options);
     return {
       cid,
@@ -53715,7 +55898,7 @@ async function* validateChunks2(source) {
       throw (0, import_err_code19.default)(new Error("Content was invalid"), "ERR_INVALID_CONTENT");
     }
     if (typeof content === "string" || content instanceof String) {
-      yield fromString3(content.toString());
+      yield fromString6(content.toString());
     } else if (Array.isArray(content)) {
       yield Uint8Array.from(content);
     } else if (content instanceof Uint8Array) {
@@ -53813,9 +55996,9 @@ var Dir2 = class {
     this.cid = void 0;
     this.size = void 0;
   }
-  async put(name5, value) {
+  async put(name7, value) {
   }
-  get(name5) {
+  get(name7) {
     return Promise.resolve(this);
   }
   async *eachChildSeries() {
@@ -53831,13 +56014,13 @@ var DirFlat2 = class extends dir_default4 {
     super(props, options);
     this._children = {};
   }
-  async put(name5, value) {
+  async put(name7, value) {
     this.cid = void 0;
     this.size = void 0;
-    this._children[name5] = value;
+    this._children[name7] = value;
   }
-  get(name5) {
-    return Promise.resolve(this._children[name5]);
+  get(name7) {
+    return Promise.resolve(this._children[name7]);
   }
   childCount() {
     return Object.keys(this._children).length;
@@ -53886,7 +56069,7 @@ var DirFlat2 = class extends dir_default4 {
       Data: unixfs.marshal(),
       Links: links2
     };
-    const buffer2 = encode3(prepare(node));
+    const buffer2 = encode11(prepare2(node));
     const cid = await persist_default2(buffer2, block, this.options);
     const size = buffer2.length + node.Links.reduce((acc, curr) => acc + (curr.Tsize == null ? 0 : curr.Tsize), 0);
     this.cid = cid;
@@ -53911,11 +56094,11 @@ var DirSharded2 = class extends dir_default4 {
       bits: options.hamtBucketBits
     });
   }
-  async put(name5, value) {
-    await this._bucket.put(name5, value);
+  async put(name7, value) {
+    await this._bucket.put(name7, value);
   }
-  get(name5) {
-    return this._bucket.get(name5);
+  get(name7) {
+    return this._bucket.get(name7);
   }
   childCount() {
     return this._bucket.leafCount();
@@ -54010,7 +56193,7 @@ async function* flush2(bucket, blockstore3, shardRoot, options) {
     Data: dir.marshal(),
     Links: links2
   };
-  const buffer2 = encode3(prepare(node));
+  const buffer2 = encode11(prepare2(node));
   const cid = await persist_default2(buffer2, blockstore3, options);
   const size = buffer2.length + childrenSize;
   yield {
@@ -54239,7 +56422,7 @@ function toBytes(chunk) {
   if (Array.isArray(chunk)) {
     return Uint8Array.from(chunk);
   }
-  return fromString3(chunk.toString());
+  return fromString6(chunk.toString());
 }
 
 // node_modules/ipfs-car/node_modules/ipfs-core-utils/esm/src/files/normalise-candidate-single.js
@@ -54388,7 +56571,7 @@ var MemoryBlockStore = class extends BaseBlockstore {
   }
   async *blocks() {
     for (const [cidStr, bytes] of this.store.entries()) {
-      yield { cid: CID.parse(cidStr), bytes };
+      yield { cid: CID3.parse(cidStr), bytes };
     }
   }
   put(cid, bytes) {
@@ -54416,7 +56599,7 @@ var unixfsImporterOptionsDefault = {
   cidVersion: 1,
   chunker: "fixed",
   maxChunkSize: 262144,
-  hasher: sha256,
+  hasher: sha2562,
   rawLeaves: true,
   wrapWithDirectory: true,
   maxChildrenPerNode: 174
@@ -54546,7 +56729,7 @@ var import_err_code26 = __toESM(require_err_code(), 1);
 // node_modules/ipfs-car/node_modules/ipfs-unixfs-exporter/esm/src/utils/find-cid-in-shard.js
 var import_hamt_sharding4 = __toESM(require_src6(), 1);
 var hashFn2 = async function(buf2) {
-  return (await murmur3128.encode(buf2)).slice(0, 8).reverse();
+  return (await murmur31282.encode(buf2)).slice(0, 8).reverse();
 };
 var addLinksToHamtBucket2 = (links2, bucket, rootBucket) => {
   return Promise.all(links2.map((link) => {
@@ -54576,7 +56759,7 @@ var toBucketPath2 = (position) => {
   path3.push(bucket);
   return path3.reverse();
 };
-var findShardCid2 = async (node, name5, blockstore3, context, options) => {
+var findShardCid2 = async (node, name7, blockstore3, context, options) => {
   if (!context) {
     const rootBucket = (0, import_hamt_sharding4.createHAMT)({ hashFn: hashFn2 });
     context = {
@@ -54586,7 +56769,7 @@ var findShardCid2 = async (node, name5, blockstore3, context, options) => {
     };
   }
   await addLinksToHamtBucket2(node.Links, context.lastBucket, context.rootBucket);
-  const position = await context.rootBucket._findNewBucketAndPos(name5);
+  const position = await context.rootBucket._findNewBucketAndPos(name7);
   let prefix = toPrefix2(position.pos);
   const bucketPath = toBucketPath2(position);
   if (bucketPath.length > context.hamtDepth) {
@@ -54602,7 +56785,7 @@ var findShardCid2 = async (node, name5, blockstore3, context, options) => {
     if (entryPrefix !== prefix) {
       return false;
     }
-    if (entryName && entryName !== name5) {
+    if (entryName && entryName !== name7) {
       return false;
     }
     return true;
@@ -54610,13 +56793,13 @@ var findShardCid2 = async (node, name5, blockstore3, context, options) => {
   if (!link) {
     return null;
   }
-  if (link.Name != null && link.Name.substring(2) === name5) {
+  if (link.Name != null && link.Name.substring(2) === name7) {
     return link.Hash;
   }
   context.hamtDepth++;
   const block = await blockstore3.get(link.Hash, options);
-  node = decode5(block);
-  return findShardCid2(node, name5, blockstore3, context, options);
+  node = decode17(block);
+  return findShardCid2(node, name7, blockstore3, context, options);
 };
 var find_cid_in_shard_default2 = findShardCid2;
 
@@ -54639,7 +56822,7 @@ var extract_data_from_block_default2 = extractDataFromBlock2;
 
 // node_modules/ipfs-car/node_modules/ipfs-unixfs-exporter/esm/src/utils/validate-offset-and-length.js
 var import_err_code24 = __toESM(require_err_code(), 1);
-var validateOffsetAndLength2 = (size, offset, length2) => {
+var validateOffsetAndLength2 = (size, offset, length4) => {
   if (!offset) {
     offset = 0;
   }
@@ -54649,18 +56832,18 @@ var validateOffsetAndLength2 = (size, offset, length2) => {
   if (offset > size) {
     throw (0, import_err_code24.default)(new Error("Offset must be less than the file size"), "ERR_INVALID_PARAMS");
   }
-  if (!length2 && length2 !== 0) {
-    length2 = size - offset;
+  if (!length4 && length4 !== 0) {
+    length4 = size - offset;
   }
-  if (length2 < 0) {
+  if (length4 < 0) {
     throw (0, import_err_code24.default)(new Error("Length must be greater than or equal to 0"), "ERR_INVALID_PARAMS");
   }
-  if (offset + length2 > size) {
-    length2 = size - offset;
+  if (offset + length4 > size) {
+    length4 = size - offset;
   }
   return {
     offset,
-    length: length2
+    length: length4
   };
 };
 var validate_offset_and_length_default2 = validateOffsetAndLength2;
@@ -54700,14 +56883,14 @@ async function* emitBytes(blockstore3, node, start, end, streamPosition = 0, opt
       const block = await blockstore3.get(childLink.Hash, { signal: options.signal });
       let child;
       switch (childLink.Hash.code) {
-        case code:
-          child = await decode5(block);
+        case code6:
+          child = await decode17(block);
           break;
-        case code3:
+        case code7:
           child = block;
           break;
-        case code2:
-          child = await decode7(block);
+        case code9:
+          child = await decode20(block);
           break;
         default:
           throw Error(`Unsupported codec: ${childLink.Hash.code}`);
@@ -54727,9 +56910,9 @@ var fileContent2 = (cid, node, unixfs, path3, resolve9, depth, blockstore3) => {
     if (fileSize === void 0) {
       throw new Error("File was a directory");
     }
-    const { offset, length: length2 } = validate_offset_and_length_default2(fileSize, options.offset, options.length);
+    const { offset, length: length4 } = validate_offset_and_length_default2(fileSize, options.offset, options.length);
     const start = offset;
-    const end = offset + length2;
+    const end = offset + length4;
     return emitBytes(blockstore3, node, start, end, 0, options);
   }
   return yieldFileContent;
@@ -54740,8 +56923,8 @@ var file_default4 = fileContent2;
 var directoryContent2 = (cid, node, unixfs, path3, resolve9, depth, blockstore3) => {
   async function* yieldDirectoryContent(options = {}) {
     const offset = options.offset || 0;
-    const length2 = options.length || node.Links.length;
-    const links2 = node.Links.slice(offset, length2);
+    const length4 = options.length || node.Links.length;
+    const links2 = node.Links.slice(offset, length4);
     for (const link of links2) {
       const result = await resolve9(link.Hash, link.Name || "", `${path3}/${link.Name || ""}`, [], depth + 1, blockstore3, options);
       if (result.entry) {
@@ -54763,13 +56946,13 @@ var hamtShardedDirectoryContent2 = (cid, node, unixfs, path3, resolve9, depth, b
 async function* listDirectory2(node, path3, resolve9, depth, blockstore3, options) {
   const links2 = node.Links;
   for (const link of links2) {
-    const name5 = link.Name != null ? link.Name.substring(2) : null;
-    if (name5) {
-      const result = await resolve9(link.Hash, name5, `${path3}/${name5}`, [], depth + 1, blockstore3, options);
+    const name7 = link.Name != null ? link.Name.substring(2) : null;
+    if (name7) {
+      const result = await resolve9(link.Hash, name7, `${path3}/${name7}`, [], depth + 1, blockstore3, options);
       yield result.entry;
     } else {
       const block = await blockstore3.get(link.Hash);
-      node = decode5(block);
+      node = decode17(block);
       for await (const file of listDirectory2(node, path3, resolve9, depth, blockstore3, options)) {
         yield file;
       }
@@ -54779,8 +56962,8 @@ async function* listDirectory2(node, path3, resolve9, depth, blockstore3, option
 var hamt_sharded_directory_default2 = hamtShardedDirectoryContent2;
 
 // node_modules/ipfs-car/node_modules/ipfs-unixfs-exporter/esm/src/resolvers/unixfs-v1/index.js
-var findLinkCid2 = (node, name5) => {
-  const link = node.Links.find((link2) => link2.Name === name5);
+var findLinkCid2 = (node, name7) => {
+  const link = node.Links.find((link2) => link2.Name === name7);
   return link && link.Hash;
 };
 var contentExporters2 = {
@@ -54795,13 +56978,13 @@ var contentExporters2 = {
     return () => [];
   }
 };
-var unixFsResolver2 = async (cid, name5, path3, toResolve, resolve9, depth, blockstore3, options) => {
+var unixFsResolver2 = async (cid, name7, path3, toResolve, resolve9, depth, blockstore3, options) => {
   const block = await blockstore3.get(cid, options);
-  const node = decode5(block);
+  const node = decode17(block);
   let unixfs;
   let next;
-  if (!name5) {
-    name5 = cid.toString();
+  if (!name7) {
+    name7 = cid.toString();
   }
   if (node.Data == null) {
     throw (0, import_err_code26.default)(new Error("no data in PBNode"), "ERR_NOT_UNIXFS");
@@ -54812,7 +56995,7 @@ var unixFsResolver2 = async (cid, name5, path3, toResolve, resolve9, depth, bloc
     throw (0, import_err_code26.default)(err, "ERR_NOT_UNIXFS");
   }
   if (!path3) {
-    path3 = name5;
+    path3 = name7;
   }
   if (toResolve.length) {
     let linkCid;
@@ -54836,7 +57019,7 @@ var unixFsResolver2 = async (cid, name5, path3, toResolve, resolve9, depth, bloc
   return {
     entry: {
       type: unixfs.isDirectory() ? "directory" : "file",
-      name: name5,
+      name: name7,
       path: path3,
       cid,
       content: contentExporters2[unixfs.type](cid, node, unixfs, path3, resolve9, depth, blockstore3),
@@ -54854,12 +57037,12 @@ var unixfs_v1_default2 = unixFsResolver2;
 var import_err_code27 = __toESM(require_err_code(), 1);
 var rawContent3 = (node) => {
   async function* contentGenerator(options = {}) {
-    const { offset, length: length2 } = validate_offset_and_length_default2(node.length, options.offset, options.length);
-    yield extract_data_from_block_default2(node, 0, offset, offset + length2);
+    const { offset, length: length4 } = validate_offset_and_length_default2(node.length, options.offset, options.length);
+    yield extract_data_from_block_default2(node, 0, offset, offset + length4);
   }
   return contentGenerator;
 };
-var resolve5 = async (cid, name5, path3, toResolve, resolve9, depth, blockstore3, options) => {
+var resolve5 = async (cid, name7, path3, toResolve, resolve9, depth, blockstore3, options) => {
   if (toResolve.length) {
     throw (0, import_err_code27.default)(new Error(`No link named ${path3} found in raw node ${cid}`), "ERR_NOT_FOUND");
   }
@@ -54867,7 +57050,7 @@ var resolve5 = async (cid, name5, path3, toResolve, resolve9, depth, blockstore3
   return {
     entry: {
       type: "raw",
-      name: name5,
+      name: name7,
       path: path3,
       cid,
       content: rawContent3(block),
@@ -54881,9 +57064,9 @@ var raw_default2 = resolve5;
 
 // node_modules/ipfs-car/node_modules/ipfs-unixfs-exporter/esm/src/resolvers/dag-cbor.js
 var import_err_code28 = __toESM(require_err_code(), 1);
-var resolve6 = async (cid, name5, path3, toResolve, resolve9, depth, blockstore3, options) => {
+var resolve6 = async (cid, name7, path3, toResolve, resolve9, depth, blockstore3, options) => {
   const block = await blockstore3.get(cid);
-  const object = decode7(block);
+  const object = decode20(block);
   let subObject = object;
   let subPath = path3;
   while (toResolve.length) {
@@ -54891,12 +57074,12 @@ var resolve6 = async (cid, name5, path3, toResolve, resolve9, depth, blockstore3
     if (prop in subObject) {
       toResolve.shift();
       subPath = `${subPath}/${prop}`;
-      const subObjectCid = CID.asCID(subObject[prop]);
+      const subObjectCid = CID3.asCID(subObject[prop]);
       if (subObjectCid) {
         return {
           entry: {
             type: "object",
-            name: name5,
+            name: name7,
             path: path3,
             cid,
             node: block,
@@ -54922,7 +57105,7 @@ var resolve6 = async (cid, name5, path3, toResolve, resolve9, depth, blockstore3
   return {
     entry: {
       type: "object",
-      name: name5,
+      name: name7,
       path: path3,
       cid,
       node: block,
@@ -54940,20 +57123,20 @@ var dag_cbor_default2 = resolve6;
 var import_err_code29 = __toESM(require_err_code(), 1);
 var rawContent4 = (node) => {
   async function* contentGenerator(options = {}) {
-    const { offset, length: length2 } = validate_offset_and_length_default2(node.length, options.offset, options.length);
-    yield extract_data_from_block_default2(node, 0, offset, offset + length2);
+    const { offset, length: length4 } = validate_offset_and_length_default2(node.length, options.offset, options.length);
+    yield extract_data_from_block_default2(node, 0, offset, offset + length4);
   }
   return contentGenerator;
 };
-var resolve7 = async (cid, name5, path3, toResolve, resolve9, depth, blockstore3, options) => {
+var resolve7 = async (cid, name7, path3, toResolve, resolve9, depth, blockstore3, options) => {
   if (toResolve.length) {
     throw (0, import_err_code29.default)(new Error(`No link named ${path3} found in raw node ${cid}`), "ERR_NOT_FOUND");
   }
-  const buf2 = await decode3(cid.multihash.bytes);
+  const buf2 = await decode15(cid.multihash.bytes);
   return {
     entry: {
       type: "identity",
-      name: name5,
+      name: name7,
       path: path3,
       cid,
       content: rawContent4(buf2.digest),
@@ -54967,17 +57150,17 @@ var identity_default2 = resolve7;
 
 // node_modules/ipfs-car/node_modules/ipfs-unixfs-exporter/esm/src/resolvers/index.js
 var resolvers2 = {
-  [code]: unixfs_v1_default2,
-  [code3]: raw_default2,
-  [code2]: dag_cbor_default2,
-  [identity.code]: identity_default2
+  [code6]: unixfs_v1_default2,
+  [code7]: raw_default2,
+  [code9]: dag_cbor_default2,
+  [identity5.code]: identity_default2
 };
-function resolve8(cid, name5, path3, toResolve, depth, blockstore3, options) {
+function resolve8(cid, name7, path3, toResolve, depth, blockstore3, options) {
   const resolver = resolvers2[cid.code];
   if (!resolver) {
     throw (0, import_err_code30.default)(new Error(`No resolver for code ${cid.code}`), "ERR_NO_RESOLVER");
   }
-  return resolver(cid, name5, path3, toResolve, resolve8, depth, blockstore3, options);
+  return resolver(cid, name7, path3, toResolve, resolve8, depth, blockstore3, options);
 }
 var resolvers_default2 = resolve8;
 
@@ -54989,11 +57172,11 @@ var toPathComponents4 = (path3 = "") => {
 var cidAndRest2 = (path3) => {
   if (path3 instanceof Uint8Array) {
     return {
-      cid: CID.decode(path3),
+      cid: CID3.decode(path3),
       toResolve: []
     };
   }
-  const cid = CID.asCID(path3);
+  const cid = CID3.asCID(path3);
   if (cid) {
     return {
       cid,
@@ -55006,7 +57189,7 @@ var cidAndRest2 = (path3) => {
     }
     const output = toPathComponents4(path3);
     return {
-      cid: CID.parse(output[0]),
+      cid: CID3.parse(output[0]),
       toResolve: output.slice(1)
     };
   }
@@ -55014,11 +57197,11 @@ var cidAndRest2 = (path3) => {
 };
 async function* walkPath2(path3, blockstore3, options = {}) {
   let { cid, toResolve } = cidAndRest2(path3);
-  let name5 = cid.toString();
-  let entryPath = name5;
+  let name7 = cid.toString();
+  let entryPath = name7;
   const startingDepth = toResolve.length;
   while (true) {
-    const result = await resolvers_default2(cid, name5, entryPath, toResolve, startingDepth, blockstore3, options);
+    const result = await resolvers_default2(cid, name7, entryPath, toResolve, startingDepth, blockstore3, options);
     if (!result.entry && !result.next) {
       throw (0, import_err_code31.default)(new Error(`Could not resolve ${path3}`), "ERR_NOT_FOUND");
     }
@@ -55030,7 +57213,7 @@ async function* walkPath2(path3, blockstore3, options = {}) {
     }
     toResolve = result.next.toResolve;
     cid = result.next.cid;
-    name5 = result.next.name;
+    name7 = result.next.name;
     entryPath = result.next.path;
   }
 }
@@ -55066,7 +57249,7 @@ async function* recursive2(path3, blockstore3, options = {}) {
 }
 
 // node_modules/uint8arrays/esm/src/equals.js
-function equals3(a, b) {
+function equals7(a, b) {
   if (a === b) {
     return true;
   }
@@ -55110,8 +57293,8 @@ var VerifyingGetOnlyBlockStore = class extends BaseBlockstore {
   }
 };
 async function isValid({ cid, bytes }) {
-  const hash = await sha256.digest(bytes);
-  return equals3(hash.digest, cid.multihash.digest);
+  const hash = await sha2562.digest(bytes);
+  return equals7(hash.digest, cid.multihash.digest);
 }
 
 // node_modules/ipfs-car/dist/esm/unpack/index.js
@@ -55134,19 +57317,19 @@ function asAsyncIterable(readable) {
 }
 
 // node_modules/multiformats/esm/src/block.js
-var readonly2 = ({ enumerable = true, configurable = false } = {}) => ({
+var readonly3 = ({ enumerable = true, configurable = false } = {}) => ({
   enumerable,
   configurable,
   writable: false
 });
-var links = function* (source, base3) {
+var links = function* (source, base4) {
   if (source == null)
     return;
   if (source instanceof Uint8Array)
     return;
   for (const [key, value] of Object.entries(source)) {
     const path3 = [
-      ...base3,
+      ...base4,
       key
     ];
     if (value != null && typeof value === "object") {
@@ -55156,7 +57339,7 @@ var links = function* (source, base3) {
             ...path3,
             index
           ];
-          const cid = CID.asCID(element);
+          const cid = CID3.asCID(element);
           if (cid) {
             yield [
               elementPath.join("/"),
@@ -55167,7 +57350,7 @@ var links = function* (source, base3) {
           }
         }
       } else {
-        const cid = CID.asCID(value);
+        const cid = CID3.asCID(value);
         if (cid) {
           yield [
             path3.join("/"),
@@ -55180,16 +57363,16 @@ var links = function* (source, base3) {
     }
   }
 };
-var tree = function* (source, base3) {
+var tree = function* (source, base4) {
   if (source == null)
     return;
   for (const [key, value] of Object.entries(source)) {
     const path3 = [
-      ...base3,
+      ...base4,
       key
     ];
     yield path3.join("/");
-    if (value != null && !(value instanceof Uint8Array) && typeof value === "object" && !CID.asCID(value)) {
+    if (value != null && !(value instanceof Uint8Array) && typeof value === "object" && !CID3.asCID(value)) {
       if (Array.isArray(value)) {
         for (const [index, element] of value.entries()) {
           const elementPath = [
@@ -55197,7 +57380,7 @@ var tree = function* (source, base3) {
             index
           ];
           yield elementPath.join("/");
-          if (typeof element === "object" && !CID.asCID(element)) {
+          if (typeof element === "object" && !CID3.asCID(element)) {
             yield* tree(element, elementPath);
           }
         }
@@ -55214,7 +57397,7 @@ var get = (source, path3) => {
     if (node == null) {
       throw new Error(`Object has no property at ${path3.slice(0, index + 1).map((part) => `[${JSON.stringify(part)}]`).join("")}`);
     }
-    const cid = CID.asCID(node);
+    const cid = CID3.asCID(node);
     if (cid) {
       return {
         value: cid,
@@ -55233,10 +57416,10 @@ var Block = class {
     this.value = value;
     this.asBlock = this;
     Object.defineProperties(this, {
-      cid: readonly2(),
-      bytes: readonly2(),
-      value: readonly2(),
-      asBlock: readonly2()
+      cid: readonly3(),
+      bytes: readonly3(),
+      value: readonly3(),
+      asBlock: readonly3()
     });
   }
   links() {
@@ -55253,24 +57436,24 @@ var Block = class {
 // node_modules/carbites/node_modules/@ipld/dag-cbor/esm/index.js
 var esm_exports2 = {};
 __export(esm_exports2, {
-  code: () => code5,
-  decode: () => decode10,
-  encode: () => encode9,
-  name: () => name4
+  code: () => code10,
+  decode: () => decode21,
+  encode: () => encode16,
+  name: () => name6
 });
-var CID_CBOR_TAG2 = 42;
+var CID_CBOR_TAG3 = 42;
 function cidEncoder2(obj) {
   if (obj.asCID !== obj) {
     return null;
   }
-  const cid = CID.asCID(obj);
+  const cid = CID3.asCID(obj);
   if (!cid) {
     return null;
   }
   const bytes = new Uint8Array(cid.bytes.byteLength + 1);
   bytes.set(cid.bytes, 1);
   return [
-    new Token(Type.tag, CID_CBOR_TAG2),
+    new Token(Type.tag, CID_CBOR_TAG3),
     new Token(Type.bytes, bytes)
   ];
 }
@@ -55294,13 +57477,13 @@ var encodeOptions2 = {
     number: numberEncoder2
   }
 };
-function cidDecoder2(bytes) {
+function cidDecoder3(bytes) {
   if (bytes[0] !== 0) {
     throw new Error("Invalid CID for CBOR tag 42; expected leading 0x00");
   }
-  return CID.decode(bytes.subarray(1));
+  return CID3.decode(bytes.subarray(1));
 }
-var decodeOptions2 = {
+var decodeOptions3 = {
   allowIndefinite: false,
   allowUndefined: false,
   allowNaN: false,
@@ -55310,11 +57493,11 @@ var decodeOptions2 = {
   useMaps: false,
   tags: []
 };
-decodeOptions2.tags[CID_CBOR_TAG2] = cidDecoder2;
-var name4 = "dag-cbor";
-var code5 = 113;
-var encode9 = (node) => encode4(node, encodeOptions2);
-var decode10 = (data) => decode6(data, decodeOptions2);
+decodeOptions3.tags[CID_CBOR_TAG3] = cidDecoder3;
+var name6 = "dag-cbor";
+var code10 = 113;
+var encode16 = (node) => encode3(node, encodeOptions2);
+var decode21 = (data) => decode6(data, decodeOptions3);
 
 // node_modules/carbites/esm/lib/treewalk/splitter.js
 var TreewalkCarSplitter = class {
@@ -55325,8 +57508,8 @@ var TreewalkCarSplitter = class {
     this._reader = reader;
     this._targetSize = targetSize;
     this._decoders = [
-      src_exports,
-      raw_exports,
+      src_exports3,
+      raw_exports3,
       esm_exports2,
       ...options.decoders || []
     ];
@@ -55407,10 +57590,10 @@ function newCar(parents) {
 
 // node_modules/files-from-path/esm/src/index.js
 var import_graceful_fs = __toESM(require_graceful_fs(), 1);
-var import_util4 = require("util");
+var import_util5 = require("util");
 var import_it_glob = __toESM(require_it_glob(), 1);
 var import_err_code32 = __toESM(require_err_code(), 1);
-var fsStat = (0, import_util4.promisify)(import_graceful_fs.default.stat);
+var fsStat = (0, import_util5.promisify)(import_graceful_fs.default.stat);
 
 // node_modules/web3.storage/src/lib.js
 var import_throttled_queue = __toESM(require_throttledQueue(), 1);
@@ -55423,11 +57606,11 @@ var import_data_uri_to_buffer = __toESM(require_src7(), 1);
 
 // node_modules/@web-std/fetch/src/body.js
 var import_stream4 = __toESM(require("stream"), 1);
-var import_util6 = require("util");
+var import_util7 = require("util");
 
 // node_modules/web-encoding/src/lib.mjs
-var Encoder2 = TextEncoder;
-var Decoder2 = TextDecoder;
+var Encoder4 = TextEncoder;
+var Decoder4 = TextDecoder;
 
 // node_modules/@web-std/stream/src/lib.node.js
 var import_stream = __toESM(require_stream(), 1);
@@ -55456,7 +57639,7 @@ var WebBlob = class Blob2 {
     let size = 0;
     for (const part of init) {
       if (typeof part === "string") {
-        const bytes = new Encoder2().encode(part);
+        const bytes = new Encoder4().encode(part);
         parts.push(bytes);
         size += bytes.byteLength;
       } else if (part instanceof WebBlob) {
@@ -55473,7 +57656,7 @@ var WebBlob = class Blob2 {
         parts.push(new Uint8Array(buffer2, byteOffset, byteLength));
         size += byteLength;
       } else {
-        const bytes = new Encoder2().encode(String(part));
+        const bytes = new Encoder4().encode(String(part));
         parts.push(bytes);
         size += bytes.byteLength;
       }
@@ -55534,7 +57717,7 @@ var WebBlob = class Blob2 {
     return buffer2;
   }
   async text() {
-    const decoder2 = new Decoder2();
+    const decoder2 = new Decoder4();
     let text = "";
     for (const part of this._parts) {
       text += decoder2.decode(part);
@@ -55627,56 +57810,56 @@ var FormData2 = class {
   get [Symbol.toStringTag]() {
     return "FormData";
   }
-  append(name5, value = panic(
+  append(name7, value = panic(
     new TypeError("FormData.append: requires at least 2 arguments")
   ), filename) {
-    this._entries.push([name5, toEntryValue(value, filename)]);
+    this._entries.push([name7, toEntryValue(value, filename)]);
   }
-  delete(name5 = panic(new TypeError("FormData.delete: requires string argument"))) {
+  delete(name7 = panic(new TypeError("FormData.delete: requires string argument"))) {
     const entries = this._entries;
     let index = 0;
     while (index < entries.length) {
       const [entryName] = entries[index];
-      if (entryName === name5) {
+      if (entryName === name7) {
         entries.splice(index, 1);
       } else {
         index++;
       }
     }
   }
-  get(name5 = panic(new TypeError("FormData.get: requires string argument"))) {
+  get(name7 = panic(new TypeError("FormData.get: requires string argument"))) {
     for (const [entryName, value] of this._entries) {
-      if (entryName === name5) {
+      if (entryName === name7) {
         return value;
       }
     }
     return null;
   }
-  getAll(name5 = panic(new TypeError("FormData.getAll: requires string argument"))) {
+  getAll(name7 = panic(new TypeError("FormData.getAll: requires string argument"))) {
     const values = [];
     for (const [entryName, value] of this._entries) {
-      if (entryName === name5) {
+      if (entryName === name7) {
         values.push(value);
       }
     }
     return values;
   }
-  has(name5 = panic(new TypeError("FormData.has: requires string argument"))) {
+  has(name7 = panic(new TypeError("FormData.has: requires string argument"))) {
     for (const [entryName] of this._entries) {
-      if (entryName === name5) {
+      if (entryName === name7) {
         return true;
       }
     }
     return false;
   }
-  set(name5, value = panic(new TypeError("FormData.set: requires at least 2 arguments")), filename) {
+  set(name7, value = panic(new TypeError("FormData.set: requires at least 2 arguments")), filename) {
     let index = 0;
     const { _entries: entries } = this;
     const entryValue = toEntryValue(value, filename);
     let wasSet = false;
     while (index < entries.length) {
       const entry = entries[index];
-      if (entry[0] === name5) {
+      if (entry[0] === name7) {
         if (wasSet) {
           entries.splice(index, 1);
         } else {
@@ -55689,15 +57872,15 @@ var FormData2 = class {
       }
     }
     if (!wasSet) {
-      entries.push([name5, entryValue]);
+      entries.push([name7, entryValue]);
     }
   }
   entries() {
     return this._entries.values();
   }
   *keys() {
-    for (const [name5] of this._entries) {
-      yield name5;
+    for (const [name7] of this._entries) {
+      yield name7;
     }
   }
   *values() {
@@ -55732,9 +57915,9 @@ var toEntryValue = (value, filename) => {
 var isFile = (value) => Object.prototype.toString.call(value) === "[object File]" && typeof value.name === "string";
 var isBlob3 = (value) => Object.prototype.toString.call(value) === "[object Blob]";
 var BlobFile = class File2 {
-  constructor([blob], name5, { lastModified = Date.now() } = {}) {
+  constructor([blob], name7, { lastModified = Date.now() } = {}) {
     this.blob = blob;
-    this.name = name5;
+    this.name = name7;
     this.lastModified = lastModified;
   }
   get webkitRelativePath() {
@@ -55796,7 +57979,7 @@ var FetchError = class extends FetchBaseError {
 };
 
 // node_modules/@web-std/fetch/src/utils/form-data.js
-var import_crypto2 = require("crypto");
+var import_crypto3 = require("crypto");
 
 // node_modules/@web3-storage/multipart-parser/esm/src/utils.js
 function stringToArray(s) {
@@ -55829,15 +58012,15 @@ function arraysEqual(a, b) {
 }
 
 // node_modules/@web3-storage/multipart-parser/esm/src/search.js
-function coerce2(a) {
+function coerce4(a) {
   if (a instanceof Uint8Array) {
     return (index) => a[index];
   }
   return a;
 }
 function jsmemcmp(buf1, pos1, buf2, pos2, len) {
-  const fn1 = coerce2(buf1);
-  const fn2 = coerce2(buf2);
+  const fn1 = coerce4(buf1);
+  const fn2 = coerce4(buf2);
   for (let i = 0; i < len; ++i) {
     if (fn1(pos1 + i) !== fn2(pos2 + i)) {
       return false;
@@ -56049,11 +58232,11 @@ function parseContentDisposition(header) {
     if (kv.length !== 2) {
       throw new Error("malformed content-disposition header: key-value pair not found - " + part + " in `" + header + "`");
     }
-    const [name5, value] = kv;
+    const [name7, value] = kv;
     if (value[0] === '"' && value[value.length - 1] === '"') {
-      out[name5] = value.slice(1, -1).replace(/\\"/g, '"');
+      out[name7] = value.slice(1, -1).replace(/\\"/g, '"');
     } else if (value[0] !== '"' && value[value.length - 1] !== '"') {
-      out[name5] = value;
+      out[name7] = value;
     } else if (value[0] === '"' && value[value.length - 1] !== '"' || value[0] !== '"' && value[value.length - 1] === '"') {
       throw new Error("malformed content-disposition header: mismatched quotations in `" + header + "`");
     }
@@ -56272,21 +58455,21 @@ var carriage = "\r\n";
 var dashes = "-".repeat(2);
 var carriageLength = Buffer.byteLength(carriage);
 var getFooter = (boundary) => `${dashes}${boundary}${dashes}${carriage.repeat(2)}`;
-function getHeader(boundary, name5, field) {
+function getHeader(boundary, name7, field) {
   let header = "";
   header += `${dashes}${boundary}${carriage}`;
-  header += `Content-Disposition: form-data; name="${name5}"`;
+  header += `Content-Disposition: form-data; name="${name7}"`;
   if (isBlob4(field)) {
-    const { name: name6 = "blob", type } = field;
-    header += `; filename="${name6}"${carriage}`;
+    const { name: name8 = "blob", type } = field;
+    header += `; filename="${name8}"${carriage}`;
     header += `Content-Type: ${type || "application/octet-stream"}`;
   }
   return `${header}${carriage.repeat(2)}`;
 }
-var getBoundary = () => (0, import_crypto2.randomBytes)(8).toString("hex");
+var getBoundary = () => (0, import_crypto3.randomBytes)(8).toString("hex");
 async function* formDataIterator(form, boundary) {
-  for (const [name5, value] of form) {
-    yield getHeader(boundary, name5, value);
+  for (const [name7, value] of form) {
+    yield getHeader(boundary, name7, value);
     if (isBlob4(value)) {
       yield* value.stream();
     } else {
@@ -56297,18 +58480,18 @@ async function* formDataIterator(form, boundary) {
   yield getFooter(boundary);
 }
 function getFormDataLength(form, boundary) {
-  let length2 = 0;
-  for (const [name5, value] of form) {
-    length2 += Buffer.byteLength(getHeader(boundary, name5, value));
+  let length4 = 0;
+  for (const [name7, value] of form) {
+    length4 += Buffer.byteLength(getHeader(boundary, name7, value));
     if (isBlob4(value)) {
-      length2 += value.size;
+      length4 += value.size;
     } else {
-      length2 += Buffer.byteLength(String(value));
+      length4 += Buffer.byteLength(String(value));
     }
-    length2 += carriageLength;
+    length4 += carriageLength;
   }
-  length2 += Buffer.byteLength(getFooter(boundary));
-  return length2;
+  length4 += Buffer.byteLength(getFooter(boundary));
+  return length4;
 }
 var toFormData = async ({ body, headers }) => {
   const contentType = (headers == null ? void 0 : headers.get("Content-Type")) || "";
@@ -56316,11 +58499,11 @@ var toFormData = async ({ body, headers }) => {
   if (type === "multipart/form-data" && boundary != null && body != null) {
     const form = new FormData();
     const parts = iterateMultipart(body, boundary);
-    for await (const { name: name5, data, filename, contentType: contentType2 } of parts) {
+    for await (const { name: name7, data, filename, contentType: contentType2 } of parts) {
       if (filename) {
-        form.append(name5, new File([data], filename, { type: contentType2 }));
+        form.append(name7, new File([data], filename, { type: contentType2 }));
       } else {
-        form.append(name5, new TextDecoder().decode(data), filename);
+        form.append(name7, new TextDecoder().decode(data), filename);
       }
     }
     return form;
@@ -56330,11 +58513,11 @@ var toFormData = async ({ body, headers }) => {
 };
 
 // node_modules/@web-std/fetch/src/utils/utf8.js
-var import_util5 = require("util");
-var encoder = new import_util5.TextEncoder();
-var decoder = new import_util5.TextDecoder();
-var encode10 = (text) => encoder.encode(text);
-var decode11 = (bytes) => decoder.decode(bytes);
+var import_util6 = require("util");
+var encoder = new import_util6.TextEncoder();
+var decoder = new import_util6.TextDecoder();
+var encode17 = (text) => encoder.encode(text);
+var decode22 = (bytes) => decoder.decode(bytes);
 
 // node_modules/@web-std/fetch/src/body.js
 var { readableHighWaterMark } = new import_stream4.default.Readable();
@@ -56356,7 +58539,7 @@ var Body = class {
       state.body = null;
       state.size = 0;
     } else if (isURLSearchParameters(body)) {
-      const bytes = encode10(body.toString());
+      const bytes = encode17(body.toString());
       state.body = fromBytes2(bytes);
       state.size = bytes.byteLength;
       state.type = "application/x-www-form-urlencoded;charset=UTF-8";
@@ -56367,7 +58550,7 @@ var Body = class {
     } else if (body instanceof Uint8Array) {
       state.body = fromBytes2(body);
       state.size = body.byteLength;
-    } else if (import_util6.types.isAnyArrayBuffer(body)) {
+    } else if (import_util7.types.isAnyArrayBuffer(body)) {
       const bytes = new Uint8Array(body);
       state.body = fromBytes2(bytes);
       state.size = bytes.byteLength;
@@ -56389,7 +58572,7 @@ var Body = class {
     } else if (body instanceof import_stream4.default) {
       state.body = fromStream(body);
     } else {
-      const bytes = encode10(String(body));
+      const bytes = encode17(String(body));
       state.type = "text/plain;charset=UTF-8";
       state.size = bytes.byteLength;
       state.body = fromBytes2(bytes);
@@ -56421,7 +58604,7 @@ var Body = class {
   }
   async text() {
     const buffer2 = await consumeBody(this);
-    return decode11(buffer2);
+    return decode22(buffer2);
   }
   async formData() {
     return toFormData(this);
@@ -56657,19 +58840,19 @@ var StreamPump = class {
 };
 
 // node_modules/@web-std/fetch/src/headers.js
-var import_util7 = require("util");
+var import_util8 = require("util");
 var import_http = __toESM(require("http"), 1);
 var validators = import_http.default;
-var validateHeaderName = typeof validators.validateHeaderName === "function" ? validators.validateHeaderName : (name5) => {
-  if (!/^[\^`\-\w!#$%&'*+.|~]+$/.test(name5)) {
-    const err = new TypeError(`Header name must be a valid HTTP token [${name5}]`);
+var validateHeaderName = typeof validators.validateHeaderName === "function" ? validators.validateHeaderName : (name7) => {
+  if (!/^[\^`\-\w!#$%&'*+.|~]+$/.test(name7)) {
+    const err = new TypeError(`Header name must be a valid HTTP token [${name7}]`);
     Object.defineProperty(err, "code", { value: "ERR_INVALID_HTTP_TOKEN" });
     throw err;
   }
 };
-var validateHeaderValue = typeof validators.validateHeaderValue === "function" ? validators.validateHeaderValue : (name5, value) => {
+var validateHeaderValue = typeof validators.validateHeaderValue === "function" ? validators.validateHeaderValue : (name7, value) => {
   if (/[^\t\u0020-\u007E\u0080-\u00FF]/.test(value)) {
-    const err = new TypeError(`Invalid character in header content ["${name5}"]`);
+    const err = new TypeError(`Invalid character in header content ["${name7}"]`);
     Object.defineProperty(err, "code", { value: "ERR_INVALID_CHAR" });
     throw err;
   }
@@ -56679,13 +58862,13 @@ var Headers2 = class extends URLSearchParams {
     let result = [];
     if (init instanceof Headers2) {
       const raw = init.raw();
-      for (const [name5, values] of Object.entries(raw)) {
-        result.push(...values.map((value) => [name5, value]));
+      for (const [name7, values] of Object.entries(raw)) {
+        result.push(...values.map((value) => [name7, value]));
       }
     } else if (init == null) {
     } else if (isIterable4(init)) {
       result = [...init].map((pair) => {
-        if (typeof pair !== "object" || import_util7.types.isBoxedPrimitive(pair)) {
+        if (typeof pair !== "object" || import_util8.types.isBoxedPrimitive(pair)) {
           throw new TypeError("Each header pair must be an iterable object");
         }
         return [...pair];
@@ -56700,10 +58883,10 @@ var Headers2 = class extends URLSearchParams {
     } else {
       throw new TypeError("Failed to construct 'Headers': The provided value is not of type '(sequence<sequence<ByteString>> or record<ByteString, ByteString>)");
     }
-    result = result.length > 0 ? result.map(([name5, value]) => {
-      validateHeaderName(name5);
-      validateHeaderValue(name5, String(value));
-      return [String(name5).toLowerCase(), String(value)];
+    result = result.length > 0 ? result.map(([name7, value]) => {
+      validateHeaderName(name7);
+      validateHeaderValue(name7, String(value));
+      return [String(name7).toLowerCase(), String(value)];
     }) : [];
     super(result);
     return new Proxy(this, {
@@ -56711,23 +58894,23 @@ var Headers2 = class extends URLSearchParams {
         switch (p) {
           case "append":
           case "set":
-            return (name5, value) => {
-              validateHeaderName(name5);
-              validateHeaderValue(name5, String(value));
+            return (name7, value) => {
+              validateHeaderName(name7);
+              validateHeaderValue(name7, String(value));
               return URLSearchParams.prototype[p].call(
                 receiver,
-                String(name5).toLowerCase(),
+                String(name7).toLowerCase(),
                 String(value)
               );
             };
           case "delete":
           case "has":
           case "getAll":
-            return (name5) => {
-              validateHeaderName(name5);
+            return (name7) => {
+              validateHeaderName(name7);
               return URLSearchParams.prototype[p].call(
                 receiver,
-                String(name5).toLowerCase()
+                String(name7).toLowerCase()
               );
             };
           case "keys":
@@ -56747,30 +58930,30 @@ var Headers2 = class extends URLSearchParams {
   toString() {
     return Object.prototype.toString.call(this);
   }
-  get(name5) {
-    const values = this.getAll(name5);
+  get(name7) {
+    const values = this.getAll(name7);
     if (values.length === 0) {
       return null;
     }
     let value = values.join(", ");
-    if (/^content-encoding$/i.test(name5)) {
+    if (/^content-encoding$/i.test(name7)) {
       value = value.toLowerCase();
     }
     return value;
   }
   forEach(callback, thisArg = void 0) {
-    for (const name5 of this.keys()) {
-      Reflect.apply(callback, thisArg, [this.get(name5), name5, this]);
+    for (const name7 of this.keys()) {
+      Reflect.apply(callback, thisArg, [this.get(name7), name7, this]);
     }
   }
   *values() {
-    for (const name5 of this.keys()) {
-      yield this.get(name5);
+    for (const name7 of this.keys()) {
+      yield this.get(name7);
     }
   }
   *entries() {
-    for (const name5 of this.keys()) {
-      yield [name5, this.get(name5)];
+    for (const name7 of this.keys()) {
+      yield [name7, this.get(name7)];
     }
   }
   [Symbol.iterator]() {
@@ -56808,10 +58991,10 @@ function fromRawHeaders(headers = []) {
         result.push(array.slice(index, index + 2));
       }
       return result;
-    }, []).filter(([name5, value]) => {
+    }, []).filter(([name7, value]) => {
       try {
-        validateHeaderName(name5);
-        validateHeaderValue(name5, String(value));
+        validateHeaderName(name7);
+        validateHeaderValue(name7, String(value));
         return true;
       } catch {
         return false;
@@ -56822,8 +59005,8 @@ function fromRawHeaders(headers = []) {
 
 // node_modules/@web-std/fetch/src/utils/is-redirect.js
 var redirectStatus = /* @__PURE__ */ new Set([301, 302, 303, 307, 308]);
-var isRedirect = (code6) => {
-  return redirectStatus.has(code6);
+var isRedirect = (code11) => {
+  return redirectStatus.has(code11);
 };
 
 // node_modules/@web-std/fetch/src/response.js
@@ -57291,9 +59474,9 @@ function fixResponseChunkedTransferBadEnding(request, errorCallback) {
 
 // node_modules/@web-std/file/src/file.js
 var File3 = class extends Blob4 {
-  constructor(init, name5 = panic2(new TypeError("File constructor requires name argument")), options = {}) {
+  constructor(init, name7 = panic2(new TypeError("File constructor requires name argument")), options = {}) {
     super(init, options);
-    this._name = name5;
+    this._name = name7;
     this._lastModified = options.lastModified || Date.now();
   }
   get name() {
@@ -57372,7 +59555,7 @@ var FsBlockStore = class extends BaseBlockstore {
     for (const cidStr of cids) {
       const location = `${this.path}/${cidStr}`;
       const bytes = await import_fs3.default.promises.readFile(location);
-      yield { cid: CID.parse(cidStr), bytes };
+      yield { cid: CID3.parse(cidStr), bytes };
     }
   }
   async close() {
@@ -57423,7 +59606,7 @@ var Web3Storage = class {
     maxRetries = MAX_PUT_RETRIES,
     maxChunkSize = DEFAULT_CHUNK_SIZE,
     wrapWithDirectory = true,
-    name: name5,
+    name: name7,
     signal
   } = {}) {
     if (maxChunkSize >= MAX_CHUNK_SIZE || maxChunkSize < MAX_BLOCK_SIZE) {
@@ -57440,13 +59623,13 @@ var Web3Storage = class {
       });
       onRootCidReady && onRootCidReady(root.toString());
       const car = await CarReader2.fromIterable(out);
-      return await Web3Storage.putCar({ endpoint, token: token2, rateLimiter, fetch: fetch7 }, car, { onStoredChunk, maxRetries, maxChunkSize, name: name5, signal });
+      return await Web3Storage.putCar({ endpoint, token: token2, rateLimiter, fetch: fetch7 }, car, { onStoredChunk, maxRetries, maxChunkSize, name: name7, signal });
     } finally {
       await blockstore3.close();
     }
   }
   static async putCar({ endpoint, token: token2, rateLimiter = globalRateLimiter, fetch: fetch7 = fetch5 }, car, {
-    name: name5,
+    name: name7,
     onStoredChunk,
     maxRetries = MAX_PUT_RETRIES,
     maxChunkSize = DEFAULT_CHUNK_SIZE,
@@ -57459,8 +59642,8 @@ var Web3Storage = class {
     const targetSize = maxChunkSize;
     const url = new URL("car", endpoint);
     let headers = Web3Storage.headers(token2);
-    if (name5) {
-      headers = { ...headers, "X-Name": encodeURIComponent(name5) };
+    if (name7) {
+      headers = { ...headers, "X-Name": encodeURIComponent(name7) };
     }
     const roots = await car.getRoots();
     if (roots[0] == null) {
@@ -57799,8 +59982,8 @@ async function exportCID(cid, processor = null) {
   debug5("Got result", resultObj);
   return resultObj;
 }
-async function processFile({ cid, path: path3, name: name5, ...file }) {
-  let value = getWebURL_default(cid, name5);
+async function processFile({ cid, path: path3, name: name7, ...file }) {
+  let value = getWebURL_default(cid, name7);
   debug5("processFile extname", extname(path3), value);
   if (!extname(path3)) {
     if (path3.length === 0) {
@@ -57911,11 +60094,11 @@ var import_queueable2 = __toESM(require_lib4(), 1);
 // src/keyValueStore.js
 var import_debug7 = __toESM(require_src(), 1);
 var debug7 = (0, import_debug7.default)("pollenStore");
-var store = (name5) => {
+var store = (name7) => {
   let lastValue = null;
   const get2 = async (key) => {
     var _a;
-    const { data, error } = await client_default.from(name5).select("value").match({ key });
+    const { data, error } = await client_default.from(name7).select("value").match({ key });
     if (error)
       console.error(error);
     if (data.length === 0)
@@ -57925,12 +60108,12 @@ var store = (name5) => {
   const set = async (key, value) => {
     debug7("publishing", key, value);
     lastValue = value;
-    await client_default.from(name5).upsert({ key, value: JSON.stringify(value) });
+    await client_default.from(name7).upsert({ key, value: JSON.stringify(value) });
   };
   const subscribe = (key, callback) => {
-    const res = client_default.channel(`public:${name5}`).on(
+    const res = client_default.channel(`public:${name7}`).on(
       "postgres_changes",
-      { event: "*", schema: "public", table: name5 },
+      { event: "*", schema: "public", table: name7 },
       (payload) => {
         if (payload.new.key === key) {
           const newValue = payload.new.value;
