@@ -68501,6 +68501,10 @@ async function processFile({ cid, path: path4, name: name8, ...file }) {
     if (path4.length === 0) {
       debug6("result is buffer. returning directly");
       value = await file.buffer();
+    }
+    if (path4 === "log") {
+      debug6("result is log. returning text");
+      value = await file.text();
     } else {
       debug6("result is json. parsing", value);
       value = await file.json();
@@ -68515,8 +68519,7 @@ async function extractContent(file) {
   }
   return new Uint8Array(content);
 }
-function parse(content) {
-  const str = contentToString(content);
+function parse(str) {
   try {
     return import_json5.default.parse(str);
   } catch (e) {
@@ -68555,10 +68558,13 @@ async function* fetchWithWeb3storageFallback(cid, skipWeb3storage = false) {
 }
 var dataFetchers = (file) => {
   debug6("creating data fetchers for cid", file.cid);
+  const buffer2 = async () => await extractContent(file);
+  const text = async () => contentToString(await buffer2());
+  const json = async () => file.name === "log" ? await text() : parse(await text());
   return {
-    json: async () => parse(await extractContent(file)),
-    text: async () => contentToString(await extractContent(file)),
-    buffer: async () => await extractContent(file)
+    json,
+    text,
+    buffer: buffer2
   };
 };
 
