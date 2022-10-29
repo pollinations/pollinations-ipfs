@@ -27718,6 +27718,54 @@ var require_src4 = __commonJS({
   }
 });
 
+// node_modules/it-drain/index.js
+var require_it_drain = __commonJS({
+  "node_modules/it-drain/index.js"(exports2, module2) {
+    "use strict";
+    var drain2 = async (source) => {
+      for await (const _ of source) {
+      }
+    };
+    module2.exports = drain2;
+  }
+});
+
+// node_modules/it-filter/index.js
+var require_it_filter = __commonJS({
+  "node_modules/it-filter/index.js"(exports2, module2) {
+    "use strict";
+    var filter2 = async function* (source, fn) {
+      for await (const entry of source) {
+        if (await fn(entry)) {
+          yield entry;
+        }
+      }
+    };
+    module2.exports = filter2;
+  }
+});
+
+// node_modules/it-take/index.js
+var require_it_take = __commonJS({
+  "node_modules/it-take/index.js"(exports2, module2) {
+    "use strict";
+    var take2 = async function* (source, limit) {
+      let items = 0;
+      if (limit < 1) {
+        return;
+      }
+      for await (const entry of source) {
+        yield entry;
+        items++;
+        if (items === limit) {
+          return;
+        }
+      }
+    };
+    module2.exports = take2;
+  }
+});
+
 // node_modules/whatwg-mimetype/lib/utils.js
 var require_utils3 = __commonJS({
   "node_modules/whatwg-mimetype/lib/utils.js"(exports2) {
@@ -32957,54 +33005,6 @@ var require_path_browserify = __commonJS({
     };
     posix.posix = posix;
     module2.exports = posix;
-  }
-});
-
-// node_modules/it-drain/index.js
-var require_it_drain = __commonJS({
-  "node_modules/it-drain/index.js"(exports2, module2) {
-    "use strict";
-    var drain2 = async (source) => {
-      for await (const _ of source) {
-      }
-    };
-    module2.exports = drain2;
-  }
-});
-
-// node_modules/it-filter/index.js
-var require_it_filter = __commonJS({
-  "node_modules/it-filter/index.js"(exports2, module2) {
-    "use strict";
-    var filter2 = async function* (source, fn) {
-      for await (const entry of source) {
-        if (await fn(entry)) {
-          yield entry;
-        }
-      }
-    };
-    module2.exports = filter2;
-  }
-});
-
-// node_modules/it-take/index.js
-var require_it_take = __commonJS({
-  "node_modules/it-take/index.js"(exports2, module2) {
-    "use strict";
-    var take2 = async function* (source, limit) {
-      let items = 0;
-      if (limit < 1) {
-        return;
-      }
-      for await (const entry of source) {
-        yield entry;
-        items++;
-        if (items === limit) {
-          return;
-        }
-      }
-    };
-    module2.exports = take2;
   }
 });
 
@@ -43841,7 +43841,11 @@ if (process.env.DB_NAME)
   DB_NAME = process.env.DB_NAME;
 debug("DB_NAME", DB_NAME);
 function dispatchPollen(params) {
-  return client_default.from(DB_NAME).insert(params).then(({ data }) => data);
+  try {
+    return client_default.from(DB_NAME).insert(params).then(({ data }) => data);
+  } catch (e) {
+    debug("pollen probably already exists", e);
+  }
 }
 async function getPlaceInQueue(data) {
   var _a;
@@ -53727,30 +53731,6 @@ async function* importer(source, blockstore3, options = {}) {
 
 // src/pollenStoreClient.js
 var import_ramda = __toESM(require_src4(), 1);
-var import_data_urls = __toESM(require_parser2(), 1);
-var import_json5 = __toESM(require_lib6(), 1);
-var import_node_fetch4 = __toESM(require_lib3(), 1);
-var import_path_browserify = __toESM(require_path_browserify(), 1);
-
-// src/s3/s3store.js
-var import_node_fetch3 = __toESM(require_lib3(), 1);
-var import_debug3 = __toESM(require_src(), 1);
-
-// node_modules/blockstore-core/esm/src/errors.js
-var errors_exports = {};
-__export(errors_exports, {
-  abortedError: () => abortedError,
-  notFoundError: () => notFoundError
-});
-var import_err_code15 = __toESM(require_err_code(), 1);
-function notFoundError(err) {
-  err = err || new Error("Not Found");
-  return (0, import_err_code15.default)(err, "ERR_NOT_FOUND");
-}
-function abortedError(err) {
-  err = err || new Error("Aborted");
-  return (0, import_err_code15.default)(err, "ERR_ABORTED");
-}
 
 // node_modules/blockstore-core/esm/src/base.js
 var import_it_drain = __toESM(require_it_drain(), 1);
@@ -53871,6 +53851,70 @@ var BaseBlockstore = class {
   }
 };
 
+// node_modules/blockstore-core/esm/src/errors.js
+var errors_exports = {};
+__export(errors_exports, {
+  abortedError: () => abortedError,
+  notFoundError: () => notFoundError
+});
+var import_err_code15 = __toESM(require_err_code(), 1);
+function notFoundError(err) {
+  err = err || new Error("Not Found");
+  return (0, import_err_code15.default)(err, "ERR_NOT_FOUND");
+}
+function abortedError(err) {
+  err = err || new Error("Aborted");
+  return (0, import_err_code15.default)(err, "ERR_ABORTED");
+}
+
+// node_modules/blockstore-core/esm/src/memory.js
+var MemoryBlockstore = class extends BaseBlockstore {
+  constructor() {
+    super();
+    this.data = {};
+  }
+  open() {
+    return Promise.resolve();
+  }
+  close() {
+    return Promise.resolve();
+  }
+  async put(key, val) {
+    this.data[base323.encode(key.multihash.bytes)] = val;
+  }
+  async get(key) {
+    const exists3 = await this.has(key);
+    if (!exists3)
+      throw notFoundError();
+    return this.data[base323.encode(key.multihash.bytes)];
+  }
+  async has(key) {
+    return this.data[base323.encode(key.multihash.bytes)] !== void 0;
+  }
+  async delete(key) {
+    delete this.data[base323.encode(key.multihash.bytes)];
+  }
+  async *_all() {
+    yield* Object.entries(this.data).map(([key, value]) => ({
+      key: CID3.createV1(code7, decode15(base323.decode(key))),
+      value
+    }));
+  }
+  async *_allKeys() {
+    yield* Object.entries(this.data).map(([key]) => CID3.createV1(code7, decode15(base323.decode(key))));
+  }
+};
+
+// src/pollenStoreClient.js
+var import_data_urls = __toESM(require_parser2(), 1);
+var import_json5 = __toESM(require_lib6(), 1);
+var import_node_fetch4 = __toESM(require_lib3(), 1);
+var import_path_browserify = __toESM(require_path_browserify(), 1);
+
+// src/s3/s3store.js
+var import_node_fetch3 = __toESM(require_lib3(), 1);
+var import_debug3 = __toESM(require_src(), 1);
+
 // node_modules/blockstore-core/esm/src/index.js
 var Errors = { ...errors_exports };
 
@@ -53888,6 +53932,7 @@ var S3Blockstore = class extends BaseBlockstore {
     return Promise.resolve();
   }
   async put(key, val, options) {
+    key = key.toString();
     debug3("put", key, "options", options);
     if (await this.has(key)) {
       debug3("block already exists", key);
@@ -53907,6 +53952,7 @@ var S3Blockstore = class extends BaseBlockstore {
     this.cache[key] = val;
   }
   async get(key, options) {
+    key = key.toString();
     if (this.cache[key]) {
       debug3("get cache hit", key);
       return this.cache[key];
@@ -53924,6 +53970,7 @@ var S3Blockstore = class extends BaseBlockstore {
     }
   }
   async has(key, options) {
+    key = key.toString();
     if (this.cache[key])
       return true;
     debug3("has", key);
@@ -59912,10 +59959,11 @@ var import_s3_request_presigner = __toESM(require_dist_cjs16(), 1);
 var debug5 = (0, import_debug5.default)("pollenStoreClient");
 var { extname } = import_path_browserify.default;
 var blockstore2 = new s3store_default();
+var memoryBlockstore = new MemoryBlockstore();
 var importOptions2 = {
   wrapWithDirectory: true
 };
-async function importJSON(inputs) {
+async function importJSON(inputs, options = { pin: false }) {
   let lastCID = null;
   const files = await objectToFiles(inputs);
   for await (const file of importer(files, blockstore2, importOptions2)) {
