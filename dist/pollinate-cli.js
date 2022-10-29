@@ -73207,7 +73207,7 @@ async function* chunkedFilewatcher({ path: path4, debounce, signal }) {
     }
   });
   debug14("signal", signal);
-  while (!signal.aborted) {
+  do {
     const files = changeQueue;
     changeQueue = [];
     if (files.length > 0) {
@@ -73217,7 +73217,7 @@ async function* chunkedFilewatcher({ path: path4, debounce, signal }) {
       debug14("Yielded files. Sleeping");
     }
     await (0, import_await_sleep2.default)(debounce);
-  }
+  } while (!signal.aborted);
   debug14("fileWatcher aborted. closing watcher");
   watcher.removeAllListeners();
   watcher.unwatch(path4);
@@ -73261,33 +73261,29 @@ async function* folderSync({
     signal
   });
   for await (const changedFlat of fileChanges$) {
-    const changedGrouped = groupSyncQueue(changedFlat);
-    debug15("changedGrouped", changedGrouped);
-    for (const changed of changedGrouped) {
-      for (const {
-        event,
-        path: file
-      } of changed) {
-        if (signal.aborted)
-          continue;
-        debug15("Local:", event, file);
-        const localPath = (0, import_path2.join)(path4, file);
-        const ipfsPath = file;
-        if (event === "addDir") {
-          debug15("mkdir", ipfsPath);
-          await mkDir(ipfsPath);
-        }
-        if (event === "add" || event === "change") {
-          debug15("adding", ipfsPath, localPath);
-          await addFile(ipfsPath, localPath);
-        }
-        if (event === "unlink" || event === "unlinkDir") {
-          debug15("removing", file, event);
-          await rm(ipfsPath);
-        }
+    debug15("Changed files", changedFlat);
+    for (const {
+      event,
+      path: file
+    } of changedFlat) {
+      debug15("Local:", event, file);
+      const localPath = (0, import_path2.join)(path4, file);
+      const ipfsPath = file;
+      if (event === "addDir") {
+        debug15("mkdir", ipfsPath);
+        await mkDir(ipfsPath);
+      }
+      if (event === "add" || event === "change") {
+        debug15("adding", ipfsPath, localPath);
+        await addFile(ipfsPath, localPath);
+      }
+      if (event === "unlink" || event === "unlinkDir") {
+        debug15("removing", file, event);
+        await rm(ipfsPath);
       }
     }
     const newContentID = await cid();
+    debug15("newContentID", newContentID);
     yield newContentID;
   }
 }
@@ -73315,6 +73311,11 @@ var sender = ({ path: path4, debounce, once, nodeid, publish }) => {
   async function startSending() {
     abortController = new import_native_abort_controller.AbortController();
     const cid$ = folderSync({ path: path4, debounce, writer: ipfsWriter, once, signal: abortController.signal });
+    process.on("SIGINT", async () => {
+      debug16("SIGINT signal received. Closing sender.");
+      await close();
+      debug16("Sender closed.");
+    });
     debug16("start consuming watched files");
     if (!(0, import_fs7.existsSync)(path4)) {
       debug16("Local: Root directory does not exist. Creating", path4);

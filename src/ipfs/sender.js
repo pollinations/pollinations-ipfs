@@ -32,6 +32,12 @@ export const sender = ({ path, debounce, once, nodeid, publish }) => {
 
     abortController = new AbortController()
     const cid$ = folderSync({ path, debounce, writer: ipfsWriter, once, signal: abortController.signal })
+        
+    process.on('SIGINT', async () => {
+      debug('SIGINT signal received. Closing sender.');
+      await close()
+      debug('Sender closed.');
+    });
 
     debug("start consuming watched files")
     if (!existsSync(path)) {

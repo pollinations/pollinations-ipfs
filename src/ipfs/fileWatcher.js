@@ -35,7 +35,7 @@ async function* chunkedFilewatcher({ path, debounce, signal }) {
         }
     })
     debug("signal", signal)
-    while (!signal.aborted) {
+    do {
         const files = changeQueue
         changeQueue = []
         if (files.length > 0) {
@@ -48,7 +48,7 @@ async function* chunkedFilewatcher({ path, debounce, signal }) {
         // the use of debounce is not quite right here. Will change later
         // debug("Sleeping", debounce, signal.aborted)
         await awaitSleep(debounce)
-    }
+    } while (!signal.aborted);
     // yield []
     debug("fileWatcher aborted. closing watcher")
     watcher.removeAllListeners()
