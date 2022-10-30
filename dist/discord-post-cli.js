@@ -55153,6 +55153,7 @@ var S3Blockstore = class extends BaseBlockstore {
       debug4("block already exists", key);
       return;
     }
+    this.cache[key] = val;
     const urlResponse = await (0, import_node_fetch2.default)(`https://store.pollinations.ai/upload/${key.toString()}`);
     const url = await urlResponse.text();
     debug4("signed url", url, "for key", key.toString());
@@ -55164,7 +55165,6 @@ var S3Blockstore = class extends BaseBlockstore {
       }
     });
     debug4("upload response ok", uploadResponse.ok);
-    this.cache[key] = val;
   }
   async get(key, options) {
     key = key.toString();
