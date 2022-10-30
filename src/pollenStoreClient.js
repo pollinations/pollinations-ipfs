@@ -279,6 +279,19 @@ function isDataURL(str) {
 }
 
 
+// let counter = 0;
+// while (true) {
+//     const json = {"hello": "world", "counter": counter++};
+//     const cid = await importJSON(json);
+//     console.log("imported", cid);
+
+//     // fetch from http://localhost:3001/ipfs/[cid]
+
+//     const result = await fetch(`https://pollinations-ipfs.s3.amazonaws.com/${cid}`);
+//     const resultJSON = await result.text();
+//     console.log("exported", resultJSON, result.ok);
+    
+// }
 // console.log(await importJSON({"log":"hello", "image.png": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAElBMVEX8/vz///8pKikAAAAtLS2Oj47hKWeDAAABEElEQVR4nO3PBxEDMRAAMZcLf8p5GuuRGGjdO+dhc9f97afNmr1ets86hm2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2GfYZ9hn2Gfd9w9ttm3Tkvm/sHIDIKk6RLvD4AAAAASUVORK5CYII="}))
 
 // console.log(await exportCID("Qmf2DRoagPA1gYghjNF2iETgvnBAhi3nANQ8jbEemG8uAu"))

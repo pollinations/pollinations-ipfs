@@ -7,7 +7,7 @@ import { BaseBlockstore } from 'blockstore-core/base';
 
 
 const debug = Debug("s3store");
-
+const useCache = process.env.USE_POLLEN_MEMORY_CACHE === 'true';
 // debug("s3head", s3.headObject)
 
 class S3Blockstore extends BaseBlockstore {
@@ -29,11 +29,16 @@ class S3Blockstore extends BaseBlockstore {
         key = key.toString();
         debug("put", key, "options", options)
         // check if a block exists
-        if (await this.has(key)) {
+        if (this.cache[key])
+            return;
+        else    
+            this.cache[key] = val;
+    
+        if (await this.has(key, {skipCacheCheck: true})) {
             debug("block already exists", key)
             return;
         }
-        this.cache[key] = val;
+        
         // get a signed url from https://store.pollinations.ai/upload/[key]
         const urlResponse = await fetch(`https://store.pollinations.ai/upload/${key.toString()}`)
         const url = await urlResponse.text();
@@ -63,8 +68,13 @@ class S3Blockstore extends BaseBlockstore {
         try {
 
             // get from https://pollinations-ipfs.s3.amazonaws.com/[key] using fetch
-            debug("get from s3", key.toString())    
-            const response = await fetch(`https://pollinations-ipfs.s3.amazonaws.com/${key.toString()}`);
+            debug("get from s3", key)    
+            const response = await fetch(`https://pollinations-ipfs.s3.amazonaws.com/${key}`);
+            // if response is not ok, throw an error
+            if (!response.ok) {
+                throw new Error("not found")
+            }
+            
             // convert to Uint8Array
             const buffer = await response.arrayBuffer();
             const result = new Uint8Array(buffer);
@@ -77,10 +87,10 @@ class S3Blockstore extends BaseBlockstore {
         }
     }
 
-    async has (key, options) {
+    async has (key, options={skipCacheCheck: false}) {
         key = key.toString();
         // check if a block exists
-        if (this.cache[key]) 
+        if (!options?.skipCacheCheck && this.cache[key]) 
             return true;
             
         debug("has", key);
