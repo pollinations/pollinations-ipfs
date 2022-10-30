@@ -33,7 +33,7 @@ class S3Blockstore extends BaseBlockstore {
             debug("block already exists", key)
             return;
         }
-
+        this.cache[key] = val;
         // get a signed url from https://store.pollinations.ai/upload/[key]
         const urlResponse = await fetch(`https://store.pollinations.ai/upload/${key.toString()}`)
         const url = await urlResponse.text();
@@ -49,7 +49,6 @@ class S3Blockstore extends BaseBlockstore {
             }
         });
         debug("upload response ok", uploadResponse.ok)
-        this.cache[key] = val;
     }
 
     async get (key, options) {
