@@ -23,8 +23,8 @@ const debug = Debug('web3storage');
 const token = process.env.WEB3STORAGE_TOKEN //args.token
 
 if (!token) {
-   console.error('A token is needed. You can create one on https://web3.storage')
-   console.error('env', process.env.WEB3STORAGE_TOKEN)
+   debug('A token is needed. You can create one on https://web3.storage')
+   debug('env', process.env.WEB3STORAGE_TOKEN)
 }
 
 const storage = new Web3Storage({
