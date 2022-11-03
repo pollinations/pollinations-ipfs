@@ -5,10 +5,6 @@ import {
 } from 'web3.storage';
 import S3Blockstore from '../s3/s3store.js';
 
-import * as dotenv from 'dotenv'; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
-dotenv.config()
-
-
 
 const importOptions = {
     // maxChunkSize: 262144*20,
