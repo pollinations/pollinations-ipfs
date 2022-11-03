@@ -1,6 +1,7 @@
 
 import Debug from "debug";
 import fetch from "node-fetch";
+import { dispatchAndReturnPollen } from "./supabase/pollen.js";
 
 export { getPollen, getPollens, updatePollen } from './supabase/pollen.js';
 export { default as getWebURL } from "./utils/getWebURL.js";
@@ -48,7 +49,22 @@ export const updateInput = async inputs => {
     return cid
 }
 
-// only download json files, notebooks and files without extension (such as logs, text, etc)
-function shouldImport(ext) {
-    return ext.length === 0 || ext.toLowerCase() === ".json" || ext.toLowerCase() === ".ipynb" || ext.toLowerCase() === ".md";
-}
+
+
+export const runModel = async (inputs, image="voodoohop/dalle-playground", returnImmediately=false, params={}) => {
+    debug("running model", inputs, image);
+    inputs = {...inputs, model_image: image};
+    const inputCID = await updateInput(inputs);
+    debug("got input content ID", inputCID);
+    
+    const outputCID = await dispatchAndReturnPollen({input: inputCID.toString(), image, ...params }, returnImmediately);
+    if (!outputCID)
+      return null;
+    const data = await IPFSWebState(outputCID);
+    debug("got and returning output data", data);
+  
+    // if (!data?.output?.done) 
+    //  throw new Error("output not done");
+  
+    return data;
+  }
