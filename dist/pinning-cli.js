@@ -9992,20 +9992,20 @@ var require_merge_options = __commonJS({
       });
       return result;
     }
-    var mergeKeys = (merged, source, keys, config2) => {
+    var mergeKeys = (merged, source, keys, config) => {
       keys.forEach((key) => {
-        if (typeof source[key] === "undefined" && config2.ignoreUndefined) {
+        if (typeof source[key] === "undefined" && config.ignoreUndefined) {
           return;
         }
         if (key in merged && merged[key] !== Object.getPrototypeOf(merged)) {
-          defineProperty(merged, key, merge2(merged[key], source[key], config2));
+          defineProperty(merged, key, merge2(merged[key], source[key], config));
         } else {
           defineProperty(merged, key, clone2(source[key]));
         }
       });
       return merged;
     };
-    var concatArrays = (merged, source, config2) => {
+    var concatArrays = (merged, source, config) => {
       let result = merged.slice(0, 0);
       let resultIndex = 0;
       [merged, source].forEach((array) => {
@@ -10021,21 +10021,21 @@ var require_merge_options = __commonJS({
             defineProperty(result, resultIndex++, clone2(array[k]));
           }
         }
-        result = mergeKeys(result, array, getEnumerableOwnPropertyKeys(array).filter((key) => !indices.includes(key)), config2);
+        result = mergeKeys(result, array, getEnumerableOwnPropertyKeys(array).filter((key) => !indices.includes(key)), config);
       });
       return result;
     };
-    function merge2(merged, source, config2) {
-      if (config2.concatArrays && Array.isArray(merged) && Array.isArray(source)) {
-        return concatArrays(merged, source, config2);
+    function merge2(merged, source, config) {
+      if (config.concatArrays && Array.isArray(merged) && Array.isArray(source)) {
+        return concatArrays(merged, source, config);
       }
       if (!isOptionObject(source) || !isOptionObject(merged)) {
         return clone2(source);
       }
-      return mergeKeys(merged, source, getEnumerableOwnPropertyKeys(source), config2);
+      return mergeKeys(merged, source, getEnumerableOwnPropertyKeys(source), config);
     }
     module2.exports = function(...options) {
-      const config2 = merge2(clone2(defaultMergeOptions), this !== globalThis2 && this || {}, defaultMergeOptions);
+      const config = merge2(clone2(defaultMergeOptions), this !== globalThis2 && this || {}, defaultMergeOptions);
       let merged = { _: {} };
       for (const option of options) {
         if (option === void 0) {
@@ -10044,7 +10044,7 @@ var require_merge_options = __commonJS({
         if (!isOptionObject(option)) {
           throw new TypeError("`" + option + "` is not an Option Object");
         }
-        merged = merge2(merged, { _: option }, config2);
+        merged = merge2(merged, { _: option }, config);
       }
       return merged._;
     };
@@ -31863,155 +31863,6 @@ var require_stream = __commonJS({
   }
 });
 
-// node_modules/dotenv/package.json
-var require_package = __commonJS({
-  "node_modules/dotenv/package.json"(exports2, module2) {
-    module2.exports = {
-      name: "dotenv",
-      version: "16.0.3",
-      description: "Loads environment variables from .env file",
-      main: "lib/main.js",
-      types: "lib/main.d.ts",
-      exports: {
-        ".": {
-          require: "./lib/main.js",
-          types: "./lib/main.d.ts",
-          default: "./lib/main.js"
-        },
-        "./config": "./config.js",
-        "./config.js": "./config.js",
-        "./lib/env-options": "./lib/env-options.js",
-        "./lib/env-options.js": "./lib/env-options.js",
-        "./lib/cli-options": "./lib/cli-options.js",
-        "./lib/cli-options.js": "./lib/cli-options.js",
-        "./package.json": "./package.json"
-      },
-      scripts: {
-        "dts-check": "tsc --project tests/types/tsconfig.json",
-        lint: "standard",
-        "lint-readme": "standard-markdown",
-        pretest: "npm run lint && npm run dts-check",
-        test: "tap tests/*.js --100 -Rspec",
-        prerelease: "npm test",
-        release: "standard-version"
-      },
-      repository: {
-        type: "git",
-        url: "git://github.com/motdotla/dotenv.git"
-      },
-      keywords: [
-        "dotenv",
-        "env",
-        ".env",
-        "environment",
-        "variables",
-        "config",
-        "settings"
-      ],
-      readmeFilename: "README.md",
-      license: "BSD-2-Clause",
-      devDependencies: {
-        "@types/node": "^17.0.9",
-        decache: "^4.6.1",
-        dtslint: "^3.7.0",
-        sinon: "^12.0.1",
-        standard: "^16.0.4",
-        "standard-markdown": "^7.1.0",
-        "standard-version": "^9.3.2",
-        tap: "^15.1.6",
-        tar: "^6.1.11",
-        typescript: "^4.5.4"
-      },
-      engines: {
-        node: ">=12"
-      }
-    };
-  }
-});
-
-// node_modules/dotenv/lib/main.js
-var require_main = __commonJS({
-  "node_modules/dotenv/lib/main.js"(exports2, module2) {
-    var fs5 = require("fs");
-    var path3 = require("path");
-    var os2 = require("os");
-    var packageJson = require_package();
-    var version2 = packageJson.version;
-    var LINE = /(?:^|^)\s*(?:export\s+)?([\w.-]+)(?:\s*=\s*?|:\s+?)(\s*'(?:\\'|[^'])*'|\s*"(?:\\"|[^"])*"|\s*`(?:\\`|[^`])*`|[^#\r\n]+)?\s*(?:#.*)?(?:$|$)/mg;
-    function parse3(src8) {
-      const obj = {};
-      let lines = src8.toString();
-      lines = lines.replace(/\r\n?/mg, "\n");
-      let match;
-      while ((match = LINE.exec(lines)) != null) {
-        const key = match[1];
-        let value = match[2] || "";
-        value = value.trim();
-        const maybeQuote = value[0];
-        value = value.replace(/^(['"`])([\s\S]*)\1$/mg, "$2");
-        if (maybeQuote === '"') {
-          value = value.replace(/\\n/g, "\n");
-          value = value.replace(/\\r/g, "\r");
-        }
-        obj[key] = value;
-      }
-      return obj;
-    }
-    function _log(message2) {
-      console.log(`[dotenv@${version2}][DEBUG] ${message2}`);
-    }
-    function _resolveHome(envPath) {
-      return envPath[0] === "~" ? path3.join(os2.homedir(), envPath.slice(1)) : envPath;
-    }
-    function config2(options) {
-      let dotenvPath = path3.resolve(process.cwd(), ".env");
-      let encoding = "utf8";
-      const debug11 = Boolean(options && options.debug);
-      const override = Boolean(options && options.override);
-      if (options) {
-        if (options.path != null) {
-          dotenvPath = _resolveHome(options.path);
-        }
-        if (options.encoding != null) {
-          encoding = options.encoding;
-        }
-      }
-      try {
-        const parsed = DotenvModule.parse(fs5.readFileSync(dotenvPath, { encoding }));
-        Object.keys(parsed).forEach(function(key) {
-          if (!Object.prototype.hasOwnProperty.call(process.env, key)) {
-            process.env[key] = parsed[key];
-          } else {
-            if (override === true) {
-              process.env[key] = parsed[key];
-            }
-            if (debug11) {
-              if (override === true) {
-                _log(`"${key}" is already defined in \`process.env\` and WAS overwritten`);
-              } else {
-                _log(`"${key}" is already defined in \`process.env\` and was NOT overwritten`);
-              }
-            }
-          }
-        });
-        return { parsed };
-      } catch (e) {
-        if (debug11) {
-          _log(`Failed to load ${dotenvPath} ${e.message}`);
-        }
-        return { error: e };
-      }
-    }
-    var DotenvModule = {
-      config: config2,
-      parse: parse3
-    };
-    module2.exports.config = DotenvModule.config;
-    module2.exports.parse = DotenvModule.parse;
-    module2.exports = DotenvModule;
-  }
-});
-
 // node_modules/tslib/tslib.js
 var require_tslib = __commonJS({
   "node_modules/tslib/tslib.js"(exports2, module2) {
@@ -32513,10 +32364,10 @@ var require_createConfigValueProvider = __commonJS({
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.createConfigValueProvider = void 0;
-    var createConfigValueProvider = (configKey, canonicalEndpointParamKey, config2) => {
+    var createConfigValueProvider = (configKey, canonicalEndpointParamKey, config) => {
       const configProvider = async () => {
         var _a;
-        const configValue = (_a = config2[configKey]) !== null && _a !== void 0 ? _a : config2[canonicalEndpointParamKey];
+        const configValue = (_a = config[configKey]) !== null && _a !== void 0 ? _a : config[canonicalEndpointParamKey];
         if (typeof configValue === "function") {
           return configValue();
         }
@@ -32689,14 +32540,14 @@ var require_endpointMiddleware = __commonJS({
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.endpointMiddleware = void 0;
     var getEndpointFromInstructions_1 = require_getEndpointFromInstructions();
-    var endpointMiddleware = ({ config: config2, instructions }) => {
+    var endpointMiddleware = ({ config, instructions }) => {
       return (next, context) => async (args) => {
         var _a, _b;
         const endpoint = await (0, getEndpointFromInstructions_1.getEndpointFromInstructions)(args.input, {
           getEndpointParameterInstructions() {
             return instructions;
           }
-        }, { ...config2 }, context);
+        }, { ...config }, context);
         context.endpointV2 = endpoint;
         context.authSchemes = (_a = endpoint.properties) === null || _a === void 0 ? void 0 : _a.authSchemes;
         const authScheme = (_b = context.authSchemes) === null || _b === void 0 ? void 0 : _b[0];
@@ -32780,11 +32631,11 @@ var require_serdePlugin = __commonJS({
       tags: ["SERIALIZER"],
       override: true
     };
-    function getSerdePlugin(config2, serializer, deserializer) {
+    function getSerdePlugin(config, serializer, deserializer) {
       return {
         applyToStack: (commandStack) => {
-          commandStack.add((0, deserializerMiddleware_1.deserializerMiddleware)(config2, deserializer), exports2.deserializerMiddlewareOption);
-          commandStack.add((0, serializerMiddleware_1.serializerMiddleware)(config2, serializer), exports2.serializerMiddlewareOption);
+          commandStack.add((0, deserializerMiddleware_1.deserializerMiddleware)(config, deserializer), exports2.deserializerMiddlewareOption);
+          commandStack.add((0, serializerMiddleware_1.serializerMiddleware)(config, serializer), exports2.serializerMiddlewareOption);
         }
       };
     }
@@ -32820,10 +32671,10 @@ var require_getEndpointPlugin = __commonJS({
       relation: "before",
       toMiddleware: middleware_serde_1.serializerMiddlewareOption.name
     };
-    var getEndpointPlugin = (config2, instructions) => ({
+    var getEndpointPlugin = (config, instructions) => ({
       applyToStack: (clientStack) => {
         clientStack.addRelativeTo((0, endpointMiddleware_1.endpointMiddleware)({
-          config: config2,
+          config,
           instructions
         }), exports2.endpointMiddlewareOptions);
       }
@@ -34603,7 +34454,7 @@ var require_FunctionsClient = __commonJS({
 });
 
 // node_modules/@supabase/functions-js/dist/main/index.js
-var require_main2 = __commonJS({
+var require_main = __commonJS({
   "node_modules/@supabase/functions-js/dist/main/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -34978,7 +34829,7 @@ var require_PostgrestFilterBuilder = __commonJS({
         }
         return this;
       }
-      textSearch(column, query, { config: config2, type } = {}) {
+      textSearch(column, query, { config, type } = {}) {
         let typePart = "";
         if (type === "plain") {
           typePart = "pl";
@@ -34987,7 +34838,7 @@ var require_PostgrestFilterBuilder = __commonJS({
         } else if (type === "websearch") {
           typePart = "w";
         }
-        const configPart = config2 === void 0 ? "" : `(${config2})`;
+        const configPart = config === void 0 ? "" : `(${config})`;
         this.url.searchParams.append(column, `${typePart}fts${configPart}.${query}`);
         return this;
       }
@@ -35232,7 +35083,7 @@ var require_PostgrestClient = __commonJS({
 });
 
 // node_modules/@supabase/postgrest-js/dist/main/index.js
-var require_main3 = __commonJS({
+var require_main2 = __commonJS({
   "node_modules/@supabase/postgrest-js/dist/main/index.js"(exports2) {
     "use strict";
     var __importDefault = exports2 && exports2.__importDefault || function(mod2) {
@@ -35989,11 +35840,11 @@ var require_WebSocketFrame = __commonJS({
     var WAITING_FOR_MASK_KEY = 4;
     var WAITING_FOR_PAYLOAD = 5;
     var COMPLETE = 6;
-    function WebSocketFrame(maskBytes, frameHeader, config2) {
+    function WebSocketFrame(maskBytes, frameHeader, config) {
       this.maskBytes = maskBytes;
       this.frameHeader = frameHeader;
-      this.config = config2;
-      this.maxReceivedFrameSize = config2.maxReceivedFrameSize;
+      this.config = config;
+      this.maxReceivedFrameSize = config.maxReceivedFrameSize;
       this.protocolError = false;
       this.frameTooLarge = false;
       this.invalidCloseFrameLength = false;
@@ -36412,7 +36263,7 @@ var require_WebSocketConnection = __commonJS({
     var STATE_CLOSED = "closed";
     var setImmediateImpl = "setImmediate" in global ? global.setImmediate.bind(global) : process.nextTick.bind(process);
     var idCounter = 0;
-    function WebSocketConnection(socket, extensions, protocol, maskOutgoingPackets, config2) {
+    function WebSocketConnection(socket, extensions, protocol, maskOutgoingPackets, config) {
       this._debug = utils.BufferingLogger("websocket:connection", ++idCounter);
       this._debug("constructor");
       if (this._debug.enabled) {
@@ -36429,7 +36280,7 @@ var require_WebSocketConnection = __commonJS({
           this._pingListenerCount--;
         }
       });
-      this.config = config2;
+      this.config = config;
       this.socket = socket;
       this.protocol = protocol;
       this.extensions = extensions;
@@ -37536,7 +37387,7 @@ var require_WebSocketServer = __commonJS({
     var debug11 = require_src7()("websocket:server");
     var EventEmitter2 = require("events").EventEmitter;
     var WebSocketRequest = require_WebSocketRequest();
-    var WebSocketServer = function WebSocketServer2(config2) {
+    var WebSocketServer = function WebSocketServer2(config) {
       EventEmitter2.call(this);
       this._handlers = {
         upgrade: this.handleUpgrade.bind(this),
@@ -37545,12 +37396,12 @@ var require_WebSocketServer = __commonJS({
       };
       this.connections = [];
       this.pendingRequests = [];
-      if (config2) {
-        this.mount(config2);
+      if (config) {
+        this.mount(config);
       }
     };
     util.inherits(WebSocketServer, EventEmitter2);
-    WebSocketServer.prototype.mount = function(config2) {
+    WebSocketServer.prototype.mount = function(config) {
       this.config = {
         httpServer: null,
         maxReceivedFrameSize: 65536,
@@ -37570,7 +37421,7 @@ var require_WebSocketServer = __commonJS({
         disableNagleAlgorithm: true,
         closeTimeout: 5e3
       };
-      extend(this.config, config2);
+      extend(this.config, config);
       if (this.config.httpServer) {
         if (!Array.isArray(this.config.httpServer)) {
           this.config.httpServer = [this.config.httpServer];
@@ -37709,7 +37560,7 @@ var require_WebSocketClient = __commonJS({
       String.fromCharCode(9)
     ];
     var excludedTlsOptions = ["hostname", "port", "method", "path", "headers"];
-    function WebSocketClient(config2) {
+    function WebSocketClient(config) {
       EventEmitter2.call(this);
       this.config = {
         maxReceivedFrameSize: 1048576,
@@ -37722,15 +37573,15 @@ var require_WebSocketClient = __commonJS({
         closeTimeout: 5e3,
         tlsOptions: {}
       };
-      if (config2) {
+      if (config) {
         var tlsOptions;
-        if (config2.tlsOptions) {
-          tlsOptions = config2.tlsOptions;
-          delete config2.tlsOptions;
+        if (config.tlsOptions) {
+          tlsOptions = config.tlsOptions;
+          delete config.tlsOptions;
         } else {
           tlsOptions = {};
         }
-        extend(this.config, config2);
+        extend(this.config, config);
         extend(this.config.tlsOptions, tlsOptions);
       }
       this._req = null;
@@ -37983,13 +37834,13 @@ var require_WebSocketRouter = __commonJS({
     var util = require("util");
     var EventEmitter2 = require("events").EventEmitter;
     var WebSocketRouterRequest = require_WebSocketRouterRequest();
-    function WebSocketRouter(config2) {
+    function WebSocketRouter(config) {
       EventEmitter2.call(this);
       this.config = {
         server: null
       };
-      if (config2) {
-        extend(this.config, config2);
+      if (config) {
+        extend(this.config, config);
       }
       this.handlers = [];
       this._requestHandler = this.handleRequest.bind(this);
@@ -38450,7 +38301,7 @@ var require_Deprecation = __commonJS({
 });
 
 // node_modules/websocket/package.json
-var require_package2 = __commonJS({
+var require_package = __commonJS({
   "node_modules/websocket/package.json"(exports2, module2) {
     module2.exports = {
       name: "websocket",
@@ -38516,7 +38367,7 @@ var require_package2 = __commonJS({
 // node_modules/websocket/lib/version.js
 var require_version2 = __commonJS({
   "node_modules/websocket/lib/version.js"(exports2, module2) {
-    module2.exports = require_package2().version;
+    module2.exports = require_package().version;
   }
 });
 
@@ -39259,7 +39110,7 @@ var require_RealtimeChannel = __commonJS({
           this._onError((e) => callback && callback("CHANNEL_ERROR", e));
           this._onClose(() => callback && callback("CLOSED"));
           const accessTokenPayload = {};
-          const config2 = {
+          const config = {
             broadcast,
             presence,
             postgres_changes: (_b = (_a = this.bindings.postgres_changes) === null || _a === void 0 ? void 0 : _a.map((r) => r.filter)) !== null && _b !== void 0 ? _b : []
@@ -39267,7 +39118,7 @@ var require_RealtimeChannel = __commonJS({
           if (this.socket.accessToken) {
             accessTokenPayload.access_token = this.socket.accessToken;
           }
-          this.updateJoinPayload(Object.assign({ config: config2 }, accessTokenPayload));
+          this.updateJoinPayload(Object.assign({ config }, accessTokenPayload));
           this.joinedOnce = true;
           this._rejoin(timeout);
           this.joinPush.receive("ok", ({ postgres_changes: serverPostgresFilters }) => {
@@ -39838,7 +39689,7 @@ var require_RealtimeClient = __commonJS({
 });
 
 // node_modules/@supabase/realtime-js/dist/main/index.js
-var require_main4 = __commonJS({
+var require_main3 = __commonJS({
   "node_modules/@supabase/realtime-js/dist/main/index.js"(exports2) {
     "use strict";
     var __createBinding = exports2 && exports2.__createBinding || (Object.create ? function(o, m, k, k2) {
@@ -40535,7 +40386,7 @@ var require_types3 = __commonJS({
 });
 
 // node_modules/@supabase/storage-js/dist/main/index.js
-var require_main5 = __commonJS({
+var require_main4 = __commonJS({
   "node_modules/@supabase/storage-js/dist/main/index.js"(exports2) {
     "use strict";
     var __createBinding = exports2 && exports2.__createBinding || (Object.create ? function(o, m, k, k2) {
@@ -42375,7 +42226,7 @@ var require_types4 = __commonJS({
 });
 
 // node_modules/@supabase/gotrue-js/dist/main/index.js
-var require_main6 = __commonJS({
+var require_main5 = __commonJS({
   "node_modules/@supabase/gotrue-js/dist/main/index.js"(exports2) {
     "use strict";
     var __createBinding = exports2 && exports2.__createBinding || (Object.create ? function(o, m, k, k2) {
@@ -42418,7 +42269,7 @@ var require_SupabaseAuthClient = __commonJS({
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.SupabaseAuthClient = void 0;
-    var gotrue_js_1 = require_main6();
+    var gotrue_js_1 = require_main5();
     var SupabaseAuthClient = class extends gotrue_js_1.GoTrueClient {
       constructor(options) {
         super(options);
@@ -42460,10 +42311,10 @@ var require_SupabaseClient = __commonJS({
       });
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
-    var functions_js_1 = require_main2();
-    var postgrest_js_1 = require_main3();
-    var realtime_js_1 = require_main4();
-    var storage_js_1 = require_main5();
+    var functions_js_1 = require_main();
+    var postgrest_js_1 = require_main2();
+    var realtime_js_1 = require_main3();
+    var storage_js_1 = require_main4();
     var constants_1 = require_constants6();
     var fetch_1 = require_fetch2();
     var helpers_1 = require_helpers2();
@@ -42595,7 +42446,7 @@ var require_SupabaseClient = __commonJS({
 });
 
 // node_modules/@supabase/supabase-js/dist/main/index.js
-var require_main7 = __commonJS({
+var require_main6 = __commonJS({
   "node_modules/@supabase/supabase-js/dist/main/index.js"(exports2) {
     "use strict";
     var __createBinding = exports2 && exports2.__createBinding || (Object.create ? function(o, m, k, k2) {
@@ -42624,8 +42475,8 @@ var require_main7 = __commonJS({
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.createClient = exports2.SupabaseClient = exports2.FunctionsError = exports2.FunctionsRelayError = exports2.FunctionsFetchError = exports2.FunctionsHttpError = void 0;
     var SupabaseClient_1 = __importDefault(require_SupabaseClient());
-    __exportStar(require_main6(), exports2);
-    var functions_js_1 = require_main2();
+    __exportStar(require_main5(), exports2);
+    var functions_js_1 = require_main();
     Object.defineProperty(exports2, "FunctionsHttpError", { enumerable: true, get: function() {
       return functions_js_1.FunctionsHttpError;
     } });
@@ -42638,7 +42489,7 @@ var require_main7 = __commonJS({
     Object.defineProperty(exports2, "FunctionsError", { enumerable: true, get: function() {
       return functions_js_1.FunctionsError;
     } });
-    __exportStar(require_main4(), exports2);
+    __exportStar(require_main3(), exports2);
     var SupabaseClient_2 = require_SupabaseClient();
     Object.defineProperty(exports2, "SupabaseClient", { enumerable: true, get: function() {
       return __importDefault(SupabaseClient_2).default;
@@ -63110,8 +62961,6 @@ async function* paginator(fn, service, opts) {
 }
 
 // src/supabase/web3storage.js
-var dotenv = __toESM(require_main(), 1);
-dotenv.config();
 var importOptions = {
   wrapWithDirectory: true
 };
@@ -63171,7 +63020,7 @@ var import_node_fetch2 = __toESM(require_lib5(), 1);
 var import_queueable = __toESM(require_lib6(), 1);
 
 // src/supabase/client.js
-var import_supabase_js = __toESM(require_main7(), 1);
+var import_supabase_js = __toESM(require_main6(), 1);
 var getClient = () => {
   const supabaseUrl = "https://vtxnaziguspwqgndeais.supabase.co";
   const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ0eG5hemlndXNwd3FnbmRlYWlzIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDc1MjI5NjQsImV4cCI6MTk2MzA5ODk2NH0.sMlEkFJUdP8imkKF-a13C-MDvpyn0nbk2WDZBcMHg1A";

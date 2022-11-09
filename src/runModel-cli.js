@@ -33,7 +33,7 @@ async function run(model, inputs, onlyDispatch) {
     return inputCid;
   }
   const resultJSON = await runModel(inputs, model, false, { priority });
-  console.log(resultJSON);
+  console.log(JSON.stringify(resultJSON));
   if (outputPath) {
     await processRemoteCID(resultJSON.output[".cid"], outputPath);
   }
