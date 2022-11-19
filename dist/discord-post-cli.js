@@ -65562,7 +65562,12 @@ async function processFile({ cid, path: path3, name: name10, ...file }) {
   return value;
 }
 function isBinary3(str) {
-  return !str.every((c) => c >= 32 && c <= 127);
+  for (let i = 0; i < str.length; i++) {
+    if (str.charCodeAt(i) > 127) {
+      return true;
+    }
+  }
+  return false;
 }
 async function extractContent(file) {
   let content = [];

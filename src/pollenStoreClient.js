@@ -186,7 +186,12 @@ async function processFile({cid, path, name, ...file }) {
 
 // function to check if a string contains binary data
 function isBinary(str) {
-    return !str.every(c => c >= 32 && c <= 127);
+    for (let i = 0; i < str.length; i++) {
+        if (str.charCodeAt(i) > 127) {
+            return true;
+        }
+    }
+    return false;
 }
 
 async function extractContent(file) {
