@@ -1,6 +1,6 @@
 {
   "name": "@pollinations/ipfs",
-  "version": "0.2.42",
+  "version": "0.2.43",
   "description": "pollinations ipfs state, messaging and storage",
   "type": "module",
   "exports": {
@@ -55,6 +55,7 @@
     "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",
     "markdown-to-text": "^0.1.1",
+    "mime-types": "^2.1.35",
     "multicodec": "^3.1.0",
     "multiformats": "^9.7.0",
     "mz": "^2.7.0",

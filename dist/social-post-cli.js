@@ -20213,8 +20213,8 @@ var require_lodash = __commonJS({
             return value === 0 ? value : +value;
           }
           value = baseTrim(value);
-          var isBinary3 = reIsBinary.test(value);
-          return isBinary3 || reIsOctal.test(value) ? freeParseInt(value.slice(2), isBinary3 ? 2 : 8) : reIsBadHex.test(value) ? NAN : +value;
+          var isBinary4 = reIsBinary.test(value);
+          return isBinary4 || reIsOctal.test(value) ? freeParseInt(value.slice(2), isBinary4 ? 2 : 8) : reIsBadHex.test(value) ? NAN : +value;
         }
         function toPlainObject(value) {
           return copyObject(value, keysIn(value));
@@ -44410,7 +44410,7 @@ var require_bytes = __commonJS({
       }
       throw new Error("Unknown type, must be binary type");
     };
-    var isBinary3 = (o) => o instanceof ArrayBuffer || ArrayBuffer.isView(o);
+    var isBinary4 = (o) => o instanceof ArrayBuffer || ArrayBuffer.isView(o);
     var fromString8 = (str) => new TextEncoder().encode(str);
     var toString5 = (b) => new TextDecoder().decode(b);
     exports2.coerce = coerce9;
@@ -44418,7 +44418,7 @@ var require_bytes = __commonJS({
     exports2.equals = equals17;
     exports2.fromHex = fromHex3;
     exports2.fromString = fromString8;
-    exports2.isBinary = isBinary3;
+    exports2.isBinary = isBinary4;
     exports2.toHex = toHex3;
     exports2.toString = toString5;
   }
@@ -75924,7 +75924,8 @@ async function exportCID(cid, processor = null) {
   return resultObj;
 }
 async function processFile({ cid, path: path3, name: name10, ...file }) {
-  let value = getWebURL_default(cid, name10);
+  const url = getWebURL_default(cid, name10);
+  let value = url;
   debug10("processFile extname", extname(path3), value);
   if (!extname(path3)) {
     if (path3.length === 0) {
@@ -75933,9 +75934,16 @@ async function processFile({ cid, path: path3, name: name10, ...file }) {
     } else {
       debug10("result is json. parsing", value);
       value = await file.json();
+      if (isBinary3(value)) {
+        debug10("result is binary. returning url");
+        value = url;
+      }
     }
   }
   return value;
+}
+function isBinary3(str) {
+  return !str.every((c) => c >= 32 && c <= 127);
 }
 async function extractContent(file) {
   let content = [];

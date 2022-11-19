@@ -162,7 +162,8 @@ export async function exportCID(cid, processor=null) {
 
 
 async function processFile({cid, path, name, ...file }) {
-    let value = getWebURL(cid, name);
+    const url = getWebURL(cid, name);
+    let value = url;
     // if there is no extension read the file as a JSON string
     // console.log("file path", file.path)
     debug("processFile extname", extname(path), value)
@@ -173,9 +174,19 @@ async function processFile({cid, path, name, ...file }) {
         } else {
             debug("result is json. parsing", value);
             value = await file.json();
+            
+            if (isBinary(value)) {
+                debug("result is binary. returning url");
+                value = url;
+            }
         }
     }
     return value;
+}
+
+// function to check if a string contains binary data
+function isBinary(str) {
+    return !str.every(c => c >= 32 && c <= 127);
 }
 
 async function extractContent(file) {
