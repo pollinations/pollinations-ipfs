@@ -18,7 +18,7 @@ export { getPollen } from "./supabase/pollen.js";
 // Debug.enable("*");
 const { extname } = path;
 
-const blockstore = new S3Blockstore()
+const s3Blockstore = new S3Blockstore()
 const memoryBlockstore = new MemoryBlockstore()
 
 const importOptions = {
@@ -33,7 +33,7 @@ export async function importJSON(inputs, options = { pin: false}) {
     let lastCID = null;
 
     const files = await objectToFiles(inputs);
-    for await (const file of importer(files, blockstore, importOptions)) {
+    for await (const file of importer(files, s3Blockstore, importOptions)) {
         debug("Imported file", file.path, file.cid)
         lastCID = file.cid;
         // lastTree = file.tree;
@@ -49,7 +49,7 @@ export function pollenImporter() {
         if (files.length === 0)
             return lastCID;
             
-        for await (const file of importer(files, blockstore, {...importOptions, tree: lastTree })) {
+        for await (const file of importer(files, s3Blockstore, {...importOptions, tree: lastTree })) {
             debug("Imported file", file.path, file.cid)
             lastCID = file.cid.toString();
             lastTree = file.tree;
@@ -181,6 +181,7 @@ async function processFile({cid, path, name, ...file }) {
 async function extractContent(file) {
     let content = []
     for await (const chunk of await file.content()) {
+        console.log("chunk", chunk)
         content = [...content, ...chunk];
     }
     return new Uint8Array(content);
@@ -207,7 +208,7 @@ function contentToString(content) {
 async function* fetchWithWeb3storageFallback(cid, skipWeb3storage=false) {
     debug("fetching", cid)
     try {
-        const results = await recursive(cid, blockstore);
+        const results = await recursive(cid, s3Blockstore);
         if (typeof results[Symbol.asyncIterator] === "function")
             yield* results;
         else
@@ -253,20 +254,55 @@ const dataFetchers = (file) => {
     };
 };
 
+const formatFileForUnixFSImport = async (file) => {
+    if (file.type !== 'file') 
+        return null;
+    debug("mapping file", file, file.name, file.lastModified);
+
+    const content = Buffer.from(await extractContent(file));
+    debug("content", content);
+    // let buffer = Buffer.from(content)
+    const path = file.path.split("/").slice(1).join("/");
+    return { path, content } ;
+};
+
+const mapAsyncIterator = async function* (iterator, fn) {
+    for await (const item of iterator) {
+        const mapResult = await fn(item)
+        if (mapResult) 
+            yield mapResult
+    }   
+}
 
 
-// // const importedCID = await importFromWeb3Storage("QmVh1bMaeq5NwjWZPL8xXz6tUBiQcPshkzhwHesgS3Y8Nt");
-// try {
-//     let resultObj = await exportCID("QmXzEKNkacq3qPohCFwqs8NXZGvtfDL8B4KZyLeKSTdh3J");
-//     // //     // await getDirectory(entry.unixfs);
-//     console.log(resultObj)
-//     const {mime} = await fileTypeFromBuffer(resultObj);
-//     console.log(mime)
-// } catch (e) {
-//     console.error("erroir", e)
-// }
+
+// const importedCID = await importFromWeb3Storage("QmVh1bMaeq5NwjWZPL8xXz6tUBiQcPshkzhwHesgS3Y8Nt");
+try {
+    // let resultObj = await exportCID("QmShnnCCitoJiu5zy5k8trxn2jzudZEsEZX1LgXN9mdNL2");
+    // // //     // await getDirectory(entry.unixfs);
+    // console.log(resultObj)
+    // const {mime} = await fileTypeFromBuffer(resultObj);
+    // console.log(mime)
+    const cid = ("QmVh1bMaeq5NwjWZPL8xXz6tUBiQcPshkzhwHesgS3Y8Nt");
+    await pin(cid);
+} catch (e) {
+    console.error("erroir", e)
+}
 
 
+
+export async function pin(cid) {
+    const results = await recursive(cid, memoryBlockstore);
+    // for await (const file of results) {
+    //     console.log(file);
+    // }
+    const mappedResults = mapAsyncIterator(results, formatFileForUnixFSImport);
+    const importedFiles = await importer(mappedResults, s3Blockstore, importOptions);
+
+    for await (const file of importedFiles) {
+        debug("pinned", file.path, file.cid.toString());
+    }
+}
 
 function isURL(str) {
     var urlRegex = '^(?!mailto:)(?:(?:http|https|ftp)://)(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:(/|\\?|#)[^\\s]*)?$';
