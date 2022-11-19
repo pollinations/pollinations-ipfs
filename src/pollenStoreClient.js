@@ -91,7 +91,12 @@ async function objectToFiles(obj, path="") {
                     debug("got data length", body.length);
                     result.push({path: fullPath, content: Buffer.from(body,'base64')});
                 } else {
-                    result.push({path: fullPath, content: Buffer.from(JSON.stringify(value))})
+                    if (isBinary(value)) {
+                        debug("value is binary, adding as is...");
+                        result.push({path: fullPath, content: Buffer.from(value)});
+                    } else {
+                        result.push({path: fullPath, content: Buffer.from(JSON.stringify(value))})
+                    }
                 }
             }
         }
