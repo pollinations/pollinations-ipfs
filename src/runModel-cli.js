@@ -28,7 +28,7 @@ async function main() {
   const { input, outputPath, return: onlyDispatch, priority, model } = opts;
   
   const inputObject = encodeFiles(JSON.parse(input));
-  
+  debug("encoded input object", inputObject)
   await run(model, inputObject, onlyDispatch, priority, outputPath)
   
 }
@@ -57,6 +57,7 @@ async function run(model, inputs, onlyDispatch, priority, outputPath) {
 function encodeFiles(obj) {
   const result = {};
   Object.entries(obj).forEach(([key, value]) => {
+    result[key] = value;
     if (typeof value === "string" && value.startsWith("@")) {
       const path = value.slice(1);
       const data = readFileSync(path);

@@ -73219,6 +73219,7 @@ async function main() {
   debug11("options", opts);
   const { input, outputPath, return: onlyDispatch, priority, model } = opts;
   const inputObject = encodeFiles(JSON.parse(input));
+  debug11("encoded input object", inputObject);
   await run(model, inputObject, onlyDispatch, priority, outputPath);
 }
 async function run(model, inputs, onlyDispatch, priority, outputPath) {
@@ -73237,6 +73238,7 @@ async function run(model, inputs, onlyDispatch, priority, outputPath) {
 function encodeFiles(obj) {
   const result = {};
   Object.entries(obj).forEach(([key, value]) => {
+    result[key] = value;
     if (typeof value === "string" && value.startsWith("@")) {
       const path3 = value.slice(1);
       const data = (0, import_fs6.readFileSync)(path3);
