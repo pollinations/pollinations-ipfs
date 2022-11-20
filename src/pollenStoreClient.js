@@ -33,6 +33,7 @@ export async function importJSON(inputs, options = { pin: false}) {
     let lastCID = null;
 
     const files = await objectToFiles(inputs);
+    debug("importing files", files);
     for await (const file of importer(files, blockstore, importOptions)) {
         debug("Imported file", file.path, file.cid)
         lastCID = file.cid;

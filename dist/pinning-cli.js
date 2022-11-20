@@ -54618,7 +54618,9 @@ var S3Blockstore = class extends BaseBlockstore {
       debug("block already exists", key);
       return;
     }
-    const urlResponse = await (0, import_node_fetch.default)(`https://store.pollinations.ai/upload/${key.toString()}`);
+    const signedURLRequestURL = `https://store.pollinations.ai/upload/${key.toString()}`;
+    debug("getting signed url using", signedURLRequestURL);
+    const urlResponse = await (0, import_node_fetch.default)(signedURLRequestURL);
     const url = await urlResponse.text();
     debug("signed url", url, "for key", key.toString());
     const uploadResponse = await (0, import_node_fetch.default)(url, {
