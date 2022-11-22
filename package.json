@@ -1,6 +1,6 @@
 {
   "name": "@pollinations/ipfs",
-  "version": "0.2.46",
+  "version": "0.2.47",
   "description": "pollinations ipfs state, messaging and storage",
   "type": "module",
   "exports": {

@@ -73212,23 +73212,23 @@ async function processFile2({ path: path3, cid, buffer: buffer2 }, rootPath) {
 var import_fs6 = require("fs");
 var import_mime_types = __toESM(require_mime_types(), 1);
 var debug11 = (0, import_debug11.default)("runModel-cli");
-import_commander.program.option("-m, --model <model>", "model image identifier to run", "614871946825.dkr.ecr.us-east-1.amazonaws.com/pollinations/stable-diffusion-private").option("-i --input <json>", "input json", "{}").option("-o --output-path <path>", "save output to path", null).option("-r, --return", "just schedule run and return CID immediately", false).option("-p, --priority <priority>", "priority of run", 0);
+import_commander.program.option("-m, --model <model>", "model image identifier to run", "614871946825.dkr.ecr.us-east-1.amazonaws.com/pollinations/stable-diffusion-private").option("-i --input <json>", "input json", "{}").option("-o --output-path <path>", "save output to path", null).option("-r, --return", "just schedule run and return CID immediately", false).option("-p, --priority <priority>", "priority of run", 0).option("-parent, --parent <pollen_id>", "parent pollen", null);
 async function main() {
   import_commander.program.parse(process.argv);
   const opts = import_commander.program.opts();
   debug11("options", opts);
-  const { input, outputPath, return: onlyDispatch, priority, model } = opts;
+  const { input, outputPath, return: onlyDispatch, priority, model, parent } = opts;
   const inputObject = encodeFiles(JSON.parse(input));
   debug11("encoded input object", inputObject);
-  await run(model, inputObject, onlyDispatch, priority, outputPath);
+  await run(model, inputObject, onlyDispatch, { priority, parent }, outputPath);
 }
-async function run(model, inputs, onlyDispatch, priority, outputPath) {
+async function run(model, inputs, onlyDispatch, params, outputPath) {
   if (onlyDispatch) {
-    const inputCid = await dispatch(inputs, model, { priority });
+    const inputCid = await dispatch(inputs, model, params);
     console.log(inputCid);
     return inputCid;
   }
-  const resultJSON = await awsPollenRunner_default(inputs, model, false, { priority });
+  const resultJSON = await awsPollenRunner_default(inputs, model, false, params);
   console.log(JSON.stringify(resultJSON));
   if (outputPath) {
     await processRemoteCID(resultJSON.output[".cid"], outputPath);

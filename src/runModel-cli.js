@@ -14,6 +14,7 @@ const debug = Debug("runModel-cli");
     .option('-o --output-path <path>', 'save output to path', null)
     .option('-r, --return', 'just schedule run and return CID immediately', false)
     .option('-p, --priority <priority>', 'priority of run', 0)
+    .option('-parent, --parent <pollen_id>', 'parent pollen', null)
 
 
 async function main() {
@@ -25,22 +26,22 @@ async function main() {
   
   debug("options", opts)
   
-  const { input, outputPath, return: onlyDispatch, priority, model } = opts;
+  const { input, outputPath, return: onlyDispatch, priority, model, parent } = opts;
   
   const inputObject = encodeFiles(JSON.parse(input));
   debug("encoded input object", inputObject)
-  await run(model, inputObject, onlyDispatch, priority, outputPath)
+  await run(model, inputObject, onlyDispatch, {priority,parent}, outputPath)
   
 }
     
 
-async function run(model, inputs, onlyDispatch, priority, outputPath) {
+async function run(model, inputs, onlyDispatch, params , outputPath) {
   if (onlyDispatch) {
-    const inputCid = await dispatch(inputs, model, { priority });
+    const inputCid = await dispatch(inputs, model, params);
     console.log(inputCid);
     return inputCid;
   }
-  const resultJSON = await runModel(inputs, model, false, { priority });
+  const resultJSON = await runModel(inputs, model, false, params);
   console.log(JSON.stringify(resultJSON));
   if (outputPath) {
     await processRemoteCID(resultJSON.output[".cid"], outputPath);
